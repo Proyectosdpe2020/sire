@@ -1,0 +1,64 @@
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #3c6084;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: #3c6084;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #23394e;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #2b4660;
+}
+
+/* Style the tab content */
+.tabcontent {
+  
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+}
+
+.titleMenuTop{
+
+  font-weight: bold;
+  color: white !important;
+  cursor: pointer;
+}
+
+.mainRecb{
+
+
+  width: 100%;
+   padding: 6px 12px;
+
+  border: 1px solid #ccc;
+ 
+}
+
+.tittleAcuerd{
+
+  color: #4a4a4a;
+  font-weight: bold;
+}
+
+.negrita{  font-weight: bold !important; }
+
+.mediacion{ width: 100%; background-color:#f5f5f5; padding: 3px; border-radius: 5px;}
+
+.inputext{ color: #000 !important; text-align: center !important; font-family: ARIAL !important; font-weight: bold; font-size: 1.1em; height: 38px !important;}
+

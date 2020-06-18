@@ -1,0 +1,224 @@
+.tituloIndicadores{
+	font-size: 25px;
+	color: #152F5A;
+}
+
+.tituloPeriodo{
+	font-size: 20px;
+	color: #C09F77;
+}
+
+.tituloPregunta{
+	font-size: 24px;
+	color: #152F4A;
+}
+
+.textoPregunta{
+    border-left-color: #152F4A;
+    border-left-style: solid;
+    border-left-width: 3px; /* Cambiando este valor, puedes cambiar el ancho del borde */
+    padding-left: 35px; /* Con este padding, puedes separar el texto del borde */
+    font-size: 24px;
+}
+
+.card{
+	padding: 25px;
+}
+.card-body2{
+	padding: 1px;
+}
+
+.tableTrimes {
+  border: #b2b2b2 1px solid;
+  width: 100%;
+}
+
+.tableTrimes td, th {
+  border: silver 1px solid;  
+  padding: 1rem;
+}
+
+.tableTrimes thead > tr > th{
+	text-align: center;
+	font-size: 22px;
+	background-color: #7C8B9E;
+}
+
+.tableTrimes > tbody {
+	font-size: 20px;
+	text-align: center;
+}
+
+.tableTrimes.striped > tbody > tr:nth-child(odd) {
+ 
+  background-color: rgba(170, 213, 213, 0.5);
+ 
+}
+
+
+#guardarPregunta{
+	width: 150px;
+	height: 50px;
+	font-size: 20px;
+}
+/*.btn-success{
+	margin-top: 10%;
+}*/
+
+.circle {
+  
+  border: 0.1rem solid gray;
+  border-radius: 50%;
+  box-shadow: 0.375em 0.375em 0 0 rgba(15, 28, 63, 0.125);
+  height: 5rem;
+  width: 5rem;
+  
+}
+.tablecircles{
+	width: 100%;
+
+}
+
+.circlesContainer{
+	margin: 0 auto;
+	width: 50%;
+}
+
+.circleOk{
+	background: #28a745;
+	color: white;
+}
+.circleNone{
+	background: rgba(255, 255, 255, 0.8);
+}
+
+.contentMain{
+	zoom:85%;
+}
+
+button h4{
+	font-weight: bold;
+	font-size: 21px;
+}
+
+button{
+	outline: none;
+}
+
+.tablecircles button:active{
+	outline: none !important;
+	background-color: #7C8B9E !important;
+}
+
+.tablecircles button:focus{
+	outline: none !important;
+	background-color: #7C8B9E !important;
+}
+
+.textoNota{
+	margin-left: 4%;
+	border-left-color: #152F4A;
+    border-left-style: solid;
+    border-left-width: 3px; /* Cambiando este valor, puedes cambiar el ancho del borde */
+    padding-left: 35px; /* Con este padding, puedes separar el texto del borde */
+    font-size: 24px;
+}
+
+.warningIcon{
+	width: 60px;
+	height: 1500px;
+	display: inline;
+    vertical-align: top;
+}
+
+.imagenWarning img{
+  float: left;
+  margin-right: 2%;
+}
+
+input {
+	border: none;
+	background-color: transparent;
+	text-align: center;
+	font-weight: bold;
+	width: 100px !important;
+	-webkit-appearance: textfield !important;
+    margin: 0;
+    -moz-appearance:textfield !important;
+}
+
+input:active{
+outline: none !important;
+}
+input:focus{
+	outline: none !important;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+ .blockInp{
+	background-color: rgba(192, 159, 119, 0.2); 
+}
+
+/************AGREGADOS*******/
+
+.botonAyuda{
+	display: flex;
+	flex-direction: row-reverse;
+}
+
+.botonGuardar{
+	display: flex;
+	flex-direction: row-reverse;
+}
+
+
+.card{
+	background: #FFFFFF;
+	padding: 25px;
+	border: 1px solid rgba(0,0,0,.125);
+}
+
+.container-fluid{
+	padding: 2%;
+}
+
+.tituloAyuda{
+	font-size: 25px;
+	color: #152F4A;
+}
+
+.textoAyuda{
+	margin-left: 2%;
+	margin-bottom: 3%;
+	border-left-color: #7C8B9E;
+    border-left-style: solid;
+    border-left-width: 6px; /* Cambiando este valor, puedes cambiar el ancho del borde */
+    padding-left: 35px; /* Con este padding, puedes separar el texto del borde */
+    font-size: 24px;
+    text-align: justify;
+    list-style: none;
+}
+
+.botonCloseModal{
+	display: flex;
+	flex-direction: row-reverse;
+	margin-right: 2%;
+	margin-bottom: 2%;
+}
+
+#closeModalAyuda{
+	width: 150px;
+	height: 60px;
+	font-size: 20px;
+	background: #7C8B9E;
+	color: #FFFFFF;
+}
+
+.imgWarning{
+	width: 50px;
+}

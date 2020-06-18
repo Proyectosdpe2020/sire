@@ -1,0 +1,13 @@
+build/
+dist/
+images/
+img/
+src/
+vendors/
+repositorio/documentos/
+formatos/plantillas/
+formatos/librerias/
+formatos/downloadReport/
+format/librerias/
+format/litigacion/plantillas/
+format/litigacion/downloadReport/

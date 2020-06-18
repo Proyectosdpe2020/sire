@@ -1,0 +1,86 @@
+
+.redondear{    -moz-border-radius: 5px !important;   -webkit-border-radius: 5px !important; border-radius: 5px !important; }
+
+.redondear2{    -moz-border-radius: 10px;   -webkit-border-radius: 10px;  border-radius: 10px; border: solid 10px #FFE4C2; }
+
+
+
+
+#divprincipalx_panel{  
+
+            font-size: small;  
+            background-image: url('../img/Fondo 5.png'); 
+            background-repeat: repeat;  
+            background-position: center; 
+            background-size: 100%; 
+
+       }   
+
+#divPanelEncabezado{
+
+    height:150px; 
+    width:100%; 
+    border: none !important; 
+    background-color:rgba(255,255,255,0.6);
+
+
+}
+
+#imgmich{
+
+   width: 8%;
+   height: 100%;
+   background-image: url('../images/mich 546.png'); 
+   background-repeat: no-repeat;  
+   background-position: center; 
+   background-size: 70%; 
+   background-position-y: 65%;
+
+
+}
+
+
+#imgsello{
+
+  width: 5%;
+  height: 125%;
+  background-image: url('../images/sello 636.png'); 
+  background-repeat: no-repeat;  
+  background-position: center; 
+  background-size: 90%; 
+  background-position-y: 55%;
+}
+
+
+#imgdgtipe{
+
+ width: 15%,
+ height: 125%;
+ background-image: url('../images/dgtipe.png'); 
+ background-repeat: no-repeat;  
+ background-position: center; 
+ background-size: 55%; 
+ background-position-y: 65%;
+
+}
+
+
+#divContTree::-webkit-scrollbar
+{
+ width: 10px;
+ background-color: #F5F5F5;
+}
+
+
+
+#divContTree{
+
+   height:790px; overflow-y: scroll; 
+   border: solid 1px #f2f3f2 !important;
+   background-color:rgba(248,248,255,0.4); 
+
+   -moz-border-radius: 10px; 
+   -webkit-border-radius: 10px; 
+   border-radius: 10px;
+
+}

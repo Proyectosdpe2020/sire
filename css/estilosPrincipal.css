@@ -1,0 +1,374 @@
+*{
+
+	padding: 0;
+	margin: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box; 
+
+}
+
+body{
+
+	 font-family: 'Roboto', sans-serif !important;
+	/*background: url('../img/0.jpeg');*/
+	background-size: cover;
+	background-attachment: fixed;
+	background-image: url('../img/Acceso SIPOA 3-03.png'); 
+
+  background-repeat: repeat;  
+  background-position: center; 
+  background-size: 135%; 
+  background-position-y: 50%;
+	
+}
+
+
+#opacity{
+
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	background: rgba(238,238,238,.1);
+
+
+}
+
+.contenido{
+
+	width: 100%;
+	margin: auto;
+	position: relative;
+	font-family: helvetica, sans-serif;
+}
+
+header{
+
+	position: relative;
+	height: auto;
+}
+
+
+
+header .menu{
+
+		background: rgba(21,47,74,.9);
+		overflow: hidden;
+
+}
+.titleDPE{
+
+    font-weight: bolder;
+    text-align: center;
+    font-size: 1.8rem;
+    
+
+
+}
+header .logo{
+
+	color: rgba(0,0,0,.8);
+	float: left;
+	font-size: 27px;
+	line-height: 50px;
+	color: white;
+  margin-top: .6%;
+}
+
+header nav{
+	float: right;
+}
+
+header nav ul{
+
+	list-style: none;
+}
+header nav ul li {
+	float: left;
+}
+header nav ul li a{
+	color: rgba(0,0,0,.8);
+	text-decoration: none;
+	display: block;
+	font-size: 16px;
+	padding: 0 20px;
+	line-height: 80px;
+	color: white;
+}
+header nav ul li:hover{
+
+	background: rgba(0,0,0,.1);
+	border-bottom: inset 5px solid #fff;
+	text-decoration: none;
+}
+header nav ul li a:hover{
+	color: #fff;
+	text-decoration: none;
+}
+
+.principal{
+	position: relative;
+	color: #000;
+	margin-top: 0%;
+	border-radius: 10px;
+}
+
+ .imagenUserIcon{
+          width:35px;
+          height:35px;
+          } 
+
+  .curPo{  cursor: pointer;  }       
+
+
+  .bcground{
+
+  }
+
+
+  .overlay{
+  position:fixed;
+   background:url('../img/Portada SIRE móvil.png');
+   background-repeat: repeat;  background-position: center center; background-attachment: fixed; background-size: cover;
+  -webkit-animation:150s scroll infinite linear;
+  -moz-animation:150s scroll infinite linear;
+  -o-animation:150s scroll infinite linear;
+  -ms-animation:150s scroll infinite linear;
+  animation:150s scroll infinite linear;
+  top:0;
+  left:0;
+  width:100%;
+ height:100%;
+}
+
+h1{
+  text-align:center;
+  color:#FFF !important;
+  margin-top:10%;
+  font:60px Lobster;
+  text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+             0px 8px 13px rgba(0,0,0,0.1),
+             0px 18px 23px rgba(0,0,0,0.1);
+}
+
+p{
+  color:#FFF;
+  text-align:center;
+  font:19px;
+  font-weight: ;
+  /*text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+             0px 8px 13px rgba(0,0,0,0.1),
+             0px 18px 23px rgba(0,0,0,0.1);*/
+}
+
+
+@-webkit-keyframes scroll{
+  100%{
+    background-position:0px -3000px;
+  }
+}
+
+@-moz-keyframes scroll{
+  100%{
+    background-position:0px -3000px;
+  }
+}
+
+@-o-keyframes scroll{
+  100%{
+    background-position:0px -3000px;
+  }
+}
+
+@-ms-keyframes scroll{
+  100%{
+    background-position:0px -3000px;
+  }
+}
+
+@keyframes scroll{
+  100%{
+    background-position:0px -3000px;
+  }
+}
+
+
+.btn-wrap{
+  margin:0 auto;
+  width:200px;
+  padding-top:0;
+}
+
+a{
+  /*background:#e74c3c;*/
+  /*box-shadow:#c0392b 0px 7px 2px,#000 0px 8px 5px;*/
+}
+
+a:hover{
+  opacitY:1;
+}
+a:active{
+  top:4px;
+  text-decoration: none;
+}
+
+a.nounderline:link 
+{ 
+text-decoration:none; 
+} 
+
+
+h1:before{  content: none !important;  }
+h1:after{   content: none !important;  }
+
+a { cursor: pointer !important; }
+i { cursor: pointer !important; }
+
+
+#inpulogin {
+  width: 100%;
+  height: 45px;
+  margin-bottom: 25px;
+  padding-left:10px;
+  font-size: 15px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #aaa;
+}
+
+.titleSys{
+
+		color: #aaa;
+		font-size: 1.5em;
+
+}
+
+.titlesire{
+
+		color: #aaa;
+		font-size: 2em;
+
+}
+
+.carpetasLogo{
+
+ /* border:solid 1px blue;*/
+ padding: 0 !important; margin: 0 !important;
+
+
+}
+.litigacionLogo{
+
+/*border:solid 1px green;*/
+padding: 0 !important; margin: 0 !important;
+
+}
+
+#imgCarpeLogo{
+
+
+  padding: 20px;
+  width: 100%;
+  height: 90vh !important;
+  margin: 0 auto;
+
+}
+#imgLitiLogo{
+
+
+  padding: 20px;
+width: 100%;
+  height: 90vh !important;
+  margin: 0 auto;
+}
+
+.imgCentralCarpe{
+
+
+  padding: 20px;
+  width: 60%;
+  height: 40vh !important;
+  margin: 0 auto;
+  margin-top: 29%;
+    background-image: url('../img/Icono carpetas 1.png') !important;
+    background-size: cover;
+ background-repeat: no-repeat;  
+  background-position: center; 
+ background-size: 100%; 
+  background-position-y: 50%;
+
+}
+.imgCentralLit{
+
+width: 50%;
+  height: 40vh !important;
+  margin: 0 auto;
+  margin-top: 25%;
+  background-image: url('../img/Icono litigación 1.png') !important;
+    background-size: cover;
+ background-repeat: no-repeat;  
+  background-position: center; 
+ background-size: 100%; 
+  background-position-y: 50%;
+
+}
+
+.imgCentralTrimestral{
+
+
+width: 50%;
+  height: 40vh !important;
+  margin: 0 auto;
+  margin-top: 25%;
+  background-image: url('../img/Icono trimestral 1.png') !important;
+    background-size: cover;
+ background-repeat: no-repeat;  
+  background-position: center; 
+ background-size: 100%; 
+  background-position-y: 50%;
+
+
+
+}
+
+
+
+.carpetasLogo:hover{
+
+    background: rgba(0,139,202,1);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0,139,202,1)), color-stop(100%, rgba(255,175,3,0)));
+    background: -webkit-linear-gradient(top, rgba(0,139,202,1) 0%, rgba(0,139,202,0) 100%);
+    background: linear-gradient(to bottom, rgba(0,139,202,1) 0%, rgba(0,139,202,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffaf03', endColorstr='#ffaf03', GradientType=0 );
+    cursor: pointer;
+
+
+
+}
+
+.carpetasLogo:hover .imgCentralCarpe{
+
+    background-image: url('../img/Icono carpetas 2.2.png') !important;
+}
+
+
+.litigacionLogo:hover{
+
+    background: rgba(0,139,202,1);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0,139,202,1)), color-stop(100%, rgba(255,175,3,0)));
+    background: -webkit-linear-gradient(top, rgba(0,139,202,1) 0%, rgba(0,139,202,0) 100%);
+    background: linear-gradient(to bottom, rgba(0,139,202,1) 0%, rgba(0,139,202,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffaf03', endColorstr='#ffaf03', GradientType=0 );
+    cursor: pointer;
+}
+
+.litigacionLogo:hover .imgCentralLit{
+
+    background-image: url('../img/Icono litigación 2.2.png') !important;
+}
+
+.litigacionLogo:hover .imgCentralTrimestral{
+
+    background-image: url('../img/Icono trimestral 2.2.png') !important;
+}

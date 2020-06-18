@@ -1,0 +1,486 @@
+/* AQUI VAN LAS CLASES E IDS GENERAL CABEZERAS y PIE DE PAGINA*/
+.ghost{ background-color: whitesmoke;  }
+.ghostWhite{ background-color: white; max-height: 800px;
+  overflow-y: scroll;
+  overflow-x:hidden;}
+  .ghostWhite2{ background-color: white; max-height: 900px;
+  overflow-y: hidden;
+  overflow-x:hidden;}
+
+.principalPanel{
+
+  font-size: small; 
+  
+  overflow-y: hidden;
+  overflow-x:hidden;
+  max-width: 1900px;
+  margin: 0 auto;
+
+}
+.principalPanel2{
+
+  font-size: small; 
+  background-image: url('../img/fondo8.jpg'); 
+  background-repeat: repeat;  
+  background-size: cover;
+  background-position: center;
+  background-size: 80%; 
+  background-position-y: 0%;
+  background-position-x: -50%;
+
+   max-height: 800px;
+  overflow-y: scroll;
+  overflow-x:hidden;
+
+}
+
+.principalPaneli{
+
+  font-size: small; 
+  
+  overflow-y: hidden;
+  overflow-x:hidden;
+  max-width: 1900px;
+  margin: 0 auto;
+
+ background-color:rgba(254, 249, 231,0.6);
+
+
+  border-radius: 15px;
+
+  position:relative;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+
+}
+
+#contMOdalVistaPrevialitigacion{
+
+  font-size: small; 
+  padding: 20px;
+  overflow-y: hidden;
+  overflow-x:hidden;
+  max-width: 1900px;
+  margin: 0 auto;
+
+ background-color:rgba(254, 249, 231,0.6);
+
+
+  border-radius: 15px;
+
+  position:relative;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+
+}
+
+#contMOdalVistaPrevia{
+
+  font-size: small; 
+  padding: 20px;
+  overflow-y: hidden;
+  overflow-x:hidden;
+  max-width: 1900px;
+  margin: 0 auto;
+
+ background-color:rgba(254, 249, 231,0.6);
+
+
+  border-radius: 15px;
+
+  position:relative;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+
+}
+
+
+.paneluno{
+
+    background-image: url('../img/Formulario SIRE6-06.png'); 
+  background-repeat: repeat;  
+  background-size: auto;
+  background-position: center;
+  background-size: 110%; 
+  background-position-y: 50%;
+  height: 100vh;
+   overflow-y: scroll;
+  overflow-x:hidden;
+
+}
+.panelin{
+
+  background-image: url('../img/Formulario SIRE6-06.png') !important; 
+  background-repeat: repeat;  
+  background-size: cover;
+  background-position: center;
+  background-size: 100%; 
+  background-position-y: 50%;
+  max-height: 600px;
+   overflow-y: hidden;
+  overflow-x:hidden;
+
+}
+
+.fd1{ background-color: rgba(255,255,255,0.0);  }
+
+
+.panelCabezera{
+
+   height:150px; 
+   width:100%; 
+   border:none; 
+   background-color: transparent;
+
+}
+
+.panelCabezera2{
+
+   width:100%; 
+   border:none; 
+   background-image: url('../img/fondo8.jpg') !important;  
+   background-repeat: repeat;  
+  background-position: cover; 
+  background-size: 100%; 
+  background-position-y: 0%;
+}
+
+
+.imgMichCabezera{
+
+  background-image: url('../images/MICHOACAN.png'); 
+  background-repeat: no-repeat;  
+  background-position: center; 
+  background-size: 70%; 
+  background-position-y: 25%;
+
+}
+
+.imgSelloCabezera{
+
+  background-image: url('../images/FGE.png');
+  background-repeat: no-repeat;  
+  background-position: center;
+  background-size: 90%; 
+  background-position-y: 25%;
+
+}
+
+.imgdgtipeCabezera{
+
+  background-image: url('../images/dgtipe.png'); 
+  background-repeat: no-repeat;  
+  background-position: center; 
+  background-size: 70%; 
+  background-position-y: 25%;
+
+}
+
+.tituloCentralSegu{ height:100%; width:100%; }
+.titulosCabe1{ text-align: center; margin-top: 2.5%; margin-left: 5%; }
+.titulo1{ font-size: 2em; color: #686D72;}
+.titulo2{ font-weight: bold; color: #686D72;}
+.alwidth{ width: 100% !important; }
+.piepanel{ height:120px; border:none; width:100%; background-color:rgba(255,255,255,0.0); }
+.piepanel2{ float:left; height:100%; width:100%; }
+.piepanel3{ text-align: center; margin-top: 2.5%; }
+.piepanel4{ text-align: center; margin-top: 1%; }
+
+
+
+/* AQUI VAN LAS CLASES E IDS DE LA VENTANA PRINCIPAL DE CARPETAS DE INVESTIGACION */
+
+.selectTranparent{
+
+  color:#78858B; 
+  font-weight:; 
+  background-color:rgba(255,255,255,0.8);
+
+}
+
+.selectTranparent2{
+
+  color:#78858B; 
+  font-weight:; 
+  background-color:rgba(255,255,255,0.1);
+
+}
+
+.transparente{ color:transparent; }
+
+.btnEnvDPE{ float: right; width: 100%; height:34px; }
+.contTblMPs{ height: auto; overflow-y: hidden; overflow-x: hidden; padding: 20PX; }
+.tblTransparente{ background-color:rgba(255,255,255,0.3) !important; width: 100%; }
+.textCent{ text-align: center; }
+.cabezeraTabla{ height: 1.5em !important; background: rgba(21,47,74,.8) !important; color: white !important; }
+.tdRowMain{ color: #686D72; text-align: center; vertical-align: middle !important; } 
+.tdRowMain2{ color: #686D72; vertical-align: middle !important; }
+.colorLabelBTN{ color: #2a3f54; }
+.btnCapturarTbl{ float: right; width: 100%; height:34px; font-size: 1em; }
+.spanOK{ color:green; font-size: 1.3em; }
+.spanRemove{ color:rgba(248,164,103) !important; font-size: 1.3em; }
+.negr{  font-weight: bolder; font-size: 1.1em; }
+
+.pad20{  padding: 0px 20px 0px 20px;  }
+
+/* AQUI VAN LAS CLASES E IDS DE LA VENTANA MODAL DE CARPETAS DE INVESTIGACION */
+
+
+.text-on-pannel {
+  background: #e7f0f9;
+  height: auto;
+  margin-left: 20px;
+  padding: 3px 5px;
+  position: absolute;
+  margin-top: -42px;
+  border: 1px solid darkgray;
+  border-radius: 10px;
+}
+
+.panel {
+  /* for text on pannel */
+  margin-top: 10px !important;
+
+  height: auto;
+   overflow-y: hidden;
+  overflow-x:hidden;
+  background: rgba(255,255,255,0.7);
+} 
+
+.mainPrograms{  padding: 5px 30px 5px 30px !important;  }
+
+.panel-body {
+  padding-top: 30px !important;
+}
+.redondear{    -moz-border-radius: 5px !important;   -webkit-border-radius: 5px !important; border-radius: 5px !important; }
+
+.colorLetras{ color: #686D72; font-weight: bold !important;}
+.fdesv{ background-color:rgba(255,255,255,0.8); font-weight: bold !important; }
+.colorBloqueado{ background-color:#fafafa !important; font-weight: bold !important; }
+
+.modalSIze
+
+#style-2::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+#style-2::-webkit-scrollbar
+{
+  width: 12px;
+  background-color: #F5F5F5;
+}
+
+#style-2::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #D62929;
+}
+
+.modlCabe{ background-color:#3f5265;  }
+.tituloMdl{ color:white; font-weight:bolder; }
+.fondMdlSub{ background-image: url('../img/Fondo poa-07.png'); 
+background-repeat: repeat;  
+background-position: center; 
+background-size: 100%; 
+ackground-position-y: 25%;   }
+.textAreaSubir{ resize: none; 
+  background-color:rgba(255,255,255,0.7) !important; 
+  color: #686D72; }
+.btnSubCacelWidth{ width: 95%; }  
+
+#contMOdalVerFormato{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#contMOdalVerFormato:before{
+
+    content: "";
+    width: 100%;
+    position: absolute;
+    top: 5.5%;
+    left: 0;
+
+    opacity: 0.2;
+
+}
+
+.cargando{
+
+    width: 20%;
+    height: 32%;
+    margin: 0 auto;
+
+}
+
+.orangecol{  background-color: #eea236; }
+.verdCol{  background-color: #8cb887; }
+.yelloCol{  background-color: #efce0a; }
+.redCol{  background-color: rgba(240,89,91,0.9); }
+
+#circulo{
+
+       margin: 0 auto;
+       width: 25px;
+       height: 25px;
+       -moz-border-radius: 70px;
+       -webkit-border-radius: 70px;
+       border-radius: 70px;
+
+       border: solid 4px white;
+
+       -webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.3);
+       -moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.3);
+       box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.3);
+    }
+
+.degMps{
+background: #FFEEEE;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #DDEFBB, #FFEEEE);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #DDEFBB, #FFEEEE); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.degEdit{
+background: #ECE9E6;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #FFFFFF, #ECE9E6);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #FFFFFF, #ECE9E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.degEdit2{
+background: #8e9eab;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #eef2f3, #8e9eab);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #eef2f3, #8e9eab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.degEdit3{
+background: #FFEFBA;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #FFFFFF, #FFEFBA);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #FFFFFF, #FFEFBA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.green{  color: green; }
+.yellowOr{ color: #f0ad4e; font-size: 1.3em; }
+
+.trans{  background-color: transparent !important; }
+
+/*      INPUTS PARA EL REGISTRO DE INFORMACION    */
+
+input[type=number].first{
+
+
+    width: 100%;
+    border: 1px solid #aaa;
+    border-radius: 8px;
+    margin: 8px 0;
+    outline:none;
+    padding: 8px;
+    box-sizing: border-box;
+    transition: .3s;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+
+input[type=number].first:focus{
+
+    border-color: dodgerblue;
+    box-shadow: 0 0 8px 0 dodgerblue;
+
+}
+
+.iconiput input[type=number].first{
+
+    padding-left: 40px;
+
+}
+.iconiput{  position: relative;  }
+.iconiput i{  
+
+      position: absolute;
+      right: : : 0;
+      top: 9px;
+      padding: 9px 8px;
+      color: #3c6084;
+      transition: .3s;
+      font-size:24px;
+ }
+ .iconiput input[type=number].first:focus + i{  color: dodgerblue;  }
+
+ ::placeholder { color: #aaa; }
+
+ /* AQUI SE ACABA EL CODIGO PARA LOS INPUT DE LOS FORMULARIOS */
+
+
+ ::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
+.margtdtable{  padding: 30px;  }
+
+
+.tdFiscalia{
+
+    padding: 1px;
+        border-bottom: 2px dotted darkgray;
+}
+
+.labelFiscalia{
+
+    font-size: 16px;
+    font-weight: bold;
+
+
+}
+.labelFiscalia2{
+
+  color: #566573 ;
+
+
+}
+
+#table1110 {
+  border-collapse: separate;
+  border-spacing: 8px;
+  margin: 10px;
+}
+#table111 {
+  border-collapse: separate;
+  border-spacing: 8px;
+}
+
+.rowmainData{
+
+     padding: 30px;
+
+
+}
+
+#labelBottom{
+
+     border-bottom: 2px dotted darkgray;
+       border-bottom-width: 90% !important;
+
+}

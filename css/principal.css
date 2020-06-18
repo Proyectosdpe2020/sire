@@ -1,0 +1,27 @@
+        .contenedorBI {
+
+                    height: 0;
+                    overflow: hidden;
+                 padding-bottom: 55.5%;
+                 position: relative;
+                 border: solid 1px transparent;
+
+        }
+
+        .contenedorBI iframe {
+
+                height: 100%;
+                left: 0;
+                position: absolute;
+                top: 0;
+                width: 100%;
+
+        }
+
+        .redondear{    -moz-border-radius: 5px !important;   -webkit-border-radius: 5px !important; border-radius: 5px !important; }
+
+.bcground{
+
+          background-image: url('img/Sist Int Reg Est-01.png'); background-repeat: no-repeat;  background-position: center center; background-attachment: fixed; background-size: cover;   
+
+  }
