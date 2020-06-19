@@ -25,6 +25,9 @@
   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">-->
 
 	<div id="contenido">
+
+	<button type="button" class="btn btn-primary" style="height:38px;  align:right; "  onclick = "info()">Descargar Reporte</button>
+
 		<div class="right_col contentMain" role="main">
 
 			<div style="" class="x_panel principalPanel">
