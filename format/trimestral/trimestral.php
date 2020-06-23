@@ -36,7 +36,7 @@
 								<td width="50%">
 											<div class="tituloCentralSegu">
 												<div class="titulosCabe1">
-													<label class="titulo1" style="color: #686D72;">REGISTRO DE INDICADORES TRIMESTRALES</label>
+													<label class="titulo1" style="color: #686D72;">REGISTRO DE INDICADORES TRIMESTRALES <?php echo $idUnidad; ?></label>
 													<h4> <label id="titfisc" class="titulo2">Dirección de Planeación y Estadística</label></h4>
 												</div>
 											</div>
@@ -56,7 +56,12 @@
 								    <h6 class="card-subtitle mb-2 tituloPeriodo"><strong>INFORMACION: <? echo $anioGlobal; ?><br>
 																																																						           PERIODO: <? echo $nme; ?></strong></h6>
 								    
-								  </div>
+								  </div>							  
+				    	<div class="botonAyuda">  	
+										<button type="button" class="botonAcciones" id="ayudaOPC"  onclick="showModalAyuda(1)">Ayuda</button>	
+										<button type="button" class="botonAcciones"  onclick="">Descargar Reporte</button>
+										<button type="button" class="botonAcciones"  onclick="">Enviar a DPE</button>
+									</div><br>	    
 								</div>
 				    </div>
 				  </div><BR>
@@ -73,10 +78,7 @@
 							¿Cúal es el número de <strong>denuncias, querellas u otros requisitos</strong> equivalentes que se recibierón en la Procuraduria General de Justicia o Fiscalía General de la entidad federativa (incluyendo las recibidas en los Centros de Justicia para Mujeres) durante el 2020.
 						</li>
 					</ul>
-				</div><br><hr>
-				<div class="botonAyuda">
-					<button type="button" class="btn btn-primary" id="guardarPregunta" onclick="showModalAyuda(1)">Ayuda</button>
-				</div><br>
+				</div><br><hr><br>
 				<table class="tableTrimes">
 					<thead>
 						<tr>
@@ -129,6 +131,9 @@
 								  							$arrQue3 = array(5, 6, 7); $validaQuest3 = validaQuest($conn, $arrQue3, $per, $anioGlobal, $idUnidad);
 								  							$arrQue5 = array(10, 11, 12, 13, 14); $validaQuest5 = validaQuest($conn, $arrQue5, $per, $anioGlobal, $idUnidad);
 								  							$arrQue6 = array(15,16,17); $validaQuest6 = validaQuest($conn, $arrQue6, $per, $anioGlobal, $idUnidad);
+								  							$arrQue8 = array(34,35,36,37,38,39,40,41,42,43,44,45,46,47); $validaQuest8 = validaQuest($conn, $arrQue8, $per, $anioGlobal, $idUnidad);
+								  							$arrQue9 = array(48,49,50,51); $validaQuest9 = validaQuest($conn, $arrQue9, $per, $anioGlobal, $idUnidad);
+								  							$arrQue10 = array(52,53,54,55); $validaQuest10 = validaQuest($conn, $arrQue10, $per, $anioGlobal, $idUnidad);
 
 								  					 ?>
 								    				<table class="tablecircles">
@@ -140,9 +145,9 @@
 								    								<td><button onclick="getQUestionAjax(5,<? echo $per; ?>,<? echo $anioGlobal; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" class="circle <? if($validaQuest5 == 1){ echo "circleOk"; }else{ echo "circleNone"; } ?>"><h4>5</h4></button></td>	
 								    								<td><button onclick="getQUestionAjax(6,<? echo $per; ?>,<? echo $anioGlobal; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" class="circle <? if($validaQuest6 == 1){ echo "circleOk"; }else{ echo "circleNone"; } ?>"><h4>6</h4></button></td>
 								    								<td><button onclick="getQUestionAjax(7,<? echo $per; ?>,<? echo $anioGlobal; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" class="circle circleNone"><h4>7</h4></button></td>
-								    								<td><button onclick="getQUestionAjax(8,<? echo $per; ?>,<? echo $anioGlobal; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" class="circle circleNone"><h4>8</h4></button></td>
-								    								<td><button onclick="getQUestionAjax(9,<? echo $per; ?>,<? echo $anioGlobal; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)"class="circle circleNone"><h4>9</h4></button></td>
-								    								<td><button onclick="getQUestionAjax(10,<? echo $per; ?>,<? echo $anioGlobal; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" class="circle circleNone"><h4>10</h4></button></td>
+								    								<td><button onclick="getQUestionAjax(8,<? echo $per; ?>,<? echo $anioGlobal; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" class="circle <? if($validaQuest8 == 1){ echo "circleOk"; }else{ echo "circleNone"; } ?>"><h4>8</h4></button></td>
+								    								<td><button onclick="getQUestionAjax(9,<? echo $per; ?>,<? echo $anioGlobal; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" class="circle <? if($validaQuest9 == 1){ echo "circleOk"; }else{ echo "circleNone"; } ?>"><h4>9</h4></button></td>
+								    								<td><button onclick="getQUestionAjax(10,<? echo $per; ?>,<? echo $anioGlobal; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" class="circle <? if($validaQuest10 == 1){ echo "circleOk"; }else{ echo "circleNone"; } ?>"><h4>10</h4></button></td>
 								    						</tr>
 								    				</table>	</div>							    
 								  </div>

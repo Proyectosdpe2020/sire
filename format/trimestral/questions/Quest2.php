@@ -19,7 +19,7 @@
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							¿Cuál es el número de carpetas de investigación iniciadas durante el 2020 con motivó de las denuncias, querella u otros requisitos equivalentes que se recibierón en la Procuraduria General de Justicia o Fiscalia General de la entidad federativa (incluyendo las recibidas en los Centros de Justicia para Mujeres) en ese mismo año?
+							¿Cuál es el número de carpetas de investigación iniciadas durante el 2020 con motivó de las denuncias, querella u otros requisitos equivalentes que se recibieron en la Procuraduria General de Justicia o Fiscalía General de la entidad federativa (incluyendo las recibidas en los Centros de Justicia para Mujeres) en ese mismo año?
 						</li>
 					</ul>
 				</div><br><br>
@@ -29,10 +29,7 @@
 							¿Cuántas carpetas de investigación se iniciaron en el 2020 correspondientes a denuncias, querellas u otros requisitos equivalentes recibidos en 2019?
 						</li>
 					</ul>
-				</div><br><hr>
-				<div class="botonAyuda">
-					<button type="button" class="btn btn-primary" id="guardarPregunta" onclick="showModalAyuda(2)">Ayuda</button>
-				</div><br>
+				</div><br><br>
 				<table class="tableTrimes">
 					<thead>
 						<tr>
@@ -55,7 +52,7 @@
 						</tr>
 						<tr>
 							<th scope="row">2.2</th>
-							<td style="text-align: left;">Carpetas de investigación iniciadas por denuncias, querellas u otros requisitos equivalentes recibidos en 2020</td>
+							<td style="text-align: left;">Carpetas de investigación iniciadas por denuncias, querellas u otros requisitos equivalentes recibidos en 2019</td>
 							<td><input type="number" value="<? echo $data2[0][0]; ?>" id="p4m1"></td>
 							<td><input type="number" value="<? echo $data2[0][1]; ?>" id="p4m2"></td>
 							<td><input type="number" value="<? echo $data2[0][2]; ?>" id="p4m3"></td>

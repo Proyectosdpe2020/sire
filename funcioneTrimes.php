@@ -53,6 +53,40 @@ function getDataQ($conn, $quest, $per, $anio, $idUnidad){
 	
 	}
 
+	function getDAtaSIREQuestionEstatus($conSic, $mes, $anio, $idUnidad, $estatus, $per){
+
+	$query = " SELECT COUNT(resoluciones.CarpetaID) as m
+  FROM [PRUEBA].[dbo].[Resoluciones] INNER JOIN Carpeta c ON c.CarpetaID = Resoluciones.CarpetaID 
+  WHERE idUnidad = $idUnidad AND mes IN($mes) AND EstatusID = $estatus AND anio = $anio AND YEAR(FechaInicio) = $anio AND MONTH(FechaInicio) $per ";
+
+
+	$indice = 0;
+	$stmt = sqlsrv_query($conSic, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['m'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+	
+	}
+
+	function getDAtaSIREQuestionEstatusLiti($conSic, $mes, $anio, $idUnidad, $estatus, $per){
+
+ $query = "SELECT COUNT(idEstatusNucs) as mes
+  FROM [ESTADISTICAV2].[dbo].[estatusNucs]  WHERE idUnidad = $idUnidad AND mes IN($mes) AND idEstatus = $estatus AND anio = $anio AND YEAR(fecha) = $anio AND MONTH(fecha) $per ";
+
+	$indice = 0;
+	$stmt = sqlsrv_query($conSic, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['mes'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+	
+	}
+
 
 function validaQuest($conn, $Arrquest, $per, $anio, $idUnidad){
 				$val = 0;

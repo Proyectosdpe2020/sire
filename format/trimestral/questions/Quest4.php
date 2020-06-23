@@ -21,10 +21,7 @@
 							¿Cúantas carpetas de investigación se iniciaron en el 2020 con al menos un detenido en flagrancia y cuántas se iniciarón sin detenido?
 						</li>
 					</ul>
-				</div><br><hr>
-				<div class="botonAyuda">
-					<button type="button" class="btn btn-primary" id="guardarPregunta" onclick="showModalAyuda(4)">Ayuda</button>
-				</div><br>
+				</div><br><hr><br>
 				<table class="tableTrimes">
 					<thead>
 						<tr>
