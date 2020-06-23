@@ -36,7 +36,7 @@
 								<td width="50%">
 											<div class="tituloCentralSegu">
 												<div class="titulosCabe1">
-													<label class="titulo1" style="color: #686D72;">REGISTRO DE INDICADORES TRIMESTRALES</label>
+													<label class="titulo1" style="color: #686D72;">REGISTRO DE INDICADORES TRIMESTRALES <?php echo $idUnidad; ?></label>
 													<h4> <label id="titfisc" class="titulo2">Dirección de Planeación y Estadística</label></h4>
 												</div>
 											</div>
@@ -56,7 +56,12 @@
 								    <h6 class="card-subtitle mb-2 tituloPeriodo"><strong>INFORMACION: <? echo $anioGlobal; ?><br>
 																																																						           PERIODO: <? echo $nme; ?></strong></h6>
 								    
-								  </div>
+								  </div>							  
+				    	<div class="botonAyuda">  	
+										<button type="button" class="botonAcciones" id="ayudaOPC"  onclick="showModalAyuda(1)">Ayuda</button>	
+										<button type="button" class="botonAcciones"  onclick="">Descargar Reporte</button>
+										<button type="button" class="botonAcciones"  onclick="">Enviar a DPE</button>
+									</div><br>	    
 								</div>
 				    </div>
 				  </div><BR>
@@ -73,10 +78,7 @@
 							¿Cúal es el número de <strong>denuncias, querellas u otros requisitos</strong> equivalentes que se recibierón en la Procuraduria General de Justicia o Fiscalía General de la entidad federativa (incluyendo las recibidas en los Centros de Justicia para Mujeres) durante el 2020.
 						</li>
 					</ul>
-				</div><br><hr>
-				<div class="botonAyuda">
-					<button type="button" class="btn btn-primary" id="guardarPregunta" onclick="showModalAyuda(1)">Ayuda</button>
-				</div><br>
+				</div><br><hr><br>
 				<table class="tableTrimes">
 					<thead>
 						<tr>

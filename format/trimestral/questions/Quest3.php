@@ -22,13 +22,10 @@
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							¿Cúal es el número de víctimas u ofendidos que derivan de las carpetas de investigación iniciadas en 2020.
+							¿Cúal es el número de víctimas u ofendidos que derivan de las carpetas de investigación iniciadas en 2020?.
 						</li>
 					</ul>
-				</div><br><hr>
-				<div class="botonAyuda">
-					<button type="button" class="btn btn-primary" id="guardarPregunta" onclick="showModalAyuda(3)">Ayuda</button>
-				</div><br>
+				</div><br><hr><br>
 				<table class="tableTrimes">
 					<thead>
 						<tr>

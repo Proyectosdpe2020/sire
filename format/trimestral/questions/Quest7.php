@@ -3,7 +3,7 @@
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							<strong>¿Cuántos procedimientos</strong> han realizado los agentes del Ministerio Público derivados de las carpetas de Investigación iniciadas en 2020 y en qué estatus se encuentran desde su inicio hasta el auto de vinculación a proceso dentro de los rubros señalados, conforme los registros de la Procuraduría General de Justicia o Fiscalía Generas de la entidad federativa en los cortes referidos?
+							<strong>¿Cuántos procedimientos</strong> han realizado los agentes del Ministerio Público derivados de las carpetas de Investigación iniciadas en 2020 y en qué estatus se encuentran desde su inicio hasta el auto de vinculación a proceso dentro de los rubros señalados, conforme los registros de la Procuraduría General de Justicia o Fiscalía General de la entidad federativa en los cortes referidos?
 						</li>
 					</ul>
 				</div><br><br>
@@ -21,7 +21,7 @@
 					<ul>
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
-							 En este sentido, los procedimientos que han realizado los agentes del Ministerio Público se refieren al número de derivaciones que simultáneamente llevaron a cabo cada una de las carpetas de investigación iniciadas para definir la vía correspondiente para su terminación dentro del proceso penal. El estatus des la situacion que guardan dichos procedimientos en un momento dentro de la etapa de investigación. 
+							 En este sentido, los procedimientos que han realizado los agentes del Ministerio Público se refieren al número de derivaciones que simultáneamente llevaron a cabo cada una de las carpetas de investigación iniciadas para definir la vía correspondiente para su terminación dentro del proceso penal. El estatus es la situacion que guardan dichos procedimientos en un momento dentro de la etapa de investigación. 
 							</div>
 						</li>
 					</ul>
@@ -34,10 +34,7 @@
 							</div>
 						</li>
 					</ul>
-				</div><br><hr>
-				<div class="botonAyuda">
-					<button type="button" class="btn btn-primary" id="guardarPregunta" onclick="showModalAyuda(7)">Ayuda</button>
-				</div><br>
+				</div><br><hr><br>
 				<table class="tableTrimes">
 					<thead>
 						<tr>
@@ -206,7 +203,7 @@
 					<ul>
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
-								En caso de que un procedimiento que todavía no haya sido vinculado a proceso se hubere derivado al OEMASC perteneciente al Poder Judicial pro cargas de trabajo u otros motivos, se deberá registrar en este apartado.
+								En caso de que un procedimiento que todavía no haya sido vinculado a proceso se hubiere derivado al OEMASC perteneciente al Poder Judicial por cargas de trabajo u otros motivos, se deberá registrar en este apartado.
 							</div>
 						</li>
 					</ul>

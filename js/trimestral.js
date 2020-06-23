@@ -1,4 +1,7 @@
 function getQUestionAjax(quest, per, anio, idUnidad, idEnlace){
+  
+  getHelp(quest);
+
 		//swal("", "Estas selecionando la pregunta "+quest, "success");
 		$.ajax({
 				//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
@@ -474,4 +477,39 @@ function showModalAyuda(pregunta){
 
 function closeModalAyuda(){
 	$('#modalAyuda').modal('hide');
+}
+
+function getHelp(quest){
+	switch(quest){
+		case 1:
+		$("#ayudaOPC").attr("onclick","showModalAyuda(1)");
+		break;
+		case 2:
+		$("#ayudaOPC").attr("onclick","showModalAyuda(2)");
+		break;
+		case 3:
+		$("#ayudaOPC").attr("onclick","showModalAyuda(3)");
+		break;
+		case 4:
+		$("#ayudaOPC").attr("onclick","showModalAyuda(4)");
+		break;
+		case 5:
+		$("#ayudaOPC").attr("onclick","showModalAyuda(5)");
+		break;
+		case 6:
+		$("#ayudaOPC").attr("onclick","showModalAyuda(6)");
+		break;
+		case 7:
+		$("#ayudaOPC").attr("onclick","showModalAyuda(7)");
+		break;
+		case 8:
+		$("#ayudaOPC").attr("onclick","showModalAyuda(8)");
+		break;
+		case 9:
+		$("#ayudaOPC").attr("onclick","showModalAyuda(9)");
+		break;
+		case 10:
+		$("#ayudaOPC").attr("onclick","showModalAyuda(10)");
+		break;
+	}
 }

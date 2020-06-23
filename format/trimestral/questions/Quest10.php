@@ -31,7 +31,7 @@
 					<ul>
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
-							 	Un imputado con una o más sentencias absolutorias y ninguna condenatoria 4 se contabilizará como un imputado con sentencia absolutoria. 
+							 	Un imputado con una o más sentencias absolutorias y ninguna condenatoria se contabilizará como un imputado con sentencia absolutoria. 
 							</div>
 						</li>
 					</ul>
@@ -53,10 +53,7 @@
 							</div>
 						</li>
 					</ul>
-				</div><br><hr>
-				<div class="botonAyuda">
-					<button type="button" class="btn btn-primary" id="guardarPregunta" onclick="showModalAyuda(10)">Ayuda</button>
-				</div><br>
+				</div><br><hr><br>
 				<table class="tableTrimes">
 					<thead>
 						<tr>

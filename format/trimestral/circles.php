@@ -34,7 +34,7 @@
 								    								<td><button onclick="getQUestionAjax(5,<? echo $per; ?>,<? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" class="circle <? if($validaQuest5 == 1){ echo "circleOk"; }else{ echo "circleNone"; } ?>"><h4>5</h4></button></td>
 								    								<td><button onclick="getQUestionAjax(6,<? echo $per; ?>,<? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" class="circle <? if($validaQuest6 == 1){ echo "circleOk"; }else{ echo "circleNone"; } ?>"><h4>6</h4></button></td>
 								    								<td><button onclick="getQUestionAjax(7,<? echo $per; ?>,<? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" class="circle circleNone"><h4>7</h4></button></td>
-								    								<td><button onclick="getQUestionAjax(8,<? echo $per; ?>,<? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" lass="circle <? if($validaQuest8 == 1){ echo "circleOk"; }else{ echo "circleNone"; } ?>"><h4>8</h4></button></td>
+								    								<td><button onclick="getQUestionAjax(8,<? echo $per; ?>,<? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" class="circle <? if($validaQuest8 == 1){ echo "circleOk"; }else{ echo "circleNone"; } ?>"><h4>8</h4></button></td>
 								    								<td><button onclick="getQUestionAjax(9,<? echo $per; ?>,<? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" class="circle <? if($validaQuest9 == 1){ echo "circleOk"; }else{ echo "circleNone"; } ?>"><h4>9</h4></button></td>
 								    								<td><button onclick="getQUestionAjax(10,<? echo $per; ?>,<? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" class="circle <? if($validaQuest10 == 1){ echo "circleOk"; }else{ echo "circleNone"; } ?>"><h4>10</h4></button></td>
 								    						</tr>

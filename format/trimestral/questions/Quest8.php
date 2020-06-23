@@ -1,15 +1,16 @@
 <? 
 					include ("../../../Conexiones/Conexion.php");
+					include ("../../../Conexiones/conexionSicap.php");
 			  include("../../../funcioneTrimes.php");
 
 					if (isset($_GET["per"])){ $per = $_GET["per"]; }
 					if (isset($_GET["anio"])){ $anio = $_GET["anio"]; }
 					if (isset($_GET["idUnidad"])){ $idUnidad = $_GET["idUnidad"]; }
 					if (isset($_GET["idEnlace"])){ $idEnlace = $_GET["idEnlace"]; }
-					if($per == 1){ $m1 = "Enero"; $m2 = "Febrero"; $m3 = "Marzo"; $nme = "Enero - Marzo";}
-					if($per == 2){ $m1 = "Abril"; $m2 = "Mayo"; $m3 = "Junio"; $nme = "Abril - Junio";}
-					if($per == 3){ $m1 = "Julio"; $m2 = "Agosto"; $m3 = "Septiembre"; $nme = "Julio - Septiembre";}
-					if($per == 4){ $m1 = "Octubre"; $m2 = "Noviembre"; $m3 = "Diciembre"; $nme = "Octubre - Diciembre";}
+					if($per == 1){ $m1 = "Enero"; $m2 = "Febrero"; $m3 = "Marzo"; $nme = "Enero - Marzo"; $arr = array(1,2,3); $per1 = "IN(1,2,3)"; } 
+					if($per == 2){ $m1 = "Abril"; $m2 = "Mayo"; $m3 = "Junio"; $nme = "Abril - Junio"; $arr = array(4,5,6); $per1 = "IN(4,5,6)"; }
+					if($per == 3){ $m1 = "Julio"; $m2 = "Agosto"; $m3 = "Septiembre"; $nme = "Julio - Septiembre"; $arr = array(7,8,9); $per1 = "IN(7,8,9)"; }
+					if($per == 4){ $m1 = "Octubre"; $m2 = "Noviembre"; $m3 = "Diciembre"; $nme = "Octubre - Diciembre"; $arr = array(10,11,12); $per1 = "IN(10,11,12)"; }
 
 					$data = getDAtaQuestion($conn, 34, $per, $anio, $idUnidad);
 					$data2 = getDAtaQuestion($conn, 35, $per, $anio, $idUnidad);
@@ -34,10 +35,7 @@
 							<strong>¿Cuántos procedimientos</strong> se han generado de las vinculaciones a proceso derivadas de las carpetas de investigación iniciadas en 2020 y en qué estatus se encuentran dentro de los rubros señalados, conforme los registros de la Procuraduria General de Justicia o Fiscalía General de la entidad federativa en los cortes referidos?
 						</li>
 					</ul>
-				</div><br><hr>
-				<div class="botonAyuda">
-					<button type="button" class="btn btn-primary" id="guardarPregunta" onclick="showModalAyuda(8)">Ayuda</button>
-				</div><br>
+				</div><br><hr><br>
 				<table class="tableTrimes">
 					<thead>
 						<tr>
@@ -61,10 +59,19 @@
 						<tr>
 							<th scope="row">8.2</th>
 							<td style="text-align: left;">Determinados por criterio de oportunidad</td>
-							<td><input type="number" value="<? echo $data2[0][0]; ?>" id="p35m1"></td>
-							<td><input type="number" value="<? echo $data2[0][1]; ?>" id="p35m2"></td>
-							<td><input type="number" value="<? echo $data2[0][2]; ?>" id="p35m3"></td>
-							<td class="blockInp"><input type="number" value="<? echo $data2[0][3]; ?>" id="p35tot" readonly></td>
+						<?
+									$tota = 0; $tota1 = 0;
+									for ($o=0; $o < sizeof($arr) ; $o++) { 
+
+												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUnidad, 25, $per1);
+												$tota = $tota + $data[0][0];
+												if(is_null($data[0][0])){ $data[0][0] = 0; }
+												?>
+													<td class="blockInp"><input type="number" value="<? echo $data[0][0]; ?>" id="p35m<? echo $o+1; ?>" readonly></td>
+												<?										
+									}
+							?>	
+							<td class="blockInp"><input type="number" value="<? echo $tota; ?>" id="p35tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">8.3</th>
@@ -77,10 +84,19 @@
 						<tr>
 							<th scope="row">8.4</th>
 							<td style="text-align: left;">Cumplida la suspensión condicional del proceso</td>
-							<td><input type="number" value="<? echo $data4[0][0]; ?>" id="p37m1"></td>
-							<td><input type="number" value="<? echo $data4[0][1]; ?>" id="p37m2"></td>
-							<td><input type="number" value="<? echo $data4[0][2]; ?>" id="p37m3"></td>
-							<td class="blockInp"><input type="number" value="<? echo $data4[0][3]; ?>" id="p37tot" readonly></td>
+								<?
+									$tota = 0; $tota1 = 0;
+									for ($o=0; $o < sizeof($arr) ; $o++) { 
+
+												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUnidad, 18, $per1);
+												$tota = $tota + $data[0][0];
+												if(is_null($data[0][0])){ $data[0][0] = 0; }
+												?>
+													<td class="blockInp"><input type="number" value="<? echo $data[0][0]; ?>" id="p37m<? echo $o+1; ?>" readonly></td>
+												<?										
+									}
+							?>	
+							<td class="blockInp"><input type="number" value="<? echo $tota; ?>" id="p37tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">8.5</th>
@@ -101,10 +117,19 @@
 						<tr>
 							<th scope="row">8.7</th>
 							<td style="text-align: left;">Resueltos por procedimiento abreviado</td>
-							<td><input type="number" value="<? echo $data7[0][0]; ?>" id="p40m1"></td>
-							<td><input type="number" value="<? echo $data7[0][1]; ?>" id="p40m2"></td>
-							<td><input type="number" value="<? echo $data7[0][2]; ?>" id="p40m3"></td>
-							<td class="blockInp"><input type="number" value="<? echo $data7[0][3]; ?>" id="p40tot" readonly></td>
+								<?
+									$tota = 0; $tota1 = 0;
+									for ($o=0; $o < sizeof($arr) ; $o++) { 
+
+												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUnidad, 13, $per1);
+												$tota = $tota + $data[0][0];
+												if(is_null($data[0][0])){ $data[0][0] = 0; }
+												?>
+													<td class="blockInp"><input type="number" value="<? echo $data[0][0]; ?>" id="p40m<? echo $o+1; ?>" readonly></td>
+												<?										
+									}
+							?>	
+							<td class="blockInp"><input type="number" value="<? echo $tota; ?>" id="p40tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">8.8</th>

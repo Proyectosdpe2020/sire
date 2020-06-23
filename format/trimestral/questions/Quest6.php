@@ -25,10 +25,7 @@
 							Cuál es el número de detenidos en flagrancia, por orden de aprehensión o caso urgente derivados de las carpetas de investigación iniciadas en 2020?
 						</li>
 					</ul>
-				</div><br><hr>
-				<div class="botonAyuda">
-					<button type="button" class="btn btn-primary" id="guardarPregunta" onclick="showModalAyuda(6)">Ayuda</button>
-				</div><br>
+				</div><br><hr><br>
 				<table class="tableTrimes">
 					<thead>
 						<tr>
@@ -81,7 +78,7 @@
 					<ul>
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
-							 Por su parte, los datos proporcionados en el reactivo 6.2 (número de detenidos por orden de aprehensión) deberan ser iguales o mayores a los datos proporcionados en el reactivo 5.3 (número de órdenes de aprehensión cumplimentadas) de la pregunta 5. Lo anterior no es aplicable si la persona o personas se encuentre privadas de la libertas, es decir, en el centro penitenciario en cumplimiento de su sentencia condenatoria o en cumplimiento de la medida cuatelar de prisión preventiva.
+							 Por su parte, los datos proporcionados en el reactivo 6.2 (número de detenidos por orden de aprehensión) deberan ser iguales o mayores a los datos proporcionados en el reactivo 5.3 (número de órdenes de aprehensión cumplimentadas) de la pregunta 5. Lo anterior no es aplicable si la persona o personas se encuentre privadas de la libertad, es decir, en el centro penitenciario en cumplimiento de su sentencia condenatoria o en cumplimiento de la medida cautelar de prisión preventiva.
 							</div>
 						</li>
 					</ul>
