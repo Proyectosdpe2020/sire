@@ -6,8 +6,6 @@ function getDataQ($conn, $quest, $per, $anio, $idUnidad){
 
 	$query = " SELECT idSeguimiento FROM trimestral.seguimiento WHERE idPregunta = $quest AND idPeriodo = $per AND anio = $anio AND idUnidad = $idUnidad ";
 
-	echo $query."<br>";
-
 		$stmt = sqlsrv_query(  $conn, $query,array(), array("Scrollable" => SQLSRV_CURSOR_STATIC));
 		$row_count = sqlsrv_num_rows( $stmt );
 
@@ -47,6 +45,25 @@ function getDataQ($conn, $quest, $per, $anio, $idUnidad){
 	{
 		$arreglo[$indice][0]=$row['IniDetenido'];
 		$arreglo[$indice][1]=$row['IniSinDetenido'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+	
+	}
+
+
+	function getDAtaSIREQuestionEstatus($conSic, $mes, $anio, $idUnidad, $estatus, $per){
+
+	$query = " SELECT COUNT(resoluciones.CarpetaID) as m
+  FROM [PRUEBA].[dbo].[Resoluciones] INNER JOIN Carpeta c ON c.CarpetaID = Resoluciones.CarpetaID 
+  WHERE idUnidad = $idUnidad AND mes IN($mes) AND EstatusID = $estatus AND anio = $anio AND YEAR(FechaInicio) = $anio AND MONTH(FechaInicio) $per ";
+
+
+	$indice = 0;
+	$stmt = sqlsrv_query($conSic, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['m'];
 		$indice++;
 	}
 	if(isset($arreglo)){return $arreglo;}

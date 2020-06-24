@@ -19,7 +19,8 @@
 								  							$arrQue1 = array(1, 2); $validaQuest1 = validaQuest($conn, $arrQue1, $per, $anio, $idUnidad);
 								  							$arrQue3 = array(5, 6, 7); $validaQuest3 = validaQuest($conn, $arrQue3, $per, $anio, $idUnidad);
 								  							$arrQue5 = array(10, 11, 12, 13, 14); $validaQuest5 = validaQuest($conn, $arrQue5, $per, $anio, $idUnidad);
-								  								$arrQue6 = array(15,16,17); $validaQuest6 = validaQuest($conn, $arrQue6, $per, $anio, $idUnidad);
+								  							$arrQue6 = array(15,16,17); $validaQuest6 = validaQuest($conn, $arrQue6, $per, $anio, $idUnidad);
+								  							$arrQue7 = array(18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33); $validaQuest7 = validaQuest($conn, $arrQue7, $per, $anio, $idUnidad);
 
 								  					 ?>
 								    				<table class="tablecircles">
@@ -30,7 +31,7 @@
 								    								<td><button onclick="getQUestionAjax(4,<? echo $per; ?>,<? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" class="circle <? if($validaQuest4 == 1){ echo "circleOk"; }else{ echo "circleNone"; } ?>"><h4>4</h4></button></td>
 								    								<td><button onclick="getQUestionAjax(5,<? echo $per; ?>,<? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" class="circle <? if($validaQuest5 == 1){ echo "circleOk"; }else{ echo "circleNone"; } ?>"><h4>5</h4></button></td>
 								    								<td><button onclick="getQUestionAjax(6,<? echo $per; ?>,<? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" class="circle <? if($validaQuest6 == 1){ echo "circleOk"; }else{ echo "circleNone"; } ?>"><h4>6</h4></button></td>
-								    								<td><button onclick="getQUestionAjax(7,<? echo $per; ?>,<? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" class="circle circleNone"><h4>7</h4></button></td>
+								    								<td><button onclick="getQUestionAjax(7,<? echo $per; ?>,<? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" class="circle <? if($validaQuest7 == 1){ echo "circleOk"; }else{ echo "circleNone"; } ?>"><h4>7</h4></button></td>
 								    								<td><button onclick="getQUestionAjax(8,<? echo $per; ?>,<? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" class="circle circleNone"><h4>8</h4></button></td>
 								    								<td><button onclick="getQUestionAjax(9,<? echo $per; ?>,<? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)"class="circle circleNone"><h4>9</h4></button></td>
 								    								<td><button onclick="getQUestionAjax(10,<? echo $per; ?>,<? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" class="circle circleNone"><h4>10</h4></button></td>
