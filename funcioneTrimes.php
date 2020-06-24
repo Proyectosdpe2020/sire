@@ -53,7 +53,6 @@ function getDataQ($conn, $quest, $per, $anio, $idUnidad){
 
 	function getDAtaSIREQuestionEstatus($conSic, $mes, $anio, $idUnidad, $estatus, $per){
 
-	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
 	$query = " SELECT COUNT(resoluciones.CarpetaID) as m
   FROM [PRUEBA].[dbo].[Resoluciones] INNER JOIN Carpeta c ON c.CarpetaID = Resoluciones.CarpetaID 
   WHERE idUnidad = $idUnidad AND mes IN($mes) AND EstatusID = $estatus AND anio = $anio AND YEAR(FechaInicio) = $anio AND MONTH(FechaInicio) $per ";
