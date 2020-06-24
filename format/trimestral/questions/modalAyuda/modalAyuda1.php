@@ -14,7 +14,7 @@
 						Se solicitan el número de denuncias, querellas u otros requisitos equivalentes que se recibieron ante la Procuraduría General de Justicia o la Fiscalía General del Estado, incluyendo los Centros de Justicia para Mujeres, durante los cuatro trimestres de 2020, proporcionando el dato acumulado en cada uno de los trimestres.	
 					</div>
 					<div class="textoAyuda" >
-						Es importante que no se vayan a contabilizar las denuncias, querellas u otros requisitos equivalentes recibidas en 2019 que iniciaron carpetas de investigación en 2020. Esta situación la estamos contemplando en la segunda pregunta.
+						Es importante que <strong>no se vayan a contabilizar</strong> las denuncias, querellas u otros requisitos equivalentes recibidas en 2019 que iniciaron carpetas de investigación en 2020. Esta situación se contempla en la segunda pregunta.
 					</div>
 					<div class="textoAyuda" >
 						En cuanto a la naturaleza o definición de los datos que dan contenido a esta primer pregunta, se aclara que: 1.1. Denuncias.- corresponde a la figura prevista en los artículos 222, 223 y 224 del CNPP; 1.2. Querellas u otros requisitos equivalentes.- a las figuras previstas en el artículo 225 del CNPP.

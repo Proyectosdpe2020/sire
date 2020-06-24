@@ -11,7 +11,7 @@
 						<div class="col-md-1 tituloAyuda"><strong>Ayuda:</strong></div>
 					</div><br><br>
 					<div class="textoAyuda" >
-					En esta pregunta se solicita el número de víctimas u ofendidos en términos de lo dispuesto en el artículo 108 del Código Nacional de Procedimientos Penales (CNPP) derivados de las carpetas de investigación iniciadas en 2020, <strong>diferenciando si éstos son mujeres u hombres u otros tipos,</strong> entendiendo por esta última cuando se trate de personas morales, osamentas relacionadas con el hecho delictivo, entre otros.	
+					En esta pregunta se solicita el <strong>número de víctimas u ofendidos</strong> en términos de lo dispuesto en el artículo 108 del Código Nacional de Procedimientos Penales (CNPP) derivados de las carpetas de investigación iniciadas en 2020, <strong>diferenciando si éstos son mujeres u hombres u otros tipos,</strong> entendiendo por esta última cuando se trate de personas morales, osamentas relacionadas con el hecho delictivo, entre otros.	
 					</div>
 				</div>
 				<div class="botonCloseModal">

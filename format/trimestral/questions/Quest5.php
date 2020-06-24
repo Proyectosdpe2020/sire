@@ -34,10 +34,7 @@
 							¿Cuántas órdenes de detención por caso urgente fueron emitidas por el Ministerio Público y cúantas de éstas fueron cumplimentasas por la Policia?
 						</li>
 					</ul>
-				</div><br><hr>
-				<div class="botonAyuda">
-					<button type="button" class="btn btn-primary" id="guardarPregunta" onclick="showModalAyuda(5)">Ayuda</button>
-				</div><br>
+				</div><br><hr><br>
 				<table class="tableTrimes">
 					<thead>
 						<tr>
@@ -52,7 +49,7 @@
 					<tbody>
 						<tr>
 							<th scope="row">5.1</th>
-							<td style="text-align: left;">Número de órdenes de aprehensión solicitadas</td>
+							<td style="text-align: left;">Número de órdenes de aprehensión solicitadas por imputado</td>
 							<td><input type="number" value="<? echo $data[0][0]; ?>" id="p10m1"></td>
 							<td><input type="number" value="<? echo $data[0][1]; ?>" id="p10m2"></td>
 							<td><input type="number" value="<? echo $data[0][2]; ?>" id="p10m3"></td>
@@ -60,7 +57,7 @@
 						</tr>
 						<tr>
 							<th scope="row">5.2</th>
-							<td style="text-align: left;">Número de órdenes de aprehensión ordenadas por el Juez de Control</td>
+							<td style="text-align: left;">Número de órdenes de aprehensión ordenadas por el Juez de Control por imputado</td>
 							<td><input type="number" value="<? echo $data2[0][0]; ?>" id="p11m1"></td>
 							<td><input type="number" value="<? echo $data2[0][1]; ?>" id="p11m2"></td>
 							<td><input type="number" value="<? echo $data2[0][2]; ?>" id="p11m3"></td>
@@ -68,7 +65,7 @@
 						</tr>
 						<tr>
 							<th scope="row">5.3</th>
-							<td style="text-align: left;">Número de órdenes de aprehensión cumplimentadas por la Policia</td>
+							<td style="text-align: left;">Número de órdenes de aprehensión cumplimentadas por la Policía por imputado</td>
 							<td><input type="number" value="<? echo $data3[0][0]; ?>" id="p12m1"></td>
 							<td><input type="number" value="<? echo $data3[0][1]; ?>" id="p12m2"></td>
 							<td><input type="number" value="<? echo $data3[0][2]; ?>" id="p12m3"></td>
@@ -76,7 +73,7 @@
 						</tr>
 						<tr>
 							<th scope="row">5.4</th>
-							<td style="text-align: left;">Número de órdenes de detención por caso urgente emitidas por el 	Ministerio Publico</td>
+							<td style="text-align: left;">Número de órdenes de detención por caso urgente emitidas por el 	Ministerio Público por imputado</td>
 							<td><input type="number" value="<? echo $data4[0][0]; ?>" id="p13m1"></td>
 							<td><input type="number" value="<? echo $data4[0][1]; ?>" id="p13m2"></td>
 							<td><input type="number" value="<? echo $data4[0][2]; ?>" id="p13m3"></td>
@@ -84,7 +81,7 @@
 						</tr>
 						<tr>
 							<th scope="row">5.5</th>
-							<td style="text-align: left;">Número de órdenes de detención por caso urgente cumplimentadas por la Policia</td>
+							<td style="text-align: left;">Número de órdenes de detención por caso urgente cumplimentadas por la Policía por imputado</td>
 							<td><input type="number" value="<? echo $data5[0][0]; ?>" id="p14m1"></td>
 							<td><input type="number" value="<? echo $data5[0][1]; ?>" id="p14m2"></td>
 							<td><input type="number" value="<? echo $data5[0][2]; ?>" id="p14m3"></td>
@@ -97,8 +94,8 @@
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
 							 <img src="images/warning.png"  class="imgWarning" alt="">
-							 Nota.- Los datos proporcionados en el reactivo 5.3 (números de órdenes de aprehensión cumplimentadas) no podrán ser superiores al reactivo 5.2 (número de óirdenes de aprehension ordenadas) y éstos a su vez no podrán ser superiores al reactivo 5.1 (número de órdenes de aprehensión solicitadas).<br><br>
-							 De la misma forma , los datos proporcionados en el reactivo 5.5 (número de órdenes de detención por carso urgente cumplimentadas) no podrán ser superiores al reactivo 5.4 (número de órdenes de detención por caso urgente emitidas).
+							 Nota.- Los datos proporcionados en el reactivo 5.3 (números de órdenes de aprehensión cumplimentadas) no podrán ser superiores al reactivo 5.2 (número de órdenes de aprehensión ordenadas) y éstos a su vez no podrán ser superiores al reactivo 5.1 (número de órdenes de aprehensión solicitadas).<br><br>
+							 De la misma forma, los datos proporcionados en el reactivo 5.5 (número de órdenes de detención por caso urgente cumplimentadas) no podrán ser superiores al reactivo 5.4 (número de órdenes de detención por caso urgente emitidas).
 							</div>
 						</li>
 					</ul>

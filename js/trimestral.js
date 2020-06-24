@@ -1,4 +1,7 @@
 function getQUestionAjax(quest, per, anio, idUnidad, idEnlace){
+  
+  getHelp(quest);
+
 		//swal("", "Estas selecionando la pregunta "+quest, "success");
 		$.ajax({
 				//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
@@ -218,6 +221,211 @@ function saveQuest5(quest, per, anio, idUnidad, idEnlace){
 }
 
 
+function saveQuest6(quest, per, anio, idUnidad, idEnlace){
+
+	p15m1 = document.getElementById("p15m1").value;
+	p15m2 = document.getElementById("p15m2").value;
+	p15m3 = document.getElementById("p15m3").value;
+
+	p16m1 = document.getElementById("p16m1").value;
+	p16m2 = document.getElementById("p16m2").value;
+	p16m3 = document.getElementById("p16m3").value;
+
+	p17m1 = document.getElementById("p17m1").value;
+	p17m2 = document.getElementById("p17m2").value;
+	p17m3 = document.getElementById("p17m3").value;
+
+	if(p15m1 == "" || p15m2 == "" || p15m3 == "" || p16m1 == "" || p16m2 == "" || p16m3 == "" || p17m1 == "" || p17m2 == "" || p17m3 == ""){
+		swal("", "Faltan campos por completar. ", "warning");
+	}else{		
+		$.ajax({
+				//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
+				url:'format/trimestral/inserts/save'+quest+'.php?quest='+quest+'&per='+per+'&anio='+anio+'&idUnidad='+idUnidad+'&idEnlace='+idEnlace+'&p15m1='+p15m1
+				+'&p15m2='+p15m2+'&p15m3='+p15m3+'&p16m1='+p16m1+'&p16m2='+p16m2+'&p16m3='+p16m3+'&p17m1='+p17m1+'&p17m2='+p17m2+'&p17m3='+p17m3,
+				type:'POST',
+				contentType:false,
+				processData:false,
+				cache:false
+		}).done(function(respuesta){					
+					var data = JSON.parse(respuesta);
+					if(data.first == "SI"){
+						 swal("", "Información capturada exitosamente.", "success");
+						 getQUestionAjax(quest, per, anio, idUnidad, idEnlace);
+						 getCircles(quest, per, anio, idUnidad, idEnlace);
+					}else{   swal("", "Hubo un error favor de revisar.", "warning");  }
+				});	
+	}
+}
+
+function saveQuest8(quest, per, anio, idUnidad, idEnlace){
+
+	p34m1 = document.getElementById("p34m1").value;
+	p34m2 = document.getElementById("p34m2").value;
+	p34m3 = document.getElementById("p34m3").value;
+
+	p35m1 = document.getElementById("p35m1").value;
+	p35m2 = document.getElementById("p35m2").value;
+	p35m3 = document.getElementById("p35m3").value;
+
+	p36m1 = document.getElementById("p36m1").value;
+	p36m2 = document.getElementById("p36m2").value;
+	p36m3 = document.getElementById("p36m3").value;
+
+	p37m1 = document.getElementById("p37m1").value;
+	p37m2 = document.getElementById("p37m2").value;
+	p37m3 = document.getElementById("p37m3").value;
+
+	p38m1 = document.getElementById("p38m1").value;
+	p38m2 = document.getElementById("p38m2").value;
+	p38m3 = document.getElementById("p38m3").value;
+
+	p39m1 = document.getElementById("p39m1").value;
+	p39m2 = document.getElementById("p39m2").value;
+	p39m3 = document.getElementById("p39m3").value;
+
+	p40m1 = document.getElementById("p40m1").value;
+	p40m2 = document.getElementById("p40m2").value;
+	p40m3 = document.getElementById("p40m3").value;
+
+	p41m1 = document.getElementById("p41m1").value;
+	p41m2 = document.getElementById("p41m2").value;
+	p41m3 = document.getElementById("p41m3").value;
+
+	p42m1 = document.getElementById("p42m1").value;
+	p42m2 = document.getElementById("p42m2").value;
+	p42m3 = document.getElementById("p42m3").value;
+
+	p43m1 = document.getElementById("p43m1").value;
+	p43m2 = document.getElementById("p43m2").value;
+	p43m3 = document.getElementById("p43m3").value;
+
+	p44m1 = document.getElementById("p44m1").value;
+	p44m2 = document.getElementById("p44m2").value;
+	p44m3 = document.getElementById("p44m3").value;
+
+	p45m1 = document.getElementById("p45m1").value;
+	p45m2 = document.getElementById("p45m2").value;
+	p45m3 = document.getElementById("p45m3").value;
+
+	p46m1 = document.getElementById("p46m1").value;
+	p46m2 = document.getElementById("p46m2").value;
+	p46m3 = document.getElementById("p46m3").value;
+
+	p47m1 = document.getElementById("p47m1").value;
+	p47m2 = document.getElementById("p47m2").value;
+	p47m3 = document.getElementById("p47m3").value;
+
+	if(p34m1 == "" || p34m2 == "" || p34m3 == "" || p35m1 == "" || p35m2 == "" || p35m3 == "" || p36m1 == "" || p36m2 == "" || p36m3 == "" 
+		|| p37m1 == "" || p37m2 == "" || p37m3 == "" || p38m1 == "" || p38m2 == "" || p38m3 == "" || p39m1 == "" || p39m2 == "" || p39m3 == ""
+		|| p40m1 == "" || p40m2 == "" || p40m3 == "" || p41m1 == "" || p41m2 == "" || p41m3 == "" || p42m1 == "" || p42m2 == "" || p42m3 == ""
+		|| p43m1 == "" || p43m2 == "" || p43m3 == "" || p44m1 == "" || p44m2 == "" || p44m3 == "" || p45m1 == "" || p45m2 == "" || p45m3 == ""
+		|| p46m1 == "" || p46m2 == "" || p46m3 == "" || p47m1 == "" || p47m2 == "" || p47m3 == ""){
+		swal("", "Faltan campos por completar. ", "warning");
+	}else{		
+		$.ajax({
+				//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
+				url:'format/trimestral/inserts/save'+quest+'.php?quest='+quest+'&per='+per+'&anio='+anio+'&idUnidad='+idUnidad+'&idEnlace='+idEnlace+'&p34m1='+p34m1
+				+'&p34m2='+p34m2+'&p34m3='+p34m3+'&p35m1='+p35m1+'&p35m2='+p35m2+'&p35m3='+p35m3+'&p36m1='+p36m1+'&p36m2='+p36m2+'&p36m3='+p36m3+'&p37m1='+p37m1+'&p37m2='+p37m2+'&p37m3='+p37m3
+				+'&p38m1='+p38m1+'&p38m2='+p38m2+'&p38m3='+p38m3+'&p39m1='+p39m1+'&p39m2='+p39m2+'&p39m3='+p39m3+'&p40m1='+p40m1+'&p40m2='+p40m2+'&p40m3='+p40m3
+				+'&p41m1='+p41m1+'&p41m2='+p41m2+'&p41m3='+p41m3+'&p42m1='+p42m1+'&p42m2='+p42m2+'&p42m3='+p42m3+'&p43m1='+p43m1+'&p43m2='+p43m2+'&p43m3='+p43m3
+				+'&p44m1='+p44m1+'&p44m2='+p44m2+'&p44m3='+p44m3+'&p45m1='+p45m1+'&p45m2='+p45m2+'&p45m3='+p45m3+'&p46m1='+p46m1+'&p46m2='+p46m2+'&p46m3='+p46m3
+				+'&p47m1='+p47m1+'&p47m2='+p47m2+'&p47m3='+p47m3,
+				type:'POST',
+				contentType:false,
+				processData:false,
+				cache:false
+		}).done(function(respuesta){					
+					var data = JSON.parse(respuesta);
+					if(data.first == "SI"){
+						 swal("", "Información capturada exitosamente.", "success");
+						 getQUestionAjax(quest, per, anio, idUnidad, idEnlace);
+						 getCircles(quest, per, anio, idUnidad, idEnlace);
+					}else{   swal("", "Hubo un error favor de revisar.", "warning");  }
+				});	
+	}
+}
+
+function saveQuest9(quest, per, anio, idUnidad, idEnlace){
+
+	p48m1 = document.getElementById("p48m1").value;
+	p48m2 = document.getElementById("p48m2").value;
+	p48m3 = document.getElementById("p48m3").value;
+
+	p49m1 = document.getElementById("p49m1").value;
+	p49m2 = document.getElementById("p49m2").value;
+	p49m3 = document.getElementById("p49m3").value;
+
+	p50m1 = document.getElementById("p50m1").value;
+	p50m2 = document.getElementById("p50m2").value;
+	p50m3 = document.getElementById("p50m3").value;
+
+	p51m1 = document.getElementById("p51m1").value;
+	p51m2 = document.getElementById("p51m2").value;
+	p51m3 = document.getElementById("p51m3").value;
+
+	if(p48m1 == "" || p48m2 == "" || p48m3 == "" || p49m1 == "" || p49m2 == "" || p49m3 == "" || p50m1 == "" || p50m2 == "" || p50m3 == "" 
+		|| p51m1 == "" || p51m2 == "" || p51m3 == ""){
+		swal("", "Faltan campos por completar. ", "warning");
+	}else{		
+		$.ajax({
+				//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
+				url:'format/trimestral/inserts/save'+quest+'.php?quest='+quest+'&per='+per+'&anio='+anio+'&idUnidad='+idUnidad+'&idEnlace='+idEnlace+'&p48m1='+p48m1
+				+'&p48m2='+p48m2+'&p48m3='+p48m3+'&p49m1='+p49m1+'&p49m2='+p49m2+'&p49m3='+p49m3+'&p50m1='+p50m1+'&p50m2='+p50m2+'&p50m3='+p50m3+'&p51m1='+p51m1+'&p51m2='+p51m2+'&p51m3='+p51m3,
+				type:'POST',
+				contentType:false,
+				processData:false,
+				cache:false
+		}).done(function(respuesta){					
+					var data = JSON.parse(respuesta);
+					if(data.first == "SI"){
+						 swal("", "Información capturada exitosamente.", "success");
+						 getQUestionAjax(quest, per, anio, idUnidad, idEnlace);
+						 getCircles(quest, per, anio, idUnidad, idEnlace);
+					}else{   swal("", "Hubo un error favor de revisar.", "warning");  }
+				});	
+	}
+}
+
+function saveQuest10(quest, per, anio, idUnidad, idEnlace){
+
+	p52m1 = document.getElementById("p52m1").value;
+	p52m2 = document.getElementById("p52m2").value;
+	p52m3 = document.getElementById("p52m3").value;
+
+	p53m1 = document.getElementById("p53m1").value;
+	p53m2 = document.getElementById("p53m2").value;
+	p53m3 = document.getElementById("p53m3").value;
+
+	p54m1 = document.getElementById("p54m1").value;
+	p54m2 = document.getElementById("p54m2").value;
+	p54m3 = document.getElementById("p54m3").value;
+
+	p55m1 = document.getElementById("p55m1").value;
+	p55m2 = document.getElementById("p55m2").value;
+	p55m3 = document.getElementById("p55m3").value;
+
+	if(p52m1 == "" || p52m2 == "" || p52m3 == "" || p53m1 == "" || p53m2 == "" || p53m3 == "" || p54m1 == "" || p54m2 == "" || p54m3 == "" 
+		|| p55m1 == "" || p55m2 == "" || p55m3 == ""){
+		swal("", "Faltan campos por completar. ", "warning");
+	}else{		
+		$.ajax({
+				//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
+				url:'format/trimestral/inserts/save'+quest+'.php?quest='+quest+'&per='+per+'&anio='+anio+'&idUnidad='+idUnidad+'&idEnlace='+idEnlace+'&p52m1='+p52m1
+				+'&p52m2='+p52m2+'&p52m3='+p52m3+'&p53m1='+p53m1+'&p53m2='+p53m2+'&p53m3='+p53m3+'&p54m1='+p54m1+'&p54m2='+p54m2+'&p54m3='+p54m3+'&p55m1='+p55m1+'&p55m2='+p55m2+'&p55m3='+p55m3,
+				type:'POST',
+				contentType:false,
+				processData:false,
+				cache:false
+		}).done(function(respuesta){					
+					var data = JSON.parse(respuesta);
+					if(data.first == "SI"){
+						 swal("", "Información capturada exitosamente.", "success");
+						 getQUestionAjax(quest, per, anio, idUnidad, idEnlace);
+						 getCircles(quest, per, anio, idUnidad, idEnlace);
+					}else{   swal("", "Hubo un error favor de revisar.", "warning");  }
+				});	
+	}
+}
 
 function showModalAyuda(pregunta){
 	cont = document.getElementById('contModalAyuda');
@@ -271,40 +479,38 @@ function closeModalAyuda(){
 	$('#modalAyuda').modal('hide');
 }
 
-
-function saveQuest6(quest, per, anio, idUnidad, idEnlace){
-
-	p15m1 = document.getElementById("p15m1").value;
-	p15m2 = document.getElementById("p15m2").value;
-	p15m3 = document.getElementById("p15m3").value;
-
-	p16m1 = document.getElementById("p16m1").value;
-	p16m2 = document.getElementById("p16m2").value;
-	p16m3 = document.getElementById("p16m3").value;
-
-	p17m1 = document.getElementById("p17m1").value;
-	p17m2 = document.getElementById("p17m2").value;
-	p17m3 = document.getElementById("p17m3").value;
-
-	if(p15m1 == "" || p15m2 == "" || p15m3 == "" || p16m1 == "" || p16m2 == "" || p16m3 == "" || p17m1 == "" || p17m2 == "" || p17m3 == ""){
-		swal("", "Faltan campos por completar. ", "warning");
-	}else{		
-		$.ajax({
-				//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
-				url:'format/trimestral/inserts/save'+quest+'.php?quest='+quest+'&per='+per+'&anio='+anio+'&idUnidad='+idUnidad+'&idEnlace='+idEnlace+'&p15m1='+p15m1
-				+'&p15m2='+p15m2+'&p15m3='+p15m3+'&p16m1='+p16m1+'&p16m2='+p16m2+'&p16m3='+p16m3+'&p17m1='+p17m1+'&p17m2='+p17m2+'&p17m3='+p17m3,
-				type:'POST',
-				contentType:false,
-				processData:false,
-				cache:false
-		}).done(function(respuesta){					
-					var data = JSON.parse(respuesta);
-					if(data.first == "SI"){
-						 swal("", "Información capturada exitosamente.", "success");
-						 getQUestionAjax(quest, per, anio, idUnidad, idEnlace);
-						 getCircles(quest, per, anio, idUnidad, idEnlace);
-					}else{   swal("", "Hubo un error favor de revisar.", "warning");  }
-				});	
+function getHelp(quest){
+	switch(quest){
+		case 1:
+		$("#ayudaOPC").attr("onclick","showModalAyuda(1)");
+		break;
+		case 2:
+		$("#ayudaOPC").attr("onclick","showModalAyuda(2)");
+		break;
+		case 3:
+		$("#ayudaOPC").attr("onclick","showModalAyuda(3)");
+		break;
+		case 4:
+		$("#ayudaOPC").attr("onclick","showModalAyuda(4)");
+		break;
+		case 5:
+		$("#ayudaOPC").attr("onclick","showModalAyuda(5)");
+		break;
+		case 6:
+		$("#ayudaOPC").attr("onclick","showModalAyuda(6)");
+		break;
+		case 7:
+		$("#ayudaOPC").attr("onclick","showModalAyuda(7)");
+		break;
+		case 8:
+		$("#ayudaOPC").attr("onclick","showModalAyuda(8)");
+		break;
+		case 9:
+		$("#ayudaOPC").attr("onclick","showModalAyuda(9)");
+		break;
+		case 10:
+		$("#ayudaOPC").attr("onclick","showModalAyuda(10)");
+		break;
 	}
 }
 
