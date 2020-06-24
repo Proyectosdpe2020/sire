@@ -147,6 +147,8 @@ if($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || $
 										<? if($format  == 2){ ?><a onclick="loadtablaFormat(0, 'formatCmasc.php', 'cmasc', <? echo $idEnlace; ?>);" href="#">Formato Mensual</a> <? } ?>
 										<? if($format  == 4){ ?><a onclick="loadtablaFormat(0, 'formatLitigacion.php', 'litigacion', <? echo $idEnlace; ?>);" href="#">Formato Mensual</a> <? } ?>
 										<? if($format  == 6){ ?><a onclick="loadtablaFormat(0, 'formatDesaparecidos.php', 'desaparecidos', <? echo $idEnlace; ?>);" href="#">Datos Mensuales</a> <? } ?>
+										<? if($format  == 11){ ?><a onclick="loadtablaFormat(<? echo $idUnidEnlac ?>, 'trimestral.php', 'trimestral', <? echo $idEnlace; ?>);" href="#">Formato Mensual</a> <? } ?>
+
 							
 								<? } ?>
 
@@ -179,6 +181,14 @@ if($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || $
 												?>
 																<li><a onclick="cargaContRepositorio(<? echo $idUsuario; ?>, <? echo $format; ?>)" href="#">Repositorio</a></li>
 																<li><a onclick="cargaContHistoricoEnlaceDatosLiti(<? echo $idUsuario; ?>, <? echo $idEnlace; ?>, <? echo $format; ?>, <? echo $idUnidEnlac; ?>)" href="#">Datos Historico</a></li>
+												<?
+
+									} ?>	
+
+									<? if($format == 11){
+
+												?>
+																<li><a onclick="cargaContRepositorio(<? echo $idUsuario; ?>, <? echo $format; ?>)" href="#">Repositorio</a></li>
 												<?
 
 									} ?>	
