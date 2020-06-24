@@ -530,7 +530,7 @@ function loadtablaFormat(idUnidad, pagina, carpeta, idEnlace){
 			cont.innerHTML = ajax.responseText;
 			//cargar tabla sin nada
 
-			var anio = document.getElementById("anioCmasc").value;
+			//var anio = document.getElementById("anioCmasc").value;
 			var mes = document.getElementById("mesCmasc").value;	
 			
 			if(pagina == "formatCmasc.php"){ 

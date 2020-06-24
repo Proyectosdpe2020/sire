@@ -513,3 +513,101 @@ function getHelp(quest){
 		break;
 	}
 }
+
+function saveQuest7(quest, per, anio, idUnidad, idEnlace){
+
+	p18m1 = document.getElementById("p18m1").value;
+	p18m2 = document.getElementById("p18m2").value;
+	p18m3 = document.getElementById("p18m3").value;
+
+	p19m1 = document.getElementById("p19m1").value;
+	p19m2 = document.getElementById("p19m2").value;
+	p19m3 = document.getElementById("p19m3").value;
+
+	p20m1 = document.getElementById("p20m1").value;
+	p20m2 = document.getElementById("p20m2").value;
+	p20m3 = document.getElementById("p20m3").value;
+
+	p21m1 = document.getElementById("p21m1").value;
+	p21m2 = document.getElementById("p21m2").value;
+	p21m3 = document.getElementById("p21m3").value;
+
+	p22m1 = document.getElementById("p22m1").value;
+	p22m2 = document.getElementById("p22m2").value;
+	p22m3 = document.getElementById("p22m3").value;
+
+	p23m1 = document.getElementById("p23m1").value;
+	p23m2 = document.getElementById("p23m2").value;
+	p23m3 = document.getElementById("p23m3").value;
+
+	p24m1 = document.getElementById("p24m1").value;
+	p24m2 = document.getElementById("p24m2").value;
+	p24m3 = document.getElementById("p24m3").value;
+
+	p25m1 = document.getElementById("p25m1").value;
+	p25m2 = document.getElementById("p25m2").value;
+	p25m3 = document.getElementById("p25m3").value;
+
+	p26m1 = document.getElementById("p26m1").value;
+	p26m2 = document.getElementById("p26m2").value;
+	p26m3 = document.getElementById("p26m3").value;
+
+	p27m1 = document.getElementById("p27m1").value;
+	p27m2 = document.getElementById("p27m2").value;
+	p27m3 = document.getElementById("p27m3").value;
+
+	p28m1 = document.getElementById("p28m1").value;
+	p28m2 = document.getElementById("p28m2").value;
+	p28m3 = document.getElementById("p28m3").value;
+
+	p29m1 = document.getElementById("p29m1").value;
+	p29m2 = document.getElementById("p29m2").value;
+	p29m3 = document.getElementById("p29m3").value;
+
+	p30m1 = document.getElementById("p30m1").value;
+	p30m2 = document.getElementById("p30m2").value;
+	p30m3 = document.getElementById("p30m3").value;
+
+	p31m1 = document.getElementById("p31m1").value;
+	p31m2 = document.getElementById("p31m2").value;
+	p31m3 = document.getElementById("p31m3").value;
+
+	p32m1 = document.getElementById("p32m1").value;
+	p32m2 = document.getElementById("p32m2").value;
+	p32m3 = document.getElementById("p32m3").value;
+
+	p33m1 = document.getElementById("p33m1").value;
+	p33m2 = document.getElementById("p33m2").value;
+	p33m3 = document.getElementById("p33m3").value;
+
+	if(p18m1 == "" || p18m2 == "" || p18m3 == "" || p19m1 == "" || p19m2 == "" || p19m3 == "" || p20m1 == "" || p20m2 == "" || p20m3 == "" 
+		|| p21m1 == "" || p21m2 == "" || p21m3 == "" || p22m1 == "" || p22m2 == "" || p22m3 == "" || p23m1 == "" || p23m2 == "" || p23m3 == ""
+		|| p24m1 == "" || p24m2 == "" || p24m3 == "" || p25m1 == "" || p25m2 == "" || p25m3 == "" || p26m1 == "" || p26m2 == "" || p26m3 == ""
+		|| p27m1 == "" || p27m2 == "" || p27m3 == "" || p28m1 == "" || p28m2 == "" || p28m3 == "" || p29m1 == "" || p29m2 == "" || p29m3 == ""
+		|| p30m1 == "" || p30m2 == "" || p30m3 == "" || p31m1 == "" || p31m2 == "" || p31m3 == "" || p32m1 == "" || p32m2 == "" || p32m3 == ""
+		|| p33m1 == "" || p33m2 == "" || p33m3 == ""){
+		swal("", "Faltan campos por completar. ", "warning");
+	}else{		
+		$.ajax({
+				//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
+				url:'format/trimestral/inserts/save'+quest+'.php?quest='+quest+'&per='+per+'&anio='+anio+'&idUnidad='+idUnidad+'&idEnlace='+idEnlace+'&p18m1='+p18m1
+				+'&p18m2='+p18m2+'&p18m3='+p18m3+'&p19m1='+p19m1+'&p19m2='+p19m2+'&p19m3='+p19m3+'&p20m1='+p20m1+'&p20m2='+p20m2+'&p20m3='+p20m3+'&p21m1='+p21m1
+				+'&p21m2='+p21m2+'&p21m3='+p21m3+'&p22m1='+p22m1+'&p22m2='+p22m2+'&p22m3='+p22m3+'&p23m1='+p23m1+'&p23m2='+p23m2+'&p23m3='+p23m3+'&p24m1='+p24m1
+				+'&p24m2='+p24m2+'&p24m3='+p24m3+'&p25m1='+p25m1+'&p25m2='+p25m2+'&p25m3='+p25m3+'&p26m1='+p26m1+'&p26m2='+p26m2+'&p26m3='+p26m3+'&p27m1='+p27m1
+				+'&p27m2='+p27m2+'&p27m3='+p27m3+'&p28m1='+p28m1+'&p28m2='+p28m2+'&p28m3='+p28m3+'&p29m1='+p29m1+'&p29m2='+p29m2+'&p29m3='+p29m3+'&p30m1='+p30m1
+				+'&p30m2='+p30m2+'&p30m3='+p30m3+'&p31m1='+p31m1+'&p31m2='+p31m2+'&p31m3='+p31m3+'&p32m1='+p32m1+'&p32m2='+p32m2+'&p32m3='+p32m3+'&p33m1='+p33m1
+				+'&p33m2='+p33m2+'&p33m3='+p33m3,
+				type:'POST',
+				contentType:false,
+				processData:false,
+				cache:false
+		}).done(function(respuesta){					
+					var data = JSON.parse(respuesta);
+					if(data.first == "SI"){
+						 swal("", "Información capturada exitosamente.", "success");
+						 getQUestionAjax(quest, per, anio, idUnidad, idEnlace);
+						 getCircles(quest, per, anio, idUnidad, idEnlace);
+					}else{   swal("", "Hubo un error favor de revisar.", "warning");  }
+				});	
+	}
+}
