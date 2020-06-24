@@ -97,7 +97,7 @@ $w = array(
 );
 
 for($i = 0; $i < 8; $i++){
-    footer($pdf2);
+    //footer($pdf2);
 
     set_paragraph($pdf2, $i+1, $year);
     $pdf2->Ln();
@@ -373,21 +373,32 @@ function set_sign_field($pdf2, $user, $position){
 
     $pdf2->Ln(10);
     if ($pdf2->GetY() > 180) {
-        $pdf2->AddPage("P", "letter");
+        /*$pdf2->AddPage("P", "letter");
         $pdf2->Cell(380, 2, 'Pagina ' . $pdf2->PageNo() . '/{nb}', 0, 0, 'C');
         $pdf2->Ln(30);
-        $pdf2->SetFont('Arial', '', 10);
-        
+        $pdf2->SetFont('Arial', '', 10);*/
+
         $pdf2->Ln(3);
+        $pdf2->Cell(70, 70, iconv('UTF-8', 'windows-1252', 'Elaboró'), "", "", 'C');
+        $pdf2->Cell(170, 70, iconv('UTF-8', 'windows-1252', 'Validó'), "", "", 'C');
+        $pdf2->Ln(15);
+        $pdf2->Cell(70, 70, iconv('UTF-8', 'windows-1252', $user), "", "", 'C');
+        $pdf2->Cell(170, 70, iconv('UTF-8', 'windows-1252', $user), "", "", 'C');
+        $pdf2->Ln(1);
+        $pdf2->Cell(70, 80, iconv('UTF-8', 'windows-1252', $position), "", "", 'C');
+        $pdf2->Cell(170, 80, iconv('UTF-8', 'windows-1252', $position), "", "", 'C');
+        
+        
+    } 
+    else {$pdf2->Ln(3);
+        $pdf2->Cell(40, 70, iconv('UTF-8', 'windows-1252', $user), "", "", 'C');
+        $pdf2->Ln(2);
+        $pdf2->Cell(40, 80, iconv('UTF-8', 'windows-1252', $position), "", "", 'C');
+
+        $pdf2->Ln(20);
         $pdf2->Cell(190, 70, iconv('UTF-8', 'windows-1252', $user), "", "", 'C');
         $pdf2->Ln(2);
         $pdf2->Cell(190, 80, iconv('UTF-8', 'windows-1252', $position), "", "", 'C');
-        
-    } 
-    else {
-        $pdf2->Cell(190, 70, iconv('UTF-8', 'windows-1252', $user), "", "", 'C');
-        $pdf2->Ln(2);
-        $pdf2->Cell(190, 75, iconv('UTF-8', 'windows-1252', $position), "", "", 'C');
     }
 
 }
