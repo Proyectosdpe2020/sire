@@ -158,7 +158,7 @@ button{
   margin-right: 2%;
 }
 
-input {
+.tableTrimes input {
 	border: none;
 	background-color: transparent;
 	text-align: center;
@@ -169,15 +169,15 @@ input {
     -moz-appearance:textfield !important;
 }
 
-input:active{
+.tableTrimes input:active{
 outline: none !important;
 }
-input:focus{
+.tableTrimes input:focus{
 	outline: none !important;
 }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
+.tableTrimes input[type=number]::-webkit-inner-spin-button, 
+.tableTrimes input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
   margin: 0; 
 }

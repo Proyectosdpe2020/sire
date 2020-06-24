@@ -6,8 +6,6 @@ function getDataQ($conn, $quest, $per, $anio, $idUnidad){
 
 	$query = " SELECT idSeguimiento FROM trimestral.seguimiento WHERE idPregunta = $quest AND idPeriodo = $per AND anio = $anio AND idUnidad = $idUnidad ";
 
-	echo $query."<br>";
-
 		$stmt = sqlsrv_query(  $conn, $query,array(), array("Scrollable" => SQLSRV_CURSOR_STATIC));
 		$row_count = sqlsrv_num_rows( $stmt );
 
