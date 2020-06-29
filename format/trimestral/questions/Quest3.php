@@ -22,7 +22,7 @@
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							¿Cúal es el número de víctimas u ofendidos que derivan de las carpetas de investigación iniciadas en 2020?.
+							¿Cúal es el número de víctimas u ofendidos que derivan de las carpetas de investigación iniciadas en el año 2020?.
 						</li>
 					</ul>
 				</div><br><hr><br>
@@ -30,7 +30,7 @@
 					<thead>
 						<tr>
 							<th scope="col">No.</th>
-							<th scope="col">Victimas u Ofendidos</th>
+							<th scope="col">Víctimas u Ofendidos</th>
 							<th scope="col"><? echo $m1; ?></th>
 							<th scope="col"><? echo $m2; ?></th>
 							<th scope="col"><? echo $m3; ?></th>
@@ -40,7 +40,7 @@
 					<tbody>
 						<tr>
 							<th scope="row">3.1</th>
-							<td style="text-align: left;">Número de victimas u ofendidos mujeres</td>
+							<td style="text-align: left;">Número de víctimas u ofendidos mujeres</td>
 							<td><input type="number" value="<? echo $data[0][0]; ?>" id="p5m1"></td>
 							<td><input type="number" value="<? echo $data[0][1]; ?>" id="p5m2"></td>
 							<td><input type="number" value="<? echo $data[0][2]; ?>" id="p5m3"></td>
@@ -48,7 +48,7 @@
 						</tr>
 						<tr>
 							<th scope="row">3.2</th>
-							<td style="text-align: left;">Número de victimas u ofendidos hombres</td>
+							<td style="text-align: left;">Número de víctimas u ofendidos hombres</td>
 							<td><input type="number" value="<? echo $data2[0][0]; ?>" id="p6m1"></td>
 							<td><input type="number" value="<? echo $data2[0][1]; ?>" id="p6m2"></td>
 							<td><input type="number" value="<? echo $data2[0][2]; ?>" id="p6m3"></td>

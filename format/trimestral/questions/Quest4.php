@@ -18,7 +18,7 @@
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							¿Cúantas carpetas de investigación se iniciaron en el 2020 con al menos un detenido en flagrancia y cuántas se iniciarón sin detenido?
+							¿Cúantas carpetas de investigación se iniciaron en el año 2020 con al menos un detenido en flagrancia y cuántas se iniciaron sin detenido?
 						</li>
 					</ul>
 				</div><br><hr><br>
@@ -72,7 +72,7 @@
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
 							 <img src="images/warning.png"  class="imgWarning" alt="">
-							 	Nota.- Si una carpeta de investigación iniciada cuenta con al menos un detenido en flagrancia se registrara en el reactivo 4.1, incluso cuando se presente una situación mixta en la que puedan identificarse personas que no pudieron ser detenidas, pero se cuenta con al menos un detenido en flagrancia. Si la carpeta de investigación iniciada no cuenta con algún detenido se registrará en el reactivo 4.2.
+							 	Nota.- Si una carpeta de investigación iniciada cuenta con al menos un detenido en flagrancia se registrará en el reactivo 4.1, incluso cuando se presente una situación mixta en la que puedan identificarse personas que no pudieron ser detenidas, pero se cuenta con al menos un detenido en flagrancia. Si la carpeta de investigación iniciada no cuenta con algún detenido se registrará en el reactivo 4.2.
 							</div>
 						</li>
 					</ul>

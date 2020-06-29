@@ -32,7 +32,7 @@
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							<strong>¿Cuántos procedimientos</strong> se han generado de las vinculaciones a proceso derivadas de las carpetas de investigación iniciadas en 2020 y en qué estatus se encuentran dentro de los rubros señalados, conforme los registros de la Procuraduria General de Justicia o Fiscalía General de la entidad federativa en los cortes referidos?
+							<strong>¿Cuántos procedimientos</strong> se han generado de las vinculaciones a proceso derivadas de las carpetas de investigación iniciadas en el año 2020 y en qué estatus se encuentran dentro de los rubros señalados, conforme los registros de la Fiscalía General de la entidad federativa en los cortes referidos?
 						</li>
 					</ul>
 				</div><br><hr><br>
@@ -50,7 +50,7 @@
 					<tbody>
 						<tr>
 							<th scope="row">8.1</th>
-							<td style="text-align: left;">En tramite ante el Juez de Control (sin incluir los que se encuentran en trámite por suspensión condicional, por acuerdos reparatorios o por procedimiento abreviado)</td>
+							<td style="text-align: left;">En trámite ante el Juez de Control (sin incluir los que se encuentran en trámite por suspensión condicional, por acuerdos reparatorios o por procedimiento abreviado)</td>
 							<td><input type="number" value="<? echo $data[0][0]; ?>" id="p34m1"></td>
 							<td><input type="number" value="<? echo $data[0][1]; ?>" id="p34m2"></td>
 							<td><input type="number" value="<? echo $data[0][2]; ?>" id="p34m3"></td>
@@ -58,7 +58,7 @@
 						</tr>
 						<tr>
 							<th scope="row">8.2</th>
-							<td style="text-align: left;">Determinados por criterio de oportunidad</td>
+							<td style="text-align: left;">Determinado por criterio de oportunidad</td>
 						<?
 									$tota = 0; $tota1 = 0;
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
@@ -100,7 +100,7 @@
 						</tr>
 						<tr>
 							<th scope="row">8.5</th>
-							<td style="text-align: left;">Resueltos por otras causas de sobreseimiento (sin incluir criterio de oportunidad ni los cumplidos por suspension condicional o por acuerdo reparatorio)</td>
+							<td style="text-align: left;">Resueltos por otras causas de sobreseimiento (sin incluir criterio de oportunidad ni los cumplidos por suspensión condicional o por acuerdo reparatorio)</td>
 							<td><input type="number" value="<? echo $data5[0][0]; ?>" id="p38m1"></td>
 							<td><input type="number" value="<? echo $data5[0][1]; ?>" id="p38m2"></td>
 							<td><input type="number" value="<? echo $data5[0][2]; ?>" id="p38m3"></td>
@@ -108,7 +108,7 @@
 						</tr>
 						<tr>
 							<th scope="row">8.6</th>
-							<td style="text-align: left;">En tramite de procedimiento abreviado</td>
+							<td style="text-align: left;">En trámite de procedimiento abreviado</td>
 							<td><input type="number" value="<? echo $data6[0][0]; ?>" id="p39m1"></td>
 							<td><input type="number" value="<? echo $data6[0][1]; ?>" id="p39m2"></td>
 							<td><input type="number" value="<? echo $data6[0][2]; ?>" id="p39m3"></td>
@@ -206,7 +206,7 @@
 					<ul>
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
-							 En caso de que se realicen acuerdos reparatorios a través del OEMASC dependiente de la Procuraduria o Fiscalá por que no se cuenta con OEMASC dependiente del Poder Judicial, deberá registrarse en este apartado.
+							 En caso de que se realicen acuerdos reparatorios a través del OEMASC dependiente de la Fiscalía por que no se cuenta con OEMASC dependiente del Poder Judicial, deberá registrarse en este apartado.
 							</div>
 						</li>
 					</ul>
@@ -215,7 +215,7 @@
 					<ul>
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
-								Si a la fecha de corte de una carpeta de investigación tiene más de un procedimiento en el Órgano Jurisdiccional después de la vinculación a proceso, se deberá registrar casa uno de éstos aun cuando se trate de la misma carpeta de investrigación.
+								Si a la fecha de corte de una carpeta de investigación tiene más de un procedimiento en el Órgano Jurisdiccional después de la vinculación a proceso, se deberá registrar casa uno de éstos aun cuando se trate de la misma carpeta de investigación.
 							</div>
 						</li>
 					</ul>

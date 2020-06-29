@@ -15,18 +15,18 @@
 					$data2 = getDAtaQuestion($conn, 4, $per, $anio, $idUnidad);
 				?>
 
-				<h5 class="card-title tituloPregunta">Pregunta 2: Número de carpetas de investigacion iniciadas durante el año 2020.</h5><br>
+				<h5 class="card-title tituloPregunta">Pregunta 2: Número de carpetas de investigación iniciadas durante el año 2020.</h5><br>
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							¿Cuál es el número de carpetas de investigación iniciadas durante el 2020 con motivó de las denuncias, querella u otros requisitos equivalentes que se recibieron en la Procuraduria General de Justicia o Fiscalía General de la entidad federativa (incluyendo las recibidas en los Centros de Justicia para Mujeres) en ese mismo año?
+							¿Cuál es el número de carpetas de investigación iniciadas durante el año 2020 con motivo de las denuncias, querellas u otros requisitos equivalentes que se recibieron en la Fiscalía General de la entidad federativa (incluyendo las recibidas en los Centros de Justicia para Mujeres) en ese mismo año?
 						</li>
 					</ul>
 				</div><br><br>
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							¿Cuántas carpetas de investigación se iniciaron en el 2020 correspondientes a denuncias, querellas u otros requisitos equivalentes recibidos en 2019?
+							¿Cuántas carpetas de investigación se iniciaron en el año 2020 correspondientes a denuncias, querellas u otros requisitos equivalentes recibidos en 2019?
 						</li>
 					</ul>
 				</div><br><br>
@@ -34,7 +34,7 @@
 					<thead>
 						<tr>
 							<th scope="col">No.</th>
-							<th scope="col">Número de carpetas de investigacion iniciadas</th>
+							<th scope="col">Número de carpetas de investigación iniciadas</th>
 							 <th scope="col"><? echo $m1; ?></th>
 						     <th scope="col"><? echo $m2; ?></th>
 							 <th scope="col"><? echo $m3; ?></th>
@@ -65,7 +65,7 @@
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
 							 <img src="images/warning.png"  class="imgWarning" alt="">
-							 	Nota.- Los datos proporcionados en el reactivo 2:1 (carpetas de investigacion iniciadas por denuncias, querellas u otros requisitos equivalentes recibidos en el 2020) no podrán ser superiores a la sumas de los reactivos 1.1 al 1.2 de la pregunta número 1.
+							 	Nota.- Los datos proporcionados en el reactivo 2:1 (carpetas de investigación iniciadas por denuncias, querellas u otros requisitos equivalentes recibidos en el año 2020) no podrán ser superiores a la suma de los reactivos 1.1 al 1.2 de la pregunta número 1.
 							</div>
 						</li>
 					</ul>

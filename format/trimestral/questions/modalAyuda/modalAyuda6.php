@@ -11,13 +11,13 @@
 						<div class="col-md-1 tituloAyuda"><strong>Ayuda:</strong></div>
 					</div><br><br>
 					<div class="textoAyuda" >
-					En esta pregunta se solicita el <strong>número de detenidos</strong> en sus diferentes modalidades, <strong>correspondientes a las carpetas de investigación iniciadas en 2020:</strong>	
+					En esta pregunta se solicita el <strong>número de detenidos</strong> en sus diferentes modalidades, <strong>correspondientes a las carpetas de investigación iniciadas en el año 2020:</strong>	
 					</div>
 					<div class="textoAyuda" >
-					6.1. <strong>Número de detenidos en flagrancia.-</strong> conforme a los supuestos de flagrancias establecidos en el artículo 146 del Código Nacional de Procedimientos Penales (CNPP);	
+					6.1. <strong>Número de detenidos en flagrancia.-</strong> conforme a los supuestos de flagrancias establecidos en el artículo 146 del Código Nacional de Procedimientos Penales (CNPP).
 					</div>
 					<div class="textoAyuda" >
-					6.2. <strong>Número de detenidos por orden de aprehensión.-</strong> en términos de lo dispuesto en el artículo 141, fracción III del CNPP,	
+					6.2. <strong>Número de detenidos por orden de aprehensión.-</strong> en términos de lo dispuesto en el artículo 141, fracción III del CNPP.	
 					</div>
 					<div class="textoAyuda" >
 					6.3. <strong>Número de detenidos por caso urgente.-</strong> conforme a los supuestos definidos en el artículo 150 del CNPP.

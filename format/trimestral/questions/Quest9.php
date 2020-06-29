@@ -23,7 +23,7 @@
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							De los procedimientos derivados de las carpetas de investigación iniciadas en 2020, ¿a cúantos imputados de los que se les dictó auto de vinculación a proceso o que se encontraban en espera de la audiencia de vinculación se les impuso alguna medida caultelar?
+							De los procedimientos derivados de las carpetas de investigación iniciadas en el año 2020, ¿a cúantos imputados de los que se les dictó auto de vinculación a proceso o que se encontraban en espera de la audiencia de vinculación se les impuso alguna medida caultelar?
 						</li>
 					</ul>
 				</div><br><hr><br>
@@ -84,7 +84,7 @@
 						</tr>
 						<tr>
 							<th scope="row">9.4</th>
-							<td style="text-align: left;">Número de imputados a los que se les impuso medida cautelar</td>
+							<td style="text-align: left;">Número de imputados a los que no se les impuso medida cautelar</td>
 							<td><input type="number" value="<? echo $data4[0][0]; ?>" id="p51m1"></td>
 							<td><input type="number" value="<? echo $data4[0][1]; ?>" id="p51m2"></td>
 							<td><input type="number" value="<? echo $data4[0][2]; ?>" id="p51m3"></td>

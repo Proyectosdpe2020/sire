@@ -23,7 +23,7 @@
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-						De los procedimientos derivados de las carpetas de investigación iniciadas en 2020, ¿cuántos imputados tuvieron sentencias condenatorias o absolutorias poor tipo de procedimiento?
+						De los procedimientos derivados de las carpetas de investigación iniciadas en el año 2020, ¿cuántos imputados tuvieron sentencias condenatorias o absolutorias por tipo de procedimiento?
 						</li>
 					</ul>
 				</div><br><br>
