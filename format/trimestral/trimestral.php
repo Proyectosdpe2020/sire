@@ -52,8 +52,8 @@
 				    <div class="col-12">
 				     <div class="card">
 								  <div class="card-body">
-								    <h5 class="card-title tituloIndicadores">INDICADORES ESTRATEGICOS DEL MODELO DE EVALUACION Y SEGUIMIENTO DE LA CONSOLIDACION DEL SISTEMA DE JUSTICIA PENAL</h5><BR>
-								    <h6 class="card-subtitle mb-2 tituloPeriodo"><strong>INFORMACION: <? echo $anioGlobal; ?><br>
+								    <h5 class="card-title tituloIndicadores"><strong>INDICADORES ESTRATÉGICOS DEL MODELO DE EVALUACIÓN Y SEGUIMIENTO DE LA CONSOLIDACIÓN DEL SISTEMA DE JUSTICIA PENAL INFORMADOS A LA SECRETARÍA DE GOBERNACIÓN</strong></h5><BR>
+								    <h6 class="card-subtitle mb-2 tituloPeriodo"><strong>INFORMACIÓN: <? echo $anioGlobal; ?><br>
 																																																						           PERIODO: <? echo $nme; ?></strong></h6>
 								    
 								  </div>							  
@@ -75,7 +75,7 @@
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							¿Cúal es el número de <strong>denuncias, querellas u otros requisitos</strong> equivalentes que se recibierón en la Procuraduria General de Justicia o Fiscalía General de la entidad federativa (incluyendo las recibidas en los Centros de Justicia para Mujeres) durante el 2020.
+							¿Cúal es el número de <strong>denuncias, querellas u otros requisitos</strong> equivalentes que se recibierón en la Fiscalía General de la entidad federativa (incluyendo las recibidas en los Centros de Justicia para Mujeres) durante el año 2020.
 						</li>
 					</ul>
 				</div><br><hr><br>
