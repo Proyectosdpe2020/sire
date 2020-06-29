@@ -1,6 +1,7 @@
 <? 
 					include ("../../../Conexiones/Conexion.php");
 			  include("../../../funcioneTrimes.php");
+			  	include("../../../funciones.php");	
 
 					if (isset($_GET["per"])){ $per = $_GET["per"]; }
 					if (isset($_GET["anio"])){ $anio = $_GET["anio"]; }
@@ -15,6 +16,8 @@
 					$data2 = getDAtaQuestion($conn, 53, $per, $anio, $idUnidad);
 					$data3 = getDAtaQuestion($conn, 54, $per, $anio, $idUnidad);
 					$data4 = getDAtaQuestion($conn, 55, $per, $anio, $idUnidad);
+					$getEnv = getInfOCarpetasEnv($conn, $idEnlace, 11);
+					$envt = $getEnv[0][0]; 
 				?>
 
 
@@ -69,38 +72,39 @@
 						<tr>
 							<th scope="row">10.1</th>
 							<td style="text-align: left;">Número de imputados con sentencia condenatoria por procedimiento abreviado</td>
-							<td><input type="number" value="<? echo $data[0][0]; ?>" id="p52m1"></td>
-							<td><input type="number" value="<? echo $data[0][1]; ?>" id="p52m2"></td>
-							<td><input type="number" value="<? echo $data[0][2]; ?>" id="p52m3"></td>
+							<td><input type="number" value="<? echo $data[0][0]; ?>" id="p52m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data[0][1]; ?>" id="p52m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data[0][2]; ?>" id="p52m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data[0][3]; ?>" id="p52tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">10.2</th>
 							<td style="text-align: left;">Número de imputados con sentencia absolutoria por procedimiento abreviado</td>
-							<td><input type="number" value="<? echo $data2[0][0]; ?>" id="p53m1"></td>
-							<td><input type="number" value="<? echo $data2[0][1]; ?>" id="p53m2"></td>
-							<td><input type="number" value="<? echo $data2[0][2]; ?>" id="p53m3"></td>
+							<td><input type="number" value="<? echo $data2[0][0]; ?>" id="p53m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data2[0][1]; ?>" id="p53m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data2[0][2]; ?>" id="p53m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data2[0][3]; ?>" id="p53tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">10.3</th>
 							<td style="text-align: left;">Número de imputados con sentencia condenatoria por juicio oral</td>
-							<td><input type="number" value="<? echo $data3[0][0]; ?>" id="p54m1"></td>
-							<td><input type="number" value="<? echo $data3[0][1]; ?>" id="p54m2"></td>
-							<td><input type="number" value="<? echo $data3[0][2]; ?>" id="p54m3"></td>
+							<td><input type="number" value="<? echo $data3[0][0]; ?>" id="p54m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data3[0][1]; ?>" id="p54m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data3[0][2]; ?>" id="p54m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data3[0][3]; ?>" id="p54tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">10.4</th>
 							<td style="text-align: left;">Número de imputados con sentencia absolutoria por juicio oral</td>
-							<td><input type="number" value="<? echo $data4[0][0]; ?>" id="p55m1"></td>
-							<td><input type="number" value="<? echo $data4[0][1]; ?>" id="p55m2"></td>
-							<td><input type="number" value="<? echo $data4[0][2]; ?>" id="p55m3"></td>
+							<td><input type="number" value="<? echo $data4[0][0]; ?>" id="p55m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data4[0][1]; ?>" id="p55m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data4[0][2]; ?>" id="p55m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data4[0][3]; ?>" id="p55tot" readonly></td>
 						</tr>
 					</tbody>
 				</table><br><br>
 				<div class="botonGuardar">
-					<button type="button" class="btn btn-success" id="guardarPregunta" onclick="saveQuest10(10, <? echo $per; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)">GUARDAR</button>
+					<? if($envt == 0){ ?>
+					<button type="button" class="btn btn-success" id="guardarPregunta" onclick="saveQuest10(10, <? echo $per; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)">GUARDAR</button> <? } ?>
 				</div>
 		

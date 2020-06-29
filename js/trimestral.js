@@ -1,3 +1,41 @@
+
+function enviarDPEtrim(idEnlace, anio, format, per, idUnidad){
+
+		 swal({
+				title: "",
+				text: "¿Esta seguro de enviar la información? \n\n Nota:    Una vez enviados a la Dirección de Planeación y Estadística no podra ser modificado. ",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "Enviar",
+				cancelButtonText: "Cancelar",
+				closeOnConfirm: false,
+				closeOnCancel: true
+			},
+			function(isConfirm){
+				if (isConfirm) {
+
+								$.ajax({
+				//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
+								url:'format/trimestral/inserts/sendInfo.php?idEnlace='+idEnlace+'&anio='+anio+'&format='+format+'&per='+per+'&idUnidad='+idUnidad,
+								type:'POST',
+								contentType:false,
+								processData:false,
+								cache:false
+								}).done(function(respuesta){
+											var data = JSON.parse(respuesta);
+											if(data.first == "SI"){
+												 swal("", "Información enviada exitosamente.", "success");
+												 loadtablaFormat(idUnidad, 'trimestral.php', 'trimestral', idEnlace);
+											}else{   swal("", "No se puede enviar la información verifique sus datos.", "warning");  }
+
+										});
+					
+				}
+			});
+	
+}
+
 function getQUestionAjax(quest, per, anio, idUnidad, idEnlace){
   
   getHelp(quest);
