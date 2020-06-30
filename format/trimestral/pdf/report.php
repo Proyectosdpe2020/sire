@@ -10,7 +10,7 @@ $records = $_SESSION['question_records'];
 $position = 'Fiscalía General';
 $user = '[Nombre, Cargo y Firma]';
 $ur = $records[0]['unity'];
-$year = $records[0]['period_id'];
+$year = $records[0]['year'];
 $periods = array(
     array(
         'Enero-Marzo',
