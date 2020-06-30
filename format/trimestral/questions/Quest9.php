@@ -95,6 +95,13 @@
 						</tr>
 					</tbody>
 				</table><br>
+				<div class="textoNotaSire" >
+					<ul>
+						<li style="list-style-type: circle !important" >
+								Los reactivos 9.1 y 9.2 fueron precargados automáticamente correspondiente con la información que fue proporcionada por su unidad en el Sistema Integral de Registro Estadístico (SIRE)<br><br>
+						</li>
+					</ul>
+				</div><br><br>
 				<div class="botonGuardar">
 					<? if($envt == 0){ ?>
 					<button type="button" class="btn btn-success" id="guardarPregunta" onclick="saveQuest9(9, <? echo $per; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)">GUARDAR</button> <? } ?>
