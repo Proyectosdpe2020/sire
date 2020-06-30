@@ -28,6 +28,7 @@
   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">-->
 
 	<div id="contenido">
+
 		<div class="right_col contentMain" role="main">
 
 			<div style="" class="x_panel principalPanel">
@@ -62,7 +63,7 @@
 								  </div>							  
 				    	<div class="botonAyuda">  	
 										<button type="button" class="botonAcciones" id="ayudaOPC"  onclick="showModalAyuda(1)">Ayuda</button>	
-										<button type="button" class="botonAcciones"  onclick="">Descargar Reporte</button>
+										<button type="button" class="botonAcciones"  onclick = "generateReport(<?php echo $anioGlobal.','.$per.','.$idUnidad.','.$idEnlace ?>)">Descargar Reporte</button>
 										<? if($envt == 0){  ?>
 										<button type="button" class="botonAcciones"  onclick="enviarDPEtrim(<? echo $idEnlace; ?>, <? echo $anioGlobal; ?>, <? echo $format; ?>, <? echo $per; ?>, <? echo $idUnidad; ?>)">Enviar a DPE</button> <? } ?>
 										<? if($envt == 1){  ?>
