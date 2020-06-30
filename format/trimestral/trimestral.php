@@ -12,6 +12,7 @@
 
 	$anioGlobal = 2020;
 	$per = 2;
+	$format = 11; // ESTE ES EL FORMATO AL CUAL SE HACE REFERENCIA
 
 	if($per == 1){ $m1 = "Enero"; $m2 = "Febrero"; $m3 = "Marzo"; $nme = "Enero - Marzo";}
 	if($per == 2){ $m1 = "Abril"; $m2 = "Mayo"; $m3 = "Junio"; $nme = "Abril - Junio";}
@@ -20,6 +21,8 @@
 
 	$data = getDAtaQuestion($conn, 1, $per, $anioGlobal, $idUnidad);
 	$data2 = getDAtaQuestion($conn, 2, $per, $anioGlobal, $idUnidad);
+	$getEnv = getInfOCarpetasEnv($conn, $idEnlace, $format);
+	$envt = $getEnv[0][0]; 
 
 	?>
   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">-->
@@ -60,7 +63,11 @@
 				    	<div class="botonAyuda">  	
 										<button type="button" class="botonAcciones" id="ayudaOPC"  onclick="showModalAyuda(1)">Ayuda</button>	
 										<button type="button" class="botonAcciones"  onclick="">Descargar Reporte</button>
-										<button type="button" class="botonAcciones"  onclick="">Enviar a DPE</button>
+										<? if($envt == 0){  ?>
+										<button type="button" class="botonAcciones"  onclick="enviarDPEtrim(<? echo $idEnlace; ?>, <? echo $anioGlobal; ?>, <? echo $format; ?>, <? echo $per; ?>, <? echo $idUnidad; ?>)">Enviar a DPE</button> <? } ?>
+										<? if($envt == 1){  ?>
+										<button type="button" class="botonAcciones"  onclick="">Subir Archivo</button> <? } ?>
+
 									</div><br>	    
 								</div>
 				    </div>
@@ -75,7 +82,7 @@
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							¿Cúal es el número de <strong>denuncias, querellas u otros requisitos</strong> equivalentes que se recibierón en la Fiscalía General de la entidad federativa (incluyendo las recibidas en los Centros de Justicia para Mujeres) durante el año 2020.
+							¿Cúal es el número de <strong>denuncias, querellas u otros requisitos</strong> equivalentes que se recibierón en la Procuraduria General de Justicia o Fiscalía General de la entidad federativa (incluyendo las recibidas en los Centros de Justicia para Mujeres) durante el año 2020.
 						</li>
 					</ul>
 				</div><br><hr><br>
@@ -94,23 +101,24 @@
 						<tr>
 							<th scope="row">1.1</th>
 							<td style="text-align: left;">Denuncias</td>
-							<td><input type="number" value="<? echo $data[0][0]; ?>" id="p1m1"></td>
-							<td><input type="number" value="<? echo $data[0][1]; ?>" id="p1m2"></td>
-							<td><input type="number" value="<? echo $data[0][2]; ?>" id="p1m3"></td>
+							<td><input type="number" value="<? echo $data[0][0]; ?>" id="p1m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data[0][1]; ?>" id="p1m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data[0][2]; ?>" id="p1m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data[0][3]; ?>" id="p1Tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">1.2</th>
 							<td style="text-align: left;">Querellas u otros requisistos equivalentes</td>
-							<td><input type="number" value="<? echo $data2[0][0]; ?>" id="p2m1"></td>
-							<td><input type="number" value="<? echo $data2[0][1]; ?>" id="p2m2"></td>
-							<td><input type="number" value="<? echo $data2[0][2]; ?>" id="p2m3"></td>
+							<td><input type="number" value="<? echo $data2[0][0]; ?>" id="p2m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data2[0][1]; ?>" id="p2m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data2[0][2]; ?>" id="p2m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data2[0][3]; ?>" id="p2Tot" readonly></td>
 						</tr>
 					</tbody>
 				</table><br>
 				<div class="botonGuardar">
-					<button type="button" class="btn btn-success" id="guardarPregunta" onclick="saveQuest1(1, <? echo $per; ?>, <? echo $anioGlobal; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)">GUARDAR</button>
+					<? if($envt == 0){ ?>
+					<button type="button" class="btn btn-success" id="guardarPregunta" onclick="saveQuest1(1, <? echo $per; ?>, <? echo $anioGlobal; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)">GUARDAR</button> <? } ?>
 				</div>
 								</div>
 							</div>

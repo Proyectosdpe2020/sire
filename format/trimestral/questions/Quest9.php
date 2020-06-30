@@ -2,6 +2,7 @@
 					include ("../../../Conexiones/Conexion.php");
 					include ("../../../Conexiones/conexionSicap.php");
 			  include("../../../funcioneTrimes.php");
+			  include("../../../funciones.php");	
 
 					if (isset($_GET["per"])){ $per = $_GET["per"]; }
 					if (isset($_GET["anio"])){ $anio = $_GET["anio"]; }
@@ -16,6 +17,8 @@
 					$data2 = getDAtaQuestion($conn, 49, $per, $anio, $idUnidad);
 					$data3 = getDAtaQuestion($conn, 50, $per, $anio, $idUnidad);
 					$data4 = getDAtaQuestion($conn, 51, $per, $anio, $idUnidad);
+					$getEnv = getInfOCarpetasEnv($conn, $idEnlace, 11);
+					$envt = $getEnv[0][0]; 
 				?>
 
 
@@ -77,22 +80,23 @@
 						<tr>
 							<th scope="row">9.3</th>
 							<td style="text-align: left;">Número de imputados a los que se les impuso otra medida cautelar</td>
-							<td><input type="number" value="<? echo $data3[0][0]; ?>" id="p50m1"></td>
-							<td><input type="number" value="<? echo $data3[0][1]; ?>" id="p50m2"></td>
-							<td><input type="number" value="<? echo $data3[0][2]; ?>" id="p50m3"></td>
+							<td><input type="number" value="<? echo $data3[0][0]; ?>" id="p50m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data3[0][1]; ?>" id="p50m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data3[0][2]; ?>" id="p50m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data3[0][3]; ?>" id="p50tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">9.4</th>
-							<td style="text-align: left;">Número de imputados a los que no se les impuso medida cautelar</td>
-							<td><input type="number" value="<? echo $data4[0][0]; ?>" id="p51m1"></td>
-							<td><input type="number" value="<? echo $data4[0][1]; ?>" id="p51m2"></td>
-							<td><input type="number" value="<? echo $data4[0][2]; ?>" id="p51m3"></td>
+							<td style="text-align: left;">Número de imputados a los que se les impuso medida cautelar</td>
+							<td><input type="number" value="<? echo $data4[0][0]; ?>" id="p51m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data4[0][1]; ?>" id="p51m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data4[0][2]; ?>" id="p51m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data4[0][3]; ?>" id="p51tot" readonly></td>
 						</tr>
 					</tbody>
 				</table><br>
 				<div class="botonGuardar">
-					<button type="button" class="btn btn-success" id="guardarPregunta" onclick="saveQuest9(9, <? echo $per; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)">GUARDAR</button>
+					<? if($envt == 0){ ?>
+					<button type="button" class="btn btn-success" id="guardarPregunta" onclick="saveQuest9(9, <? echo $per; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)">GUARDAR</button> <? } ?>
 				</div>
 	

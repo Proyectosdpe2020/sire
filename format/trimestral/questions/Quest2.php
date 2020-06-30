@@ -1,6 +1,7 @@
 				<? 
 					include ("../../../Conexiones/Conexion.php");
 			include("../../../funcioneTrimes.php");
+				include("../../../funciones.php");	
 
 					if (isset($_GET["per"])){ $per = $_GET["per"]; }
 					if (isset($_GET["anio"])){ $anio = $_GET["anio"]; }
@@ -13,6 +14,8 @@
 
 					$data = getDAtaQuestion($conn, 3, $per, $anio, $idUnidad);
 					$data2 = getDAtaQuestion($conn, 4, $per, $anio, $idUnidad);
+					$getEnv = getInfOCarpetasEnv($conn, $idEnlace, 11);
+					$envt = $getEnv[0][0]; 
 				?>
 
 				<h5 class="card-title tituloPregunta">Pregunta 2: Número de carpetas de investigación iniciadas durante el año 2020.</h5><br>
@@ -45,17 +48,17 @@
 						<tr>
 							<th scope="row">2.1</th>
 							<td style="text-align: left;">Carpetas de investigación iniciadas por denuncias, querellas u otros requisitos equivalentes recibidos en 2020</td>
-							<td><input type="number" value="<? echo $data[0][0]; ?>" id="p3m1"></td>
-							<td><input type="number" value="<? echo $data[0][1]; ?>" id="p3m2"></td>
-							<td><input type="number" value="<? echo $data[0][2]; ?>" id="p3m3"></td>
+							<td><input type="number" value="<? echo $data[0][0]; ?>" id="p3m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data[0][1]; ?>" id="p3m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data[0][2]; ?>" id="p3m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data[0][3]; ?>" id="p3tot" value="0" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">2.2</th>
 							<td style="text-align: left;">Carpetas de investigación iniciadas por denuncias, querellas u otros requisitos equivalentes recibidos en 2019</td>
-							<td><input type="number" value="<? echo $data2[0][0]; ?>" id="p4m1"></td>
-							<td><input type="number" value="<? echo $data2[0][1]; ?>" id="p4m2"></td>
-							<td><input type="number" value="<? echo $data2[0][2]; ?>" id="p4m3"></td>
+							<td><input type="number" value="<? echo $data2[0][0]; ?>" id="p4m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data2[0][1]; ?>" id="p4m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data2[0][2]; ?>" id="p4m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data2[0][3]; ?>" id="p4tot" value="0" readonly></td>
 						</tr>
 					</tbody>
@@ -71,6 +74,7 @@
 					</ul>
 				</div>
 				<div class="botonGuardar">
-					<button type="button" onclick="saveQuest2(2, <? echo $per; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" class="btn btn-success" id="guardarPregunta">GUARDAR</button>
+					<? if($envt == 0){ ?>
+					<button type="button" onclick="saveQuest2(2, <? echo $per; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" class="btn btn-success" id="guardarPregunta">GUARDAR</button><? } ?>
 				</div>
 		
