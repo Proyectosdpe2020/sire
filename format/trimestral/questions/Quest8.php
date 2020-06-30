@@ -195,6 +195,13 @@
 						</tr>
 					</tbody>
 				</table><br><br>
+				<div class="textoNotaSire" >
+					<ul>
+						<li style="list-style-type: circle !important" >
+								Los reactivos 8.2, 8.4 y 8.7 fueron precargados automáticamente correspondiente con la información que fue proporcionada por su unidad en el Sistema Integral de Registro Estadístico (SIRE)<br><br>
+						</li>
+					</ul>
+				</div><br><br>
 				<div class="textoNota" >
 					<ul>
 						<li style="list-style-type: circle !important" >
