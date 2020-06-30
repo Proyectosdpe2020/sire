@@ -35,7 +35,7 @@
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							<strong>¿Cuántos procedimientos</strong> han realizado los agentes del Ministerio Público derivados de las carpetas de Investigación iniciadas en 2020 y en qué estatus se encuentran desde su inicio hasta el auto de vinculación a proceso dentro de los rubros señalados, conforme los registros de la Procuraduría General de Justicia o Fiscalía General de la entidad federativa en los cortes referidos?
+							<strong>¿Cuántos procedimientos</strong> han realizado los agentes del Ministerio Público derivados de las carpetas de Investigación iniciadas en el año 2020 y en qué estatus se encuentran desde su inicio hasta el auto de vinculación a proceso dentro de los rubros señalados, conforme los registros de la  Fiscalía General de la entidad federativa en los cortes referidos?
 						</li>
 					</ul>
 				</div><br><br>
@@ -44,7 +44,7 @@
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
 							 <img src="images/warning.png"  class="imgWarning" alt="">
-							 	Para efectos de esta pregunta, debe considerarse que una carpeta de investigación puede derivar simultáneamente en varios procedimientos para definir la via correspondiente para su terminación dentro del proceso penal, conforme la relación victimas/ofendidos, imputados y delitos involucrados. 
+							 	Para efectos de esta pregunta, debe considerarse que una carpeta de investigación puede derivar simultáneamente en varios procedimientos para definir la vía correspondiente para su terminación dentro del proceso penal, conforme la relación víctimas/ofendidos, imputados y delitos involucrados. 
 							</div>
 						</li>
 					</ul>
@@ -53,7 +53,7 @@
 					<ul>
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
-							 En este sentido, los procedimientos que han realizado los agentes del Ministerio Público se refieren al número de derivaciones que simultáneamente llevaron a cabo cada una de las carpetas de investigación iniciadas para definir la vía correspondiente para su terminación dentro del proceso penal. El estatus es la situacion que guardan dichos procedimientos en un momento dentro de la etapa de investigación. 
+							 En este sentido, los procedimientos que han realizado los agentes del Ministerio Público se refieren al número de derivaciones que simultáneamente llevaron a cabo por cada una de las carpetas de investigación iniciadas para definir la vía correspondiente para su terminación dentro del proceso penal. El estatus es la situación que guardan dichos procedimientos en un momento dentro de la etapa de investigación. 
 							</div>
 						</li>
 					</ul>
@@ -62,7 +62,7 @@
 					<ul>
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
-							 	<strong>Ejemplo:</strong> En enero de 2020 se inició una carpeta de investigación con dos imputados y un ofendido. Al 30 de marzo de 2020, esa misma carpeta ha derivado en dos procedimientos: mediante un procedimiento se logró llegar a un acuerdo reparatorio entre la víctima y uno de los imputados, mientras que en otro procedimiento el segundo imputado se encuentra vinculado a proceso. En este caso, debe reportarse el estatus de ambos procedimientos, aun cuando pertenezcan a la misma carperta de investigación. 
+							 	<strong>Ejemplo:</strong> En enero del año 2020 se inició una carpeta de investigación con dos imputados y un ofendido. Al 30 de marzo del año 2020, esa misma carpeta ha derivado en dos procedimientos: mediante un procedimiento se logró llegar a un acuerdo reparatorio entre la víctima y uno de los imputados, mientras que en otro procedimiento el segundo imputado se encuentra vinculado a proceso. En este caso, debe reportarse el estatus de ambos procedimientos, aun cuando pertenezcan a la misma carperta de investigación. 
 							</div>
 						</li>
 					</ul>
@@ -307,7 +307,7 @@
 					<ul>
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
-							No deberán registrarse los procedimientos derivados al OEMASC dependiente de la Procuraduria o Fiscalía cuando éstos hayan sido vinculados a proceso.
+							No deberán registrarse los procedimientos derivados al OEMASC dependiente de la Fiscalía cuando éstos hayan sido vinculados a proceso.
 							</div>
 						</li>
 					</ul>

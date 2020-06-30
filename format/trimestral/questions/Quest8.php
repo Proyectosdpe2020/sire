@@ -35,7 +35,7 @@
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							<strong>¿Cuántos procedimientos</strong> se han generado de las vinculaciones a proceso derivadas de las carpetas de investigación iniciadas en 2020 y en qué estatus se encuentran dentro de los rubros señalados, conforme los registros de la Procuraduria General de Justicia o Fiscalía General de la entidad federativa en los cortes referidos?
+							<strong>¿Cuántos procedimientos</strong> se han generado de las vinculaciones a proceso derivadas de las carpetas de investigación iniciadas en el año 2020 y en qué estatus se encuentran dentro de los rubros señalados, conforme los registros de la Fiscalía General de la entidad federativa en los cortes referidos?
 						</li>
 					</ul>
 				</div><br><hr><br>
@@ -61,7 +61,7 @@
 						</tr>
 						<tr>
 							<th scope="row">8.2</th>
-							<td style="text-align: left;">Determinados por criterio de oportunidad</td>
+							<td style="text-align: left;">Determinado por criterio de oportunidad</td>
 						<?
 									$tota = 0; $tota1 = 0;
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
@@ -209,7 +209,7 @@
 					<ul>
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
-							 En caso de que se realicen acuerdos reparatorios a través del OEMASC dependiente de la Procuraduria o Fiscalá por que no se cuenta con OEMASC dependiente del Poder Judicial, deberá registrarse en este apartado.
+							 En caso de que se realicen acuerdos reparatorios a través del OEMASC dependiente de la Fiscalía por que no se cuenta con OEMASC dependiente del Poder Judicial, deberá registrarse en este apartado.
 							</div>
 						</li>
 					</ul>
@@ -218,7 +218,7 @@
 					<ul>
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
-								Si a la fecha de corte de una carpeta de investigación tiene más de un procedimiento en el Órgano Jurisdiccional después de la vinculación a proceso, se deberá registrar casa uno de éstos aun cuando se trate de la misma carpeta de investrigación.
+								Si a la fecha de corte de una carpeta de investigación tiene más de un procedimiento en el Órgano Jurisdiccional después de la vinculación a proceso, se deberá registrar casa uno de éstos aun cuando se trate de la misma carpeta de investigación.
 							</div>
 						</li>
 					</ul>

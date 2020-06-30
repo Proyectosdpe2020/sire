@@ -26,7 +26,7 @@
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							De los procedimientos derivados de las carpetas de investigación iniciadas en 2020, ¿a cúantos imputados de los que se les dictó auto de vinculación a proceso o que se encontraban en espera de la audiencia de vinculación se les impuso alguna medida caultelar?
+							De los procedimientos derivados de las carpetas de investigación iniciadas en el año 2020, ¿a cúantos imputados de los que se les dictó auto de vinculación a proceso o que se encontraban en espera de la audiencia de vinculación se les impuso alguna medida caultelar?
 						</li>
 					</ul>
 				</div><br><hr><br>

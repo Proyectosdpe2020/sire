@@ -81,7 +81,7 @@
 					<ul>
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
-							 Por su parte, los datos proporcionados en el reactivo 6.2 (número de detenidos por orden de aprehensión) deberan ser iguales o mayores a los datos proporcionados en el reactivo 5.3 (número de órdenes de aprehensión cumplimentadas) de la pregunta 5. Lo anterior no es aplicable si la persona o personas se encuentre privadas de la libertad, es decir, en el centro penitenciario en cumplimiento de su sentencia condenatoria o en cumplimiento de la medida cautelar de prisión preventiva.
+							 Por su parte, los datos proporcionados en el reactivo 6.2 (número de detenidos por orden de aprehensión) deberan ser iguales o mayores a los datos proporcionados en el reactivo 5.3 (número de órdenes de aprehensión cumplimentadas) de la pregunta número 5. Lo anterior no es aplicable si la persona o personas se encuentren privadas de la libertad, es decir, en el centro penitenciario en cumplimiento de su sentencia condenatoria o en cumplimiento de la medida cautelar de prisión preventiva.
 							</div>
 						</li>
 					</ul>

@@ -55,8 +55,8 @@
 				    <div class="col-12">
 				     <div class="card">
 								  <div class="card-body">
-								    <h5 class="card-title tituloIndicadores">INDICADORES ESTRATEGICOS DEL MODELO DE EVALUACION Y SEGUIMIENTO DE LA CONSOLIDACION DEL SISTEMA DE JUSTICIA PENAL</h5><BR>
-								    <h6 class="card-subtitle mb-2 tituloPeriodo"><strong>INFORMACION: <? echo $anioGlobal; ?><br>
+								    <h5 class="card-title tituloIndicadores"><strong>INDICADORES ESTRATÉGICOS DEL MODELO DE EVALUACIÓN Y SEGUIMIENTO DE LA CONSOLIDACIÓN DEL SISTEMA DE JUSTICIA PENAL INFORMADOS A LA SECRETARÍA DE GOBERNACIÓN</strong></h5><BR>
+								    <h6 class="card-subtitle mb-2 tituloPeriodo"><strong>INFORMACIÓN: <? echo $anioGlobal; ?><br>
 																																																						           PERIODO: <? echo $nme; ?></strong></h6>
 								    
 								  </div>							  

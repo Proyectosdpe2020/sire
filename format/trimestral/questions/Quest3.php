@@ -25,7 +25,7 @@
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							¿Cúal es el número de víctimas u ofendidos que derivan de las carpetas de investigación iniciadas en 2020?.
+							¿Cúal es el número de víctimas u ofendidos que derivan de las carpetas de investigación iniciadas en el año 2020?.
 						</li>
 					</ul>
 				</div><br><hr><br>
@@ -33,7 +33,7 @@
 					<thead>
 						<tr>
 							<th scope="col">No.</th>
-							<th scope="col">Victimas u Ofendidos</th>
+							<th scope="col">Víctimas u Ofendidos</th>
 							<th scope="col"><? echo $m1; ?></th>
 							<th scope="col"><? echo $m2; ?></th>
 							<th scope="col"><? echo $m3; ?></th>

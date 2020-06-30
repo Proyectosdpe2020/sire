@@ -11,10 +11,10 @@
 						<div class="col-md-1 tituloAyuda"><strong>Ayuda:</strong></div>
 					</div><br><br>
 					<div class="textoAyuda" >
-					En esta pregunta se solicita el número de carpetas de investigación iniciadas en 2020 a partir de las denuncias, querellas u otros requisitos equivalentes recibidas en el Ministerio Público en el año 2020, y también de las denuncias, querellas u otros requisitos equivalentes recibidos en el año 2019 y que iniciaron sus carpetas de investigación en 2020.	
+					En esta pregunta se solicita el número de <strong>carpetas de investigación iniciadas en el año 2020 a partir de las denuncias, querellas u otros requisitos equivalentes</strong> recibidas en el Ministerio Público en el año 2020, y también de las denuncias, querellas u otros requisitos equivalentes recibidos en el año 2019 y que iniciaron sus carpetas de investigación en el año 2020.	
 					</div>
 					<div class="textoAyuda" >
-						Se hace la diferencia entre carpetas de investigación iniciadas en 2020 derivadas de denuncias, querellas u otros requisitos equivalentes del año 2019, porque queremos que la información sea consistente respecto de aquellas entidades federativas que por cada denuncia, querella u otro requisito equivalente recibida, inicien una carpeta de investigación. Si no contabilizamos esta situación en este apartado, en algunas entidades se tendrán más carpetas que denuncias, querellas u otros requisitos equivalentes recibidas.
+						Se hace la diferencia entre carpetas de investigación iniciadas en el año 2020 derivadas de denuncias, querellas u otros requisitos equivalentes del año 2019, porque queremos que la información sea consistente respecto de aquellas entidades federativas que por cada denuncia, querella u otro requisito equivalente recibida, inicien una carpeta de investigación. Si no contabilizamos esta situación en este apartado, en algunas entidades se tendrán más carpetas que denuncias, querellas u otros requisitos equivalentes recibidas.
 					</div>
 					<div class="textoAyuda" >
 						Las carpetas de investigación iniciadas se refiere a las que se han iniciado a partir de las denuncias, querellas u otros requisitos equivalentes que han derivado en una investigación inicial o primera etapa del procedimiento penal. Una carpeta de investigación contempla todos los registros de investigación realizados por la policía y, en su caso, por el Ministerio Público, siempre bajo el mando y conducción de éste.
