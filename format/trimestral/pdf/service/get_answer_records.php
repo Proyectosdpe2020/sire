@@ -101,6 +101,8 @@ if($row_count > 0){
                 'count' => array($row['m1'], $row['m2'], $row['m3']),
                 'section' => $row['section'],
                 'period_id' => $row['period_id'],
+                'year' => $_POST['year'],
+                'unity' => $_POST['unity']
             )
         );
     }

@@ -26,8 +26,6 @@
 
 	<div id="contenido">
 
-	<button type="button" class="btn btn-primary" style="height:38px;  align:right; "  onclick = "info()">Descargar Reporte</button>
-
 		<div class="right_col contentMain" role="main">
 
 			<div style="" class="x_panel principalPanel">
@@ -62,7 +60,7 @@
 								  </div>							  
 				    	<div class="botonAyuda">  	
 										<button type="button" class="botonAcciones" id="ayudaOPC"  onclick="showModalAyuda(1)">Ayuda</button>	
-										<button type="button" class="botonAcciones"  onclick="">Descargar Reporte</button>
+										<button type="button" class="botonAcciones"  onclick = "generateReport(<?php echo $anioGlobal.','.$per.','.$idUnidad.','.$idEnlace ?>)">Descargar Reporte</button>
 										<button type="button" class="botonAcciones"  onclick="">Enviar a DPE</button>
 									</div><br>	    
 								</div>

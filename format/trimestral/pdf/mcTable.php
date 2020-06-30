@@ -8,6 +8,7 @@
 	{
 		var $widths;
 		var $aligns;
+		var $fillColors;
 		
 		function SetWidths($w)
 		{
@@ -20,8 +21,14 @@
 			//Set the array of column alignments
 			$this->aligns=$a;
 		}
+
+		function SetFillColors($fc)
+		{
+			//Set the array of column alignments
+			$this->fillColors=$fc;
+		}
 		
-		function Row($data){
+		function Row($data, $sec){
 			
 			
 			//Calculate the height of the row
@@ -34,15 +41,33 @@
 			$this->CheckPageBreak($h);
 			//Draw the cells of the row
 			for($i=0;$i<count($data);$i++){
+
 				$w=$this->widths[$i];
 				$a=isset($this->aligns[$i]) ? $this->aligns[$i] : 'L';
+				$fc=isset($this->fillColors[$i]) ? $this->fillColors[$i] : array(255, 255 ,255);
+
 				//Save the current position
 				$x=$this->GetX();
 				$y=$this->GetY();
+
 				//Draw the border
 				$this->Rect($x,$y,$w,$h);
+
+				/*if($sec != 'c'){
+					//Fill cell color
+					$this->setFillColor($fc[0], $fc[1], $fc[2]);
+
+					//Print the text
+					$this->MultiCell($w,5,$data[$i],1,$a,1);
+				}
+				else{
+					//Print the text
+					$this->MultiCell($w,5,$data[$i],0,$a);
+				}*/
+
 				//Print the text
 				$this->MultiCell($w,5,$data[$i],0,$a);
+
 				//Put the position to the right of the cell
 				$this->SetXY($x+$w,$y);
 			}
@@ -51,52 +76,42 @@
 			
 			
 		}
+
+		function Header()
+		{
+			// Logo
+			$this->Image('assets/img/segob.png', 10, 10, 80);
+			// Arial bold 15
+			$this->SetFont('Arial','B',15);
+			// Move to the right
+			$this->Cell(80);
+
+			//$this->Cell(380,2, 'Pagina ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
+			// Line break
+			$this->Ln(20);
+		}
 		
 		function CheckPageBreak($h){
 			//If the height h would cause an overflow, add a new page immediately
 			// if($this->GetY()+$h>$this->PageBreakTrigger){
 			if($this->GetY()+$h>230){	
-				$this->AddPage($this->CurOrientation,"letter");
+				//$this->AddPage($this->CurOrientation,"letter");
+
+				$this->AddPage();
 				
 				$pdf = new FPDF();
 				$pdf->AddPage("letter");
-				
 				
 				
 				$start_x = $pdf->GetX();
 				$start_y = $pdf->GetY();
 				
 				
-				/////////////////
-				
-				
-				//$this->Image('../img/estadistica.png', 0, 0, 217);
+				$this->Image('assets/img/segob.png', 10, 10, 80);
 				$this->SetAligns("C");
 				$this->SetFont('Arial','',8);
 				$this->AliasNbPages();
-				$this->Cell(380,2, 'Pagina ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
-				
-				/* $this->SetFont('Arial', 'B', 10);
-					$this->Cell(130, 15, "FISCALÍA GENERAL DE MICHOACÁN", '', '', 'R', '');
-					$this->Ln(6);
-					$this->SetFont('Arial', '', 8);
-					$this->Cell(160, 15, "DIRECCIÓN GENERAL DE TECNOLOGÍAS DE LA INFORMACIÓN, PLANEACIÓN Y ESTADISTÍCA", '', '', 'R', '');
-					$this->Ln(6);
-					$this->SetFont('Arial', '', 7);
-					$this->Cell(123, 15, "DIRECCIÓN DE PLANEACIÓN Y ESTADISTÍCA", '', '', 'R', '');
-					$this->Ln(25);
-					$this->Cell(50, 4, '', '', '', 'C', '');
-					$this->Ln(6);
-					$this->SetFont('Arial', 'B', 11);
-				$this->Cell(40, 15, "Periodo Validación:", '', '', 'R', ''); */
-				
-				
-				/////footer
-				
-				
-				
-				//$this->Image('', $pdf->GetX(), $pdf->GetY(), $image_height, $image_width); 
-				$this->Ln(30);
+				$this->Ln();
 			}
 		}
 		
