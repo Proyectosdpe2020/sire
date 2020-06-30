@@ -37,7 +37,7 @@ function getDataQ($conn, $quest, $per, $anio, $idUnidad){
 	$query = " SELECT
        sum([iniciadasConDetenido]) as 'IniDetenido'
       ,sum([iniciadasSinDetenido]) as 'IniSinDetenido'
-  FROM [ESTADISTICAV2].[dbo].[Carpetas] WHERE idUnidad = $idUnidad AND idAnio = $anio AND idMes = $mes GROUP BY idMes ORDER BY idMes ";
+  FROM [ESTADISTICAV2].[dbo].[Carpetas] WHERE idUnidad $idUnidad AND idAnio = $anio AND idMes = $mes GROUP BY idMes ORDER BY idMes ";
 //echo $query."<br>";
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);

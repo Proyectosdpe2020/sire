@@ -14,6 +14,15 @@
 					if($per == 4){ $m1 = "Octubre"; $m2 = "Noviembre"; $m3 = "Diciembre"; $nme = "Octubre - Diciembre"; $arr = array(10,11,12);}
 					$getEnv = getInfOCarpetasEnv($conn, $idEnlace, 11);
 					$envt = $getEnv[0][0]; 
+					$fisid = getIdFiscaliaEnlace($conn, $idEnlace);
+					
+					if($fisid[0][0]  == 4){
+						$idUnidad = "IN(".$idUnidad.")";
+					}else{
+						if($fisid[0][0] == 5){
+							$idUnidad = "IN(159,150,151,53,54,55,56,57,58,59,60,61)";
+						}
+					}
 		?>
 				
 				<h5 class="card-title tituloPregunta">Pregunta 4: Número de Carpetas con detenido(s) en flagrancia 2020 </h5><br>
