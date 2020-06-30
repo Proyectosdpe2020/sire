@@ -11,7 +11,7 @@
 						<div class="col-md-1 tituloAyuda"><strong>Ayuda:</strong></div>
 					</div><br><br>
 					<div class="textoAyuda" >
-					En esta pregunta se solicita el número de carpetas de investigación iniciadas en 2020 que se hayan iniciado con al menos un detenido en flagrancia, conforme a los supuestos establecidos en el artículo 146 del Código Nacional de Procedimientos Penales (CNPP), y aquellas iniciadas sin detenido. Es muy importante tomar en cuenta, con el propósito de evitar confusiones, que en esta pregunta se <strong>solicita el número de carpetas y no el número de detenidos.</strong>	
+					En esta pregunta se solicita el número de carpetas de investigación iniciadas en el año 2020 que se hayan iniciado con al menos un detenido en flagrancia, conforme a los supuestos establecidos en el artículo 146 del Código Nacional de Procedimientos Penales (CNPP), y aquellas iniciadas sin detenido. Es muy importante tomar en cuenta, con el propósito de evitar confusiones, que en esta pregunta se <strong>solicita el número de carpetas y no el número de detenidos.</strong>	
 					</div>
 				</div>
 				<div class="botonCloseModal">

@@ -3,6 +3,7 @@
 					include ("../../../Conexiones/Conexion.php");
 					include ("../../../Conexiones/conexionSicap.php");
 			include("../../../funcioneTrimes.php");
+			include("../../../funciones.php");	
 
 					if (isset($_GET["per"])){ $per = $_GET["per"]; }
 					if (isset($_GET["anio"])){ $anio = $_GET["anio"]; }
@@ -25,7 +26,8 @@
 					$data14 = getDAtaQuestion($conn, 31, $per, $anio, $idUnidad);
 					$data15 = getDAtaQuestion($conn, 32, $per, $anio, $idUnidad);
 					$data16 = getDAtaQuestion($conn, 33, $per, $anio, $idUnidad);
-
+					$getEnv = getInfOCarpetasEnv($conn, $idEnlace, 11);
+					$envt = $getEnv[0][0];
 				?>
 
 
@@ -33,7 +35,7 @@
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							<strong>¿Cuántos procedimientos</strong> han realizado los agentes del Ministerio Público derivados de las carpetas de Investigación iniciadas en 2020 y en qué estatus se encuentran desde su inicio hasta el auto de vinculación a proceso dentro de los rubros señalados, conforme los registros de la Procuraduría General de Justicia o Fiscalía General de la entidad federativa en los cortes referidos?
+							<strong>¿Cuántos procedimientos</strong> han realizado los agentes del Ministerio Público derivados de las carpetas de Investigación iniciadas en el año 2020 y en qué estatus se encuentran desde su inicio hasta el auto de vinculación a proceso dentro de los rubros señalados, conforme los registros de la  Fiscalía General de la entidad federativa en los cortes referidos?
 						</li>
 					</ul>
 				</div><br><br>
@@ -42,7 +44,7 @@
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
 							 <img src="images/warning.png"  class="imgWarning" alt="">
-							 	Para efectos de esta pregunta, debe considerarse que una carpeta de investigación puede derivar simultáneamente en varios procedimientos para definir la via correspondiente para su terminación dentro del proceso penal, conforme la relación victimas/ofendidos, imputados y delitos involucrados. 
+							 	Para efectos de esta pregunta, debe considerarse que una carpeta de investigación puede derivar simultáneamente en varios procedimientos para definir la vía correspondiente para su terminación dentro del proceso penal, conforme la relación víctimas/ofendidos, imputados y delitos involucrados. 
 							</div>
 						</li>
 					</ul>
@@ -51,7 +53,7 @@
 					<ul>
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
-							 En este sentido, los procedimientos que han realizado los agentes del Ministerio Público se refieren al número de derivaciones que simultáneamente llevaron a cabo cada una de las carpetas de investigación iniciadas para definir la vía correspondiente para su terminación dentro del proceso penal. El estatus es la situacion que guardan dichos procedimientos en un momento dentro de la etapa de investigación. 
+							 En este sentido, los procedimientos que han realizado los agentes del Ministerio Público se refieren al número de derivaciones que simultáneamente llevaron a cabo por cada una de las carpetas de investigación iniciadas para definir la vía correspondiente para su terminación dentro del proceso penal. El estatus es la situación que guardan dichos procedimientos en un momento dentro de la etapa de investigación. 
 							</div>
 						</li>
 					</ul>
@@ -60,7 +62,7 @@
 					<ul>
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
-							 	<strong>Ejemplo:</strong> En enero de 2020 se inició una carpeta de investigación con dos imputados y un ofendido. Al 30 de marzo de 2020, esa misma carpeta ha derivado en dos procedimientos: mediante un procedimiento se logró llegar a un acuerdo reparatorio entre la víctima y uno de los imputados, mientras que en otro procedimiento el segundo imputado se encuentra vinculado a proceso. En este caso, debe reportarse el estatus de ambos procedimientos, aun cuando pertenezcan a la misma carperta de investigación. 
+							 	<strong>Ejemplo:</strong> En enero del año 2020 se inició una carpeta de investigación con dos imputados y un ofendido. Al 30 de marzo del año 2020, esa misma carpeta ha derivado en dos procedimientos: mediante un procedimiento se logró llegar a un acuerdo reparatorio entre la víctima y uno de los imputados, mientras que en otro procedimiento el segundo imputado se encuentra vinculado a proceso. En este caso, debe reportarse el estatus de ambos procedimientos, aun cuando pertenezcan a la misma carperta de investigación. 
 							</div>
 						</li>
 					</ul>
@@ -182,33 +184,33 @@
 						<tr>
 							<th scope="row">7.7</th>
 							<td style="text-align: left;">Por sobreseimiento ordenado por el Juez de Control antes de la vinculación a proceso</td>
-							<td><input type="number" value="<? echo $data7[0][0]; ?>" id="p24m1"></td>
-							<td><input type="number" value="<? echo $data7[0][1]; ?>" id="p24m2"></td>
-							<td><input type="number" value="<? echo $data7[0][2]; ?>" id="p24m3"></td>
+							<td><input type="number" value="<? echo $data7[0][0]; ?>" id="p24m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data7[0][1]; ?>" id="p24m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data7[0][2]; ?>" id="p24m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data7[0][3]; ?>" id="p24tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">7.8</th>
 							<td style="text-align: left;">Por otra causa que exiga la acción penal</td>
-						<td><input type="number" value="<? echo $data8[0][0]; ?>" id="p25m1"></td>
-							<td><input type="number" value="<? echo $data8[0][1]; ?>" id="p25m2"></td>
-							<td><input type="number" value="<? echo $data8[0][2]; ?>" id="p25m3"></td>
+							<td><input type="number" value="<? echo $data8[0][0]; ?>" id="p25m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data8[0][1]; ?>" id="p25m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data8[0][2]; ?>" id="p25m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data8[0][3]; ?>" id="p25tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">7.9</th>
 							<td style="text-align: left;">Otra decisión/terminación que establezca el código penal de la entidad federativa</td>
-							<td><input type="number" value="<? echo $data9[0][0]; ?>" id="p26m1"></td>
-							<td><input type="number" value="<? echo $data9[0][1]; ?>" id="p26m2"></td>
-							<td><input type="number" value="<? echo $data9[0][2]; ?>" id="p26m3"></td>
+							<td><input type="number" value="<? echo $data9[0][0]; ?>" id="p26m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data9[0][1]; ?>" id="p26m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data9[0][2]; ?>" id="p26m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data9[0][3]; ?>" id="p26tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">7.10</th>
 							<td style="text-align: left;">En trámite en la etapa de investigación (antes del auto de vinculación a proceso).</td>
-							<td><input type="number" value="<? echo $data10[0][0]; ?>" id="p27m1"></td>
-							<td><input type="number" value="<? echo $data10[0][1]; ?>" id="p27m2"></td>
-							<td><input type="number" value="<? echo $data10[0][2]; ?>" id="p27m3"></td>
+							<td><input type="number" value="<? echo $data10[0][0]; ?>" id="p27m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data10[0][1]; ?>" id="p27m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data10[0][2]; ?>" id="p27m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data10[0][3]; ?>" id="p27tot" readonly></td>
 						</tr>
 						<tr>
@@ -234,41 +236,41 @@
 						<tr>
 							<th scope="row">7.12</th>
 							<td style="text-align: left;">En trámite en el OEMASC sin acuerdo reparatorio</td>
-							<td><input type="number" value="<? echo $data12[0][0]; ?>" id="p29m1"></td>
-							<td><input type="number" value="<? echo $data12[0][1]; ?>" id="p29m2"></td>
-							<td><input type="number" value="<? echo $data12[0][2]; ?>" id="p29m3"></td>
+							<td><input type="number" value="<? echo $data12[0][0]; ?>" id="p29m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data12[0][1]; ?>" id="p29m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data12[0][2]; ?>" id="p29m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data12[0][3]; ?>" id="p29tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">7.13</th>
 							<td style="text-align: left;">En trámite en el OEMASC con acuerdo reparatorio firmado (en proceso de cumplimiento)</td>
-							<td><input type="number" value="<? echo $data13[0][0]; ?>" id="p30m1"></td>
-							<td><input type="number" value="<? echo $data13[0][1]; ?>" id="p30m2"></td>
-							<td><input type="number" value="<? echo $data13[0][2]; ?>" id="p30m3"></td>
+							<td><input type="number" value="<? echo $data13[0][0]; ?>" id="p30m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data13[0][1]; ?>" id="p30m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data13[0][2]; ?>" id="p30m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data13[0][3]; ?>" id="p30tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">7.14</th>
 							<td style="text-align: left;">Resueltos (cumplidos) en OEMASC por mediación</td>
-							<td><input type="number" value="<? echo $data14[0][0]; ?>" id="p31m1"></td>
-							<td><input type="number" value="<? echo $data14[0][1]; ?>" id="p31m2"></td>
-							<td><input type="number" value="<? echo $data14[0][2]; ?>" id="p31m3"></td>
+							<td><input type="number" value="<? echo $data14[0][0]; ?>" id="p31m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data14[0][1]; ?>" id="p31m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data14[0][2]; ?>" id="p31m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data14[0][3]; ?>" id="p8tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">7.15</th>
 							<td style="text-align: left;">Resueltos (cumplidos) en OEMASC por conciliación</td>
-							<td><input type="number" value="<? echo $data15[0][0]; ?>" id="p32m1"></td>
-							<td><input type="number" value="<? echo $data15[0][1]; ?>" id="p32m2"></td>
-							<td><input type="number" value="<? echo $data15[0][2]; ?>" id="p32m3"></td>
+							<td><input type="number" value="<? echo $data15[0][0]; ?>" id="p32m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data15[0][1]; ?>" id="p32m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data15[0][2]; ?>" id="p32m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data15[0][3]; ?>" id="p32tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">7.16</th>
 							<td style="text-align: left;">Resueltos (cumplidos) en OEMASC por acuerdo reparatorio por junta restaurativa</td>
-							<td><input type="number" value="<? echo $data16[0][0]; ?>" id="p33m1"></td>
-							<td><input type="number" value="<? echo $data16[0][1]; ?>" id="p33m2"></td>
-							<td><input type="number" value="<? echo $data16[0][2]; ?>" id="p33m3"></td>
+							<td><input type="number" value="<? echo $data16[0][0]; ?>" id="p33m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data16[0][1]; ?>" id="p33m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data16[0][2]; ?>" id="p33m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data16[0][3]; ?>" id="p33tot" readonly></td>
 						</tr>
 					</tbody>
@@ -305,12 +307,13 @@
 					<ul>
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
-							No deberán registrarse los procedimientos derivados al OEMASC dependiente de la Procuraduria o Fiscalía cuando éstos hayan sido vinculados a proceso.
+							No deberán registrarse los procedimientos derivados al OEMASC dependiente de la Fiscalía cuando éstos hayan sido vinculados a proceso.
 							</div>
 						</li>
 					</ul>
 				</div>
 				<div class="botonGuardar">
-					<button type="button" class="btn btn-success" onclick="saveQuest7(7, <? echo $per; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" id="guardarPregunta">GUARDAR</button>
+						<? if($envt == 0){ ?> 
+					<button type="button" class="btn btn-success" onclick="saveQuest7(7, <? echo $per; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" id="guardarPregunta">GUARDAR</button> <? } ?>
 				</div>
 			

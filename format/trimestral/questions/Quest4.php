@@ -1,6 +1,7 @@
 	<? 
 					include ("../../../Conexiones/Conexion.php");
 			include("../../../funcioneTrimes.php");
+			include("../../../funciones.php");	
 
 					if (isset($_GET["per"])){ $per = $_GET["per"]; }
 					if (isset($_GET["anio"])){ $anio = $_GET["anio"]; }
@@ -11,14 +12,15 @@
 					if($per == 2){ $m1 = "Abril"; $m2 = "Mayo"; $m3 = "Junio"; $nme = "Abril - Junio"; $arr = array(4,5,6);}
 					if($per == 3){ $m1 = "Julio"; $m2 = "Agosto"; $m3 = "Septiembre"; $nme = "Julio - Septiembre"; $arr = array(7,8,9);}
 					if($per == 4){ $m1 = "Octubre"; $m2 = "Noviembre"; $m3 = "Diciembre"; $nme = "Octubre - Diciembre"; $arr = array(10,11,12);}
-					
+					$getEnv = getInfOCarpetasEnv($conn, $idEnlace, 11);
+					$envt = $getEnv[0][0]; 
 		?>
 				
 				<h5 class="card-title tituloPregunta">Pregunta 4: Número de Carpetas con detenido(s) en flagrancia 2020 </h5><br>
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							¿Cúantas carpetas de investigación se iniciaron en el 2020 con al menos un detenido en flagrancia y cuántas se iniciarón sin detenido?
+							¿Cúantas carpetas de investigación se iniciaron en el año 2020 con al menos un detenido en flagrancia y cuántas se iniciaron sin detenido?
 						</li>
 					</ul>
 				</div><br><hr><br>
@@ -72,12 +74,13 @@
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
 							 <img src="images/warning.png"  class="imgWarning" alt="">
-							 	Nota.- Si una carpeta de investigación iniciada cuenta con al menos un detenido en flagrancia se registrara en el reactivo 4.1, incluso cuando se presente una situación mixta en la que puedan identificarse personas que no pudieron ser detenidas, pero se cuenta con al menos un detenido en flagrancia. Si la carpeta de investigación iniciada no cuenta con algún detenido se registrará en el reactivo 4.2.
+							 	Nota.- Si una carpeta de investigación iniciada cuenta con al menos un detenido en flagrancia se registrará en el reactivo 4.1, incluso cuando se presente una situación mixta en la que puedan identificarse personas que no pudieron ser detenidas, pero se cuenta con al menos un detenido en flagrancia. Si la carpeta de investigación iniciada no cuenta con algún detenido se registrará en el reactivo 4.2.
 							</div>
 						</li>
 					</ul>
 				</div>
 				<div class="botonGuardar">
-					<button type="button" class="btn btn-success" id="guardarPregunta" onclick="saveQuest4(4, <? echo $per; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)">GUARDAR</button>
+					<? if($envt == 0){ ?>
+					<button type="button" class="btn btn-success" id="guardarPregunta" onclick="saveQuest4(4, <? echo $per; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)">GUARDAR</button> <? } ?>
 				</div>
 	

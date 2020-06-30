@@ -11,7 +11,7 @@
 						<div class="col-md-1 tituloAyuda"><strong>Ayuda:</strong></div>
 					</div><br><br>
 					<div class="textoAyuda" >
-					En esta pregunta se solicita el número de procedimientos realizados por los agentes del Ministerio Público derivados de las carpetas de investigación iniciadas en 2020 desde su inicio hasta el auto de vinculación a proceso, así como la situación (estatus) que guardan cada uno de ellos en los cortes correspondientes, considerando los siguientes supuestos:	
+					En esta pregunta se solicita el número de procedimientos realizados por los agentes del Ministerio Público derivados de las carpetas de investigación iniciadas en el año 2020 desde su inicio hasta el auto de vinculación a proceso, así como la situación (estatus) que guardan cada uno de ellos en los cortes correspondientes, considerando los siguientes supuestos:	
 					</div>
 					<div class="textoAyuda" >
 					7.1. Determinados en archivo temporal.- que se haya aplicado la figura prevista en el artículo 254 del CNPP;
@@ -29,10 +29,10 @@
 					7.5. Por Incompetencia.- que se encuentre en el supuesto a que se refiere el artículo 25 del CNPP;
 					</div>
 					<div class="textoAyuda" >
-					7.6. Por acumulación.- se refiere al número de procedimientos derivados de las carpetas de investigación iniciadas en 2020 que el Ministerio Público concluyó con motivo de haberlas incorporado a otra carpeta. En interpretación del artículo 30 del CNPP haciendo extensiva esta facultad al Ministerio Público. La carpeta a la cual se haya acumulado una o más carpetas no podrá tener este estatus, sino que deberá considerar alguna de las situaciones planteadas (determinado, resuelto o en trámite en cualquier etapa del procedimiento penal);
+					7.6. Por acumulación.- se refiere al número de procedimientos derivados de las carpetas de investigación iniciadas en el año 2020 que el Ministerio Público concluyó con motivo de haberlas incorporado a otra carpeta. En interpretación del artículo 30 del CNPP haciendo extensiva esta facultad al Ministerio Público. La carpeta a la cual se haya acumulado una o más carpetas no podrá tener este estatus, sino que deberá considerar alguna de las situaciones planteadas (determinado, resuelto o en trámite en cualquier etapa del procedimiento penal);
 					</div>
 					<div class="textoAyuda" >
-					7.7. Por sobreseimiento ordenado por el Juez de Control.- se refiere a los procedimientos derivados de las carpetas de investigación iniciadas en 2020 que excepcionalmente fueron resueltos por sobreseimiento ordenados por el Juez de Control en la etapa de investigación sin haber una vinculación a proceso conforme a las causales contempladas en el artículo 327 del CNPP;
+					7.7. Por sobreseimiento ordenado por el Juez de Control.- se refiere a los procedimientos derivados de las carpetas de investigación iniciadas en el año 2020 que excepcionalmente fueron resueltos por sobreseimiento ordenados por el Juez de Control en la etapa de investigación sin haber una vinculación a proceso conforme a las causales contempladas en el artículo 327 del CNPP;
 					</div>
 					<div class="textoAyuda" >
 					7.8. Por otra causa que extinga la acción penal.- que se encuentre en alguno de los supuestos establecidos en el artículo 485 del CNPP;
@@ -41,10 +41,10 @@
 					7.9. Otra decisión/terminación que establezca el código penal en la entidad federativa.- se refiere a alguna otra forma de determinación o de decisión aplicada por el Ministerio Público que no esté incluida en alguno de los incisos precedentes y cuya aplicación sea propia de la entidad federativa que está reportando el estatus del procedimiento derivado de la carpeta de investigación iniciada en 2020. La cual deberá estar fundamentada en los ordenamientos normativos propios de la entidad federativa, por no estar considerado en el CNPP;
 					</div>
 					<div class="textoAyuda" >
-					7.10. En trámite en la etapa de investigación (antes del auto de vinculación a proceso).- se refiere a los procedimientos que se encuentran en trámite antes del auto de vinculación a proceso sin la contabilización de los procedimientos que se encuentran en trámite en el OEMASC, conforme lo previsto en el artículo 211 fracción I del CNPP, y
+					7.10. En trámite en la etapa de investigación (antes del auto de vinculación a proceso).- se refiere a los procedimientos que se encuentran en trámite antes del auto de vinculación a proceso sin la contabilización de los procedimientos que se encuentran en trámite en el OEMASC, conforme lo previsto en el artículo 211 fracción I del CNPP;
 					</div>
 					<div class="textoAyuda" >
-					<strong>Asimismo, para el caso del número de procedimientos realizados por los agentes del Ministerio Público derivados de las carpetas de investigación iniciadas en 2020 desde su inicio hasta el auto de vinculación a proceso que fueron derivados al Órgano Especializado en Mecanismos Alternativos de Solución de Controversias en materia Penal (OEMASC) dependiente de la Procuraduría General de Justicia o Fiscalía General de la entidad federativa (reactivos del 7.11 al 7.15), se considerarán los siguientes supuestos:</strong>
+					<strong>Asimismo, para el caso del número de procedimientos realizados por los agentes del Ministerio Público derivados de las carpetas de investigación iniciadas en el año 2020 desde su inicio hasta el auto de vinculación a proceso que fueron derivados al Órgano Especializado en Mecanismos Alternativos de Solución de Controversias en materia Penal (OEMASC) dependiente de la Fiscalía General de la entidad federativa (reactivos del 7.11 al 7.15), se considerarán los siguientes supuestos:</strong>
 					</div>
 					<div class="textoAyuda" >
 					7.12. En trámite en el OEMASC sin acuerdo reparatorio.- se refiere a los procedimientos que se encuentran en el OEMASC y que todavía no concluyen el proceso para determinar si se alcanza un acuerdo reparatorio o se canaliza a la instancia de investigación;

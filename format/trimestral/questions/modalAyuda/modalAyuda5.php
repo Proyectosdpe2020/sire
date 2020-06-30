@@ -11,7 +11,7 @@
 						<div class="col-md-1 tituloAyuda"><strong>Ayuda:</strong></div>
 					</div><br><br>
 					<div class="textoAyuda" >
-					En esta pregunta se solicita, <strong>de las carpetas de investigación iniciadas en 2020,</strong> el número de órdenes de aprehensión ordenadas por el Juez de Control y de <strong>detención por caso urgente</strong> emitidas por el Ministerio Público, con sus respectivos <strong>cumplimientos,</strong> de conformidad con lo siguiente:.	
+					En esta pregunta se solicita, <strong>de las carpetas de investigación iniciadas en el año 2020,</strong> el número de órdenes de aprehensión ordenadas por el Juez de Control y de <strong>detención por caso urgente</strong> emitidas por el Ministerio Público, con sus respectivos <strong>cumplimientos,</strong> de conformidad con lo siguiente:.	
 					</div>
 					<div class="textoAyuda" >
 					5.1. <strong>Número de órdenes de aprehensión solicitadas.-</strong> son las órdenes de aprehensión solicitadas por el Ministerio Público al Juez de Control de conformidad con lo dispuesto el artículo 142 del CNPP;	
