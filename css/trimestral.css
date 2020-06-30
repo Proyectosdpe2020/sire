@@ -147,6 +147,13 @@ button{
     font-size: 24px;
 }
 
+.textoNotaSire{
+	margin-left: 4%;
+	
+    padding-left: 35px; /* Con este padding, puedes separar el texto del borde */
+    font-size: 24px;
+}
+
 .warningIcon{
 	width: 60px;
 	height: 1500px;
