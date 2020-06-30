@@ -64,7 +64,7 @@
 								  </div>							  
 				    	<div class="botonAyuda">  	
 										<button type="button" class="botonAcciones" id="ayudaOPC"  onclick="showModalAyuda(1)">Ayuda</button>	
-										<button type="button" class="botonAcciones"  onclick = "generateReport(<?php echo $anioGlobal.','.$per.','.$idUnidad.','.$idEnlace ?>)">Descargar Reporte</button>
+										<button type="button" class="botonAcciones"  onclick = "generateReport(<?php echo $anioGlobal.','.$per.','.$idUnidad.','.$idEnlace ?>)" <? if($envt == 0){ echo "disabled"; } ?>>Descargar Reporte</button>
 										<? if($envt == 0){  ?>
 										<button type="button" class="botonAcciones"  onclick="enviarDPEtrim(<? echo $idEnlace; ?>, <? echo $anioGlobal; ?>, <? echo $format; ?>, <? echo $per; ?>, <? echo $idUnidad; ?>)">Enviar a DPE</button> <? } ?>
 										<? if($envt == 1 && $envta == 0){  ?>

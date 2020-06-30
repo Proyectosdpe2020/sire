@@ -55,7 +55,7 @@ function getDataQ($conn, $quest, $per, $anio, $idUnidad){
 
 	$query = " SELECT COUNT(resoluciones.CarpetaID) as m
   FROM [PRUEBA].[dbo].[Resoluciones] INNER JOIN Carpeta c ON c.CarpetaID = Resoluciones.CarpetaID 
-  WHERE idUnidad = $idUnidad AND mes IN($mes) AND EstatusID = $estatus AND anio = $anio AND YEAR(FechaInicio) = $anio AND MONTH(FechaInicio) $per ";
+  WHERE idUnidad $idUnidad AND mes IN($mes) AND EstatusID = $estatus AND anio = $anio AND YEAR(FechaInicio) = $anio AND MONTH(FechaInicio) $per ";
 
 
 	$indice = 0;
