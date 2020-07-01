@@ -69,6 +69,13 @@
 						</tr>
 					</tbody>
 				</table><br><br>
+				<div class="textoNotaSire" >
+					<ul>
+						<li style="list-style-type: circle !important" >
+								Los reactivos 4.1 y 4.2 fueron precargados automáticamente correspondiente con la información que fue proporcionada por su unidad en el Sistema Integral de Registro Estadístico (SIRE)<br><br>
+						</li>
+					</ul>
+				</div>
 				<div class="textoNota" >
 					<ul>
 						<li style="list-style-type: circle !important" >
@@ -83,4 +90,3 @@
 					<? if($envt == 0){ ?>
 					<button type="button" class="btn btn-success" id="guardarPregunta" onclick="saveQuest4(4, <? echo $per; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)">GUARDAR</button> <? } ?>
 				</div>
-	
