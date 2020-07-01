@@ -22,7 +22,12 @@
        if($idUnidad == 48){ $nomUnidad = "Unidad de Combate al Secuestro"; }
       /// por el largo del nombre del archivo tubo que cambiar para mas corto sea
 
-      $nombreReporte = $nomUnidad.$idEnlace."-".$idUnidad."-".$mes."-".$anio;
+      if($idTipoArch == 11){
+        $nombreReporte = "Trimestral-".$idEnlace."-".$idUnidad."-".$mes."-".$anio;
+      } else{
+        $nombreReporte = $nomUnidad.$idEnlace."-".$idUnidad."-".$mes."-".$anio;
+      } 
+      
 
       $ubicacion = 'documentos/';
 

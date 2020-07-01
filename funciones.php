@@ -3,7 +3,7 @@
 function getArchvsEnla($conn, $idEnlace){
 
 	$query = " SELECT idFormtato FROM enlaceFormato WHERE idEnlace = $idEnlace ";
-		//echo $query;
+		
 
 $indice = 0;
 	$stmt = sqlsrv_query($conn, $query);

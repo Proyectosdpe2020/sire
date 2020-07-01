@@ -23,6 +23,7 @@
 	$data2 = getDAtaQuestion($conn, 2, $per, $anioGlobal, $idUnidad);
 	$getEnv = getInfOCarpetasEnv($conn, $idEnlace, $format);
 	$envt = $getEnv[0][0]; 
+	$envta = $getEnv[0][1];
 
 	?>
   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">-->
@@ -63,11 +64,11 @@
 								  </div>							  
 				    	<div class="botonAyuda">  	
 										<button type="button" class="botonAcciones" id="ayudaOPC"  onclick="showModalAyuda(1)">Ayuda</button>	
-										<button type="button" class="botonAcciones"  onclick = "generateReport(<?php echo $anioGlobal.','.$per.','.$idUnidad.','.$idEnlace ?>)">Descargar Reporte</button>
+										<button type="button" class="botonAcciones"  onclick = "generateReport(<?php echo $anioGlobal.','.$per.','.$idUnidad.','.$idEnlace ?>)" <? if($envt == 0){ echo "disabled"; } ?>>Descargar Reporte</button>
 										<? if($envt == 0){  ?>
 										<button type="button" class="botonAcciones"  onclick="enviarDPEtrim(<? echo $idEnlace; ?>, <? echo $anioGlobal; ?>, <? echo $format; ?>, <? echo $per; ?>, <? echo $idUnidad; ?>)">Enviar a DPE</button> <? } ?>
-										<? if($envt == 1){  ?>
-										<button type="button" class="botonAcciones"  onclick="">Subir Archivo</button> <? } ?>
+										<? if($envt == 1 && $envta == 0){  ?>
+										<button type="button" data-toggle="modal" href="#myModaSubirArchivoUser" class="botonAcciones"  onclick="subirArchivoEnlace(<? echo $idUnidad; ?>, <? echo $per; ?>, <? echo $anioGlobal; ?> , <? echo $idEnlace; ?>,<? echo $format; ?>);">Subir Archivo</button> <? } ?>
 
 									</div><br>	    
 								</div>

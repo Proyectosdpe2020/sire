@@ -75,7 +75,7 @@
 
                           				INSERT INTO trimestral.seguimiento VALUES(5, $per, $idUnidad, $idEnlace, $anio, $p5m1, $p5m2, $p5m3, GETDATE() )
                           				INSERT INTO trimestral.seguimiento VALUES(6, $per, $idUnidad, $idEnlace, $anio, $p6m1, $p6m2, $p6m3, GETDATE() )
-                                  INSERT INTO trimestral.seguimiento VALUES(7, $per, $idUnidad, $idEnlace, $anio, $p7m2, $p7m2, $p7m3, GETDATE() )
+                                  INSERT INTO trimestral.seguimiento VALUES(7, $per, $idUnidad, $idEnlace, $anio, $p7m1, $p7m2, $p7m3, GETDATE() )
                           
                           COMMIT
                     END TRY
