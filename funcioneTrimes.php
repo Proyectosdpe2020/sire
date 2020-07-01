@@ -108,7 +108,18 @@ function validaQuest($conn, $Arrquest, $per, $anio, $idUnidad){
 	}
 
 	
+function getDataEnlaceMesValidaEnviado($conn, $mes, $anio, $idEnlace, $idFormato){
+	$query = " SELECT enviado FROM dbo.enlaceMesValidaEnviado WHERE idEnlace = $idEnlace AND idFormato = $idFormato AND mesCap = $mes ";
 
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['enviado'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
 
 
 ?>
