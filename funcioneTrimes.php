@@ -57,7 +57,7 @@ function getDataQ($conn, $quest, $per, $anio, $idUnidad){
   FROM [PRUEBA].[dbo].[Resoluciones] INNER JOIN Carpeta c ON c.CarpetaID = Resoluciones.CarpetaID 
   WHERE idUnidad $idUnidad AND mes IN($mes) AND EstatusID = $estatus AND anio = $anio AND YEAR(FechaInicio) = $anio AND MONTH(FechaInicio) $per ";
 
-
+//echo $query;
 	$indice = 0;
 	$stmt = sqlsrv_query($conSic, $query);
 	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
@@ -71,8 +71,11 @@ function getDataQ($conn, $quest, $per, $anio, $idUnidad){
 
 	function getDAtaSIREQuestionEstatusLiti($conSic, $mes, $anio, $idUnidad, $estatus, $per){
 
- $query = "SELECT COUNT(idEstatusNucs) as mes
-  FROM [ESTADISTICAV2].[dbo].[estatusNucs]  WHERE idUnidad = $idUnidad AND mes IN($mes) AND idEstatus = $estatus AND anio = $anio AND YEAR(fecha) = $anio AND MONTH(fecha) $per ";
+ $query = " SELECT COUNT(idEstatusNucs) as mes FROM [ESTADISTICAV2].[dbo].[estatusNucs] INNER JOIN PRUEBA.dbo.Carpeta c ON c.CarpetaID = estatusNucs.idCarpeta
+  WHERE idUnidad $idUnidad AND mes IN($mes) 
+  AND idEstatus = $estatus AND anio = $anio AND YEAR(c.FechaInicio) = $anio AND MONTH(c.FechaInicio) $per ";
+
+  
 
 	$indice = 0;
 	$stmt = sqlsrv_query($conSic, $query);
