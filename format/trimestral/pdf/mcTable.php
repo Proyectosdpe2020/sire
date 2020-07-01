@@ -80,7 +80,28 @@
 		function Header()
 		{
 			// Logo
-			$this->Image('assets/img/segob.png', 10, 10, 80);
+			$this->Image('assets/img/segob.png', 10, 10, 70);
+
+			$this->Image('assets/img/lv2020.jpg', 85, 10, 40);
+
+			$this->SetFont('Arial','B',8);
+
+			$this->SetTextColor(182, 137, 82);
+
+			$this->Cell(130, 5, "", "", "", 'C');
+
+			$this->Cell(50, 5, iconv('UTF-8', 'windows-1252', 'UNIDAD DE APOYO AL SISTEMA DE JUSTICIA'), "", "", 'C');
+
+			$this->Ln();
+
+			$this->SetFont('Arial','I',8);
+
+			$this->Cell(130, 5, "", "", "", 'C');
+
+			$this->Cell(50, 5, iconv('UTF-8', 'windows-1252', 'EVALUACIÓN AL SISTEMA DE JUSTICIA'), "", "", 'C');
+
+			$this->SetTextColor(0);
+
 			// Arial bold 15
 			$this->SetFont('Arial','B',15);
 			// Move to the right
@@ -89,6 +110,18 @@
 			//$this->Cell(380,2, 'Pagina ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
 			// Line break
 			$this->Ln(20);
+		}
+
+		function Footer()
+		{
+			// Position at 1.5 cm from bottom
+			$this->SetY(-15);
+			// Arial italic 8
+			$this->SetFont('Arial','I',8);
+			// Text color in gray
+			$this->SetTextColor(128);
+			// Page number
+			$this->Cell(0,10,iconv('UTF-8', 'windows-1252', 'Página ').$this->PageNo(),0,0,'C');
 		}
 		
 		function CheckPageBreak($h){
@@ -107,11 +140,11 @@
 				$start_y = $pdf->GetY();
 				
 				
-				$this->Image('assets/img/segob.png', 10, 10, 80);
+				/*$this->Image('assets/img/segob.png', 10, 10, 80);
 				$this->SetAligns("C");
 				$this->SetFont('Arial','',8);
 				$this->AliasNbPages();
-				$this->Ln();
+				$this->Ln();*/
 			}
 		}
 		

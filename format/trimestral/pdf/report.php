@@ -175,7 +175,7 @@ $pdf2->Output();
 function set_table_header($pdf2, $records, $periods, $header, $w){
     $pdf2->SetLineWidth(.1);
     $pdf2->SetDrawColor(0);
-    $pdf2->SetFont('','',9);
+    $pdf2->SetFont('','',10);
 
 
     $pdf2->SetTextColor(0);
