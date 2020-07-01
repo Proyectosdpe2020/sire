@@ -120,10 +120,11 @@
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
 
 												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 5, $per1);
+												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $idEnlace, 1); }
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
-													<td class="blockInp"><input type="number" value="<? echo $data[0][0]; ?>" id="p18m<? echo $o+1; ?>" readonly></td>
+													<td class="blockInp"><input type="number" value="<?if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else echo $data[0][0]; ?>" id="p18m<? echo $o+1; ?>" readonly></td>
 												<?										
 									}
 							?>	
@@ -137,10 +138,11 @@
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
 
 												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 2, $per1);
+												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $idEnlace, 1); }
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
-													<td class="blockInp"><input type="number" value="<? echo $data[0][0]; ?>" id="p19m<? echo $o+1; ?>" readonly></td>
+													<td class="blockInp"><input type="number" value="<?if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else echo $data[0][0]; ?>" id="p19m<? echo $o+1; ?>" readonly></td>
 												<?										
 									}
 							?>	
@@ -154,10 +156,11 @@
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
 
 												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 20, $per1);
+												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $idEnlace, 1); }
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
-													<td class="blockInp"><input type="number" value="<? echo $data[0][0]; ?>" id="p20m<? echo $o+1; ?>" readonly></td>
+													<td class="blockInp"><input type="number" value="<?if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else echo $data[0][0]; ?>" id="p20m<? echo $o+1; ?>" readonly></td>
 												<?										
 									}
 							?>	
@@ -171,10 +174,11 @@
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
 
 												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 25, $per1);
+												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $idEnlace, 1); }
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
-													<td class="blockInp"><input type="number" value="<? echo $data[0][0]; ?>" id="p21m<? echo $o+1; ?>" readonly></td>
+													<td class="blockInp"><input type="number" value="<?if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else echo $data[0][0]; ?>" id="p21m<? echo $o+1; ?>" readonly></td>
 												<?										
 									}
 							?>	
@@ -188,10 +192,11 @@
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
 
 												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 21, $per1);
+												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $idEnlace, 1); }
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
-													<td class="blockInp"><input type="number" value="<? echo $data[0][0]; ?>" id="p22m<? echo $o+1; ?>" readonly></td>
+													<td class="blockInp"><input type="number" value="<?if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else echo $data[0][0]; ?>" id="p22m<? echo $o+1; ?>" readonly></td>
 												<?										
 									}
 							?>	
@@ -205,10 +210,11 @@
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
 
 												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 3, $per1);
+												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $idEnlace, 1); }
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
-													<td class="blockInp"><input type="number" value="<? echo $data[0][0]; ?>" id="p23m<? echo $o+1; ?>" readonly></td>
+													<td class="blockInp"><input type="number" value="<?if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else echo $data[0][0]; ?>" id="p23m<? echo $o+1; ?>" readonly></td>
 												<?										
 									}
 							?>	
@@ -254,10 +260,11 @@
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
 
 												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 19, $per1);
+												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $idEnlace, 4); }
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
-													<td class="blockInp"><input type="number" value="<? echo $data[0][0]; ?>" id="p28m<? echo $o+1; ?>" readonly></td>
+													<td class="blockInp"><input type="number" value="<?if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else echo $data[0][0]; ?>" id="p28m<? echo $o+1; ?>" readonly></td>
 												<?										
 									}
 							?>	
