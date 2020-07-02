@@ -101,15 +101,15 @@
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
 
 												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 25, $per1);
-												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][1], 4); }
+												if($o == 2 && $dataEnlaces[0][1] != 0 ){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][1], 4); }
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
-													<td class="blockInp"><input type="number" value="<?if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else echo $data[0][0]; ?>" id="p35m<? echo $o+1; ?>" readonly></td>
+													<td class="<? if($idUnidad == 1001 || $dataEnlaces[0][1] == 0){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if(($o == 2 && $dataEnviados[0][0] == 0 )|| $dataEnlaces[0][1] == 0){ echo " "; }else {echo $data[0][0];}} ?>" <? if($dataEnlaces[0][1] != 0){  echo "readonly"; } ?> ></td>
 												<?										
 									}
 							?>	
-							<td class="blockInp"><input type="number" value="<? echo $tota; ?>" id="p35tot" readonly></td>
+							<td class="blockInp"><input type="number" value="<? if(($idUnidad != 1001 || $dataEnlaces[0][1] != 0) && ($data[0][0] != "")){  echo $tota; }  ?>" id="p35tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">8.3</th>
@@ -127,15 +127,15 @@
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
 
 												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 18, $per1);
-												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][1], 4); }
+												if($o == 2 && $dataEnlaces[0][1] != 0){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][1], 4); }
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
-													<td class="blockInp"><input type="number" value="<?if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else echo $data[0][0]; ?>" id="p37m<? echo $o+1; ?>" readonly></td>
+													<td class="<? if($idUnidad == 1001 || $dataEnlaces[0][1] == 0){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if(($o == 2 && $dataEnviados[0][0] == 0 )|| $dataEnlaces[0][1] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p37m<? echo $o+1; ?>" <? if($dataEnlaces[0][1] != 0){  echo "readonly"; } ?> ></td>
 												<?										
 									}
 							?>	
-							<td class="blockInp"><input type="number" value="<? echo $tota; ?>" id="p37tot" readonly></td>
+							<td class="blockInp"><input type="number" value="<? if(($idUnidad != 1001 || $dataEnlaces[0][1] != 0) && ($data[0][0] != "")){  echo $tota; }  ?>" id="p37tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">8.5</th>
@@ -161,15 +161,15 @@
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
 
 												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 13, $per1);
-												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][1], 4); }
+												if($o == 2 && $dataEnlaces[0][1] != 0){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][1], 4); }
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
-													<td class="blockInp"><input type="number" value="<?if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else echo $data[0][0]; ?>" id="p40m<? echo $o+1; ?>" readonly></td>
+													<td class="<? if($idUnidad == 1001 || $dataEnlaces[0][1] == 0){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if(($o == 2 && $dataEnviados[0][0] == 0 )|| $dataEnlaces[0][1] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p40m<? echo $o+1; ?>" <? if($dataEnlaces[0][1] != 0){  echo "readonly"; } ?> ></td>
 												<?										
 									}
 							?>	
-							<td class="blockInp"><input type="number" value="<? echo $tota; ?>" id="p40tot" readonly></td>
+							<td class="blockInp"><input type="number" value="<? if(($idUnidad != 1001 || $dataEnlaces[0][1] != 0) && ($data[0][0] != "")){  echo $tota; }  ?>" id="p40tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">8.8</th>
