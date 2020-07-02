@@ -18,18 +18,18 @@
 					$envt = $getEnv[0][0]; 
 				?>
 
-				<h5 class="card-title tituloPregunta">Pregunta 2: Número de carpetas de investigación iniciadas durante el año 2020.</h5><br>
+				<h5 class="card-title tituloPregunta">Pregunta 2: Número de carpetas de investigación iniciadas durante el año <?php echo "$anio";?>.</h5><br>
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							¿Cuál es el número de carpetas de investigación iniciadas durante el año 2020 con motivo de las denuncias, querellas u otros requisitos equivalentes que se recibieron en la Fiscalía General de la entidad federativa (incluyendo las recibidas en los Centros de Justicia para Mujeres) en ese mismo año?
+							¿Cuál es el número de carpetas de investigación iniciadas durante el año  <?php echo "$anio";?> con motivo de las denuncias, querellas u otros requisitos equivalentes que se recibieron en la Fiscalía General de la entidad federativa (incluyendo las recibidas en los Centros de Justicia para Mujeres) en ese mismo año?
 						</li>
 					</ul>
 				</div><br><br>
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							¿Cuántas carpetas de investigación se iniciaron en el año 2020 correspondientes a denuncias, querellas u otros requisitos equivalentes recibidos en 2019?
+							¿Cuántas carpetas de investigación se iniciaron en el año  <?php echo "$anio";?> correspondientes a denuncias, querellas u otros requisitos equivalentes recibidos en <?php echo strval($anio-1); ?>, <strong>PERO QUE SE INICIARON EN <?php echo "$anio";?></strong>?
 						</li>
 					</ul>
 				</div><br><br>
@@ -47,7 +47,7 @@
 					<tbody>
 						<tr>
 							<th scope="row">2.1</th>
-							<td style="text-align: left;">Carpetas de investigación iniciadas por denuncias, querellas u otros requisitos equivalentes recibidos en 2020</td>
+							<td style="text-align: left;">Carpetas de investigación iniciadas por denuncias, querellas u otros requisitos equivalentes recibidos en <?php echo "$anio";?></td>
 							<td><input type="number" value="<? echo $data[0][0]; ?>" id="p3m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data[0][1]; ?>" id="p3m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data[0][2]; ?>" id="p3m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
@@ -55,7 +55,7 @@
 						</tr>
 						<tr>
 							<th scope="row">2.2</th>
-							<td style="text-align: left;">Carpetas de investigación iniciadas por denuncias, querellas u otros requisitos equivalentes recibidos en 2019</td>
+							<td style="text-align: left;">Carpetas de investigación iniciadas por denuncias, querellas u otros requisitos equivalentes recibidos en <?php echo strval($anio-1); ?></td>
 							<td><input type="number" value="<? echo $data2[0][0]; ?>" id="p4m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data2[0][1]; ?>" id="p4m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data2[0][2]; ?>" id="p4m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
@@ -68,7 +68,7 @@
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
 							 <img src="images/warning.png"  class="imgWarning" alt="">
-							 	Nota.- Los datos proporcionados en el reactivo 2:1 (carpetas de investigación iniciadas por denuncias, querellas u otros requisitos equivalentes recibidos en el año 2020) no podrán ser superiores a la suma de los reactivos 1.1 al 1.2 de la pregunta número 1.
+							 	Nota.- Los datos proporcionados en el reactivo 2:1 (carpetas de investigación iniciadas por denuncias, querellas u otros requisitos equivalentes recibidos en el año <?php echo "$anio";?>) no podrán ser superiores a la suma de los reactivos 1.1 al 1.2 de la pregunta número 1.
 							</div>
 						</li>
 					</ul>

@@ -81,7 +81,17 @@
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][1])){ $data[0][0] = 0; }
 												?>
-													<td class="blockInp"><input type="number" value="<?if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else echo $data[0][0]; ?>" id="p8m<? echo $o+1; ?>" readonly></td>
+													<td class="blockInp"><input type="number" value="<?
+													if($idUnidad == 1001){
+														echo "0";
+													}else{
+														if($o == 2 && $dataEnviados[0][0] == 0){ 
+														echo " "; 
+													}else {
+														echo $data[0][0];
+													}
+													}
+													 ?>" id="p8m<? echo $o+1; ?>" readonly></td>
 												<?										
 									}
 							?>	
@@ -97,7 +107,15 @@
 												$tota1 = $tota1 + $data[0][1];
 												if(is_null($data[0][1])){ $data[0][1] = 0; }
 												?>
-													<td class="blockInp"><input type="number" value="<?if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else echo $data[0][1]; ?>" id="p9m<? echo $o+1; ?>" readonly></td>
+													<td class="blockInp"><input type="number" value="<?
+													if($idUnidad == 1001){
+														echo "0";
+													}else{
+													if($o == 2 && $dataEnviados[0][0] == 0){ 
+														echo " "; 
+													}else{
+														echo $data[0][1];
+													}} ?>" id="p9m<? echo $o+1; ?>" readonly></td>
 												<?										
 									}
 							?>								
