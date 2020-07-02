@@ -66,7 +66,7 @@
 				?>
 
 
-				<h5 class="card-title tituloPregunta">Pregunta 7: Procedimientos Iniciados 2020. echo <? echo $dataEnlaces[0][1]; ?></h5><br>
+				<h5 class="card-title tituloPregunta">Pregunta 7: Procedimientos Iniciados 2020.</h5><br>
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
@@ -276,7 +276,7 @@
 												<?										
 									}
 							?>	
-							<td class="blockInp"><input type="number" value="<? if(($idUnidad != 1001 || $dataEnlaces[0][1] != 0) && ($data[0][0] != "")){  echo $tota; }  ?>" id="p28tot" readonly></td>
+							<td class="blockInp"><input type="number" value="<? if(($idUnidad != 1001 || $dataEnlaces[0][1] != 0) && ($data[0][0] != "" || $data[0][0] == 0 )){  echo $tota; }  ?>" id="p28tot" readonly></td>
 						</tr>
 						<tr>
 							<td colspan="6" style="background-color: #7C8B9E; font-size: 20px;"><strong>DERIVADOS A MECANISMOS ALTERNATIVOS (ANTES DEL AUTO DE VINCULACIÓN A PROCESO)</strong></td>

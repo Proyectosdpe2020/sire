@@ -8,7 +8,8 @@
 	if (isset($_POST["idEnlace"])){ $idEnlace = $_POST["idEnlace"]; }
 
 	if (isset($_POST["format"])){ $format = $_POST["format"]; }
-$idUnidad = 35;
+	if (isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }
+
 	$nUni = getNunidad($conn, $idUnidad);
 	$nameUni = $nUni[0][0];
 
@@ -28,7 +29,7 @@ $idUnidad = 35;
 	$mesNom = Mes_Nombre($mesCapturar);
 
 
-		switch ($format) {
+		switch ($format) { 
 			case 1:
 				  $chartipearch = "Carpetas de Investigación";
 				break;
@@ -38,6 +39,7 @@ $idUnidad = 35;
 				break;	
 			
 		}
+
 ?>
 
 <html>
@@ -122,12 +124,17 @@ $idUnidad = 35;
 																					<select id="unidadEnlacHisto" onchange="getDataHistoricaBDconsulta(<? echo $idEnlace; ?>)" class="form-control redondear selectTranparent">								
 																						
 
-
+																						<?  if ($idEnlace == 65) {
+																						?>
 																						<option value="35" selected="">UNIDAD DE INVESTIGACIÓN Y PERSECUCIÓN AL NARCOMENUDEO</option>
 																						<option value="52" >UNIDAD ESPECIALIZADA EN ROBO AL TRANSPORTE</option>
 																						<option value="39" >UNIDAD DE INTELIGENCIA PATRIMONIAL Y FINANCIERA</option>
 																						<option value="50" >UNIDAD ESPECIALIZADA EN DELITOS PATRIMONIALES</option>
-
+																					<? } ?>
+																					<?  if ($idEnlace == 80) {
+																						?>
+																						<option value="48" selected="">UNIDAD ESPECIALIZADA EN DELITOS CONTRA LA LIBERTAD Y SEGURIDAD DE LAS PERSONAS</option>
+																					<? } ?>
 
 																					</select>
 
