@@ -62,6 +62,7 @@
 							$idUn = "IN(116,117,118,119,162)";		
 							}										
 					}
+					$dataEnlaces = getDataEnlacesByIdUnidad($conn, $idUn);
 				?>
 
 				<h5 class="card-title tituloPregunta">Pregunta 8: Procedimientos y Estatus 2020</h5><br>
@@ -100,7 +101,7 @@
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
 
 												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 25, $per1);
-												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $idEnlace, 4); }
+												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][1], 4); }
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
@@ -126,7 +127,7 @@
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
 
 												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 18, $per1);
-												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $idEnlace, 4); }
+												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][1], 4); }
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
@@ -160,7 +161,7 @@
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
 
 												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 13, $per1);
-												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $idEnlace, 4); }
+												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][1], 4); }
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>

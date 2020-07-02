@@ -66,7 +66,6 @@ function getDataQ($conn, $quest, $per, $anio, $idUnidad){
 		$indice++;
 	}
 	if(isset($arreglo)){return $arreglo;}
-	
 	}
 
 	function getDAtaSIREQuestionEstatusLiti($conSic, $mes, $anio, $idUnidad, $estatus, $per){
@@ -122,5 +121,19 @@ function getDataEnlaceMesValidaEnviado($conn, $mes, $anio, $idEnlace, $idFormato
 	if(isset($arreglo)){return $arreglo;}
 }
 
+
+function getDataEnlacesByIdUnidad($conn, $idUnidad){
+	$query = " SELECT * FROM trimestral.enlaceUnidades where idUniCarp $idUnidad OR idUniLiti $idUnidad ";
+ echo $query;
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['idEnlaceCarp'];
+		$arreglo[$indice][1]=$row['idEnlaceLiti'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
 
 ?>

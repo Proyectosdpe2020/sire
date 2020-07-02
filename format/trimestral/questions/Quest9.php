@@ -52,6 +52,7 @@
 							$idUn = "IN(116,117,118,119,162)";		
 							}										
 					}
+					$dataEnlaces = getDataEnlacesByIdUnidad($conn, $idUn);
 				?>
 
 
@@ -83,7 +84,7 @@
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
 
 												$data = getDAtaSIREQuestionEstatusLiti($conSic , $arr[$o] , $anio, $idUn, 17, $per1);
-												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $idEnlace, 4); }
+												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][1], 4); }
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
@@ -101,7 +102,7 @@
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
 
 												$data = getDAtaSIREQuestionEstatusLiti($conSic , $arr[$o] , $anio, $idUn, 18, $per1);
-												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $idEnlace, 4); }
+												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][1], 4); }
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>

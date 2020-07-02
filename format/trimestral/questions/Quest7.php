@@ -61,10 +61,12 @@
 							$idUn = "IN(116,117,118,119,162)";		
 							}										
 					}
+
+					$dataEnlaces = getDataEnlacesByIdUnidad($conn, $idUn);
 				?>
 
 
-				<h5 class="card-title tituloPregunta">Pregunta 7: Procedimientos Iniciados 2020.</h5><br>
+				<h5 class="card-title tituloPregunta">Pregunta 7: Procedimientos Iniciados 2020. echo <? echo $dataEnlaces[0][1]; ?></h5><br>
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
@@ -264,9 +266,9 @@
 							<?
 									$tota = 0; $tota1 = 0;
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
-
+                   
 												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 19, $per1);
-												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $idEnlace, 4); }
+												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][1], 4); }
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
