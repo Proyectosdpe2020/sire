@@ -268,15 +268,15 @@
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
                    
 												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 19, $per1);
-												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][1], 4); }
+ 												if($o == 2 && $dataEnlaces[0][1] != 0){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][1], 4); }
 												$tota = $tota + $data[0][0];
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
+												if(is_null($data[0][0])){  $data[0][0] = 0; }
 												?>
-													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p28m<? echo $o+1; ?>" readonly></td>
+													<td class="<? if($idUnidad == 1001 || $dataEnlaces[0][1] == 0){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if(($o == 2 && $dataEnviados[0][0] == 0 )|| $dataEnlaces[0][1] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p28m<? echo $o+1; ?>" <? if($dataEnlaces[0][1] != 0){  echo "readonly"; } ?> ></td>
 												<?										
 									}
 							?>	
-							<td class="blockInp"><input type="number" value="<? echo $tota; ?>" id="p28tot" readonly></td>
+							<td class="blockInp"><input type="number" value="<? if(($idUnidad != 1001 || $dataEnlaces[0][1] != 0) && ($data[0][0] != "")){  echo $tota; }  ?>" id="p28tot" readonly></td>
 						</tr>
 						<tr>
 							<td colspan="6" style="background-color: #7C8B9E; font-size: 20px;"><strong>DERIVADOS A MECANISMOS ALTERNATIVOS (ANTES DEL AUTO DE VINCULACIÓN A PROCESO)</strong></td>
