@@ -37,7 +37,7 @@ function getDataQ($conn, $quest, $per, $anio, $idUnidad){
 	$query = " SELECT
        sum([iniciadasConDetenido]) as 'IniDetenido'
       ,sum([iniciadasSinDetenido]) as 'IniSinDetenido'
-  FROM [ESTADISTICAV2].[dbo].[Carpetas] WHERE idUnidad = $idUnidad AND idAnio = $anio AND idMes = $mes GROUP BY idMes ORDER BY idMes ";
+  FROM [ESTADISTICAV2].[dbo].[Carpetas] WHERE idUnidad $idUnidad AND idAnio = $anio AND idMes = $mes GROUP BY idMes ORDER BY idMes ";
 //echo $query."<br>";
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
@@ -55,9 +55,9 @@ function getDataQ($conn, $quest, $per, $anio, $idUnidad){
 
 	$query = " SELECT COUNT(resoluciones.CarpetaID) as m
   FROM [PRUEBA].[dbo].[Resoluciones] INNER JOIN Carpeta c ON c.CarpetaID = Resoluciones.CarpetaID 
-  WHERE idUnidad = $idUnidad AND mes IN($mes) AND EstatusID = $estatus AND anio = $anio AND YEAR(FechaInicio) = $anio AND MONTH(FechaInicio) $per ";
+  WHERE idUnidad $idUnidad AND mes IN($mes) AND EstatusID = $estatus AND anio = $anio AND YEAR(FechaInicio) = $anio AND MONTH(FechaInicio) $per ";
 
-
+//echo $query;
 	$indice = 0;
 	$stmt = sqlsrv_query($conSic, $query);
 	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
@@ -71,8 +71,12 @@ function getDataQ($conn, $quest, $per, $anio, $idUnidad){
 
 	function getDAtaSIREQuestionEstatusLiti($conSic, $mes, $anio, $idUnidad, $estatus, $per){
 
- $query = "SELECT COUNT(idEstatusNucs) as mes
-  FROM [ESTADISTICAV2].[dbo].[estatusNucs]  WHERE idUnidad = $idUnidad AND mes IN($mes) AND idEstatus = $estatus AND anio = $anio AND YEAR(fecha) = $anio AND MONTH(fecha) $per ";
+ $query = " SELECT COUNT(idEstatusNucs) as mes FROM [ESTADISTICAV2].[dbo].[estatusNucs] INNER JOIN PRUEBA.dbo.Carpeta c ON c.CarpetaID = estatusNucs.idCarpeta
+  WHERE idUnidad $idUnidad AND mes IN($mes) 
+  AND idEstatus = $estatus AND anio = $anio AND YEAR(c.FechaInicio) = $anio AND MONTH(c.FechaInicio) $per ";
+
+
+  
 
 	$indice = 0;
 	$stmt = sqlsrv_query($conSic, $query);
@@ -105,7 +109,18 @@ function validaQuest($conn, $Arrquest, $per, $anio, $idUnidad){
 	}
 
 	
-
+function getDataEnlaceMesValidaEnviado($conn, $mes, $anio, $idEnlace, $idFormato){
+	$query = " SELECT enviado FROM dbo.enlaceMesValidaEnviado WHERE idEnlace = $idEnlace AND idFormato = $idFormato AND mesCap = $mes ";
+	
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['enviado'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
 
 
 ?>

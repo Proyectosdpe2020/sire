@@ -283,11 +283,23 @@ width: 100%;
   margin: 0 auto;
 }
 
+.img60{
+   width: 60%;
+}
+.img80{
+   width: 80% !important;
+}
+.img50{
+   width: 50% !important;
+}
+.img70{
+   width: 70% !important;
+}
+
 .imgCentralCarpe{
 
-
   padding: 20px;
-  width: 60%;
+ 
   height: 40vh !important;
   margin: 0 auto;
   margin-top: 29%;
@@ -301,7 +313,7 @@ width: 100%;
 }
 .imgCentralLit{
 
-width: 50%;
+
   height: 40vh !important;
   margin: 0 auto;
   margin-top: 25%;
@@ -317,7 +329,6 @@ width: 50%;
 .imgCentralTrimestral{
 
 
-width: 50%;
   height: 40vh !important;
   margin: 0 auto;
   margin-top: 25%;
