@@ -41,7 +41,7 @@
 								<td width="50%">
 											<div class="tituloCentralSegu">
 												<div class="titulosCabe1">
-													<label class="titulo1" style="color: #686D72;">REGISTRO DE INDICADORES TRIMESTRALES <? echo $idUnidad; echo $idEnlace; ?></label>
+													<label class="titulo1" style="color: #686D72;">REGISTRO DE INDICADORES TRIMESTRALES</label>
 													<h4> <label id="titfisc" class="titulo2">Dirección de Planeación y Estadística</label></h4>
 												</div>
 											</div>
