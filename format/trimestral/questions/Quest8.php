@@ -62,7 +62,7 @@
 							$idUn = "IN(116,117,118,119,162)";		
 							}										
 					}
-					$dataEnlaces = getDataEnlacesByIdUnidad($conn, $idUn);
+					$dataEnlaces = getDataEnlacesByIdUnidad($conn, $idUn, $idEnlace);
 				?>
 
 				<h5 class="card-title tituloPregunta">Pregunta 8: Procedimientos y Estatus 2020</h5><br>
@@ -107,7 +107,7 @@
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $ind = false; $data[0][0] = 0; }
 												?>
-													<td class="<? if($idUnidad == 1001 || $dataEnlaces[0][1] == 0){ echo ""; }else{ echo "blockInp"; } ?>"><input id="p35m<? echo $o+1; ?>" type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if(($o == 2 && $dataEnviados[0][0] == 0 )|| $dataEnlaces[0][1] == 0){ if($ind){echo $data[0][0];}else{ echo " "; } }else {echo $data[0][0];}} ?>" <? if($dataEnlaces[0][1] != 0){  echo "readonly"; } ?> ></td>
+													<td class="<? if($idUnidad == 1001 || $dataEnlaces[0][1] == 0){ echo ""; }else{ echo "blockInp"; } ?>"><input id="p35m<? echo $o+1; ?>" type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if(($o == 2 && $dataEnviados[0][0] == 0 )|| $dataEnlaces[0][1] == 0){ if($ind){if($dataEnviados[0][0] != 0 || $dataEnlaces[0][1] == 0){echo $data[0][0];}else{ echo "";}}else{ echo " "; } }else {echo $data[0][0];}} ?>" <? if($dataEnlaces[0][1] != 0){  echo "readonly"; } ?> ></td>
 												<?								
 									}
 							?>	
@@ -135,7 +135,7 @@
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $ind = false; $data[0][0] = 0; }
 												?>
-													<td class="<? if($idUnidad == 1001 || $dataEnlaces[0][1] == 0){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if(($o == 2 && $dataEnviados[0][0] == 0 )|| $dataEnlaces[0][1] == 0){ if($ind){echo $data[0][0];}else{ echo " "; } }else {echo $data[0][0];}} ?>" id="p37m<? echo $o+1; ?>" <? if($dataEnlaces[0][1] != 0){  echo "readonly"; } ?> ></td>
+													<td class="<? if($idUnidad == 1001 || $dataEnlaces[0][1] == 0){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if(($o == 2 && $dataEnviados[0][0] == 0 )|| $dataEnlaces[0][1] == 0){ if($ind){if($dataEnviados[0][0] != 0 || $dataEnlaces[0][1] == 0){echo $data[0][0];}else{ echo "";}}else{ echo " "; } }else {echo $data[0][0];}} ?>" id="p37m<? echo $o+1; ?>" <? if($dataEnlaces[0][1] != 0){  echo "readonly"; } ?> ></td>
 												<?										
 									}
 							?>	
@@ -171,7 +171,7 @@
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $ind = false; $data[0][0] = 0; }
 												?>
-													<td class="<? if($idUnidad == 1001 || $dataEnlaces[0][1] == 0){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if(($o == 2 && $dataEnviados[0][0] == 0 )|| $dataEnlaces[0][1] == 0){ if($ind){echo $data[0][0];}else{ echo " "; } }else {echo $data[0][0];}} ?>" id="p40m<? echo $o+1; ?>" <? if($dataEnlaces[0][1] != 0){  echo "readonly"; } ?> ></td>
+													<td class="<? if($idUnidad == 1001 || $dataEnlaces[0][1] == 0){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if(($o == 2 && $dataEnviados[0][0] == 0 )|| $dataEnlaces[0][1] == 0){ if($ind){if($dataEnviados[0][0] != 0 || $dataEnlaces[0][1] == 0){echo $data[0][0];}else{ echo "";}}else{ echo " "; } }else {echo $data[0][0];}} ?>" id="p40m<? echo $o+1; ?>" <? if($dataEnlaces[0][1] != 0){  echo "readonly"; } ?> ></td>
 												<?										
 									}
 							?>	
