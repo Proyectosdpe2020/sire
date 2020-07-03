@@ -96,19 +96,20 @@
 						<tr>
 							<th scope="row">8.2</th>
 							<td style="text-align: left;">Determinado por criterio de oportunidad</td>
-						<?
+					  <?
 									$tota = 0; $tota1 = 0;
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
-
+            $ind = true;
+            $validaEnlace = $dataEnlaces[0][0];
 												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 25, $per1);
-												if($o == 2 && $dataEnlaces[0][1] != 0 ){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][1], 4); }
+												if( $dataEnlaces[0][1] != 0){ $validaEnlace = $dataEnlaces[0][1];  }	else {$validaEnlace = $dataEnlaces[0][0]; } 
+												$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $validaEnlace, 4); 
 												$tota = $tota + $data[0][0];
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
+												if(is_null($data[0][0])){ $ind = false; $data[0][0] = 0; }
 												?>
-													<td class="<? if($idUnidad == 1001 || $dataEnlaces[0][1] == 0){ echo ""; }else{ echo "blockInp"; } ?>"><input id="p35m<? echo $o+1; ?>" type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if(($o == 2 && $dataEnviados[0][0] == 0 )|| $dataEnlaces[0][1] == 0){ echo " "; }else {echo $data[0][0];}} ?>" <? if($dataEnlaces[0][1] != 0){  echo "readonly"; } ?> ></td>
-												<?										
+													<td class="<? if($idUnidad == 1001 || $dataEnlaces[0][1] == 0){ echo ""; }else{ echo "blockInp"; } ?>"><input id="p35m<? echo $o+1; ?>" type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if(($o == 2 && $dataEnviados[0][0] == 0 )|| $dataEnlaces[0][1] == 0){ if($ind){echo $data[0][0];}else{ echo " "; } }else {echo $data[0][0];}} ?>" <? if($dataEnlaces[0][1] != 0){  echo "readonly"; } ?> ></td>
+												<?								
 									}
-									echo $tota;
 							?>	
 							<td class="blockInp"><input type="number" value="<? if(($idUnidad != 1001 || $dataEnlaces[0][1] != 0) && ($data[0][0] != "" || $data[0][0] == 0 )){  echo $tota; }  ?>" id="p35tot" readonly></td>
 						</tr>
@@ -126,13 +127,15 @@
 								<?
 									$tota = 0; $tota1 = 0;
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
-
+            $ind = true;
+            $validaEnlace = $dataEnlaces[0][0];
 												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 18, $per1);
-												if($o == 2 && $dataEnlaces[0][1] != 0){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][1], 4); }
+												if( $dataEnlaces[0][1] != 0){ $validaEnlace = $dataEnlaces[0][1];  }	else {$validaEnlace = $dataEnlaces[0][0]; } 
+												$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $validaEnlace, 4); 
 												$tota = $tota + $data[0][0];
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
+												if(is_null($data[0][0])){ $ind = false; $data[0][0] = 0; }
 												?>
-													<td class="<? if($idUnidad == 1001 || $dataEnlaces[0][1] == 0){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if(($o == 2 && $dataEnviados[0][0] == 0 )|| $dataEnlaces[0][1] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p37m<? echo $o+1; ?>" <? if($dataEnlaces[0][1] != 0){  echo "readonly"; } ?> ></td>
+													<td class="<? if($idUnidad == 1001 || $dataEnlaces[0][1] == 0){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if(($o == 2 && $dataEnviados[0][0] == 0 )|| $dataEnlaces[0][1] == 0){ if($ind){echo $data[0][0];}else{ echo " "; } }else {echo $data[0][0];}} ?>" id="p37m<? echo $o+1; ?>" <? if($dataEnlaces[0][1] != 0){  echo "readonly"; } ?> ></td>
 												<?										
 									}
 							?>	
@@ -160,13 +163,15 @@
 								<?
 									$tota = 0; $tota1 = 0;
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
-
+            $ind = true;
+            $validaEnlace = $dataEnlaces[0][0];
 												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 13, $per1);
-												if($o == 2 && $dataEnlaces[0][1] != 0){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][1], 4); }
+												if( $dataEnlaces[0][1] != 0){ $validaEnlace = $dataEnlaces[0][1];  }	else {$validaEnlace = $dataEnlaces[0][0]; } 
+												$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $validaEnlace, 4); 
 												$tota = $tota + $data[0][0];
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
+												if(is_null($data[0][0])){ $ind = false; $data[0][0] = 0; }
 												?>
-													<td class="<? if($idUnidad == 1001 || $dataEnlaces[0][1] == 0){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if(($o == 2 && $dataEnviados[0][0] == 0 )|| $dataEnlaces[0][1] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p40m<? echo $o+1; ?>" <? if($dataEnlaces[0][1] != 0){  echo "readonly"; } ?> ></td>
+													<td class="<? if($idUnidad == 1001 || $dataEnlaces[0][1] == 0){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if(($o == 2 && $dataEnviados[0][0] == 0 )|| $dataEnlaces[0][1] == 0){ if($ind){echo $data[0][0];}else{ echo " "; } }else {echo $data[0][0];}} ?>" id="p40m<? echo $o+1; ?>" <? if($dataEnlaces[0][1] != 0){  echo "readonly"; } ?> ></td>
 												<?										
 									}
 							?>	
