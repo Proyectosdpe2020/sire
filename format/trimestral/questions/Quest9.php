@@ -92,7 +92,7 @@
 												<?										
 									}
 							?>	
-							<td class="blockInp"><input type="number" value="<? if(($idUnidad != 1001 || $dataEnlaces[0][1] != 0) && ($data[0][0] != "")){  echo $tota; }  ?>" id="p48tot" readonly></td>
+							<td class="blockInp"><input type="number" value="<? if(($idUnidad != 1001 || $dataEnlaces[0][1] != 0) && ($data[0][0] != "" || $data[0][0] == 0 )){  echo $tota; }  ?>" id="p48tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">9.2</th>
@@ -110,7 +110,7 @@
 												<?										
 									}
 							?>	
-							<td class="blockInp"><input type="number" value="<? if(($idUnidad != 1001 || $dataEnlaces[0][1] != 0) && ($data[0][0] != "")){  echo $tota; }  ?>" id="p49tot" readonly></td>
+							<td class="blockInp"><input type="number" value="<? if(($idUnidad != 1001 || $dataEnlaces[0][1] != 0) && ($data[0][0] != "" || $data[0][0] == 0 )){  echo $tota; }  ?>" id="p49tot" readonly></td>
 						</tr>
 						</tr>
 						<tr>
