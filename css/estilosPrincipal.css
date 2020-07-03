@@ -288,7 +288,7 @@ width: 100%;
 }
 .img80{
    width: 80% !important;
-}
+} 
 .img50{
    width: 50% !important;
 }
@@ -331,7 +331,7 @@ width: 100%;
 
   height: 40vh !important;
   margin: 0 auto;
-  margin-top: 25%;
+  margin-top: 30%;
   background-image: url('../img/Icono trimestral 1.png') !important;
     background-size: cover;
  background-repeat: no-repeat;  
