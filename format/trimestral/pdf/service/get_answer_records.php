@@ -79,8 +79,13 @@ $sql = "SELECT s.idPregunta as 'number', p.nombre as 'question', s.anio as 'year
             ON s.idPregunta = p.idPregunta
             INNER JOIN [ESTADISTICAV2].[trimestral].[periodo] pe 
             ON s.idPeriodo = pe.idPeriodo 
-            WHERE s.idEnlace = 37 and pe.idPeriodo = 2
+            WHERE s.idEnlace = $link and pe.idPeriodo = $period
             ORDER BY p.idPregunta";	
+
+
+
+echo $sql;
+
 
 $params = array();
 $options = array( "Scrollable" => SQLSRV_CURSOR_KEYSET );
