@@ -598,7 +598,7 @@ function set_paragraph($pdf2, $section, $year){
             $pdf2->Cell(10, 5, "-", "", "", 'C');
             $pdf2->MultiCell(175,6,iconv('UTF-8', 'windows-1252', 'Un imputado con una o más sentencias absolutorias y una o más sentencias condenatorias -> se contabilizará como un imputado con sentencia condenatoria.'), 'J');
 
-            $pdf2->Ln();
+            $pdf2->Ln(12);
         break;
     }
 }
