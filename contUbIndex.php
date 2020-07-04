@@ -49,7 +49,7 @@
 									?>
 											<div class="col-xs-12 col-sm-<?echo $colum;?>  col-md-<?echo $colum;?> litigacionLogo" onclick="enviarAindex(11);">
 														<div id="imgLitiLogo">													
-															<div class="imgCentralTrimestral <? if($tam == 3){ echo "img70"; }else{ echo "img50"; } ?>"></div>
+															<div class="imgCentralTrimestral <? if($tam == 3){ echo "img80"; }else{ echo "img50"; } ?>"></div>
 														</div>
 											</div>		
 									<?}

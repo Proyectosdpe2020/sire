@@ -2,7 +2,6 @@
 				<? 
 					include ("../../../Conexiones/Conexion.php");
 			include("../../../funcioneTrimes.php");
-			include("../../../funciones.php");	
 
 					if (isset($_GET["per"])){ $per = $_GET["per"]; }
 					if (isset($_GET["anio"])){ $anio = $_GET["anio"]; }
@@ -18,8 +17,6 @@
 					$data3 = getDAtaQuestion($conn, 12, $per, $anio, $idUnidad);
 					$data4 = getDAtaQuestion($conn, 13, $per, $anio, $idUnidad);
 					$data5 = getDAtaQuestion($conn, 14, $per, $anio, $idUnidad);
-					$getEnv = getInfOCarpetasEnv($conn, $idEnlace, 11);
-					$envt = $getEnv[0][0]; 
 				?>
 
 
@@ -27,14 +24,14 @@
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							De las carpetas de investigación iniciadas (CII) en 2020, ¿cuál es el número de órdenes de aprehensión solicitadas por el Ministerio Publico; el número de órdenes de aprehensión ordenadas por el Juez de Control y el número de órdenes de aprehensión cumplimentadas pro la Policia?
+							De las carpetas de investigación iniciadas (CII) en el año 2020, ¿cuál es el número de órdenes de aprehensión solicitadas por el Ministerio Público; el número de órdenes de aprehensión ordenadas por el Juez de Control y el número de órdenes de aprehensión cumplimentadas por la Policía?
 						</li>
 					</ul>
 				</div><br><br>
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							¿Cuántas órdenes de detención por caso urgente fueron emitidas por el Ministerio Público y cúantas de éstas fueron cumplimentasas por la Policia?
+							¿Cuántas órdenes de detención por caso urgente fueron emitidas por el Ministerio Público y cúantas de éstas fueron cumplimentadas por la Policía?
 						</li>
 					</ul>
 				</div><br><hr><br>
@@ -53,41 +50,41 @@
 						<tr>
 							<th scope="row">5.1</th>
 							<td style="text-align: left;">Número de órdenes de aprehensión solicitadas por imputado</td>
-							<td><input type="number" value="<? echo $data[0][0]; ?>" id="p10m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data[0][1]; ?>" id="p10m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data[0][2]; ?>" id="p10m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data[0][0]; ?>" id="p10m1"></td>
+							<td><input type="number" value="<? echo $data[0][1]; ?>" id="p10m2"></td>
+							<td><input type="number" value="<? echo $data[0][2]; ?>" id="p10m3"></td>
 							<td class="blockInp"><input type="number" value="<? echo $data[0][3]; ?>" id="p10tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">5.2</th>
 							<td style="text-align: left;">Número de órdenes de aprehensión ordenadas por el Juez de Control por imputado</td>
-							<td><input type="number" value="<? echo $data2[0][0]; ?>" id="p11m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data2[0][1]; ?>" id="p11m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data2[0][2]; ?>" id="p11m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data2[0][0]; ?>" id="p11m1"></td>
+							<td><input type="number" value="<? echo $data2[0][1]; ?>" id="p11m2"></td>
+							<td><input type="number" value="<? echo $data2[0][2]; ?>" id="p11m3"></td>
 							<td class="blockInp"><input type="number" value="<? echo $data2[0][3]; ?>" id="p11tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">5.3</th>
 							<td style="text-align: left;">Número de órdenes de aprehensión cumplimentadas por la Policía por imputado</td>
-							<td><input type="number" value="<? echo $data3[0][0]; ?>" id="p12m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data3[0][1]; ?>" id="p12m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data3[0][2]; ?>" id="p12m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data3[0][0]; ?>" id="p12m1"></td>
+							<td><input type="number" value="<? echo $data3[0][1]; ?>" id="p12m2"></td>
+							<td><input type="number" value="<? echo $data3[0][2]; ?>" id="p12m3"></td>
 							<td class="blockInp"><input type="number" value="<? echo $data3[0][3]; ?>" id="p12tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">5.4</th>
 							<td style="text-align: left;">Número de órdenes de detención por caso urgente emitidas por el 	Ministerio Público por imputado</td>
-							<td><input type="number" value="<? echo $data4[0][0]; ?>" id="p13m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data4[0][1]; ?>" id="p13m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data4[0][2]; ?>" id="p13m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data4[0][0]; ?>" id="p13m1"></td>
+							<td><input type="number" value="<? echo $data4[0][1]; ?>" id="p13m2"></td>
+							<td><input type="number" value="<? echo $data4[0][2]; ?>" id="p13m3"></td>
 							<td class="blockInp"><input type="number" value="<? echo $data4[0][3]; ?>" id="p13tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">5.5</th>
 							<td style="text-align: left;">Número de órdenes de detención por caso urgente cumplimentadas por la Policía por imputado</td>
-							<td><input type="number" value="<? echo $data5[0][0]; ?>" id="p14m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data5[0][1]; ?>" id="p14m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data5[0][2]; ?>" id="p14m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data5[0][0]; ?>" id="p14m1"></td>
+							<td><input type="number" value="<? echo $data5[0][1]; ?>" id="p14m2"></td>
+							<td><input type="number" value="<? echo $data5[0][2]; ?>" id="p14m3"></td>
 							<td class="blockInp"><input type="number" value="<? echo $data5[0][3]; ?>" id="p14tot" readonly></td>
 						</tr>
 					</tbody>
@@ -104,7 +101,6 @@
 					</ul>
 				</div>
 				<div class="botonGuardar">
-					<? if($envt == 0){ ?>
-					<button type="button" class="btn btn-success" onclick="saveQuest5(5, <? echo $per; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" id="guardarPregunta">GUARDAR</button> <? } ?>
+					<button type="button" class="btn btn-success" onclick="saveQuest5(5, <? echo $per; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" id="guardarPregunta">GUARDAR</button>
 				</div>
 		

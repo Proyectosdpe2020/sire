@@ -48,6 +48,8 @@
 							$idUn = "IN(116,117,118,119,162)";		
 							}										
 					}
+
+						$dataEnlaces = getDataEnlacesByIdUnidad($conn, $idUn, $idEnlace);
 		?>
 				
 				<h5 class="card-title tituloPregunta">Pregunta 4: Número de Carpetas con detenido(s) en flagrancia 2020 </h5><br>
@@ -77,7 +79,7 @@
 									$tota = 0; $tota1 = 0;
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
 												$data = getDAtaSIREQuestion($conn,$arr[$o], $anio, $idUn);
-												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $idEnlace, 1); }
+												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][0], 1); }
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][1])){ $data[0][0] = 0; }
 												?>
@@ -103,7 +105,7 @@
 								<?
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
 												$data = getDAtaSIREQuestion($conn,$arr[$o], $anio, $idUn);
-												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $idEnlace, 1); }
+												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][0], 1); }
 												$tota1 = $tota1 + $data[0][1];
 												if(is_null($data[0][1])){ $data[0][1] = 0; }
 												?>
