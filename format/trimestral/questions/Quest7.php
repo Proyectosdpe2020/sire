@@ -20,7 +20,9 @@
 					$data8 = getDAtaQuestion($conn, 25, $per, $anio, $idUnidad);
 					$data9 = getDAtaQuestion($conn, 26, $per, $anio, $idUnidad);
 					$data10 = getDAtaQuestion($conn, 27, $per, $anio, $idUnidad);
-					
+
+					$data11 = getDAtaQuestion($conn, 28, $per, $anio, $idUnidad);
+
 					$data12 = getDAtaQuestion($conn, 29, $per, $anio, $idUnidad);
 					$data13 = getDAtaQuestion($conn, 30, $per, $anio, $idUnidad);
 					$data14 = getDAtaQuestion($conn, 31, $per, $anio, $idUnidad);
@@ -265,24 +267,74 @@
 							<td style="text-align: left;">Vinculados a proceso</td>
 							<?
 									$tota = 0; $tota1 = 0;
-									for ($o=0; $o < sizeof($arr) ; $o++) { 
-            $ind = true;
-            $validaEnlace = $dataEnlaces[0][0];      
-												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 19, $per1);
-									
- 											if( $dataEnlaces[0][1] != 0){ $validaEnlace = $dataEnlaces[0][1];  }	else {$validaEnlace = $dataEnlaces[0][0]; } 
- 											
-												$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $validaEnlace, 4); 
 
-												$tota = $tota + $data[0][0];
-												
-												if(is_null($data[0][0])){ $ind = false; $data[0][0] = 0; }
-												?>
-													<td class="<? if($idUnidad == 1001 || $dataEnlaces[0][1] == 0){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if(($o == 2 && $dataEnviados[0][0] == 0 )|| $dataEnlaces[0][1] == 0){ if($ind){ if($dataEnviados[0][0] != 0 || $dataEnlaces[0][1] == 0){echo $data[0][0];}else{ echo "";} }else{ echo " "; } }else {echo $data[0][0];}} ?>" id="p28m<? echo $o+1; ?>" <? if($dataEnlaces[0][1] != 0){  echo "readonly"; } ?> ></td>
-												<?										
+									$has_litigation = false;
+									$has_captured = false;
+									$validaEnlace = $idEnlace;
+									$data_sended = false;
+
+									if(!is_null($data11)){ //check if the question has something
+										$data = $data11;
+										$has_captured = true;
+									}
+
+									if( $dataEnlaces[0][1] != 0){  //check if it has litigation
+										$validaEnlace = $dataEnlaces[0][1];
+										$has_litigation = true; 
+									}	
+									else{ 
+										$validaEnlace = $dataEnlaces[0][0];
+										$has_litigation = false; 
+									} 
+
+									if(getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $validaEnlace, 4) != 0){ //check if last month has sended
+										$data_sended = true;
+									}
+
+									$quest_class = "";
+									$quest_value = "";
+									$quest_readonly = "";
+									$tota = 0;
+
+									if($has_litigation && $idUnidad != 1001){ //write exclusions
+										$quest_class =  "blockInp"; 
+										$quest_readonly = "readonly"; 
+									} 
+
+									for ($o=0; $o < sizeof($arr) ; $o++) { 
+
+										if($has_captured){ //set value if has captured or not
+											$quest_value =  $data[0][$o]; 
+											$tota += $data[0][$o];
+										}
+										else{
+											if($has_litigation){ 
+
+												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 19, $per1);
+
+												if($data_sended){ //all trimester sended
+													$quest_value = $data[0][0];
+													$tota += $data[0][0];
+												}
+												else if($o != 2){ //last month not sended
+													$quest_value = $data[0][0];
+													$tota += $data[0][0];
+												}
+												else{ //put blak if its the last month and has no data sended
+													$quest_value = "";
+												}
+
+											}
+										}
+
+										?>
+											<td class="<?php echo $quest_class; ?>">
+												<input type="number" value="<?php echo $quest_value; ?>" id="p28m<? echo $o+1; ?>" <? echo $quest_readonly; ?> >
+											</td>
+										<?										
 									}
 							?>	
-							<td class="blockInp"><input type="number" value="<? if(($idUnidad != 1001 || $dataEnlaces[0][1] != 0) && ($data[0][0] != "" || $data[0][0] == 0 )){  echo $tota; }  ?>" id="p28tot" readonly></td>
+							<td class="blockInp"><input type="number" value="<? echo $tota;  ?>" id="p28tot" readonly></td>
 						</tr>
 						<tr>
 							<td colspan="6" style="background-color: #7C8B9E; font-size: 20px;"><strong>DERIVADOS A MECANISMOS ALTERNATIVOS (ANTES DEL AUTO DE VINCULACIÓN A PROCESO)</strong></td>
