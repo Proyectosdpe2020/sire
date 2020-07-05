@@ -259,33 +259,33 @@
 						<tr>
 							<th scope="row">7.7</th>
 							<td style="text-align: left;">Por sobreseimiento ordenado por el Juez de Control antes de la vinculación a proceso</td>
-							<td><input type="number" value="<? echo $data7[0][0]; ?>" id="p24m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data7[0][1]; ?>" id="p24m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data7[0][2]; ?>" id="p24m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data7[0][0]; ?>" id="p24m1" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data7[0][1]; ?>" id="p24m2" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data7[0][2]; ?>" id="p24m3" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data7[0][3]; ?>" id="p24tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">7.8</th>
 							<td style="text-align: left;">Por otra causa que exiga la acción penal</td>
-							<td><input type="number" value="<? echo $data8[0][0]; ?>" id="p25m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data8[0][1]; ?>" id="p25m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data8[0][2]; ?>" id="p25m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data8[0][0]; ?>" id="p25m1" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data8[0][1]; ?>" id="p25m2" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data8[0][2]; ?>" id="p25m3" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data8[0][3]; ?>" id="p25tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">7.9</th>
 							<td style="text-align: left;">Otra decisión/terminación que establezca el código penal de la entidad federativa</td>
-							<td><input type="number" value="<? echo $data9[0][0]; ?>" id="p26m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data9[0][1]; ?>" id="p26m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data9[0][2]; ?>" id="p26m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data9[0][0]; ?>" id="p26m1" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data9[0][1]; ?>" id="p26m2" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data9[0][2]; ?>" id="p26m3" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data9[0][3]; ?>" id="p26tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">7.10</th>
 							<td style="text-align: left;">En trámite en la etapa de investigación (antes del auto de vinculación a proceso).</td>
-							<td><input type="number" value="<? echo $data10[0][0]; ?>" id="p27m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data10[0][1]; ?>" id="p27m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data10[0][2]; ?>" id="p27m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data10[0][0]; ?>" id="p27m1" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data10[0][1]; ?>" id="p27m2" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data10[0][2]; ?>" id="p27m3" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data10[0][3]; ?>" id="p27tot" readonly></td>
 						</tr>
 						<tr>
