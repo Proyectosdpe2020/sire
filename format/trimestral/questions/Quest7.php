@@ -15,7 +15,13 @@
 					if($per == 3){ $m1 = "Julio"; $m2 = "Agosto"; $m3 = "Septiembre"; $nme = "Julio - Septiembre"; $arr = array(7,8,9); $per1 = "IN(7,8,9)"; }
 					if($per == 4){ $m1 = "Octubre"; $m2 = "Noviembre"; $m3 = "Diciembre"; $nme = "Octubre - Diciembre"; $arr = array(10,11,12); $per1 = "IN(10,11,12)"; }
 
-		
+					$data1 = getDAtaQuestion($conn, 18, $per, $anio, $idUnidad);
+					$data2 = getDAtaQuestion($conn, 19, $per, $anio, $idUnidad);
+					$data3 = getDAtaQuestion($conn, 20, $per, $anio, $idUnidad);
+					$data4 = getDAtaQuestion($conn, 21, $per, $anio, $idUnidad);
+					$data5 = getDAtaQuestion($conn, 22, $per, $anio, $idUnidad);
+					$data6 = getDAtaQuestion($conn, 23, $per, $anio, $idUnidad);
+	
 					$data7 = getDAtaQuestion($conn, 24, $per, $anio, $idUnidad);
 					$data8 = getDAtaQuestion($conn, 25, $per, $anio, $idUnidad);
 					$data9 = getDAtaQuestion($conn, 26, $per, $anio, $idUnidad);
@@ -65,6 +71,10 @@
 					}
 
 					$dataEnlaces = getDataEnlacesByIdUnidad($conn, $idUn, $idEnlace);
+
+					if( $dataEnlaces[0][0] == 0 && $dataEnlaces[0][1] == 0){  //check if link dont report litigation or folders (CMASC)
+						$dataEnlaces[0][0] = $idEnlace;
+					}
 				?>
 
 
@@ -129,7 +139,7 @@
 												?>
 													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<? 
 													
-													if($idUnidad == 1001){ echo ""; }else {if($o == 2 && $dataEnviados[0][0] == 0){ 
+													if($idUnidad == 1001){ if(is_null($data1[0][$o])) {echo "";} else{echo $data1[0][$o];} }else {if($o == 2 && $dataEnviados[0][0] == 0){ 
 														echo " "; 
 												  }else {
 												  	echo $data[0][0];
@@ -151,7 +161,11 @@
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
-													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p19m<? echo $o+1; ?>" readonly></td>
+													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+													
+													<input type="number" value="<?if($idUnidad == 1001){ if(is_null($data2[0][$o])) {echo "";} else{echo $data2[0][$o];} }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p19m<? echo $o+1; ?>" 
+													
+													<? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
 												<?										
 									}
 							?>	
@@ -170,7 +184,10 @@
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
-													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p20m<? echo $o+1; ?>" readonly></td>
+													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+													<input type="number" value="<?if($idUnidad == 1001){ if(is_null($data3[0][$o])) {echo "";} else{echo $data3[0][$o];} }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p20m<? echo $o+1; ?>" 
+													
+													<? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
 												<?										
 									}
 							?>	
@@ -188,7 +205,10 @@
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
-													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p21m<? echo $o+1; ?>" readonly></td>
+													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+													<input type="number" value="<?if($idUnidad == 1001){ if(is_null($data4[0][$o])) {echo "";} else{echo $data4[0][$o];} }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p21m<? echo $o+1; ?>" 
+													
+													<? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
 												<?										
 									}
 							?>	
@@ -206,7 +226,10 @@
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
-													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p22m<? echo $o+1; ?>" readonly></td>
+													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+													<input type="number" value="<?if($idUnidad == 1001){ if(is_null($data5[0][$o])) {echo "";} else{echo $data5[0][$o];} }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p22m<? echo $o+1; ?>" 
+													
+													<? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
 												<?										
 									}
 							?>	
@@ -224,7 +247,10 @@
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
-													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p23m<? echo $o+1; ?>" readonly></td>
+													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+													<input type="number" value="<?if($idUnidad == 1001){ if(is_null($data6[0][$o])) {echo "";} else{echo $data6[0][$o];} }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p23m<? echo $o+1; ?>" 
+													
+													<? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
 												<?										
 									}
 							?>	
@@ -300,6 +326,9 @@
 										$quest_class =  "blockInp"; 
 										$quest_readonly = "readonly"; 
 									} 
+									else if($idUnidad == 1001){
+										$quest_readonly = "";
+									}
 
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
 
