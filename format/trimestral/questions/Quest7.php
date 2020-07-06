@@ -15,7 +15,7 @@
 					if($per == 3){ $m1 = "Julio"; $m2 = "Agosto"; $m3 = "Septiembre"; $nme = "Julio - Septiembre"; $arr = array(7,8,9); $per1 = "IN(7,8,9)"; }
 					if($per == 4){ $m1 = "Octubre"; $m2 = "Noviembre"; $m3 = "Diciembre"; $nme = "Octubre - Diciembre"; $arr = array(10,11,12); $per1 = "IN(10,11,12)"; }
 
-		
+
 					$data7 = getDAtaQuestion($conn, 24, $per, $anio, $idUnidad);
 					$data8 = getDAtaQuestion($conn, 25, $per, $anio, $idUnidad);
 					$data9 = getDAtaQuestion($conn, 26, $per, $anio, $idUnidad);
@@ -63,6 +63,7 @@
 					}
 
 					$dataEnlaces = getDataEnlacesByIdUnidad($conn, $idUn, $idEnlace);
+					
 				?>
 
 
@@ -149,7 +150,13 @@
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
-													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p19m<? echo $o+1; ?>" readonly></td>
+													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?
+
+													if($idUnidad == 1001){ echo ""; }else {if($o == 2 && $dataEnviados[0][0] == 0){ 
+														echo " "; 
+													}else {
+														  echo $data[0][0];
+														 }} ?>" id="p19m<? echo $o+1; ?>" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
 												<?										
 									}
 							?>	
@@ -168,7 +175,7 @@
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
-													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p20m<? echo $o+1; ?>" readonly></td>
+													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p20m<? echo $o+1; ?>" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
 												<?										
 									}
 							?>	
@@ -186,7 +193,7 @@
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
-													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p21m<? echo $o+1; ?>" readonly></td>
+													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p21m<? echo $o+1; ?>" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
 												<?										
 									}
 							?>	
@@ -204,7 +211,7 @@
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
-													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p22m<? echo $o+1; ?>" readonly></td>
+													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p22m<? echo $o+1; ?>" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
 												<?										
 									}
 							?>	
@@ -222,7 +229,7 @@
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
-													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p23m<? echo $o+1; ?>" readonly></td>
+													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p23m<? echo $o+1; ?>" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
 												<?										
 									}
 							?>	

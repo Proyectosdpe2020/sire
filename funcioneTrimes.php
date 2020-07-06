@@ -110,7 +110,7 @@ function validaQuest($conn, $Arrquest, $per, $anio, $idUnidad){
 	
 function getDataEnlaceMesValidaEnviado($conn, $mes, $anio, $idEnlace, $idFormato){
 	$query = " SELECT enviado FROM dbo.enlaceMesValidaEnviado WHERE idEnlace = $idEnlace AND idFormato = $idFormato AND mesCap = $mes ";
-	
+	//echo $query;
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
@@ -123,8 +123,8 @@ function getDataEnlaceMesValidaEnviado($conn, $mes, $anio, $idEnlace, $idFormato
 
 
 function getDataEnlacesByIdUnidad($conn, $idUnidad, $idEnlace){
-	$query = " SELECT * FROM trimestral.enlaceUnidades where idUniCarp $idUnidad OR idUniLiti $idUnidad AND idEnlacTrimes = $idEnlace";
-
+	$query = " SELECT * FROM trimestral.enlaceUnidades where idUniCarp $idUnidad OR idUniLiti $idUnidad OR idEnlacTrimes = $idEnlace";
+//echo $query;
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
