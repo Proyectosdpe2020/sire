@@ -30,6 +30,7 @@
 
 	$mesNom = Mes_Nombre($mesCapturar);
 
+	echo $idUnidad."-".$idEnlace;
  
 	?>
 
