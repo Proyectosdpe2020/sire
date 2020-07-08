@@ -123,7 +123,7 @@ function getDataEnlaceMesValidaEnviado($conn, $mes, $anio, $idEnlace, $idFormato
 
 function getDataEnlacesByIdUnidad($conn, $idUnidad, $idEnlace){
 	$query = " SELECT * FROM trimestral.enlaceUnidades where idUniCarp $idUnidad OR idUniLiti $idUnidad OR idEnlacTrimes = $idEnlace";
-
+	
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
