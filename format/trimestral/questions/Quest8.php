@@ -47,13 +47,13 @@
 							$idUn = "IN(157,93,102,103,27,28,29,30,31,32)";
 							}	
 						if($fisid[0][0] == 6){
-							$idUn = "IN(152,,164,1005,1006,62,63,64,65,66,67,68,69,70)";
+							$idUn = "IN(152,164,1005,1006,62,63,64,65,66,67,68,69,70)";
 							}
 						if($fisid[0][0] == 7){
 							$idUn = "IN(94,95,96,97,98,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91)";
 							}
 						if($fisid[0][0] == 8){
-							$idUn = "IN(111,,112,113,114,115,163,1008,1009,108,109,110)";
+							$idUn = "IN(111,112,113,114,115,163,1008,1009,1010,108,109,110)";
 							}
 						if($fisid[0][0] == 9){
 							$idUn = "IN(120,121,122,123,124,125,160)";		
@@ -96,22 +96,76 @@
 						<tr>
 							<th scope="row">8.2</th>
 							<td style="text-align: left;">Determinado por criterio de oportunidad</td>
-					  <?
+							<?
 									$tota = 0; $tota1 = 0;
+
+									$has_litigation = false;
+									$has_captured = false;
+									$validaEnlace = $idEnlace;
+									$data_sended = false;
+
+									if(!is_null($data2)){ //check if the question has something
+										$data = $data2;
+										$has_captured = true;
+									}
+
+									if( $dataEnlaces[0][1] != 0){  //check if it has litigation
+										$validaEnlace = $dataEnlaces[0][1];
+										$has_litigation = true; 
+									}	
+									else{ 
+										$validaEnlace = $dataEnlaces[0][0];
+										$has_litigation = false; 
+									} 
+
+									if(getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $validaEnlace, 4) != 0){ //check if last month has sended
+										$data_sended = true;
+									}
+
+									$quest_class = "";
+									$quest_value = "";
+									$quest_readonly = "";
+									$tota = 0;
+
+									if($has_litigation && $idUnidad != 1001){ //write exclusions
+										$quest_class =  "blockInp"; 
+										$quest_readonly = "readonly"; 
+									} 
+
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
-            $ind = true;
-            $validaEnlace = $dataEnlaces[0][0];
-												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 25, $per1);
-												if( $dataEnlaces[0][1] != 0){ $validaEnlace = $dataEnlaces[0][1];  }	else {$validaEnlace = $dataEnlaces[0][0]; } 
-												$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $validaEnlace, 4); 
-												$tota = $tota + $data[0][0];
-												if(is_null($data[0][0])){ $ind = false; $data[0][0] = 0; }
-												?>
-													<td class="<? if($idUnidad == 1001 || $dataEnlaces[0][1] == 0){ echo ""; }else{ echo "blockInp"; } ?>"><input id="p35m<? echo $o+1; ?>" type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if(($o == 2 && $dataEnviados[0][0] == 0 )|| $dataEnlaces[0][1] == 0){ if($ind){if($dataEnviados[0][0] != 0 || $dataEnlaces[0][1] == 0){echo $data[0][0];}else{ echo "";}}else{ echo " "; } }else {echo $data[0][0];}} ?>" <? if($dataEnlaces[0][1] != 0){  echo "readonly"; } ?> ></td>
-												<?								
+
+										if($has_captured){ //set value if has captured or not
+											$quest_value =  $data[0][$o]; 
+											$tota += $data[0][$o];
+										}
+										else{
+											if($has_litigation){ 
+
+												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 19, $per1);
+
+												if($data_sended){ //all trimester sended
+													$quest_value = $data[0][0];
+													$tota += $data[0][0];
+												}
+												else if($o != 2){ //last month not sended
+													$quest_value = $data[0][0];
+													$tota += $data[0][0];
+												}
+												else{ //put blak if its the last month and has no data sended
+													$quest_value = "";
+												}
+
+											}
+										}
+
+										?>
+											<td class="<?php echo $quest_class; ?>">
+												<input type="number" value="<?php echo $quest_value; ?>" id="p35m<? echo $o+1; ?>" <? echo $quest_readonly; ?> >
+											</td>
+										<?										
 									}
 							?>	
-							<td class="blockInp"><input type="number" value="<? if(($idUnidad != 1001 || $dataEnlaces[0][1] != 0) && ($data[0][0] != "" || $data[0][0] == 0 )){  echo $tota; }  ?>" id="p35tot" readonly></td>
+							<td class="blockInp"><input type="number" value="<? echo $tota;  ?>" id="p35tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">8.3</th>
@@ -124,22 +178,76 @@
 						<tr>
 							<th scope="row">8.4</th>
 							<td style="text-align: left;">Cumplida la suspensión condicional del proceso</td>
-								<?
+							<?
 									$tota = 0; $tota1 = 0;
+
+									$has_litigation = false;
+									$has_captured = false;
+									$validaEnlace = $idEnlace;
+									$data_sended = false;
+
+									if(!is_null($data4)){ //check if the question has something
+										$data = $data4;
+										$has_captured = true;
+									}
+
+									if( $dataEnlaces[0][1] != 0){  //check if it has litigation
+										$validaEnlace = $dataEnlaces[0][1];
+										$has_litigation = true; 
+									}	
+									else{ 
+										$validaEnlace = $dataEnlaces[0][0];
+										$has_litigation = false; 
+									} 
+
+									if(getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $validaEnlace, 4) != 0){ //check if last month has sended
+										$data_sended = true;
+									}
+
+									$quest_class = "";
+									$quest_value = "";
+									$quest_readonly = "";
+									$tota = 0;
+
+									if($has_litigation && $idUnidad != 1001){ //write exclusions
+										$quest_class =  "blockInp"; 
+										$quest_readonly = "readonly"; 
+									} 
+
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
-            $ind = true;
-            $validaEnlace = $dataEnlaces[0][0];
-												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 18, $per1);
-												if( $dataEnlaces[0][1] != 0){ $validaEnlace = $dataEnlaces[0][1];  }	else {$validaEnlace = $dataEnlaces[0][0]; } 
-												$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $validaEnlace, 4); 
-												$tota = $tota + $data[0][0];
-												if(is_null($data[0][0])){ $ind = false; $data[0][0] = 0; }
-												?>
-													<td class="<? if($idUnidad == 1001 || $dataEnlaces[0][1] == 0){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if(($o == 2 && $dataEnviados[0][0] == 0 )|| $dataEnlaces[0][1] == 0){ if($ind){if($dataEnviados[0][0] != 0 || $dataEnlaces[0][1] == 0){echo $data[0][0];}else{ echo "";}}else{ echo " "; } }else {echo $data[0][0];}} ?>" id="p37m<? echo $o+1; ?>" <? if($dataEnlaces[0][1] != 0){  echo "readonly"; } ?> ></td>
-												<?										
+
+										if($has_captured){ //set value if has captured or not
+											$quest_value =  $data[0][$o]; 
+											$tota += $data[0][$o];
+										}
+										else{
+											if($has_litigation){ 
+
+												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 19, $per1);
+
+												if($data_sended){ //all trimester sended
+													$quest_value = $data[0][0];
+													$tota += $data[0][0];
+												}
+												else if($o != 2){ //last month not sended
+													$quest_value = $data[0][0];
+													$tota += $data[0][0];
+												}
+												else{ //put blak if its the last month and has no data sended
+													$quest_value = "";
+												}
+
+											}
+										}
+
+										?>
+											<td class="<?php echo $quest_class; ?>">
+												<input type="number" value="<?php echo $quest_value; ?>" id="p37m<? echo $o+1; ?>" <? echo $quest_readonly; ?> >
+											</td>
+										<?										
 									}
 							?>	
-							<td class="blockInp"><input type="number" value="<? if(($idUnidad != 1001 || $dataEnlaces[0][1] != 0) && ($data[0][0] != "" || $data[0][0] == 0 )){  echo $tota; }  ?>" id="p37tot" readonly></td>
+							<td class="blockInp"><input type="number" value="<? echo $tota;  ?>" id="p37tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">8.5</th>
@@ -160,22 +268,76 @@
 						<tr>
 							<th scope="row">8.7</th>
 							<td style="text-align: left;">Resueltos por procedimiento abreviado</td>
-								<?
+							<?
 									$tota = 0; $tota1 = 0;
+
+									$has_litigation = false;
+									$has_captured = false;
+									$validaEnlace = $idEnlace;
+									$data_sended = false;
+
+									if(!is_null($data7)){ //check if the question has something
+										$data = $data7;
+										$has_captured = true;
+									}
+
+									if( $dataEnlaces[0][1] != 0){  //check if it has litigation
+										$validaEnlace = $dataEnlaces[0][1];
+										$has_litigation = true; 
+									}	
+									else{ 
+										$validaEnlace = $dataEnlaces[0][0];
+										$has_litigation = false; 
+									} 
+
+									if(getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $validaEnlace, 4) != 0){ //check if last month has sended
+										$data_sended = true;
+									}
+
+									$quest_class = "";
+									$quest_value = "";
+									$quest_readonly = "";
+									$tota = 0;
+
+									if($has_litigation && $idUnidad != 1001){ //write exclusions
+										$quest_class =  "blockInp"; 
+										$quest_readonly = "readonly"; 
+									} 
+
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
-            $ind = true;
-            $validaEnlace = $dataEnlaces[0][0];
-												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 13, $per1);
-												if( $dataEnlaces[0][1] != 0){ $validaEnlace = $dataEnlaces[0][1];  }	else {$validaEnlace = $dataEnlaces[0][0]; } 
-												$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $validaEnlace, 4); 
-												$tota = $tota + $data[0][0];
-												if(is_null($data[0][0])){ $ind = false; $data[0][0] = 0; }
-												?>
-													<td class="<? if($idUnidad == 1001 || $dataEnlaces[0][1] == 0){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if(($o == 2 && $dataEnviados[0][0] == 0 )|| $dataEnlaces[0][1] == 0){ if($ind){if($dataEnviados[0][0] != 0 || $dataEnlaces[0][1] == 0){echo $data[0][0];}else{ echo "";}}else{ echo " "; } }else {echo $data[0][0];}} ?>" id="p40m<? echo $o+1; ?>" <? if($dataEnlaces[0][1] != 0){  echo "readonly"; } ?> ></td>
-												<?										
+
+										if($has_captured){ //set value if has captured or not
+											$quest_value =  $data[0][$o]; 
+											$tota += $data[0][$o];
+										}
+										else{
+											if($has_litigation){ 
+
+												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 19, $per1);
+
+												if($data_sended){ //all trimester sended
+													$quest_value = $data[0][0];
+													$tota += $data[0][0];
+												}
+												else if($o != 2){ //last month not sended
+													$quest_value = $data[0][0];
+													$tota += $data[0][0];
+												}
+												else{ //put blak if its the last month and has no data sended
+													$quest_value = "";
+												}
+
+											}
+										}
+
+										?>
+											<td class="<?php echo $quest_class; ?>">
+												<input type="number" value="<?php echo $quest_value; ?>" id="p40m<? echo $o+1; ?>" <? echo $quest_readonly; ?> >
+											</td>
+										<?										
 									}
 							?>	
-							<td class="blockInp"><input type="number" value="<? if(($idUnidad != 1001 || $dataEnlaces[0][1] != 0) && ($data[0][0] != "" || $data[0][0] == 0 )){  echo $tota; }  ?>" id="p40tot" readonly></td>
+							<td class="blockInp"><input type="number" value="<? echo $tota;  ?>" id="p40tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">8.8</th>

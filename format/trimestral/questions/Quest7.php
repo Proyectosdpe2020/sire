@@ -15,12 +15,20 @@
 					if($per == 3){ $m1 = "Julio"; $m2 = "Agosto"; $m3 = "Septiembre"; $nme = "Julio - Septiembre"; $arr = array(7,8,9); $per1 = "IN(7,8,9)"; }
 					if($per == 4){ $m1 = "Octubre"; $m2 = "Noviembre"; $m3 = "Diciembre"; $nme = "Octubre - Diciembre"; $arr = array(10,11,12); $per1 = "IN(10,11,12)"; }
 
-		
+					$data1 = getDAtaQuestion($conn, 18, $per, $anio, $idUnidad);
+					$data2 = getDAtaQuestion($conn, 19, $per, $anio, $idUnidad);
+					$data3 = getDAtaQuestion($conn, 20, $per, $anio, $idUnidad);
+					$data4 = getDAtaQuestion($conn, 21, $per, $anio, $idUnidad);
+					$data5 = getDAtaQuestion($conn, 22, $per, $anio, $idUnidad);
+					$data6 = getDAtaQuestion($conn, 23, $per, $anio, $idUnidad);
+	
 					$data7 = getDAtaQuestion($conn, 24, $per, $anio, $idUnidad);
 					$data8 = getDAtaQuestion($conn, 25, $per, $anio, $idUnidad);
 					$data9 = getDAtaQuestion($conn, 26, $per, $anio, $idUnidad);
 					$data10 = getDAtaQuestion($conn, 27, $per, $anio, $idUnidad);
-					
+
+					$data11 = getDAtaQuestion($conn, 28, $per, $anio, $idUnidad);
+
 					$data12 = getDAtaQuestion($conn, 29, $per, $anio, $idUnidad);
 					$data13 = getDAtaQuestion($conn, 30, $per, $anio, $idUnidad);
 					$data14 = getDAtaQuestion($conn, 31, $per, $anio, $idUnidad);
@@ -46,13 +54,13 @@
 							$idUn = "IN(157,93,102,103,27,28,29,30,31,32)";
 							}	
 						if($fisid[0][0] == 6){
-							$idUn = "IN(152,,164,1005,1006,62,63,64,65,66,67,68,69,70)";
+							$idUn = "IN(152,164,1005,1006,62,63,64,65,66,67,68,69,70)";
 							}
 						if($fisid[0][0] == 7){
 							$idUn = "IN(94,95,96,97,98,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91)";
 							}
-						if($fisid[0][0] == 8){
-							$idUn = "IN(111,,112,113,114,115,163,1008,1009,108,109,110)";
+						if($fisid[0][0] == 8){						
+							$idUn = "IN(111,112,113,114,115,163,1008,1009,1010,108,109,110)";
 							}
 						if($fisid[0][0] == 9){
 							$idUn = "IN(120,121,122,123,124,125,160)";		
@@ -61,8 +69,13 @@
 							$idUn = "IN(116,117,118,119,162)";		
 							}										
 					}
+					
 
 					$dataEnlaces = getDataEnlacesByIdUnidad($conn, $idUn, $idEnlace);
+
+					if( $dataEnlaces[0][0] == 0 && $dataEnlaces[0][1] == 0){  //check if link dont report litigation or folders (CMASC)
+						$dataEnlaces[0][0] = $idEnlace;
+					}
 				?>
 
 
@@ -127,7 +140,7 @@
 												?>
 													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<? 
 													
-													if($idUnidad == 1001){ echo ""; }else {if($o == 2 && $dataEnviados[0][0] == 0){ 
+													if($idUnidad == 1001){ if(is_null($data1[0][$o])) {echo "";} else{echo $data1[0][$o];} }else {if($o == 2 && $dataEnviados[0][0] == 0){ 
 														echo " "; 
 												  }else {
 												  	echo $data[0][0];
@@ -149,7 +162,11 @@
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
-													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p19m<? echo $o+1; ?>" readonly></td>
+													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+													
+													<input type="number" value="<?if($idUnidad == 1001){ if(is_null($data2[0][$o])) {echo "";} else{echo $data2[0][$o];} }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p19m<? echo $o+1; ?>" 
+													
+													<? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
 												<?										
 									}
 							?>	
@@ -168,7 +185,10 @@
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
-													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p20m<? echo $o+1; ?>" readonly></td>
+													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+													<input type="number" value="<?if($idUnidad == 1001){ if(is_null($data3[0][$o])) {echo "";} else{echo $data3[0][$o];} }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p20m<? echo $o+1; ?>" 
+													
+													<? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
 												<?										
 									}
 							?>	
@@ -186,7 +206,10 @@
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
-													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p21m<? echo $o+1; ?>" readonly></td>
+													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+													<input type="number" value="<?if($idUnidad == 1001){ if(is_null($data4[0][$o])) {echo "";} else{echo $data4[0][$o];} }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p21m<? echo $o+1; ?>" 
+													
+													<? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
 												<?										
 									}
 							?>	
@@ -204,7 +227,10 @@
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
-													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p22m<? echo $o+1; ?>" readonly></td>
+													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+													<input type="number" value="<?if($idUnidad == 1001){ if(is_null($data5[0][$o])) {echo "";} else{echo $data5[0][$o];} }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p22m<? echo $o+1; ?>" 
+													
+													<? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
 												<?										
 									}
 							?>	
@@ -222,7 +248,10 @@
 												$tota = $tota + $data[0][0];
 												if(is_null($data[0][0])){ $data[0][0] = 0; }
 												?>
-													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p23m<? echo $o+1; ?>" readonly></td>
+													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+													<input type="number" value="<?if($idUnidad == 1001){ if(is_null($data6[0][$o])) {echo "";} else{echo $data6[0][$o];} }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p23m<? echo $o+1; ?>" 
+													
+													<? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
 												<?										
 									}
 							?>	
@@ -231,33 +260,33 @@
 						<tr>
 							<th scope="row">7.7</th>
 							<td style="text-align: left;">Por sobreseimiento ordenado por el Juez de Control antes de la vinculación a proceso</td>
-							<td><input type="number" value="<? echo $data7[0][0]; ?>" id="p24m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data7[0][1]; ?>" id="p24m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data7[0][2]; ?>" id="p24m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data7[0][0]; ?>" id="p24m1" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data7[0][1]; ?>" id="p24m2" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data7[0][2]; ?>" id="p24m3" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data7[0][3]; ?>" id="p24tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">7.8</th>
 							<td style="text-align: left;">Por otra causa que exiga la acción penal</td>
-							<td><input type="number" value="<? echo $data8[0][0]; ?>" id="p25m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data8[0][1]; ?>" id="p25m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data8[0][2]; ?>" id="p25m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data8[0][0]; ?>" id="p25m1" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data8[0][1]; ?>" id="p25m2" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data8[0][2]; ?>" id="p25m3" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data8[0][3]; ?>" id="p25tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">7.9</th>
 							<td style="text-align: left;">Otra decisión/terminación que establezca el código penal de la entidad federativa</td>
-							<td><input type="number" value="<? echo $data9[0][0]; ?>" id="p26m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data9[0][1]; ?>" id="p26m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data9[0][2]; ?>" id="p26m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data9[0][0]; ?>" id="p26m1" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data9[0][1]; ?>" id="p26m2" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data9[0][2]; ?>" id="p26m3" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data9[0][3]; ?>" id="p26tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">7.10</th>
 							<td style="text-align: left;">En trámite en la etapa de investigación (antes del auto de vinculación a proceso).</td>
-							<td><input type="number" value="<? echo $data10[0][0]; ?>" id="p27m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data10[0][1]; ?>" id="p27m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data10[0][2]; ?>" id="p27m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data10[0][0]; ?>" id="p27m1" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data10[0][1]; ?>" id="p27m2" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
+							<td><input type="number" value="<? echo $data10[0][2]; ?>" id="p27m3" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data10[0][3]; ?>" id="p27tot" readonly></td>
 						</tr>
 						<tr>
@@ -265,24 +294,77 @@
 							<td style="text-align: left;">Vinculados a proceso</td>
 							<?
 									$tota = 0; $tota1 = 0;
-									for ($o=0; $o < sizeof($arr) ; $o++) { 
-            $ind = true;
-            $validaEnlace = $dataEnlaces[0][0];      
-												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 19, $per1);
-									
- 											if( $dataEnlaces[0][1] != 0){ $validaEnlace = $dataEnlaces[0][1];  }	else {$validaEnlace = $dataEnlaces[0][0]; } 
- 											
-												$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $validaEnlace, 4); 
 
-												$tota = $tota + $data[0][0];
-												
-												if(is_null($data[0][0])){ $ind = false; $data[0][0] = 0; }
-												?>
-													<td class="<? if($idUnidad == 1001 || $dataEnlaces[0][1] == 0){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?if($idUnidad == 1001){ echo ""; }else {if(($o == 2 && $dataEnviados[0][0] == 0 )|| $dataEnlaces[0][1] == 0){ if($ind){ if($dataEnviados[0][0] != 0 || $dataEnlaces[0][1] == 0){echo $data[0][0];}else{ echo "";} }else{ echo " "; } }else {echo $data[0][0];}} ?>" id="p28m<? echo $o+1; ?>" <? if($dataEnlaces[0][1] != 0){  echo "readonly"; } ?> ></td>
-												<?										
+									$has_litigation = false;
+									$has_captured = false;
+									$validaEnlace = $idEnlace;
+									$data_sended = false;
+
+									if(!is_null($data11)){ //check if the question has something
+										$data = $data11;
+										$has_captured = true;
+									}
+
+									if( $dataEnlaces[0][1] != 0){  //check if it has litigation
+										$validaEnlace = $dataEnlaces[0][1];
+										$has_litigation = true; 
+									}	
+									else{ 
+										$validaEnlace = $dataEnlaces[0][0];
+										$has_litigation = false; 
+									} 
+
+									if(getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $validaEnlace, 4) != 0){ //check if last month has sended
+										$data_sended = true;
+									}
+
+									$quest_class = "";
+									$quest_value = "";
+									$quest_readonly = "";
+									$tota = 0;
+
+									if($has_litigation && $idUnidad != 1001){ //write exclusions
+										$quest_class =  "blockInp"; 
+										$quest_readonly = "readonly"; 
+									} 
+									else if($idUnidad == 1001){
+										$quest_readonly = "";
+									}
+
+									for ($o=0; $o < sizeof($arr) ; $o++) { 
+
+										if($has_captured){ //set value if has captured or not
+											$quest_value =  $data[0][$o]; 
+											$tota += $data[0][$o];
+										}
+										else{
+											if($has_litigation){ 
+
+												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 19, $per1);
+
+												if($data_sended){ //all trimester sended
+													$quest_value = $data[0][0];
+													$tota += $data[0][0];
+												}
+												else if($o != 2){ //last month not sended
+													$quest_value = $data[0][0];
+													$tota += $data[0][0];
+												}
+												else{ //put blak if its the last month and has no data sended
+													$quest_value = "";
+												}
+
+											}
+										}
+
+										?>
+											<td class="<?php echo $quest_class; ?>">
+												<input type="number" value="<?php echo $quest_value; ?>" id="p28m<? echo $o+1; ?>" <? echo $quest_readonly; ?> >
+											</td>
+										<?										
 									}
 							?>	
-							<td class="blockInp"><input type="number" value="<? if(($idUnidad != 1001 || $dataEnlaces[0][1] != 0) && ($data[0][0] != "" || $data[0][0] == 0 )){  echo $tota; }  ?>" id="p28tot" readonly></td>
+							<td class="blockInp"><input type="number" value="<? echo $tota;  ?>" id="p28tot" readonly></td>
 						</tr>
 						<tr>
 							<td colspan="6" style="background-color: #7C8B9E; font-size: 20px;"><strong>DERIVADOS A MECANISMOS ALTERNATIVOS (ANTES DEL AUTO DE VINCULACIÓN A PROCESO)</strong></td>
