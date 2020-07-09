@@ -568,7 +568,7 @@ function set_paragraph($pdf2, $section, $year){
             $pdf2->SetFont('','B');
             $pdf2->Cell(10, 5, "9.", "", "", 'C');
             $pdf2->SetFont('','');
-            $pdf2->MultiCell(175,6,iconv('UTF-8', 'windows-1252', 'De los procedimientos derivados de las carpetas de investigación iniciadas en '.strval($year-1).', ¿a cuántos imputados de los que se les dictó auto de vinculación a proceso o que se encontraban en espera de la audiencia de vinculación se les impuso alguna medida cautelar?'), 'J');
+            $pdf2->MultiCell(175,6,iconv('UTF-8', 'windows-1252', 'De los procedimientos derivados de las carpetas de investigación iniciadas en '.strval($year).', ¿a cuántos imputados de los que se les dictó auto de vinculación a proceso o que se encontraban en espera de la audiencia de vinculación se les impuso alguna medida cautelar?'), 'J');
 
             $pdf2->Ln();
         break;
