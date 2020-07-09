@@ -12,7 +12,7 @@
 	if (isset($_POST["mes"])){ $mes = $_POST["mes"]; }
 
 ?>
-<table class="table-hover" style="width: 100% !important;">
+<table class="table-hover" style="width: 100% !important;"> 
 
 																		    	 						<tbody style="">
 																															<tr style="border: solid 1px !important; ">

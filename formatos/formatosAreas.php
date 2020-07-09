@@ -7,14 +7,12 @@
 	include("../funcioneSicap.php");
 
 	if (isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }
-
-
 	
- 	$idUsuario = $_SESSION['useridIE'];
+ $idUsuario = $_SESSION['useridIE'];
 
 	$enlace = getInfoEnlaceUsuario($conn, $idUsuario);
-									$idEnlace = $enlace[0][0];
-									$idfisca = $enlace[0][1];
+	$idEnlace = $enlace[0][0];
+	$idfisca = $enlace[0][1];
 
 
 	$enlaunid = getUnidadEnlaceFormat($conn, $idEnlace, 1);	
@@ -29,6 +27,7 @@
 	$anioCaptura = $ANIOSCAP[0][0];
 
 	$mesNom = Mes_Nombre($mesCapturar);
+
 
  
 	?>
@@ -75,7 +74,7 @@
 						</select>
 					</div>
 
-					<div class="col-xs-6 col-sm-4  col-md-4">
+					<div class="col-xs-6 col-sm-4  col-md-4">	
 						<label for="heard">Unidad:</label>
 						<div id="contenidoProyectosListAgru">							
 							<? 
