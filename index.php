@@ -144,9 +144,9 @@ if($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || $
 								<a onclick="loadtablaFormatos(<? echo $idUnidadSelect; ?>)" href="#">Formato Mensual</a>
 								<? }else{ ?>
 
-										<? if($format  == 2){ ?><a onclick="loadtablaFormat(0, 'formatCmasc.php', 'cmasc', <? echo $idEnlace; ?>);" href="#">Formato Mensual</a> <? } ?>
+										<? /*if($format  == 2){ ?><a onclick="loadtablaFormat(0, 'formatCmasc.php', 'cmasc', <? echo $idEnlace; ?>);" href="#">Formato Mensual</a> <? } */?>
 										<? if($format  == 4){ ?><a onclick="loadtablaFormat(0, 'formatLitigacion.php', 'litigacion', <? echo $idEnlace; ?>);" href="#">Formato Mensual</a> <? } ?>
-										<? if($format  == 6){ ?><a onclick="loadtablaFormat(0, 'formatDesaparecidos.php', 'desaparecidos', <? echo $idEnlace; ?>);" href="#">Datos Mensuales</a> <? } ?>
+										<? /*if($format  == 6){ ?><a onclick="loadtablaFormat(0, 'formatDesaparecidos.php', 'desaparecidos', <? echo $idEnlace; ?>);" href="#">Datos Mensuales</a> <? }*/ ?>
 										<? if($format  == 11){ ?><a onclick="loadtablaFormat(<? echo $idUnidEnlac ?>, 'trimestral.php', 'trimestral', <? echo $idEnlace; ?>);" href="#">Formato Mensual</a> <? } ?>
 
 							

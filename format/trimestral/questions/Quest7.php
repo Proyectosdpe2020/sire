@@ -334,12 +334,13 @@
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
 
 										if($has_captured){ //set value if has captured or not
+
 											$quest_value =  $data[0][$o]; 
 											$tota += $data[0][$o];
 										}
 										else{
 											if($has_litigation){ 
-
+												
 												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 19, $per1);
 
 												if($data_sended){ //all trimester sended
