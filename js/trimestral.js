@@ -649,3 +649,20 @@ function saveQuest7(quest, per, anio, idUnidad, idEnlace){
 				});	
 	}
 }
+
+function generarExcel(){
+ $.ajax({
+  type: "POST",
+  dataType: 'json',
+  url: "format/trimestral/excel/generarExcel.php",
+  //data: "fecha1="+fecha1+"&fecha2="+fecha2,
+ }).done(function(data){
+    var $a = $("<a>");
+    $a.attr("href",data.file);
+    $("body").append($a);
+    $a.attr("download","reporte.xlsx");
+    $a[0].click();
+    $a.remove();
+});
+
+}

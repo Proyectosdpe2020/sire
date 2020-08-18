@@ -62,7 +62,8 @@
 																																																						           PERIODO: <? echo $nme; ?></strong></h6>
 								    
 								  </div>							  
-				    	<div class="botonAyuda">  	
+				    	<div class="botonAyuda">
+				    		<button type="button" class="botonAcciones" id="ayudaOPC"  onclick="generarExcel()">Generar Excel</button>	  	
 										<button type="button" class="botonAcciones" id="ayudaOPC"  onclick="showModalAyuda(1)">Ayuda</button>	
 										<button type="button" class="botonAcciones"  onclick = "generateReport(<?php echo $anioGlobal.','.$per.','.$idUnidad.','.$idEnlace ?>)" <? if($envt == 0){ echo "disabled"; } ?>>Descargar Reporte</button>
 										<? if($envt == 0){  ?>

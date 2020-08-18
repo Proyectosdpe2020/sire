@@ -78,8 +78,8 @@
 					}
 				?>
 
-
-				<h5 class="card-title tituloPregunta">Pregunta 7: Procedimientos Iniciados 2020.</h5><br>
+   
+				<h5 class="card-title tituloPregunta">Pregunta 7: Procedimientos Iniciados 2020. <? echo $dataEnlaces[0][0]; ?></h5><br>
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
