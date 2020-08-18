@@ -937,19 +937,24 @@ switch ($acc) {
 
              case 'existeNuc':
           
+
           //// SE OBTIENE EL NOMBRE DEL ULTIMO MP DE LA MISMA UNIDAD QUE HIZO LA DETERMINACION /////
             $arreglo[0] = "SI";
             $arreglo[1] = "NO";
             
 
             if (isset($_POST["nuc"])){ $nuc = $_POST["nuc"]; }
-         
-          
-            if($aux=get_nuc_sicap ($nuc,$conSic)){  echo json_encode(array('first'=>$arreglo[0]));  }else{
+            if (isset($_POST["estatResolucion"])){ $estatResolucion = $_POST["estatResolucion"]; }
 
+            if($estatResolucion == 19 ){
+                 echo json_encode(array('first'=>$arreglo[0]));
+            }else{
+                if($aux=get_nuc_sicap ($nuc,$conSic)){  echo json_encode(array('first'=>$arreglo[0]));  }else{
                 echo json_encode(array('first'=>$arreglo[1]));
-
+                }
             }
+          
+            
 
 
           break; 

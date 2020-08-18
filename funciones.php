@@ -1019,6 +1019,7 @@ $query = "SELECT  idResolucionMp, idMp, idEstatusResolucion, mes, anio, nuc, exp
 function getUnidadEnlace($conn, $idEnlace){
 
 		$query = "SELECT idUnidad From enlace WHERE idEnlace = $idEnlace";
+		
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
@@ -1526,6 +1527,7 @@ $indice = 0;
 
 function getInfoEnlaceUsuario($conn, $idUsuario){
 	$query = "  SELECT u.idEnlace, e.idFiscalia FROM usuario u INNER JOIN enlace e ON e.idEnlace = u.idEnlace WHERE u.idUsuario = $idUsuario ";
+//echo $query;
 $indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))

@@ -83,10 +83,6 @@ $sql = "SELECT s.idPregunta as 'number', p.nombre as 'question', s.anio as 'year
             ORDER BY p.idPregunta";	
 
 
-
-echo $sql;
-
-
 $params = array();
 $options = array( "Scrollable" => SQLSRV_CURSOR_KEYSET );
 $result = sqlsrv_query( $conn, $sql , $params, $options );

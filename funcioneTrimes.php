@@ -121,7 +121,7 @@ function getDataEnlaceMesValidaEnviado($conn, $mes, $anio, $idEnlace, $idFormato
 }
 
 
-function getDataEnlacesByIdUnidad($conn, $idUnidad, $idEnlace){
+function getDataEnlacesByIdUnidad($conn, $idUnidad, $idEnlace){	
 	$query = " SELECT * FROM trimestral.enlaceUnidades where idUniCarp $idUnidad OR idUniLiti $idUnidad OR idEnlacTrimes = $idEnlace";
 	
 	$indice = 0;

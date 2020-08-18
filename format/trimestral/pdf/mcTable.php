@@ -127,7 +127,7 @@
 		function CheckPageBreak($h){
 			//If the height h would cause an overflow, add a new page immediately
 			// if($this->GetY()+$h>$this->PageBreakTrigger){
-			if($this->GetY()+$h>230){	
+			if($this->GetY()+$h>270){	
 				//$this->AddPage($this->CurOrientation,"letter");
 
 				$this->AddPage();

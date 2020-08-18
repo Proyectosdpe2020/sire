@@ -8,6 +8,7 @@
 	include("../../funcioneSicap.php");
 
 
+
  	$idUsuario = $_SESSION['useridIE'];
 
 	if (isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }
@@ -15,7 +16,7 @@
 	
 
 	$enlace = getInfoEnlaceUsuario($conn, $idUsuario);
-	$idEnlace = $enlace[0][0];
+	$idEnlace = $enlace[0][0]; 
 	$idfisca = $enlace[0][1];	
 
 

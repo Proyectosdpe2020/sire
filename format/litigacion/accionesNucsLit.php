@@ -800,8 +800,8 @@ switch ($acc) {
             if (isset($_POST["anio"])){ $anio = $_POST["anio"]; }
             if (isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }
    
-            /// SI LOS ESTATUS SON AUDIENCIAS 
-            if($estatResolucion == 60 || $estatResolucion == 61 || $estatResolucion == 63){
+            /// SI LOS ESTATUS SON AUDIENCIAS, FORMULACIONES, ORDENES APREHENSION, VINCULACIONES A PROCESO
+            if($estatResolucion == 60 || $estatResolucion == 61 || $estatResolucion == 63 || $estatResolucion == 50 || $estatResolucion == 53 || $estatResolucion == 3 || $estatResolucion == 4 || $estatResolucion == 5 || $estatResolucion == 10 || $estatResolucion == 12 || $estatResolucion == 78){
 
                 echo json_encode(array('first'=>$arreglo[0]));
 

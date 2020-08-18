@@ -3,29 +3,21 @@ session_start();
 include("validar_sesion.php");
 include("funciones.php");
 include("Conexiones/Conexion.php");
+include("sqlPersonas.php");
 ?>
-
 <?php
-
 $mesactualnumero = date("m");
 $idUsuario = $_SESSION['useridIE'];
 $tipoUser  = $_SESSION['permisosIE'];
-
 //$idTipArch = $_SESSION['idArchivo'];
-
-
 if (isset($_GET["format"])){ $format = $_GET["format"]; }
-
 if (isset($_GET["idUnidadSelect"])){ $idUnidadSelect = $_GET["idUnidadSelect"]; }else{
-	$idUnidadSelect = 0;	
+	$idUnidadSelect = 0;
 }
-
-
 
 $enlace = getInfoEnlaceUsuario($conn, $idUsuario);
 $idEnlace = $enlace[0][0];
 $idfisca = $enlace[0][1];
-
 
 if($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || $idEnlace == 17 || $idEnlace == 18 || $idEnlace == 16 || $idEnlace == 19 || $idEnlace == 58 ){
 
@@ -47,10 +39,7 @@ if($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || $
 
 
 	}
-	
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,21 +52,95 @@ if($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || $
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-		<link rel="icon" href="img/pgje.png" type="imag/ico" />	
+		<link rel="icon" href="img/pgje.png" type="imag/ico">	
 		<link rel="stylesheet" type="text/css" href="css/estilosPrincipal.css">
-		<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto&display=swap" rel="stylesheet">
 		
+		<script language="JavaScript" type="text/javascript" src="js/jquery2.1.4.min.js"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 		<link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 		<link rel="stylesheet" type="text/css" href="css/principal.css">
-		<link rel="stylesheet" type="text/css" href="css/cmascTabs.css">
-		<link rel="stylesheet" type="text/css" href="css/trimestral.css">
+		<link rel="stylesheet" type="text/css" href="css/puesDispo.css">
+
+		
+		<link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">	
+
 		<link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/formatoCarpetas.css">
 		<link rel="stylesheet" type="text/css" href="css/estilosPrincipal.css">
 		<link rel="stylesheet" type="text/css" href="css/litigacion.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
+	<script type="text/javascript">
+
+		function createNew(idPersona, tipoActualizacion) {
+		//$("#add-more").hide();
+ var idPersona = idPersona;
+ var tipoActualizacion = tipoActualizacion;
+ if(tipoActualizacion == 0){
+	var data = '<tr class="table-row" id="new_row_ajax">' +
+	'<td contenteditable="false" id="txt_title" onBlur="addToHiddenField(this,\'id\')" onclick="editRow(this);"></td>' +
+	
+	'<td contenteditable="true" id="txt_title" onBlur="addToHiddenField(this,\'title\')" onclick="editRow(this);"><select id="textdelitoCometido" name="delitos[]" tabindex="6" class="form-control redondear selectTranparent"><?php while ($delitos = sqlsrv_fetch_array($res1)) { ?><option value="<? echo $delitos['idTipoDelito']; ?>" selected><? echo $delitos['delito']; ?></option><?php } ?></select></td>' +
+	
+	'<td><input type="hidden" id="title" /><input type="hidden" id="idPers" value="" /> / <a onclick="cancelAdd();" class="ajax-action-links">Cancelar</a></td>' +	
+	'</tr>';
+}else{
+	var data = '<tr class="table-row" id="new_row_ajax">' +
+	'<td contenteditable="false" id="txt_title" onBlur="addToHiddenField(this,\'id\')" onclick="editRow(this);"></td>' +
+	
+	'<td contenteditable="true" id="txt_title" onBlur="addToHiddenField(this,\'title\')" onclick="editRow(this);"><select id="textdelitoCometido" name="delitosAct[]" tabindex="6" class="form-control redondear selectTranparent"><?php while ($delitos = sqlsrv_fetch_array($res2)) { ?><option value="<? echo $delitos['idTipoDelito']; ?>" selected><? echo $delitos['delito']; ?></option><?php } ?></select></td>' +
+	
+	'<td><input type="hidden" id="title" /><input type="hidden" id="idPers" value="" /><a onclick="agregarDelito();" class="ajax-action-links">Añadir delito</a> / <a onclick="cancelAdd();" class="ajax-action-links">Cancelar</a></td>' +	
+	'</tr>';
+}
+$("#table-body").append(data);
+   document.getElementById("idPers").value = idPersona;
+
+  
+
+}
+				
+			 function eliminarCampos(idDelitoPersona){
+
+			 	var idDelitoPersona = idDelitoPersona;
+			 	if(idDelitoPersona != 0){
+			 
+						ajax=objetoAjax();
+						ajax.open("POST", "format/puestaDisposicion/deleteDelito.php");
+ 
+						ajax.onreadystatechange = function(){
+							if (ajax.readyState == 4 && ajax.status == 200) {			
+										 var json = ajax.responseText;
+													var obj = eval("(" + json + ")");
+													if (obj.first == "NO") { swal("", "No se elimino el delito.", "warning"); }else{
+														 if (obj.first == "SI") {    															
+														 	var obj = eval("(" + json + ")");
+														 	swal("", "Registro eliminado exitosamente.", "success");															
+														 }
+													}
+										}
+						}
+						ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+						ajax.send("&idDelitoPersona="+idDelitoPersona);
+								
+			 	}
+
+
+			 	 $(document).on("click",".remover_campo",function(e) {
+                e.preventDefault();
+                $(this).closest('tr').remove();
+               
+        });
+    }
+
+		</script>
+
+		
+		
 </head>
 <body style="zoom: 83%;" 
 
@@ -89,6 +152,9 @@ if($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || $
 			if($format  == 4){ ?>  	onload="loadtablaFormat(0, 'formatLitigacion.php', 'litigacion', <? echo $idEnlace; ?>);" 	<? }
 			if($format  == 6){ ?>  	onload="loadtablaFormat(0, 'formatDesaparecidos.php', 'desaparecidos', <? echo $idEnlace; ?>);" 	<? }
 			if($format  == 11){ ?>  	onload="loadtablaFormat(<? echo $idUnidEnlac ?>, 'trimestral.php', 'trimestral', <? echo $idEnlace; ?>);" 	<? }
+			if($format  == 9){ ?>  	onload="loadtablaFormat(0, 'puestaDisposicion.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
+
+			if($format  == 10){ ?>  	onload="loadtablaFormat(0, 'puestaDisposicionSuper.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
 	}
 
 
@@ -144,10 +210,11 @@ if($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || $
 								<a onclick="loadtablaFormatos(<? echo $idUnidadSelect; ?>)" href="#">Formato Mensual</a>
 								<? }else{ ?>
 
-										<? if($format  == 2){ ?><a onclick="loadtablaFormat(0, 'formatCmasc.php', 'cmasc', <? echo $idEnlace; ?>);" href="#">Formato Mensual</a> <? } ?>
+										<? /*if($format  == 2){ ?><a onclick="loadtablaFormat(0, 'formatCmasc.php', 'cmasc', <? echo $idEnlace; ?>);" href="#">Formato Mensual</a> <? } */?>
 										<? if($format  == 4){ ?><a onclick="loadtablaFormat(0, 'formatLitigacion.php', 'litigacion', <? echo $idEnlace; ?>);" href="#">Formato Mensual</a> <? } ?>
-										<? if($format  == 6){ ?><a onclick="loadtablaFormat(0, 'formatDesaparecidos.php', 'desaparecidos', <? echo $idEnlace; ?>);" href="#">Datos Mensuales</a> <? } ?>
+										<? /*if($format  == 6){ ?><a onclick="loadtablaFormat(0, 'formatDesaparecidos.php', 'desaparecidos', <? echo $idEnlace; ?>);" href="#">Datos Mensuales</a> <? }*/ ?>
 										<? if($format  == 11){ ?><a onclick="loadtablaFormat(<? echo $idUnidEnlac ?>, 'trimestral.php', 'trimestral', <? echo $idEnlace; ?>);" href="#">Formato Mensual</a> <? } ?>
+										<? if($format  == 9){ ?><a onclick="loadtablaFormat(0, 'puestaDisposicion.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" href="#">Informe Diario</a> <? } ?>
 
 							
 								<? } ?>
@@ -174,6 +241,56 @@ if($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || $
 												<?
 
 									} ?>	
+
+									<? if ($format == 10) { ?>
+										
+
+											<li>
+
+
+											
+											<a href="javascript:;" data-toggle="dropdown" aria-expanded="true">
+											<img style="color: white;" class="imagenUserIcon" src="images/ofi2.png" alt="">
+											Informes
+											<span class=" fa fa-angle-down"></span>
+											</a>
+													<ul class="dropdown-menu dropdown-usermenu pull-right">
+
+																<li style="margin-right: 400px !important;"><a style="font-weight: bold !important;" data-toggle="modal" href="#busquepuestdispos">Mensual</a></li><br>
+																<li style="margin-right: 400px !important;"><a style="font-weight: bold !important;" data-toggle="modal" href="#busquepuestdispos">Semanal</a></li><br>
+																<li style="margin-right: 400px !important;"><a style="font-weight: bold !important;" data-toggle="modal" href="#">Diario</a></li><br>
+																<li style="margin-right: 400px !important;"><a style="font-weight: bold !important;" data-toggle="modal" href="#">Vehículos</a></li><br>
+																<li><a style="font-weight: bold !important;" data-toggle="modal" href="#">Personas</a></li>
+													</ul>
+
+
+									</li>
+
+
+
+												<li>
+
+
+											
+											<a href="javascript:;" data-toggle="dropdown" aria-expanded="true">
+											<img style="color: white;" class="imagenUserIcon" src="images/searche.png" alt="">
+											Busquedas
+											<span class=" fa fa-angle-down"></span>
+											</a>
+													<ul class="dropdown-menu dropdown-usermenu pull-right">
+
+																<li style="margin-right: 180px !important;"><a style="font-weight: bold !important;" data-toggle="modal" href="#busquepuestdispos">Puesta Disposición</a></li><br>
+																<li style="margin-right: 180px !important;"><a style="font-weight: bold !important;" data-toggle="modal" href="#">Persona</a></li><br>
+																<li style="margin-right: 180px !important;"><a style="font-weight: bold !important;" data-toggle="modal" href="#">Vehículo</a></li><br>
+																<li><a style="font-weight: bold !important;" data-toggle="modal" href="#">Defunción</a></li>
+													</ul>
+
+
+									</li>
+
+										<? 
+											# code...
+										} ?>
 
 
 												<? if($format == 4){
@@ -319,6 +436,31 @@ if($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || $
 		</div>
 
 	</div>
+
+	<div class="modal fade bs-example-modal-sm" id="busquepuestdispos" role="dialog" data-backdrop="static" data-keyboard="false">
+
+										<div id="modalVistaCss" class="modal-dialog modal-sm" style = "width: 30%; margin-top: 12%;">
+																	<div class="modal-content">
+																					<div id="contMOdalBusquePueDispo">			
+																									 <div class="modal-header" style="background-color:#152F4A;">
+																				        <center><h4  style="font-weight: bold; color: white;" class="modal-title">Buscar Puesta a Disposición</h4></center>
+																				      </div>
+																				      <div class="modal-body">
+																				        <p style="color: black;">Ingrese el ID de la Puesta a Disposición.</p>
+																				        <input id="idPuestaBusque" type="number" name="" class="form-control" style="text-align: center !important; font-weight: bolder;">
+																				        <div id="contPuestaBusque"></div>
+																				      </div>
+																				      <div class="modal-footer">
+																				      							 <div class="row">
+																																				<div class="col-xs-12 col-sm-6 col-md-6"><center><button style="width: 88%;" type="button" class="btn btn-default redondear" data-dismiss="modal">Cancelar</button></center></div>
+																																					<div class="col-xs-12 col-sm-6 col-md-6"><center><button onclick="buscarPuesta(<? echo $idEnlace; ?>)" style="width: 88%;" type="button" class="btn btn-primary redondear" >Buscar</button></center></div>					  
+																																			</div> 
+																				      </div>
+																					</div>
+																	</div>				
+										</div>												
+
+		</div>
 
 		<div class="modal fade bs-example-modal-sm" id="myModaFormato" role="dialog" data-backdrop="static" data-keyboard="false">
 
@@ -514,6 +656,8 @@ if($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || $
 		<script language="JavaScript" type="text/javascript" src="js/litigacion.js"></script>
 		<script language="JavaScript" type="text/javascript" src="js/trimestral.js"></script>
 			<script language="JavaScript" type="text/javascript" src="js/desapar.js"></script>
+				<script language="JavaScript" type="text/javascript" src="js/puesDispos.js"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <!--<script src="vendors/jquery/dist/jquery.min.js"></script>-->
 <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Custom Theme Scripts -->

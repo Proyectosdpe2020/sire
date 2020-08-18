@@ -1,0 +1,196 @@
+
+
+#generalInfoPuesta{
+
+    background-color: #999999;
+
+
+}
+ 
+
+.mandda{
+
+		font-size: 12px; 
+		font-weight: bold;
+		color: #263238 ;
+		font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.gehit{
+  height:35px
+}
+
+
+.aste{
+
+
+
+color: red !important;
+font-weight: bold;
+font-size: 12px;
+}
+
+.remover_herramienta{
+  font-size: 15px;
+  float:right;
+}
+
+.panelunoDisposicdo{
+
+    background-image: url('../img/Fondo SIRE4-0450.png'); 
+  background-repeat: repeat;  
+  background-size: cover;
+  background-size: 100%; 
+  background-position-y: 52%;
+  height: 85vh;
+   overflow-y: scroll;
+  overflow-x:hidden;
+  padding-left:  5% !important;
+  padding-right: 5% !important;
+
+}
+
+.panelunoDisposicdo2{
+
+    background-image: url('../img/Fondo SIRE4-0450.png'); 
+  background-repeat: repeat;  
+  background-size: cover;
+  background-size: 100%; 
+  background-position-y: 52%;
+  height: 60vh;
+   overflow-y: scroll;
+  overflow-x:hidden;
+  padding-left:  2% !important;
+  padding-right: 2% !important;
+
+}
+.panelunoDisposicdo3{
+
+    background-image: url('../img/Fondo SIRE4-0450.png'); 
+  background-repeat: repeat;  
+  background-size: cover;
+  background-size: 100%; 
+  background-position-y: 52%;
+  height: 60vh;
+   overflow-y: scroll;
+  overflow-x:hidden;
+  padding-left:  2% !important;
+  padding-right: 2% !important;
+
+}
+
+.panelunoDisposicdo4{
+
+    background-image: url('../img/Fondo SIRE4-0450.png'); 
+  background-repeat: repeat;  
+  background-size: cover;
+  background-size: 100%; 
+  background-position-y: 52%;
+  height: 50vh;
+   overflow-y: scroll;
+  overflow-x:hidden;
+  padding-left:  2% !important;
+  padding-right: 2% !important;
+
+}
+
+
+
+
+
+.panelunoDisposic{
+
+  background-size: cover;
+  background-attachment: fixed;
+  background-image: url('../img/Acceso SIPOA 3-03.png'); 
+  background-repeat: repeat;  
+  background-position: center; 
+  background-size: 112%; 
+  background-position-y: 50%;
+  height: 90vh;
+  overflow-y: scroll;
+  overflow-x:hidden;
+  padding-left:  2% !important;
+  padding-right: 2% !important;
+
+}
+
+.involucrado{
+
+	max-height: 500px !important; 
+	width: 100% !important; 
+	overflow-y: scroll; 
+	overflow-x: hidden; 
+	background-color: white;  
+	padding: 10px;
+   border: solid 1px lightgray !important; 
+
+}
+
+
+
+#imgVeicle{
+ 
+
+    cursor: pointer !important;
+}
+
+
+
+.poicur{
+ 
+
+    cursor: pointer !important;
+}
+
+ 
+
+  @media screen and (max-width: 960px) {
+       
+
+        #contIcones { 
+
+          overflow-x: scroll !important;
+         
+        }
+
+        #involucrado { 
+
+          overflow-x: scroll !important;
+
+        }
+
+        .tableIcones{
+
+          overflow-x: scroll !important;
+        }
+
+}
+
+.tableIcones{
+
+
+      width: 100% !important;
+
+}
+
+/* CHECKBOX DEFUNCIONES*/
+.demo input[type="checkbox"] {
+  display: none;
+}
+.demo input[type="checkbox"] + label span {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: -1px 4px 0 0;
+  vertical-align: middle;
+  background: url(../img/iconosPuestaDispo/checkbox-uncheck.png);
+  background-size: cover;
+  cursor: pointer;
+}
+.demo input[type="checkbox"]:checked + label span {
+  background: url(../img/iconosPuestaDispo/checkbox-check.png);
+  background-size: cover;
+}
+/* CHECKBOX DEFUNCIONES*/
