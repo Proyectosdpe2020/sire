@@ -1617,7 +1617,7 @@ function subirArchENlace(idUnidad, idEnlace, mes, anio,idTipoArch){
 
 		if (extension != '.pdf' || extension != '.pdf' ) { swal("", "Archivo no compatible.", "warning");  }else{
 
-		if (size >= 1200000) { swal("", "El archivo es demasiado grande.", "warning"); }else{
+		if (size >= 2200000) { swal("", "El archivo es demasiado grande.", "warning"); }else{
 
 		$.ajax({
 
@@ -1987,7 +1987,7 @@ function subirArchivoAgain(idUnidad, idEnlace, mes, anio, nomArchivo, idArchi){
 
 		if (extension != '.pdf' || extension != '.pdf' ) { swal("", "Archivo no compatible.", "warning");  }else{
 
-		if (size >= 990000) { swal("", "El archivo es demasiado grande.", "warning"); }else{
+		if (size >= 2200000) { swal("", "El archivo es demasiado grande.", "warning"); }else{
 
 		$.ajax({
 
@@ -2062,7 +2062,7 @@ function validartamano(idinput, idMp, mes, anio, estatResolucion, deten, idUnida
 						}
 					}
 					ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-					ajax.send("&nuc="+nuc+"&acc="+acc);
+					ajax.send("&nuc="+nuc+"&acc="+acc+"&estatResolucion="+estatResolucion);
 											
 				}
   			}
@@ -2241,7 +2241,7 @@ function validartamanoLit(idinput, idMp, mes, anio, estatResolucion, deten, idUn
 						}
 					}
 					ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-					ajax.send("&nuc="+nuc+"&acc="+acc);
+					ajax.send("&nuc="+nuc+"&acc="+acc+"&estatResolucion="+estatResolucion);
 											
 				}
   			}

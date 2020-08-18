@@ -67,16 +67,16 @@ $upp = "(13) PROCURADURIA GENERAL DE JUSTICIA DEL ESTADO";
 <?
 $actividades = getActvsAreaAnio($conn, $idArea, $anio, $idProyecto);
 
-for ($e=0; $e < sizeof($actividades); $e++) {
+for ($e=0; $e < sizeof($actividades); $e++) {	
 
-	$idActividad = $actividades[$e][0];
+	$idActividad = $actividades[$e][0];	
 	$nombreActividad = $actividades[$e][1];
-	$beneficiario = $actividades[$e][2];
+	$beneficiario = $actividades[$e][2];	
 	$medida = $actividades[$e][3];
 
-?>
+?>	
 
-	<tr>
+	<tr>	
 	<td rowspan="2" style="font-size:9px; text-align: center; vertical-align: middle;"><?php echo ($e+1); ?></td>
 	<td rowspan="2" style="font-size:9px; padding:8px;"><?php echo $nombreActividad; ?></td>
 	<td rowspan="2" style="font-size:9px; vertical-align: middle; text-align:center;"><?php echo $medida; ?></td>
