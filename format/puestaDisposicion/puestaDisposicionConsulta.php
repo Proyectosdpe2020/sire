@@ -160,7 +160,8 @@
 									<thead>
 										<tr class="cabezeraTabla10">
 											<th class="textCent">ID</th>
-													<th class="textCent10">Mando</th>
+										  	<th class="textCent10">Mando</th>
+													<th class="textCent10">Enlace</th>
 													<th class="">Nuc</th>
 													<th class=" textCent">Fecha Evento</th>
 													<th class=" textCent">Fecha Informe</th>
@@ -186,6 +187,7 @@
 
 																									?>
 																										<tr><td> <? echo $dataPuestasDia[$h][0]; ?> </td>
+																										<tr><td> <? echo $dataPuestasDia[$h][11]; ?> </td>
 																										<td> <? echo $dataPuestasDia[$h][1]; ?> </td>
 																										<td> <? echo $dataPuestasDia[$h][2]; ?> </td>
 																									<td> 	<center><? echo $dataPuestasDia[$h][3]->format('Y-m-d H:i'); ?></center> </td>
