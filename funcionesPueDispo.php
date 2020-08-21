@@ -230,7 +230,7 @@ WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND 
 		WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND pd.mes = $mes AND pd.idEnlace IN($valoresEnlaceConsulta) ORDER BY f.Nombre ";
 	}else{
 
-		if($idenlace == 59 || $idenlace == 60 || $idenlace == 84 || $idenlace == 85 || $idenlace == 91){
+		if($idenlace == 59 || $idenlace == 60 || $idenlace == 84 || $idenlace == 85 || $idenlace == 91 || $idenlace == 86 || $idenlace == 87|| $idenlace == 89 || $idenlace == 90){ //// THEY ARE ALL THE USERS CAN SEE EVERTHING
 
 			$query = " SELECT pd.idPuestaDisposicion, m.nombre+' '+m.paterno+' '+m.materno as nombreMando, pd.nuc, pd.fechaEvento, pd.fechaInforme, f.Nombre as fiscalia, 
 			mu.Nombre as municipio, col.Nombre as colonia, pd.calle, pd.numero, pd.codigoPostal
@@ -255,6 +255,7 @@ WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND 
 	}
 
 }
+
 
  $indice = 0;
 	
