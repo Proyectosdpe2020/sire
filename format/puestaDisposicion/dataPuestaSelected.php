@@ -36,6 +36,7 @@
 									<thead>
 										<tr class="cabezeraTabla10">
 											<th class="textCent">ID</th>
+											  <?if($arch == 12){ ?> <th class="textCent10">Enlace</th> <? } ?>
 													<th class="textCent10">Mando</th>	
 													<th class="">Nuc</th>
 													<th class=" textCent">Fecha Evento</th>
@@ -57,6 +58,7 @@
 																							for ($h=0; $h < sizeof($dataPuestasDia) ; $h++) { 
 																									?>
 																										<tr><td style="font-weight: bolder;"> <? echo $dataPuestasDia[$h][0]; ?> </td>
+																										<?if($arch == 12){ ?> <td> <? echo $dataPuestasDia[$h][11]; ?> </td> <? } ?>	
 																										<td> <? echo $dataPuestasDia[$h][1]; ?> </td>
 																										<td> <? echo $dataPuestasDia[$h][2]; ?> </td>
 																									<td> 	<center><? echo $dataPuestasDia[$h][3]->format('Y-m-d H:i'); ?></center> </td>
