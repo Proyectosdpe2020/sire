@@ -726,9 +726,17 @@ function registrarPersona(idEnlace, tipoActualizacion, tipoArch, b, idPersona){
  var textCatDelitos = $("#textTipoDelito").val(); 
  var textDisposicionDe = $("#textDisposicionDe").val();
 
+//Para verificar si el usuario agrego un delito secundario
+ if ( document.getElementById( "textdelitoCometido" ) ) { 
+ 	var arrDelitos = document.getElementsByName("delitos[]"); 
+ }else{
+ 		var arrDelitos = 0;
+ }
+
+
 
     if(textNombre!= "" && textApPaterno != "" && textApMaterno != "" && fechaDetencion != "" && textEdad  != "" 
-			&& textSexo != "" && textCatDelitos != "" && textInvFlag != 0 && textDisposicionDe != 0){
+			&& textSexo != "" && textCatDelitos != "" && textInvFlag != 0 && textDisposicionDe != 0 ){
 
 	/*Obtener datos del formulario*/
 
@@ -737,8 +745,7 @@ function registrarPersona(idEnlace, tipoActualizacion, tipoArch, b, idPersona){
 	var dia = fechaDetencion.format('D'); 
 	var mes = fechaDetencion.format('M'); 
 	var anio = fechaDetencion.format('YYYY'); 
-	var arrDelitos = document.getElementsByName("delitos[]");
- 
+
     
 	var textBandas = $("#textBandas").val();
 	var textOrgCriminal = $("#textOrgCriminal").val();
@@ -793,12 +800,8 @@ function registrarPersona(idEnlace, tipoActualizacion, tipoArch, b, idPersona){
     //// DATA DE LA PUESTA A DISPOSICION /////
 
     /// DATA DE DELITOS ///
-if(arrDelitos.length > 0){
 	for(i=0;i<arrDelitos.length;i++){ jObjectDelitos[i] = arrDelitos[i].value; }
 	jObjectDelitos = JSON.stringify(jObjectDelitos);
-}else{
-	jObjectDelitos = JSON.stringify('2');
-}
   	/// DATA DE DELITOS ///
 
 
@@ -2513,7 +2516,7 @@ function agregarDelito() {
  var arrDelitos = document.getElementsByName("delitosAct[]");
  	for(i=0;i<arrDelitos.length;i++){ jObjectDelitos[i] = arrDelitos[i].value; }
 	//jObjectDelitos = JSON.stringify(jObjectDelitos);
-  alert("ID DE PERSONA: " +  idPers + "ID DELITO" +jObjectDelitos[arrDelitos.length-1]);
+  //alert("ID DE PERSONA: " +  idPers + "ID DELITO" +jObjectDelitos[arrDelitos.length-1]);
 
 
   	ajax=objetoAjax();
