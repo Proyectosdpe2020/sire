@@ -649,3 +649,33 @@ function saveQuest7(quest, per, anio, idUnidad, idEnlace){
 				});	
 	}
 }
+
+
+function getUsersByPeriod(period, year){
+
+	$.ajax({
+		url:'format/trimestral/admin/templates/users_by_period_table.php?period='+period+'&year='+year,
+		type:'POST',
+		contentType:false,
+		processData:false,
+		cache:false
+	}).done(function(respuesta){
+		$( "#admin_content" ).html( respuesta );
+
+	});
+
+}
+
+function changeLock(year, period, link, sendedReport){
+	$.ajax({
+		url:'format/trimestral/admin/service/update_sended_report_by_link.php?period='+period+'&year='+year+'&link='+link+'&sendedReport='+sendedReport,
+		type:'POST',
+		contentType:false,
+		processData:false,
+		cache:false
+	}).done(function(respuesta){
+		getUsersByPeriod(period, year);
+		swal("", "Se ha cambiado correctamente", "success");
+	});
+}
+

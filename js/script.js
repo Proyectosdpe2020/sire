@@ -493,7 +493,6 @@ function loadSubIndex(idEnlace){
 
 }
 
-
 function loadtablaFormatos(idUnidad){
 
 
@@ -2565,6 +2564,31 @@ function checkCero(valorinput, continput, idMp, estatus, mes, anio, deten){
 
 }
 
+function loadTrimestralAdmin(){
 
+	$.ajax({
+		url:'format/trimestral/admin/admin.php',
+		type:'POST',
+		contentType:false,
+		processData:false,
+		cache:false
+	}).done(function(respuesta){
+		$( "#contenido" ).html( respuesta );
+		loadTrimestralPeriods();
+	});
 
+}
 
+function loadTrimestralPeriods(){
+
+	$.ajax({
+		url:'format/trimestral/admin/templates/available_periods_table.php',
+		type:'POST',
+		contentType:false,
+		processData:false,
+		cache:false
+	}).done(function(respuesta){
+		$( "#admin_content" ).html( respuesta );
+	});
+
+}
