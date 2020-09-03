@@ -8,7 +8,17 @@ include ("../../Conexiones/Conexion.php");
 if (isset($_POST['idPers'])){ $idPers = $_POST['idPers']; }
 if (isset($_POST['arrDelitosAct'])){ $arrDelitosAct = $_POST['arrDelitosAct']; }
 
+$query = "SELECT COUNT(*) AS TOTAL FROM pueDisposi.DelitosPorPersona WHERE idPersona = $idPers AND idCatDelito = $arrDelitosAct";
+$indice = 0;
+$stmt = sqlsrv_query($conn, $query);
+while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+  {
+    $arreglo[$indice][0]=$row['TOTAL'];
+    $indice++;
+  }  
+  $delitoExiste = $arreglo[0][0];
 
+if($delitoExiste == 0){
           
                    $queryTransaction = "  
 
@@ -47,7 +57,9 @@ if (isset($_POST['arrDelitosAct'])){ $arrDelitosAct = $_POST['arrDelitosAct']; }
                     echo json_encode(array('first'=>$arreglo[0]));
                     
                   }                   
-
+}else{
+  echo json_encode(array('first'=>"NO"));
+}
 
 
 ?>

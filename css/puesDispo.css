@@ -194,3 +194,12 @@ font-size: 12px;
   background-size: cover;
 }
 /* CHECKBOX DEFUNCIONES*/
+
+.padre{
+  counter-reset: my-sec-counter;
+}
+
+.delOpc::before {
+  counter-increment: my-sec-counter;
+  content: counter(my-sec-counter);
+}
