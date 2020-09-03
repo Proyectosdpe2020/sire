@@ -166,14 +166,14 @@
 																				<h5 class="text-on-pannel"><strong> Delitos cometidos </strong></h5>
 																				<div class="form-row">
 																				<div class="form-group col-md-12">
-																					<label for="textRequerido">Delito principal</label>
+																					<label for="textRequerido">Delito principal<span class="aste">(*)</span></label>
 
 																					<table class="tbl-qa table table-bordered">
 																				  <thead>
 																					<tr>
 																					  <th class="table-header">#</th>
 																					  <th class="table-header">Tipo de delíto</th>
-																					  <th class="table-header">Acciones</th>
+																					  <!--<th class="table-header">Acciones</th>-->
 																					</tr>
 																				  </thead>
 																				  <tbody id="table-body-DelitoPrincipal">
@@ -193,7 +193,7 @@
 																									 </datalist>
 																						</td>
 																						
-																						<td><a class="ajax-action-links" onclick="#">Cancelar</a></td>
+																						<!--<td><a class="ajax-action-links" onclick="#">Cancelar</a></td>-->
 																					  </tr>
 																				  </tbody>
 																				</table>
@@ -221,9 +221,11 @@
 																													$nombreDelito = $delitos[$i][2];	?>
 																							
 																					  <tr class="table-row" id="campos">
-																						<td contenteditable="false" onBlur="saveToDatabase(this,'id','5')" onClick="editRow(this);">-</td>      
+																					  	<div class="padre"> <!--Clase padre y delOpc se utilizan para el counter CSS-->
+																									<td contenteditable="false" onBlur="saveToDatabase(this,'id','5')" onClick="editRow(this);" class="delOpc"></td> 
+																						  </div>
 																						<td contenteditable="true" onBlur="saveToDatabase(this,'articulo_titulo','1')" onClick="editRow(this);">
-																							<select id="textdelitoCometido" name="delitos[]" tabindex="6" class="form-control redondear selectTranparent">
+																							<select id="textdelitoCometido" name="delitos[]" tabindex="6" class="form-control redondear selectTranparent" disabled="disabled">
 																																				<? 
 																																						$dataDelitos = getDataDelitos($conn);
 																																						for ($d=0; $d < sizeof($dataDelitos); $d++) { 		

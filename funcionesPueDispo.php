@@ -546,9 +546,19 @@ if($idArma == 0){
 
 function get_data_drog_puesta($conn, $idPuestaDisposicion, $idDroga){
 if($idDroga == 0){
-			$query = "   SELECT d.idDrogas, cd.nombre, d.kilogramos, d.observaciones FROM pueDisposi.Drogas d INNER JOIN pueDisposi.CatDrogas cd ON cd.CatDrogasId = d.idCatDroga WHERE d.idPueDisposicion = $idPuestaDisposicion   ";
+			$query = "   SELECT d.idDrogas, cd.nombre, d.kilogramos, d.observaciones, um.nombre as unidadMedida, pq.nombre as prodQuimico 
+			FROM pueDisposi.Drogas d 
+			INNER JOIN pueDisposi.CatDrogas cd ON cd.CatDrogasId = d.idCatDroga 
+			LEFT JOIN pueDisposi.CatUnidadMedidaDroga um ON um.idUnidadMedidaDroga = d.idUnidadMedidaDroga
+			LEFT JOIN pueDisposi.CatProdQuimicoDroga pq ON pq.idProductoQuimico = d.idProductoQuimico
+			WHERE d.idPueDisposicion = $idPuestaDisposicion   ";
 		}else{
-			$query = "   SELECT d.idDrogas, cd.nombre, d.kilogramos, d.observaciones FROM pueDisposi.Drogas d INNER JOIN pueDisposi.CatDrogas cd ON cd.CatDrogasId = d.idCatDroga WHERE d.idDrogas = $idDroga   ";
+			$query = "   SELECT d.idDrogas, cd.nombre, d.kilogramos, d.observaciones,  um.nombre as unidadMedida, pq.nombre as prodQuimico 
+			FROM pueDisposi.Drogas d 
+			INNER JOIN pueDisposi.CatDrogas cd ON cd.CatDrogasId = d.idCatDroga
+			LEFT JOIN pueDisposi.CatUnidadMedidaDroga um ON um.idUnidadMedidaDroga = d.idUnidadMedidaDroga
+			LEFT JOIN pueDisposi.CatProdQuimicoDroga pq ON pq.idProductoQuimico = d.idProductoQuimico
+			WHERE d.idDrogas = $idDroga   ";
 		}
 
 
@@ -561,6 +571,8 @@ if($idDroga == 0){
 		$arreglo[$indice][1]=$row['nombre'];
 		$arreglo[$indice][2]=$row['kilogramos'];
 		$arreglo[$indice][3]=$row['observaciones'];
+		$arreglo[$indice][4]=$row['unidadMedida'];
+		$arreglo[$indice][5]=$row['prodQuimico'];
 
 		$indice++;
 	}
@@ -1096,6 +1108,37 @@ function getDataDelitosPorPersona($conn , $idPersona){
 }
 
 
+function getDataUnidadMedida($conn){
+	$query = "SELECT * FROM pueDisposi.CatUnidadMedidaDroga";
+
+							 $indice = 0;
+								$stmt = sqlsrv_query($conn, $query);
+								while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))	
+								{
+							
+									$arreglo[$indice][0]=$row['idUnidadMedidaDroga'];
+									$arreglo[$indice][1]=$row['nombre'];
+							
+									$indice++;
+								}
+								if(isset($arreglo)){return $arreglo;}	
+}
+
+function getDataProductoQuimico($conn){
+	$query = "SELECT * FROM pueDisposi.CatProdQuimicoDroga";
+
+							 $indice = 0;
+								$stmt = sqlsrv_query($conn, $query);
+								while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))	
+								{
+							
+									$arreglo[$indice][0]=$row['idProductoQuimico'];
+									$arreglo[$indice][1]=$row['nombre'];
+							
+									$indice++;
+								}
+								if(isset($arreglo)){return $arreglo;}	
+}
 
 
 

@@ -1226,8 +1226,10 @@ var objDroga = $("#listaCatDroga").find("option[value='" + textCatDroga + "']").
 if(objDroga != null && objDroga.length > 0){
 
 					var textKilogramos = $("#textKilogramos").val();
+					var textCatUnidadMedida = $("#textCatUnidadMedida").val();
+					var textCatProductoQuimico = $("#textCatProductoQuimico").val();
 										    /// VALIDACIONES ///
-						if(textKilogramos != ""){
+						if(textKilogramos != "" && textCatUnidadMedida != 0 &&  textCatProductoQuimico != 0){
 
 						
 						var textObservaciones = $("#textObservacionesDrog").val();
@@ -1274,7 +1276,8 @@ if(objDroga != null && objDroga.length > 0){
 						        dataType: 'html',
 						        url: "format/puestaDisposicion/registroDrogas.php",
 						        data: "catDroga_id="+objDroga+"&kilogramos="+textKilogramos+"&observaciones="+textObservaciones+"&jObject="+jObject+"&idEnlace="+idEnlace+
-						               "&idPuestaDisposicion="+idPuestaDisposicion+"&tipoActualizacion="+tipoActualizacion+"&idDroga="+idDroga,
+						               "&idPuestaDisposicion="+idPuestaDisposicion+"&tipoActualizacion="+tipoActualizacion+"&idDroga="+idDroga+"&idCatUnidadMedida="+textCatUnidadMedida+
+						               "&idCatProductoQuimico="+textCatProductoQuimico,
 						        success: function(resp){
 						            var json = resp;
 															var obj = eval("(" + json + ")");
@@ -2518,18 +2521,19 @@ function agregarDelito() {
 	//jObjectDelitos = JSON.stringify(jObjectDelitos);
   //alert("ID DE PERSONA: " +  idPers + "ID DELITO" +jObjectDelitos[arrDelitos.length-1]);
 
-
   	ajax=objetoAjax();
 						ajax.open("POST", "format/puestaDisposicion/actualizarDelito.php");
  
 						ajax.onreadystatechange = function(){
 							if (ajax.readyState == 4 && ajax.status == 200) {		
-								$("#table-body").append(data);
+								//$("#table-body").append(data);
 										 var json = ajax.responseText;
 										 	 $("#add-more").show();	
 													var obj = eval("(" + json + ")");
-													if (obj.first == "NO") { swal("", "No se agrego el delito.", "warning"); }else{
-														 if (obj.first == "SI") {    															
+													if (obj.first == "NO") { swal("", "No se agrego el delito, verifique si no se agregó anteriormente", "warning"); }else{
+														 if (obj.first == "SI") {   		
+														 $("#addDelitoSec").remove();		
+														 $(".txtDelitoDisable").prop("disabled", true);	
 														 	var obj = eval("(" + json + ")");
 														 	swal("", "Delito agregado exitosamente.", "success");															
 														 }
