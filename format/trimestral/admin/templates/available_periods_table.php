@@ -20,7 +20,6 @@ $availablePeriods = getTrimestralPeriodsAvailable($conn);
                             <th class="col-xs-4 col-sm-4 col-md-4 textCent">Periodo</th>
                             <th class="col-xs-1 col-sm-1 col-md-1 textCent">Año</th>
                             <th class="col-xs-4 col-sm-4 col-md-3 textCent">Estatus</th>
-                            <th class="col-xs-4 col-sm-4 col-md-3 textCent">Acciones</th>
 
                         </tr>
                     </thead>
@@ -34,8 +33,7 @@ $availablePeriods = getTrimestralPeriodsAvailable($conn);
                                 <td class="tdRowMain negr"><? echo ($i+1); ?></td>
                                 <td class="tdRowMain"><? echo $availablePeriods[$i][1]; ?></td>
                                 <td class="tdRowMain"><? echo $availablePeriods[$i][0]; ?></td>
-                                <td class="tdRowMain">Bloqueado</td>
-                                <td class="tdRowMain">Activar</td>														
+                                <td class="tdRowMain">Bloqueado</td>												
                                     
                             </tr>			
 

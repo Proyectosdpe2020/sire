@@ -679,3 +679,24 @@ function changeLock(year, period, link, sendedReport){
 	});
 }
 
+function verFormato(idArchivo, ubicacion){
+
+
+	$('#contMOdalVerFormato').html('<div><img src="img/load.gif"/></div>');
+
+	cont = document.getElementById('contMOdalVerFormato');
+	ajax=objetoAjax();
+	ajax.open("POST", "repositorio/myModalVerArchivo.php");
+
+	ajax.onreadystatechange = function(){
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			
+				cont.innerHTML = ajax.responseText;
+		}
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send("&idArchivo="+idArchivo+"&ubicacion="+ubicacion);
+
+
+}
+

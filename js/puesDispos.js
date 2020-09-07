@@ -2577,5 +2577,24 @@ function deleteRecord(id) {
 	}
 }
 
+function downloadExcelReport() {
 
+	console.log('descargando...');
+	
+	
+	$.ajax({
+		url:"../vendors/upload.php",
+		method:"POST",
+		data:new FormData(this),
+		contentType:false,
+		cache:false,
+		processData:false,
+		success:function(data)
+		{
+		  $('#excel_area').html(data);
+		  $('table').css('width','100%');
+		}
+	});
+
+}
 
