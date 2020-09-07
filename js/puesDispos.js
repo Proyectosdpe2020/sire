@@ -2581,5 +2581,6 @@ function deleteRecord(id) {
 	}
 }
 
-
-
+$(document).ready( function () {
+  var table = $('#example').DataTable();
+} );

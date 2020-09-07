@@ -157,6 +157,7 @@ $("#table-body").append(data);
 
 			if($format  == 10){ ?>  	onload="loadtablaFormat(0, 'puestaDisposicionSuper.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
 			if($format  == 12){ ?>  	onload="loadtablaFormat(0, 'puestaDisposicionConsulta.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
+			if($format  == 13){ ?>  	onload="loadtablaFormat(0, 'cambioAdscripcionPueDispo.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
 	}
 
 
