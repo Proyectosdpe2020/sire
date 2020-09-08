@@ -2580,21 +2580,20 @@ function deleteRecord(id) {
 function downloadExcelReport() {
 
 	console.log('descargando...');
-	
-	
+
+
 	$.ajax({
-		url:"../vendors/upload.php",
-		method:"POST",
-		data:new FormData(this),
-		contentType:false,
-		cache:false,
-		processData:false,
-		success:function(data)
-		{
-		  $('#excel_area').html(data);
-		  $('table').css('width','100%');
-		}
-	});
+		type: "POST",
+		dataType: 'json',
+		url: "format/puestaDisposicion/excel/report.php",
+		//data: "fecha1="+fecha1+"&fecha2="+fecha2,
+	   }).done(function(data){
+		  /*var $a = $("<a>");
+		  $a.attr("href",data.file);
+		  $("body").append($a);
+		  $a.attr("download","reporte.xlsx");
+		  $a[0].click();
+		  $a.remove();*/
+	  });
 
 }
-
