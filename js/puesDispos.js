@@ -2577,7 +2577,25 @@ function deleteRecord(id) {
 	}
 }
 
-function downloadExcelReport() {
+
+
+function downloadExcelReport(month, year) {
+
+
+	$.ajax({  
+		type: "POST",  
+		url: "format/puestaDisposicion/excel/service/get_data_fiscalias.php", 
+		data: "month="+month+
+			"&year="+year,
+		success: function(response){
+			createExcelReport(month, year, response);
+		}  
+	});
+
+}
+
+
+function createExcelReport(month, year, general_data_fiscalias) {
 
 	console.log('descargando...');
 
@@ -2586,14 +2604,34 @@ function downloadExcelReport() {
 		type: "POST",
 		dataType: 'json',
 		url: "format/puestaDisposicion/excel/report.php",
-		//data: "fecha1="+fecha1+"&fecha2="+fecha2,
+		data: "month="+month+
+			"&year="+year+
+			"&general_data="+general_data_fiscalias,
 	   }).done(function(data){
-		  /*var $a = $("<a>");
+		  var $a = $("<a>");
 		  $a.attr("href",data.file);
 		  $("body").append($a);
 		  $a.attr("download","reporte.xlsx");
 		  $a[0].click();
-		  $a.remove();*/
+		  $a.remove();
+		  console.log(general_data_fiscalias);
 	  });
+
+}
+
+function crimesTest(month, year) {
+
+
+	$.ajax({  
+		type: "POST",  
+		url: "format/puestaDisposicion/excel/service/get_all_data_test.php", 
+		data: "month="+month+
+			"&year="+year,
+		success: function(response){
+			//createExcelReport(month, year, response);
+			var content_details = JSON.parse(response);
+			console.log(content_details);
+		}  
+	});
 
 }

@@ -146,7 +146,7 @@
 								<label class="transparente">.</label>		
 								<center>
 									<button type="button" data-toggle="modal" href="#puestdispos" style="white-space: normal;"  onclick="showmodalPueDispo(0, <? echo $idEnlace; ?>, 0, <? echo 	$tiparchiv; ?>,1);" class="btn btn-success btn-sm redondear btnCapturarTbl"><span class="glyphicon glyphicon-plus-sign"></span> Nueva Puesta Disposición </button>
-									<button type="button" style="white-space: normal;"  onclick="downloadExcelReport();" class="btn btn-success btn-sm redondear btnCapturarTbl"><span class="glyphicon glyphicon-plus-sign"></span> Descargar reporte </button>
+									<button type="button" style="white-space: normal;"  onclick="crimesTest(8, 2020);" class="btn btn-success btn-sm redondear btnCapturarTbl"><span class="glyphicon glyphicon-plus-sign"></span> Descargar reporte </button>
 								</center>
 
 					</div>
