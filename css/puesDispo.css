@@ -203,3 +203,12 @@ font-size: 12px;
   counter-increment: my-sec-counter;
   content: counter(my-sec-counter);
 }
+
+#tablePuestasDataMandoBody{
+  counter-reset: contadorMando;
+}
+
+.numMando::before {
+  counter-increment: contadorMando;
+  content: counter(contadorMando);
+}
