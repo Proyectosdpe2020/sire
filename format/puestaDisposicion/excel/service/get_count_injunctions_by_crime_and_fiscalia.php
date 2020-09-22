@@ -20,61 +20,61 @@ $fiscalias_by_id = array(
     10 => 'jiquilpan'
 );
 
-$arresteds_by_crime = array(
+$injunctions_by_crime = array(
     'apatzingan' => array(
         'id' => 1,
         'name' => 'Apatzingán',
-        'arrested' => array()
+        'injunction' => array()
     ),
     'coalcoman' => array(
         'id' => 8,
         'name' => 'Coalcomán',
-        'arrested' => array()
+        'injunction' => array()
     ),
     'huetamo' => array(
         'id' => 9,
         'name' => 'Huetamo',
-        'arrested' => array()
+        'injunction' => array()
     ),
     'jiquilpan' => array(
         'id' => 10,
         'name' => 'Jiquilpan',
-        'arrested' => array()
+        'injunction' => array()
     ),
     'la_piedad' => array(
         'id' => 2,
         'name' => 'La Piedad',
-        'arrested' => array()
+        'injunction' => array()
     ),
     'lazaro_cardenas' => array(
         'id' => 3,
         'name' => 'Lázaro Cárdenas',
-        'arrested' => array()
+        'injunction' => array()
     ),
     'morelia' => array(
         'id' => 4,
         'name' => 'Morelia',
-        'arrested' => array()
+        'injunction' => array()
     ),
     'uruapan' => array(
         'id' => 5,
         'name' => 'Uruapan',
-        'arrested' => array()
+        'injunction' => array()
     ),
     'zamora' => array(
         'id' => 6,
         'name' => 'Zamora',
-        'arrested' => array()
+        'injunction' => array()
     ),
     'zitacuaro' => array(
         'id' => 7,
         'name' => 'Zitácuaro',
-        'arrested' => array()
+        'injunction' => array()
     ),
     'total' => array(
         'id' => null,
         'name' => null,
-        'arrested' => array()
+        'injunction' => array()
     )
 );
 
@@ -89,17 +89,18 @@ $queries = array(
                         ON p.idPuestaDisposicion = pd.idPuestaDisposicion
                         inner join [ESTADISTICAV2].[dbo].[CatFiscalia] f
                         ON pd.idFiscalia = f.idFiscalia
-                        where p.mes = $month and p.anio = $year
+                        where p.mes = $month and p.anio = $year and p.invFlag = 2
                         group by e.idModalidadEstadistica, e.nModalidadEstadistica
                         order by e.idModalidadEstadistica, e.nModalidadEstadistica"
     ),
-    'arresteds_by_crime_and_fiscalia' => array(
+    'injunctions_by_crime_and_fiscalia' => array(
         'query_number' => 2,
-        'query' => "SELECT f.idFiscalia,
-                        f.nFiscalia,
+        'query' => "SELECT 
+                        f.idFiscalia, 
+                        f.nFiscalia, 
                         e.idModalidadEstadistica,
-                        e.nModalidadEstadistica
-                        ,count(e.nModalidadEstadistica) as 'arrested_number'
+                        e.nModalidadEstadistica,
+                        count(p.invFlag ) as 'injunction_number'
                         FROM [ESTADISTICAV2].[pueDisposi].[personasDetenidas] p 
                         inner join [ESTADISTICAV2].[dbo].[CatModalidadEstadistica] e 
                         ON p.idTipoDelito = e.idModalidadEstadistica
@@ -107,7 +108,7 @@ $queries = array(
                         ON p.idPuestaDisposicion = pd.idPuestaDisposicion
                         inner join [ESTADISTICAV2].[dbo].[CatFiscalia] f
                         ON pd.idFiscalia = f.idFiscalia
-                        where p.mes = $month and p.anio = $year
+                        where p.mes = $month and p.anio = $year and p.invFlag = 2
                         group by f.idFiscalia, f.nFiscalia, e.idModalidadEstadistica, e.nModalidadEstadistica
                         order by f.idFiscalia, f.nFiscalia, e.idModalidadEstadistica, e.nModalidadEstadistica"
     )
@@ -142,17 +143,17 @@ if($row_count > 0){
 }
 
 
-foreach(array_keys($arresteds_by_crime) as $fiscalia){
+foreach(array_keys($injunctions_by_crime) as $fiscalia){
 
     foreach($crimes_by_date as $crime){
-        $arresteds_by_crime[$fiscalia]['arrested'] += [$crime['crime'] => 0];
+        $injunctions_by_crime[$fiscalia]['injunction'] += [$crime['crime'] => 0];
     }
 
 }
 
 
 
-$result = sqlsrv_query( $conn, $queries['arresteds_by_crime_and_fiscalia']['query'] , $params, $options );
+$result = sqlsrv_query( $conn, $queries['injunctions_by_crime_and_fiscalia']['query'] , $params, $options );
 
 $row_count = sqlsrv_num_rows( $result );
 
@@ -160,21 +161,21 @@ if($row_count > 0){
 
     while( $row = sqlsrv_fetch_array( $result) ) {
 
-        $arresteds_by_crime[$fiscalias_by_id[$row['idFiscalia']]]['arrested'][$row['nModalidadEstadistica']] = $row['arrested_number'];
-        $arresteds_by_crime[$fiscalias_by_id[$row['idFiscalia']]]['arrested']['Total'] += $row['arrested_number'];
+        $injunctions_by_crime[$fiscalias_by_id[$row['idFiscalia']]]['injunction'][$row['nModalidadEstadistica']] = $row['injunction_number'];
+        $injunctions_by_crime[$fiscalias_by_id[$row['idFiscalia']]]['injunction']['Total'] = $row['injunction_number'];
 
-        $arresteds_by_crime['total']['arrested'][$row['nModalidadEstadistica']] += $row['arrested_number'];
-        $arresteds_by_crime['total']['arrested']['Total'] += $row['arrested_number'];
-       
+        $injunctions_by_crime['total']['injunction'][$row['nModalidadEstadistica']] += $row['injunction_number'];
+        $injunctions_by_crime['total']['injunction']['Total'] += $row['injunction_number'];
+        
     }
 
 }
 
 
 
-$_SESSION['data_fiscalias'] = $arresteds_by_crime;
+$_SESSION['data_fiscalias'] = $injunctions_by_crime;
 
-echo json_encode($arresteds_by_crime, JSON_FORCE_OBJECT);
+echo json_encode($injunctions_by_crime, JSON_FORCE_OBJECT);
 
 sqlsrv_close($conn);
 

@@ -5,6 +5,19 @@ include('../../../../Conexiones/Conexion.php');
 $month = $_POST['month'];
 $year = $_POST['year'];
 
+$fiscalias_by_id = array(
+    1 => 'apatzingan',
+    2 => 'la_piedad',
+    3 => 'lazaro_cardenas',
+    4 => 'morelia',
+    5 => 'uruapan',
+    6 => 'zamora',
+    7 => 'zitacuaro',
+    8 => 'coalcoman',
+    9 => 'huetamo',
+    10 => 'jiquilpan'
+);
+
 $data_fiscalias = array(
     'apatzingan' => array(
         'id' => 1,
@@ -116,11 +129,10 @@ $data_fiscalias = array(
     )
 );
 
-
-
 $queries = array(
     'investigations_by_fiscalia' => array(
         'query_number' => 1,
+        'query_concept' => 'investigations',
         'query' => "SELECT f.idFiscalia, f.nFiscalia ,sum(investigacionesCumplidas) as 'data'
                         from [ESTADISTICAV2].[pueDisposi].[TrabajoDeCampo] tc
                         inner join [ESTADISTICAV2].[pueDisposi].[puestaDisposicion] pd
@@ -133,10 +145,12 @@ $queries = array(
     ),
     'localizations_by_fiscalia' => array(
         'query_number' => 2,
+        'query_concept' => 'localizations',
         'query' => ""
     ),
     'insured_money_mxn_by_fiscalia' => array(
         'query_number' => 3,
+        'query_concept' => 'insured_money_MXN',
         'query' => "SELECT f.idFiscalia, f.nFiscalia, sum(da.m_nal) as 'data'
                         FROM [ESTADISTICAV2].[pueDisposi].[DineroAsegurado] da
                         inner join [ESTADISTICAV2].[pueDisposi].[puestaDisposicion] pd
@@ -149,10 +163,12 @@ $queries = array(
     ),
     'insured_money_usd_by_fiscalia' => array(
         'query_number' => 4,
+        'query_concept' => 'insured_money_USD',
         'query' => ""
     ),
     'cateos_by_fiscalia' => array(
         'query_number' => 5,
+        'query_concept' => 'cateos',
         'query' => "SELECT f.idFiscalia, f.nFiscalia ,count(cate) as 'data'
                         FROM [ESTADISTICAV2].[pueDisposi].[puestaDisposicion] pd
                         inner join [ESTADISTICAV2].[dbo].[CatFiscalia] f
@@ -163,6 +179,7 @@ $queries = array(
     ),
     'recorridos_by_fiscalia' => array(
         'query_number' => 6,
+        'query_concept' => 'recorridos',
         'query' => "SELECT f.idFiscalia, f.nFiscalia ,count(reco) as 'data'
                         FROM [ESTADISTICAV2].[pueDisposi].[puestaDisposicion] pd
                         inner join [ESTADISTICAV2].[dbo].[CatFiscalia] f
@@ -173,10 +190,8 @@ $queries = array(
     )
 );
 
-
 $params = array();
 $options = array( "Scrollable" => SQLSRV_CURSOR_KEYSET );
-
 
 foreach($queries as $query){
 
@@ -188,79 +203,14 @@ foreach($queries as $query){
 
         while( $row = sqlsrv_fetch_array( $result) ) {
     
-            switch($row['idFiscalia']){
-                case 1: //Apatzingán
-                    $data_fiscalias = setFiscaliaData($query['query_number'], $row['data'], 'apatzingan', $data_fiscalias);
-                break;
-                case 2: //La Piedad
-                    $data_fiscalias = setFiscaliaData($query['query_number'], $row['data'], 'la_piedad', $data_fiscalias);
-                break;
-                case 3: //Lázaro Cárdenas
-                    $data_fiscalias = setFiscaliaData($query['query_number'], $row['data'], 'lazaro_cardenas', $data_fiscalias);
-                break;
-                case 4: //Morelia
-                    $data_fiscalias = setFiscaliaData($query['query_number'], $row['data'], 'morelia', $data_fiscalias);
-                break;
-                case 5: //Uruapan
-                    $data_fiscalias = setFiscaliaData($query['query_number'], $row['data'], 'uruapan', $data_fiscalias);
-                break;
-                case 6: //Zamora
-                    $data_fiscalias = setFiscaliaData($query['query_number'], $row['data'], 'zamora', $data_fiscalias);
-                break;
-                case 7: //Zitácuaro
-                    $data_fiscalias = setFiscaliaData($query['query_number'], $row['data'], 'zitacuaro', $data_fiscalias);
-                break;
-                case 8: //Coalcomán
-                    $data_fiscalias = setFiscaliaData($query['query_number'], $row['data'], 'coalcoman', $data_fiscalias);
-                break;
-                case 9: //Huetamo
-                    $data_fiscalias = setFiscaliaData($query['query_number'], $row['data'], 'huetamo', $data_fiscalias);
-                break;
-                case 10: //Jiquilpan
-                    $data_fiscalias = setFiscaliaData($query['query_number'], $row['data'], 'jiquilpan', $data_fiscalias);
-                break;
-            }
+            $data_fiscalias[$fiscalias_by_id[$row['idFiscalia']]][$query['query_concept']] = $row['data'];
+            $data_fiscalias['total'][$query['query_concept']] += $row['data'];
 
         }
 
     }
 
 }
-
-function setFiscaliaData($option, $data, $fiscalia, $data_fiscalias){
-
-    $data_fiscalias_temp = $data_fiscalias;
-
-    switch($option){
-        case 1: //investigations
-            $data_fiscalias_temp[$fiscalia]['investigations'] = $data;
-            $data_fiscalias_temp['total']['investigations'] += $data;
-        break;
-        case 2: //localizations
-            $data_fiscalias_temp[$fiscalia]['localizations'] = $data;
-            $data_fiscalias_temp['total']['localizations'] += $data;
-        break;  
-        case 3: //MXN
-            $data_fiscalias_temp[$fiscalia]['insured_money_MXN'] = $data;
-            $data_fiscalias_temp['total']['insured_money_MXN'] += $data;
-        break;
-        case 4: //USD
-            $data_fiscalias_temp[$fiscalia]['insured_money_USD'] = $data;
-            $data_fiscalias_temp['total']['insured_money_USD'] += $data;
-        break;
-        case 5: //cateos
-            $data_fiscalias_temp[$fiscalia]['cateos'] = $data;
-            $data_fiscalias_temp['total']['cateos'] += $data;
-        break;
-        case 6: //recorridos
-            $data_fiscalias_temp[$fiscalia]['recorridos'] = $data;
-            $data_fiscalias_temp['total']['recorridos'] += $data;
-        break;
-    }
-
-    return $data_fiscalias_temp;
-}
-
 
 $_SESSION['data_fiscalias'] = $data_fiscalias;
 
