@@ -2581,5 +2581,141 @@ function deleteRecord(id) {
 	}
 }
 
+/*
+$(document).ready( function () {
+  var table = $('#example').DataTable();
+} );
+*/
 
+/******+ADMINISTRACION MANDOS******/
 
+function getDataMandosTableAdm(filtroBusqueda){
+	switch (filtroBusqueda){
+		case 'busqMando' :
+			var newBrwoser= document.getElementById("newBrwoser").value;
+	 	var newBrwoser_val= document.querySelector("#newBrwosers"  + " option[value='" + newBrwoser+ "']").dataset.value;
+			var newBrwosers_id= document.querySelector("#newBrwosers"  + " option[value='" + newBrwoser+ "']").dataset.id;		
+		break;
+		case 'busqAreaAdscr' :
+		document.getElementById("newBrwoser").value = "";	
+			var newBrwosers_id = 0;
+		break;
+	}
+
+	 var areaAdsc = document.getElementById("areaAdsc").value;
+		cont = document.getElementById('tablePuestasDataMandoBody');
+		ajax=objetoAjax();
+		ajax.open("POST", "format/puestaDisposicion/dataMandoTableAdm.php");
+
+		ajax.onreadystatechange = function(){
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				cont.innerHTML = ajax.responseText;
+			}
+		}
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		ajax.send("&newBrwosers_id="+newBrwosers_id+"&filtroBusqueda="+filtroBusqueda+"&areaAdsc="+areaAdsc);
+
+}
+
+function showModalEditarMando(idMando){
+	cont = document.getElementById('contModalModuloAdministracion');
+	ajax=objetoAjax();
+	ajax.open("POST", "format/puestaDisposicion/modalModuloAdministracion.php");
+	ajax.onreadystatechange = function(){
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			cont.innerHTML = ajax.responseText;
+			$('#modalModuloAdministracion').modal('show');
+		}
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send("&idMando="+idMando);
+}
+
+function closeModalEditarMando(){
+	$('#modalModuloAdministracion').modal('hide');
+}
+
+function closeModalEditarMando(){
+	$('#modalModuloAdministracionADDMando').modal('hide');
+}
+
+function actualizarMandos(idMando){
+	var getNombreMando = document.getElementById("admNombreMando").value;
+	var getApPaterno = document.getElementById("admApPaterno").value;
+	var getApMaterno = document.getElementById("admApMaterno").value;
+	var idCargo = document.getElementById("admCargo").value;
+	var idFuncion = document.getElementById("admFuncion").value;
+	var idAreaAdscripcion = document.getElementById("admAreaAdscripcion").value;
+	var getEstatusMando = document.getElementById("admEstatusMando").value;
+ document.getElementById("newBrwoser").value = "";
+
+	if(getNombreMando != "" && getApPaterno != "" && getApMaterno && idCargo != 0 && idFuncion != 0 && idAreaAdscripcion != 0 && getEstatusMando != 0){
+		cont = document.getElementById('tablePuestasDataMandoBody');
+		ajax=objetoAjax();
+		ajax.open("POST", "format/puestaDisposicion/admActualizarMandos.php");
+		ajax.onreadystatechange = function(){
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				cont.innerHTML = ajax.responseText;
+				$('#modalModuloAdministracion').modal('hide');
+			}
+		}
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		ajax.send("&getNombreMando="+getNombreMando+"&getApPaterno="+getApPaterno+"&getApMaterno="+getApMaterno+"&idCargo="+idCargo+"&idFuncion="+idFuncion+
+			          "&idAreaAdscripcion="+idAreaAdscripcion+"&idMando="+idMando+"&getEstatusMando="+getEstatusMando);
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+function showModalNuevoMando(idMando){
+	cont = document.getElementById('contModalModuloAdministracionADDMando');
+	ajax=objetoAjax();
+	ajax.open("POST", "format/puestaDisposicion/modalModuloAdministracionADDMando.php");
+	ajax.onreadystatechange = function(){
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			cont.innerHTML = ajax.responseText;
+			$('#modalModuloAdministracionADDMando').modal('show');
+		}
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send("&idMando="+idMando);
+}
+
+function agregarMando(){
+ var getNombreMando = document.getElementById("addNombreMando").value;
+	var getApPaterno = document.getElementById("addApPaterno").value;
+	var getApMaterno = document.getElementById("addApMaterno").value;
+	var idCargo = document.getElementById("addCargo").value;
+	var idFuncion = document.getElementById("addFuncion").value;
+	var idAreaAdscripcion = document.getElementById("addAreaAdscripcion").value;
+
+ if(getNombreMando != "" && getApPaterno != "" && getApMaterno && idCargo != 0 && idFuncion != 0 && idAreaAdscripcion != 0){
+ 	cont = document.getElementById('tablePuestasDataMandoBody');
+		ajax=objetoAjax();
+		ajax.open("POST", "format/puestaDisposicion/admAgregarNuevoMando.php");
+		ajax.onreadystatechange = function(){
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				cont.innerHTML = ajax.responseText;
+				$('#modalModuloAdministracionADDMando').modal('hide');
+			}
+		}
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		ajax.send("&getNombreMando="+getNombreMando+"&getApPaterno="+getApPaterno+"&getApMaterno="+getApMaterno+"&idCargo="+idCargo+"&idFuncion="+idFuncion+
+			          "&idAreaAdscripcion="+idAreaAdscripcion);
+ }else{
+ 	swal("", "Faltan datos por registrar.", "warning");
+ }
+}                      
+
+function getDataMandosdataList(){
+	cont = document.getElementById('newBrwosers');
+	ajax=objetoAjax();
+	ajax.open("POST", "format/puestaDisposicion/admGetDataMandosdataList.php");
+	ajax.onreadystatechange = function(){
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			cont.innerHTML = ajax.responseText;
+		}
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send();
+}

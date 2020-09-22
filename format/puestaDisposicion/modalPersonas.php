@@ -277,11 +277,11 @@
 																	      <input value="<?php if($a == 1){ echo $agraviado; } ?>" type="text" class="form-control" id="textAgraviado" name="textAgraviado">
 																	    </div>
 																	    <div class="form-group col-md-3">
-																	      <label for="textInvFlag">Involucrado/Flagrancia<span class="aste">(*)</span></label>
+																	      <label for="textInvFlag">Flagrancia / Mandato Judicial<span class="aste">(*)</span></label>
 																	      <select id="textInvFlag" name="textInvFlag" tabindex="6" class="form-control redondear selectTranparent" required>
 																	       	<option value="0">Selecciona</option>
-																	       	<option value="1" <?php if($a == 1 && $invFlag == 1){ ?> selected <? }?> >Flagrancia</option>
-																	       	<option value="2" <?php if($a == 1 && $invFlag == 2){ ?> selected <? }?>>Involucrado</option>
+																	       	<option style="color: black; font-weight: bold;" value="1" <?php if($a == 1 && $invFlag == 1){ ?> selected <? }?> >Flagrancia</option>
+																	       	<option style="color: black; font-weight: bold;" value="2" <?php if($a == 1 && $invFlag == 2){ ?> selected <? }?>>Mandato Judicial</option>
 																								</select>
 																	    </div>
 																	     <div class="form-group col-md-3">
