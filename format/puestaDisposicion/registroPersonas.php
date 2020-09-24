@@ -174,13 +174,15 @@ if($data[8] == ""){ $data[8]=0;}
                     echo json_encode(array('first'=>$arreglo[0]));
                   }
 
+                   if($getArrayDelitos != 0){
                      if ($id != "") {                  
 
                       foreach ($getArrayDelitos as $delitos){
                                                         $insertarDelitos = "INSERT INTO pueDisposi.DelitosPorPersona (idPersona , idCatDelito) VALUES($id  ,  $delitos)";
                                                         $res2 = sqlsrv_query($conn, $insertarDelitos, array(), array("Scrollable" => SQLSRV_CURSOR_KEYSET ));
                                                       }  
-                       }     
+                       }  
+                       }   
    
       }
       else if($idPuestaDisposicion != ""){
@@ -233,13 +235,16 @@ if($data[8] == ""){ $data[8]=0;}
                     }else{
                       echo json_encode(array('first'=>$arreglo[0]));
                     }
+
+                    if($getArrayDelitos != 0){
                        if ($id != "") {                  
 
                       foreach ($getArrayDelitos as $delitos){
                                                         $insertarDelitos = "INSERT INTO pueDisposi.DelitosPorPersona (idPersona , idCatDelito) VALUES($id  ,  $delitos)";
                                                         $res2 = sqlsrv_query($conn, $insertarDelitos, array(), array("Scrollable" => SQLSRV_CURSOR_KEYSET ));
                                                       }  
-                       }                               
+                       }  
+                     }                             
 
                  }else{
                    $queryTransaction = " 

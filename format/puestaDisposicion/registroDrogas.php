@@ -41,6 +41,9 @@ if (isset($_POST["idPuestaDisposicion"])){
 
 if (isset($_POST['catDroga_id'])){ $getCatDroga_id = $_POST['catDroga_id']; }
 if (isset($_POST['kilogramos'])){ $getKilogramos = $_POST['kilogramos']; }
+if (isset($_POST['idCatUnidadMedida'])){ $getCatUnidadMedida_id = $_POST['idCatUnidadMedida']; }
+if (isset($_POST['idCatProductoQuimico'])){ $getCatProductoQuimico_id = $_POST['idCatProductoQuimico']; }
+
 
 if (isset($_POST['observaciones'])){ $getObservaciones = $_POST['observaciones']; }
 if (isset($_POST['idEnlace'])){ $idEnlace = $_POST['idEnlace']; }
@@ -81,8 +84,8 @@ if (isset($_POST['idDroga'])){ $idDroga = $_POST['idDroga']; }
                                           select @insertado = @@IDENTITY
 
 
-                                            INSERT INTO pueDisposi.Drogas (idPueDisposicion , idCatDroga , kilogramos, observaciones) 
-                                              VALUES(@insertado , $getCatDroga_id , $getKilogramos ,'$getObservaciones')
+                                            INSERT INTO pueDisposi.Drogas (idPueDisposicion, idCatDroga, idProductoQuimico, idUnidadMedidaDroga,  kilogramos, observaciones) 
+                                              VALUES(@insertado, $getCatDroga_id, $getCatProductoQuimico_id,  $getCatUnidadMedida_id,  $getKilogramos ,'$getObservaciones')
 
 
                                              SELECT MAX(idPuestaDisposicion) AS id FROM pueDisposi.puestaDisposicion   
@@ -132,10 +135,9 @@ if (isset($_POST['idDroga'])){ $idDroga = $_POST['idDroga']; }
                       BEGIN TRANSACTION
                             SET NOCOUNT ON    
 
-                                         INSERT INTO pueDisposi.Drogas (idPueDisposicion , idCatDroga , kilogramos, observaciones) 
-                                              VALUES($idPuestaDisposicion , $getCatDroga_id , $getKilogramos ,'$getObservaciones')
-
-
+                                         INSERT INTO pueDisposi.Drogas (idPueDisposicion , idCatDroga , idProductoQuimico, idUnidadMedidaDroga, kilogramos, observaciones) 
+                                              VALUES($idPuestaDisposicion , $getCatDroga_id , $getCatProductoQuimico_id , $getCatUnidadMedida_id ,
+                                                $getKilogramos ,'$getObservaciones')
 
                           COMMIT
                     END TRY
@@ -153,6 +155,8 @@ if (isset($_POST['idDroga'])){ $idDroga = $_POST['idDroga']; }
                                   SET NOCOUNT ON 
 
                                     UPDATE pueDisposi.Drogas SET idCatDroga = $getCatDroga_id ,
+                                           idProductoQuimico = $getCatProductoQuimico_id,
+                                           idUnidadMedidaDroga =  $getCatUnidadMedida_id,
                                            kilogramos = $getKilogramos, 
                                            observaciones = '$getObservaciones' 
                                            WHERE idDrogas = $idDroga

@@ -76,7 +76,6 @@ if($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || $
 		<link rel="stylesheet" type="text/css" href="css/principal.css">
 		<link rel="stylesheet" type="text/css" href="css/puesDispo.css">
 		<link rel="stylesheet" type="text/css" href="css/trimestral.css">
-
 		
 		<link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">	
 
@@ -94,19 +93,20 @@ if($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || $
  var tipoActualizacion = tipoActualizacion;
  if(tipoActualizacion == 0){
 	var data = '<tr class="table-row" id="new_row_ajax">' +
-	'<td contenteditable="false" id="txt_title" onBlur="addToHiddenField(this,\'id\')" onclick="editRow(this);"></td>' +
+	'<div class="padre"><td contenteditable="false" id="txt_title" onBlur="addToHiddenField(this,\'id\')" onclick="editRow(this);" class="delOpc"></td></div>' +
 	
 	'<td contenteditable="true" id="txt_title" onBlur="addToHiddenField(this,\'title\')" onclick="editRow(this);"><select id="textdelitoCometido" name="delitos[]" tabindex="6" class="form-control redondear selectTranparent"><?php while ($delitos = sqlsrv_fetch_array($res1)) { ?><option value="<? echo $delitos['idTipoDelito']; ?>" selected><? echo $delitos['delito']; ?></option><?php } ?></select></td>' +
 	
-	'<td><input type="hidden" id="title" /><input type="hidden" id="idPers" value="" /> / <a onclick="cancelAdd();" class="ajax-action-links">Cancelar</a></td>' +	
+	'<td><input type="hidden" id="title" /><input type="hidden" id="idPers" value="" /> <a onclick="cancelAdd();" class="ajax-action-links">Cancelar</a></td>' +	
 	'</tr>';
 }else{
+	$("#add-more").hide();
 	var data = '<tr class="table-row" id="new_row_ajax">' +
-	'<td contenteditable="false" id="txt_title" onBlur="addToHiddenField(this,\'id\')" onclick="editRow(this);"></td>' +
+	'<div class="padre"><td contenteditable="false" id="txt_title" onBlur="addToHiddenField(this,\'id\')" onclick="editRow(this);" class="delOpc"></td></div>' +
 	
-	'<td contenteditable="true" id="txt_title" onBlur="addToHiddenField(this,\'title\')" onclick="editRow(this);"><select id="textdelitoCometido" name="delitosAct[]" tabindex="6" class="form-control redondear selectTranparent"><?php while ($delitos = sqlsrv_fetch_array($res2)) { ?><option value="<? echo $delitos['idTipoDelito']; ?>" selected><? echo $delitos['delito']; ?></option><?php } ?></select></td>' +
+	'<td contenteditable="true" id="txt_title" onBlur="addToHiddenField(this,\'title\')" onclick="editRow(this);"><select id="textdelitoCometido" name="delitosAct[]" tabindex="6" class="form-control redondear selectTranparent txtDelitoDisable"><?php while ($delitos = sqlsrv_fetch_array($res2)) { ?><option value="<? echo $delitos['idTipoDelito']; ?>" selected><? echo $delitos['delito']; ?></option><?php } ?></select></td>' +
 	
-	'<td><input type="hidden" id="title" /><input type="hidden" id="idPers" value="" /><a onclick="agregarDelito();" class="ajax-action-links">Añadir delito</a> / <a onclick="cancelAdd();" class="ajax-action-links">Cancelar</a></td>' +	
+	'<td><input type="hidden" id="title" /><input type="hidden" id="idPers" value="" /><a id="addDelitoSec" onclick="agregarDelito();" class="ajax-action-links">Añadir delito </a> </td></div>' +	
 	'</tr>';
 }
 $("#table-body").append(data);
@@ -163,7 +163,8 @@ $("#table-body").append(data);
 			if($format  == 11){ ?>  onload="loadtablaFormat(<? echo $idUnidEnlac ?>, 'trimestral.php', 'trimestral', <? echo $idEnlace; ?>);" 	<? }
 			if($format  == 9){ ?>  	onload="loadtablaFormat(0, 'puestaDisposicion.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
 			if($format  == 10){ ?>  onload="loadtablaFormat(0, 'puestaDisposicionSuper.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
-			if($format  == 12){ ?>  onload="loadtablaFormat(0, 'puestaDisposicionConsulta.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
+			if($format  == 12){ ?>  	onload="loadtablaFormat(0, 'puestaDisposicionConsulta.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
+			if($format  == 13){ ?>  	onload="loadtablaFormat(0, 'cambioAdscripcionPueDispo.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
 	}
 
 } else {   
