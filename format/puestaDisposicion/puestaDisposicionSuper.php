@@ -1,6 +1,9 @@
 
 	<?php
 	session_start();
+
+		
+
 	include ("../../Conexiones/Conexion.php");
 	include("../../funciones.php");	
 	include ("../../Conexiones/conexionSicap.php");

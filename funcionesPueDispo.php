@@ -1,5 +1,7 @@
 <?php
 
+
+
 function getDataDireFiscaPuesta($conn, $idPuestaDisposicion){
 
 	$query = "  SELECT idFiscalia, idMunicipio, idColonia FROM pueDisposi.puestaDisposicion WHERE idPuestaDisposicion = $idPuestaDisposicion";

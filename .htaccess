@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteRule ^([a-zA-Z0-9/]+)$ index.php?format=$1
+ErrorDocument 404 /cbs/mycbs/error404.php
