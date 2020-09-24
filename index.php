@@ -205,7 +205,22 @@ $("#table-body").append(data);
 								?>
 
 
-			
+
+										<? 
+
+								if($tipoUser == 1  and $format == 1){
+
+									?>
+									  								<li style="background-color: #C09F77;  border: solid 2px #C09F77;"><a onclick="loadBiEstadistics(<? echo $idEnlace; ?>)" href="#">BI Estadistícas de Evaluación de Desempeño</a></li>
+
+									<?
+
+								}
+
+
+								?>
+					
+
 
 
 
@@ -216,7 +231,9 @@ $("#table-body").append(data);
 								<? if($format == 1){ ?>	
 
 
-								<a onclick="loadtablaFormatos(<? echo $idUnidadSelect; ?>)" href="#">Formato Mensual</a>
+									<a onclick="loadtablaFormatos(<? echo $idUnidadSelect; ?>)" href="#">Formato Mensual</a>
+
+
 								<? }else{ ?>
 
 										<? /*if($format  == 2){ ?><a onclick="loadtablaFormat(0, 'formatCmasc.php', 'cmasc', <? echo $idEnlace; ?>);" href="#">Formato Mensual</a> <? } */?>
@@ -236,6 +253,8 @@ $("#table-body").append(data);
 								<? if($format == 1 ){
 
 												?>
+
+																
 																<li><a onclick="cargaContRepositorio(<? echo $idUsuario; ?>, <? echo $format; ?>)" href="#">Repositorio</a></li>
 																<!--<li><a onclick="cargaContHistoricoEnlace(<? echo $idUsuario; ?>, <? echo $idEnlace; ?>, <? echo $format; ?>)" href="#">Historico</a></li>-->
 																<li><a onclick="cargaContHistoricoEnlaceDatos(<? echo $idUsuario; ?>, <? echo $idEnlace; ?>, <? echo $format; ?>, <? echo $idUnidEnlac; ?>)" href="#">Datos Historico</a></li>
