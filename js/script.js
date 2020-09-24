@@ -17,6 +17,235 @@ function objetoAjax(){
 	return xmlhttp;
 }
 
+
+function saveMp(){
+
+  var nameMpAdd = document.getElementById("nameMpAdd").value;
+  var paternoMpAdd = document.getElementById("paternoMpAdd").value;
+  var maternoMpAdd = document.getElementById("maternoMpAdd").value;
+
+		cont = document.getElementById('contTablempsAdded');
+		ajax=objetoAjax();
+		ajax.open("POST", "formatos/AddtemToMps.php");
+
+		ajax.onreadystatechange = function(){
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				//cont.innerHTML = ajax.responseText;
+				var json = ajax.responseText;
+																			var obj = eval("(" + json + ")");
+																			if (obj.first == "NO") { swal("", "No se agrego verifique los datos.", "warning"); }else{
+																				 if (obj.first == "SI") {                    
+																								
+		       document.getElementById("nameMpAdd").value = "";
+         document.getElementById("paternoMpAdd").value = "";
+         document.getElementById("maternoMpAdd").value = "";
+																								$('#addMpCatalo').modal('hide'); 
+																								//loadTableMpsEnlaceFormato(idEnlace)
+																								swal("", "Agregado Exitosamente.", "success");																				
+																				 }
+																			}
+			}
+		}
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		ajax.send("&nameMpAdd="+nameMpAdd+"&paternoMpAdd="+paternoMpAdd+"&maternoMpAdd="+maternoMpAdd);
+
+}
+
+
+function addMptoUnid(idMp, idEnlace, f){
+
+  var idUnidad = document.getElementById("selUnidMp").value;
+
+		cont = document.getElementById('contTablempsAdded');
+		ajax=objetoAjax();
+		ajax.open("POST", "formatos/AddtemMpUnidad.php");
+
+		ajax.onreadystatechange = function(){
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				//cont.innerHTML = ajax.responseText;
+				var json = ajax.responseText;
+																			var obj = eval("(" + json + ")");
+																			if (obj.first == "NO") { swal("", "No se agrego verifique los datos.", "warning"); }else{
+																				 if (obj.first == "SI") {                    
+																								
+																								$('#addMp').modal('hide'); 
+																								loadTableMpsEnlaceFormato(idEnlace)
+																								swal("", "Agregado Exitosamente.", "success");																				
+																				 }
+																			}
+			}
+		}
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		ajax.send("&idEnlace="+idEnlace+"&f="+f+"&idMp="+idMp+"&idUnidad="+idUnidad);
+
+}
+
+
+
+function getMpsSearching(idEnlace, f){
+
+			var names = document.getElementById("nameMp").value;
+			var patrn = document.getElementById("paternoMp").value;
+			var matrn = document.getElementById("maternoMp").value;
+
+			var sizen = names.length;
+			var sizep = patrn.length;
+			var sizem	= matrn.length;
+
+				if(sizen > 2 ){}
+
+				cont = document.getElementById('contTablempsAdded');
+				ajax=objetoAjax();
+				ajax.open("POST", "format/puestaDisposicion/mpsAdded.php");
+
+				ajax.onreadystatechange = function(){
+					if (ajax.readyState == 4 && ajax.status == 200) {
+						cont.innerHTML = ajax.responseText;
+					}
+				}
+				ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+				ajax.send("&names="+names+"&patrn="+patrn+"&matrn="+matrn+"&idEnlace="+idEnlace+"&f="+f);
+
+}	
+
+
+function loadAddMpsMod(){
+
+		var f = document.getElementById("selFormatoes").value;	
+  var idEnlace = document.getElementById("selEnlacess").value;
+
+		cont = document.getElementById('contModAddMps');
+		ajax=objetoAjax();
+		ajax.open("POST", "format/puestaDisposicion/modAddMps.php");
+
+		ajax.onreadystatechange = function(){
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				cont.innerHTML = ajax.responseText;
+			}
+		}
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		ajax.send("&idEnlace="+idEnlace+"&f="+f);
+
+}
+
+
+function loadMpsMovs(){
+
+		cont = document.getElementById('contenido');
+		ajax=objetoAjax();
+		ajax.open("POST", "format/puestaDisposicion/modalMovimMps.php");
+
+		ajax.onreadystatechange = function(){
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				cont.innerHTML = ajax.responseText;
+			}
+		}
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		ajax.send(null);
+
+}
+
+
+function deleteMpEnlcUnid(idEnMpUnid){ 
+ //var idEnlace = document.getElementById("selEnlacess").value;
+
+
+
+ swal({
+				title: "",
+				text: "¿Esta seguro de Eliminar?",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "Eliminar",
+				cancelButtonText: "Cancelar",
+				closeOnConfirm: true,
+				closeOnCancel: true
+			},
+			function(isConfirm){
+				if (isConfirm) {
+
+						cont = document.getElementById('contTablempsEnlacs');
+						ajax=objetoAjax();
+						ajax.open("POST", "formatos/deleteItemMpUnidad.php");
+
+						ajax.onreadystatechange = function(){
+							if (ajax.readyState == 4 && ajax.status == 200) {			
+									cont.innerHTML = ajax.responseText;
+									
+
+									var json = ajax.responseText;
+																			var obj = eval("(" + json + ")");
+																			if (obj.first == "NO") { swal("", "No se elimino verifique los datos.", "warning"); }else{
+																				 if (obj.first == "SI") {                    
+																						
+																								loadTableMpsEnlaceFormato2();	
+																								swal("", "Eliminado Exitosamente.", "success");																				
+																				 }
+																			}
+								
+
+								}
+						}
+						ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+						ajax.send("&idEnMpUnid="+idEnMpUnid);
+					
+				}
+			});
+ 
+}
+
+function loadTableMpsEnlaceFormato2(){
+ 
+ var f = document.getElementById("selFormatoes").value;	
+ var idEnlace = document.getElementById("selEnlacess").value;
+
+ cont = document.getElementById('contTablempsEnlacs');
+	ajax=objetoAjax();
+	ajax.open("POST", "formatos/tableSelectEnlacs.php");
+
+	ajax.onreadystatechange = function(){
+		if (ajax.readyState == 4 && ajax.status == 200) {			
+				cont.innerHTML = ajax.responseText;
+			}
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send("&idEnlace="+idEnlace+"&f="+f);
+}
+
+function loadTableMpsEnlaceFormato(idEnlace){
+ 
+ var f = document.getElementById("selFormatoes").value;	
+ cont = document.getElementById('contTablempsEnlacs');
+	ajax=objetoAjax();
+	ajax.open("POST", "formatos/tableSelectEnlacs.php");
+
+	ajax.onreadystatechange = function(){
+		if (ajax.readyState == 4 && ajax.status == 200) {			
+				cont.innerHTML = ajax.responseText;
+			}
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send("&idEnlace="+idEnlace+"&f="+f);
+}
+
+function loadInfoMpsFormat(){
+ 
+ var enlac = document.getElementById("selEnlacess").value;	
+ cont = document.getElementById('contFormatoMps');
+	ajax=objetoAjax();
+	ajax.open("POST", "formatos/selectFormatMpsEnlac.php");
+
+	ajax.onreadystatechange = function(){
+		if (ajax.readyState == 4 && ajax.status == 200) {			
+				cont.innerHTML = ajax.responseText;
+				loadTableMpsEnlaceFormato(enlac);
+			}
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send("&enlac="+enlac);
+}
+
 function cargaContHistoricoEnlaceDatos(idUsuario, idEnlace, format, idUnidad){
 
 	
@@ -1144,9 +1373,11 @@ function guardarCarpeta(mes, anio, idUnidad, idMp, format){
 
 function enviarAindex(idArchivo){
 
-
-
-	 setTimeout("location.href = 'index.php?format="+idArchivo+"';",10);
+	if(idArchivo == 1){ var e = "CarpetasInvestigacion"; }
+	if(idArchivo == 4){ var e = "Litigacion"; }
+	if(idArchivo == 11){ var e = "Trimestral"; }
+	
+	 setTimeout("location.href = '"+e+"';",10);
 
 
 }
