@@ -22,6 +22,7 @@ if($format == "CarpetasInvestigacion"){ $format = 1; }
 if($format == "Litigacion"){ $format = 4; }
 if($format == "Trimestral"){ $format = 11; }
 if($format == "Administrador"){ $format = 0; }
+if($format == "AdmonPolicias"){ $format = 13; }
 
 
 $_SESSION['formatis']=$format;
@@ -165,6 +166,7 @@ $("#table-body").append(data);
 			if($format  == 10){ ?>  onload="loadtablaFormat(0, 'puestaDisposicionSuper.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
 			if($format  == 12){ ?>  	onload="loadtablaFormat(0, 'puestaDisposicionConsulta.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
 			if($format  == 13){ ?>  	onload="loadtablaFormat(0, 'cambioAdscripcionPueDispo.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
+
 	}
 
 } else {   
