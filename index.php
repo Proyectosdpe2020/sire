@@ -22,6 +22,7 @@ if($format == "CarpetasInvestigacion"){ $format = 1; }
 if($format == "Litigacion"){ $format = 4; }
 if($format == "Trimestral"){ $format = 11; }
 if($format == "Administrador"){ $format = 0; }
+if($format == "AdmonPolicias"){ $format = 13; }
 
 
 $_SESSION['formatis']=$format;
@@ -165,6 +166,7 @@ $("#table-body").append(data);
 			if($format  == 10){ ?>  onload="loadtablaFormat(0, 'puestaDisposicionSuper.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
 			if($format  == 12){ ?>  	onload="loadtablaFormat(0, 'puestaDisposicionConsulta.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
 			if($format  == 13){ ?>  	onload="loadtablaFormat(0, 'cambioAdscripcionPueDispo.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
+
 	}
 
 } else {   
@@ -205,7 +207,22 @@ $("#table-body").append(data);
 								?>
 
 
-			
+
+										<? 
+
+								if($tipoUser == 1  and $format == 1){
+
+									?>
+									  								<li style="background-color: #C09F77;  border: solid 2px #C09F77;"><a onclick="loadBiEstadistics(<? echo $idEnlace; ?>)" href="#">BI Estadistícas de Evaluación de Desempeño</a></li>
+
+									<?
+
+								}
+
+
+								?>
+					
+
 
 
 
@@ -216,7 +233,9 @@ $("#table-body").append(data);
 								<? if($format == 1){ ?>	
 
 
-								<a onclick="loadtablaFormatos(<? echo $idUnidadSelect; ?>)" href="#">Formato Mensual</a>
+									<a onclick="loadtablaFormatos(<? echo $idUnidadSelect; ?>)" href="#">Formato Mensual</a>
+
+
 								<? }else{ ?>
 
 										<? /*if($format  == 2){ ?><a onclick="loadtablaFormat(0, 'formatCmasc.php', 'cmasc', <? echo $idEnlace; ?>);" href="#">Formato Mensual</a> <? } */?>
@@ -236,6 +255,8 @@ $("#table-body").append(data);
 								<? if($format == 1 ){
 
 												?>
+
+																
 																<li><a onclick="cargaContRepositorio(<? echo $idUsuario; ?>, <? echo $format; ?>)" href="#">Repositorio</a></li>
 																<!--<li><a onclick="cargaContHistoricoEnlace(<? echo $idUsuario; ?>, <? echo $idEnlace; ?>, <? echo $format; ?>)" href="#">Historico</a></li>-->
 																<li><a onclick="cargaContHistoricoEnlaceDatos(<? echo $idUsuario; ?>, <? echo $idEnlace; ?>, <? echo $format; ?>, <? echo $idUnidEnlac; ?>)" href="#">Datos Historico</a></li>
