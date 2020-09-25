@@ -3,6 +3,9 @@
 				include("../../funciones2.php");
 				include("../../sqlPersonas.php");
 
+				$envi = getEnviadoEnlaceFromt($conn, 1, 1);
+				$menom = Mes_Nombre($envi[0][1]);
+
 	?>
 
 						<div class="cotentMpsAdminMain">
@@ -23,11 +26,11 @@
 																						</td>
 																						<td id="nomostrar" class="imgdgtipeCabezera" width="10%" height="125"></td>
 																					</tr>
-																			</table>
+																			</table>  
 
 											<div class="row">
 								
-								<div class="col-xs-12 col-md-4"> 
+								<div class="col-xs-12 col-md-3"> 
 											
 														<label class="" for="inputlg">Enlace Capturista :<span class="aste">(*)</span></label>
 																																		<select class="form-control browser-default custom-select" onchange="loadInfoMpsFormat()" id="selEnlacess"><? 
@@ -39,7 +42,7 @@
 																																				?>
 																																	</select>
 								</div>
-								<div class="col-xs-12 col-md-4">									
+								<div class="col-xs-12 col-md-2">									
 													<label class="" for="inputlg">Formato :<span class="aste">(*)</span></label>
 																																		<div id="contFormatoMps"><select class="form-control browser-default custom-select" id="selFormatoes"> 
 																																			<option value="1" selected>Carpetas de Investigación</option>                            
@@ -47,11 +50,23 @@
 																																				?>
 																																	</select></div>
 								</div>
-								<div class="col-xs-12 col-md-4">
-									
-													<label class="" for="inputlg" style="color: transparent !important;">dfsfsdfdffsd.<span class="aste"></span></label>
-																																		<button data-toggle="modal" href="#addMp"  style="width: 100%; font-weight: bolder; color: white;" onclick="loadAddMpsMod()" type="button" class="btn btn-warning redondear">Agregar MP</button>
+									<div class="col-xs-12 col-md-2">									
+												<label class="" for="inputlg">Mes Captura:</label>
+												<div id="contMontsel"><select  style="color: black; font-weight: bold !important;" class="form-control browser-default custom-select"  id="selEnlacess">
+																																											<option value="Septiembre" selected><? echo $menom; ?></option>
+																																	</select></div>
 								</div>
+										<div class="col-xs-12 col-md-2">
+									
+													<div id="conBtnEnvid"><label class="" for="inputlg" style="color: transparent !important;">.<span class="aste"></span></label>
+																																		<button  href=""  style="width: 100%; font-weight: bolder; color: white;" onclick="updateEnviadoEnlceFor(<? echo $envi[0][0]; ?>, 1)" type="button" class="btn btn-<? if($envi[0][0] == 1){echo "success"; }else{ echo "warning"; } ?> redondear"> <? if ($envi[0][0] == 0){ ?> <i class="fa fa-unlock-alt" aria-hidden="true"></i> <? echo " No Enviado"; 	}else{ if($envi[0][0] == 1){ ?> <i class="fa fa-lock" aria-hidden="true"></i> <? echo " Enviado";  } } ?></button></div>
+								</div>
+								<div class="col-xs-12 col-md-3">
+									
+													<label class="" for="inputlg" style="color: transparent !important;">.<span class="aste"></span></label>
+																																		<button data-toggle="modal" href="#addMp"  style="width: 100%; font-weight: bolder; color: white;" onclick="loadAddMpsMod()" type="button" class="btn btn-info redondear">Agregar MP</button>
+								</div>
+						
 
 						</div>
 

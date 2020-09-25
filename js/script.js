@@ -52,6 +52,53 @@ function loadBiEstadistics(idEnlace){
 }
 
 
+function updateEnviadoEnlceFor(enviado, idEnlace){ 
+
+ swal({
+				title: "",
+				text: "¿Esta seguro de Actualizar Enviado?",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "Actualizar",
+				cancelButtonText: "Cancelar",
+				closeOnConfirm: true,
+				closeOnCancel: true
+			},
+			function(isConfirm){
+				if (isConfirm) {
+
+							var f = document.getElementById("selFormatoes").value;	
+
+						//cont = document.getElementById('contTablempsEnlacs');
+						ajax=objetoAjax();
+						ajax.open("POST", "formatos/updateEnviadoFormEnc.php");
+
+						ajax.onreadystatechange = function(){
+							if (ajax.readyState == 4 && ajax.status == 200) {			
+									//cont.innerHTML = ajax.responseText;
+									
+
+									var json = ajax.responseText;
+																			var obj = eval("(" + json + ")");
+																			if (obj.first == "NO") { swal("", "No se actualizo verifique los datos.", "warning"); }else{
+																				 if (obj.first == "SI") {  																					
+																								loadEnviadoEnlcFormt(idEnlace);																			
+																				 }
+																			}
+								
+
+								}
+						}
+						ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+						ajax.send("&enviado="+enviado+"&idEnlace="+idEnlace+"&f="+f);
+					
+				}
+			});
+ 
+}
+
+
 function saveMp(){
 
   var nameMpAdd = document.getElementById("nameMpAdd").value;
@@ -241,6 +288,7 @@ function loadTableMpsEnlaceFormato2(){
 	ajax.onreadystatechange = function(){
 		if (ajax.readyState == 4 && ajax.status == 200) {			
 				cont.innerHTML = ajax.responseText;
+				loadEnviadoEnlcFormt(idEnlace);
 			}
 	}
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
@@ -257,6 +305,39 @@ function loadTableMpsEnlaceFormato(idEnlace){
 	ajax.onreadystatechange = function(){
 		if (ajax.readyState == 4 && ajax.status == 200) {			
 				cont.innerHTML = ajax.responseText;
+				loadEnviadoEnlcFormt(idEnlace);
+			}
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send("&idEnlace="+idEnlace+"&f="+f);
+}
+
+function loadMonthenlcenvi(idEnlace, f){
+ 
+ cont = document.getElementById('contMontsel');
+	ajax=objetoAjax();
+	ajax.open("POST", "formatos/monthEnlceEnviad.php");
+
+	ajax.onreadystatechange = function(){
+		if (ajax.readyState == 4 && ajax.status == 200) {			
+				cont.innerHTML = ajax.responseText;
+			}
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send("&idEnlace="+idEnlace+"&f="+f);
+}
+
+function loadEnviadoEnlcFormt(idEnlace){
+ 
+ var f = document.getElementById("selFormatoes").value;	
+ cont = document.getElementById('conBtnEnvid');
+	ajax=objetoAjax();
+	ajax.open("POST", "formatos/enviadoBtnenlc.php");
+
+	ajax.onreadystatechange = function(){
+		if (ajax.readyState == 4 && ajax.status == 200) {			
+				cont.innerHTML = ajax.responseText;
+				loadMonthenlcenvi(idEnlace, f);
 			}
 	}
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
@@ -274,6 +355,7 @@ function loadInfoMpsFormat(){
 		if (ajax.readyState == 4 && ajax.status == 200) {			
 				cont.innerHTML = ajax.responseText;
 				loadTableMpsEnlaceFormato(enlac);
+				
 			}
 	}
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
