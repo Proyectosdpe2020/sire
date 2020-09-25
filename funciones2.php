@@ -1,5 +1,20 @@
 <? 
 
+function getEnviadoEnlaceFromt($conn, $idEnlace, $idFormato){
+
+		$query = "   SELECT mesCap, enviado FROM enlaceMesValidaEnviado WHERE idEnlace = $idEnlace AND idFormato = $idFormato ";
+
+		$indice = 0;
+		$stmt = sqlsrv_query($conn, $query);
+		while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+		{
+			$arreglo[$indice][0]=$row['enviado'];
+			$arreglo[$indice][1]=$row['mesCap'];
+			$indice++;
+		}
+		if(isset($arreglo)){return $arreglo;}
+}
+
 function getUnidadesFiscalias($conn, $idFiscalia){
 		$query = " SELECT idUnidad, idFiscalia,nUnidad FROM CatUnidad WHERE idFiscalia = $idFiscalia AND idUnidad NOT IN(158,161,157,166,159,164,75,163,160,162) ";
 		$indice = 0;
@@ -32,6 +47,8 @@ function dataUnidadEnlaceFormat2($conn, $idEnlace){
 		$query = " SELECT distinct usuario.idEnlace,[areaNombre], e.idUnidad, cu.nUnidad ,f.idFiscalia, usuario.idTipoArchivo
 FROM [ESTADISTICAV2].[dbo].[usuario] INNER JOIN enlace e ON e.idEnlace = usuario.idEnlace INNER JOIN CatFiscalia f ON f.idFiscalia = e.idFiscalia INNER JOIN CatUnidad cu ON cu.idUnidad = e.idUnidad 
 WHERE usuario.idEnlace = $idEnlace AND usuario.estatus = 'VI' AND idUsuario NOT IN(206,215,230) ORDER BY  areaNombre,idFiscalia  ";
+
+
 
 		$indice = 0;
 		$stmt = sqlsrv_query($conn, $query);
@@ -263,6 +280,53 @@ function getDataMPsMovLit($conn, $idEnlace, $idFormato){
 								}
 								if(isset($arreglo)){return $arreglo;}	
 }
+
+function Mes_Nombre($mes)
+{
+	$mes=(int)$mes;
+	$mes_nom="";
+	switch ($mes)
+	{
+		case 1:
+		$mes_nom="Enero";
+		break;
+		case 2:
+		$mes_nom="Febrero";
+		break;
+		case 3:
+		$mes_nom="Marzo";
+		break;
+		case 4:
+		$mes_nom="Abril";
+		break;
+		case 5:
+		$mes_nom="Mayo";
+		break;
+		case 6:
+		$mes_nom="Junio";
+		break;
+		case 7:
+		$mes_nom="Julio";
+		break;
+		case 8:
+		$mes_nom="Agosto";
+		break;
+		case 9:
+		$mes_nom="Septiembre";
+		break;
+		case 10:
+		$mes_nom="Octubre";
+		break;
+		case 11:
+		$mes_nom="Noviembre";
+		break;
+		case 12:
+		$mes_nom="Diciembre";
+		break;
+	}
+	return $mes_nom;
+}
+
 
 
 ?>
