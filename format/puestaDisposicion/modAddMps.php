@@ -6,7 +6,6 @@
 				if (isset($_POST["idEnlace"])){ $idEnlace = $_POST["idEnlace"]; }	
 				if (isset($_POST["f"])){ $f = $_POST["f"]; }		
 
-				echo "El enlace es: ".$idEnlace." y el formato es: ".$f;
 				$infoUni = dataUnidadEnlaceFormat2($conn, $idEnlace, $f);	
 
 					if($idEnlace != 14 OR $idEnlace != 15 OR $idEnlace != 16 OR $idEnlace != 17 OR $idEnlace != 18 OR $idEnlace != 19 OR $idEnlace != 21 OR $idEnlace != 22 OR $idEnlace != 23  ){

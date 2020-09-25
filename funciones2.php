@@ -48,7 +48,7 @@ function dataUnidadEnlaceFormat2($conn, $idEnlace){
 FROM [ESTADISTICAV2].[dbo].[usuario] INNER JOIN enlace e ON e.idEnlace = usuario.idEnlace INNER JOIN CatFiscalia f ON f.idFiscalia = e.idFiscalia INNER JOIN CatUnidad cu ON cu.idUnidad = e.idUnidad 
 WHERE usuario.idEnlace = $idEnlace AND usuario.estatus = 'VI' AND idUsuario NOT IN(206,215,230) ORDER BY  areaNombre,idFiscalia  ";
 
-echo $query;
+
 
 		$indice = 0;
 		$stmt = sqlsrv_query($conn, $query);
