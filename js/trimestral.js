@@ -679,6 +679,21 @@ function changeLock(year, period, link, sendedReport){
 	});
 }
 
+function getUsersByPastPeriod(period, year){
+
+	$.ajax({
+		url:'format/trimestral/admin/templates/users_by_past_period_table.php?period='+period+'&year='+year,
+		type:'POST',
+		contentType:false,
+		processData:false,
+		cache:false
+	}).done(function(respuesta){
+		$( "#admin_content" ).html( respuesta );
+
+	});
+
+}
+
 function verFormato(idArchivo, ubicacion){
 
 

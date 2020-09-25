@@ -3,7 +3,7 @@ include("../../../../Conexiones/Conexion.php");
 include("../../../../funciones.php");
 
 $availablePeriods = getTrimestralPeriodsAvailable($conn);
-
+$getUsersMethod = 'getUsersByPeriod';
 ?>
 
 
@@ -27,13 +27,38 @@ $availablePeriods = getTrimestralPeriodsAvailable($conn);
                     <tbody>
 <? 			
                         for ($i=0; $i < sizeof($availablePeriods); $i++) { 
+                            if($availablePeriods[$i][3] != 'Activo'){ 
+                                $getUsersMethod = "getUsersByPastPeriod";
+                            } 
+                            else{
+                                $getUsersMethod = 'getUsersByPeriod';
+                            } 
 ?>
-                            <tr style="cursor: pointer;" onclick="getUsersByPeriod('<? echo $availablePeriods[$i][2]; ?>','<? echo $availablePeriods[$i][0]; ?>')">
+                            <tr style="cursor: pointer;" onclick="<? echo $getUsersMethod; ?>('<? echo $availablePeriods[$i][2]; ?>','<? echo $availablePeriods[$i][0];?>')">
 
                                 <td class="tdRowMain negr"><? echo ($i+1); ?></td>
                                 <td class="tdRowMain"><? echo $availablePeriods[$i][1]; ?></td>
                                 <td class="tdRowMain"><? echo $availablePeriods[$i][0]; ?></td>
-                                <td class="tdRowMain">Bloqueado</td>												
+                                <td class="tdRowMain" 
+<? 
+                                    if($availablePeriods[$i][3] != 'Activo'){ 
+                                        echo 'style="color: red;"';
+                                    } 
+                                    else{
+                                        echo 'style="color: green;"';
+                                    } 
+?>
+                                >
+<? 
+                                    if($availablePeriods[$i][3] != 'Activo'){ 
+                                        echo 'Bloqueado';
+                                    } 
+                                    else{
+                                        echo 'Activo';
+                                    } 
+?>
+                                </td>
+											
                                     
                             </tr>			
 
