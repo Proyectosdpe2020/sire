@@ -44,7 +44,16 @@
 
 		$band=true;
 	}
+	if($_SESSION['idArchivo'] == 13){ $nameFormat = "AdmonPolicias";}
+	if($_SESSION['idArchivo'] == 12){ $nameFormat = "PoliciaConsulta";}
+	if($_SESSION['idArchivo'] == 10){ $nameFormat = "PoliciaAdmin";}
+	if($_SESSION['idArchivo'] == 9){ $nameFormat = "Policia";}
+	if($_SESSION['idArchivo'] == 1){ $nameFormat = "CarpetasInvestigacion";}
+	if($_SESSION['idArchivo'] == 4){ $nameFormat = "Litigacion";}
+	if($_SESSION['idArchivo'] == 11){ $nameFormat = "Trimestral";}
+	if($_SESSION['idArchivo'] == 0){ $nameFormat = "Administrador";}
 
+	echo $_SESSION['idArchivo'];
 	if($band)
 	{
 		$_SESSION['yainicieIE']="SI";
@@ -73,7 +82,7 @@
 
 			}else{
 
-					header("Location: index.php?format=".$_SESSION['idArchivo']);
+					header("Location: ".$nameFormat);
 					$_SESSION['accesSubIndex']=0;
 
 		}							

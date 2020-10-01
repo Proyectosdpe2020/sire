@@ -503,6 +503,8 @@
 																																																			     <tr>
 																																																						      <th scope="col">#</th>
 																																																						      <th scope="col">Droga</th>
+																																																						      <th scope="col"><center>Unidad de medida</center></th>
+																																																						      <th scope="col"><center>Producto Químico</center></th>
 																																																						      <th scope="col"><center>Gramos</center></th>
 																																																						      <th scope="col"><center>Observaciones</center></th>
 
@@ -519,6 +521,8 @@
 																																																				<tr>																																																					
 																																																							<td> <? echo ($h+1) ?> </td>
 																																																							<td> <? echo $dataPuestaDrogas[$h][1]; ?> </td>
+																																																							<td> <center><? echo $dataPuestaDrogas[$h][4]; ?></center> </td>
+																																																							<td> <center><? echo $dataPuestaDrogas[$h][5]; ?></center> </td>
 																																																							<td> <center><? echo $dataPuestaDrogas[$h][2]; ?></center> </td>
 																																																							<td> <center><? echo $dataPuestaDrogas[$h][3]; ?></center> </td>
 

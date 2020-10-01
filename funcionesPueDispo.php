@@ -1,5 +1,7 @@
 <?php
 
+
+
 function getDataDireFiscaPuesta($conn, $idPuestaDisposicion){
 
 	$query = "  SELECT idFiscalia, idMunicipio, idColonia FROM pueDisposi.puestaDisposicion WHERE idPuestaDisposicion = $idPuestaDisposicion";
@@ -190,6 +192,7 @@ for ($i=0; $i < sizeof($arrFiscEnlace) ; $i++) {
 }
 $valores = substr($valores, 0, -1);
 
+$enlaceCaptura = 0; //Bandera para saber si se esta entrando como usuario regional de consulta
 			
 if($fiscalia == 0){
 
@@ -204,31 +207,57 @@ WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND 
 
 
 }else{
-
-	if($idenlace == 59 || $idenlace == 60 || $idenlace == 84 || $idenlace == 85 || $idenlace == 91){
-
+  
+ //Consulta para usuarios regionales 
+	if($idenlace == 192 || $idenlace == 193 || $idenlace == 197 || $idenlace == 198 || $idenlace == 199 || $idenlace == 200 || $idenlace == 201 	|| $idenlace == 202 || $idenlace == 203){
+   
+			$valoresEnlaceConsulta ="";
+			$arrFiscEnlaceConsulta = getFiscaliasEnlaceConsulta($conn, $idenlace); 
+			for ($i=0; $i < sizeof($arrFiscEnlaceConsulta) ; $i++) { 
+				
+				$enlaceConsultaVal = $arrFiscEnlaceConsulta[$i][1];
+				$valoresEnlaceConsulta = $valoresEnlaceConsulta."".$enlaceConsultaVal.","; 
+			}
+			$valoresEnlaceConsulta = substr($valoresEnlaceConsulta, 0, -1);
+		
+		$enlaceCaptura = 1;
 		$query = " SELECT pd.idPuestaDisposicion, m.nombre+' '+m.paterno+' '+m.materno as nombreMando, pd.nuc, pd.fechaEvento, pd.fechaInforme, f.Nombre as fiscalia, 
-		mu.Nombre as municipio, col.Nombre as colonia, pd.calle, pd.numero, pd.codigoPostal
+		mu.Nombre as municipio, col.Nombre as colonia, pd.calle, pd.numero, pd.codigoPostal,e.nombre+' '+e.apellidoPaterno+' '+e.apellidoMarterno as nombreEnlace
 		FROM pueDisposi.puestaDisposicion pd 
 		INNER JOIN pueDisposi.mando m ON m.idMando = pd.idMando
 		INNER JOIN pueDisposi.Fiscalias f ON f.CatFiscaliasID = pd.idFiscalia
 		INNER JOIN pueDisposi.CatMunicipios mu ON mu.CatMunicipiosID = pd.idMunicipio
 		INNER JOIN pueDisposi.CatColonias col ON col.CatColoniasID = pd.idColonia
-		WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND pd.mes = $mes AND pd.idFiscalia IN($valores) ORDER BY f.Nombre ";
-
+		INNER JOIN dbo.enlace e ON e.idEnlace = pd.idEnlace
+		WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND pd.mes = $mes AND pd.idEnlace IN($valoresEnlaceConsulta) ORDER BY f.Nombre ";
 	}else{
 
-		$query = " SELECT pd.idPuestaDisposicion, m.nombre+' '+m.paterno+' '+m.materno as nombreMando, pd.nuc, pd.fechaEvento, pd.fechaInforme, f.Nombre as fiscalia, 
-		mu.Nombre as municipio, col.Nombre as colonia, pd.calle, pd.numero, pd.codigoPostal
-		FROM pueDisposi.puestaDisposicion pd 
-		INNER JOIN pueDisposi.mando m ON m.idMando = pd.idMando
-		INNER JOIN pueDisposi.Fiscalias f ON f.CatFiscaliasID = pd.idFiscalia
-		INNER JOIN pueDisposi.CatMunicipios mu ON mu.CatMunicipiosID = pd.idMunicipio
-		INNER JOIN pueDisposi.CatColonias col ON col.CatColoniasID = pd.idColonia
-		WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND pd.mes = $mes AND pd.idFiscalia IN($valores) AND idEnlace = $idenlace ORDER BY f.Nombre ";
+		if($idenlace == 59 || $idenlace == 60 || $idenlace == 84 || $idenlace == 85 || $idenlace == 91 || $idenlace == 86 || $idenlace == 87|| $idenlace == 89 || $idenlace == 90){ //// THEY ARE ALL THE USERS CAN SEE EVERTHING
+
+			$query = " SELECT pd.idPuestaDisposicion, m.nombre+' '+m.paterno+' '+m.materno as nombreMando, pd.nuc, pd.fechaEvento, pd.fechaInforme, f.Nombre as fiscalia, 
+			mu.Nombre as municipio, col.Nombre as colonia, pd.calle, pd.numero, pd.codigoPostal
+			FROM pueDisposi.puestaDisposicion pd 
+			INNER JOIN pueDisposi.mando m ON m.idMando = pd.idMando
+			INNER JOIN pueDisposi.Fiscalias f ON f.CatFiscaliasID = pd.idFiscalia
+			INNER JOIN pueDisposi.CatMunicipios mu ON mu.CatMunicipiosID = pd.idMunicipio
+			INNER JOIN pueDisposi.CatColonias col ON col.CatColoniasID = pd.idColonia
+			WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND pd.mes = $mes AND pd.idFiscalia IN($valores) ORDER BY f.Nombre ";
+
+		}else{
+
+			$query = " SELECT pd.idPuestaDisposicion, m.nombre+' '+m.paterno+' '+m.materno as nombreMando, pd.nuc, pd.fechaEvento, pd.fechaInforme, f.Nombre as fiscalia, 
+			mu.Nombre as municipio, col.Nombre as colonia, pd.calle, pd.numero, pd.codigoPostal
+			FROM pueDisposi.puestaDisposicion pd 
+			INNER JOIN pueDisposi.mando m ON m.idMando = pd.idMando
+			INNER JOIN pueDisposi.Fiscalias f ON f.CatFiscaliasID = pd.idFiscalia
+			INNER JOIN pueDisposi.CatMunicipios mu ON mu.CatMunicipiosID = pd.idMunicipio
+			INNER JOIN pueDisposi.CatColonias col ON col.CatColoniasID = pd.idColonia
+			WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND pd.mes = $mes AND pd.idFiscalia IN($valores) AND idEnlace = $idenlace ORDER BY f.Nombre ";
+		}
 	}
 
 }
+
 
  $indice = 0;
 	
@@ -246,6 +275,7 @@ WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND 
 		$arreglo[$indice][8]=$row['calle'];
 		$arreglo[$indice][9]=$row['numero'];
 		$arreglo[$indice][10]=$row['codigoPostal'];
+		if(	$enlaceCaptura == 1){ $arreglo[$indice][11]=$row['nombreEnlace']; }
 		$indice++;
 	}
 
@@ -519,9 +549,19 @@ if($idArma == 0){
 
 function get_data_drog_puesta($conn, $idPuestaDisposicion, $idDroga){
 if($idDroga == 0){
-			$query = "   SELECT d.idDrogas, cd.nombre, d.kilogramos, d.observaciones FROM pueDisposi.Drogas d INNER JOIN pueDisposi.CatDrogas cd ON cd.CatDrogasId = d.idCatDroga WHERE d.idPueDisposicion = $idPuestaDisposicion   ";
+			$query = "   SELECT d.idDrogas, cd.nombre, d.kilogramos, d.observaciones, um.nombre as unidadMedida, pq.nombre as prodQuimico 
+			FROM pueDisposi.Drogas d 
+			INNER JOIN pueDisposi.CatDrogas cd ON cd.CatDrogasId = d.idCatDroga 
+			LEFT JOIN pueDisposi.CatUnidadMedidaDroga um ON um.idUnidadMedidaDroga = d.idUnidadMedidaDroga
+			LEFT JOIN pueDisposi.CatProdQuimicoDroga pq ON pq.idProductoQuimico = d.idProductoQuimico
+			WHERE d.idPueDisposicion = $idPuestaDisposicion   ";
 		}else{
-			$query = "   SELECT d.idDrogas, cd.nombre, d.kilogramos, d.observaciones FROM pueDisposi.Drogas d INNER JOIN pueDisposi.CatDrogas cd ON cd.CatDrogasId = d.idCatDroga WHERE d.idDrogas = $idDroga   ";
+			$query = "   SELECT d.idDrogas, cd.nombre, d.kilogramos, d.observaciones,  um.nombre as unidadMedida, pq.nombre as prodQuimico 
+			FROM pueDisposi.Drogas d 
+			INNER JOIN pueDisposi.CatDrogas cd ON cd.CatDrogasId = d.idCatDroga
+			LEFT JOIN pueDisposi.CatUnidadMedidaDroga um ON um.idUnidadMedidaDroga = d.idUnidadMedidaDroga
+			LEFT JOIN pueDisposi.CatProdQuimicoDroga pq ON pq.idProductoQuimico = d.idProductoQuimico
+			WHERE d.idDrogas = $idDroga   ";
 		}
 
 
@@ -534,6 +574,8 @@ if($idDroga == 0){
 		$arreglo[$indice][1]=$row['nombre'];
 		$arreglo[$indice][2]=$row['kilogramos'];
 		$arreglo[$indice][3]=$row['observaciones'];
+		$arreglo[$indice][4]=$row['unidadMedida'];
+		$arreglo[$indice][5]=$row['prodQuimico'];
 
 		$indice++;
 	}
@@ -851,12 +893,12 @@ function getDataMarcaVehicle($conn){
 
 
 			
-function getDataMandos($conn, $estatus){
+function getDataMandos($conn){
 
 							$query = " SELECT m.idMando, m.nombre, m.paterno, m.materno, pdc.nombre as cargo, f.nombre as funcion, ad.nombre as areaAdscripcion FROM pueDisposi.mando m 
   INNER JOIN pueDisposi.cargo pdc ON pdc.idCargo = m.idCargo 
   INNER JOIN pueDisposi.funcion f ON f.idFuncion = m.idFuncion
-  INNER JOIN pueDisposi.areaAdscripcion ad ON ad.idAreaAdscripcion = m.idAreaAdscripcion WHERE m.estatus = '$estatus' ";
+  INNER JOIN pueDisposi.areaAdscripcion ad ON ad.idAreaAdscripcion = m.idAreaAdscripcion ";
 
 
 							$indice = 0;
@@ -931,6 +973,25 @@ function getFiscaliasEnlace($conn, $idEnlace){
 							
 									$arreglo[$indice][0]=$row['idFiscalia'];
 									$arreglo[$indice][1]=$row['nFiscalia'];
+							
+									$indice++;
+								}
+								if(isset($arreglo)){return $arreglo;}	
+
+}
+
+function getFiscaliasEnlaceConsulta($conn, $idEnlace){
+
+							$query = " SELECT idFiscalia, idEnlaceConsulta FROM pueDisposi.enlaceFiscaliaConsulta WHERE idEnlace = $idEnlace";
+
+
+							 $indice = 0;
+								$stmt = sqlsrv_query($conn, $query);
+								while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))	
+								{
+							
+									$arreglo[$indice][0]=$row['idFiscalia'];
+									$arreglo[$indice][1]=$row['idEnlaceConsulta'];
 							
 									$indice++;
 								}
@@ -1050,7 +1111,123 @@ function getDataDelitosPorPersona($conn , $idPersona){
 }
 
 
+function getDataUnidadMedida($conn){
+	$query = "SELECT * FROM pueDisposi.CatUnidadMedidaDroga";
+
+							 $indice = 0;
+								$stmt = sqlsrv_query($conn, $query);
+								while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))	
+								{
+							
+									$arreglo[$indice][0]=$row['idUnidadMedidaDroga'];
+									$arreglo[$indice][1]=$row['nombre'];
+							
+									$indice++;
+								}
+								if(isset($arreglo)){return $arreglo;}	
+}
+
+function getDataProductoQuimico($conn){
+	$query = "SELECT * FROM pueDisposi.CatProdQuimicoDroga";
+
+							 $indice = 0;
+								$stmt = sqlsrv_query($conn, $query);
+								while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))	
+								{
+							
+									$arreglo[$indice][0]=$row['idProductoQuimico'];
+									$arreglo[$indice][1]=$row['nombre'];
+							
+									$indice++;
+								}
+								if(isset($arreglo)){return $arreglo;}	
+}
 
 
+//**************MODULO ADMINISTRACION******************
+function getareaAdscripcion($conn){
+	$query = "SELECT * FROM pueDisposi.areaAdscripcion";
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC )){
+		$arreglo[$indice][0]=$row['idAreaAdscripcion'];
+		$arreglo[$indice][1]=$row['nombre'];
+		$arreglo[$indice][2]=$row['estatus'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}	
+}
+
+function getCargo($conn){
+	$query = "SELECT * FROM pueDisposi.cargo";
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC )){
+		$arreglo[$indice][0]=$row['idCargo'];
+		$arreglo[$indice][1]=$row['nombre'];
+		$arreglo[$indice][2]=$row['estatus'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}	
+}
+
+function getFuncion($conn){
+	$query = "SELECT * FROM pueDisposi.funcion";
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC )){
+		$arreglo[$indice][0]=$row['idFuncion'];
+		$arreglo[$indice][1]=$row['nombre'];
+		$arreglo[$indice][2]=$row['estatus'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}	
+}
+
+
+function getDataMandoTableAdm($conn, $idMando, $areaAdsc){
+	if($idMando != 0){
+		$query = " SELECT m.idMando, m.nombre+' '+m.paterno+' '+m.materno as nombreMando, m.nombre, m.paterno, m.materno, pdc.nombre as cargo, f.nombre as funcion, ad.nombre as areaAdscripcion, m.idCargo, m.idFuncion, m.idAreaAdscripcion, CASE WHEN m.estatus = 'VI' THEN 'Activo' ELSE 'Inactivo' END as estatus 
+		FROM pueDisposi.mando m 
+  INNER JOIN pueDisposi.cargo pdc ON pdc.idCargo = m.idCargo 
+  INNER JOIN pueDisposi.funcion f ON f.idFuncion = m.idFuncion
+  INNER JOIN pueDisposi.areaAdscripcion ad ON ad.idAreaAdscripcion = m.idAreaAdscripcion WHERE m.idMando = $idMando ";
+	}elseif ($areaAdsc == 'todos'){
+		$query = " SELECT m.idMando, m.nombre+' '+m.paterno+' '+m.materno as nombreMando, m.nombre, m.paterno, m.materno, pdc.nombre as cargo, f.nombre as funcion, ad.nombre as areaAdscripcion, m.idCargo, m.idFuncion, m.idAreaAdscripcion, CASE WHEN m.estatus = 'VI' THEN 'Activo' ELSE 'Inactivo' END as estatus 
+		FROM pueDisposi.mando m 
+  INNER JOIN pueDisposi.cargo pdc ON pdc.idCargo = m.idCargo 
+  INNER JOIN pueDisposi.funcion f ON f.idFuncion = m.idFuncion
+  INNER JOIN pueDisposi.areaAdscripcion ad ON ad.idAreaAdscripcion = m.idAreaAdscripcion
+  ORDER BY m.idAreaAdscripcion ASC";
+	}else{
+			$query = " SELECT m.idMando, m.nombre+' '+m.paterno+' '+m.materno as nombreMando, m.nombre, m.paterno, m.materno, pdc.nombre as cargo, f.nombre as funcion, ad.nombre as areaAdscripcion, m.idCargo, m.idFuncion, m.idAreaAdscripcion, CASE WHEN m.estatus = 'VI' THEN 'Activo' ELSE 'Inactivo' END as estatus
+		FROM pueDisposi.mando m 
+  INNER JOIN pueDisposi.cargo pdc ON pdc.idCargo = m.idCargo 
+  INNER JOIN pueDisposi.funcion f ON f.idFuncion = m.idFuncion
+  INNER JOIN pueDisposi.areaAdscripcion ad ON ad.idAreaAdscripcion = m.idAreaAdscripcion WHERE m.idAreaAdscripcion = $areaAdsc"; 
+	}
+	
+  $indice = 0;
+  $stmt = sqlsrv_query($conn, $query);
+		while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC )){
+			$arreglo[$indice][0]=$row['idMando'];
+			$arreglo[$indice][1]=$row['nombreMando'];
+			$arreglo[$indice][2]=$row['nombre'];
+			$arreglo[$indice][3]=$row['paterno'];
+			$arreglo[$indice][4]=$row['materno'];
+			$arreglo[$indice][5]=$row['cargo'];
+			$arreglo[$indice][6]=$row['funcion'];
+			$arreglo[$indice][7]=$row['areaAdscripcion'];
+			$arreglo[$indice][8]=$row['idCargo'];
+			$arreglo[$indice][9]=$row['idFuncion'];
+			$arreglo[$indice][10]=$row['idAreaAdscripcion'];
+			$arreglo[$indice][11]=$row['estatus'];
+			$indice++;
+		}
+		if(isset($arreglo)){return $arreglo;}	
+
+}
 
 ?>
+
+

@@ -1,14 +1,27 @@
 
 	<?php
+
+	
+
 	session_start();
+
+	/*if($_SESSION['idArchivo'] != 11){ 
+    	unset($_SESSION['yainicieIE']); 
+    	$_SESSION['yainicieIE']="NO";
+		header("Location: http://201.116.252.158:8080/HELO900803/SIRE");    	
+    }*/
+
 	include ("../../Conexiones/Conexion.php");
 	include("../../funciones.php");	
 	include ("../../Conexiones/conexionSicap.php");
-		include("../../funcioneLit.php");
+    include("../../funcioneLit.php");
 	include("../../funcioneTrimes.php");
 
 	if (isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }
 	if (isset($_POST["idEnlace"])){ $idEnlace = $_POST["idEnlace"]; }
+	
+
+	
 
 	$anioGlobal = 2020;
 	$per = 2;

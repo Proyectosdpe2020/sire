@@ -29,6 +29,8 @@
 		    $nombre = $arreglo[0][1];
 		    $kilogramos = $arreglo[0][2];
 		    $observaciones = $arreglo[0][3];
+		    $unidadMedida = $arreglo[0][4];
+		    $prodQuimico = $arreglo[0][5];
 		 }else{ 
 		 	//Si $idTrabajoCampo viene con valor 0 no es actualizacion y entra aqui
 		 	$a = 0;
@@ -95,10 +97,39 @@
 																									 </datalist>
 																	    </div>
 																	    <div class="form-group col-md-6">
+																	      <label for="textCatUnidadMedida">Unidad de medida<span class="aste">(*)</span></label>
+																	      <select class="form-control browser-default custom-select" id="textCatUnidadMedida">
+																	      	<option value="0">Selecciona</option>
+																	      	<?
+																	      	$catUnidadMedida = getDataUnidadMedida($conn);
+																	      	for ($d=0; $d < sizeof($catUnidadMedida); $d++) { 
+																	      		$idUnidadMedidaDroga = $catUnidadMedida[$d][0];	$nombre = $catUnidadMedida[$d][1];	?>
+																	      		<option style="color: black; font-weight: bold;" value="<? echo $idUnidadMedidaDroga; ?>" <?php if($a == 1 && $unidadMedida == $nombre ){?> selected <?php } ?>><? echo $nombre; ?></option>
+																	      		<?
+																	      	}
+																	      	?>
+																	      </select>
+																	    </div>																  
+																	  </div>
+																	  <div class="form-row">
+																	  	 <div class="form-group col-md-6">
+																	      <label for="textCatProductoQuimico">Tipo de producto químico<span class="aste">(*)</span></label>
+																	      <select class="form-control browser-default custom-select" id="textCatProductoQuimico">
+																	      	<option value="0">Selecciona</option>
+																	      	<?
+																	      	$catProdQuimicoDroga = getDataProductoQuimico($conn);
+																	      	for ($d=0; $d < sizeof($catProdQuimicoDroga); $d++) { 
+																	      		$idProductoQuimico = $catProdQuimicoDroga[$d][0];	$nombre = $catProdQuimicoDroga[$d][1];	?>
+																	      		<option style="color: black; font-weight: bold;" value="<? echo $idProductoQuimico; ?>" <?php if($a == 1 && $prodQuimico == $nombre ){?> selected <?php } ?> ><? echo $nombre; ?></option>
+																	      		<?
+																	      	}
+																	      	?>
+																	      </select>
+																	    </div>									
+																	  	<div class="form-group col-md-6">
 																	      <label for="textKilogramos">Gramos<span class="aste">(*)</span></label>
 																	      <input value="<?php if($a == 1){ echo $kilogramos; } ?>" type="text" class="form-control" id="textKilogramos" name="textKilogramos">
-																	    </div>
-																	  
+																	    </div>	
 																	  </div>
 																			</div>
 																	</div>

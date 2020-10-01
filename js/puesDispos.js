@@ -726,9 +726,17 @@ function registrarPersona(idEnlace, tipoActualizacion, tipoArch, b, idPersona){
  var textCatDelitos = $("#textTipoDelito").val(); 
  var textDisposicionDe = $("#textDisposicionDe").val();
 
+//Para verificar si el usuario agrego un delito secundario
+ if ( document.getElementById( "textdelitoCometido" ) ) { 
+ 	var arrDelitos = document.getElementsByName("delitos[]"); 
+ }else{
+ 		var arrDelitos = 0;
+ }
+
+
 
     if(textNombre!= "" && textApPaterno != "" && textApMaterno != "" && fechaDetencion != "" && textEdad  != "" 
-			&& textSexo != "" && textCatDelitos != "" && textInvFlag != 0 && textDisposicionDe != 0){
+			&& textSexo != "" && textCatDelitos != "" && textInvFlag != 0 && textDisposicionDe != 0 ){
 
 	/*Obtener datos del formulario*/
 
@@ -737,8 +745,7 @@ function registrarPersona(idEnlace, tipoActualizacion, tipoArch, b, idPersona){
 	var dia = fechaDetencion.format('D'); 
 	var mes = fechaDetencion.format('M'); 
 	var anio = fechaDetencion.format('YYYY'); 
-	var arrDelitos = document.getElementsByName("delitos[]");
- 
+
     
 	var textBandas = $("#textBandas").val();
 	var textOrgCriminal = $("#textOrgCriminal").val();
@@ -793,12 +800,8 @@ function registrarPersona(idEnlace, tipoActualizacion, tipoArch, b, idPersona){
     //// DATA DE LA PUESTA A DISPOSICION /////
 
     /// DATA DE DELITOS ///
-if(arrDelitos.length > 0){
 	for(i=0;i<arrDelitos.length;i++){ jObjectDelitos[i] = arrDelitos[i].value; }
 	jObjectDelitos = JSON.stringify(jObjectDelitos);
-}else{
-	jObjectDelitos = JSON.stringify('2');
-}
   	/// DATA DE DELITOS ///
 
 
@@ -1223,8 +1226,10 @@ var objDroga = $("#listaCatDroga").find("option[value='" + textCatDroga + "']").
 if(objDroga != null && objDroga.length > 0){
 
 					var textKilogramos = $("#textKilogramos").val();
+					var textCatUnidadMedida = $("#textCatUnidadMedida").val();
+					var textCatProductoQuimico = $("#textCatProductoQuimico").val();
 										    /// VALIDACIONES ///
-						if(textKilogramos != ""){
+						if(textKilogramos != "" && textCatUnidadMedida != 0 &&  textCatProductoQuimico != 0){
 
 						
 						var textObservaciones = $("#textObservacionesDrog").val();
@@ -1271,7 +1276,8 @@ if(objDroga != null && objDroga.length > 0){
 						        dataType: 'html',
 						        url: "format/puestaDisposicion/registroDrogas.php",
 						        data: "catDroga_id="+objDroga+"&kilogramos="+textKilogramos+"&observaciones="+textObservaciones+"&jObject="+jObject+"&idEnlace="+idEnlace+
-						               "&idPuestaDisposicion="+idPuestaDisposicion+"&tipoActualizacion="+tipoActualizacion+"&idDroga="+idDroga,
+						               "&idPuestaDisposicion="+idPuestaDisposicion+"&tipoActualizacion="+tipoActualizacion+"&idDroga="+idDroga+"&idCatUnidadMedida="+textCatUnidadMedida+
+						               "&idCatProductoQuimico="+textCatProductoQuimico,
 						        success: function(resp){
 						            var json = resp;
 															var obj = eval("(" + json + ")");
@@ -2513,20 +2519,21 @@ function agregarDelito() {
  var arrDelitos = document.getElementsByName("delitosAct[]");
  	for(i=0;i<arrDelitos.length;i++){ jObjectDelitos[i] = arrDelitos[i].value; }
 	//jObjectDelitos = JSON.stringify(jObjectDelitos);
-  alert("ID DE PERSONA: " +  idPers + "ID DELITO" +jObjectDelitos[arrDelitos.length-1]);
-
+  //alert("ID DE PERSONA: " +  idPers + "ID DELITO" +jObjectDelitos[arrDelitos.length-1]);
 
   	ajax=objetoAjax();
 						ajax.open("POST", "format/puestaDisposicion/actualizarDelito.php");
  
 						ajax.onreadystatechange = function(){
 							if (ajax.readyState == 4 && ajax.status == 200) {		
-								$("#table-body").append(data);
+								//$("#table-body").append(data);
 										 var json = ajax.responseText;
 										 	 $("#add-more").show();	
 													var obj = eval("(" + json + ")");
-													if (obj.first == "NO") { swal("", "No se agrego el delito.", "warning"); }else{
-														 if (obj.first == "SI") {    															
+													if (obj.first == "NO") { swal("", "No se agrego el delito, verifique si no se agregó anteriormente", "warning"); }else{
+														 if (obj.first == "SI") {   		
+														 $("#addDelitoSec").remove();		
+														 $(".txtDelitoDisable").prop("disabled", true);	
 														 	var obj = eval("(" + json + ")");
 														 	swal("", "Delito agregado exitosamente.", "success");															
 														 }
@@ -2574,5 +2581,141 @@ function deleteRecord(id) {
 	}
 }
 
+/*
+$(document).ready( function () {
+  var table = $('#example').DataTable();
+} );
+*/
 
+/******+ADMINISTRACION MANDOS******/
 
+function getDataMandosTableAdm(filtroBusqueda){
+	switch (filtroBusqueda){
+		case 'busqMando' :
+			var newBrwoser= document.getElementById("newBrwoser").value;
+	 	var newBrwoser_val= document.querySelector("#newBrwosers"  + " option[value='" + newBrwoser+ "']").dataset.value;
+			var newBrwosers_id= document.querySelector("#newBrwosers"  + " option[value='" + newBrwoser+ "']").dataset.id;		
+		break;
+		case 'busqAreaAdscr' :
+		document.getElementById("newBrwoser").value = "";	
+			var newBrwosers_id = 0;
+		break;
+	}
+
+	 var areaAdsc = document.getElementById("areaAdsc").value;
+		cont = document.getElementById('tablePuestasDataMandoBody');
+		ajax=objetoAjax();
+		ajax.open("POST", "format/puestaDisposicion/dataMandoTableAdm.php");
+
+		ajax.onreadystatechange = function(){
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				cont.innerHTML = ajax.responseText;
+			}
+		}
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		ajax.send("&newBrwosers_id="+newBrwosers_id+"&filtroBusqueda="+filtroBusqueda+"&areaAdsc="+areaAdsc);
+
+}
+
+function showModalEditarMando(idMando){
+	cont = document.getElementById('contModalModuloAdministracion');
+	ajax=objetoAjax();
+	ajax.open("POST", "format/puestaDisposicion/modalModuloAdministracion.php");
+	ajax.onreadystatechange = function(){
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			cont.innerHTML = ajax.responseText;
+			$('#modalModuloAdministracion').modal('show');
+		}
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send("&idMando="+idMando);
+}
+
+function closeModalEditarMando(){
+	$('#modalModuloAdministracion').modal('hide');
+}
+
+function closeModalEditarMando(){
+	$('#modalModuloAdministracionADDMando').modal('hide');
+}
+
+function actualizarMandos(idMando){
+	var getNombreMando = document.getElementById("admNombreMando").value;
+	var getApPaterno = document.getElementById("admApPaterno").value;
+	var getApMaterno = document.getElementById("admApMaterno").value;
+	var idCargo = document.getElementById("admCargo").value;
+	var idFuncion = document.getElementById("admFuncion").value;
+	var idAreaAdscripcion = document.getElementById("admAreaAdscripcion").value;
+	var getEstatusMando = document.getElementById("admEstatusMando").value;
+ document.getElementById("newBrwoser").value = "";
+
+	if(getNombreMando != "" && getApPaterno != "" && getApMaterno && idCargo != 0 && idFuncion != 0 && idAreaAdscripcion != 0 && getEstatusMando != 0){
+		cont = document.getElementById('tablePuestasDataMandoBody');
+		ajax=objetoAjax();
+		ajax.open("POST", "format/puestaDisposicion/admActualizarMandos.php");
+		ajax.onreadystatechange = function(){
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				cont.innerHTML = ajax.responseText;
+				$('#modalModuloAdministracion').modal('hide');
+			}
+		}
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		ajax.send("&getNombreMando="+getNombreMando+"&getApPaterno="+getApPaterno+"&getApMaterno="+getApMaterno+"&idCargo="+idCargo+"&idFuncion="+idFuncion+
+			          "&idAreaAdscripcion="+idAreaAdscripcion+"&idMando="+idMando+"&getEstatusMando="+getEstatusMando);
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+function showModalNuevoMando(idMando){
+	cont = document.getElementById('contModalModuloAdministracionADDMando');
+	ajax=objetoAjax();
+	ajax.open("POST", "format/puestaDisposicion/modalModuloAdministracionADDMando.php");
+	ajax.onreadystatechange = function(){
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			cont.innerHTML = ajax.responseText;
+			$('#modalModuloAdministracionADDMando').modal('show');
+		}
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send("&idMando="+idMando);
+}
+
+function agregarMando(){
+ var getNombreMando = document.getElementById("addNombreMando").value;
+	var getApPaterno = document.getElementById("addApPaterno").value;
+	var getApMaterno = document.getElementById("addApMaterno").value;
+	var idCargo = document.getElementById("addCargo").value;
+	var idFuncion = document.getElementById("addFuncion").value;
+	var idAreaAdscripcion = document.getElementById("addAreaAdscripcion").value;
+
+ if(getNombreMando != "" && getApPaterno != "" && getApMaterno && idCargo != 0 && idFuncion != 0 && idAreaAdscripcion != 0){
+ 	cont = document.getElementById('tablePuestasDataMandoBody');
+		ajax=objetoAjax();
+		ajax.open("POST", "format/puestaDisposicion/admAgregarNuevoMando.php");
+		ajax.onreadystatechange = function(){
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				cont.innerHTML = ajax.responseText;
+				$('#modalModuloAdministracionADDMando').modal('hide');
+			}
+		}
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		ajax.send("&getNombreMando="+getNombreMando+"&getApPaterno="+getApPaterno+"&getApMaterno="+getApMaterno+"&idCargo="+idCargo+"&idFuncion="+idFuncion+
+			          "&idAreaAdscripcion="+idAreaAdscripcion);
+ }else{
+ 	swal("", "Faltan datos por registrar.", "warning");
+ }
+}                      
+
+function getDataMandosdataList(){
+	cont = document.getElementById('newBrwosers');
+	ajax=objetoAjax();
+	ajax.open("POST", "format/puestaDisposicion/admGetDataMandosdataList.php");
+	ajax.onreadystatechange = function(){
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			cont.innerHTML = ajax.responseText;
+		}
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send();
+}
