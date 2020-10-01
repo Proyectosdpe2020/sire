@@ -123,6 +123,15 @@
 							?>								
 							<td class="blockInp"><input type="number" value="<? echo $tota1; ?>" id="p9tot" readonly></td>
 						</tr>
+						</tr>
+							<tr>
+							 <th style=" border: inset 0pt" scope="row"></th>
+								<td style=" border: inset 0pt"></td>
+								<td style=" border: inset 0pt"></td>
+								<td style=" border: inset 0pt"></td>
+								<td style=" border: inset 0pt"><strong>TOTAL:</strong></td>
+								<td class="blockInp"><strong><?php echo $tota + $tota1; ?></strong></td>
+						</tr>
 					</tbody>
 				</table><br><br>
 				<div class="textoNotaSire" >

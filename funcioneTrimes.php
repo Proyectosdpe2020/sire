@@ -135,4 +135,20 @@ function getDataEnlacesByIdUnidad($conn, $idUnidad, $idEnlace){
 	if(isset($arreglo)){return $arreglo;}
 }
 
+function getDAtaSIREQuestionValidateQuestion($conn, $mes, $anio, $idUnidad){
+
+	$query = " SELECT
+       sum([iniciadasConDetenido]) +
+	   sum([iniciadasSinDetenido]) as 'total'
+  FROM [ESTADISTICAV2].[dbo].[Carpetas] WHERE idUnidad $idUnidad AND idAnio = $anio AND idMes in $mes ";
+//echo $query."<br>";
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[0][0]=$row['total'];
+	}
+	if(isset($arreglo)){return $arreglo;}
+	
+	}
+
 ?>

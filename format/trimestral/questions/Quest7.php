@@ -36,6 +36,9 @@
 					$data16 = getDAtaQuestion($conn, 33, $per, $anio, $idUnidad);
 					$getEnv = getInfOCarpetasEnv($conn, $idEnlace, 11);
 					$envt = $getEnv[0][0];
+					$sumTotal = $data1[0][3] + $data2[0][3] + $data3[0][3] + $data4[0][3] + $data5[0][3] + $data6[0][3] + $data7[0][3] + $data8[0][3] + $data9[0][3] +
+					            $data10[0][3] + $data11[0][3] + $data12[0][3] + $data13[0][3] + $data14[0][3] + $data15[0][3] + $data16[0][3];
+
 					$fisid = getIdFiscaliaEnlace($conn, $idEnlace);
 
 					if($fisid[0][0]  == 4){
@@ -79,7 +82,7 @@
 				?>
 
    
-				<h5 class="card-title tituloPregunta">Pregunta 7: Procedimientos Iniciados 2020. <? echo $dataEnlaces[0][0]; ?></h5><br>
+				<h5 class="card-title tituloPregunta">Pregunta 7: Procedimientos Iniciados 2020. </h5><br>
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
@@ -372,7 +375,7 @@
 						</tr>
 						<tr>
 							<th scope="row">7.12</th>
-							<td style="text-align: left;">En trámite en el OEMASC sin acuerdo reparatorio</td>
+							<td style="text-align: left;">En trámite en el CMASC sin acuerdo reparatorio</td>
 							<td><input type="number" value="<? echo $data12[0][0]; ?>" id="p29m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data12[0][1]; ?>" id="p29m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data12[0][2]; ?>" id="p29m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
@@ -380,7 +383,7 @@
 						</tr>
 						<tr>
 							<th scope="row">7.13</th>
-							<td style="text-align: left;">En trámite en el OEMASC con acuerdo reparatorio firmado (en proceso de cumplimiento)</td>
+							<td style="text-align: left;">En trámite en el CMASC con acuerdo reparatorio firmado (en proceso de cumplimiento)</td>
 							<td><input type="number" value="<? echo $data13[0][0]; ?>" id="p30m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data13[0][1]; ?>" id="p30m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data13[0][2]; ?>" id="p30m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
@@ -388,7 +391,7 @@
 						</tr>
 						<tr>
 							<th scope="row">7.14</th>
-							<td style="text-align: left;">Resueltos (cumplidos) en OEMASC por mediación</td>
+							<td style="text-align: left;">Resueltos (cumplidos) en CMASC por mediación</td>
 							<td><input type="number" value="<? echo $data14[0][0]; ?>" id="p31m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data14[0][1]; ?>" id="p31m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data14[0][2]; ?>" id="p31m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
@@ -396,7 +399,7 @@
 						</tr>
 						<tr>
 							<th scope="row">7.15</th>
-							<td style="text-align: left;">Resueltos (cumplidos) en OEMASC por conciliación</td>
+							<td style="text-align: left;">Resueltos (cumplidos) en CMASC por conciliación</td>
 							<td><input type="number" value="<? echo $data15[0][0]; ?>" id="p32m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data15[0][1]; ?>" id="p32m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data15[0][2]; ?>" id="p32m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
@@ -404,11 +407,19 @@
 						</tr>
 						<tr>
 							<th scope="row">7.16</th>
-							<td style="text-align: left;">Resueltos (cumplidos) en OEMASC por acuerdo reparatorio por junta restaurativa</td>
+							<td style="text-align: left;">Resueltos (cumplidos) en CMASC por acuerdo reparatorio por junta restaurativa</td>
 							<td><input type="number" value="<? echo $data16[0][0]; ?>" id="p33m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data16[0][1]; ?>" id="p33m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data16[0][2]; ?>" id="p33m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data16[0][3]; ?>" id="p33tot" readonly></td>
+						</tr>
+						<tr>
+						 <th style=" border: inset 0pt" scope="row"></th>
+							<td style=" border: inset 0pt"></td>
+							<td style=" border: inset 0pt"></td>
+							<td style=" border: inset 0pt"></td>
+							<td style=" border: inset 0pt"><strong>TOTAL:</strong></td>
+							<td class="blockInp"><strong><?php if($sumTotal != null){ echo $sumTotal; } ?></strong></td>
 						</tr>
 					</tbody>
 				</table><br><br>
@@ -442,7 +453,7 @@
 					<ul>
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
-								En caso de que un procedimiento que todavía no haya sido vinculado a proceso se hubiere derivado al OEMASC perteneciente al Poder Judicial por cargas de trabajo u otros motivos, se deberá registrar en este apartado.
+								En caso de que un procedimiento que todavía no haya sido vinculado a proceso se hubiere derivado al CMASC perteneciente al Poder Judicial por cargas de trabajo u otros motivos, se deberá registrar en este apartado.
 							</div>
 						</li>
 					</ul>
@@ -451,7 +462,7 @@
 					<ul>
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
-							No deberán registrarse los procedimientos derivados al OEMASC dependiente de la Fiscalía cuando éstos hayan sido vinculados a proceso.
+							No deberán registrarse los procedimientos derivados al CMASC dependiente de la Fiscalía cuando éstos hayan sido vinculados a proceso.
 							</div>
 						</li>
 					</ul>

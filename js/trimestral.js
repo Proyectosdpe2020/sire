@@ -79,25 +79,55 @@ function saveQuest2(quest, per, anio, idUnidad, idEnlace){
 	p4m1 = document.getElementById("p4m1").value;
 	p4m2 = document.getElementById("p4m2").value;
 	p4m3 = document.getElementById("p4m3").value;
+
+	totalValidateQuest4 = document.getElementById("totalValidateQuest4").value;
+
+	var validateQuest = false;
+	var sumQuest2 = parseInt(p3m1) + parseInt(p3m2) + parseInt(p3m3);
+
 	if(p3m1 == "" || p3m2 == "" || p3m3 == "" || p4m1 == "" || p4m2 == "" || p4m3 == ""){
 		swal("", "Faltan campos por completar. ", "warning");
-	}else{		
+	}else{	
+
 		$.ajax({
 				//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
-				url:'format/trimestral/inserts/save'+quest+'.php?quest='+quest+'&per='+per+'&anio='+anio+'&idUnidad='+idUnidad+'&idEnlace='+idEnlace+'&p3m1='+p3m1
-				+'&p3m2='+p3m2+'&p3m3='+p3m3+'&p4m1='+p4m1+'&p4m2='+p4m2+'&p4m3='+p4m3,
+				url:'format/trimestral/inserts/validateQuest.php?quest='+quest+'&per='+per+'&anio='+anio+'&idUnidad='+idUnidad+'&idEnlace='+idEnlace+'&sumQuest2='+sumQuest2+'&totalValidateQuest4='+totalValidateQuest4,
 				type:'POST',
 				contentType:false,
 				processData:false,
+				async: false,
 				cache:false
-		}).done(function(respuesta){					
-					var data = JSON.parse(respuesta);
-					if(data.first == "SI"){
-						 swal("", "Información capturada exitosamente.", "success");
-						 getQUestionAjax(quest, per, anio, idUnidad, idEnlace);
-						 getCircles(quest, per, anio, idUnidad, idEnlace);
-					}else{   swal("", "Hubo un error favor de revisar.", "warning");  }
+		}).done(function(respuestaDataValida){
+								
+					var dataValidate = JSON.parse(respuestaDataValida);				
+
+					if(dataValidate.first == "SI"){
+
+						 validateQuest = true;
+
+					}else{ swal("", "EL TOTAL del reactivo 2.1 en el trimestre, debe ser igual al TOTAL de los reactivos correspondiente en la pregunta 4,\nverifique su información.", "warning");  }
+
 				});	
+
+  if(validateQuest == true){ 
+			$.ajax({
+					//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
+					url:'format/trimestral/inserts/save'+quest+'.php?quest='+quest+'&per='+per+'&anio='+anio+'&idUnidad='+idUnidad+'&idEnlace='+idEnlace+'&p3m1='+p3m1
+					+'&p3m2='+p3m2+'&p3m3='+p3m3+'&p4m1='+p4m1+'&p4m2='+p4m2+'&p4m3='+p4m3,
+					type:'POST',
+					contentType:false,
+					processData:false,
+					cache:false
+			}).done(function(respuesta){					
+						var data = JSON.parse(respuesta);
+						if(data.first == "SI"){
+							 swal("", "Información capturada exitosamente.", "success");
+							 getQUestionAjax(quest, per, anio, idUnidad, idEnlace);
+							 getCircles(quest, per, anio, idUnidad, idEnlace);
+						}else{   swal("", "Hubo un error favor de revisar.", "warning");  }
+					});
+		}
+
 	}
 }
 
@@ -111,35 +141,60 @@ function saveQuest4(quest, per, anio, idUnidad, idEnlace){
 	p9m2 = document.getElementById("p9m2").value;
 	p9m3 = document.getElementById("p9m3").value;
 
+	var validateQuest = false;
+	var sumQuest4 = parseInt(p8m1) + parseInt(p8m2) + parseInt(p8m3) + parseInt(p9m1) + parseInt(p9m2) + parseInt(p9m3);
+	
 	if(p8m1 == "" || p8m2 == "" || p8m3 == "" || p9m1 == "" || p9m2 == "" || p9m3 == ""){
 		swal("", "Faltan campos por completar. ", "warning");
 	}else{
-		
+
 		$.ajax({
 				//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
-				url:'format/trimestral/inserts/save'+quest+'.php?quest='+quest+'&per='+per+'&anio='+anio+'&idUnidad='+idUnidad+'&idEnlace='+idEnlace+'&p8m1='+p8m1
-				+'&p8m2='+p8m2+'&p8m3='+p8m3+'&p9m1='+p9m1+'&p9m2='+p9m2+'&p9m3='+p9m3,
+				url:'format/trimestral/inserts/validateQuest.php?quest='+quest+'&per='+per+'&anio='+anio+'&idUnidad='+idUnidad+'&idEnlace='+idEnlace+'&sumQuest4='+sumQuest4,
 				type:'POST',
 				contentType:false,
 				processData:false,
+				async: false,
 				cache:false
-		}).done(function(respuesta){
-					
-					//$( "#ajaxContainerQUes" ).html( respuesta );				
+		}).done(function(respuestaDataValida){
+								
+					var dataValidate = JSON.parse(respuestaDataValida);				
 
-					var data = JSON.parse(respuesta);				
+					if(dataValidate.first == "SI"){
 
-					if(data.first == "SI"){
+						 validateQuest = true;
 
-						 swal("", "Información capturada exitosamente.", "success");
-						 getQUestionAjax(quest, per, anio, idUnidad, idEnlace);
-						 getCircles(quest, per, anio, idUnidad, idEnlace);
-
-
-					}else{   swal("", "Hubo un error favor de revisar.", "warning");  }
+					}else{ swal("", "EL TOTAL de la pregunta 4 en el trimestre, debe ser igual al TOTAL del los reactivos en la pregunta 1: (1.1 + 1.2) = (4.1 + 4.2), verifique su información.", "warning");  }
 
 				});	
 
+		if(validateQuest == true){
+			$.ajax({
+					//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
+					url:'format/trimestral/inserts/save'+quest+'.php?quest='+quest+'&per='+per+'&anio='+anio+'&idUnidad='+idUnidad+'&idEnlace='+idEnlace+'&p8m1='+p8m1
+					+'&p8m2='+p8m2+'&p8m3='+p8m3+'&p9m1='+p9m1+'&p9m2='+p9m2+'&p9m3='+p9m3,
+					type:'POST',
+					contentType:false,
+					processData:false,
+					cache:false
+			}).done(function(respuesta){
+						
+						//$( "#ajaxContainerQUes" ).html( respuesta );				
+
+						var data = JSON.parse(respuesta);				
+
+						if(data.first == "SI"){
+
+							 swal("", "Información capturada exitosamente.", "success");
+							 getQUestionAjax(quest, per, anio, idUnidad, idEnlace);
+							 getCircles(quest, per, anio, idUnidad, idEnlace);
+
+
+						}else{   swal("", "Hubo un error favor de revisar.", "warning");  }
+
+					});	
+		}
+  
 	}
 
 }
@@ -154,25 +209,60 @@ function saveQuest1(quest, per, anio, idUnidad, idEnlace){
 	p2m1 = document.getElementById("p2m1").value;
 	p2m2 = document.getElementById("p2m2").value;
 	p2m3 = document.getElementById("p2m3").value;
+
+	totalValidateQuest4 = document.getElementById("totalValidateQuest4").value;
+
+ var validateQuest = false;
+	var sumQuest1 = parseInt(p1m1) + parseInt(p1m2) + parseInt(p1m3) + parseInt(p2m1) + parseInt(p2m2) + parseInt(p2m3);
+
 	if(p1m1 == "" || p1m2 == "" || p1m3 == "" || p2m1 == "" || p2m2 == "" || p2m3 == ""){
 		swal("", "Faltan campos por completar. ", "warning");
 	}else{		
-		$.ajax({
+			$.ajax({
 				//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
-				url:'format/trimestral/inserts/save'+quest+'.php?quest='+quest+'&per='+per+'&anio='+anio+'&idUnidad='+idUnidad+'&idEnlace='+idEnlace+'&p1m1='+p1m1
-				+'&p1m2='+p1m2+'&p1m3='+p1m3+'&p2m1='+p2m1+'&p2m2='+p2m2+'&p2m3='+p2m3,
+				url:'format/trimestral/inserts/validateQuest.php?quest='+quest+'&per='+per+'&anio='+anio+'&idUnidad='+idUnidad+'&idEnlace='+idEnlace+'&sumQuest1='+sumQuest1+'&totalValidateQuest4='+totalValidateQuest4,
 				type:'POST',
 				contentType:false,
 				processData:false,
+				async: false,
 				cache:false
-		}).done(function(respuesta){					
-					var data = JSON.parse(respuesta);
-					if(data.first == "SI"){
-						 swal("", "Información capturada exitosamente.", "success");
-						 getQUestionAjax(quest, per, anio, idUnidad, idEnlace);
-						 getCircles(quest, per, anio, idUnidad, idEnlace);
-					}else{   swal("", "Hubo un error favor de revisar.", "warning");  }
+		}).done(function(respuestaDataValida){
+								
+					var dataValidate = JSON.parse(respuestaDataValida);				
+     console.log(dataValidate);
+					if(dataValidate.first == "SI"){
+
+						 validateQuest = true;
+
+					}else{ 
+							swal("", "EL TOTAL de la pregunta 1, debe ser igual al TOTAL del reactivo 4.1 + 4.2, verifique su información.\nSon las carpetas iniciadas en el trimestre, desglosadas según se hayan iniciado: \nPor denuncia o por Querella u otro requisito equivalente.", "warning"); 				
+					}
+
 				});	
+  
+  if(validateQuest == true){
+			$.ajax({
+					//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
+					url:'format/trimestral/inserts/save'+quest+'.php?quest='+quest+'&per='+per+'&anio='+anio+'&idUnidad='+idUnidad+'&idEnlace='+idEnlace+'&p1m1='+p1m1
+					+'&p1m2='+p1m2+'&p1m3='+p1m3+'&p2m1='+p2m1+'&p2m2='+p2m2+'&p2m3='+p2m3,
+					type:'POST',
+					contentType:false,
+					processData:false,
+					cache:false
+			}).done(function(respuesta){					
+						var data = JSON.parse(respuesta);
+						if(data.first == "SI"){
+							 swal("", "Información capturada exitosamente.", "success");
+							 getQUestionAjax(quest, per, anio, idUnidad, idEnlace);
+							 getCircles(quest, per, anio, idUnidad, idEnlace);
+						}else{   
+							
+								swal("", "Hubo un error favor de revisar.", "warning");  
+							
+						}
+					});	
+	 }
+
 	}
 }
 
@@ -190,25 +280,54 @@ function saveQuest3(quest, per, anio, idUnidad, idEnlace){
 	p7m2 = document.getElementById("p7m2").value;
 	p7m3 = document.getElementById("p7m3").value;
 
+	totalValidateQuest4 = document.getElementById("totalValidateQuest4").value;
+
+	var validateQuest = false;
+	var sumQuest3 = parseInt(p5m1) + parseInt(p5m2) + parseInt(p5m3) + parseInt(p6m1) + parseInt(p6m2) + parseInt(p6m3) + parseInt(p7m1) + parseInt(p7m2) + parseInt(p7m3);
+
 	if(p5m1 == "" || p5m2 == "" || p5m3 == "" || p6m1 == "" || p6m2 == "" || p6m3 == "" || p7m1 == "" || p7m2 == "" || p7m3 == ""){
 		swal("", "Faltan campos por completar. ", "warning");
 	}else{		
+
 		$.ajax({
 				//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
-				url:'format/trimestral/inserts/save'+quest+'.php?quest='+quest+'&per='+per+'&anio='+anio+'&idUnidad='+idUnidad+'&idEnlace='+idEnlace+'&p5m1='+p5m1
-				+'&p5m2='+p5m2+'&p5m3='+p5m3+'&p6m1='+p6m1+'&p6m2='+p6m2+'&p6m3='+p6m3+'&p7m1='+p7m1+'&p7m2='+p7m2+'&p7m3='+p7m3,
+				url:'format/trimestral/inserts/validateQuest.php?quest='+quest+'&per='+per+'&anio='+anio+'&idUnidad='+idUnidad+'&idEnlace='+idEnlace+'&sumQuest3='+sumQuest3+'&totalValidateQuest4='+totalValidateQuest4,
 				type:'POST',
 				contentType:false,
 				processData:false,
+				async: false,
 				cache:false
-		}).done(function(respuesta){					
-					var data = JSON.parse(respuesta);
-					if(data.first == "SI"){
-						 swal("", "Información capturada exitosamente.", "success");
-						 getQUestionAjax(quest, per, anio, idUnidad, idEnlace);
-						 getCircles(quest, per, anio, idUnidad, idEnlace);
-					}else{   swal("", "Hubo un error favor de revisar.", "warning");  }
+		}).done(function(respuestaDataValida){
+								
+					var dataValidate = JSON.parse(respuestaDataValida);				
+
+					if(dataValidate.first == "SI"){
+
+						 validateQuest = true;
+
+					}else{ swal("", "EL TOTAL de la pregunta 3 en el trimestre, debe ser igual o mayor al TOTAL del reactivo 4, púes por cada carpeta debe haber al menos una víctima.\nVerifique su información.", "warning");  }
+
 				});	
+
+  if(validateQuest == true){
+			$.ajax({
+					//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
+					url:'format/trimestral/inserts/save'+quest+'.php?quest='+quest+'&per='+per+'&anio='+anio+'&idUnidad='+idUnidad+'&idEnlace='+idEnlace+'&p5m1='+p5m1
+					+'&p5m2='+p5m2+'&p5m3='+p5m3+'&p6m1='+p6m1+'&p6m2='+p6m2+'&p6m3='+p6m3+'&p7m1='+p7m1+'&p7m2='+p7m2+'&p7m3='+p7m3,
+					type:'POST',
+					contentType:false,
+					processData:false,
+					cache:false
+			}).done(function(respuesta){					
+						var data = JSON.parse(respuesta);
+						if(data.first == "SI"){
+							 swal("", "Información capturada exitosamente.", "success");
+							 getQUestionAjax(quest, per, anio, idUnidad, idEnlace);
+							 getCircles(quest, per, anio, idUnidad, idEnlace);
+						}else{   swal("", "Hubo un error favor de revisar.", "warning");  }
+					});
+			}	
+
 	}
 }
 
