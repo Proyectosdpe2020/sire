@@ -24,7 +24,7 @@
 	
 
 	$anioGlobal = 2020;
-	$per = 2;
+	$per = 3;
 	$format = 11; // ESTE ES EL FORMATO AL CUAL SE HACE REFERENCIA
 
 	if($per == 1){ $m1 = "Enero"; $m2 = "Febrero"; $m3 = "Marzo"; $nme = "Enero - Marzo"; $arr = array(1,2,3);}
