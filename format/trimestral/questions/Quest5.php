@@ -17,6 +17,8 @@
 					$data3 = getDAtaQuestion($conn, 12, $per, $anio, $idUnidad);
 					$data4 = getDAtaQuestion($conn, 13, $per, $anio, $idUnidad);
 					$data5 = getDAtaQuestion($conn, 14, $per, $anio, $idUnidad);
+
+					$sumTotal = $data[0][3] + $data2[0][3] + $data3[0][3] + $data4[0][3] + $data5[0][3];
 				?>
 
 
@@ -86,6 +88,14 @@
 							<td><input type="number" value="<? echo $data5[0][1]; ?>" id="p14m2"></td>
 							<td><input type="number" value="<? echo $data5[0][2]; ?>" id="p14m3"></td>
 							<td class="blockInp"><input type="number" value="<? echo $data5[0][3]; ?>" id="p14tot" readonly></td>
+						</tr>
+						<tr>
+						 <th style=" border: inset 0pt" scope="row"></th>
+							<td style=" border: inset 0pt"></td>
+							<td style=" border: inset 0pt"></td>
+							<td style=" border: inset 0pt"></td>
+							<td style=" border: inset 0pt"><strong>TOTAL:</strong></td>
+							<td class="blockInp"><strong><?php if($sumTotal != null){ echo $sumTotal; } ?></strong></td>
 						</tr>
 					</tbody>
 				</table><br><br>

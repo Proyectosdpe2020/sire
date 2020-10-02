@@ -1,6 +1,12 @@
  
 	<?php
 	session_start();
+		/*if($_SESSION['idArchivo'] != 12){ 
+    	unset($_SESSION['yainicieIE']); 
+    	$_SESSION['yainicieIE']="NO";
+		header("Location: http://201.116.252.158:8080/HELO900803/SIRE");    	
+    }*/
+
 	include ("../../Conexiones/Conexion.php");
 	include("../../funciones.php");	
 	include ("../../Conexiones/conexionSicap.php");

@@ -15,6 +15,18 @@ if (isset($_GET["idUnidadSelect"])){ $idUnidadSelect = $_GET["idUnidadSelect"]; 
 	$idUnidadSelect = 0;
 }
 
+if($format == "PoliciaConsulta"){ $format = 12; }
+if($format == "PoliciaAdmin"){ $format = 10; }
+if($format == "Policia"){ $format = 9; }
+if($format == "CarpetasInvestigacion"){ $format = 1; }
+if($format == "Litigacion"){ $format = 4; }
+if($format == "Trimestral"){ $format = 11; }
+if($format == "Administrador"){ $format = 0; }
+if($format == "AdmonPolicias"){ $format = 13; }
+
+
+$_SESSION['formatis']=$format;
+
 $enlace = getInfoEnlaceUsuario($conn, $idUsuario);
 $idEnlace = $enlace[0][0];
 $idfisca = $enlace[0][1];
@@ -82,25 +94,24 @@ if($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || $
  var tipoActualizacion = tipoActualizacion;
  if(tipoActualizacion == 0){
 	var data = '<tr class="table-row" id="new_row_ajax">' +
-	'<td contenteditable="false" id="txt_title" onBlur="addToHiddenField(this,\'id\')" onclick="editRow(this);"></td>' +
+	'<div class="padre"><td contenteditable="false" id="txt_title" onBlur="addToHiddenField(this,\'id\')" onclick="editRow(this);" class="delOpc"></td></div>' +
 	
 	'<td contenteditable="true" id="txt_title" onBlur="addToHiddenField(this,\'title\')" onclick="editRow(this);"><select id="textdelitoCometido" name="delitos[]" tabindex="6" class="form-control redondear selectTranparent"><?php while ($delitos = sqlsrv_fetch_array($res1)) { ?><option value="<? echo $delitos['idTipoDelito']; ?>" selected><? echo $delitos['delito']; ?></option><?php } ?></select></td>' +
 	
-	'<td><input type="hidden" id="title" /><input type="hidden" id="idPers" value="" /> / <a onclick="cancelAdd();" class="ajax-action-links">Cancelar</a></td>' +	
+	'<td><input type="hidden" id="title" /><input type="hidden" id="idPers" value="" /> <a onclick="cancelAdd();" class="ajax-action-links">Cancelar</a></td>' +	
 	'</tr>';
 }else{
+	$("#add-more").hide();
 	var data = '<tr class="table-row" id="new_row_ajax">' +
-	'<td contenteditable="false" id="txt_title" onBlur="addToHiddenField(this,\'id\')" onclick="editRow(this);"></td>' +
+	'<div class="padre"><td contenteditable="false" id="txt_title" onBlur="addToHiddenField(this,\'id\')" onclick="editRow(this);" class="delOpc"></td></div>' +
 	
-	'<td contenteditable="true" id="txt_title" onBlur="addToHiddenField(this,\'title\')" onclick="editRow(this);"><select id="textdelitoCometido" name="delitosAct[]" tabindex="6" class="form-control redondear selectTranparent"><?php while ($delitos = sqlsrv_fetch_array($res2)) { ?><option value="<? echo $delitos['idTipoDelito']; ?>" selected><? echo $delitos['delito']; ?></option><?php } ?></select></td>' +
+	'<td contenteditable="true" id="txt_title" onBlur="addToHiddenField(this,\'title\')" onclick="editRow(this);"><select id="textdelitoCometido" name="delitosAct[]" tabindex="6" class="form-control redondear selectTranparent txtDelitoDisable"><?php while ($delitos = sqlsrv_fetch_array($res2)) { ?><option value="<? echo $delitos['idTipoDelito']; ?>" selected><? echo $delitos['delito']; ?></option><?php } ?></select></td>' +
 	
-	'<td><input type="hidden" id="title" /><input type="hidden" id="idPers" value="" /><a onclick="agregarDelito();" class="ajax-action-links">Añadir delito</a> / <a onclick="cancelAdd();" class="ajax-action-links">Cancelar</a></td>' +	
+	'<td><input type="hidden" id="title" /><input type="hidden" id="idPers" value="" /><a id="addDelitoSec" onclick="agregarDelito();" class="ajax-action-links">Añadir delito </a> </td></div>' +	
 	'</tr>';
 }
 $("#table-body").append(data);
-   document.getElementById("idPers").value = idPersona;
-
-  
+   document.getElementById("idPers").value = idPersona; 
 
 }
 				
@@ -146,18 +157,17 @@ $("#table-body").append(data);
 
 
 <? if ($tipoUser == 1) { 
-	if($format == 1){ 	?> onload="loadtablaFormatos(<? echo $idUnidadSelect; ?>);" <?}	else{
-			
-			if($format  == 2){ ?> 	onload="loadtablaFormat(0, 'formatCmasc.php', 'cmasc', <? echo $idEnlace; ?>);" 	<? }
+			if($format == 1){ 	?>  onload="loadtablaFormatos(<? echo $idUnidadSelect; ?>);" <?}	else{			
+			/*if($format  == 2){ ?> 	onload="loadtablaFormat(0, 'formatCmasc.php', 'cmasc', <? echo $idEnlace; ?>);" 	<? }*/
 			if($format  == 4){ ?>  	onload="loadtablaFormat(0, 'formatLitigacion.php', 'litigacion', <? echo $idEnlace; ?>);" 	<? }
-			if($format  == 6){ ?>  	onload="loadtablaFormat(0, 'formatDesaparecidos.php', 'desaparecidos', <? echo $idEnlace; ?>);" 	<? }
-			if($format  == 11){ ?>  	onload="loadtablaFormat(<? echo $idUnidEnlac ?>, 'trimestral.php', 'trimestral', <? echo $idEnlace; ?>);" 	<? }
+			/*if($format  == 6){ ?>  	onload="loadtablaFormat(0, 'formatDesaparecidos.php', 'desaparecidos', <? echo $idEnlace; ?>);" 	<? }*/
+			if($format  == 11){ ?>  onload="loadtablaFormat(<? echo $idUnidEnlac ?>, 'trimestral.php', 'trimestral', <? echo $idEnlace; ?>);" 	<? }
 			if($format  == 9){ ?>  	onload="loadtablaFormat(0, 'puestaDisposicion.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
-
-			if($format  == 10){ ?>  	onload="loadtablaFormat(0, 'puestaDisposicionSuper.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
+			if($format  == 10){ ?>  onload="loadtablaFormat(0, 'puestaDisposicionSuper.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
 			if($format  == 12){ ?>  	onload="loadtablaFormat(0, 'puestaDisposicionConsulta.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
-	}
+			if($format  == 13){ ?>  	onload="loadtablaFormat(0, 'cambioAdscripcionPueDispo.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
 
+	}
 
 } else {   
 
@@ -188,7 +198,7 @@ $("#table-body").append(data);
 								if($numOFforms == 1 ){
 
 									?>
-									  <li><a href=" subIndex.php">Menu Principal</a></li>
+									  <li><a href="subIndex.php">Menu Principal</a></li>
 									<?
 
 								}
@@ -197,7 +207,22 @@ $("#table-body").append(data);
 								?>
 
 
-			
+
+										<? 
+
+								if($tipoUser == 1  and $format == 1){
+
+									?>
+									  								<li style="background-color: #C09F77;  border: solid 2px #C09F77;"><a onclick="loadBiEstadistics(<? echo $idEnlace; ?>)" href="#">BI Estadistícas de Evaluación de Desempeño</a></li>
+
+									<?
+
+								}
+
+
+								?>
+					
+
 
 
 
@@ -208,7 +233,9 @@ $("#table-body").append(data);
 								<? if($format == 1){ ?>	
 
 
-								<a onclick="loadtablaFormatos(<? echo $idUnidadSelect; ?>)" href="#">Formato Mensual</a>
+									<a onclick="loadtablaFormatos(<? echo $idUnidadSelect; ?>)" href="#">Formato Mensual</a>
+
+
 								<? }else{ ?>
 
 										<? /*if($format  == 2){ ?><a onclick="loadtablaFormat(0, 'formatCmasc.php', 'cmasc', <? echo $idEnlace; ?>);" href="#">Formato Mensual</a> <? } */?>
@@ -228,6 +255,8 @@ $("#table-body").append(data);
 								<? if($format == 1 ){
 
 												?>
+
+																
 																<li><a onclick="cargaContRepositorio(<? echo $idUsuario; ?>, <? echo $format; ?>)" href="#">Repositorio</a></li>
 																<!--<li><a onclick="cargaContHistoricoEnlace(<? echo $idUsuario; ?>, <? echo $idEnlace; ?>, <? echo $format; ?>)" href="#">Historico</a></li>-->
 																<li><a onclick="cargaContHistoricoEnlaceDatos(<? echo $idUsuario; ?>, <? echo $idEnlace; ?>, <? echo $format; ?>, <? echo $idUnidEnlac; ?>)" href="#">Datos Historico</a></li>
@@ -358,7 +387,11 @@ $("#table-body").append(data);
 																	</a>
 																<ul class="dropdown-menu dropdown-usermenu pull-right">
 
-																			<li><a href="cerrar_sesion.php">Cerrar Sesion</a></li>
+																			<li style="margin-right: 80px !important;" onclick="loadMpsMovs()"><a style="font-weight: bold !important;">Movimientos MPs</a></li><br>
+																			<li style="margin-right: 80px !important;"><a style="font-weight: bold !important;" data-toggle="modal" href="#addMpCatalo">Agregar Ministerio Público</a></li><br>
+																			<hr>
+																			<li><a style="text-align: center; font-weight: bold;" href="cerrar_sesion.php">Cerrar Sesion</a></li><br>
+																			
 																</ul>
 
 																</li>
@@ -417,9 +450,7 @@ $("#table-body").append(data);
 
 														if($format == 6 ){
 
-																			?>	
-
-																
+																			?>															
 																						
 
 																										<div ><center><img style="width:300;height:300; margin-top: 12% !important;" src="img/cargando (1).gif"><br><h3 style="color: #757575 ; font-weight: bold; font-family: helvetica;">        Generando Información...</h3></center></div>													
@@ -438,6 +469,18 @@ $("#table-body").append(data);
 		</div>
 
 	</div>
+
+		<div class="modal fade bs-example-modal-sm" id="movimientosMp" role="dialog" data-backdrop="static" data-keyboard="false">
+
+										<div id="modalVistaCss" class="modal-dialog modal-sm" style = "width: 60%; margin-top: 3%;">
+																	<div class="modal-content">
+																					<div id="contMOdalMovimientoMp">			
+																									 
+																					</div>
+																	</div>				
+										</div>												
+
+		</div>
 
 	<div class="modal fade bs-example-modal-sm" id="busquepuestdispos" role="dialog" data-backdrop="static" data-keyboard="false">
 
@@ -458,6 +501,57 @@ $("#table-body").append(data);
 																																					<div class="col-xs-12 col-sm-6 col-md-6"><center><button onclick="buscarPuesta(<? echo $idEnlace; ?>)" style="width: 88%;" type="button" class="btn btn-primary redondear" >Buscar</button></center></div>					  
 																																			</div> 
 																				      </div>
+																					</div>
+																	</div>				
+										</div>												
+
+		</div>
+
+		<div class="modal fade bs-example-modal-sm" id="addMpCatalo" role="dialog" data-backdrop="static" data-keyboard="false">
+
+										<div id="modalVistaCss" class="modal-dialog modal-sm" style = "width: 45%; margin-top: 15%;">
+																	<div class="modal-content">
+																					<div id="contMOdalBusquePueDispo">			
+																									 <div class="modal-header" style="background-color:#152F4A;">
+																				        <center><h4  style="font-weight: bold; color: white;" class="modal-title">Agregar Nuevo Ministerio Público</h4></center>
+																				      </div>
+																				      <div class="modal-body">
+																				        <div class="row">
+								
+								
+								<div class="col-xs-12 col-md-4">
+										<label style="color: black;">Nombre (S) :</label>
+										<input id="nameMpAdd" type="text" name="" class="form-control" style=" font-weight: bolder;">
+								</div>
+								<div class="col-xs-12 col-md-4">
+									<label style="color: black;">Apellido Paterno :</label>
+										<input id="paternoMpAdd" type="text" name="" class="form-control" style=" font-weight: bolder;">
+								</div>
+								<div class="col-xs-12 col-md-4">
+									<label style="color: black;">Apellido Materno :</label>
+										<input id="maternoMpAdd" type="text" name="" class="form-control" style=" font-weight: bolder;">
+								</div>
+								
+					</div>		
+																				      </div>
+																				      <div class="modal-footer">
+																				      							 <div class="row">
+																																				<div class="col-xs-12 col-sm-6 col-md-6"><center><button style="width: 88%;" type="button" class="btn btn-default redondear" data-dismiss="modal">Cancelar</button></center></div>
+																																					<div class="col-xs-12 col-sm-6 col-md-6"><center><button onclick="saveMp()" style="width: 88%;" type="button" class="btn btn-primary redondear" >Guardar</button></center></div>					  
+																																			</div> 
+																				      </div>
+																					</div>
+																	</div>				
+										</div>												
+
+		</div>
+
+		<div class="modal fade bs-example-modal-sm" id="addMp" role="dialog" >
+
+										<div id="modalVistaCss" class="modal-dialog modal-sm" style = "width: 45%; margin-top: 2%;">
+																	<div class="modal-content">
+																					<div id="contModAddMps">			
+																									 
 																					</div>
 																	</div>				
 										</div>												

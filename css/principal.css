@@ -25,3 +25,85 @@
           background-image: url('img/Sist Int Reg Est-01.png'); background-repeat: no-repeat;  background-position: center center; background-attachment: fixed; background-size: cover;   
 
   }
+
+  .cotentMpsAdminMain{
+    width: 100% !important;
+  }
+
+  .cotentMpsAdminMain2{
+
+    width: 65% !important;
+    margin: 0 auto;
+    max-height: 85vh !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .cotentMpsAdminMain3{
+
+    width: 65% !important;
+    margin: 0 auto;
+  }
+
+  {
+
+  }
+
+  .hovermps tr:hover {
+          background-color: #ffff99 !important;
+          cursor: pointer;
+        }
+
+
+        @media only screen and (max-width: 575px){
+
+              .cotentMpsAdminMain2{
+
+                  width: 100% !important;
+                  margin: 0 auto;
+                  max-height: 85vh !important;
+                  overflow-y: auto;
+                  overflow-x: auto;
+                }
+
+                .cotentMpsAdminMain3{
+
+                  width: 100% !important;
+                  margin: 0 auto;
+                }
+
+                #tableencabemps{
+
+                  display: none;
+
+                }
+
+          }
+
+
+          .hovermps {
+  border: #b2b2b2 1px solid;
+  width: 100%;
+}
+
+.hovermps td, th {
+  border: silver 1px solid;  
+  padding: 1rem;
+}
+
+.hovermps thead > tr > th{
+  
+  font-size: 16px;
+  background-color: #7C8B9E;
+  color: white;
+}
+
+.hovermps > tbody {
+  font-size: 14px;
+}
+
+.hovermps.striped > tbody > tr:nth-child(odd) {
+ 
+  background-color: rgba(170, 213, 213, 0.5);
+ 
+}
