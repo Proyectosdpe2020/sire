@@ -366,6 +366,7 @@ $("#table-body").append(data);
 									</li>
 									<? }else{ if($tipoUser == 2){
 																?>
+																<li><a onclick="loadTrimestralAdmin()">Control de captura trimestral</a></li>
 																<li><a href="http://189.254.243.115">Reportes Estatales</a></li>
 																<li><a onclick="cargaContHistoricoAdmin(<? echo $idUsuario; ?>)" href="#">Historico</a></li>
 																<li><a onclick="loadEnlacesFaltantes()" href="#">Enlaces que Capturan</a></li>

@@ -2719,3 +2719,181 @@ function getDataMandosdataList(){
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 	ajax.send();
 }
+
+
+function downloadExcelReport() {
+
+	var month = document.getElementById('mesPuestaSelected').value;
+	var year = document.getElementById('anioCmasc').value;
+	
+	var data = [];
+
+	generalDataFiscalias(month, year, data);
+
+}
+
+function generalDataFiscalias(month, year, data) {
+
+
+	$.ajax({  
+		type: "POST",  
+		url: "format/puestaDisposicion/excel/service/get_data_fiscalias.php", 
+		data: "month="+month+
+			"&year="+year,
+		success: function(response){
+			data['general_data'] = response;
+			arrestedsByFiscalia(month, year, data);
+		}  
+	});
+
+}
+
+function arrestedsByFiscalia(month, year, data) {
+
+	$.ajax({  
+		type: "POST",  
+		url: "format/puestaDisposicion/excel/service/get_count_arresteds_by_crime_and_fiscalia.php", 
+		data: "month="+month+
+			"&year="+year,
+		success: function(response){
+			data['arresteds_by_fiscalia'] = response;
+			drugsByFiscalia(month, year, data);
+		}  
+	});
+
+}
+
+function drugsByFiscalia(month, year, data) {
+
+	$.ajax({  
+		type: "POST",  
+		url: "format/puestaDisposicion/excel/service/get_count_drugs_by_drug_type_and_fiscalia.php", 
+		data: "month="+month+
+			"&year="+year,
+		success: function(response){
+			data['drugs_by_fiscalia'] = response;
+			weaponsByFiscalia(month, year, data);
+		}  
+	});
+
+}
+
+function weaponsByFiscalia(month, year, data) {
+
+	$.ajax({  
+		type: "POST",  
+		url: "format/puestaDisposicion/excel/service/get_count_weapons_by_weapon_type_and_fiscalia.php", 
+		data: "month="+month+
+			"&year="+year,
+		success: function(response){
+			data['weapons_by_fiscalia'] = response;
+			injunctionsByFiscalia(month, year, data);
+		}  
+	});
+
+}
+
+/*
+function vehiclesByFiscalia(month, year, data) {
+
+	$.ajax({  
+		type: "POST",  
+		url: "format/puestaDisposicion/excel/service/get_count_vehicles_by_vehicle_type_and_fiscalia.php", 
+		data: "month="+month+
+			"&year="+year,
+		success: function(response){
+			data['vehicles_by_fiscalia'] = response;
+			injunctionsByFiscalia(month, year, data);
+		}  
+	});
+
+}
+*/
+
+function injunctionsByFiscalia(month, year, data) {
+
+	$.ajax({  
+		type: "POST",  
+		url: "format/puestaDisposicion/excel/service/get_count_injunctions_by_crime_and_fiscalia.php", 
+		data: "month="+month+
+			"&year="+year,
+		success: function(response){
+			data['injunctions_by_fiscalia'] = response;
+			bandsByFiscalia(month, year, data);
+		}  
+	});
+
+}
+
+function bandsByFiscalia(month, year, data) {
+
+	$.ajax({  
+		type: "POST",  
+		url: "format/puestaDisposicion/excel/service/get_count_bands_by_crime_and_fiscalia.php", 
+		data: "month="+month+
+			"&year="+year,
+		success: function(response){
+			data['bands_by_fiscalia'] = response;
+			vehiclesByFiscalia(month, year, data);
+		}  
+	});
+
+}
+
+function vehiclesByFiscalia(month, year, data) {
+
+	$.ajax({  
+		type: "POST",  
+		url: "format/puestaDisposicion/excel/service/get_count_vehicle_data_by_fiscalia.php", 
+		data: "month="+month+
+			"&year="+year,
+		success: function(response){
+			data['vehicle_data_by_fiscalia'] = response;
+			motociclesByFiscalia(month, year, data);
+		}  
+	});
+
+}
+
+function motociclesByFiscalia(month, year, data) {
+
+	$.ajax({  
+		type: "POST",  
+		url: "format/puestaDisposicion/excel/service/get_count_motocicle_data_by_fiscalia.php", 
+		data: "month="+month+
+			"&year="+year,
+		success: function(response){
+			data['motocicle_data_by_fiscalia'] = response;
+			createExcelReport(month, year, data);
+		}  
+	});
+
+}
+
+function createExcelReport(month, year, data) {
+
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: "format/puestaDisposicion/excel/report.php",
+		data: "month="+month+
+			"&year="+year+
+			"&general_data="+data.general_data+
+			"&arresteds_by_fiscalia="+data.arresteds_by_fiscalia+
+			"&drugs_by_fiscalia="+data.drugs_by_fiscalia+
+			"&weapons_by_fiscalia="+data.weapons_by_fiscalia+
+			//"&vehicles_by_fiscalia="+data.vehicles_by_fiscalia+
+			"&injunctions_by_fiscalia="+data.injunctions_by_fiscalia+
+			"&bands_by_fiscalia="+data.bands_by_fiscalia+
+			"&vehicle_data_by_fiscalia="+data.vehicle_data_by_fiscalia+
+			"&motocicle_data_by_fiscalia="+data.motocicle_data_by_fiscalia,
+	   	}).done(function(data){
+		  var $a = $("<a>");
+		  $a.attr("href",data.file);
+		  $("body").append($a);
+		  $a.attr("download","reporte.xlsx");
+		  $a[0].click();
+		  $a.remove();
+	});
+
+}

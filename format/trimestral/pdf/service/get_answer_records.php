@@ -4,16 +4,7 @@ include('../../../../Conexiones/Conexion.php');
 
 $link = $_POST['link'];
 $period = $_POST['period'];
-
-/*$sql = "SELECT 
-            s.idPregunta as 'number', p.nombre as 'question', s.anio as 'year', pe.nombre as 'period', s.m1, s.m2, s.m3
-            FROM [ESTADISTICAV2].[trimestral].[seguimiento] s 
-            INNER JOIN [ESTADISTICAV2].[trimestral].[pregunta] p 
-            ON s.idPregunta = p.idPregunta
-            INNER JOIN [ESTADISTICAV2].[trimestral].[periodo] pe 
-            ON s.idPeriodo = pe.idPeriodo 
-            WHERE s.idEnlace = $link and pe.idPeriodo = $period
-            ORDER BY p.idPregunta";	*/
+$year = $_POST['year'];
 
 $sql = "SELECT s.idPregunta as 'number', p.nombre as 'question', s.anio as 'year', pe.nombre as 'period', s.m1, s.m2, s.m3, pe.idPeriodo as 'period_id',
             CASE s.idPregunta
@@ -79,7 +70,7 @@ $sql = "SELECT s.idPregunta as 'number', p.nombre as 'question', s.anio as 'year
             ON s.idPregunta = p.idPregunta
             INNER JOIN [ESTADISTICAV2].[trimestral].[periodo] pe 
             ON s.idPeriodo = pe.idPeriodo 
-            WHERE s.idEnlace = $link and pe.idPeriodo = $period
+            WHERE s.idEnlace = $link and pe.idPeriodo = $period and s.anio = $year
             ORDER BY p.idPregunta";	
 
 

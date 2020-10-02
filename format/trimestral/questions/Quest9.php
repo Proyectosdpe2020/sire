@@ -19,6 +19,7 @@
 					$data4 = getDAtaQuestion($conn, 51, $per, $anio, $idUnidad);
 					$getEnv = getInfOCarpetasEnv($conn, $idEnlace, 11);
 					$envt = $getEnv[0][0]; 
+					$sumTotal = $data[0][3] + $data2[0][3] + $data3[0][3] + $data4[0][3]; 
 					$fisid = getIdFiscaliaEnlace($conn, $idEnlace);
 
 					if($fisid[0][0]  == 4){
@@ -239,6 +240,14 @@
 							<td><input type="number" value="<? echo $data4[0][1]; ?>" id="p51m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data4[0][2]; ?>" id="p51m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data4[0][3]; ?>" id="p51tot" readonly></td>
+						</tr>
+						<tr>
+						 <th style=" border: inset 0pt" scope="row"></th>
+							<td style=" border: inset 0pt"></td>
+							<td style=" border: inset 0pt"></td>
+							<td style=" border: inset 0pt"></td>
+							<td style=" border: inset 0pt"><strong>TOTAL:</strong></td>
+							<td class="blockInp"><strong><?php if($sumTotal != null){ echo $sumTotal; } ?></strong></td>
 						</tr>
 					</tbody>
 				</table><br>

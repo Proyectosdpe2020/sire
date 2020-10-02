@@ -59,7 +59,7 @@
                             INSERT INTO archivo (idEnlace,idUnidad, idTipoArchivo, nombreArchivo, observacionesUser, tamanio, fechaSubida, ubicacion, mes, anio, estatusArch) 
                             VALUES ($idEnlace, $idUnidad, $idTipoArch,'$nuevoname','$oberv',$fileSize,GETDATE(),'$destino',$mes,$anio,'env') 
                           
-                            UPDATE enlaceMesValidaEnviado SET enviadoArchivo = 1 WHERE idEnlace = $idEnlace AND idAnio = $anio 
+                            UPDATE enlaceMesValidaEnviado SET enviadoArchivo = 1 WHERE idEnlace = $idEnlace AND idAnio = $anio AND idFormato = $idTipoArch
 
                           COMMIT
                     END TRY
