@@ -20,10 +20,10 @@ $availablePeriods = getTrimestralPeriodsAvailable($conn);
                             <th class="col-xs-2 col-sm-2 col-md-2 textCent">Nombre</th>
                             <th class="col-xs-1 col-sm-1 col-md-1 textCent">Usuario</th>
                             <th class="col-xs-1 col-sm-1 col-md-1 textCent">Contraseña</th>
-                            <th class="col-xs-1 col-sm-1 col-md-1 textCent">Fiscalía</th>													
+                            <th class="col-xs-1 col-sm-1 col-md-1 textCent">Fiscalía</th>
                             <th class="col-xs-3 col-sm-3 col-md-3 textCent">Unidad Responsable</th>
                             <th class="col-xs-1 col-sm-1 col-md-1 textCent">Acciones</th>
-                            
+
                         </tr>
                     </thead>
 
@@ -48,7 +48,7 @@ $availablePeriods = getTrimestralPeriodsAvailable($conn);
                                 <td class="tdRowMain"><? echo $fiscalia; ?></td>
                                 <td class="tdRowMain"><? echo $unidad; ?></td>	
                                 <td class="tdRowMain">
-                                    <button type="button" style="color: #FD6E55; padding: inherit; background: none; border: none;" onclick="generateReport(<?php echo $_GET['year'].','.$_GET['period'].','.$trimesUsers[$i][13].','.$trimesUsers[$i][12] ?>)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+                                    <button type="button" style="color: #FD6E55; padding: inherit; background: none; border: none;" onclick="generateReport(<?php echo $_GET['year'].','.$_GET['period'].','.$trimesUsers[$i][11].','.$trimesUsers[$i][10] ?>)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
                                 </td>	
     
                             </tr>

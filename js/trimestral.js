@@ -694,24 +694,43 @@ function getUsersByPastPeriod(period, year){
 
 }
 
-function verFormato(idArchivo, ubicacion){
+function showReviewModal(period, year, file, link, ubication){
 
+	$.ajax({
+		url:'format/trimestral/admin/templates/pdf_review_modal_content.php?period='+period+'&year='+year+'&file='+file+'&link='+link+'&ubication='+ubication,
+		type:'POST',
+		contentType:false,
+		processData:false,
+		cache:false
+	}).done(function(response){
+		$( "#review_modal_content" ).html( response );
 
-	$('#contMOdalVerFormato').html('<div><img src="img/load.gif"/></div>');
-
-	cont = document.getElementById('contMOdalVerFormato');
-	ajax=objetoAjax();
-	ajax.open("POST", "repositorio/myModalVerArchivo.php");
-
-	ajax.onreadystatechange = function(){
-		if (ajax.readyState == 4 && ajax.status == 200) {
-			
-				cont.innerHTML = ajax.responseText;
-		}
-	}
-	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	ajax.send("&idArchivo="+idArchivo+"&ubicacion="+ubicacion);
-
-
+	});
+	
 }
 
+function reviewReport(period, year, file, link, status){
+	$.ajax({
+		url:'format/trimestral/admin/service/update_review_report_by_file.php?period='+period+'&year='+year+'&file='+file+'&link='+link+'&status='+status,
+		type:'POST',
+		contentType:false,
+		processData:false,
+		cache:false
+	}).done(function(response){
+		getUsersByPeriod(period, year);
+		switch(status){
+			case 'rev':
+				swal("", "Se ha aprovado el reporte correctamente", "success");
+			break;
+
+			case 'rec':
+				swal("", "Se ha rechazado el reporte correctamente", "success");
+			break;
+		}
+		$('#review_modal').modal('hide');
+	});
+}
+
+function closeReviewReport(){
+	$('#review_modal').modal('hide');
+}

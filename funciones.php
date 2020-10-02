@@ -2076,6 +2076,10 @@ function getTrimestralUsersByPeriod($conn, $period, $anio){
 					WHEN '3' THEN 'Julio - Septiembre'
 					WHEN '4' THEN 'Octubre - Diciembre'
 					END AS 'nPeriodo'
+				,sub.idArchivo
+				,sub.nombreArchivo
+				,sub.ubicacion
+				,sub.estatusArch
 			FROM [ESTADISTICAV2].[dbo].[usuario] u
 			INNER JOIN [ESTADISTICAV2].[dbo].[enlace] e
 			ON u.idEnlace = e.idEnlace
@@ -2085,6 +2089,12 @@ function getTrimestralUsersByPeriod($conn, $period, $anio){
 			ON cu.idFiscalia = cf.idFiscalia
 			LEFT JOIN [ESTADISTICAV2].[dbo].[enlaceMesValidaEnviado] ev
 			ON e.idEnlace = ev.idEnlace
+			left JOIN (
+				SELECT *
+					FROM [ESTADISTICAV2].[dbo].[archivo] 
+					where anio = $anio and mes = $period and idTipoArchivo = 11
+			) sub
+			ON e.idEnlace = sub.idEnlace
 			WHERE ev.idAnio = $anio and ev.mesCap = $period and ev.idFormato = 11 and u.idUsuario not in (156, 165, 170, 206)
 			ORDER BY  cf.nFiscalia, u.nombre, u.paterno, u.materno";
 
@@ -2108,6 +2118,10 @@ function getTrimestralUsersByPeriod($conn, $period, $anio){
 		$arreglo[$indice][11]=$row['nPeriodo'];
 		$arreglo[$indice][12]=$row['idEnlace'];
 		$arreglo[$indice][13]=$row['idUnidad'];
+		$arreglo[$indice][14]=$row['nombreArchivo'];
+		$arreglo[$indice][15]=$row['ubicacion'];
+		$arreglo[$indice][16]=$row['estatusArch'];
+		$arreglo[$indice][17]=$row['idArchivo'];
 		$indice++;
 	}
 	if(isset($arreglo)){return $arreglo;}

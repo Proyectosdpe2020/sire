@@ -6,7 +6,6 @@ $availablePeriods = getTrimestralPeriodsAvailable($conn);
 $getUsersMethod = 'getUsersByPeriod';
 ?>
 
-
 <div class="contTblMPs" id="contTblMPs2"><br>
     <div id="tablempss" style="width: 100% !important; ">
         <div class="row pad20">							
