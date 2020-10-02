@@ -2004,5 +2004,185 @@ function getCOlorStatusArchivo($conn, $estado){
 
 }
 
+function getTrimestralPeriodsAvailable($conn){
+
+	$query = "SELECT DISTINCT 
+				[anio]
+				,[idPeriodo]
+				,CASE idPeriodo
+					WHEN '1' THEN 'Enero - Marzo'
+					WHEN '2' THEN 'Abril - Junio'
+					WHEN '3' THEN 'Julio - Septiembre'
+					WHEN '4' THEN 'Octubre - Diciembre'
+					END AS 'nPeriodo'
+				,e.estatus
+				FROM [ESTADISTICAV2].[trimestral].[seguimiento] s
+				FULL OUTER JOIN (
+					SELECT TOP 1
+					[idAnio]
+					,[mesCap]
+					,CASE [mesCap]
+						WHEN 1 then 'Activo'
+						ELSE 'Activo'
+						END AS 'estatus'
+					FROM [ESTADISTICAV2].[dbo].[enlaceMesValidaEnviado] 
+					WHERE idFormato = 11 ORDER BY idAnio, mesCap desc
+				) e
+				ON s.idPeriodo = e.mesCap
+				ORDER BY anio, idPeriodo";
+
+	$indice = 0;
+
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+
+		$arreglo[$indice][0]=$row['anio'];
+		$arreglo[$indice][1]=$row['nPeriodo'];
+		$arreglo[$indice][2]=$row['idPeriodo'];
+		$arreglo[$indice][3]=$row['estatus'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+
+}
+
+function getTrimestralUsersByPeriod($conn, $period, $anio){
+
+	$query = "SELECT ROW_NUMBER() OVER(ORDER BY cf.nFiscalia, u.nombre ASC) AS 'n'
+				,e.idEnlace
+				,e.idUnidad
+				,u.[nombre]
+				,u.[paterno]
+				,u.[materno]
+				,u.[usuario]
+				,u.[contrasena]
+				,u.[estatus]
+				,u.[areaNombre]
+				,cf.nFiscalia
+				,cu.[nUnidad]
+				,CASE ev.[enviado]
+					WHEN '0' THEN 'NO'
+					WHEN '1' THEN 'SI'
+					END AS 'enviado'
+				,CASE ev.[enviadoArchivo]
+					WHEN '0' THEN 'NO'
+					WHEN '1' THEN 'SI'
+					END AS 'enviadoArchivo'
+				,ev.[mesCap]
+				,CASE ev.mesCap
+					WHEN '1' THEN 'Enero - Marzo'
+					WHEN '2' THEN 'Abril - Junio'
+					WHEN '3' THEN 'Julio - Septiembre'
+					WHEN '4' THEN 'Octubre - Diciembre'
+					END AS 'nPeriodo'
+				,sub.idArchivo
+				,sub.nombreArchivo
+				,sub.ubicacion
+				,sub.estatusArch
+			FROM [ESTADISTICAV2].[dbo].[usuario] u
+			INNER JOIN [ESTADISTICAV2].[dbo].[enlace] e
+			ON u.idEnlace = e.idEnlace
+			INNER JOIN [ESTADISTICAV2].[dbo].[CatUnidad] cu
+			ON e.idUnidad = cu.idUnidad
+			INNER JOIN [ESTADISTICAV2].[dbo].[CatFiscalia] cf
+			ON cu.idFiscalia = cf.idFiscalia
+			LEFT JOIN [ESTADISTICAV2].[dbo].[enlaceMesValidaEnviado] ev
+			ON e.idEnlace = ev.idEnlace
+			left JOIN (
+				SELECT *
+					FROM [ESTADISTICAV2].[dbo].[archivo] 
+					where anio = $anio and mes = $period and idTipoArchivo = 11
+			) sub
+			ON e.idEnlace = sub.idEnlace
+			WHERE ev.idAnio = $anio and ev.mesCap = $period and ev.idFormato = 11 and u.idUsuario not in (156, 165, 170, 206)
+			ORDER BY  cf.nFiscalia, u.nombre, u.paterno, u.materno";
+
+	$indice = 0;
+
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+
+		$arreglo[$indice][0]=$row['nombre'];
+		$arreglo[$indice][1]=$row['paterno'];
+		$arreglo[$indice][2]=$row['materno'];
+		$arreglo[$indice][3]=$row['usuario'];
+		$arreglo[$indice][4]=$row['contrasena'];
+		$arreglo[$indice][5]=$row['estatus'];
+		$arreglo[$indice][6]=$row['areaNombre'];
+		$arreglo[$indice][7]=$row['nFiscalia'];
+		$arreglo[$indice][8]=$row['nUnidad'];
+		$arreglo[$indice][9]=$row['enviado'];
+		$arreglo[$indice][10]=$row['enviadoArchivo'];
+		$arreglo[$indice][11]=$row['nPeriodo'];
+		$arreglo[$indice][12]=$row['idEnlace'];
+		$arreglo[$indice][13]=$row['idUnidad'];
+		$arreglo[$indice][14]=$row['nombreArchivo'];
+		$arreglo[$indice][15]=$row['ubicacion'];
+		$arreglo[$indice][16]=$row['estatusArch'];
+		$arreglo[$indice][17]=$row['idArchivo'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+
+}
+
+function getTrimestralUsersByPastPeriod($conn, $period, $anio){
+
+	$query = "SELECT DISTINCT
+				e.idEnlace
+				,e.idUnidad
+				,u.[nombre]
+				,u.[paterno]
+				,u.[materno]
+				,u.[usuario]
+				,u.[contrasena]
+				,u.[estatus]
+				,u.[areaNombre]
+				,cf.nFiscalia
+				,cu.[nUnidad]
+				,s.idPeriodo
+				,CASE s.idPeriodo
+					WHEN '1' THEN 'Enero - Marzo'
+					WHEN '2' THEN 'Abril - Junio'
+					WHEN '3' THEN 'Julio - Septiembre'
+					WHEN '4' THEN 'Octubre - Diciembre'
+					END AS 'nPeriodo'
+			FROM [ESTADISTICAV2].[trimestral].[seguimiento] s
+			inner join [ESTADISTICAV2].[dbo].[usuario] u
+			on u.idEnlace = s.idEnlace
+					INNER JOIN [ESTADISTICAV2].[dbo].[enlace] e
+					ON u.idEnlace = e.idEnlace
+					INNER JOIN [ESTADISTICAV2].[dbo].[CatUnidad] cu
+					ON e.idUnidad = cu.idUnidad
+					INNER JOIN [ESTADISTICAV2].[dbo].[CatFiscalia] cf
+					ON cu.idFiscalia = cf.idFiscalia
+			WHERE anio = $anio and idPeriodo = $period and u.idUsuario not in (156, 165, 170, 206)
+			ORDER BY  cf.nFiscalia, u.nombre, u.paterno, u.materno";
+
+	$indice = 0;
+
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+
+		$arreglo[$indice][0]=$row['nombre'];
+		$arreglo[$indice][1]=$row['paterno'];
+		$arreglo[$indice][2]=$row['materno'];
+		$arreglo[$indice][3]=$row['usuario'];
+		$arreglo[$indice][4]=$row['contrasena'];
+		$arreglo[$indice][5]=$row['estatus'];
+		$arreglo[$indice][6]=$row['areaNombre'];
+		$arreglo[$indice][7]=$row['nFiscalia'];
+		$arreglo[$indice][8]=$row['nUnidad'];
+		$arreglo[$indice][9]=$row['nPeriodo'];
+		$arreglo[$indice][10]=$row['idEnlace'];
+		$arreglo[$indice][11]=$row['idUnidad'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+
+}
 
 ?>

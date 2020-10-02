@@ -7,11 +7,16 @@
 				if (isset($_POST["f"])){ $f = $_POST["f"]; }		
 
 				$infoUni = dataUnidadEnlaceFormat2($conn, $idEnlace, $f);	
+
 					if($idEnlace != 14 AND $idEnlace != 15 AND $idEnlace != 16 AND $idEnlace != 17 AND $idEnlace != 18 AND $idEnlace != 19 AND $idEnlace != 21 AND $idEnlace != 22 AND $idEnlace != 23  ){
 							$dataUnidsFis[0][0] = $infoUni[0][1];
 							$dataUnidsFis[0][1] = $infoUni[0][4];
 					}else{
-								$dataUnidsFis = getUnidadesFiscalias($conn, $infoUni[0][2]);
+								if($f != 4 ){
+												$dataUnidsFis = getUnidadesFiscalias($conn, $infoUni[0][2]);
+								}else{
+												$dataUnidsFis = getUnidadesFiscaliasLiti($conn, $infoUni[0][2]);
+								}
 					}
 
 	?>

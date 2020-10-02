@@ -30,9 +30,6 @@ function generateReport(year, period, unity, link){
 
         }  
     });
-
-
-    
 }
 
 function getUnityName(unity){

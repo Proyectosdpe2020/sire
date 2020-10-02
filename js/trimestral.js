@@ -785,3 +785,88 @@ function generarExcel(){
 });
 
 }
+
+
+function getUsersByPeriod(period, year){
+
+	$.ajax({
+		url:'format/trimestral/admin/templates/users_by_period_table.php?period='+period+'&year='+year,
+		type:'POST',
+		contentType:false,
+		processData:false,
+		cache:false
+	}).done(function(respuesta){
+		$( "#admin_content" ).html( respuesta );
+
+	});
+
+}
+
+function changeLock(year, period, link, sendedReport){
+	$.ajax({
+		url:'format/trimestral/admin/service/update_sended_report_by_link.php?period='+period+'&year='+year+'&link='+link+'&sendedReport='+sendedReport,
+		type:'POST',
+		contentType:false,
+		processData:false,
+		cache:false
+	}).done(function(respuesta){
+		getUsersByPeriod(period, year);
+		swal("", "Se ha cambiado correctamente", "success");
+	});
+}
+
+function getUsersByPastPeriod(period, year){
+
+	$.ajax({
+		url:'format/trimestral/admin/templates/users_by_past_period_table.php?period='+period+'&year='+year,
+		type:'POST',
+		contentType:false,
+		processData:false,
+		cache:false
+	}).done(function(respuesta){
+		$( "#admin_content" ).html( respuesta );
+
+	});
+
+}
+
+function showReviewModal(period, year, file, link, ubication){
+
+	$.ajax({
+		url:'format/trimestral/admin/templates/pdf_review_modal_content.php?period='+period+'&year='+year+'&file='+file+'&link='+link+'&ubication='+ubication,
+		type:'POST',
+		contentType:false,
+		processData:false,
+		cache:false
+	}).done(function(response){
+		$( "#review_modal_content" ).html( response );
+
+	});
+	
+}
+
+function reviewReport(period, year, file, link, status){
+	$.ajax({
+		url:'format/trimestral/admin/service/update_review_report_by_file.php?period='+period+'&year='+year+'&file='+file+'&link='+link+'&status='+status,
+		type:'POST',
+		contentType:false,
+		processData:false,
+		cache:false
+	}).done(function(response){
+		getUsersByPeriod(period, year);
+		switch(status){
+			case 'rev':
+				swal("", "Se ha aprovado el reporte correctamente", "success");
+			break;
+
+			case 'rec':
+				swal("", "Se ha rechazado el reporte correctamente", "success");
+			break;
+		}
+		$('#review_modal').modal('hide');
+	});
+}
+
+function closeReviewReport(){
+	$('#review_modal').modal('hide');
+}
