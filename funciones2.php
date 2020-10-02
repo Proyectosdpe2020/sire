@@ -17,6 +17,7 @@ function getEnviadoEnlaceFromt($conn, $idEnlace, $idFormato){
 
 function getUnidadesFiscalias($conn, $idFiscalia){
 		$query = " SELECT idUnidad, idFiscalia,nUnidad FROM CatUnidad WHERE idFiscalia = $idFiscalia AND idUnidad NOT IN(158,161,157,166,159,164,75,163,160,162) ";
+		
 		$indice = 0;
 		$stmt = sqlsrv_query($conn, $query);
 		while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
