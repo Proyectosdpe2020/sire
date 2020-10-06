@@ -108,7 +108,7 @@ include("pdf_review_modal.php")
 
                                     if($enviadoArch == "SI"){
                                         $ubicacion = "'$ubicacion'";
-                                        echo '<button type="button" data-toggle="modal" href="#review_modal" style="color: #33CA95; padding: inherit; background: none; border: none;" onclick="showReviewModal('. $_GET['period'].' , '.$_GET['year'].' , '.$idEnlace.' , '.$idArchivo.' , '.$ubicacion.')"><i class="fa fa-eye" aria-hidden="true"></i></button>';
+                                        echo '<button type="button" data-toggle="modal" href="#review_modal" style="color: #33CA95; padding: inherit; background: none; border: none;" onclick="showReviewModal('. $_GET['period'].' , '.$_GET['year'].' , '.$idArchivo.' , '.$idEnlace.' , '.$ubicacion.')"><i class="fa fa-eye" aria-hidden="true"></i></button>';
                                     }
 
                                     if($enviado == "SI"){
