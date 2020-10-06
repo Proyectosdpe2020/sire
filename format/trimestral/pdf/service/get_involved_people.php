@@ -56,12 +56,17 @@ $involved_people = array(
     ),
     10 => array(
         'elaborated_by' => array(
-            'name' => 'Erika Olivares Pinto',
-            'position' => ''
+            'name' => 'Lic. Erika Olivares Pinto',
+            'position' => 'Directora de la unidad de análisis de contexto'
         ),
         'validated_by' => array(
-            'name' => '[Nombre, Cargo y Firma]',
-            'position' => ''
+            'name' => 'Mtra. Xochitl Alejandra Martinez Reyna',
+            'position' => 'Directora de la unidad de carpetas de investigación'
+        ),
+        'third_person' => array(
+            'name' => 'Mtra. Beatriz Torres Jimenez',
+            'position' => 'Directora de litigación',
+            'function' => 'Validó'
         )
     ),
     14 => array(
