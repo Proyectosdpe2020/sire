@@ -94,7 +94,8 @@ if($row_count > 0){
                 'section' => $row['section'],
                 'period_id' => $row['period_id'],
                 'year' => $_POST['year'],
-                'unity' => $_POST['unity']
+                'unity' => $_POST['unity'],
+                'link' => $_POST['link']
             )
         );
     }

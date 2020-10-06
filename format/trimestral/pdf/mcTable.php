@@ -64,7 +64,7 @@
 					//Print the text
 					$this->MultiCell($w,5,$data[$i],0,$a);
 				}*/
-
+				$this->setFillColor(255, 255, 255);
 				//Print the text
 				$this->MultiCell($w,5,$data[$i],0,$a);
 
