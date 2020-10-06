@@ -246,7 +246,7 @@ $involved_people = array(
     ),
     73 => array(
         'elaborated_by' => array(
-            'name' => 'Lic. Marco Antonio Miguel Cano',
+            'name' => 'Lic. Antonio Miguel Cano',
             'position' => ''
         ),
         'validated_by' => array(
