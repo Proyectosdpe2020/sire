@@ -46,7 +46,7 @@ $involved_people = array(
     ),
     9 => array(
         'elaborated_by' => array(
-            'name' => 'Ernesto Villalobos Mejía',
+            'name' => 'Lic. Blanca Graciela Arredondo Martínez',
             'position' => ''
         ),
         'validated_by' => array(
@@ -77,10 +77,10 @@ $involved_people = array(
     15 => array(
         'elaborated_by' => array(
             'name' => 'Daniel Pulido Virrueta',
-            'position' => ''
+            'position' => 'Enlace de planeación y estadística'
         ),
         'validated_by' => array(
-            'name' => 'Lic armando Montero Juarez',
+            'name' => 'Lic Armando Montero Juarez',
             'position' => 'Director de Litigación'
         )
     ),
@@ -310,7 +310,7 @@ $involved_people = array(
             'position' => ''
         ),
         'validated_by' => array(
-            'name' => 'Lic Gerardo Marin',
+            'name' => 'Lic. Luis Gerardo Marín Chávez',
             'position' => 'Director de carpetas de investigación de la Fiscalía Regional de Morelia'
         )
     )
