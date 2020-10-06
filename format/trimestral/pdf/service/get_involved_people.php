@@ -6,7 +6,7 @@ $link = $_POST['link'];
 $involved_people = array(
     2 => array(
         'elaborated_by' => array(
-            'name' => 'Vanessa Pérez Días',
+            'name' => 'Vanessa Pérez Díaz',
             'position' => ''
         ),
         'validated_by' => array(
@@ -60,8 +60,8 @@ $involved_people = array(
             'position' => ''
         ),
         'validated_by' => array(
-            'name' => '',
-            'position' => 'Directora de carpetas'
+            'name' => '[Nombre, Cargo y Firma]',
+            'position' => ''
         )
     ),
     14 => array(
@@ -106,11 +106,11 @@ $involved_people = array(
     ),
     21 => array(
         'elaborated_by' => array(
-            'name' => 'Roberto Carlos de la Cruz Rosales',
+            'name' => 'Lic. Pedro Xochipa Ríos',
             'position' => ''
         ),
         'validated_by' => array(
-            'name' => '',
+            'name' => 'Lic. Servando Eduardo Barrera Tafolla',
             'position' => ''
         )
     ),
