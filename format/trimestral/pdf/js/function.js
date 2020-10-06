@@ -22,8 +22,20 @@ function generateReport(year, period, unity, link){
                       "&year="+year+
                       "&unity="+name,
                 success: function(response){
-        
-                    window.open("format/trimestral/pdf/report.php");
+
+                    $.ajax({  
+                        type: "POST",  
+                        url: "format/trimestral/pdf/service/get_involved_people.php", 
+                        data: "link="+link,
+                        success: function(response){
+                
+                            people = response;
+
+                            window.open("format/trimestral/pdf/report.php");
+                
+                        }  
+
+                    });
         
                 }  
             });
@@ -48,4 +60,22 @@ function getUnityName(unity){
     });
 
     return name;
+}
+
+function getInvolvedPeople(link){
+
+    var people = "";
+
+    $.ajax({  
+        type: "POST",  
+        url: "format/trimestral/pdf/service/get_involved_people.php", 
+        data: "link="+link,
+        success: function(response){
+
+            people = response;
+
+        }  
+    });
+
+    return people;
 }
