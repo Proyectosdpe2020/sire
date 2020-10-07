@@ -853,7 +853,7 @@ function reviewReport(period, year, file, link, status){
 		processData:false,
 		cache:false
 	}).done(function(response){
-		getUsersByPeriod(period, year);
+		
 		switch(status){
 			case 'rev':
 				swal("", "Se ha aprovado el reporte correctamente", "success");
@@ -864,6 +864,8 @@ function reviewReport(period, year, file, link, status){
 			break;
 		}
 		$('#review_modal').modal('hide');
+
+		getUsersByPeriod(period, year);
 	});
 }
 

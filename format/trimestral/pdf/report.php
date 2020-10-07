@@ -6,6 +6,7 @@ require('mcTable.php');
 //$records = json_decode($_POST['records'], true);
 
 $records = $_SESSION['question_records'];
+$involved_people = $_SESSION['involved_people'];
 
 $position = 'Fiscalía General';
 $user = '[Nombre, Cargo y Firma]';
@@ -158,7 +159,7 @@ for($i = 0; $i < 10; $i++){
     $pdf2->Ln(10);
 }
 
-set_sign_field($pdf2, $user, $position);
+set_sign_field($pdf2, $user, $position, $involved_people);
     
 $pdf2->Output();
 
@@ -481,18 +482,47 @@ function set_paragraph($pdf2, $section, $year){
     }
 }
 
-function set_sign_field($pdf2, $user, $position){
+function set_sign_field($pdf2, $user, $position, $involved_people){
 
+    if(isset($involved_people['third_person'])){
+        $pdf2->Ln(-30);
+    }
+    
     $pdf2->Ln(5);
 
     $pdf2->Cell(70, 70, iconv('UTF-8', 'windows-1252', 'Elaboró'), "", "", 'C');
     $pdf2->Cell(170, 70, iconv('UTF-8', 'windows-1252', 'Validó'), "", "", 'C');
     $pdf2->Ln(15);
-    $pdf2->Cell(70, 70, iconv('UTF-8', 'windows-1252', $user), "", "", 'C');
-    $pdf2->Cell(170, 70, iconv('UTF-8', 'windows-1252', $user), "", "", 'C');
+    $pdf2->Cell(70, 70, iconv('UTF-8', 'windows-1252', $involved_people['elaborated_by']['name']), "", "", 'C');
+    $pdf2->Cell(170, 70, iconv('UTF-8', 'windows-1252',  $involved_people['validated_by']['name']), "", "", 'C');
     $pdf2->Ln(1);
-    //$pdf2->Cell(70, 80, iconv('UTF-8', 'windows-1252', $position), "", "", 'C');
-    //$pdf2->Cell(170, 80, iconv('UTF-8', 'windows-1252', $position), "", "", 'C');
+    //$pdf2->Cell(70, 80, iconv('UTF-8', 'windows-1252', $involved_people['elaborated_by']['position']), "", "", 'C');
+    //$pdf2->Cell(170, 80, iconv('UTF-8', 'windows-1252', $involved_people['validated_by']['position']), "", "", 'C');
+
+    if(strlen($involved_people['validated_by']['position']) > 51){
+
+        $pdf2->Ln(40);
+        $pdf2->Cell(80, 6, iconv('UTF-8', 'windows-1252', $involved_people['elaborated_by']['position']), "", "", 'C');
+        $pdf2->Cell(25, 6, '', "", "", 'C');
+        $pdf2->MultiCell(95,6,iconv('UTF-8', 'windows-1252', $involved_people['validated_by']['position']), 0, 'C');
+
+    }
+    else{
+        $pdf2->Cell(70, 80, iconv('UTF-8', 'windows-1252', $involved_people['elaborated_by']['position']), "", "", 'C');
+        $pdf2->Cell(170, 80, iconv('UTF-8', 'windows-1252', $involved_people['validated_by']['position']), "", "", 'C');
+    }
+
+    if(isset($involved_people['third_person'])){
+        $pdf2->Ln(-20);
+
+        $pdf2->Cell(180, 80, iconv('UTF-8', 'windows-1252', $involved_people['third_person']['function']), "", "", 'C');
+
+        $pdf2->Ln(8);
+
+        $pdf2->Cell(180, 80, iconv('UTF-8', 'windows-1252', $involved_people['third_person']['name']), "", "", 'C');
+        $pdf2->Ln(5);
+        $pdf2->Cell(180, 80, iconv('UTF-8', 'windows-1252', $involved_people['third_person']['position']), "", "", 'C');
+    }
 
 }
 

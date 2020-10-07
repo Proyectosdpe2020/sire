@@ -74,7 +74,7 @@ function getDataQ($conn, $quest, $per, $anio, $idUnidad){
   AND idEstatus = $estatus AND anio = $anio AND YEAR(c.FechaInicio) = $anio AND MONTH(c.FechaInicio) $per ";
 //echo $query;
 
-  
+
 
 	$indice = 0;
 	$stmt = sqlsrv_query($conSic, $query);
