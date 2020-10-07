@@ -124,7 +124,7 @@
 										else{
 											if($has_litigation){ 
 
-												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 19, $per1);
+												$data = getDAtaSIREQuestionEstatusLiti($conSic , $arr[$o] , $anio, $idUn, 17, $per1);
 
 												if($data_sended){ //all trimester sended
 													$quest_value = $data[0][0];
@@ -198,7 +198,7 @@
 										else{
 											if($has_litigation){ 
 
-												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 19, $per1);
+												$data = getDAtaSIREQuestionEstatusLiti($conSic , $arr[$o] , $anio, $idUn, 18, $per1);
 
 												if($data_sended){ //all trimester sended
 													$quest_value = $data[0][0];
