@@ -2091,8 +2091,10 @@ function getTrimestralUsersByPeriod($conn, $period, $anio){
 			ON e.idEnlace = ev.idEnlace
 			left JOIN (
 				SELECT *
-					FROM [ESTADISTICAV2].[dbo].[archivo] 
-					where anio = $anio and mes = $period and idTipoArchivo = 11
+					FROM (SELECT *,
+								row_number() OVER(PARTITION BY idEnlace ORDER BY fechaSubida DESC) AS date_order
+						FROM [ESTADISTICAV2].[dbo].[archivo] WHERE anio = $anio and mes = $period and idTipoArchivo = 11) AS T
+					WHERE date_order = 1
 			) sub
 			ON e.idEnlace = sub.idEnlace
 			WHERE ev.idAnio = $anio and ev.mesCap = $period and ev.idFormato = 11 and u.idUsuario not in (156, 165, 170, 206)
