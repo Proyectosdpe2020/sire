@@ -72,7 +72,7 @@ function getDataQ($conn, $quest, $per, $anio, $idUnidad){
  $query = " SELECT COUNT(idEstatusNucs) as mes FROM [ESTADISTICAV2].[dbo].[estatusNucs] INNER JOIN PRUEBA.dbo.Carpeta c ON c.CarpetaID = estatusNucs.idCarpeta
   WHERE idUnidad $idUnidad AND mes IN($mes) 
   AND idEstatus = $estatus AND anio = $anio AND YEAR(c.FechaInicio) = $anio AND MONTH(c.FechaInicio) $per ";
-
+//echo $query;
 
 
 
