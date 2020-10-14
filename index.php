@@ -366,7 +366,13 @@ $("#table-body").append(data);
 									</li>
 									<? }else{ if($tipoUser == 2){
 																?>
-																<li><a onclick="loadTrimestralAdmin()">Control de captura trimestral</a></li>
+																<li>
+																	<a href="javascript:;" data-toggle="dropdown" aria-expanded="false">Trimestral <span class=" fa fa-angle-down"></span></a>
+																	<ul class="dropdown-menu dropdown-usermenu pull-right">
+																		<li style="margin-right: 750px !important;" onclick="loadTrimestralAdmin()"><a style="font-weight: bold !important;">Control de captura trimestral</a></li><br>
+																		<li style="margin-right: 750px !important;" onclick="loadReporteTrim()"><a style="font-weight: bold !important;">Reporte Trimestral</a></li>										
+																	</ul>
+																</li>
 																<li><a href="http://189.254.243.115">Reportes Estatales</a></li>
 																<li><a onclick="cargaContHistoricoAdmin(<? echo $idUsuario; ?>)" href="#">Historico</a></li>
 																<li><a onclick="loadEnlacesFaltantes()" href="#">Enlaces que Capturan</a></li>

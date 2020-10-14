@@ -2187,4 +2187,104 @@ function getTrimestralUsersByPastPeriod($conn, $period, $anio){
 
 }
 
+function reportByQuestTable($conn, $periodo , $getAnio){
+
+	$query = " SELECT s.idPregunta , p.nombre , SUM(CASE WHEN (s.idPeriodo = $periodo AND s.anio = $getAnio) then s.total end) as 'trimestre'
+		          FROM ESTADISTICAV2.trimestral.seguimiento s
+		          INNER JOIN trimestral.pregunta p ON p.idPregunta = s.idPregunta
+		          GROUP BY p.nombre , s.idPregunta
+		          ORDER BY s.idPregunta ASC ";
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))	{
+		switch ($row['idPregunta']) {
+			case 1 : $arreglo[$indice][0] = 1.1; break;
+			case 2 : $arreglo[$indice][0] = 1.2; break;
+			case 3 : $arreglo[$indice][0] = 2.1; break;
+			case 4 : $arreglo[$indice][0] = 2.2; break;
+			case 5 : $arreglo[$indice][0] = 3.1; break;
+			case 6 : $arreglo[$indice][0] = 3.2; break;
+			case 7 : $arreglo[$indice][0] = 3.3; break;
+			case 8 : $arreglo[$indice][0] = 4.1; break;
+			case 9 : $arreglo[$indice][0] = 4.2; break;
+			case 10 : $arreglo[$indice][0] = 5.1; break;
+			case 11 : $arreglo[$indice][0] = 5.2; break;
+			case 12 : $arreglo[$indice][0] = 5.3; break;
+			case 13 : $arreglo[$indice][0] = 5.4; break;
+			case 14 : $arreglo[$indice][0] = 5.5; break;
+			case 15 : $arreglo[$indice][0] = 6.1; break;
+			case 16 : $arreglo[$indice][0] = 6.2; break;
+			case 17 : $arreglo[$indice][0] = 6.3; break;
+			case 18 : $arreglo[$indice][0] = 7.1; break;
+			case 19 : $arreglo[$indice][0] = 7.2; break;
+			case 20 : $arreglo[$indice][0] = 7.3; break;
+			case 21 : $arreglo[$indice][0] = 7.4; break;
+			case 22 : $arreglo[$indice][0] = 7.5; break;
+			case 23 : $arreglo[$indice][0] = 7.6; break;
+			case 24 : $arreglo[$indice][0] = 7.7; break;
+			case 25 : $arreglo[$indice][0] = 7.8; break;
+			case 26 : $arreglo[$indice][0] = 7.9; break;
+			case 27 : $arreglo[$indice][0] = 7.10; break;
+			case 28 : $arreglo[$indice][0] = 7.11; break;
+			case 29 : $arreglo[$indice][0] = 7.12; break;
+			case 30 : $arreglo[$indice][0] = 7.13; break;
+			case 31 : $arreglo[$indice][0] = 7.14; break;
+			case 32 : $arreglo[$indice][0] = 7.15; break;
+			case 33 : $arreglo[$indice][0] = 7.16; break;
+			case 34 : $arreglo[$indice][0] = 8.1; break;
+			case 35 : $arreglo[$indice][0] = 8.2; break;
+			case 36 : $arreglo[$indice][0] = 8.3; break;
+			case 37 : $arreglo[$indice][0] = 8.4; break;
+			case 38 : $arreglo[$indice][0] = 8.5; break;
+			case 39 : $arreglo[$indice][0] = 8.6; break;
+			case 40 : $arreglo[$indice][0] = 8.7; break;
+			case 41 : $arreglo[$indice][0] = 8.8; break;
+			case 42 : $arreglo[$indice][0] = 8.9; break;
+			case 43 : $arreglo[$indice][0] = 8.10; break;
+			case 44 : $arreglo[$indice][0] = 8.11; break;
+			case 45 : $arreglo[$indice][0] = 8.12; break;
+			case 46 : $arreglo[$indice][0] = 8.13; break;
+			case 47 : $arreglo[$indice][0] = 8.14; break;
+			case 48 : $arreglo[$indice][0] = 9.1; break;
+			case 49 : $arreglo[$indice][0] = 9.2; break;
+			case 50 : $arreglo[$indice][0] = 9.3; break;
+			case 51 : $arreglo[$indice][0] = 9.4; break;
+			case 52 : $arreglo[$indice][0] = 10.1; break;
+			case 53 : $arreglo[$indice][0] = 10.2; break;
+			case 54 : $arreglo[$indice][0] = 10.3; break;
+			case 55 : $arreglo[$indice][0] = 10.4; break;
+		}
+		$arreglo[$indice][1]=$row['nombre'];
+		$arreglo[$indice][2]=$row['trimestre'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}	
+}
+
+function getYearsTrim($conn){
+	$query = "SELECT DISTINCT anio FROM ESTADISTICAV2.trimestral.seguimiento ORDER BY anio DESC";
+	$indice = 0;
+
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['anio'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
+
+function getPeriodoActual($conn , $anio){
+	$query = "SELECT DISTINCT MAX(idPeriodo) AS periodoActual FROM ESTADISTICAV2.trimestral.seguimiento WHERE anio = $anio ";
+	$indice = 0;
+
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['periodoActual'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
+
 ?>
