@@ -252,3 +252,19 @@ outline: none !important;
 .imgWarning{
 	width: 50px;
 }
+
+.trimeAdmin li{
+	display:inline-block;
+      width:150px;
+      height:30px;
+      padding:5px 10px;
+      background-color:#000;
+      border:1px solid #000;
+      text-align:center;
+      color:#fff;
+      position:relative;
+}
+
+.contentQuest td:hover{
+	background: #FFEC33;
+}

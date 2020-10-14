@@ -770,10 +770,12 @@ function saveQuest7(quest, per, anio, idUnidad, idEnlace){
 }
 
 function generarExcel(){
+	anioTrimes = document.getElementById("anioTrimes").value;
+ periodoTrimes = document.getElementById("periodoTrimes").value;
  $.ajax({
   type: "POST",
   dataType: 'json',
-  url: "format/trimestral/excel/generarExcel.php",
+  url: 'format/trimestral/excel/generarExcel.php?periodoTrimes='+periodoTrimes+'&anioTrimes='+anioTrimes,
   //data: "fecha1="+fecha1+"&fecha2="+fecha2,
  }).done(function(data){
     var $a = $("<a>");
@@ -872,3 +874,34 @@ function reviewReport(period, year, file, link, status){
 function closeReviewReport(){
 	$('#review_modal').modal('hide');
 }
+
+function consultarPeriodoTrimes(){
+	anioTrimes = document.getElementById("anioTrimes").value;
+ periodoTrimes = document.getElementById("periodoTrimes").value;
+	$.ajax({
+		url:'format/trimestral/admin/templates/reload_report_by_quest_table.php?periodoTrimes='+periodoTrimes+'&anioTrimes='+anioTrimes,
+		type:'POST',
+		contentType:false,
+		processData:false,
+		cache:false
+	}).done(function(respuesta){
+		$( ".contentQuest" ).html( respuesta );
+		reloadCabeceraPeriodo(anioTrimes , periodoTrimes);
+	});
+
+function reloadCabeceraPeriodo(anioTrimes , periodoTrimes){
+$.ajax({
+		url:'format/trimestral/admin/templates/reload_report_by_quest_tableCabecera.php?periodoTrimes='+periodoTrimes+'&anioTrimes='+anioTrimes,
+		type:'POST',
+		contentType:false,
+		processData:false,
+		cache:false
+	}).done(function(respuesta){
+		$( ".cabTrim" ).html( respuesta );
+	});
+}
+
+
+
+}
+

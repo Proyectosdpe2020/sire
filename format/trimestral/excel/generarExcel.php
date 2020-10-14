@@ -11,6 +11,9 @@ $fechaReporte = date("Y")."-".date("m")."-".date("d");
 $spreadsheet = new Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
 
+if (isset($_GET["anioTrimes"])){ $getAnio = $_GET["anioTrimes"]; }
+if (isset($_GET["periodoTrimes"])){ $getPeriodo = array(1,2,3,4); }
+
 /*******META DATOS*****/
 $sheet->setTitle("INDICADORES ESTRATEGICOS");
 
@@ -174,12 +177,8 @@ $sheet->mergeCells('A70:A72');
 
 /*****TERMINA COMBINAR CELDAS*******/
 
-$getAnio = 2020;
 
 $col = 'C';
-
-$getPeriodo = array(1,2,3,4);
-
 $contTrimestre = 1;
 $trimestre = 'trimestre'.$contTrimestre;
 $ultimaColumna = "";
