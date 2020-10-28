@@ -23,6 +23,7 @@ if($format == "Litigacion"){ $format = 4; }
 if($format == "Trimestral"){ $format = 11; }
 if($format == "Administrador"){ $format = 0; }
 if($format == "AdmonPolicias"){ $format = 13; }
+if($format == "Forestales"){ $format = 14; }
 
 
 $_SESSION['formatis']=$format;
@@ -84,6 +85,7 @@ if($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || $
 		<link rel="stylesheet" type="text/css" href="css/formatoCarpetas.css">
 		<link rel="stylesheet" type="text/css" href="css/estilosPrincipal.css">
 		<link rel="stylesheet" type="text/css" href="css/litigacion.css">
+		<link rel="stylesheet" type="text/css" href="css/forestales.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
 	<script type="text/javascript">
@@ -166,6 +168,7 @@ $("#table-body").append(data);
 			if($format  == 10){ ?>  onload="loadtablaFormat(0, 'puestaDisposicionSuper.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
 			if($format  == 12){ ?>  	onload="loadtablaFormat(0, 'puestaDisposicionConsulta.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
 			if($format  == 13){ ?>  	onload="loadtablaFormat(0, 'cambioAdscripcionPueDispo.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
+   if($format  == 14){ ?>  	onload="loadtablaFormat(0, 'forestales.php', 'forestales', <? echo $idEnlace; ?>);" 	<? }
 
 	}
 
@@ -766,7 +769,7 @@ $("#table-body").append(data);
 <script src="build/js/custom.min.js"></script>
 <script language="JavaScript" type="text/javascript" src="dist/sweetalert.min.js"></script>
 <script language="JavaScript" type="text/javascript" src="format/trimestral/pdf/js/function.js"></script>
-
+<script language="JavaScript" type="text/javascript" src="js/forestales.js"></script>
 	    
 
 </body>
