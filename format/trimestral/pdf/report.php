@@ -484,6 +484,10 @@ function set_paragraph($pdf2, $section, $year){
 
 function set_sign_field($pdf2, $user, $position, $involved_people){
 
+    if(isset($involved_people['third_person'])){
+        $pdf2->Ln(-30);
+    }
+    
     $pdf2->Ln(5);
 
     $pdf2->Cell(70, 70, iconv('UTF-8', 'windows-1252', 'Elaboró'), "", "", 'C');
@@ -506,6 +510,18 @@ function set_sign_field($pdf2, $user, $position, $involved_people){
     else{
         $pdf2->Cell(70, 80, iconv('UTF-8', 'windows-1252', $involved_people['elaborated_by']['position']), "", "", 'C');
         $pdf2->Cell(170, 80, iconv('UTF-8', 'windows-1252', $involved_people['validated_by']['position']), "", "", 'C');
+    }
+
+    if(isset($involved_people['third_person'])){
+        $pdf2->Ln(-20);
+
+        $pdf2->Cell(180, 80, iconv('UTF-8', 'windows-1252', $involved_people['third_person']['function']), "", "", 'C');
+
+        $pdf2->Ln(8);
+
+        $pdf2->Cell(180, 80, iconv('UTF-8', 'windows-1252', $involved_people['third_person']['name']), "", "", 'C');
+        $pdf2->Ln(5);
+        $pdf2->Cell(180, 80, iconv('UTF-8', 'windows-1252', $involved_people['third_person']['position']), "", "", 'C');
     }
 
 }

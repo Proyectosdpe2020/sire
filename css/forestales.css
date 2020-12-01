@@ -1,0 +1,8 @@
+.cabezeraTablaForest{
+	background: rgba(21,47,74,.9);
+	color: white;
+}
+
+#contentForestales tr:hover{
+	background: #FFEC33;
+}

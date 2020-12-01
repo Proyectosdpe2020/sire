@@ -46,7 +46,7 @@ $involved_people = array(
     ),
     9 => array(
         'elaborated_by' => array(
-            'name' => 'Ernesto Villalobos Mejía',
+            'name' => 'Lic. Blanca Graciela Arredondo Martínez',
             'position' => ''
         ),
         'validated_by' => array(
@@ -56,12 +56,17 @@ $involved_people = array(
     ),
     10 => array(
         'elaborated_by' => array(
-            'name' => 'Erika Olivares Pinto',
-            'position' => ''
+            'name' => 'Lic. Erika Olivares Pinto',
+            'position' => 'Directora de la unidad de análisis de contexto'
         ),
         'validated_by' => array(
-            'name' => '[Nombre, Cargo y Firma]',
-            'position' => ''
+            'name' => 'Mtra. Xochitl Alejandra Martinez Reyna',
+            'position' => 'Directora de la unidad de carpetas de investigación'
+        ),
+        'third_person' => array(
+            'name' => 'Mtra. Beatriz Torres Jimenez',
+            'position' => 'Directora de litigación',
+            'function' => 'Validó'
         )
     ),
     14 => array(
@@ -77,10 +82,10 @@ $involved_people = array(
     15 => array(
         'elaborated_by' => array(
             'name' => 'Daniel Pulido Virrueta',
-            'position' => ''
+            'position' => 'Enlace de planeación y estadística'
         ),
         'validated_by' => array(
-            'name' => 'Lic armando Montero Juarez',
+            'name' => 'Lic Armando Montero Juarez',
             'position' => 'Director de Litigación'
         )
     ),
@@ -310,7 +315,7 @@ $involved_people = array(
             'position' => ''
         ),
         'validated_by' => array(
-            'name' => 'Lic Gerardo Marin',
+            'name' => 'Lic. Luis Gerardo Marín Chávez',
             'position' => 'Director de carpetas de investigación de la Fiscalía Regional de Morelia'
         )
     )

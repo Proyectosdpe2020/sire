@@ -2926,6 +2926,21 @@ function loadTrimestralAdmin(){
 
 }
 
+function loadReporteTrim(){
+
+ $.ajax({
+  url:'format/trimestral/admin/admin.php',
+  type:'POST',
+  contentType:false,
+  processData:false,
+  cache:false
+ }).done(function(respuesta){
+  $( "#contenido" ).html( respuesta );
+  loadTrimestralReport();
+ });
+
+}
+
 function loadTrimestralPeriods(){
 
 	$.ajax({
@@ -2937,5 +2952,19 @@ function loadTrimestralPeriods(){
 	}).done(function(respuesta){
 		$( "#admin_content" ).html( respuesta );
 	});
+
+}
+
+function loadTrimestralReport(){
+
+ $.ajax({
+  url:'format/trimestral/admin/templates/report_by_quest_table.php',
+  type:'POST',
+  contentType:false,
+  processData:false,
+  cache:false
+ }).done(function(respuesta){
+  $( "#admin_content" ).html( respuesta );
+ });
 
 }

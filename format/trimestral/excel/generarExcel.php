@@ -11,6 +11,9 @@ $fechaReporte = date("Y")."-".date("m")."-".date("d");
 $spreadsheet = new Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
 
+if (isset($_GET["anioTrimes"])){ $getAnio = $_GET["anioTrimes"]; }
+if (isset($_GET["periodoTrimes"])){ $getPeriodo = array(1,2,3,4); }
+
 /*******META DATOS*****/
 $sheet->setTitle("INDICADORES ESTRATEGICOS");
 
@@ -131,6 +134,19 @@ $sheet->getStyle('A15:A70')->getAlignment()->setWrapText(true)
             ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
             ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
 
+$sheet->getStyle('A15:A72')->getFont()->setBold(true)->setSize(9)->getColor()->setARGB(\PhpOffice\PhpSpreadsheet\Style\Color::COLOR_WHITE);
+$sheet->getStyle('A15:A16')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('996633');
+$sheet->getStyle('A17:A18')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('680014');
+$sheet->getStyle('A19:A21')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('996633');
+$sheet->getStyle('A22:A23')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('680014');
+$sheet->getStyle('A24:A28')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('996633');
+$sheet->getStyle('A29:A31')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('680014');
+$sheet->getStyle('A32:A47')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('996633');
+$sheet->getStyle('A48:A61')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('680014');
+$sheet->getStyle('A62:A65')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('996633');
+$sheet->getStyle('A66:A69')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('680014');
+$sheet->getStyle('A70:A72')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('996633');
+
 /******Agregar filtro**********/
 //$sheet->setAutoFilter('A1:DL1');
 
@@ -161,12 +177,8 @@ $sheet->mergeCells('A70:A72');
 
 /*****TERMINA COMBINAR CELDAS*******/
 
-$getAnio = 2020;
 
 $col = 'C';
-
-$getPeriodo = array(1,2,3,4);
-
 $contTrimestre = 1;
 $trimestre = 'trimestre'.$contTrimestre;
 $ultimaColumna = "";

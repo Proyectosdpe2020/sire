@@ -44,6 +44,7 @@
 
 		$band=true;
 	}
+	if($_SESSION['idArchivo'] == 14){ $nameFormat = "Forestales";}
 	if($_SESSION['idArchivo'] == 13){ $nameFormat = "AdmonPolicias";}
 	if($_SESSION['idArchivo'] == 12){ $nameFormat = "PoliciaConsulta";}
 	if($_SESSION['idArchivo'] == 10){ $nameFormat = "PoliciaAdmin";}
