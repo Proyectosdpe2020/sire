@@ -483,5 +483,18 @@
 
 					</div>
 
+					<div class="modal fade bs-example-modal-sm" id="modalNucsLitigInfo" role="dialog" data-backdrop="static" data-keyboard="false">
+
+										<div id="modalVistaCss" class="modal-dialog modal-sm" style = "width: 80%; margin-top: 1%;">
+
+																	<div class="modal-content">
+
+																					<div id="contmodalnucsLitigInfo"></div>
+
+																	</div>				
+										</div>												
+
+					</div>
+
 
 	</html>
