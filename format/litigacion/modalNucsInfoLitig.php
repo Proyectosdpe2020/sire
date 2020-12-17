@@ -5,83 +5,59 @@
 	include("../../funciones.php");
 	include("../../funcioneSicap.php");
 	include("../../funcioneLit.php");
+	include("../../funcionesLitSENAP.php");
 
+	if (isset($_POST["idEstatusNucs"])){ $idEstatusNucs = $_POST["idEstatusNucs"]; }
+	if (isset($_POST["idMp"])){ $idMp = $_POST["idMp"]; }
+	if (isset($_POST["anio"])){ $anio = $_POST["anio"]; }
+	if (isset($_POST["mes"])){ $mes = $_POST["mes"]; }
+	if (isset($_POST["estatus"])){ $estatus = $_POST["estatus"]; }
+	if (isset($_POST["nuc"])){ $nuc = $_POST["nuc"]; }
+	if (isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }
+	$getNucExpedienteSicap = getNucExpedienteSicap($conSic, $nuc);
+	$expediente = $getNucExpedienteSicap[0][0];
+	
 ?>
 
 
 <div class="modal-header" style="background-color:#152F4A;">
-	<center><h4  style="font-weight: bold; color: white;" class="modal-title">ACTUALIZACIÓN DE ARMAS</h4></center>
+	<center><h4  style="font-weight: bold; color: white;" class="modal-title">Estadística Básica del Sistema Estadistico de Procuración de Justicia (SENAP)</h4></center>
 </div>
 
 <div class="modal-body">
+	<div class="row">
+		<div class="col-xs-12 col-sm-3 col-md-3">
+			<h4>Registro estadistico del NUC: <strong><? echo $nuc; ?></strong></h4>
+		</div>
+	</div><br>
 
-	<!--******************* ARMA LARGA **********************!-->
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<h5 class="text-on-pannel"><strong> ARMA LARGA </strong></h5>
-
-						<div class="row">
-							<div class="col-xs-12 col-sm-4 col-md-4">
-								<label for="marcaArmaLarga">Marca:<span class="aste">(*)</span></label>
-								<input value="" type="text" style="text-transform:uppercase;" class="form-control" id="marcaArmaLarga" name="marcaArmaLarga" onkeyup="javascript:this.value=this.value.toUpperCase();">
-							</div>
-							<div class="col-xs-12 col-sm-4 col-md-4">
-								<label for="modeloArmaLarga">Modelo:<span class="aste">(*)</span></label>
-								<input value="" type="text" style="text-transform:uppercase;" class="form-control" id="modeloArmaLarga" name="modeloArmaLarga" onkeyup="javascript:this.value=this.value.toUpperCase();">
-							</div>
-							<div class="col-xs-12 col-sm-4 col-md-4">
-								<label for="matriculaArmaLarga">Matricula:<span class="aste">(*)</span></label>
-								<input value="" type="text" style="text-transform:uppercase;" class="form-control" id="matriculaArmaLarga" name="matriculaArmaLarga" onkeyup="javascript:this.value=this.value.toUpperCase();">
-							</div>
-						</div><br><br>
-
-						<div class="row">
-							<div class="col-xs-12 col-sm-6 col-md-6">
-								<label for="calibreArmaLarga">Calibre:<span class="aste">(*)</span></label>
-								<input value="" type="text" style="text-transform:uppercase;" class="form-control" id="calibreArmaLarga" name="calibreArmaLarga" onkeyup="javascript:this.value=this.value.toUpperCase();">
-							</div>
-							<div class="col-xs-12 col-sm-6 col-md-6">
-								<label for="folioArmaLarga">Folio:<span class="aste">(*)</span></label>
-								<input value="" type="text" style="text-transform:uppercase;" class="form-control" id="folioArmaLarga" name="folioArmaLarga" onkeyup="javascript:this.value=this.value.toUpperCase();">
-							</div>
-						</div>
-
+	<div class="row">
+		<!--LISTADO DE OPCIONES-->
+		<div class="col-xs-12 col-sm-3 col-md-3">
+			<button type="button" class="btn btn-primary btn-lg btn-block" onclick="show(<? echo $idMando; ?>)">Estado de la CI</button>
+			<button type="button" class="btn btn-primary btn-lg btn-block" onclick="show(<? echo $idMando; ?>)">Audiencia Inicial</button>
+			<button type="button" class="btn btn-primary btn-lg btn-block" onclick="show(<? echo $idMando; ?>)">Etapa Intermedia</button>
+			<button type="button" class="btn btn-primary btn-lg btn-block" onclick="show(<? echo $idMando; ?>)">MASC</button>
+			<button type="button" class="btn btn-primary btn-lg btn-block" onclick="show(<? echo $idMando; ?>)">Sobreseimiento</button>
+			<button type="button" class="btn btn-primary btn-lg btn-block" onclick="show(<? echo $idMando; ?>)">Suspensión condicional</button>
+			<button type="button" class="btn btn-primary btn-lg btn-block" onclick="show(<? echo $idMando; ?>)">Suspensión condicional</button>
+			<button type="button" class="btn btn-primary btn-lg btn-block" onclick="show(<? echo $idMando; ?>)">Juicio Oral</button>
+			<button type="button" class="btn btn-primary btn-lg btn-block" onclick="show(<? echo $idMando; ?>)">Sentencia</button>
+		</div>
+		<!--FORMULARIO-->
+		<div class="col-xs-12 col-sm-9 col-md-9">
+				<div class="row">
+					<div class="col-xs-12 col-sm-3 col-md-3">
+						<label for="idSegCaso">Seguimiento del caso:</label>
+						<input value="<? echo $expediente; ?>" type="text" style="text-transform:uppercase;" class="form-control" id="idSegCaso" name="idSegCaso" onkeyup="javascript:this.value=this.value.toUpperCase();" disabled>
 					</div>
-				</div><br>
-
-				<!--******************* ARMA CORTA **********************!-->
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<h5 class="text-on-pannel"><strong> ARMA CORTA </strong></h5>
-
-						<div class="row">
-							<div class="col-xs-12 col-sm-4 col-md-4">
-								<label for="marcaArmaCorta">Marca:<span class="aste">(*)</span></label>
-								<input value="" type="text" style="text-transform:uppercase;" class="form-control" id="marcaArmaCorta" name="marcaArmaCorta" onkeyup="javascript:this.value=this.value.toUpperCase();">
-							</div>
-							<div class="col-xs-12 col-sm-4 col-md-4">
-								<label for="modeloArmaCorta">Modelo:<span class="aste">(*)</span></label>
-								<input value="" type="text" style="text-transform:uppercase;" class="form-control" id="modeloArmaCorta" name="modeloArmaCorta" onkeyup="javascript:this.value=this.value.toUpperCase();">
-							</div>
-							<div class="col-xs-12 col-sm-4 col-md-4">
-								<label for="matriculaArmaCorta">Matricula:<span class="aste">(*)</span></label>
-								<input value="" type="text" style="text-transform:uppercase;" class="form-control" id="matriculaArmaCorta" name="matriculaArmaCorta" onkeyup="javascript:this.value=this.value.toUpperCase();">
-							</div>
-						</div><br><br>
-
-						<div class="row">
-							<div class="col-xs-12 col-sm-6 col-md-6">
-								<label for="calibreArmaCorta">Calibre:<span class="aste">(*)</span></label>
-								<input value="" type="text" style="text-transform:uppercase;" class="form-control" id="calibreArmaCorta" name="calibreArmaCorta" onkeyup="javascript:this.value=this.value.toUpperCase();">
-							</div>
-							<div class="col-xs-12 col-sm-6 col-md-6">
-								<label for="folioArmaCorta">Folio:<span class="aste">(*)</span></label>
-								<input value="" type="text" style="text-transform:uppercase;" class="form-control" id="folioArmaCorta" name="folioArmaCorta" onkeyup="javascript:this.value=this.value.toUpperCase();">
-							</div>
-						</div>
-
+					<div class="col-xs-12 col-sm-6 col-md-6">
+						<label for="">Etapa procesal en la que se encuentra la CI:</label>
+						
 					</div>
 				</div>
+		</div>
+	</div><br><br>
 
 </div><br><br>
 

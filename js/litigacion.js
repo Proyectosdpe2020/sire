@@ -947,7 +947,7 @@ function showModalNucLitInfo(idEstatusNucs, idMp, anio, mes, estatus, nuc, idUni
 		}
 	}
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	ajax.send();
+	ajax.send('&idEstatusNucs='+idEstatusNucs+'&idMp='+idMp+'&anio='+anio+'&mes='+mes+'&estatus='+estatus+'&nuc='+nuc+'&idUnidad='+idUnidad);
 }
 
 
