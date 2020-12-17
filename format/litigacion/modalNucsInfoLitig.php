@@ -24,7 +24,7 @@
 	<center><h4  style="font-weight: bold; color: white;" class="modal-title">Estadística Básica del Sistema Estadistico de Procuración de Justicia (SENAP)</h4></center>
 </div>
 
-<div class="modal-body">
+<div class="modal-body panelunoLitigacion1">
 	<div class="row">
 		<div class="col-xs-12 col-sm-3 col-md-3">
 			<h4>Registro estadistico del NUC: <strong><? echo $nuc; ?></strong></h4>
@@ -51,9 +51,16 @@
 						<label for="idSegCaso">Seguimiento del caso:</label>
 						<input value="<? echo $expediente; ?>" type="text" style="text-transform:uppercase;" class="form-control" id="idSegCaso" name="idSegCaso" onkeyup="javascript:this.value=this.value.toUpperCase();" disabled>
 					</div>
-					<div class="col-xs-12 col-sm-6 col-md-6">
-						<label for="">Etapa procesal en la que se encuentra la CI:</label>
-						
+					<div class="col-xs-12 col-sm-3 col-md-3">
+						<label for="etapaProcesal">Etapa procesal en la que se encuentra la CI:</label>
+						<select id="etapaProcesal" name="etapaProcesal" tabindex="6" class="form-control redondear selectTranparent">
+							<option value="0">Selecciona</option>
+							<?$getEtapaProcesal = getEtapaProcesal($conn);
+							for ($i=0; $i < sizeof($getEtapaProcesal ); $i++) {
+								$idEtapaProcesal = $getEtapaProcesal[$i][0];	$nombre = $getEtapaProcesal [$i][1];	?>
+								<option style="color: black; font-weight: bold;" value="<? echo $idEtapaProcesal; ?>"><? echo $nombre; ?> </option>
+							<? } ?>
+						</select>
 					</div>
 				</div>
 		</div>
