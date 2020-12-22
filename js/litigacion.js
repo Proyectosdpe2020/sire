@@ -934,22 +934,6 @@ function descargarLit(idUnidad, mes, anio, idEnlace){
 
 }
 
-function showModalNucLitInfo(idEstatusNucs, idMp, anio, mes, estatus, nuc, idUnidad){
-	ajax=objetoAjax();
-	ajax.open("POST", "format/litigacion/modalNucsInfoLitig.php");
-
-	cont = document.getElementById('contmodalnucsLitigInfo');
-	ajax.onreadystatechange = function(){
-		if (ajax.readyState == 4 && ajax.status == 200) {
-			cont.innerHTML = ajax.responseText; 
-		 $('#modalNucsLitigInfo').modal('show');
-		 $('#modalNucsLitig').modal('hide'); 
-		}
-	}
-	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	ajax.send('&idEstatusNucs='+idEstatusNucs+'&idMp='+idMp+'&anio='+anio+'&mes='+mes+'&estatus='+estatus+'&nuc='+nuc+'&idUnidad='+idUnidad);
-}
-
 
 
 

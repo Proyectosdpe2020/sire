@@ -19,7 +19,6 @@
 	
 ?>
 
-
 <div class="modal-header" style="background-color:#152F4A;">
 	<center><h4  style="font-weight: bold; color: white;" class="modal-title">Estadística Básica del Sistema Estadistico de Procuración de Justicia (SENAP)</h4></center>
 </div>
@@ -31,47 +30,23 @@
 		</div>
 	</div><br>
 
+ <? if($estatus == 3 || $estatus == 4){ ?>
 	<div class="row">
-		<!--LISTADO DE OPCIONES-->
-		<div class="col-xs-12 col-sm-3 col-md-3">
-			<button type="button" class="btn btn-primary btn-lg btn-block" onclick="show(<? echo $idMando; ?>)">Estado de la CI</button>
-			<button type="button" class="btn btn-primary btn-lg btn-block" onclick="show(<? echo $idMando; ?>)">Audiencia Inicial</button>
-			<button type="button" class="btn btn-primary btn-lg btn-block" onclick="show(<? echo $idMando; ?>)">Etapa Intermedia</button>
-			<button type="button" class="btn btn-primary btn-lg btn-block" onclick="show(<? echo $idMando; ?>)">MASC</button>
-			<button type="button" class="btn btn-primary btn-lg btn-block" onclick="show(<? echo $idMando; ?>)">Sobreseimiento</button>
-			<button type="button" class="btn btn-primary btn-lg btn-block" onclick="show(<? echo $idMando; ?>)">Suspensión condicional</button>
-			<button type="button" class="btn btn-primary btn-lg btn-block" onclick="show(<? echo $idMando; ?>)">Suspensión condicional</button>
-			<button type="button" class="btn btn-primary btn-lg btn-block" onclick="show(<? echo $idMando; ?>)">Juicio Oral</button>
-			<button type="button" class="btn btn-primary btn-lg btn-block" onclick="show(<? echo $idMando; ?>)">Sentencia</button>
+		<!--¿Hubo formulación de la imputación?:-->
+		<input value="1" class="form-control" id="formImputacion" name="formImputacion"  type="hidden">
+		<div class="col-xs-12 col-sm-4  col-md-4">
+			<label for="fechaFormulacionImpu">Fecha de formulación de la imputación:</label>
+			<input id="fechaFormulacionImpu" type="date" value="" name="fechaFormulacionImpu" class="fechas form-control gehit"  />
 		</div>
-		<!--FORMULARIO-->
-		<div class="col-xs-12 col-sm-9 col-md-9">
-				<div class="row">
-					<div class="col-xs-12 col-sm-3 col-md-3">
-						<label for="idSegCaso">Seguimiento del caso:</label>
-						<input value="<? echo $expediente; ?>" type="text" style="text-transform:uppercase;" class="form-control" id="idSegCaso" name="idSegCaso" onkeyup="javascript:this.value=this.value.toUpperCase();" disabled>
-					</div>
-					<div class="col-xs-12 col-sm-3 col-md-3">
-						<label for="etapaProcesal">Etapa procesal en la que se encuentra la CI:</label>
-						<select id="etapaProcesal" name="etapaProcesal" tabindex="6" class="form-control redondear selectTranparent">
-							<option value="0">Selecciona</option>
-							<?$getEtapaProcesal = getEtapaProcesal($conn);
-							for ($i=0; $i < sizeof($getEtapaProcesal ); $i++) {
-								$idEtapaProcesal = $getEtapaProcesal[$i][0];	$nombre = $getEtapaProcesal [$i][1];	?>
-								<option style="color: black; font-weight: bold;" value="<? echo $idEtapaProcesal; ?>"><? echo $nombre; ?> </option>
-							<? } ?>
-						</select>
-					</div>
-				</div>
-		</div>
-	</div><br><br>
+	</div>
+ <? } ?>
 
-</div><br><br>
+</div>
 
 <div class="modal-footer">
 	<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-6"><center><button style="width: 88%;" onclick="" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button></center></div>
-			<div class="col-xs-12 col-sm-12 col-md-6"><center><button style="width: 88%;" onclick="" type="button" class="btn btn-primary redondear" >Guardar</button></center></div>
+			<div class="col-xs-12 col-sm-12 col-md-6"><center><button style="width: 88%;" onclick="closeModalNucsLitigInfo()" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button></center></div>
+			<div class="col-xs-12 col-sm-12 col-md-6"><center><button style="width: 88%;" onclick="insertDBInfoLiti(<? echo $idEstatusNucs; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatus; ?>, <? echo $nuc; ?>, <? echo $idUnidad; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button></center></div>
 	</div>
 </div>
 
