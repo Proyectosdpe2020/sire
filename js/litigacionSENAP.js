@@ -14,19 +14,39 @@ function showModalNucLitInfo(idEstatusNucs, idMp, anio, mes, estatus, nuc, idUni
 	ajax.send('&idEstatusNucs='+idEstatusNucs+'&idMp='+idMp+'&anio='+anio+'&mes='+mes+'&estatus='+estatus+'&nuc='+nuc+'&idUnidad='+idUnidad);
 }
 
+function showModalNucLitSicaInfo(idResolMP, idMp, anio, mes, estatus, nuc, idUnidad){
+	ajax=objetoAjax();
+	ajax.open("POST", "format/litigacion/modalNucsInfoLitig.php");
+
+	cont = document.getElementById('contmodalnucsLitigInfo');
+	ajax.onreadystatechange = function(){
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			cont.innerHTML = ajax.responseText; 
+		 $('#modalNucsLitigInfo').modal('show');
+		 $('#modalNucsLitig').modal('hide'); 
+		}
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send('&idResolMP='+idResolMP+'&idMp='+idMp+'&anio='+anio+'&mes='+mes+'&estatus='+estatus+'&nuc='+nuc+'&idUnidad='+idUnidad);
+}
+
 function closeModalNucsLitigInfo(){
 	$('#modalNucsLitigInfo').modal('hide');
 	$('#modalNucsLitig').modal('show');
 }
 
-/*Funcion para insertar en la base de datos*/
-function insertDBInfoLiti(idEstatusNucs, idMp, anio, mes, estatus, nuc, idUnidad){
-	$.ajax({
-		type: "POST",
-		dataType: "html",
-		url: "format/litigacion/insertDBInfoLitiSenap.php",
-		data: "idEstatusNucs="+idEstatusNucs+"&idMp="+idMp+"&anio="+anio+"&mes="+mes+"&estatus="+estatus+"&nuc="+nuc+"&idUnidad="+idUnidad,
-	 success: function(respuesta){
+
+function insertFormImputacion_db(idEstatusNucs, idMp, anio, mes, estatus, nuc, idUnidad){
+	var formImputacion = document.getElementById("formImputacion").value;
+	var fechaFormulacionImpu = document.getElementById("fechaFormulacionImpu").value;
+
+	if(fechaFormulacionImpu != ""){
+		$.ajax({
+			type: "POST",
+		 dataType: "html",
+			url:  "format/litigacion/insertSenap/insert_FormImputacion.php",
+		 data: "idEstatusNucs="+idEstatusNucs+"&idMp="+idMp+"&anio="+anio+"&mes="+mes+"&estatus="+estatus+"&nuc="+nuc+"&idUnidad="+idUnidad+"&formImputacion="+formImputacion+"&fechaFormulacionImpu="+fechaFormulacionImpu,
+		 success: function(respuesta){
 		 	var json = respuesta;
 		 	var obj = eval("(" + json + ")");
 		 	if (obj.first == "NO") { 
@@ -34,12 +54,47 @@ function insertDBInfoLiti(idEstatusNucs, idMp, anio, mes, estatus, nuc, idUnidad
 		 	}else{
 		 		if (obj.first == "SI") {
 		 			var obj = eval("(" + json + ")");
-		 			swal("", "Registrado.", "success");
+		 			swal("", "Registro exitosamente.", "success");
 		 			$('#modalNucsLitigInfo').modal('hide');
-		 			$('#modalNucsLitig').modal('show'); 
+		 			$('#modalNucsLitig').modal('show');
 		 		}
 		 	}
 		 }
+		});
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+
+function insertFormResoAutoVinc_db(idResolMP, idMp, anio, mes, estatus, nuc, idUnidad){
+	var resolAutoVincu = document.getElementById("resolAutoVincu").value;
+	var fechaAutoVinculacion = document.getElementById("fechaAutoVinculacion").value;
+
+	if(fechaAutoVinculacion != ""){
+		$.ajax({
+			type: "POST",
+		 dataType: "html",
+			url:  "format/litigacion/insertSenap/insertFormResoAutoVinc.php",
+		 data: "idResolMP="+idResolMP+"&idMp="+idMp+"&anio="+anio+"&mes="+mes+"&estatus="+estatus+"&nuc="+nuc+"&idUnidad="+idUnidad+"&resolAutoVincu="+resolAutoVincu+"&fechaAutoVinculacion="+fechaAutoVinculacion,
+		 success: function(respuesta){
+		 	var json = respuesta;
+		 	var obj = eval("(" + json + ")");
+		 	if (obj.first == "NO") { 
+		 		swal("", "No se registro verifique los datos.", "warning"); 
+		 	}else{
+		 		if (obj.first == "SI") {
+		 			var obj = eval("(" + json + ")");
+		 			swal("", "Registro exitosamente.", "success");
+		 			$('#modalNucsLitigInfo').modal('hide');
+		 			$('#modalNucsLitig').modal('show');
+		 		}
+		 	}
+		 }
+		});
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
 }
 
 
