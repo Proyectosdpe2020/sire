@@ -191,7 +191,7 @@ $involved_people = array(
     ),
     38 => array(
         'elaborated_by' => array(
-            'name' => 'Rocío Marisol Vázquez Soto',
+            'name' => 'Lic. David Salvador Martínez Santoyo',
             'position' => ''
         ),
         'validated_by' => array(
