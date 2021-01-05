@@ -33,7 +33,7 @@
 
 
 
-	$anioCaptura = 2020;
+	$anioCaptura = 2021;
 
  	
  	$idUsuario = $_SESSION['useridIE'];

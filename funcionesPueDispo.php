@@ -1228,6 +1228,17 @@ function getDataMandoTableAdm($conn, $idMando, $areaAdsc){
 
 }
 
+function getAnioPueDispo($conn){
+	$query = "SELECT  DISTINCT anio FROM pueDisposi.puestaDisposicion WHERE anio >= 2020";
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC )){
+		$arreglo[$indice][0]=$row['anio'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}	
+}
+
 ?>
 
 

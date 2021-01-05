@@ -23,8 +23,10 @@
 
 	
 
-	$anioGlobal = 2020;
-	$per = 3;
+	
+	$per1 = getPeriodoTrim($conn,  $idEnlace);
+	$per = $per1[0][0];
+	$anioGlobal = $per1[0][1];
 	$format = 11; // ESTE ES EL FORMATO AL CUAL SE HACE REFERENCIA
 
 	if($per == 1){ $m1 = "Enero"; $m2 = "Febrero"; $m3 = "Marzo"; $nme = "Enero - Marzo"; $arr = array(1,2,3);}
