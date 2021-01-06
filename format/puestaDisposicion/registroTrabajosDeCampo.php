@@ -40,6 +40,7 @@ if (isset($_POST["idPuestaDisposicion"])){
 if (isset($_POST['textEntrevistas'])){ $getTextEntrevistas = $_POST['textEntrevistas']; }
 if (isset($_POST['textVisitasDomiciliarias'])){ $getTextVisitasDomiciliarias = $_POST['textVisitasDomiciliarias']; }
 if (isset($_POST['textInvestigacionesCumplidas'])){ $getTextInvestigacionesCumplidas = $_POST['textInvestigacionesCumplidas']; }
+if (isset($_POST['textInvestigacionesInformadas'])){ $getTextInvestigacionesInformadas = $_POST['textInvestigacionesInformadas']; }
 if (isset($_POST['textIndividuaciones'])){ $getTextIndividuaciones = $_POST['textIndividuaciones']; }
 
 if (isset($_POST['textObservaciones'])){ $getTextObservaciones = $_POST['textObservaciones']; }
@@ -77,9 +78,9 @@ if (isset($_POST['idTrabajoCampo'])){ $idTrabajoCampo = $_POST['idTrabajoCampo']
                                           select @insertado = @@IDENTITY
 
 
-                                          INSERT INTO pueDisposi.TrabajoDeCampo (idPueDisposicion , entrevistas , visitasDomiciliarias , investigacionesCumplidas , individuaciones , observaciones) 
+                                          INSERT INTO pueDisposi.TrabajoDeCampo (idPueDisposicion , entrevistas , visitasDomiciliarias , investigacionesCumplidas , investigacionesInformadas, individuaciones , observaciones) 
                                               VALUES(@insertado , $getTextEntrevistas , $getTextVisitasDomiciliarias , 
-                                                    $getTextInvestigacionesCumplidas , $getTextIndividuaciones , '$getTextObservaciones')
+                                                    $getTextInvestigacionesCumplidas , $getTextInvestigacionesInformadas, $getTextIndividuaciones , '$getTextObservaciones')
 
 
                                              SELECT MAX(idPuestaDisposicion) AS id FROM pueDisposi.puestaDisposicion   
@@ -131,9 +132,9 @@ if (isset($_POST['idTrabajoCampo'])){ $idTrabajoCampo = $_POST['idTrabajoCampo']
                       BEGIN TRANSACTION
                             SET NOCOUNT ON    
                                               
-                                          INSERT INTO pueDisposi.TrabajoDeCampo (idPueDisposicion , entrevistas , visitasDomiciliarias , investigacionesCumplidas , individuaciones , observaciones) 
+                                          INSERT INTO pueDisposi.TrabajoDeCampo (idPueDisposicion , entrevistas , visitasDomiciliarias , investigacionesCumplidas , investigacionesInformadas,  individuaciones , observaciones) 
                                           VALUES($idPuestaDisposicion , $getTextEntrevistas , $getTextVisitasDomiciliarias , 
-                                                $getTextInvestigacionesCumplidas , $getTextIndividuaciones , '$getTextObservaciones')
+                                                $getTextInvestigacionesCumplidas , $getTextInvestigacionesInformadas , $getTextIndividuaciones , '$getTextObservaciones')
 
 
                           COMMIT
@@ -154,6 +155,7 @@ if (isset($_POST['idTrabajoCampo'])){ $idTrabajoCampo = $_POST['idTrabajoCampo']
                                     UPDATE pueDisposi.TrabajoDeCampo SET entrevistas = $getTextEntrevistas ,
                                            visitasDomiciliarias = $getTextVisitasDomiciliarias, 
                                            investigacionesCumplidas = $getTextInvestigacionesCumplidas, 
+                                           investigacionesInformadas = $getTextInvestigacionesInformadas, 
                                            individuaciones = $getTextIndividuaciones,
                                            observaciones = '$getTextObservaciones'
                                            WHERE idTrabajoCampo = $idTrabajoCampo

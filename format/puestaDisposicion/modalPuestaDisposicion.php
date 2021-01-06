@@ -721,6 +721,7 @@
 																																																						      <th scope="col"><center>Entrevistas</center></th>
 																																																						      <th scope="col"><center>Visitas Domiciliarias</center></th>																							      
 																																																						      <th scope="col"><center>Investigaciones Cumplidas</center></th>
+																																																						      <th scope="col"><center>Investigaciones Informadas</center></th>
 																																																						      <th scope="col"><center>Individualizaciones</center></th>
 																																																						      <th scope="col"><center>Observaciones</center></th>
 
@@ -739,6 +740,7 @@
 																																																							<td> <center><? echo $dataPuestaDIne[$h][1]; ?></center> </td>
 																																																							<td> <center><? echo $dataPuestaDIne[$h][5]; ?></center> </td>
 																																																							<td> <center><? echo $dataPuestaDIne[$h][2]; ?></center> </td>
+																																																							<td> <center><? echo $dataPuestaDIne[$h][6]; ?></center> </td>
 																																																							<td> <center><? echo $dataPuestaDIne[$h][3]; ?></center> </td>
 																																																									<td> <center><? echo $dataPuestaDIne[$h][4]; ?></center> </td>
 
