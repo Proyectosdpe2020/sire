@@ -2105,6 +2105,7 @@ function registroTrabajosDeCampo(idEnlace, typearch, b, tipoActualizacion , idTr
 	var textEntrevistas = $("#textEntrevistas").val(); if(textEntrevistas == "") {textEntrevistas = 0; }
 	var textVisitasDomiciliarias = $("#textVisitasDomiciliarias").val(); if(textVisitasDomiciliarias == "") {textVisitasDomiciliarias = 0; }
 	var textInvestigacionesCumplidas = $("#textInvestigacionesCumplidas").val(); if(textInvestigacionesCumplidas == "") {textInvestigacionesCumplidas = 0; }
+	var textInvestigacionesInformadas = $("#textInvestigacionesInformadas").val(); if(textInvestigacionesInformadas == "") {textInvestigacionesInformadas = 0; }
 	var textIndividuaciones = $("#textIndividuaciones").val(); if(textIndividuaciones == "") {textIndividuaciones = 0; }
     var textObservaciones = $("#textObservacionesTrabCampo").val();
 
@@ -2149,7 +2150,7 @@ function registroTrabajosDeCampo(idEnlace, typearch, b, tipoActualizacion , idTr
         type: "POST",
         dataType: 'html',
         url: "format/puestaDisposicion/registroTrabajosDeCampo.php",
-        data: "textEntrevistas="+textEntrevistas+"&textVisitasDomiciliarias="+textVisitasDomiciliarias+"&textInvestigacionesCumplidas="+textInvestigacionesCumplidas+"&textIndividuaciones="+textIndividuaciones+"&textObservaciones="+textObservaciones+"&jObject="+jObject+"&idEnlace="+idEnlace+"&idPuestaDisposicion="+idPuestaDisposicion+"&tipoActualizacion="+tipoActualizacion+"&idTrabajoCampo="+idTrabajoCampo,
+        data: "textEntrevistas="+textEntrevistas+"&textVisitasDomiciliarias="+textVisitasDomiciliarias+"&textInvestigacionesCumplidas="+textInvestigacionesCumplidas+"&textInvestigacionesInformadas="+textInvestigacionesInformadas+"&textIndividuaciones="+textIndividuaciones+"&textObservaciones="+textObservaciones+"&jObject="+jObject+"&idEnlace="+idEnlace+"&idPuestaDisposicion="+idPuestaDisposicion+"&tipoActualizacion="+tipoActualizacion+"&idTrabajoCampo="+idTrabajoCampo,
         success: function(resp){
             
 
