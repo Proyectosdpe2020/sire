@@ -435,7 +435,7 @@
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
 							 <img src="images/warning.png"  class="imgWarning" alt="">
-							 	Nota.- La suma de los datos proporcionados en todos los reactivos de esta pregunta (del 7.1 al 7.16) deberán ser iguales o mayores a la suma de los datos proporcionados en todos los reactivos de la pregunta 2, del 2.1 al 2.2 (carpetas de investigación iniciadas por denuncias, querellas u otros requisitos equivalentes recibidos en 2020 y 2019, respectivamente).
+							 	Nota.- La suma de los datos proporcionados en todos los reactivos de esta pregunta (del 7.1 al 7.16) deberán ser igual a la suma de los datos proporcionados en todos los reactivos de la pregunta 2, del 2.1 al 2.2 (carpetas de investigación iniciadas por denuncias, querellas u otros requisitos equivalentes recibidos en 2020 y 2019, respectivamente).
 							</div>
 						</li>
 					</ul>
