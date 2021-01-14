@@ -33,7 +33,7 @@
 
 
 
-	$anioCaptura = 2021;
+	//$anioCaptura = 2021;
 
  	
  	$idUsuario = $_SESSION['useridIE'];
@@ -83,13 +83,18 @@
 
 					<div class="col-xs-6 col-sm-4  col-md-1">
 						<label for="heard">Año:</label><br>
-						<select id="anioCmasc" name="selMes" tabindex="6" class="form-control redondear selectTranparent" required>
-							<option value="<? echo $anioCaptura; ?>" selected><? echo $anioCaptura; ?></option>
+						<select id="anioCmasc" name="selMes" tabindex="6" class="form-control redondear selectTranparent" onchange="reloadDaysMonth(<? echo $idEnlace; ?>)" required>
+							 <?php
+							 $dataAnio = getDataAnio();
+							 for ($i = 0; $i < sizeof($dataAnio); $i++){
+							 	$anioCaptura = $dataAnio[$i][0];	?>
+									<option value="<? echo $anioCaptura; ?>" selected><? echo $anioCaptura; ?></option>
+								<? } ?>
 						</select>
 					</div>
 
 					<div class="col-xs-6 col-sm-4  col-md-1">
-						<label for="heard">Mes:</label><br>
+						<label for="heard">Mes:</label><br><div id="contMonth">
 						<select id="mesPuestaSelected" name="selMes" tabindex="6"class="form-control redondear selectTranparent" onchange="loadDaysMonth(<? echo $anioCaptura; ?>, <? echo $idEnlace; ?>, 0)" required>
 							
 							<? 
@@ -106,7 +111,7 @@
 										}
 							 ?>
 							
-						</select>
+						</select></div>
 					</div>
 
 					<div class="col-xs-6 col-sm-4  col-md-1">
