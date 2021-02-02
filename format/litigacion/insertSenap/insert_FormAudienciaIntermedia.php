@@ -11,8 +11,12 @@ if (isset($_POST['nuc'])){ $nuc = $_POST['nuc']; }
 
 
 /*DATOS FORMULARIO SENAP*/
-if (isset($_POST['fechaFormulacionImpu'])){ $fechaFormulacionImpu = $_POST['fechaFormulacionImpu']; } 
-if (isset($_POST['opcInsert'])){ $opcInsert = $_POST['opcInsert']; } 
+if (isset($_POST['fechaAudienciaIntermedia'])){ $fechaAudienciaIntermedia = $_POST['fechaAudienciaIntermedia']; } 
+if (isset($_POST['mediosDePrueba'])){ $mediosDePrueba = $_POST['mediosDePrueba']; } 
+if (isset($_POST['tipoMedioPrueba'])){ $tipoMedioPrueba = $_POST['tipoMedioPrueba']; }
+if (isset($_POST['acuerdoProbatorio'])){ $acuerdoProbatorio = $_POST['acuerdoProbatorio']; }
+if (isset($_POST['apertJuiOral'])){ $apertJuiOral = $_POST['apertJuiOral']; }
+if (isset($_POST['opcInsert'])){ $opcInsert = $_POST['opcInsert']; }  
 
 //Si opcInsert == 0 es un nuevo registro, si opcInsert == 1 es una edicion de registro
 if($opcInsert == 0){
@@ -23,8 +27,8 @@ if($opcInsert == 0){
                                 BEGIN TRANSACTION
                                       SET NOCOUNT ON 
 
-                                        INSERT INTO senap.formulacionesImputacion (idEstatusNucs, fechaFormulacion) 
-                                        VALUES('$idEstatusNucs', '$fechaFormulacionImpu')
+                                        INSERT INTO senap.audienciasIntermedias (idEstatusNucs, fechaAudienciaIntermedia, mediosDePrueba, idTipoMedioPrueba, acuerdoProbatorio, aperturaJuicioOral) 
+                                        VALUES('$idEstatusNucs', '$fechaAudienciaIntermedia', $mediosDePrueba , $tipoMedioPrueba, $acuerdoProbatorio, $apertJuiOral )
                                                   
                                       COMMIT
                               END TRY
@@ -41,8 +45,12 @@ if($opcInsert == 0){
                                 BEGIN TRANSACTION
                                       SET NOCOUNT ON 
 
-                                        UPDATE senap.formulacionesImputacion SET 
-                                        fechaFormulacion = '$fechaFormulacionImpu'
+                                        UPDATE senap.audienciasIntermedias SET 
+                                        fechaAudienciaIntermedia = '$fechaAudienciaIntermedia',
+                                        mediosDePrueba = $mediosDePrueba,
+                                        idTipoMedioPrueba = $tipoMedioPrueba,
+                                        acuerdoProbatorio = $acuerdoProbatorio,
+                                        aperturaJuicioOral = $apertJuiOral
                                         WHERE idEstatusNucs = '$idEstatusNucs' ;
                                                   
                                       COMMIT

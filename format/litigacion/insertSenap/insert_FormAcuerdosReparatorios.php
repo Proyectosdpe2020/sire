@@ -11,7 +11,8 @@ if (isset($_POST['nuc'])){ $nuc = $_POST['nuc']; }
 
 
 /*DATOS FORMULARIO SENAP*/
-if (isset($_POST['fechaFormulacionImpu'])){ $fechaFormulacionImpu = $_POST['fechaFormulacionImpu']; } 
+if (isset($_POST['tipoAcuerdosRep'])){ $tipoAcuerdosRep = $_POST['tipoAcuerdosRep']; }   
+
 if (isset($_POST['opcInsert'])){ $opcInsert = $_POST['opcInsert']; } 
 
 //Si opcInsert == 0 es un nuevo registro, si opcInsert == 1 es una edicion de registro
@@ -23,8 +24,8 @@ if($opcInsert == 0){
                                 BEGIN TRANSACTION
                                       SET NOCOUNT ON 
 
-                                        INSERT INTO senap.formulacionesImputacion (idEstatusNucs, fechaFormulacion) 
-                                        VALUES('$idEstatusNucs', '$fechaFormulacionImpu')
+                                        INSERT INTO senap.acuerdosReparatorios (idEstatusNucs, idTipoAcuerdoReparatorio) 
+                                        VALUES('$idEstatusNucs', $tipoAcuerdosRep)
                                                   
                                       COMMIT
                               END TRY
@@ -41,8 +42,8 @@ if($opcInsert == 0){
                                 BEGIN TRANSACTION
                                       SET NOCOUNT ON 
 
-                                        UPDATE senap.formulacionesImputacion SET 
-                                        fechaFormulacion = '$fechaFormulacionImpu'
+                                        UPDATE senap.acuerdosReparatorios SET 
+                                        idTipoAcuerdoReparatorio = $tipoAcuerdosRep
                                         WHERE idEstatusNucs = '$idEstatusNucs' ;
                                                   
                                       COMMIT

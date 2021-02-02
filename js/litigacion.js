@@ -141,7 +141,17 @@ function sumsobredecret(){
 		MA = document.getElementById("MA").value;      if( MA == "" ){ MA = 0; } else { MA = parseInt(document.getElementById("MA").value);   }
 		termant = document.getElementById("termant").value;    if( termant == "" ){ termant = 0; }else { termant = parseInt(document.getElementById("termant").value);  } 
 		SDpmuImpu = document.getElementById("SDpmuImpu").value;    if( SDpmuImpu == "" ){ SDpmuImpu = 0; }else { SDpmuImpu = parseInt(document.getElementById("SDpmuImpu").value);  }
-		
+		/*NUEVAS VARIABLES AGREGADAS SOLICITADAS POR SENAP
+		SDhNoCom = document.getElementById("SDhNoCom").value;  if( SDhNoCom == "" ){ SDhNoCom = 0; }else { SDhNoCom = parseInt(document.getElementById("SDhNoCom").value);  }
+		SDnoConDel = document.getElementById("SDnoConDel").value;  if( SDnoConDel == "" ){ SDnoConDel = 0; }else { SDnoConDel = parseInt(document.getElementById("SDnoConDel").value);  }
+  SDimExRespPen = document.getElementById("SDimExRespPen").value; if( SDimExRespPen == "" ){ SDimExRespPen = 0; }else { SDimExRespPen = parseInt(document.getElementById("SDimExRespPen").value);  }
+  SDNoEleSufAcusa = document.getElementById("SDNoEleSufAcusa").value;  if( SDNoEleSufAcusa == "" ){ SDNoEleSufAcusa = 0; }else { SDNoEleSufAcusa = parseInt(document.getElementById("SDNoEleSufAcusa").value);  }
+  SDExtPenal = document.getElementById("SDExtPenal").value;  if( SDExtPenal == "" ){ SDExtPenal = 0; }else { SDExtPenal = parseInt(document.getElementById("SDExtPenal").value);  }
+  SDderDeliSigProc = document.getElementById("SDderDeliSigProc").value;  if( SDderDeliSigProc == "" ){ SDderDeliSigProc = 0; }else { SDderDeliSigProc = parseInt(document.getElementById("SDderDeliSigProc").value);  }
+  SDsentFirme = document.getElementById("SDsentFirme").value; if( SDsentFirme == "" ){ SDsentFirme = 0; }else { SDsentFirme = parseInt(document.getElementById("SDsentFirme").value);  }
+  SDnoVincProc = document.getElementById("SDnoVincProc").value; if( SDnoVincProc == "" ){ SDnoVincProc = 0; }else { SDnoVincProc = parseInt(document.getElementById("SDnoVincProc").value);  }
+  SDinCieInvCom = document.getElementById("SDinCieInvCom").value; if( SDinCieInvCom == "" ){ SDinCieInvCom = 0; }else { SDinCieInvCom = parseInt(document.getElementById("SDinCieInvCom").value);  }
+  */
 		var final = SDpapen  + MA + termant + SDpmuImpu;   document.getElementById("SD").value = final;
 		sumTotCarpJudTram();
 }
@@ -833,7 +843,8 @@ function deleteResolLit(idEstatusNucs, idMp, anio, mes, estatResolucion, nuc, id
 											if (objDatos.first == "SI") {               
 
 															//updateTableNucs2(idMp, anio, mes, estatResolucion, nuc, deten);               
-																updateTableNucsLiti(idMp, anio, mes, estatResolucion, nuc, 0, idUnidad);              
+																updateTableNucsLiti(idMp, anio, mes, estatResolucion, nuc, 0, idUnidad);
+																setTimeout("removeDataSenap("+idEstatusNucs+","+estatResolucion+");",100);              
 											}
 									}
 								
@@ -934,7 +945,38 @@ function descargarLit(idUnidad, mes, anio, idEnlace){
 
 }
 
+//Funcion para eliminar informacion adicional de SENAP al eliminar el nuc
+function removeDataSenap(idEstatusNucs,estatResolucion){
+	validaDataSenap = validarEstatusShowInfoSica(estatResolucion); //Si el estatusResolucion es de SENAP pocedemos a efectuar la llamada
+	if(validaDataSenap){
+								ajax=objetoAjax();
+								ajax.open("POST", "format/litigacion/insertSenap/deleteDataSenap.php");
 
+								ajax.onreadystatechange = function(){
+								if (ajax.readyState == 4 && ajax.status == 200) {						
+								
+						}
+					}
+					ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+					ajax.send("&idEstatusNucs="+idEstatusNucs+"&estatResolucion="+estatResolucion);
+			}	
+}
 
+//Funcion para validad si el estatus recibido requiere informacion adicional de SENAP
+function validarEstatusShowInfoSica(estatResolucion){
 
-
+	if(estatResolucion == 3 || estatResolucion == 4 || estatResolucion == 19 || estatResolucion == 17 || estatResolucion == 18 
+		|| estatResolucion == 20  || estatResolucion == 21 || estatResolucion== 22 || estatResolucion == 23  || estatResolucion == 24 
+		||estatResolucion == 25 || estatResolucion == 26 || estatResolucion == 27 || estatResolucion == 28 || estatResolucion == 29  
+		|| estatResolucion == 30 || estatResolucion == 31 || estatResolucion == 95 || estatResolucion == 61 || estatResolucion == 63 
+		|| estatResolucion == 99 || estatResolucion == 89 || estatResolucion == 101 || estatResolucion == 103 || estatResolucion == 105 
+		|| estatResolucion == 106 || estatResolucion == 89 || estatResolucion == 107 || estatResolucion == 108 || estatResolucion == 109
+		 || estatResolucion == 110 || estatResolucion == 111 || estatResolucion == 64 || estatResolucion == 60 || estatResolucion == 14 
+		 || estatResolucion == 65 || estatResolucion == 66 || estatResolucion == 67 || estatResolucion == 68 || estatResolucion == 90 
+		 || estatResolucion == 91){
+		return true;
+	}
+	else{
+		return false;
+	}
+}

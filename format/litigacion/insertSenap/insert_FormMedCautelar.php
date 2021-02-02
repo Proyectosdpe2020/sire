@@ -11,8 +11,10 @@ if (isset($_POST['nuc'])){ $nuc = $_POST['nuc']; }
 
 
 /*DATOS FORMULARIO SENAP*/
-if (isset($_POST['fechaFormulacionImpu'])){ $fechaFormulacionImpu = $_POST['fechaFormulacionImpu']; } 
-if (isset($_POST['opcInsert'])){ $opcInsert = $_POST['opcInsert']; } 
+if (isset($_POST['fechaCierreInvest'])){ $fechaCierreInvest = $_POST['fechaCierreInvest']; } 
+if (isset($_POST['formulacionAcusacion'])){ $formulacionAcusacion = $_POST['formulacionAcusacion']; } 
+if (isset($_POST['fechaEscritoAcusacion'])){ $fechaEscritoAcusacion = $_POST['fechaEscritoAcusacion']; }
+if (isset($_POST['opcInsert'])){ $opcInsert = $_POST['opcInsert']; }  
 
 //Si opcInsert == 0 es un nuevo registro, si opcInsert == 1 es una edicion de registro
 if($opcInsert == 0){
@@ -23,8 +25,8 @@ if($opcInsert == 0){
                                 BEGIN TRANSACTION
                                       SET NOCOUNT ON 
 
-                                        INSERT INTO senap.formulacionesImputacion (idEstatusNucs, fechaFormulacion) 
-                                        VALUES('$idEstatusNucs', '$fechaFormulacionImpu')
+                                        INSERT INTO senap.medidaCautelar (idEstatusNucs, fechaCierreInvest, formulacionAcusacion, fechaEscritoAcusacion) 
+                                        VALUES('$idEstatusNucs', '$fechaCierreInvest', $formulacionAcusacion , '$fechaEscritoAcusacion')
                                                   
                                       COMMIT
                               END TRY
@@ -41,8 +43,10 @@ if($opcInsert == 0){
                                 BEGIN TRANSACTION
                                       SET NOCOUNT ON 
 
-                                        UPDATE senap.formulacionesImputacion SET 
-                                        fechaFormulacion = '$fechaFormulacionImpu'
+                                        UPDATE senap.medidaCautelar SET 
+                                        fechaCierreInvest = '$fechaCierreInvest',
+                                        formulacionAcusacion = $formulacionAcusacion,
+                                        fechaEscritoAcusacion = '$fechaEscritoAcusacion'
                                         WHERE idEstatusNucs = '$idEstatusNucs' ;
                                                   
                                       COMMIT

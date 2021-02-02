@@ -1,4 +1,5 @@
-function showModalNucLitInfo(idEstatusNucs, idMp, anio, mes, estatus, nuc, idUnidad){
+//Muestra modal para ingresar información adicional del NUC solicitado por SENAP
+function showModalNucLitInfo(idEstatusNucs, estatus, nuc){
 	ajax=objetoAjax();
 	ajax.open("POST", "format/litigacion/modalNucsInfoLitig.php");
 
@@ -11,10 +12,10 @@ function showModalNucLitInfo(idEstatusNucs, idMp, anio, mes, estatus, nuc, idUni
 		}
 	}
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	ajax.send('&idEstatusNucs='+idEstatusNucs+'&idMp='+idMp+'&anio='+anio+'&mes='+mes+'&estatus='+estatus+'&nuc='+nuc+'&idUnidad='+idUnidad);
+	ajax.send('&idEstatusNucs='+idEstatusNucs+'&estatus='+estatus+'&nuc='+nuc);
 }
 
-function showModalNucLitSicaInfo(idResolMP, idMp, anio, mes, estatus, nuc, idUnidad){
+function showModalNucLitSicaInfo(idResolMP, estatus, nuc){
 	ajax=objetoAjax();
 	ajax.open("POST", "format/litigacion/modalNucsInfoLitig.php");
 
@@ -27,7 +28,7 @@ function showModalNucLitSicaInfo(idResolMP, idMp, anio, mes, estatus, nuc, idUni
 		}
 	}
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	ajax.send('&idResolMP='+idResolMP+'&idMp='+idMp+'&anio='+anio+'&mes='+mes+'&estatus='+estatus+'&nuc='+nuc+'&idUnidad='+idUnidad);
+	ajax.send('&idResolMP='+idResolMP+'&estatus='+estatus+'&nuc='+nuc);
 }
 
 function closeModalNucsLitigInfo(){
@@ -35,9 +36,8 @@ function closeModalNucsLitigInfo(){
 	$('#modalNucsLitig').modal('show');
 }
 
-
-function insertFormImputacion_db(idEstatusNucs, idMp, anio, mes, estatus, nuc, idUnidad){
-	var formImputacion = document.getElementById("formImputacion").value;
+/****Ingresa a la bd la fecha de la formulación de la imputación****/
+function insertFormImputacion_db(idEstatusNucs, estatus, nuc, opcInsert){
 	var fechaFormulacionImpu = document.getElementById("fechaFormulacionImpu").value;
 
 	if(fechaFormulacionImpu != ""){
@@ -45,7 +45,7 @@ function insertFormImputacion_db(idEstatusNucs, idMp, anio, mes, estatus, nuc, i
 			type: "POST",
 		 dataType: "html",
 			url:  "format/litigacion/insertSenap/insert_FormImputacion.php",
-		 data: "idEstatusNucs="+idEstatusNucs+"&idMp="+idMp+"&anio="+anio+"&mes="+mes+"&estatus="+estatus+"&nuc="+nuc+"&idUnidad="+idUnidad+"&formImputacion="+formImputacion+"&fechaFormulacionImpu="+fechaFormulacionImpu,
+		 data: 'idEstatusNucs='+idEstatusNucs+'&nuc='+nuc+'&opcInsert='+opcInsert+'&fechaFormulacionImpu='+fechaFormulacionImpu,
 		 success: function(respuesta){
 		 	var json = respuesta;
 		 	var obj = eval("(" + json + ")");
@@ -55,6 +55,7 @@ function insertFormImputacion_db(idEstatusNucs, idMp, anio, mes, estatus, nuc, i
 		 		if (obj.first == "SI") {
 		 			var obj = eval("(" + json + ")");
 		 			swal("", "Registro exitosamente.", "success");
+		 			//reloadOpcInsertButton(idEstatusNucs, estatus, nuc,  1);
 		 			$('#modalNucsLitigInfo').modal('hide');
 		 			$('#modalNucsLitig').modal('show');
 		 		}
@@ -66,17 +67,16 @@ function insertFormImputacion_db(idEstatusNucs, idMp, anio, mes, estatus, nuc, i
 	}
 }
 
-
-function insertFormResoAutoVinc_db(idResolMP, idMp, anio, mes, estatus, nuc, idUnidad){
-	var resolAutoVincu = document.getElementById("resolAutoVincu").value;
-	var fechaAutoVinculacion = document.getElementById("fechaAutoVinculacion").value;
+/****Ingresa a la bd la fecha del auto de vinculación a proceso****/
+function insertFormAutoVincuProc_db(idResolMP , estatus , nuc , opcInsert){
+		var fechaAutoVinculacion = document.getElementById("fechaAutoVinculacion").value;
 
 	if(fechaAutoVinculacion != ""){
 		$.ajax({
 			type: "POST",
 		 dataType: "html",
-			url:  "format/litigacion/insertSenap/insertFormResoAutoVinc.php",
-		 data: "idResolMP="+idResolMP+"&idMp="+idMp+"&anio="+anio+"&mes="+mes+"&estatus="+estatus+"&nuc="+nuc+"&idUnidad="+idUnidad+"&resolAutoVincu="+resolAutoVincu+"&fechaAutoVinculacion="+fechaAutoVinculacion,
+			url:  "format/litigacion/insertSenap/insert_FormAutoVincuProc.php",
+		 data: 'idResolMP='+idResolMP+'&nuc='+nuc+'&opcInsert='+opcInsert+'&fechaAutoVinculacion='+fechaAutoVinculacion,
 		 success: function(respuesta){
 		 	var json = respuesta;
 		 	var obj = eval("(" + json + ")");
@@ -86,6 +86,177 @@ function insertFormResoAutoVinc_db(idResolMP, idMp, anio, mes, estatus, nuc, idU
 		 		if (obj.first == "SI") {
 		 			var obj = eval("(" + json + ")");
 		 			swal("", "Registro exitosamente.", "success");
+		 			//reloadOpcInsertButton(idEstatusNucs, estatus, nuc,  1);
+		 			$('#modalNucsLitigInfo').modal('hide');
+		 			$('#modalNucsLitig').modal('show');
+		 		}
+		 	}
+		 }
+		});
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+/****Ingresa a la bd la informacion de SENAP de medidas cautelares****/
+function insertMedCautelar_db(idEstatusNucs, estatus, nuc, opcInsert){
+	var fechaCierreInvest = document.getElementById("fechaCierreInvest").value;
+	var formulacionAcusacion = document.getElementById("formulacionAcusacion").value;
+	var fechaEscritoAcusacion= document.getElementById("fechaEscritoAcusacion").value;
+
+	if(formulacionAcusacion != ""){
+		$.ajax({
+			type: "POST",
+		 dataType: "html",
+			url:  "format/litigacion/insertSenap/insert_FormMedCautelar.php",
+		 data: 'idEstatusNucs='+idEstatusNucs+'&nuc='+nuc+'&opcInsert='+opcInsert+'&fechaCierreInvest='+fechaCierreInvest+'&formulacionAcusacion='+formulacionAcusacion+'&fechaEscritoAcusacion='+fechaEscritoAcusacion,
+		 success: function(respuesta){
+		 	var json = respuesta;
+		 	var obj = eval("(" + json + ")");
+		 	if (obj.first == "NO") { 
+		 		swal("", "No se registro verifique los datos.", "warning"); 
+		 	}else{
+		 		if (obj.first == "SI") {
+		 			var obj = eval("(" + json + ")");
+		 			swal("", "Registro exitosamente.", "success");
+		 			//reloadOpcInsertButton(idEstatusNucs, estatus, nuc,  1);
+		 			$('#modalNucsLitigInfo').modal('hide');
+		 			$('#modalNucsLitig').modal('show');
+		 		}
+		 	}
+		 }
+		});
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+/****Ingresa a la bd la informacion de SENAP de Audiencias Intermedias****/
+function insertAudienciaIntermedia_db(idEstatusNucs, estatus, nuc, opcInsert){
+	var fechaAudienciaIntermedia = document.getElementById("fechaAudienciaIntermedia").value;
+	var mediosDePrueba = document.getElementById("mediosDePrueba").value;
+	var tipoMedioPrueba = document.getElementById("tipoMedioPrueba").value;
+	var acuerdoProbatorio = document.getElementById("acuerdoProbatorio").value;
+	var apertJuiOral = document.getElementById("apertJuiOral").value;
+
+	if(fechaAudienciaIntermedia != "" && mediosDePrueba != 0 ){
+		$.ajax({
+			type: "POST",
+		 dataType: "html",
+			url:  "format/litigacion/insertSenap/insert_FormAudienciaIntermedia.php",
+		 data: 'idEstatusNucs='+idEstatusNucs+'&nuc='+nuc+'&opcInsert='+opcInsert+'&fechaAudienciaIntermedia='+fechaAudienciaIntermedia+'&mediosDePrueba='+mediosDePrueba+
+		       '&tipoMedioPrueba='+tipoMedioPrueba+'&acuerdoProbatorio='+acuerdoProbatorio+'&apertJuiOral='+apertJuiOral,
+		 success: function(respuesta){
+		 	var json = respuesta;
+		 	var obj = eval("(" + json + ")");
+		 	if (obj.first == "NO") { 
+		 		swal("", "No se registro verifique los datos.", "warning"); 
+		 	}else{
+		 		if (obj.first == "SI") {
+		 			var obj = eval("(" + json + ")");
+		 			swal("", "Registro exitosamente.", "success");
+		 			//reloadOpcInsertButton(idEstatusNucs, estatus, nuc,  1);
+		 			$('#modalNucsLitigInfo').modal('hide');
+		 			$('#modalNucsLitig').modal('show');
+		 		}
+		 	}
+		 }
+		});
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+/****Ingresa a la bd la informacion de SENAP de sobreseimientos****/
+function insertSobreseimientos_db(idEstatusNucs, estatus, nuc, opcInsert){
+	var fechaDictoSobresei = document.getElementById("fechaDictoSobresei").value;
+	var tipoSobreseimiento = document.getElementById("tipoSobreseimiento").value;
+
+	if(fechaDictoSobresei != "" &&tipoSobreseimiento != 0 ){
+		$.ajax({
+			type: "POST",
+		 dataType: "html",
+			url:  "format/litigacion/insertSenap/insert_FormSobreseimientos.php",
+		 data: 'idEstatusNucs='+idEstatusNucs+'&nuc='+nuc+'&opcInsert='+opcInsert+'&fechaDictoSobresei='+fechaDictoSobresei+'&tipoSobreseimiento='+tipoSobreseimiento,
+		 success: function(respuesta){
+		 	var json = respuesta;
+		 	var obj = eval("(" + json + ")");
+		 	if (obj.first == "NO") { 
+		 		swal("", "No se registro verifique los datos.", "warning"); 
+		 	}else{
+		 		if (obj.first == "SI") {
+		 			var obj = eval("(" + json + ")");
+		 			swal("", "Registro exitosamente.", "success");
+		 			//reloadOpcInsertButton(idEstatusNucs, estatus, nuc,  1);
+		 			$('#modalNucsLitigInfo').modal('hide');
+		 			$('#modalNucsLitig').modal('show');
+		 		}
+		 	}
+		 }
+		});
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+/****Ingresa a la bd la informacion de SENAP de suspencion condicional del proceso****/
+function insertSuspCondProc_db(idEstatusNucs, estatus, nuc, opcInsert){
+	var fechaDictoSuspConProc = document.getElementById("fechaDictoSuspConProc").value;
+	var etapaSuspCondProc = document.getElementById("etapaSuspCondProc").value;
+	var CondImpuSuspConProc = document.getElementById("CondImpuSuspConProc").value;
+	var reaperturaProc = document.getElementById("reaperturaProc").value;
+	var fechaReaperProc = document.getElementById("fechaReaperProc").value;
+	var fechaCumpSuspCondPro = document.getElementById("fechaCumpSuspCondPro").value;
+
+	if(fechaDictoSuspConProc != ""  ){
+		$.ajax({
+			type: "POST",
+		 dataType: "html",
+			url:  "format/litigacion/insertSenap/insert_FormSuspCondProc.php",
+		 data: 'idEstatusNucs='+idEstatusNucs+'&nuc='+nuc+'&opcInsert='+opcInsert+'&fechaDictoSuspConProc='+fechaDictoSuspConProc+'&etapaSuspCondProc='+etapaSuspCondProc+
+		 						'&CondImpuSuspConProc='+CondImpuSuspConProc+'&reaperturaProc='+reaperturaProc+'&fechaReaperProc='+fechaReaperProc+'&fechaCumpSuspCondPro='+fechaCumpSuspCondPro,
+		 success: function(respuesta){
+		 	var json = respuesta;
+		 	var obj = eval("(" + json + ")");
+		 	if (obj.first == "NO") { 
+		 		swal("", "No se registro verifique los datos.", "warning"); 
+		 	}else{
+		 		if (obj.first == "SI") {
+		 			var obj = eval("(" + json + ")");
+		 			swal("", "Registro exitosamente.", "success");
+		 			//reloadOpcInsertButton(idEstatusNucs, estatus, nuc,  1);
+		 			$('#modalNucsLitigInfo').modal('hide');
+		 			$('#modalNucsLitig').modal('show');
+		 		}
+		 	}
+		 }
+		});
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+/****Ingresa a la bd la informacion de SENAP de Audiencias de Juicio****/
+function insertAudienciasJuicio_db(idEstatusNucs, estatus, nuc, opcInsert){
+	var fechaAudienciaJuicio = document.getElementById("fechaAudienciaJuicio").value;
+	var pruebasAudienciaJuicio = document.getElementById("pruebasAudienciaJuicio").value;
+
+	if(fechaAudienciaJuicio != "" && pruebasAudienciaJuicio != 0  ){
+		$.ajax({
+			type: "POST",
+		 dataType: "html",
+			url:  "format/litigacion/insertSenap/insert_FormAudienciaJuicio.php",
+		 data: 'idEstatusNucs='+idEstatusNucs+'&nuc='+nuc+'&opcInsert='+opcInsert+'&fechaAudienciaJuicio='+fechaAudienciaJuicio+'&pruebasAudienciaJuicio='+pruebasAudienciaJuicio,
+		 success: function(respuesta){
+		 	var json = respuesta;
+		 	var obj = eval("(" + json + ")");
+		 	if (obj.first == "NO") { 
+		 		swal("", "No se registro verifique los datos.", "warning"); 
+		 	}else{
+		 		if (obj.first == "SI") {
+		 			var obj = eval("(" + json + ")");
+		 			swal("", "Registro exitosamente.", "success");
+		 			//reloadOpcInsertButton(idEstatusNucs, estatus, nuc,  1);
 		 			$('#modalNucsLitigInfo').modal('hide');
 		 			$('#modalNucsLitig').modal('show');
 		 		}
@@ -98,6 +269,136 @@ function insertFormResoAutoVinc_db(idResolMP, idMp, anio, mes, estatus, nuc, idU
 }
 
 
+/****Ingresa a la bd la informacion de SENAP de Acuerdos reparatorios****/
+function insertAcuerdoReparatorio_db(idEstatusNucs, estatus, nuc, opcInsert){
+	var tipoAcuerdosRep = document.getElementById("tipoAcuerdosRep").value;
+
+	if(tipoAcuerdosRep != 0  ){
+		$.ajax({
+			type: "POST",
+		 dataType: "html",
+			url:  "format/litigacion/insertSenap/insert_FormAcuerdosReparatorios.php",
+		 data: 'idEstatusNucs='+idEstatusNucs+'&nuc='+nuc+'&opcInsert='+opcInsert+'&tipoAcuerdosRep='+tipoAcuerdosRep,
+		 success: function(respuesta){
+		 	var json = respuesta;
+		 	var obj = eval("(" + json + ")");
+		 	if (obj.first == "NO") { 
+		 		swal("", "No se registro verifique los datos.", "warning"); 
+		 	}else{
+		 		if (obj.first == "SI") {
+		 			var obj = eval("(" + json + ")");
+		 			swal("", "Registro exitosamente.", "success");
+		 			//reloadOpcInsertButton(idEstatusNucs, estatus, nuc,  1);
+		 			$('#modalNucsLitigInfo').modal('hide');
+		 			$('#modalNucsLitig').modal('show');
+		 		}
+		 	}
+		 }
+		});
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+/****Ingresa a la bd la informacion de SENAP de Criterios de Oportunidad****/
+function insertCriteriosOportunidad_db(idEstatusNucs, estatus, nuc, opcInsert){
+	var tipoCriterioOportunidad = document.getElementById("tipoCriterioOportunidad").value;
+
+	if(tipoCriterioOportunidad != 0  ){
+		$.ajax({
+			type: "POST",
+		 dataType: "html",
+			url:  "format/litigacion/insertSenap/insert_FormCriterioOportunidad.php",
+		 data: 'idEstatusNucs='+idEstatusNucs+'&nuc='+nuc+'&opcInsert='+opcInsert+'&tipoCriterioOportunidad='+tipoCriterioOportunidad,
+		 success: function(respuesta){
+		 	var json = respuesta;
+		 	var obj = eval("(" + json + ")");
+		 	if (obj.first == "NO") { 
+		 		swal("", "No se registro verifique los datos.", "warning"); 
+		 	}else{
+		 		if (obj.first == "SI") {
+		 			var obj = eval("(" + json + ")");
+		 			swal("", "Registro exitosamente.", "success");
+		 			//reloadOpcInsertButton(idEstatusNucs, estatus, nuc,  1);
+		 			$('#modalNucsLitigInfo').modal('hide');
+		 			$('#modalNucsLitig').modal('show');
+		 		}
+		 	}
+		 }
+		});
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+/****Ingresa a la bd la informacion de SENAP de Criterios de Oportunidad****/
+function insertSentencias_db(idEstatusNucs, estatus, nuc, opcInsert){
+	var fechaDictoSentencia = document.getElementById("fechaDictoSentencia").value;
+	var tipoSentencia = document.getElementById("tipoSentencia").value;
+	var aniosPrision = document.getElementById("aniosPrision").value;
+	var sentenciaFirme = document.getElementById("sentenciaFirme").value;
+	var sentDerivaProcAbrv = document.getElementById("sentDerivaProcAbrv").value;
+	var fechaDictoProcAbrv = document.getElementById("fechaDictoProcAbrv").value;
+
+	if(fechaDictoSentencia != "" && tipoSentencia > 0){
+		$.ajax({
+			type: "POST",
+		 dataType: "html",
+			url:  "format/litigacion/insertSenap/insert_FormSentencias.php",
+		 data: 'idEstatusNucs='+idEstatusNucs+'&nuc='+nuc+'&opcInsert='+opcInsert+'&estatus='+estatus+'&fechaDictoSentencia='+fechaDictoSentencia+'&tipoSentencia='+tipoSentencia+
+		       '&aniosPrision='+aniosPrision+'&sentenciaFirme='+sentenciaFirme+'&sentDerivaProcAbrv='+sentDerivaProcAbrv+'&fechaDictoProcAbrv='+fechaDictoProcAbrv,
+		 success: function(respuesta){
+		 	var json = respuesta;
+		 	var obj = eval("(" + json + ")");
+		 	if (obj.first == "NO") { 
+		 		swal("", "No se registro verifique los datos.", "warning"); 
+		 	}else{
+		 		if (obj.first == "SI") {
+		 			var obj = eval("(" + json + ")");
+		 			swal("", "Registro exitosamente.", "success");
+		 			//reloadOpcInsertButton(idEstatusNucs, estatus, nuc,  1);
+		 			$('#modalNucsLitigInfo').modal('hide');
+		 			$('#modalNucsLitig').modal('show');
+		 		}
+		 	}
+		 }
+		});
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+
+/****Ingresa a la bd la informacion de SENAP de Criterios de Oportunidad****/
+function insertReparacionDanios_db(idEstatusNucs, estatus, nuc, opcInsert){
+	var montoRepDanio = document.getElementById("montoRepDanio").value;
+
+	if(montoRepDanio != ""){
+		$.ajax({
+			type: "POST",
+		 dataType: "html",
+			url:  "format/litigacion/insertSenap/insert_FormRepDanios.php",
+		 data: 'idEstatusNucs='+idEstatusNucs+'&nuc='+nuc+'&opcInsert='+opcInsert+'&montoRepDanio='+montoRepDanio,
+		 success: function(respuesta){
+		 	var json = respuesta;
+		 	var obj = eval("(" + json + ")");
+		 	if (obj.first == "NO") { 
+		 		swal("", "No se registro verifique los datos.", "warning"); 
+		 	}else{
+		 		if (obj.first == "SI") {
+		 			var obj = eval("(" + json + ")");
+		 			swal("", "Registro exitosamente.", "success");
+		 			//reloadOpcInsertButton(idEstatusNucs, estatus, nuc,  1);
+		 			$('#modalNucsLitigInfo').modal('hide');
+		 			$('#modalNucsLitig').modal('show');
+		 		}
+		 	}
+		 }
+		});
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
 /*
 //Mecanismo para cambiar de formulario a otro
 function openForm(evt, etapa) {

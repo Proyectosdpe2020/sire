@@ -6,12 +6,12 @@ include ("../../../Conexiones/Conexion.php");
 
 
 /*DATOS GENERALES*/
-if (isset($_POST['idEstatusNucs'])){ $idEstatusNucs = $_POST['idEstatusNucs']; }
+if (isset($_POST['idResolMP'])){ $idResolMP = $_POST['idResolMP']; }
 if (isset($_POST['nuc'])){ $nuc = $_POST['nuc']; }
 
 
 /*DATOS FORMULARIO SENAP*/
-if (isset($_POST['fechaFormulacionImpu'])){ $fechaFormulacionImpu = $_POST['fechaFormulacionImpu']; } 
+if (isset($_POST['fechaAutoVinculacion'])){ $fechaAutoVinculacion = $_POST['fechaAutoVinculacion']; } 
 if (isset($_POST['opcInsert'])){ $opcInsert = $_POST['opcInsert']; } 
 
 //Si opcInsert == 0 es un nuevo registro, si opcInsert == 1 es una edicion de registro
@@ -23,8 +23,8 @@ if($opcInsert == 0){
                                 BEGIN TRANSACTION
                                       SET NOCOUNT ON 
 
-                                        INSERT INTO senap.formulacionesImputacion (idEstatusNucs, fechaFormulacion) 
-                                        VALUES('$idEstatusNucs', '$fechaFormulacionImpu')
+                                        INSERT INTO senap.autoVincuProc (ResolucionID, fechaAutoVincuProc) 
+                                        VALUES('$idResolMP', '$fechaAutoVinculacion')
                                                   
                                       COMMIT
                               END TRY
@@ -41,9 +41,9 @@ if($opcInsert == 0){
                                 BEGIN TRANSACTION
                                       SET NOCOUNT ON 
 
-                                        UPDATE senap.formulacionesImputacion SET 
-                                        fechaFormulacion = '$fechaFormulacionImpu'
-                                        WHERE idEstatusNucs = '$idEstatusNucs' ;
+                                        UPDATE senap.autoVincuProc SET 
+                                        fechaAutoVincuProc = '$fechaAutoVinculacion'
+                                        WHERE ResolucionID = '$idResolMP' ;
                                                   
                                       COMMIT
                               END TRY

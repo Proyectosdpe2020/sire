@@ -11,7 +11,13 @@ if (isset($_POST['nuc'])){ $nuc = $_POST['nuc']; }
 
 
 /*DATOS FORMULARIO SENAP*/
-if (isset($_POST['fechaFormulacionImpu'])){ $fechaFormulacionImpu = $_POST['fechaFormulacionImpu']; } 
+if (isset($_POST['fechaDictoSuspConProc'])){ $fechaDictoSuspConProc = $_POST['fechaDictoSuspConProc']; } 
+if (isset($_POST['etapaSuspCondProc'])){ $etapaSuspCondProc = $_POST['etapaSuspCondProc']; } 
+if (isset($_POST['CondImpuSuspConProc'])){ $CondImpuSuspConProc = $_POST['CondImpuSuspConProc']; } 
+if (isset($_POST['reaperturaProc'])){ $reaperturaProc = $_POST['reaperturaProc']; } 
+if (isset($_POST['fechaReaperProc'])){ $fechaReaperProc = $_POST['fechaReaperProc']; } 
+if (isset($_POST['fechaCumpSuspCondPro'])){ $fechaCumpSuspCondPro = $_POST['fechaCumpSuspCondPro']; } 
+
 if (isset($_POST['opcInsert'])){ $opcInsert = $_POST['opcInsert']; } 
 
 //Si opcInsert == 0 es un nuevo registro, si opcInsert == 1 es una edicion de registro
@@ -23,8 +29,8 @@ if($opcInsert == 0){
                                 BEGIN TRANSACTION
                                       SET NOCOUNT ON 
 
-                                        INSERT INTO senap.formulacionesImputacion (idEstatusNucs, fechaFormulacion) 
-                                        VALUES('$idEstatusNucs', '$fechaFormulacionImpu')
+                                        INSERT INTO senap.suspCondProc (idEstatusNucs, fechaDictoSuspCondProc, idEtapaSuspCondProc, idTipoCondImpuSuspConProc, reaperturaProc, fechaReaperProc, fechaCumplimentoSuspCondPro) 
+                                        VALUES('$idEstatusNucs', '$fechaDictoSuspConProc', $etapaSuspCondProc, $CondImpuSuspConProc, $reaperturaProc, '$fechaReaperProc', '$fechaCumpSuspCondPro')
                                                   
                                       COMMIT
                               END TRY
@@ -41,8 +47,13 @@ if($opcInsert == 0){
                                 BEGIN TRANSACTION
                                       SET NOCOUNT ON 
 
-                                        UPDATE senap.formulacionesImputacion SET 
-                                        fechaFormulacion = '$fechaFormulacionImpu'
+                                        UPDATE senap.suspCondProc SET 
+                                        fechaDictoSuspCondProc = '$fechaDictoSuspConProc',
+                                        idEtapaSuspCondProc = $etapaSuspCondProc,
+                                        idTipoCondImpuSuspConProc = $CondImpuSuspConProc,
+                                        reaperturaProc = $reaperturaProc,
+                                        fechaReaperProc = '$fechaReaperProc',
+                                        fechaCumplimentoSuspCondPro = '$fechaCumpSuspCondPro'
                                         WHERE idEstatusNucs = '$idEstatusNucs' ;
                                                   
                                       COMMIT
