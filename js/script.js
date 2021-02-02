@@ -2786,7 +2786,8 @@ function deleteResol(idResol, idMp, anio, mes, estatResolucion, nuc, deten, idUn
 										 if (objDatos.first == "SI") {															
 
 															//updateTableNucs2(idMp, anio, mes, estatResolucion, nuc, deten);	
-															updateTableNucsLit(idMp, anio, mes, estatResolucion, nuc, deten, idUnidad);													
+															updateTableNucsLit(idMp, anio, mes, estatResolucion, nuc, deten, idUnidad);		
+															setTimeout("removeDataSenap("+idResol+","+estatResolucion+");",100);											
 										 }
 									}
 								
@@ -2798,6 +2799,42 @@ function deleteResol(idResol, idMp, anio, mes, estatResolucion, nuc, deten, idUn
 				}
 			});				
 
+}
+
+//Funcion para eliminar informacion adicional de SENAP al eliminar el nuc
+function removeDataSenap(idEstatusNucs,estatResolucion){
+	validaDataSenap = validarEstatusShowInfoSica(estatResolucion); //Si el estatusResolucion es de SENAP pocedemos a efectuar la llamada
+	if(validaDataSenap){
+								ajax=objetoAjax();
+								ajax.open("POST", "../format/litigacion/insertSenap/deleteDataSenap.php");
+
+								ajax.onreadystatechange = function(){
+								if (ajax.readyState == 4 && ajax.status == 200) {						
+								
+						}
+					}
+					ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+					ajax.send("&idEstatusNucs="+idEstatusNucs+"&estatResolucion="+estatResolucion);
+			}	
+}
+
+//Funcion para validad si el estatus recibido requiere informacion adicional de SENAP
+function validarEstatusShowInfoSica(estatResolucion){
+
+	if(estatResolucion == 3 || estatResolucion == 4 || estatResolucion == 19 || estatResolucion == 17 || estatResolucion == 18 
+		|| estatResolucion == 20  || estatResolucion == 21 || estatResolucion== 22 || estatResolucion == 23  || estatResolucion == 24 
+		||estatResolucion == 25 || estatResolucion == 26 || estatResolucion == 27 || estatResolucion == 28 || estatResolucion == 29  
+		|| estatResolucion == 30 || estatResolucion == 31 || estatResolucion == 95 || estatResolucion == 61 || estatResolucion == 63 
+		|| estatResolucion == 99 || estatResolucion == 89 || estatResolucion == 101 || estatResolucion == 103 || estatResolucion == 105 
+		|| estatResolucion == 106 || estatResolucion == 89 || estatResolucion == 107 || estatResolucion == 108 || estatResolucion == 109
+		 || estatResolucion == 110 || estatResolucion == 111 || estatResolucion == 64 || estatResolucion == 60 || estatResolucion == 14 
+		 || estatResolucion == 65 || estatResolucion == 66 || estatResolucion == 67 || estatResolucion == 68 || estatResolucion == 90 
+		 || estatResolucion == 91){
+		return true;
+	}
+	else{
+		return false;
+	}
 }
 
 

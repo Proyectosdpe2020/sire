@@ -56,3 +56,15 @@ hr{
 
 }
 
+.panelunoLitigacion1{
+
+    background-image: url('../img/Formulario SIRE6-06.png'); 
+  background-repeat: repeat;  
+  background-size: cover;
+  background-size: 100%; 
+  background-position-y: 52%;
+  height: 80vh;
+   overflow-y: scroll;
+  overflow-x:hidden;
+
+}

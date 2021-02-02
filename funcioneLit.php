@@ -417,6 +417,15 @@ function validarCarpetaCapturadaLitiUnidad($conn, $anioCaptura, $mesCapturar, $i
 }
 
 
+function validarEstatusShowInfo($estatResolucion){
+
+	if($estatResolucion == 3 || $estatResolucion == 4 || $estatResolucion == 19 || $estatResolucion == 17 || $estatResolucion == 18 || $estatResolucion == 20  || $estatResolucion == 21 || $estatResolucion== 22 || $estatResolucion == 23  || $estatResolucion == 24 || $estatResolucion == 25 || $estatResolucion == 26 || $estatResolucion == 27 || $estatResolucion == 28 || $estatResolucion == 29  || $estatResolucion == 30 || $estatResolucion == 31 || $estatResolucion == 95 || $estatResolucion == 61 || $estatResolucion == 63 || $estatResolucion == 99 || $estatResolucion == 89 || $estatResolucion == 101 || $estatResolucion == 103 || $estatResolucion == 105 || $estatResolucion == 106 || $estatResolucion == 89 || $estatResolucion == 107 || $estatResolucion == 108 || $estatResolucion == 109 || $estatResolucion == 110 || $estatResolucion == 111 || $estatResolucion == 64 || $estatResolucion == 60 || $estatResolucion == 14 || $estatResolucion == 65 || $estatResolucion == 66 || $estatResolucion == 67 || $estatResolucion == 68 || $estatResolucion == 90 || $estatResolucion == 91){
+		return True;
+	}
+	else{
+		return False;
+	}
+}
 
 
 

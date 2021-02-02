@@ -86,6 +86,7 @@ if($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || $
 		<link rel="stylesheet" type="text/css" href="css/estilosPrincipal.css">
 		<link rel="stylesheet" type="text/css" href="css/litigacion.css">
 		<link rel="stylesheet" type="text/css" href="css/forestales.css">
+		<link rel="stylesheet" type="text/css" href="css/litigacionSENAP.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
 	<script type="text/javascript">
@@ -770,7 +771,7 @@ $("#table-body").append(data);
 <script language="JavaScript" type="text/javascript" src="dist/sweetalert.min.js"></script>
 <script language="JavaScript" type="text/javascript" src="format/trimestral/pdf/js/function.js"></script>
 <script language="JavaScript" type="text/javascript" src="js/forestales.js"></script>
-	    
+<script language="JavaScript" type="text/javascript" src="js/litigacionSENAP.js"></script>	    
 
 </body>
 
