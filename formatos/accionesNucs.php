@@ -406,7 +406,7 @@ switch ($acc) {
                                   //// Obtener las carpetas del Mp 
                                        $sumador = 0; 
                                   $carpeAgente = getDistincCarpetasAgente($conSic, $idMp, $estatResolucion, $mes, $anio, $deten);
-                                  $validaInfo =  validarEstatusShowInfoSica($estatResolucion);
+                                  
  
                                   for ($i=0; $i < sizeof($carpeAgente) ; $i++) { 
 
@@ -432,7 +432,7 @@ switch ($acc) {
                                               <td class="tdRowMain negr"><? echo $nuc; ?></td>
                                               <td class="tdRowMain negr"><? echo $exp; ?></td>
 
-                                              <td class="tdRowMain"><center><? if($validaInfo){ ?> <button type="button" onclick="showModalNucLitSicaInfo(<? echo $idResolMP; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatus ?>, <? echo $nuc; ?>, <? echo $idUnidad; ?>)" class="btn btn-success btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-pencil"></span> Agregar </button><? } ?> <button type="button" onclick="deleteResol(<? echo $idResolMP; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatResolucion ?>, <? echo $nuc; ?>, <? echo $deten; ?>, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
+                                              <td class="tdRowMain"><center><button type="button" onclick="deleteResol(<? echo $idResolMP; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatResolucion ?>, <? echo $nuc; ?>, <? echo $deten; ?>, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
 
                                            </tr>
                                            <?  
@@ -470,7 +470,7 @@ switch ($acc) {
           if (isset($_POST["deten"])){ $deten = $_POST["deten"]; }
 
               $nucResol2 = getResolucionesMPsic($conSic, $idMp, $estatResolucion, $mes, $anio, $deten);
-              $validaInfo =  validarEstatusShowInfoSica($estatResolucion);
+              
 
               ?>
               
@@ -505,7 +505,7 @@ switch ($acc) {
                           <td class="tdRowMain negr"><? echo $nuc; ?></td>
                           <td class="tdRowMain negr"><? echo $exp; ?></td>
 
-                          <td class="tdRowMain"><center><? if($validaInfo){ ?> <button type="button" onclick="showModalNucLitSicaInfo(<? echo $idResolMP; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatus ?>, <? echo $nuc; ?>, <? echo $idUnidad; ?>)" class="btn btn-success btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-pencil"></span> Agregar </button><? } ?> <button type="button" onclick="deleteResol(<? echo $idResolMP; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatResolucion ?>, <? echo $nuc; ?>, <? echo $deten; ?>, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
+                          <td class="tdRowMain"><center><button type="button" onclick="deleteResol(<? echo $idResolMP; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatResolucion ?>, <? echo $nuc; ?>, <? echo $deten; ?>, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
 
                        </tr>
                      <?
