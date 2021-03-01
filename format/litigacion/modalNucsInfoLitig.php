@@ -10,6 +10,7 @@
 	if (isset($_POST["idEstatusNucs"])){ $idEstatusNucs = $_POST["idEstatusNucs"]; }
 	if (isset($_POST["estatus"])){ $estatus = $_POST["estatus"]; }
 	if (isset($_POST["nuc"])){ $nuc = $_POST["nuc"]; }
+	if (isset($_POST["idCarpeta"])){ $idCarpeta = $_POST["idCarpeta"]; }
 	$getNucExpedienteSicap = getNucExpedienteSicap($conSic, $nuc);
 	$expediente = $getNucExpedienteSicap[0][0];
 
@@ -24,9 +25,113 @@
 <div class="modal-body ">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12">
-			<h4>Registro estadistico del NUC: <strong><? echo $nuc; ?></strong></h4>
+			<h4>Registro estadístico del NUC: <strong><? echo $nuc; ?></strong></h4>
 		</div>
 	</div><br>
+
+	<? if($estatus == 1 || $estatus == 2){ 
+		$getData = getDataDelitoJudicializado($conn, $idEstatusNucs);
+	 	if(sizeof($getData) > 0){ 
+	 		$opcInsert = 1; 
+	 		$idModalidadEstadistica = $getData[0][2]; 
+	 		$reclasificado = $getData[0][3];
+	 		$getName = getDataDelitoNombre($conSic , $idModalidadEstadistica );
+	 		$nombreDelito = $getName[0][1];
+	 }else{ 	$opcInsert = 0; }?>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12  col-md-12">
+			<!-- TABLA DELITOS POR LA CUAL SE JUDICIALIZO-->
+			<div class="row">
+				<div class="col-xs-12 col-sm-12  col-md-12">
+					<label for="">Delito por el cual se judicializo la carpeta: </label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12  col-md-12">
+					<div id="tablePuestasDataMando" class="row pad20">	
+									<table class="table table-striped  table-hover">
+										<thead>
+											<tr class="cabezeraTablaForest">
+												<th class="textCent">#</th>
+												<th class="textCent">Delito</th>
+												<th class="textCent">¿Principal?</th>
+											</tr>
+										</thead>
+										<tbody id="">
+										<? $getDataDelito = getDataDelito($conSic, $idCarpeta);
+										   $k=0;
+										for ($i=0; $i < sizeof($getDataDelito); $i++) {  ?>
+											<tr>
+												<td class="textCent"><? echo $k+=1; ?></td>
+												<td class="textCent"><strong><? echo $getDataDelito[$i][4]; ?></strong>&nbsp&nbsp<input type="radio" name="checkDelito" value="<? echo $getDataDelito[$i][3]; ?>" class="checkDelito" <?if($opcInsert == 1 && $idModalidadEstadistica == $getDataDelito[$i][3]){ ?> checked <? } ?> ><span class="checkmark"></span></td>
+												<td class="textCent"><? echo $getDataDelito[$i][5]; ?></td>
+			        </tr>
+			       <? } ?>
+										</tbody>
+									</table>
+					 </div>
+				 </div>
+			 </div><br>
+			 <div class="row">
+			 	<div class="col-xs-12 col-sm-12  col-md-12">
+			 		<h4><strong>Nota: </strong>Información cargada de SICAP.</h4>
+			 	</div>
+			 </div><br>
+			 <div class="row">
+			 	<div class="col-xs-12 col-sm-12  col-md-12">
+			 		<h4>Si el delito por el cual se está judicializando la carpeta no figura en la tabla anterior, reclasifique el delito en la siguiente opción: </h4>
+			 	</div>
+			 </div><br>
+			 <div class="row">
+			 	<div class="col-xs-12 col-sm-12  col-md-12">
+			 	<label>Reclasificar delito: &nbsp&nbsp<input type="checkbox"class="checkRecla" id="cbox1" value="" onclick="reclasificar()"></label>
+			 	</div>
+			 </div><br>
+			 <div class="row" id="tableReclasificar" <?if($opcInsert == 1 && $reclasificado != 1){ ?> hidden <? } ?> >
+				<div class="col-xs-12 col-sm-12  col-md-12">
+					<div id="tablePuestasDataMando" class="row pad20">	
+									<table class="table table-striped  table-hover">
+										<thead>
+											<tr class="cabezeraTablaForest">
+												<th class="textCent">#</th>
+												<th class="textCent">Delito</th>
+											</tr>
+										</thead>
+										<tbody id="">
+											<tr>
+												<td class="textCent">1</td>
+												<td class="textCent">
+													<datalist id="newBrwosers">
+																<? 
+																																					$delitos = getDataDelitosSica($conSic);
+																																						for ($h=0; $h < sizeof($delitos); $h++) {
+																																							 $idDelito = $delitos[$h][0];	
+																																								$nom = $delitos[$h][1];
+																																									?>
+																																											<option style="color: black; font-weight: bold;" value="<? echo $nom; ?>" data-value="<? echo  $idDelito; ?>" data-id="<? echo $idDelito; ?>"></option>
+																																									<?
+																																						}
+																																			 ?>
+												</datalist>
+												<input class="form-control mandda gehit" value="<? if($opcInsert == 1){ echo $nombreDelito; } ?>" onchange="" onfocus="" list="newBrwosers" id="newBrwoser" name="newBrwoser" type="text" ></td>
+			        </tr>
+										</tbody>
+									</table>
+					 </div>
+				 </div>
+			 </div><br>
+
+			</div>
+	</div><br><br><br><br>
+	<div class="row">
+		<div class="col-xs-12 col-sm-6 col-md-6">
+			<button style="width: 88%;" onclick="closeModalNucsLitigInfo()" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button>
+		</div>
+		<div class="col-xs-12 col-sm-6  col-md-6 ">
+			<button style="width: 88%;" onclick="insertFormJudicializada_db(<? echo $idEstatusNucs; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
+		</div>
+	</div>
+ <? } ?>
 
  <? if($estatus == 3 || $estatus == 4){
 	 	$getData = getDataFechaFormImpu($conn, $idEstatusNucs);

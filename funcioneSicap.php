@@ -656,6 +656,46 @@ function validarEstatusShowInfoSica($estatResolucion){
 	}
 }
 
+function getDataDelito($conSic , $idCarpeta){
+	$query = "  SELECT d.DelitoID 
+													      ,d.CarpetaID
+													      ,d.CatDelitosID
+													      ,d.CatModalidadesID
+														  			,cme.Nombre
+																	  ,CASE 
+																		   WHEN d.principal = 1 THEN 'PRINCIPAL'
+																		   WHEN d.principal = 0 THEN 'SECUNDARIO'
+																	   ELSE 'Desconocido' 
+																    END as tipoDelito
+													  FROM Delito d 
+													  INNER JOIN CatModalidadesEstadisticas cme ON cme.CatModalidadesEstadisticasID = d.CatModalidadesID
+													  WHERE d.CarpetaID = $idCarpeta"; 
+	$indice = 0;
+	$stmt = sqlsrv_query($conSic, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['DelitoID'];
+		$arreglo[$indice][1]=$row['CarpetaID'];
+		$arreglo[$indice][2]=$row['CatDelitosID'];
+		$arreglo[$indice][3]=$row['CatModalidadesID'];
+		$arreglo[$indice][4]=$row['Nombre'];
+		$arreglo[$indice][5]=$row['tipoDelito'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}	
+}
+
+function getDataDelitoNombre($conSic , $idDelito){
+	$query = "  SELECT Nombre FROM CatModalidadesEstadisticas WHERE CatModalidadesEstadisticasID = $idDelito"; 
+	$indice = 0;
+	$stmt = sqlsrv_query($conSic, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][1]=$row['Nombre'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}	
+}
 
 	
 
