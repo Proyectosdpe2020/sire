@@ -99,7 +99,7 @@
 													  					if($dataMps[$h][5] == 1){ $formt= "Carpetas de Investigación"; }
 													  					if($dataMps[$h][5] == 4){ $formt= "Litigación"; }
 
-													  					$tramites = getTramiteMp($conn, $dataMps[$h][3], 2020, $dataMps[$h][1]);
+													  					$tramites = getTramiteMp($conn, $dataMps[$h][3], 2021, $dataMps[$h][1]);
 													  				?>
 													  								<tr style="background-color: <? if($tramites[0][2] == 0){ echo "orange"; } ?>;"> 
 																		      <th style="text-align: center !important;" scope="row"><? echo $h+1; ?></th>

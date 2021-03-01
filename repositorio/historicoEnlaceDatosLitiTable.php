@@ -10,8 +10,7 @@
 
 	if (isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }
 
-
-	$data = getDatosLitigacionMpUnidad2($conn, $mes,$anio, $idUnidad);
+	$data = getDatosLitigacionMpUnidad2($conn, $mes,$anio, $idUnidad); 
 
 
 
