@@ -451,5 +451,56 @@ function getDataReparacionDanios($conn, $idEstatusNucs){
 	}
 	if(isset($arreglo)){return $arreglo;}
 }
+//Función para obtener la información de SENAP sobre sentencias > se condena la reparación de daños
+function getDataDelitoJudicializado($conn, $idEstatusNucs){
+	 $query = "SELECT * FROM senap.judicializadas WHERE idEstatusNucs = '$idEstatusNucs' "; 
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['idJudicializadas'];
+		$arreglo[$indice][1]=$row['idEstatusNucs'];
+		$arreglo[$indice][2]=$row['idModalidadEstadistica'];
+		$arreglo[$indice][3]=$row['reclasificacion'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
+
+function getDataDelitosSica($conSic){
+
+		$query = "SELECT CatModalidadesEstadisticasID
+      												,Nombre
+												      ,INEGI
+												      ,CIEISP
+												      ,AgrupacionID
+												      ,Estatus
+												      ,Idhistorico
+												      ,DelitoLeyPenal
+												      ,SenalamientoNormativo
+												      ,DelitoNormaTecnica
+												  FROM dbo.CatModalidadesEstadisticas";
+
+
+							$indice = 0;
+								$stmt = sqlsrv_query($conSic, $query);
+								while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))	
+								{
+									$arreglo[$indice][0]=$row['CatModalidadesEstadisticasID'];
+									$arreglo[$indice][1]=$row['Nombre'];
+									$arreglo[$indice][2]=$row['INEGI'];
+									$arreglo[$indice][3]=$row['CIEISP'];
+									$arreglo[$indice][4]=$row['AgrupacionID'];
+									$arreglo[$indice][5]=$row['Estatus'];
+									$arreglo[$indice][6]=$row['Idhistorico'];
+									$arreglo[$indice][6]=$row['DelitoLeyPenal'];
+									$arreglo[$indice][6]=$row['SenalamientoNormativo'];
+									$arreglo[$indice][6]=$row['DelitoNormaTecnica'];
+									$indice++;
+								}
+								if(isset($arreglo)){return $arreglo;}	
+
+}
+
 
 ?>

@@ -239,15 +239,13 @@ switch ($acc) {
 
           //Valida si el status recibido pide informacion adicional para SENAP 
           $validaInfo =  validarEstatusShowInfo($estatResolucion);      
-
-                        
-
+    
               ?>
                  
                   <table class="table table-striped tblTransparente">
                                         <thead>
                                            <tr class="cabezeraTabla">
-                                                      <th class="col-xs-1 col-sm-1 col-md-1 textCent">No</th>
+                                                      <th class="col-xs-1 col-sm-1 col-md-1 textCent">No<? echo $estatResolucion; ?></th>
                                                       <th class="col-xs-4 col-sm-4 col-md-4 textCent">Numero Caso </th>
                                                       <th class="col-xs-6 col-sm-6 col-md-6 textCent">Expediente</th>          
                                                       <th class="col-xs-1 col-sm-1 col-md-1 textCent">Acción</th>
@@ -284,7 +282,7 @@ switch ($acc) {
 
                                            $nucs = getNucExpSicap($conSic, $idCarpeta);
                                            $nuc = $nucs[0][0];
-                                           $exp = $nucs[0][1];      
+                                           $exp = $nucs[0][1];   
 
                                            ?>
                                            <tr>
@@ -293,7 +291,7 @@ switch ($acc) {
                                               <td class="tdRowMain negr"><? echo $nuc; ?></td>
                                               <td class="tdRowMain negr"><? echo $exp; ?></td>
                                               <? if($validaInfo){?>
-                                              <td class="tdRowMain"><center><div class="buttonInfo"><button type="button" onclick="showModalNucLitInfo(<? echo $idEstatusNucs; ?>, <? echo $estatResolucion; ?>, <? echo $nuc; ?>)" class="btn btn-success btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-pencil"></span> Agregar </button></div></center></td>
+                                              <td class="tdRowMain"><center><div class="buttonInfo"><button type="button" onclick="showModalNucLitInfo(<? echo $idEstatusNucs; ?>, <? echo $estatResolucion; ?>, <? echo $nuc; ?>, <? echo $idCarpeta; ?>)" class="btn btn-success btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-pencil"></span> Agregar </button></div></center></td>
                                               <? } ?>
                                               <td class="tdRowMain"><center><button type="button" onclick="deleteResolLit(<? echo $idEstatusNucs; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatResolucion ?>, <? echo $nuc; ?>, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
 

@@ -10,6 +10,10 @@
   overflow-x:hidden;
 }
 
+input[type=checkbox] {
+  transform: scale(1.5);
+}
+
 #showAudienciaInicial{ display: none; }
 #showEtapaIntermedia{ display: none; }
 #showMASC{ display: none; }
