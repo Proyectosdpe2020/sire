@@ -643,6 +643,7 @@ function existenuclitigacion(nuc, idMp, estatResolucion, mes, anio, idUnidad, de
 
 											if (objDatos.first == "SI") {
 															getExpedienteLit("expedCont", nuc);
+															//showModalNucLitInfo(0, estatResolucion, nuc);
 															setTimeout("insertarNucLit("+idMp+","+estatResolucion+","+mes+","+anio+","+nuc+","+deten+","+idUnidad+");",100);
 					
 											}
@@ -655,8 +656,6 @@ function existenuclitigacion(nuc, idMp, estatResolucion, mes, anio, idUnidad, de
 
 
 }
-
-
 
 
 //////////////////////////////////////////
@@ -965,7 +964,7 @@ function removeDataSenap(idEstatusNucs,estatResolucion){
 //Funcion para validad si el estatus recibido requiere informacion adicional de SENAP
 function validarEstatusShowInfoSica(estatResolucion){
 
-	if(estatResolucion == 3 || estatResolucion == 4 || estatResolucion == 19 || estatResolucion == 17 || estatResolucion == 18 
+	if(estatResolucion == 1 || estatResolucion == 2 || estatResolucion == 3 || estatResolucion == 4 || estatResolucion == 19 || estatResolucion == 17 || estatResolucion == 18 
 		|| estatResolucion == 20  || estatResolucion == 21 || estatResolucion== 22 || estatResolucion == 23  || estatResolucion == 24 
 		||estatResolucion == 25 || estatResolucion == 26 || estatResolucion == 27 || estatResolucion == 28 || estatResolucion == 29  
 		|| estatResolucion == 30 || estatResolucion == 31 || estatResolucion == 95 || estatResolucion == 61 || estatResolucion == 63 

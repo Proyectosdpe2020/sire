@@ -1,5 +1,5 @@
 //Muestra modal para ingresar información adicional del NUC solicitado por SENAP
-function showModalNucLitInfo(idEstatusNucs, estatus, nuc){
+function showModalNucLitInfo(idEstatusNucs, estatus, nuc, idCarpeta){
 	ajax=objetoAjax();
 	ajax.open("POST", "format/litigacion/modalNucsInfoLitig.php");
 
@@ -12,7 +12,7 @@ function showModalNucLitInfo(idEstatusNucs, estatus, nuc){
 		}
 	}
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	ajax.send('&idEstatusNucs='+idEstatusNucs+'&estatus='+estatus+'&nuc='+nuc);
+	ajax.send('&idEstatusNucs='+idEstatusNucs+'&estatus='+estatus+'&nuc='+nuc+'&idCarpeta='+idCarpeta);
 }
 
 function showModalNucLitSicaInfo(idResolMP, estatus, nuc){
@@ -399,6 +399,70 @@ function insertReparacionDanios_db(idEstatusNucs, estatus, nuc, opcInsert){
 		swal("", "Faltan datos por registrar.", "warning");
 	}
 }
+
+/****Ingresa a la bd el delito por el cual se judicializo****/
+function insertFormJudicializada_db(idEstatusNucs, estatus, nuc, opcInsert){
+	if( $('.checkRecla').prop('checked') ) {
+   var reclasificacion = 1;
+   var newBrwosers_id = $("#newBrwoser").val();
+			var idCatModalidadEst = $("#newBrwosers").find("option[value='" + newBrwosers_id + "']").attr('data-id');
+
+}else{
+	  var reclasificacion = 0;
+	  $("input[type=radio]:checked").each(function(){ idCatModalidadEst = $(this).val() });
+}
+	if(typeof idCatModalidadEst !== 'undefined'){
+		$.ajax({
+			type: "POST",
+		 dataType: "html",
+			url:  "format/litigacion/insertSenap/insert_FormJudicializada.php",
+		 data: 'idEstatusNucs='+idEstatusNucs+'&nuc='+nuc+'&opcInsert='+opcInsert+'&idCatModalidadEst='+idCatModalidadEst+'&reclasificacion='+reclasificacion,
+		 success: function(respuesta){
+		 	var json = respuesta;
+		 	var obj = eval("(" + json + ")");
+		 	if (obj.first == "NO") { 
+		 		swal("", "No se registro verifique los datos.", "warning"); 
+		 	}else{
+		 		if (obj.first == "SI") {
+		 			var obj = eval("(" + json + ")");
+		 			swal("", "Registro exitosamente.", "success");
+		 			//reloadOpcInsertButton(idEstatusNucs, estatus, nuc,  1);
+		 			$('#modalNucsLitigInfo').modal('hide');
+		 			$('#modalNucsLitig').modal('show');
+		 		}
+		 	}
+		 }
+		});
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+function reclasificar(){
+	var tableReclasificar = document.getElementById("tableReclasificar");
+	$("input[name=checkDelito]").prop("disabled", true);
+	if (tableReclasificar.style.display === "block") {
+		tableReclasificar.style.display = "none";
+			$("input[name=checkDelito]").prop("disabled", false);
+	} else {
+		tableReclasificar.style.display = "block";
+		$("input:radio[name=checkDelito]:checked")[0].checked = false;
+	}
+}
+
+function getDataDelitoSicap(){
+	cont = document.getElementById('newBrwosers');
+	ajax=objetoAjax();
+	ajax.open("POST", "format/litigacion/insertSenap/getDelitosdataList.php");
+	ajax.onreadystatechange = function(){
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			cont.innerHTML = ajax.responseText;
+		}
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send();
+}
+
 /*
 //Mecanismo para cambiar de formulario a otro
 function openForm(evt, etapa) {
