@@ -31,8 +31,8 @@
 													  					if($dataMps[$h][5] == 1){ $formt= "Carpetas de Investigación"; }
 													  					if($dataMps[$h][5] == 4){ $formt= "Litigación"; }
 
-													  					if($f == 1){$tramites = getTramiteMp($conn, $dataMps[$h][3], 2020, $dataMps[$h][1]);}
-													  					if($f == 4){$tramites = getTramiteMpLiti($conn, $dataMps[$h][3], 2020, $dataMps[$h][1]);}
+													  					if($f == 1){$tramites = getTramiteMp($conn, $dataMps[$h][3], 2021, $dataMps[$h][1]);}
+													  					if($f == 4){$tramites = getTramiteMpLiti($conn, $dataMps[$h][3], 2021, $dataMps[$h][1]);}
 													  					
 													  				?>
 													  								<tr style="background-color: <? if($tramites[0][2] != 0){} if($tramites[0][2] == 0){ echo "#F5CBA7";  } ?>;"> 

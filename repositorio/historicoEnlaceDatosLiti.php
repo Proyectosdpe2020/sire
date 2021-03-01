@@ -103,7 +103,7 @@
 																											<select id="anioHistoriqueLiti" name="selMes" onchange="getDataHistoricaBDlitiga(<? echo $idUnidad; ?>)" tabindex="6" class="form-control redondear selectTranparent" required>
 																					
 																														<?
-																																	$arrayANios = array(2020);
+																																	$arrayANios = array(2020,2021);
 
 																																	for ($p=0; $p < sizeof($arrayANios) ; $p++) { 
 																																					

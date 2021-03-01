@@ -28,12 +28,25 @@
 
 															</div>
 
-															<div class="row">
+															<div class="row"> 
 
 																			<div class="col-xs-12 col-sm-2  col-md-4">
 																				<label for="heard">Año:</label><br>
-																				<select id="anioArchSelected" name="selMes" tabindex="6" class="form-control redondear selectTranparent" required>
-																					<option value="<? echo $anioCaptura; ?>" selected><? echo $anioCaptura; ?></option>
+																				<select id="anioArchSelected" name="selMes" tabindex="6" class="form-control redondear selectTranparent" onchange="updTblArchivosEnlace(<? echo $idEnlace; ?>, <? echo $format; ?>);" required>
+																					
+
+																									<?
+																																	$arrayANios = array(2020,2021);
+
+																																	for ($p=0; $p < sizeof($arrayANios) ; $p++) { 
+																																					
+																																					if($arrayANios[$p] == $anioCaptura){
+																																						?>  <option value="<? echo $arrayANios[$p];  ?>" selected><? echo $arrayANios[$p] ?></option>  <?
+																																					}else{
+																																							?>  	<option value="<? echo $arrayANios[$p]; ?>" ><? echo $arrayANios[$p]  ?></option>  <?
+																																					}
+																																	}
+																														 ?>
 																				</select>
 																			</div>
 
