@@ -22,11 +22,11 @@
 				?>
 
 
-				<h5 class="card-title tituloPregunta">Pregunta 5: Ordenes de Aprehensión 2020.</h5><br>
+				<h5 class="card-title tituloPregunta">Pregunta 5: Ordenes de Aprehensión <?php echo "$anio";?>.</h5><br>
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							De las carpetas de investigación iniciadas (CII) en el año 2020, ¿cuál es el número de órdenes de aprehensión solicitadas por el Ministerio Público; el número de órdenes de aprehensión ordenadas por el Juez de Control y el número de órdenes de aprehensión cumplimentadas por la Policía?
+							De las carpetas de investigación iniciadas (CII) en el año <?php echo "$anio";?>, ¿cuál es el número de órdenes de aprehensión solicitadas por el Ministerio Público; el número de órdenes de aprehensión ordenadas por el Juez de Control y el número de órdenes de aprehensión cumplimentadas por la Policía?
 						</li>
 					</ul>
 				</div><br><br>
@@ -41,7 +41,7 @@
 					<thead>
 						<tr>
 							<th scope="col">No.</th>
-							<th scope="col">Órdenes de Aprehensión o Detención de CII en 2020</th>
+							<th scope="col">Órdenes de Aprehensión o Detención de CII en <?php echo "$anio";?></th>
 							<th scope="col"><? echo $m1; ?></th>
 							<th scope="col"><? echo $m2; ?></th>
 							<th scope="col"><? echo $m3; ?></th>
