@@ -23,11 +23,11 @@
 
 
 
-				<h5 class="card-title tituloPregunta">Pregunta 10: Sentencias condenatorias o absolutorias 2020</h5><br>
+				<h5 class="card-title tituloPregunta">Pregunta 10: Sentencias condenatorias o absolutorias <?php echo "$anio";?></h5><br>
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-						De los procedimientos derivados de las carpetas de investigación iniciadas en el año 2020, ¿cuántos imputados tuvieron sentencias condenatorias o absolutorias por tipo de procedimiento?
+						De los procedimientos derivados de las carpetas de investigación iniciadas en el año <?php echo "$anio";?>, ¿cuántos imputados tuvieron sentencias condenatorias o absolutorias por tipo de procedimiento?
 						</li>
 					</ul>
 				</div><br><br>

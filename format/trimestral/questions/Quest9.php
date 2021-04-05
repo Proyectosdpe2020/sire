@@ -57,11 +57,11 @@
 				?>
 
 
-				<h5 class="card-title tituloPregunta">Pregunta 9: Medidas Cautelares 2020</h5><br>
+				<h5 class="card-title tituloPregunta">Pregunta 9: Medidas Cautelares <?php echo "$anio";?></h5><br>
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							De los procedimientos derivados de las carpetas de investigación iniciadas en el año 2020, ¿a cúantos imputados de los que se les dictó auto de vinculación a proceso o que se encontraban en espera de la audiencia de vinculación se les impuso alguna medida caultelar?
+							De los procedimientos derivados de las carpetas de investigación iniciadas en el año <?php echo "$anio";?>, ¿a cúantos imputados de los que se les dictó auto de vinculación a proceso o que se encontraban en espera de la audiencia de vinculación se les impuso alguna medida caultelar?
 						</li>
 					</ul>
 				</div><br><hr><br>
@@ -124,7 +124,7 @@
 										else{
 											if($has_litigation){ 
 
-												$data = getDAtaSIREQuestionEstatusLiti($conSic , $arr[$o] , $anio, $idUn, 17, $per1);
+												$data = getDAtaSIREQuestionEstatusLiti($conn , $arr[$o] , $anio, $idUn, 17, $per1);
 
 												if($data_sended){ //all trimester sended
 													$quest_value = $data[0][0];
@@ -198,7 +198,7 @@
 										else{
 											if($has_litigation){ 
 
-												$data = getDAtaSIREQuestionEstatusLiti($conSic , $arr[$o] , $anio, $idUn, 18, $per1);
+												$data = getDAtaSIREQuestionEstatusLiti($conn , $arr[$o] , $anio, $idUn, 18, $per1);
 
 												if($data_sended){ //all trimester sended
 													$quest_value = $data[0][0];
