@@ -15,6 +15,23 @@ function showModalNucLitInfo(idEstatusNucs, estatus, nuc, idCarpeta){
 	ajax.send('&idEstatusNucs='+idEstatusNucs+'&estatus='+estatus+'&nuc='+nuc+'&idCarpeta='+idCarpeta);
 }
 
+//Muestra modal para ingresar información adicional del NUC solicitado por SENAP
+function showModalNucLitInfo2(estatus, nuc, idMp, mes, anio, deten, idUnidad){
+	ajax=objetoAjax();
+	ajax.open("POST", "format/litigacion/modalNucsInfoLitig.php");
+
+	cont = document.getElementById('contmodalnucsLitigInfo');
+	ajax.onreadystatechange = function(){
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			cont.innerHTML = ajax.responseText; 
+		 $('#modalNucsLitigInfo').modal('show');
+		 $('#modalNucsLitig').modal('hide'); 
+		}
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send('&estatus='+estatus+'&nuc='+nuc+'&idMp='+idMp+'&mes='+mes+'&anio='+anio+'&deten='+deten+'&idUnidad='+idUnidad);
+}
+
 function showModalNucLitSicaInfo(idResolMP, estatus, nuc){
 	ajax=objetoAjax();
 	ajax.open("POST", "format/litigacion/modalNucsInfoLitig.php");
@@ -437,6 +454,8 @@ function insertFormJudicializada_db(idEstatusNucs, estatus, nuc, opcInsert){
 		swal("", "Faltan datos por registrar.", "warning");
 	}
 }
+
+
 
 function reclasificar(){
 	var tableReclasificar = document.getElementById("tableReclasificar");

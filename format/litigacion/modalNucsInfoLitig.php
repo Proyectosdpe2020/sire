@@ -11,6 +11,13 @@
 	if (isset($_POST["estatus"])){ $estatus = $_POST["estatus"]; }
 	if (isset($_POST["nuc"])){ $nuc = $_POST["nuc"]; }
 	if (isset($_POST["idCarpeta"])){ $idCarpeta = $_POST["idCarpeta"]; }
+
+		if (isset($_POST["idMp"])){ $idMp = $_POST["idMp"]; }
+	if (isset($_POST["mes"])){ $mes = $_POST["mes"]; }
+	if (isset($_POST["anio"])){ $anio = $_POST["anio"]; }
+	if (isset($_POST["deten"])){ $deten = $_POST["deten"]; }
+		if (isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }
+
 	$getNucExpedienteSicap = getNucExpedienteSicap($conSic, $nuc);
 	$expediente = $getNucExpedienteSicap[0][0];
 
@@ -58,7 +65,9 @@
 											</tr>
 										</thead>
 										<tbody id="">
-										<? $getDataDelito = getDataDelito($conSic, $idCarpeta);
+										<?
+             $datossicap=get_datos_carpeta_capturado($conSic, $nuc);  
+										   $getDataDelito = getDataDelito($conSic, $datossicap[0][0]);
 										   $k=0;
 										for ($i=0; $i < sizeof($getDataDelito); $i++) {  ?>
 											<tr>
@@ -128,7 +137,7 @@
 			<button style="width: 88%;" onclick="closeModalNucsLitigInfo()" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button>
 		</div>
 		<div class="col-xs-12 col-sm-6  col-md-6 ">
-			<button style="width: 88%;" onclick="insertFormJudicializada_db(<? echo $idEstatusNucs; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
+			<button style="width: 88%;" onclick="sendDataJudicializada(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> )" type="button" class="btn btn-primary redondear" >Aceptar</button>
 		</div>
 	</div>
  <? } ?>

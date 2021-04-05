@@ -643,9 +643,12 @@ function existenuclitigacion(nuc, idMp, estatResolucion, mes, anio, idUnidad, de
 
 											if (objDatos.first == "SI") {
 															getExpedienteLit("expedCont", nuc);
-															//showModalNucLitInfo(0, estatResolucion, nuc);
-															setTimeout("insertarNucLit("+idMp+","+estatResolucion+","+mes+","+anio+","+nuc+","+deten+","+idUnidad+");",100);
-					
+															if(estatResolucion == 1 || estatResolucion == 2){
+																showModalNucLitInfo2(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad);
+															  //aqui poner modal
+															}else{
+																	setTimeout("insertarNucLit("+idMp+","+estatResolucion+","+mes+","+anio+","+nuc+","+deten+","+idUnidad+");",100);
+															}
 											}
 									}
 
@@ -978,4 +981,50 @@ function validarEstatusShowInfoSica(estatResolucion){
 	else{
 		return false;
 	}
+}
+
+function sendDataJudicializada(nuc, estatus, idMp, mes, anio, deten, idUnidad){
+	if( $('.checkRecla').prop('checked') ) {
+   var reclasificacion = 1;
+   var newBrwosers_id = $("#newBrwoser").val();
+			var idCatModalidadEst = $("#newBrwosers").find("option[value='" + newBrwosers_id + "']").attr('data-id');
+
+}else{
+	  var reclasificacion = 0;
+	  $("input[type=radio]:checked").each(function(){ idCatModalidadEst = $(this).val() });
+}
+	if(typeof idCatModalidadEst !== 'undefined'){
+	 insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad,idCatModalidadEst);
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+
+function insertarNucLitJud(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad,idCatModalidadEst){
+
+				acc = "insertNuc";
+					ajax=objetoAjax();
+					ajax.open("POST", "format/litigacion/accionesNucsLit.php");
+
+					ajax.onreadystatechange = function(){
+						if (ajax.readyState == 4 && ajax.status == 200) {       
+								//cont.innerHTML = ajax.responseText;
+
+									var cadCodificadaJSON = ajax.responseText;
+											var objDatos = eval("(" + cadCodificadaJSON + ")");
+
+											if (objDatos.first == "NO") { swal("", "El NUC ya se encuentra registrado favor de revisar.", "Warning"); }else{
+
+											if (objDatos.first == "SI") {
+															swal("", "Se Registro Correctamente.", "success");                  
+															updateTableNucsLiti(idMp, anio, mes, estatResolucion, nuc, deten, idUnidad);   			
+											}
+									}
+
+						}
+					}
+					ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+					ajax.send("&nuc="+nuc+"&acc="+acc+"&idMp="+idMp+"&estatResolucion="+estatResolucion+"&mes="+mes+"&anio="+anio+"&deten="+deten+"&idUnidad="+idUnidad);
+
 }
