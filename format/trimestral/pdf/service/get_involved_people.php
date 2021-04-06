@@ -191,7 +191,7 @@ $involved_people = array(
     ),
     38 => array(
         'elaborated_by' => array(
-            'name' => 'Lic. David Salvador Martínez Santoyo',
+            'name' => 'Mtro. en D. Jonathan Angeles Luna',
             'position' => ''
         ),
         'validated_by' => array(
