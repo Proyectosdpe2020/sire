@@ -19,10 +19,10 @@
 																												<thead>
 																													<tr class="cabezeraTabla ">
 																														<th class="col-xs-12 col-sm-12 col-md-1 textCent">No</th>
-																														<th class="col-xs-12 col-sm-12 col-md-3 textCent">Nombre Archivo</th>
+																														<th class="col-xs-12 col-sm-12 col-md-1 textCent">Nombre Archivo</th>
 																														<th class="col-xs-12 col-sm-12 col-md-2 textCent">Enlace</th>
-																														<th class="col-xs-12 col-sm-12 col-md-1 textCent">Fecha Subida</th>
-																														<th class="col-xs-12 col-sm-12 col-md-1 textCent">Mes</th>
+																														<th class="col-xs-12 col-sm-12 col-md-2 textCent">Fecha Subida</th>
+																														<th class="col-xs-12 col-sm-12 col-md-2 textCent">Mes</th>
 																														<th class=" textCent">Estado</th>
 																														<th class="col-xs-12 col-sm-12 col-md-3 textCent">Observaciones Revisíon</th>
 																														<th class="col-xs-12 col-sm-12 col-md-1 textCent">Fecha Revisíon</th>

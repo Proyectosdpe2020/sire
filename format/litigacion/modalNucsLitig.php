@@ -93,6 +93,8 @@
 
 																				   if($sicaBand == 1){
 
+																				  //Valida si el status recibido pide informacion adicional para SENAP 
+                     $validaInfo =  validarEstatusShowInfo($estatus);
 
 																					?>
 																						  <div id="contTableNucs" style="overflow-y: hidden; overflow-x: hidden; padding: 15px;">															    													
@@ -102,7 +104,8 @@
 																						   <tr class="cabezeraTabla">
 																									  <th class="col-xs-1 col-sm-1 col-md-1 textCent">No</th>
 																									  <th class="col-xs-4 col-sm-4 col-md-4 textCent">Numero Caso </th>
-																									  <th class="col-xs-6 col-sm-6 col-md-6 textCent">Expediente</th>          
+																									  <th class="col-xs-6 col-sm-6 col-md-6 textCent">Expediente</th> 
+						<? if($validaInfo){?><th class="col-xs-1 col-sm-1 col-md-1 textCent">Acción</th><? } ?>         
 																									  <th class="col-xs-1 col-sm-1 col-md-1 textCent">Acción</th>
 																						   </tr>
 																					</thead>
@@ -115,6 +118,7 @@
 																										//// Obtener las carpetas del Mp 
 																				  $sumador = 0; 
 																				  $carpeAgente = getDistincCarpetasAgenteLiti($conSic, $idMp, $estatus, $mes, $anio, 0);
+																				  $validaInfo =  validarEstatusShowInfo($estatus);
 
 																				  for ($i=0; $i < sizeof($carpeAgente) ; $i++) { 
 																				
@@ -136,10 +140,12 @@
 																										  <td class="tdRowMain negr"><? echo ($sumador+1); ?></td>
 																										  <td class="tdRowMain negr"><? echo $nuc; ?></td>
 																										  <td class="tdRowMain negr"><? echo $exp; ?></td>
-
+               <? if($validaInfo){?>
+               		<td class="tdRowMain"><center><button type="button" onclick="showModalNucLitSicaInfo(<? echo $idResolMP; ?>, <? echo $estatus ?>, <? echo $nuc; ?>)" class="btn btn-success btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-pencil"></span> Agregar </button></center></td>
+               <? } ?>	
 											
 
-														<td class="tdRowMain"><center> <button type="button" onclick="deleteResol(<? echo $idResolMP; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatus ?>, <? echo $nuc; ?>, 0, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
+														<td class="tdRowMain"><center><button type="button" onclick="deleteResol(<? echo $idResolMP; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatus ?>, <? echo $nuc; ?>, 0, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
 
 																									   </tr>
 																											 <?		
@@ -163,7 +169,8 @@
 																						<?
 
 																				   }else{ 
-
+                    //Valida si el status recibido pide informacion adicional para SENAP 
+                     $validaInfo =  validarEstatusShowInfo($estatus);
 																			 
 																					?>	
 
@@ -174,7 +181,8 @@
 																						   <tr class="cabezeraTabla">
 																									  <th class="col-xs-1 col-sm-1 col-md-1 textCent">No</th>
 																									  <th class="col-xs-4 col-sm-4 col-md-4 textCent">Numero Caso </th>
-																									  <th class="col-xs-6 col-sm-6 col-md-6 textCent">Expediente</th>          
+																									  <th class="col-xs-6 col-sm-6 col-md-6 textCent">Expediente</th>  
+																									  <? if($validaInfo){?><th class="col-xs-1 col-sm-1 col-md-1 textCent">Acción</th><? } ?>          
 																									  <th class="col-xs-1 col-sm-1 col-md-1 textCent">Acción</th>
 																						   </tr>
 																					</thead>
@@ -187,6 +195,7 @@
 																						  //// Obtener las carpetas del Mp 
 																				  $sumador = 0; 
 																				  $carpeAgente = getDistincCarpetasAgenteLitigacion($conn, $idMp, $estatus, $mes, $anio, $idUnidad);
+																				  
 
 																				  for ($i=0; $i < sizeof($carpeAgente) ; $i++) { 
 
@@ -205,7 +214,7 @@
 
 																											 $nucs = getNucExpSicap($conSic, $idCarpeta);
 																											 $nuc = $nucs[0][0];
-																											 $exp = $nucs[0][1];						
+																											 $exp = $nucs[0][1];	 					
 
 																											 ?>
 																									   <tr>
@@ -213,8 +222,11 @@
 																										  <td class="tdRowMain negr"><? echo ($sumador+1); ?></td>
 																										  <td class="tdRowMain negr"><? echo $nuc; ?></td>
 																										  <td class="tdRowMain negr"><? echo $exp; ?></td>
-
-																										  <td class="tdRowMain"><center> <button type="button" onclick="deleteResolLit(<? echo $idEstatusNucs; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatus ?>, <? echo $nuc; ?>, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
+                            <!--SE AGREGO EL BOTON PARA ABRIR EL NUEVO MODAL-->
+                            <? if($validaInfo){?>
+                            <td class="tdRowMain"><center><div class="buttonInfo"><button type="button" onclick="showModalNucLitInfo(<? echo $idEstatusNucs; ?>, <? echo $estatus; ?>, <? echo $nuc; ?>, <? echo $idCarpeta; ?>)" class="btn btn-success btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-pencil"></span> Agregar </button></div></center></td>
+                            <? } ?>
+																										  <td class="tdRowMain"><center><button type="button" onclick="deleteResolLit(<? echo $idEstatusNucs; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatus ?>, <? echo $nuc; ?>, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
 
 																									   </tr>
 																											 <?		

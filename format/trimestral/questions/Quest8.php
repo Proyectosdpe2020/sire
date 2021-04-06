@@ -68,11 +68,11 @@
 					$dataEnlaces = getDataEnlacesByIdUnidad($conn, $idUn, $idEnlace);
 				?>
 
-				<h5 class="card-title tituloPregunta">Pregunta 8: Procedimientos y Estatus 2020</h5><br>
+				<h5 class="card-title tituloPregunta">Pregunta 8: Procedimientos y Estatus <?php echo "$anio";?></h5><br>
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							<strong>¿Cuántos procedimientos</strong> se han generado de las vinculaciones a proceso derivadas de las carpetas de investigación iniciadas en el año 2020 y en qué estatus se encuentran dentro de los rubros señalados, conforme los registros de la Fiscalía General de la entidad federativa en los cortes referidos?
+							<strong>¿Cuántos procedimientos</strong> se han generado de las vinculaciones a proceso derivadas de las carpetas de investigación iniciadas en el año <?php echo "$anio";?> y en qué estatus se encuentran dentro de los rubros señalados, conforme los registros de la Fiscalía General de la entidad federativa en los cortes referidos?
 						</li>
 					</ul>
 				</div><br><hr><br>
@@ -80,7 +80,7 @@
 					<thead>
 						<tr>
 							<th scope="col">No.</th>
-							<th scope="col">Estatus de las Vinculaciones a Proceso derivadas de las CII en 2020</th>
+							<th scope="col">Estatus de las Vinculaciones a Proceso derivadas de las CII en <?php echo "$anio";?></th>
 							<th scope="col"><? echo $m1; ?></th>
 							<th scope="col"><? echo $m2; ?></th>
 							<th scope="col"><? echo $m3; ?></th>
@@ -144,7 +144,7 @@
 										else{
 											if($has_litigation){ 
 
-												$data = getDAtaSIREQuestionEstatusLiti($conSic , $arr[$o] , $anio, $idUn, 91, $per1);
+												$data = getDAtaSIREQuestionEstatusLiti($conn , $arr[$o] , $anio, $idUn, 91, $per1);
 
 												if($data_sended){ //all trimester sended
 													$quest_value = $data[0][0];

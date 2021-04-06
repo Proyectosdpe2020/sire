@@ -29,6 +29,7 @@
 		    $individuaciones = $arreglo[0][3];
 		    $observaciones = $arreglo[0][4];
 		    $visitasDomiciliarias = $arreglo[0][5];
+		    $investigacionesInformadas = $arreglo[0][6];
 		 }else{ 
 		 	//Si $idTrabajoCampo viene con valor 0 no es actualizacion y entra aqui
 		 	$a = 0;
@@ -92,6 +93,12 @@
 																					<div class="form-group col-md-12">
 																								<label for="textInvestigacionesCumplidas">Investigaciones cumplidas:</label>	
 																								<input value="<?php if($a == 1){ echo $investigacionesCumplidas; } ?>" type="number" class="form-control" id="textInvestigacionesCumplidas" name="textInvestigacionesCumplidas">
+																					</div>
+																				</div>
+																				<div class="form-row">
+																					<div class="form-group col-md-12">
+																								<label for="textInvestigacionesInformadas">Investigaciones Informadas:</label>	
+																								<input value="<?php if($a == 1){ echo $investigacionesInformadas; } ?>" type="number" class="form-control" id="textInvestigacionesInformadas" name="textInvestigacionesInformadas">
 																					</div>
 																				</div>
 																				<div class="form-row">

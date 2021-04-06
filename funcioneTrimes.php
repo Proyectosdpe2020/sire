@@ -138,8 +138,8 @@ function getDataEnlacesByIdUnidad($conn, $idUnidad, $idEnlace){
 function getDAtaSIREQuestionValidateQuestion($conn, $mes, $anio, $idUnidad){
 
 	$query = " SELECT
-       sum([iniciadasConDetenido]) +
-	   sum([iniciadasSinDetenido]) as 'total'
+       ISNULL(sum([iniciadasConDetenido]) +
+	      sum([iniciadasSinDetenido]),0) as 'total'
   FROM [ESTADISTICAV2].[dbo].[Carpetas] WHERE idUnidad $idUnidad AND idAnio = $anio AND idMes in $mes ";
 //echo $query."<br>";
 	$stmt = sqlsrv_query($conn, $query);
@@ -150,5 +150,19 @@ function getDAtaSIREQuestionValidateQuestion($conn, $mes, $anio, $idUnidad){
 	if(isset($arreglo)){return $arreglo;}
 	
 	}
+
+	function getPeriodoTrim($conn,  $idEnlace){	
+	$query = " SELECT mesCap, idAnio FROM enlaceMesValidaEnviado where idEnlace = $idEnlace AND idFormato = 11";
+	
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['mesCap'];
+		$arreglo[$indice][1]=$row['idAnio'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
 
 ?>

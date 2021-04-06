@@ -52,11 +52,11 @@
 						$dataEnlaces = getDataEnlacesByIdUnidad($conn, $idUn, $idEnlace);
 		?>
 				
-				<h5 class="card-title tituloPregunta">Pregunta 4: Número de Carpetas con detenido(s) en flagrancia 2020 </h5><br>
+				<h5 class="card-title tituloPregunta">Pregunta 4: Número de Carpetas con detenido(s) en flagrancia <?php echo "$anio";?> </h5><br>
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							¿Cúantas carpetas de investigación se iniciaron en el año 2020 con al menos un detenido en flagrancia y cuántas se iniciaron sin detenido?
+							¿Cúantas carpetas de investigación se iniciaron en el año <?php echo "$anio";?> con al menos un detenido en flagrancia y cuántas se iniciaron sin detenido?
 						</li>
 					</ul>
 				</div><br><hr><br>

@@ -82,11 +82,11 @@
 				?>
 
    
-				<h5 class="card-title tituloPregunta">Pregunta 7: Procedimientos Iniciados 2020. </h5><br>
+				<h5 class="card-title tituloPregunta">Pregunta 7: Procedimientos Iniciados <?php echo "$anio";?>. </h5><br>
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							<strong>¿Cuántos procedimientos</strong> han realizado los agentes del Ministerio Público derivados de las carpetas de Investigación iniciadas en el año 2020 y en qué estatus se encuentran desde su inicio hasta el auto de vinculación a proceso dentro de los rubros señalados, conforme los registros de la  Fiscalía General de la entidad federativa en los cortes referidos?
+							<strong>¿Cuántos procedimientos</strong> han realizado los agentes del Ministerio Público derivados de las carpetas de Investigación iniciadas en el año <?php echo "$anio";?> y en qué estatus se encuentran desde su inicio hasta el auto de vinculación a proceso dentro de los rubros señalados, conforme los registros de la  Fiscalía General de la entidad federativa en los cortes referidos?
 						</li>
 					</ul>
 				</div><br><br>
@@ -113,7 +113,7 @@
 					<ul>
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
-							 	<strong>Ejemplo:</strong> En enero del año 2020 se inició una carpeta de investigación con dos imputados y un ofendido. Al 30 de marzo del año 2020, esa misma carpeta ha derivado en dos procedimientos: mediante un procedimiento se logró llegar a un acuerdo reparatorio entre la víctima y uno de los imputados, mientras que en otro procedimiento el segundo imputado se encuentra vinculado a proceso. En este caso, debe reportarse el estatus de ambos procedimientos, aun cuando pertenezcan a la misma carperta de investigación. 
+							 	<strong>Ejemplo:</strong> En enero del año <?php echo "$anio";?> se inició una carpeta de investigación con dos imputados y un ofendido. Al 30 de marzo del año <?php echo "$anio";?>, esa misma carpeta ha derivado en dos procedimientos: mediante un procedimiento se logró llegar a un acuerdo reparatorio entre la víctima y uno de los imputados, mientras que en otro procedimiento el segundo imputado se encuentra vinculado a proceso. En este caso, debe reportarse el estatus de ambos procedimientos, aun cuando pertenezcan a la misma carperta de investigación. 
 							</div>
 						</li>
 					</ul>
@@ -122,7 +122,7 @@
 					<thead>
 						<tr>
 							<th scope="col">No.</th>
-							<th scope="col">Estatus de los Procedimientos Derivados de las CII en 2020</th>
+							<th scope="col">Estatus de los Procedimientos Derivados de las CII en <?php echo "$anio";?></th>
 							<th scope="col"><? echo $m1; ?></th>
 							<th scope="col"><? echo $m2; ?></th>
 							<th scope="col"><? echo $m3; ?></th>
@@ -435,7 +435,7 @@
 						<li style="list-style-type: circle !important" >
 							<div class="imagenWarning">
 							 <img src="images/warning.png"  class="imgWarning" alt="">
-							 	Nota.- La suma de los datos proporcionados en todos los reactivos de esta pregunta (del 7.1 al 7.16) deberán ser iguales o mayores a la suma de los datos proporcionados en todos los reactivos de la pregunta 2, del 2.1 al 2.2 (carpetas de investigación iniciadas por denuncias, querellas u otros requisitos equivalentes recibidos en 2020 y 2019, respectivamente).
+							 	Nota.- La suma de los datos proporcionados en todos los reactivos de esta pregunta (del 7.1 al 7.16) deberán ser igual a la suma de los datos proporcionados en todos los reactivos de la pregunta 2, del 2.1 al 2.2 (carpetas de investigación iniciadas por denuncias, querellas u otros requisitos equivalentes recibidos en 2020 y 2019, respectivamente).
 							</div>
 						</li>
 					</ul>

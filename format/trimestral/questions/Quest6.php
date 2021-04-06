@@ -22,11 +22,11 @@
 				?>
 
 
-				<h5 class="card-title tituloPregunta">Pregunta 6: Número de detenidos en flagrancia 2020</h5><br>
+				<h5 class="card-title tituloPregunta">Pregunta 6: Número de detenidos en flagrancia <?php echo "$anio";?></h5><br>
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							Cuál es el número de detenidos en flagrancia, por orden de aprehensión o caso urgente derivados de las carpetas de investigación iniciadas en 2020?
+							Cuál es el número de detenidos en flagrancia, por orden de aprehensión o caso urgente derivados de las carpetas de investigación iniciadas en <?php echo "$anio";?>?
 						</li>
 					</ul>
 				</div><br><hr><br>
@@ -34,7 +34,7 @@
 					<thead>
 						<tr>
 							<th scope="col">No.</th>
-							<th scope="col">Detenidos de CII en 2020</th>
+							<th scope="col">Detenidos de CII en <?php echo "$anio";?></th>
 							<th scope="col"><? echo $m1; ?></th>
 							<th scope="col"><? echo $m2; ?></th>
 							<th scope="col"><? echo $m3; ?></th>

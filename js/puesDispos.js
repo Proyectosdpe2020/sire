@@ -2105,6 +2105,7 @@ function registroTrabajosDeCampo(idEnlace, typearch, b, tipoActualizacion , idTr
 	var textEntrevistas = $("#textEntrevistas").val(); if(textEntrevistas == "") {textEntrevistas = 0; }
 	var textVisitasDomiciliarias = $("#textVisitasDomiciliarias").val(); if(textVisitasDomiciliarias == "") {textVisitasDomiciliarias = 0; }
 	var textInvestigacionesCumplidas = $("#textInvestigacionesCumplidas").val(); if(textInvestigacionesCumplidas == "") {textInvestigacionesCumplidas = 0; }
+	var textInvestigacionesInformadas = $("#textInvestigacionesInformadas").val(); if(textInvestigacionesInformadas == "") {textInvestigacionesInformadas = 0; }
 	var textIndividuaciones = $("#textIndividuaciones").val(); if(textIndividuaciones == "") {textIndividuaciones = 0; }
     var textObservaciones = $("#textObservacionesTrabCampo").val();
 
@@ -2149,7 +2150,7 @@ function registroTrabajosDeCampo(idEnlace, typearch, b, tipoActualizacion , idTr
         type: "POST",
         dataType: 'html',
         url: "format/puestaDisposicion/registroTrabajosDeCampo.php",
-        data: "textEntrevistas="+textEntrevistas+"&textVisitasDomiciliarias="+textVisitasDomiciliarias+"&textInvestigacionesCumplidas="+textInvestigacionesCumplidas+"&textIndividuaciones="+textIndividuaciones+"&textObservaciones="+textObservaciones+"&jObject="+jObject+"&idEnlace="+idEnlace+"&idPuestaDisposicion="+idPuestaDisposicion+"&tipoActualizacion="+tipoActualizacion+"&idTrabajoCampo="+idTrabajoCampo,
+        data: "textEntrevistas="+textEntrevistas+"&textVisitasDomiciliarias="+textVisitasDomiciliarias+"&textInvestigacionesCumplidas="+textInvestigacionesCumplidas+"&textInvestigacionesInformadas="+textInvestigacionesInformadas+"&textIndividuaciones="+textIndividuaciones+"&textObservaciones="+textObservaciones+"&jObject="+jObject+"&idEnlace="+idEnlace+"&idPuestaDisposicion="+idPuestaDisposicion+"&tipoActualizacion="+tipoActualizacion+"&idTrabajoCampo="+idTrabajoCampo,
         success: function(resp){
             
 
@@ -2400,6 +2401,52 @@ function loadDaysMonth(anio, idEnlace, camMes){
 
 					//// RECARGAR CONSULTA DE PUESTAS EN EL MES SELECCIONADO Y PRIMER DIA DEL MES CORRESPONDIENTE
 					loadDataPuestDay(anio, idEnlace, camMes);
+
+			}
+		}
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		ajax.send("&messelected="+messelected+"&anio="+anio+"&idEnlace="+idEnlace);
+
+}
+
+function reloadDaysMonth(idEnlace){
+
+
+		var anio = document.getElementById("anioCmasc").value; 
+		var messelected = document.getElementById("mesPuestaSelected").value; 		
+
+		cont = document.getElementById('contDays');
+		ajax=objetoAjax();
+
+		ajax.open("POST", "format/puestaDisposicion/daysContentSelect.php");
+
+		ajax.onreadystatechange = function(){
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				cont.innerHTML = ajax.responseText;
+
+					//// RECARGAR CONSULTA DE PUESTAS EN EL MES SELECCIONADO Y PRIMER DIA DEL MES CORRESPONDIENTE
+				loadDataPuestDay(anio, idEnlace, 1);
+				setTimeout("reloadMonth("+anio+","+idEnlace+","+ messelected+");",100);
+			}
+		}
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		ajax.send("&messelected="+messelected+"&anio="+anio+"&idEnlace="+idEnlace);
+
+}
+
+function reloadMonth(anio, idEnlace,  messelected){
+ 		
+		cont = document.getElementById('contMonth');
+		ajax=objetoAjax();
+
+		ajax.open("POST", "format/puestaDisposicion/reloadSelectMonth.php");
+
+		ajax.onreadystatechange = function(){
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				cont.innerHTML = ajax.responseText;
+
+					//// RECARGAR CONSULTA DE PUESTAS EN EL MES SELECCIONADO Y PRIMER DIA DEL MES CORRESPONDIENTE
+				loadDataPuestDay(anio, idEnlace, 1);
 
 			}
 		}

@@ -303,7 +303,7 @@ switch ($acc) {
           if (isset($_POST["deten"])){ $deten = $_POST["deten"]; }    
           if (isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }        
 
-                        
+           $validaInfo =  validarEstatusShowInfoSica($estatResolucion);          
 
               ?>
                  
@@ -312,7 +312,8 @@ switch ($acc) {
                                            <tr class="cabezeraTabla">
                                                       <th class="col-xs-1 col-sm-1 col-md-1 textCent">No</th>
                                                       <th class="col-xs-5 col-sm-4 col-md-5 textCent">Numero Caso </th>
-                                                      <th class="col-xs-5 col-sm-6 col-md-5 textCent">Expediente</th>     
+                                                      <th class="col-xs-5 col-sm-6 col-md-5 textCent">Expediente</th>
+                                 <? if($validaInfo){?><th class="col-xs-1 col-sm-1 col-md-1 textCent">Acción</th><? } ?>       
                                                       <th class="col-xs-1 col-sm-1 col-md-1 textCent">Acción</th>
                                            </tr>
                                     </thead>
@@ -323,7 +324,7 @@ switch ($acc) {
                                   //// Obtener las carpetas del Mp 
                                        $sumador = 0; 
                                   $carpeAgente = getDistincCarpetasAgenteLiti($conSic, $idMp, $estatResolucion, $mes, $anio, $deten);
-
+                                  
                                   for ($i=0; $i < sizeof($carpeAgente) ; $i++) { 
 
                                       $resolid = $carpeAgente[$i][0];
@@ -342,8 +343,11 @@ switch ($acc) {
                                               <td class="tdRowMain negr"><? echo ($sumador+1); ?></td>
                                               <td class="tdRowMain negr"><? echo $nuc; ?></td>
                                               <td class="tdRowMain negr"><? echo $exp; ?></td>
+                                              <? if($validaInfo){?>
+                                              <td class="tdRowMain"><center><button type="button" onclick="showModalNucLitSicaInfo(<? echo $resolid; ?>,  <? echo $estatResolucion ?>, <? echo $nuc; ?>)" class="btn btn-success btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-pencil"></span> Agregar </button></center></td>
+                                              <? } ?>
 
-                                              <td class="tdRowMain"><center> <button type="button" onclick="deleteResol(<? echo $resolid; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatResolucion ?>, <? echo $nuc; ?>, <? echo $deten; ?>, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
+                                              <td class="tdRowMain"><center><button type="button" onclick="deleteResol(<? echo $resolid; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatResolucion ?>, <? echo $nuc; ?>, <? echo $deten; ?>, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
 
                                            </tr>
                                            <?  
@@ -395,12 +399,15 @@ switch ($acc) {
                                     </thead>
                                     <tbody>
 
-                                   <?                                 
+                                   <?       
+
+
 
                                   //// Obtener las carpetas del Mp 
                                        $sumador = 0; 
                                   $carpeAgente = getDistincCarpetasAgente($conSic, $idMp, $estatResolucion, $mes, $anio, $deten);
-
+                                  
+ 
                                   for ($i=0; $i < sizeof($carpeAgente) ; $i++) { 
 
                                     $CaepetaId = $carpeAgente[$i][0];
@@ -425,7 +432,7 @@ switch ($acc) {
                                               <td class="tdRowMain negr"><? echo $nuc; ?></td>
                                               <td class="tdRowMain negr"><? echo $exp; ?></td>
 
-                                              <td class="tdRowMain"><center> <button type="button" onclick="deleteResol(<? echo $idResolMP; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatResolucion ?>, <? echo $nuc; ?>, <? echo $deten; ?>, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
+                                              <td class="tdRowMain"><center><button type="button" onclick="deleteResol(<? echo $idResolMP; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatResolucion ?>, <? echo $nuc; ?>, <? echo $deten; ?>, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
 
                                            </tr>
                                            <?  
@@ -463,6 +470,7 @@ switch ($acc) {
           if (isset($_POST["deten"])){ $deten = $_POST["deten"]; }
 
               $nucResol2 = getResolucionesMPsic($conSic, $idMp, $estatResolucion, $mes, $anio, $deten);
+              
 
               ?>
               
@@ -497,7 +505,7 @@ switch ($acc) {
                           <td class="tdRowMain negr"><? echo $nuc; ?></td>
                           <td class="tdRowMain negr"><? echo $exp; ?></td>
 
-                          <td class="tdRowMain"><center> <button type="button" onclick="deleteResol(<? echo $idResolMP; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatResolucion ?>, <? echo $nuc; ?>, <? echo $deten; ?>, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
+                          <td class="tdRowMain"><center><button type="button" onclick="deleteResol(<? echo $idResolMP; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatResolucion ?>, <? echo $nuc; ?>, <? echo $deten; ?>, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
 
                        </tr>
                      <?

@@ -438,9 +438,9 @@ if($idObjeto == 0){
 
 function get_data_trabajoCampo_puesta($conn, $idPuestaDisposicion , $idTrabajoCampo){
 	if($idTrabajoCampo == 0){
-			$query = "   SELECT pueDisposi.TrabajoDeCampo.idTrabajoCampo,  pueDisposi.TrabajoDeCampo.entrevistas,  pueDisposi.TrabajoDeCampo.visitasDomiciliarias,  pueDisposi.TrabajoDeCampo.investigacionesCumplidas,  pueDisposi.TrabajoDeCampo.individuaciones,  pueDisposi.TrabajoDeCampo.observaciones FROM pueDisposi.TrabajoDeCampo WHERE  pueDisposi.TrabajoDeCampo.idPueDisposicion = $idPuestaDisposicion ";
+			$query = "   SELECT pueDisposi.TrabajoDeCampo.idTrabajoCampo,  pueDisposi.TrabajoDeCampo.entrevistas,  pueDisposi.TrabajoDeCampo.visitasDomiciliarias,  pueDisposi.TrabajoDeCampo.investigacionesCumplidas, pueDisposi.TrabajoDeCampo.investigacionesInformadas, pueDisposi.TrabajoDeCampo.individuaciones,  pueDisposi.TrabajoDeCampo.observaciones FROM pueDisposi.TrabajoDeCampo WHERE  pueDisposi.TrabajoDeCampo.idPueDisposicion = $idPuestaDisposicion ";
 		}else{
-			$query = "   SELECT pueDisposi.TrabajoDeCampo.idTrabajoCampo,  pueDisposi.TrabajoDeCampo.entrevistas,  pueDisposi.TrabajoDeCampo.visitasDomiciliarias,  pueDisposi.TrabajoDeCampo.investigacionesCumplidas,  pueDisposi.TrabajoDeCampo.individuaciones,  pueDisposi.TrabajoDeCampo.observaciones FROM pueDisposi.TrabajoDeCampo WHERE  pueDisposi.TrabajoDeCampo.idTrabajoCampo = $idTrabajoCampo ";
+			$query = "   SELECT pueDisposi.TrabajoDeCampo.idTrabajoCampo,  pueDisposi.TrabajoDeCampo.entrevistas,  pueDisposi.TrabajoDeCampo.visitasDomiciliarias,  pueDisposi.TrabajoDeCampo.investigacionesCumplidas, pueDisposi.TrabajoDeCampo.investigacionesInformadas, pueDisposi.TrabajoDeCampo.individuaciones,  pueDisposi.TrabajoDeCampo.observaciones FROM pueDisposi.TrabajoDeCampo WHERE  pueDisposi.TrabajoDeCampo.idTrabajoCampo = $idTrabajoCampo ";
 		}
 
 
@@ -455,6 +455,7 @@ function get_data_trabajoCampo_puesta($conn, $idPuestaDisposicion , $idTrabajoCa
 		$arreglo[$indice][3]=$row['individuaciones'];
 		$arreglo[$indice][4]=$row['observaciones'];
 		$arreglo[$indice][5]=$row['visitasDomiciliarias'];
+		$arreglo[$indice][6]=$row['investigacionesInformadas'];
 		$indice++;
 	}
 
@@ -1227,6 +1228,24 @@ function getDataMandoTableAdm($conn, $idMando, $areaAdsc){
 		if(isset($arreglo)){return $arreglo;}	
 
 }
+
+function getAnioPueDispo($conn){
+	$query = "SELECT  DISTINCT anio FROM pueDisposi.puestaDisposicion WHERE anio >= 2020";
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC )){
+		$arreglo[$indice][0]=$row['anio'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}	
+}
+
+function getDataAnio(){
+	$arreglo[0][0]=2020;
+	$arreglo[1][0]=2021;
+	return $arreglo;
+}
+
 
 ?>
 

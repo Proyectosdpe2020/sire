@@ -420,8 +420,95 @@
 																				      					</div>	
 
 																				      </div>
+<!--
+																				      <div class="row">
+																				      					<div class="col-xs-6">
+																				      						<label class="colorLetras" for="inputlg">El hecho no se cometió :</label>
+																														  <div class="iconiput">
+									<input type="number" placeholder="cantidad" class="first" onblur="sumsobredecret(event)" id="SDhNoCom"  value="<? if($a == 1 ){ echo  $datalit[0][24]; } ?>"/>
+																														  	<span onclick="sendDataModalLitigacion('SDhNoCom',101,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkSDhNoCom"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+																														  </div>	
+																				      					</div>
+
+																				      					<div class="col-xs-6">
+																				      						<label class="colorLetras" for="inputlg">El hecho no constituye delito :</label>
+																														  <div class="iconiput">
+									<input type="number" placeholder="cantidad" class="first" onblur="sumsobredecret(event)" id="SDnoConDel"  value="<? if($a == 1 ){ echo  $datalit[0][99]; } ?>"/>
+																														  	<span onclick="sendDataModalLitigacion('SDnoConDel',103,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkSDnoConDel"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+																														  </div>	
+																				      					</div>	
+
+																				      </div>
+
+																				         <div class="row">
+																				      					<div class="col-xs-6">
+																				      						<label class="colorLetras" for="inputlg">El imputado está exento de responsabilidad penal :</label>
+																														  <div class="iconiput">
+									<input type="number" placeholder="cantidad" class="first" onblur="sumsobredecret(event)" id="SDimExRespPen"  value="<? if($a == 1 ){ echo  $datalit[0][24]; } ?>"/>
+																														  	<span onclick="sendDataModalLitigacion('SDimExRespPen',105,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkSDimExRespPen"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+																														  </div>	
+																				      					</div>
+
+																				      					<div class="col-xs-6">
+																				      						<label class="colorLetras" for="inputlg">No hay elementos suficientes para fundar una acusación :</label>
+																														  <div class="iconiput">
+									<input type="number" placeholder="cantidad" class="first" onblur="sumsobredecret(event)" id="SDNoEleSufAcusa"  value="<? if($a == 1 ){ echo  $datalit[0][99]; } ?>"/>
+																														  	<span onclick="sendDataModalLitigacion('SDNoEleSufAcusa',106,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkSDNoEleSufAcusa"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+																														  </div>	
+																				      					</div>	
+
+																				      </div>
+
+																				       <div class="row">
+																				      					<div class="col-xs-6">
+																				      						<label class="colorLetras" for="inputlg">Extinción de la acción penal  :</label>
+																														  <div class="iconiput">
+									<input type="number" placeholder="cantidad" class="first" onblur="sumsobredecret(event)" id="SDExtPenal"  value="<? if($a == 1 ){ echo  $datalit[0][24]; } ?>"/>
+																														  	<span onclick="sendDataModalLitigacion('SDExtPenal',107,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkSDExtPenal"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+																														  </div>	
+																				      					</div>
+
+																				      					<div class="col-xs-6">
+																				      						<label class="colorLetras" for="inputlg">Una ley o reforma posterior derogó delito por el que se sigue el proceso :</label>
+																														  <div class="iconiput">
+									<input type="number" placeholder="cantidad" class="first" onblur="sumsobredecret(event)" id="SDderDeliSigProc"  value="<? if($a == 1 ){ echo  $datalit[0][99]; } ?>"/>
+																														  	<span onclick="sendDataModalLitigacion('SDderDeliSigProc',108,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkSDderDeliSigProc"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+																														  </div>	
+																				      					</div>	
+
+																				      </div>
+
+																				      <div class="row">
+																				      					<div class="col-xs-6">
+																				      						<label class="colorLetras" for="inputlg"> El hecho fue materia de un proceso penal en el que se dictó sentencia firme  :</label>
+																														  <div class="iconiput">
+									<input type="number" placeholder="cantidad" class="first" onblur="sumsobredecret(event)" id="SDsentFirme"  value="<? if($a == 1 ){ echo  $datalit[0][24]; } ?>"/>
+																														  	<span onclick="sendDataModalLitigacion('SDsentFirme',109,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkSDsentFirme"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+																														  </div>	
+																				      					</div>
+
+																				      					<div class="col-xs-6">
+																				      						<label class="colorLetras" for="inputlg">No se vinculó a proceso :</label>
+																														  <div class="iconiput">
+									<input type="number" placeholder="cantidad" class="first" onblur="sumsobredecret(event)" id="SDnoVincProc"  value="<? if($a == 1 ){ echo  $datalit[0][99]; } ?>"/>
+																														  	<span onclick="sendDataModalLitigacion('SDnoVincProc',110,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkSDnoVincProc"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+																														  </div>	
+																				      					</div>	
+
+																				      </div>
+
+																				      <div class="row">
+																				      					<div class="col-xs-12">
+																				      						<label class="colorLetras" for="inputlg">  Por incumplimiento del plazo del cierre de la investigación complementaria  :</label>
+																														  <div class="iconiput">
+									<input type="number" placeholder="cantidad" class="first" onblur="sumsobredecret(event)" id="SDinCieInvCom"  value="<? if($a == 1 ){ echo  $datalit[0][24]; } ?>"/>
+																														  	<span onclick="sendDataModalLitigacion('SDinCieInvCom',111,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkSDinCieInvCom"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+																														  </div>	
+																				      					</div>
+
+																				      </div>
 																						
-										
+		-->								
 																											         <div class="row">
 																													      					<div class="col-xs-12">
 																																										<label class="colorLetras" for="inputlg">Por mecanismos alternativos :</label>	

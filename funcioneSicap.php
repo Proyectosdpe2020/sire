@@ -646,7 +646,56 @@ function getLAstResolucionesFromAdetermLitigSicap($conn, $idMp, $estatResolucion
 
 } 
 
+function validarEstatusShowInfoSica($estatResolucion){
 
+	if($estatResolucion == 3 || $estatResolucion == 4 || $estatResolucion == 19 || $estatResolucion == 17 || $estatResolucion == 18 || $estatResolucion == 20  || $estatResolucion == 21 || $estatResolucion== 22 || $estatResolucion == 23  || $estatResolucion == 24 || $estatResolucion == 25 || $estatResolucion == 26 || $estatResolucion == 27 || $estatResolucion == 28 || $estatResolucion == 29  || $estatResolucion == 30 || $estatResolucion == 31 || $estatResolucion == 95 || $estatResolucion == 61 || $estatResolucion == 63 || $estatResolucion == 99 || $estatResolucion == 89 || $estatResolucion == 101 || $estatResolucion == 103 || $estatResolucion == 105 || $estatResolucion == 106 || $estatResolucion == 89 || $estatResolucion == 107 || $estatResolucion == 108 || $estatResolucion == 109 || $estatResolucion == 110 || $estatResolucion == 111 || $estatResolucion == 64 || $estatResolucion == 60 || $estatResolucion == 14 || $estatResolucion == 65 || $estatResolucion == 66 || $estatResolucion == 67 || $estatResolucion == 68 || $estatResolucion == 90 || $estatResolucion == 91){
+		return True;
+	}
+	else{
+		return False;
+	}
+}
+
+function getDataDelito($conSic , $idCarpeta){
+	$query = "  SELECT d.DelitoID 
+													      ,d.CarpetaID
+													      ,d.CatDelitosID
+													      ,d.CatModalidadesID
+														  			,cme.Nombre
+																	  ,CASE 
+																		   WHEN d.principal = 1 THEN 'PRINCIPAL'
+																		   WHEN d.principal = 0 THEN 'SECUNDARIO'
+																	   ELSE 'Desconocido' 
+																    END as tipoDelito
+													  FROM Delito d 
+													  INNER JOIN CatModalidadesEstadisticas cme ON cme.CatModalidadesEstadisticasID = d.CatModalidadesID
+													  WHERE d.CarpetaID = $idCarpeta"; 
+	$indice = 0;
+	$stmt = sqlsrv_query($conSic, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['DelitoID'];
+		$arreglo[$indice][1]=$row['CarpetaID'];
+		$arreglo[$indice][2]=$row['CatDelitosID'];
+		$arreglo[$indice][3]=$row['CatModalidadesID'];
+		$arreglo[$indice][4]=$row['Nombre'];
+		$arreglo[$indice][5]=$row['tipoDelito'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}	
+}
+
+function getDataDelitoNombre($conSic , $idDelito){
+	$query = "  SELECT Nombre FROM CatModalidadesEstadisticas WHERE CatModalidadesEstadisticasID = $idDelito"; 
+	$indice = 0;
+	$stmt = sqlsrv_query($conSic, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][1]=$row['Nombre'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}	
+}
 
 	
 

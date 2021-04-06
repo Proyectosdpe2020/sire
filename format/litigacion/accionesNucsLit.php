@@ -6,8 +6,10 @@
  include ("../../Conexiones/Conexion.php");
  include("../../funciones.php");
   include("../../funcioneLit.php");
+ 
+ 
 
-	
+	error_reporting(0); //ELIMINAR LUEGO, VERIFICAR ESE ERROR
 
   if (isset($_POST["acc"])){ $acc = $_POST["acc"]; }
   if (isset($_POST["nuc"])){ $nuc = $_POST["nuc"]; }
@@ -233,19 +235,21 @@ switch ($acc) {
           if (isset($_POST["anio"])){ $anio = $_POST["anio"]; }
           if (isset($_POST["nuc"])){ $nuc = $_POST["nuc"]; }
           if (isset($_POST["deten"])){ $deten = $_POST["deten"]; }    
-          if (isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }        
+          if (isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }  
 
-                        
-
+          //Valida si el status recibido pide informacion adicional para SENAP 
+          $validaInfo =  validarEstatusShowInfo($estatResolucion);      
+    
               ?>
                  
                   <table class="table table-striped tblTransparente">
                                         <thead>
                                            <tr class="cabezeraTabla">
-                                                      <th class="col-xs-1 col-sm-1 col-md-1 textCent">No</th>
+                                                      <th class="col-xs-1 col-sm-1 col-md-1 textCent">No<? echo $estatResolucion; ?></th>
                                                       <th class="col-xs-4 col-sm-4 col-md-4 textCent">Numero Caso </th>
                                                       <th class="col-xs-6 col-sm-6 col-md-6 textCent">Expediente</th>          
                                                       <th class="col-xs-1 col-sm-1 col-md-1 textCent">Acción</th>
+                                 <? if($validaInfo){?><th class="col-xs-1 col-sm-1 col-md-1 textCent">Acción</th><? } ?>
                                            </tr>
                                     </thead>
                                     <tbody>
@@ -258,6 +262,7 @@ switch ($acc) {
                                   //// Obtener las carpetas del Mp 
                                   $sumador = 0; 
                                   $carpeAgente = getDistincCarpetasAgenteLitigacion($conn, $idMp, $estatResolucion, $mes, $anio, $idUnidad);
+                                  
 
                                   for ($i=0; $i < sizeof($carpeAgente) ; $i++) { 
 
@@ -277,7 +282,7 @@ switch ($acc) {
 
                                            $nucs = getNucExpSicap($conSic, $idCarpeta);
                                            $nuc = $nucs[0][0];
-                                           $exp = $nucs[0][1];      
+                                           $exp = $nucs[0][1];   
 
                                            ?>
                                            <tr>
@@ -285,8 +290,10 @@ switch ($acc) {
                                               <td class="tdRowMain negr"><? echo ($sumador+1); ?></td>
                                               <td class="tdRowMain negr"><? echo $nuc; ?></td>
                                               <td class="tdRowMain negr"><? echo $exp; ?></td>
-
-                                              <td class="tdRowMain"><center> <button type="button" onclick="deleteResolLit(<? echo $idEstatusNucs; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatResolucion ?>, <? echo $nuc; ?>, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
+                                              <? if($validaInfo){?>
+                                              <td class="tdRowMain"><center><div class="buttonInfo"><button type="button" onclick="showModalNucLitInfo(<? echo $idEstatusNucs; ?>, <? echo $estatResolucion; ?>, <? echo $nuc; ?>, <? echo $idCarpeta; ?>)" class="btn btn-success btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-pencil"></span> Agregar </button></div></center></td>
+                                              <? } ?>
+                                              <td class="tdRowMain"><center><button type="button" onclick="deleteResolLit(<? echo $idEstatusNucs; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatResolucion ?>, <? echo $nuc; ?>, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
 
                                            </tr>
                                            <?  
@@ -322,6 +329,7 @@ switch ($acc) {
           if (isset($_POST["deten"])){ $deten = $_POST["deten"]; }
 
               $nucResol2 = getResolucionesMPsic($conSic, $idMp, $estatResolucion, $mes, $anio, $deten);
+              $validaInfo =  validarEstatusShowInfo($estatResolucion);
 
               ?>
               
@@ -330,7 +338,8 @@ switch ($acc) {
                            <tr class="cabezeraTabla">
                                       <th class="col-xs-12 col-sm-12 col-md-1 textCent">No</th>
                                       <th class="col-xs-12 col-sm-12 col-md-5 textCent">Numero Caso </th>
-                                      <th class="col-xs-12 col-sm-12 col-md-5 textCent">Expediente</th>          
+                                      <th class="col-xs-12 col-sm-12 col-md-5 textCent">Expediente</th> 
+                 <? if($validaInfo){?><th class="col-xs-1 col-sm-1 col-md-1 textCent">Acción</th><? } ?>          
                                       <th class="col-xs-12 col-sm-12 col-md-1 textCent">Acción</th>
                            </tr>
                     </thead>
@@ -355,8 +364,11 @@ switch ($acc) {
                           <td class="tdRowMain negr"><? echo ($j+1); ?></td>
                           <td class="tdRowMain negr"><? echo $nuc; ?></td>
                           <td class="tdRowMain negr"><? echo $exp; ?></td>
+                          <? if($validaInfo){?>
+                            <td class="tdRowMain"><center><button type="button" onclick="showModalNucLitSicaInfo(<? echo $idResolMP; ?>, <? echo $estatus ?>, <? echo $nuc; ?>)" class="btn btn-success btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-pencil"></span> Agregar </button></center></td>
+                          <? } ?>
 
-                          <td class="tdRowMain"><center> <button type="button" onclick="deleteResol(<? echo $idResolMP; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatResolucion ?>, <? echo $nuc; ?>, <? echo $deten; ?>, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
+                          <td class="tdRowMain"><center><button type="button" onclick="deleteResol(<? echo $idResolMP; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatResolucion ?>, <? echo $nuc; ?>, <? echo $deten; ?>, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
 
                        </tr>
                      <?
@@ -390,7 +402,7 @@ switch ($acc) {
           if (isset($_POST["nuc"])){ $nuc = $_POST["nuc"]; }
           if (isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }
 
-  
+             
 
               $queryTransaction = "                    BEGIN                     
                     BEGIN TRY 
@@ -407,7 +419,7 @@ switch ($acc) {
                     END CATCH
                     END
                   ";
-
+       
 
                  // echo $queryTransaction;
                   $result = sqlsrv_query($conn,$queryTransaction, array(), array( "Scrollable" => 'static' ));  

@@ -61,11 +61,11 @@
 				?>
 
 
-				<h5 class="card-title tituloPregunta">Pregunta 3: Número de victimas u ofendidos 2020</h5><br>
+				<h5 class="card-title tituloPregunta">Pregunta 3: Número de victimas u ofendidos <?php echo "$anio";?></h5><br>
 				<div class="textoPregunta" >
 					<ul>
 						<li style="list-style-type: circle !important">
-							¿Cúal es el número de víctimas u ofendidos que derivan de las carpetas de investigación iniciadas en el año 2020?.
+							¿Cúal es el número de víctimas u ofendidos que derivan de las carpetas de investigación iniciadas en el año <?php echo "$anio";?>?.
 						</li>
 					</ul>
 				</div><br><hr><br>

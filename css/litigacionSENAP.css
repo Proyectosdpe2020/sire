@@ -1,0 +1,23 @@
+.panelunoLitigacion1{
+
+  background-image: url('../img/Formulario SIREcuadro-07.png'); 
+  background-repeat: no-repeat;  
+  background-size: cover;
+  background-size: 100%; 
+  background-position-y: 52%;
+  height: 80vh;
+   overflow-y: scroll;
+  overflow-x:hidden;
+}
+
+input[type=checkbox] {
+  transform: scale(1.5);
+}
+
+#showAudienciaInicial{ display: none; }
+#showEtapaIntermedia{ display: none; }
+#showMASC{ display: none; }
+#showSobreseimiento{ display: none; }
+#showSuspencionCondi{ display: none; }
+#showJuicioOral{ display: none; }
+#showSentencia{ display: none; }
