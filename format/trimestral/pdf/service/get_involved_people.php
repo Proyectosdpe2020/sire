@@ -151,7 +151,7 @@ $involved_people = array(
     ),
     29 => array(
         'elaborated_by' => array(
-            'name' => 'Miryam Atziri Camacho López',
+            'name' => 'Lic Nestor Gerardo Morfin Alvarez',
             'position' => ''
         ),
         'validated_by' => array(
