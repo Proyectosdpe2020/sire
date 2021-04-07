@@ -71,8 +71,8 @@ $involved_people = array(
     ),
     14 => array(
         'elaborated_by' => array(
-            'name' => 'Dilsa Melissa Varela Martínez',
-            'position' => ''
+            'name' => 'Ana Guadalupe Sánchez Maldonado',
+            'position' => 'Auxiliar Administrativo'
         ),
         'validated_by' => array(
             'name' => 'Mtra. Isidra Marin Hernandez',
