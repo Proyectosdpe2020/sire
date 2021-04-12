@@ -71,8 +71,8 @@ $involved_people = array(
     ),
     14 => array(
         'elaborated_by' => array(
-            'name' => 'Dilsa Melissa Varela Martínez',
-            'position' => ''
+            'name' => 'Ana Guadalupe Sánchez Maldonado',
+            'position' => 'Auxiliar Administrativo'
         ),
         'validated_by' => array(
             'name' => 'Mtra. Isidra Marin Hernandez',
@@ -151,7 +151,7 @@ $involved_people = array(
     ),
     29 => array(
         'elaborated_by' => array(
-            'name' => 'Miryam Atziri Camacho López',
+            'name' => 'Lic Nestor Gerardo Morfin Alvarez',
             'position' => ''
         ),
         'validated_by' => array(
@@ -191,7 +191,7 @@ $involved_people = array(
     ),
     38 => array(
         'elaborated_by' => array(
-            'name' => 'Lic. David Salvador Martínez Santoyo',
+            'name' => 'Mtro. en D. Jonathan Angeles Luna',
             'position' => ''
         ),
         'validated_by' => array(
