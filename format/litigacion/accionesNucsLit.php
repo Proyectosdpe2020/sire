@@ -813,7 +813,8 @@ switch ($acc) {
             if (isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }
    
             /// SI LOS ESTATUS SON AUDIENCIAS, FORMULACIONES, ORDENES APREHENSION, VINCULACIONES A PROCESO
-            if($estatResolucion == 60 || $estatResolucion == 61 || $estatResolucion == 63 || $estatResolucion == 50 || $estatResolucion == 53 || $estatResolucion == 3 || $estatResolucion == 4 || $estatResolucion == 5 || $estatResolucion == 10 || $estatResolucion == 12 || $estatResolucion == 78){
+            /// SE AGREGARON LOS IDS 17 y 18 para poder agregar doble nuc en los imputados de prision preventiva
+            if($estatResolucion == 60 || $estatResolucion == 61 || $estatResolucion == 63 || $estatResolucion == 50 || $estatResolucion == 53 || $estatResolucion == 3 || $estatResolucion == 4 || $estatResolucion == 5 || $estatResolucion == 10 || $estatResolucion == 12 || $estatResolucion == 78 || $estatResolucion == 17 || $estatResolucion == 18){
 
                 echo json_encode(array('first'=>$arreglo[0]));
 
