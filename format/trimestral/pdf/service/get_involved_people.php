@@ -36,12 +36,12 @@ $involved_people = array(
     ),
     6 => array(
         'elaborated_by' => array(
-            'name' => 'Lic. Blanca Cristina Mendoza Mendoza',
-            'position' => ''
+            'name' => 'Teresa Paulina Cazarez Ramírez',
+            'position' => 'Ministerio Público'
         ),
         'validated_by' => array(
-            'name' => 'Mtro. Mario Aurelio Tirado Rayón',
-            'position' => 'Titular de la unidad de investigación y persecución de delitos cometidos a través de medios cibernéticos'
+            'name' => 'Mtro. Jorge Alejandro Montiel Villaseñor',
+            'position' => 'Titular de la Agencia de Inteligencia Criminal'
         )
     ),
     9 => array(
