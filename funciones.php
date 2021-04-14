@@ -2308,4 +2308,5 @@ function getPeriodoActual($conn , $anio){
 	if(isset($arreglo)){return $arreglo;}
 }
 
+
 ?>
