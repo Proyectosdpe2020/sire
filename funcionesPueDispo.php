@@ -244,8 +244,8 @@ WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND 
 			WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND pd.mes = $mes AND pd.idFiscalia IN($valores) ORDER BY f.Nombre ";
 
 		}else{
-
-			$query = " SELECT pd.idPuestaDisposicion, m.nombre+' '+m.paterno+' '+m.materno as nombreMando, pd.nuc, pd.fechaEvento, pd.fechaInforme, f.Nombre as fiscalia, 
+   if($diames != "todo"){
+   		$query = " SELECT pd.idPuestaDisposicion, m.nombre+' '+m.paterno+' '+m.materno as nombreMando, pd.nuc, pd.fechaEvento, pd.fechaInforme, f.Nombre as fiscalia, 
 			mu.Nombre as municipio, col.Nombre as colonia, pd.calle, pd.numero, pd.codigoPostal
 			FROM pueDisposi.puestaDisposicion pd 
 			INNER JOIN pueDisposi.mando m ON m.idMando = pd.idMando
@@ -253,6 +253,16 @@ WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND 
 			INNER JOIN pueDisposi.CatMunicipios mu ON mu.CatMunicipiosID = pd.idMunicipio
 			INNER JOIN pueDisposi.CatColonias col ON col.CatColoniasID = pd.idColonia
 			WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND pd.mes = $mes AND pd.idFiscalia IN($valores) AND idEnlace = $idenlace ORDER BY f.Nombre ";
+   }else{
+   		$query = " SELECT pd.idPuestaDisposicion, m.nombre+' '+m.paterno+' '+m.materno as nombreMando, pd.nuc, pd.fechaEvento, pd.fechaInforme, f.Nombre as fiscalia, 
+			mu.Nombre as municipio, col.Nombre as colonia, pd.calle, pd.numero, pd.codigoPostal
+			FROM pueDisposi.puestaDisposicion pd 
+			INNER JOIN pueDisposi.mando m ON m.idMando = pd.idMando
+			INNER JOIN pueDisposi.Fiscalias f ON f.CatFiscaliasID = pd.idFiscalia
+			INNER JOIN pueDisposi.CatMunicipios mu ON mu.CatMunicipiosID = pd.idMunicipio
+			INNER JOIN pueDisposi.CatColonias col ON col.CatColoniasID = pd.idColonia
+			WHERE pd.anio = $anio AND pd.mes = $mes AND pd.idFiscalia IN($valores) AND idEnlace = $idenlace ORDER BY f.Nombre ";
+   }
 		}
 	}
 

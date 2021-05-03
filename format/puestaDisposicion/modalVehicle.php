@@ -109,7 +109,7 @@
 
 																				      <h5 class="text-on-pannel"><strong> Datos Generales </strong></h5>																				       
 																				      <div class="row">																				      	
-																				      					<div class="col-xs-4">
+																				      					<div class="col-xs-12 col-sm-12  col-md-4">
 																				      							<label class="" for="inputlg">Clasificación :<span class="aste">(*)</span></label>
 			    																											<select class="form-control browser-default custom-select " id="selClasific">		
 			    																												<option value="0">Selecciona</option>																								  
@@ -124,7 +124,7 @@
 																																			 ?>
 																																	</select>
 																				      					</div>
-																				      					<div class="col-xs-4">
+																				      					<div class="col-xs-12 col-sm-12  col-md-4">
 																				      								<label class="" for="inputlg">Forma de Aseguramiento :<span class="aste">(*)</span></label>
 			    																											<select class="form-control browser-default custom-select" id="selFormAsegur">	
 			    																												<option value="0">Selecciona</option>																										  
@@ -139,13 +139,13 @@
 																																			 ?>
 																																	</select>
 																				      					</div>
-																				      							<div class="col-xs-4">
+																				      							<div class="col-xs-12 col-sm-12  col-md-4">
 																				      								<label class="" for="inputlg">AVPP / NUC / Carpeta :</label>
 			    																													<input value="<?php if($a == 1){ echo $avppcarpeta; } ?>" class="form-control input-md redondear " id="nucVehiculo" type="text"  >
 																				      					</div>
 																				      </div>
 																				        <div class="row" style="margin-top: 10px;">																				      	
-																				      					<div class="col-xs-6">
+																				      					<div class="col-xs-12 col-sm-12  col-md-6">
 																				      							<label class="" for="inputlg">A Disposición de :<span class="aste">(*)</span></label>
 			    																											<select class="form-control browser-default custom-select" id="selAdispo">																									  
 																																	  	<option value="0">Selecciona</option>																										  
@@ -160,13 +160,13 @@
 																																			 ?>																													
 																																	 </select>
 																				      					</div>
-																				      					<div class="col-xs-6">
+																				      					<div class="col-xs-12 col-sm-12  col-md-6">
 																				      								<label class="" for="inputlg">Requerido por :</label>
 			    																												<input value="<?php if($a == 1){ echo $requeridoPor; } ?>" class="form-control input-md redondear " id="requeridoPorVehi" type="text"  >
 																				      					</div>
 																				      </div>
 																				         <div class="row" style="margin-top: 10px;">																				      	
-																				      					<div class="col-xs-6">
+																				      					<div class="col-xs-12 col-sm-12  col-md-6">
 																				      							<label class="" for="inputlg">Delito :<span class="aste">(*)</span></label>
 			    																									<select class="form-control browser-default custom-select " id="selDelito">																											  
 																																	  	<option value="0">Selecciona</option>																										  
@@ -181,7 +181,7 @@
 																																			 ?>		
 																																	</select>
 																				      					</div>
-																				      					<div class="col-xs-6">
+																				      					<div class="col-xs-12 col-sm-12  col-md-6">
 																				      								<label class="" for="inputlg">Tipo en Delito :<span class="aste">(*)</span></label>
 			    																												<select class="form-control browser-default custom-select " id="selTipoDelito">																								  
 																																	  
@@ -210,7 +210,7 @@
 																				       
 																				      <div class="row">
 																				      	
-																				      					<div class="col-xs-4">
+																				      					<div class="col-xs-12 col-sm-12  col-md-4">
 																				      								<datalist id="newMarcas">
 																																			<? 
 																																						$marcas = getDataMarcaVehicle($conn);
@@ -224,7 +224,7 @@
 																																		<label for="heard">Marca : <span class="aste">(*)</span></label>	
 																															<input value="<?php if($a == 1){ echo $marca; } ?>" class="form-control mandda " onchange="getDataLinea()" list="newMarcas" id="newMarca" name="newMarca" type="text">
 																				      					</div>
-																				      					<div class="col-xs-4">
+																				      					<div class="col-xs-12 col-sm-12  col-md-4">
 																				      						<label for="heard">Linea : <span class="aste">(*)</span></label>	
 																				      								<div id="conteLinea">
 			    																															
@@ -235,7 +235,7 @@
 
 			    																												</div>
 																				      					</div>
-																				      						<div class="col-xs-4">
+																				      						<div class="col-xs-12 col-sm-12  col-md-4">
 																				      									<datalist id="newTypeVehicles">
 																																			<? 
 																																						$types = getDataTypeVehicle($conn);
@@ -252,26 +252,26 @@
 																				      </div>
 																				        <div class="row" style="margin-top: 10px;">
 																				      	
-																				      					<div class="col-xs-4">
+																				      					<div class="col-xs-12 col-sm-12  col-md-4">
 																				      							<label class="" for="inputlg">Color :</label>
 			    																								<input value="<?php if($a == 1){ echo $color; } ?>" class="form-control input-md redondear " id="colorVehi" type="text"  >
 																				      					</div>
-																				      					<div class="col-xs-4">
+																				      					<div class="col-xs-12 col-sm-12  col-md-4">
 																				      								<label class="" for="inputlg">Modelo :</label>
 			    																												<input value="<?php if($a == 1){ echo $modelo; } ?>" class="form-control input-md redondear " id="modeloVehi" type="number"  >
 																				      					</div>
-																				      						<div class="col-xs-4">
+																				      						<div class="col-xs-12 col-sm-12  col-md-4">
 																				      								<label class="" for="inputlg">Placa :</label>
 			    																											<input value="<?php if($a == 1){ echo $placa; } ?>" class="form-control input-md redondear " id="placaVehi" type="text"  >
 																				      					</div>
 																				      </div>
 																				       <div class="row" style="margin-top: 10px;">
 																				      	
-																				      					<div class="col-xs-6">
+																				      					<div class="col-xs-12 col-sm-12  col-md-6">
 																				      							<label class="" for="inputlg">Serie :</label>
 			    																								<input value="<?php if($a == 1){ echo $serie; } ?>" class="form-control input-md redondear " id="serieVehi" type="text"  >
 																				      					</div>
-																				      					<div class="col-xs-6">
+																				      					<div class="col-xs-12 col-sm-12  col-md-6">
 																				      								<label class="" for="inputlg">Serie Alterada :</label>
 			    																												<input value="<?php if($a == 1){ echo $serieAlterada; } ?>" class="form-control input-md redondear " id="serieAlVehi" type="text"  >
 																				      					</div>
@@ -279,11 +279,11 @@
 																				       								
 																				       								 <div class="row" style="margin-top: 10px;">
 																				      	
-																				      					<div class="col-xs-6">
+																				      					<div class="col-xs-12 col-sm-12  col-md-6">
 																				      							<label class="" for="inputlg">Motor :</label>
 			    																								<input value="<?php if($a == 1){ echo $motor; } ?>" class="form-control input-md redondear " id="motorVehi" type="text"  >
 																				      					</div>
-																				      					<div class="col-xs-6">
+																				      					<div class="col-xs-12 col-sm-12  col-md-6">
 																				      								<label class="" for="inputlg">Motor Alterado :</label>
 			    																												<input value="<?php if($a == 1){ echo $motorAlterado; } ?>" class="form-control input-md redondear " id="motorAlVehi" type="text"  >
 																				      					</div>
@@ -300,18 +300,18 @@
 																				    <div class="panel-body">
 																				      <h5 class="text-on-pannel"><strong> Otros Datos </strong></h5>																				       
 																				      <div class="row">																				      	
-																				      					<div class="col-xs-6">
+																				      					<div class="col-xs-12 col-sm-12  col-md-6">
 																				      							<label class="" for="inputlg">Requerido por Otras Corporaciones :</label>
 			    																								<input value="<?php if($a == 1){ echo $requeridoOtrasCorpor; } ?>" class="form-control input-md redondear " id="requeOtroCopro" type="text"  >
 																				      					</div>
-																				      					<div class="col-xs-6">
+																				      					<div class="col-xs-12 col-sm-12  col-md-6">
 																				      								<label class="" for="inputlg">Oficio :</label>
 			    																											<input value="<?php if($a == 1){ echo $oficio; } ?>" class="form-control input-md redondear " id="oficioVehi" type="text"  >
 																				      					</div>
 																				      </div>
 																				        <div class="row" style="margin-top: 10px;">
 																				      	
-																				      					<div class="col-xs-12">
+																				      					<div class="col-xs-12 col-sm-12  col-md-12">
 																				      							<label class="" for="inputlg">Observaciones :</label>
 			    																										<div class="form-group">
 																																  <textarea class="form-control rounded-0" id="observaVehi" rows="3"><?php if($a == 1){ echo $observaciones; } ?></textarea>
