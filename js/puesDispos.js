@@ -179,17 +179,17 @@ function saveDataPuesta(typearch, anio, idEnlace, camMes, messelected, diaselect
 					if(validar){
 
 											/////////// DATOS DE LOS DATALIST /////////////
-											var newBrwosers_id = $("#newBrwoser").val();
-											var obj = $("#newBrwosers").find("option[value='" + newBrwosers_id + "']").attr('data-id');
+											//var newBrwosers_id = $("#newBrwoser").val();
+											var obj = document.getElementById("newBrwosers_id").value;
 
-											var newBrwosers_id_fisca = $("#newBrwoserFisca").val();
-											var obj2 = $("#newBrwosersFis").find("option[value='" + newBrwosers_id_fisca + "']").attr('data-id');
+											//var newBrwosers_id_fisca = $("#newBrwoserFisca").val();
+											var obj2 = document.getElementById("newBrwoserFisca").value;
 
-											var newBrwosers_id_mun = $("#newBrwoserMun").val();
-											var obj3 = $("#newBrwosersMun").find("option[value='" + newBrwosers_id_mun + "']").attr('data-id');
+											//var newBrwosers_id_mun = $("#newBrwoserMun").val();
+											var obj3 = document.getElementById("newBrwoserMun").value;
 
-											var newBrwosers_id_colo = $("#newBrwoserColo").val();
-											var obj4 = $("#newBrwosersColo").find("option[value='" + newBrwosers_id_colo + "']").attr('data-id');
+											//var newBrwosers_id_colo = $("#newBrwoserColo").val(); document.getElementById("#newBrwoserColo").value;
+											var obj4 = document.getElementById("newBrwoserColo").value;
 											/////////// DATOS DE LOS DATALIST /////////////
 
 											/////// CONDICION DE QUE ESTE BIEN CAPTURADOS LOS DATALIST ////////
@@ -271,7 +271,7 @@ function saveDataPuesta(typearch, anio, idEnlace, camMes, messelected, diaselect
 
 function validateDataPuesta(){
 
-		newBrwoser= document.getElementById("newBrwoser").value;
+		newBrwoser= document.getElementById("newBrwosers_id").value;
  		fechaevento= document.getElementById("fechaevento").value; 		
  		newBrwoserFisca= document.getElementById("newBrwoserFisca").value;
  		newBrwoserMun= document.getElementById("newBrwoserMun").value;
@@ -304,14 +304,14 @@ function modalVehicle(typeForm,tipoMOd, idEnlace, idVeicle, b){
 						var obj = $("#newBrwosers").find("option[value='" + newBrwosers_id + "']").attr('data-id');*/
 						var obj = document.getElementById("newBrwosers_id").value;
 
-						var newBrwosers_id_fisca = $("#newBrwoserFisca").val();
-						var obj2 = $("#newBrwosersFis").find("option[value='" + newBrwosers_id_fisca + "']").attr('data-id');
+						//var newBrwosers_id_fisca = $("#newBrwoserFisca").val();
+							var obj2 = document.getElementById("newBrwoserFisca").value;
 
-						var newBrwosers_id_mun = $("#newBrwoserMun").val();
-						var obj3 = $("#newBrwosersMun").find("option[value='" + newBrwosers_id_mun + "']").attr('data-id');
+							//var newBrwosers_id_mun = $("#newBrwoserMun").val();
+							var obj3 = document.getElementById("newBrwoserMun").value;
 
-						var newBrwosers_id_colo = $("#newBrwoserColo").val();
-						var obj4 = $("#newBrwosersColo").find("option[value='" + newBrwosers_id_colo + "']").attr('data-id');
+							//var newBrwosers_id_colo = $("#newBrwoserColo").val(); document.getElementById("#newBrwoserColo").value;
+							var obj4 = document.getElementById("newBrwoserColo").value;
 
 						if(obj != null && obj.length > 0){
 
@@ -431,11 +431,11 @@ function getData(){
 function getDataMunicip(){
 
 
-		 newBrwoserFisca= document.getElementById("newBrwoserFisca").value;
- 		var newBrwoser_val= document.querySelector("#newBrwosersFis"  + " option[value='" + newBrwoserFisca+ "']").dataset.value;
-		var newBrwosers_id= document.querySelector("#newBrwosersFis"  + " option[value='" + newBrwoserFisca+ "']").dataset.id;		
+		 /*newBrwoserFisca= document.getElementById("newBrwoserFisca").value;
+ 		var newBrwoser_val= document.querySelector("#newBrwosersFis"  + " option[value='" + newBrwoserFisca+ "']").dataset.value;*/
+		var newBrwosers_id= document.getElementById("newBrwoserFisca").value;	
 
-		cont = document.getElementById('munciData');
+		cont = document.getElementById('newBrwoserMun');
 		ajax=objetoAjax();
 		ajax.open("POST", "format/puestaDisposicion/munciData.php");
 
@@ -495,12 +495,12 @@ function getDataMuniciPerson(){
 
 function getDataColoni(){
 
-
+/*
 		var newBrwoserMun= document.getElementById("newBrwoserMun").value;
- 		var newBrwoser_val= document.querySelector("#newBrwosersMun"  + " option[value='" + newBrwoserMun+ "']").dataset.value;
-		var newBrwosers_id= document.querySelector("#newBrwosersMun"  + " option[value='" + newBrwoserMun+ "']").dataset.id;		
+ 		var newBrwoser_val= document.querySelector("#newBrwosersMun"  + " option[value='" + newBrwoserMun+ "']").dataset.value;*/
+		var newBrwosers_id= document.getElementById("newBrwoserMun").value;	
 
-		cont = document.getElementById('coloniData');
+		cont = document.getElementById('newBrwoserColo');
 		ajax=objetoAjax();
 		ajax.open("POST", "format/puestaDisposicion/coloniData.php");
 
@@ -555,8 +555,7 @@ function getDataColoniPerson(){
 
 function getPOstalCode(){
 
-		var newBrwoserColo= document.getElementById("newBrwoserColo").value;
-		var newBrwosers_id= document.querySelector("#newBrwosersColo"  + " option[value='" + newBrwoserColo+ "']").dataset.id;
+		var newBrwosers_id= document.getElementById("newBrwoserColo").value;
 		cont = document.getElementById('codepostalid');
 		ajax=objetoAjax();
 		ajax.open("POST", "format/puestaDisposicion/codePOstalData.php");
@@ -586,11 +585,12 @@ function showmodalPersonas(tipoMOd, idEnlace, idPersona, b){
 			//////////// VALIDAR CAMPOS QUE SEAN REQUERIDO PARA LA PUESTA A DIPOSICION //////////////////
 			if(validar){
 
+
 						/*var newBrwosers_id= document.querySelector("#newBrwosers"  + " option[value='" + newBrwoser+ "']").dataset.id;	*/
 						var newBrwosers_id = document.getElementById("newBrwosers_id").value;
-						var newBrwosers_id_fisca= document.querySelector("#newBrwosersFis"  + " option[value='" + newBrwoserFisca+ "']").dataset.id;
-						var newBrwosers_id_mun= document.querySelector("#newBrwosersMun"  + " option[value='" + newBrwoserMun+ "']").dataset.id;
-						var newBrwosers_id_colo= document.querySelector("#newBrwosersColo"  + " option[value='" + newBrwoserColo+ "']").dataset.id;
+						var newBrwosers_id_fisca=  document.getElementById("newBrwoserFisca").value;
+						var newBrwosers_id_mun= document.getElementById("newBrwoserMun").value;
+						var newBrwosers_id_colo= document.getElementById("newBrwoserColo").value;
 						
 					var nucPuestaDisposi= document.getElementById("nucPuestaDisposi").value;
 					var codepostalidPeusta= document.getElementById("codepostalidPeusta").value;
@@ -908,9 +908,9 @@ function modalForestales(tipoMOd, idEnlace, idForestales, be){
 
 		var newBrwosers_id = document.getElementById("newBrwosers_id").value;
 
-		var newBrwosers_id_fisca= document.querySelector("#newBrwosersFis"  + " option[value='" + newBrwoserFisca+ "']").dataset.id;
-		var newBrwosers_id_mun= document.querySelector("#newBrwosersMun"  + " option[value='" + newBrwoserMun+ "']").dataset.id;
-		var newBrwosers_id_colo= document.querySelector("#newBrwosersColo"  + " option[value='" + newBrwoserColo+ "']").dataset.id;
+		var newBrwosers_id_fisca=  document.getElementById("newBrwoserFisca").value;
+	var newBrwosers_id_mun= document.getElementById("newBrwoserMun").value;
+	var newBrwosers_id_colo= document.getElementById("newBrwoserColo").value;
 							
 		var nucPuestaDisposi= document.getElementById("nucPuestaDisposi").value;
 		var codepostalidPeusta= document.getElementById("codepostalidPeusta").value;
@@ -1141,9 +1141,9 @@ function modalDrogas(tipoMOd, idEnlace, idDroga, b){
 
 		var newBrwosers_id = document.getElementById("newBrwosers_id").value;
 
-		var newBrwosers_id_fisca= document.querySelector("#newBrwosersFis"  + " option[value='" + newBrwoserFisca+ "']").dataset.id;
-		var newBrwosers_id_mun= document.querySelector("#newBrwosersMun"  + " option[value='" + newBrwoserMun+ "']").dataset.id;
-		var newBrwosers_id_colo= document.querySelector("#newBrwosersColo"  + " option[value='" + newBrwoserColo+ "']").dataset.id;
+		var newBrwosers_id_fisca=  document.getElementById("newBrwoserFisca").value;
+	var newBrwosers_id_mun= document.getElementById("newBrwoserMun").value;
+	var newBrwosers_id_colo= document.getElementById("newBrwoserColo").value;
 							
 		var nucPuestaDisposi= document.getElementById("nucPuestaDisposi").value;
 		var codepostalidPeusta= document.getElementById("codepostalidPeusta").value;
@@ -1345,9 +1345,9 @@ function modalObjetoAsegurado(tipoMOd, idEnlace, idObjeto, b){
 
 		var newBrwosers_id = document.getElementById("newBrwosers_id").value;
 
-		var newBrwosers_id_fisca= document.querySelector("#newBrwosersFis"  + " option[value='" + newBrwoserFisca+ "']").dataset.id;
-		var newBrwosers_id_mun= document.querySelector("#newBrwosersMun"  + " option[value='" + newBrwoserMun+ "']").dataset.id;
-		var newBrwosers_id_colo= document.querySelector("#newBrwosersColo"  + " option[value='" + newBrwoserColo+ "']").dataset.id;
+		var newBrwosers_id_fisca=  document.getElementById("newBrwoserFisca").value;
+	var newBrwosers_id_mun= document.getElementById("newBrwoserMun").value;
+	var newBrwosers_id_colo= document.getElementById("newBrwoserColo").value;
 							
 		var nucPuestaDisposi= document.getElementById("nucPuestaDisposi").value;
 		var codepostalidPeusta= document.getElementById("codepostalidPeusta").value;
@@ -1562,10 +1562,10 @@ function modalDineroAsegurado(tipoMOd, idEnlace, idDinero, b){
 
 									var newBrwosers_id = document.getElementById("newBrwosers_id").value;
 
-									var newBrwosers_id_fisca= document.querySelector("#newBrwosersFis"  + " option[value='" + newBrwoserFisca+ "']").dataset.id;
-									var newBrwosers_id_mun= document.querySelector("#newBrwosersMun"  + " option[value='" + newBrwoserMun+ "']").dataset.id;
-									var newBrwosers_id_colo= document.querySelector("#newBrwosersColo"  + " option[value='" + newBrwoserColo+ "']").dataset.id;
-														
+								var newBrwosers_id_fisca=  document.getElementById("newBrwoserFisca").value;
+								var newBrwosers_id_mun= document.getElementById("newBrwoserMun").value;
+								var newBrwosers_id_colo= document.getElementById("newBrwoserColo").value;
+																					
 									var nucPuestaDisposi= document.getElementById("nucPuestaDisposi").value;
 									var codepostalidPeusta= document.getElementById("codepostalidPeusta").value;
 									var numberCallePuesta= document.getElementById("numberCallePuesta").value;
@@ -1790,10 +1790,10 @@ function modalDefunciones(tipoMOd, idEnlace, idDefuncion, b){
 
 		var newBrwosers_id = document.getElementById("newBrwosers_id").value;
 
-		var newBrwosers_id_fisca= document.querySelector("#newBrwosersFis"  + " option[value='" + newBrwoserFisca+ "']").dataset.id;
-		var newBrwosers_id_mun= document.querySelector("#newBrwosersMun"  + " option[value='" + newBrwoserMun+ "']").dataset.id;
-		var newBrwosers_id_colo= document.querySelector("#newBrwosersColo"  + " option[value='" + newBrwoserColo+ "']").dataset.id;
-							
+		var newBrwosers_id_fisca=  document.getElementById("newBrwoserFisca").value;
+		var newBrwosers_id_mun= document.getElementById("newBrwoserMun").value;
+		var newBrwosers_id_colo= document.getElementById("newBrwoserColo").value;
+								
 		var nucPuestaDisposi= document.getElementById("nucPuestaDisposi").value;
 		var codepostalidPeusta= document.getElementById("codepostalidPeusta").value;
 		var numberCallePuesta= document.getElementById("numberCallePuesta").value;
@@ -2029,10 +2029,10 @@ function modalTrabajosDeCampo(tipoMOd, idEnlace, idTrabajoCampo, b){
 
 		var newBrwosers_id = document.getElementById("newBrwosers_id").value;
 
-		var newBrwosers_id_fisca= document.querySelector("#newBrwosersFis"  + " option[value='" + newBrwoserFisca+ "']").dataset.id;
-		var newBrwosers_id_mun= document.querySelector("#newBrwosersMun"  + " option[value='" + newBrwoserMun+ "']").dataset.id;
-		var newBrwosers_id_colo= document.querySelector("#newBrwosersColo"  + " option[value='" + newBrwoserColo+ "']").dataset.id;
-							
+		var newBrwosers_id_fisca=  document.getElementById("newBrwoserFisca").value;
+		var newBrwosers_id_mun= document.getElementById("newBrwoserMun").value;
+		var newBrwosers_id_colo= document.getElementById("newBrwoserColo").value;
+
 		var nucPuestaDisposi= document.getElementById("nucPuestaDisposi").value;
 		var codepostalidPeusta= document.getElementById("codepostalidPeusta").value;
 		var numberCallePuesta= document.getElementById("numberCallePuesta").value;
@@ -2219,9 +2219,9 @@ function modalArmasAseguradas(tipoMOd, idEnlace, idArma, b){
 
 		var newBrwosers_id = document.getElementById("newBrwosers_id").value;
 
-		var newBrwosers_id_fisca= document.querySelector("#newBrwosersFis"  + " option[value='" + newBrwoserFisca+ "']").dataset.id;
-		var newBrwosers_id_mun= document.querySelector("#newBrwosersMun"  + " option[value='" + newBrwoserMun+ "']").dataset.id;
-		var newBrwosers_id_colo= document.querySelector("#newBrwosersColo"  + " option[value='" + newBrwoserColo+ "']").dataset.id;
+	var newBrwosers_id_fisca=  document.getElementById("newBrwoserFisca").value;
+	var newBrwosers_id_mun= document.getElementById("newBrwoserMun").value;
+	var newBrwosers_id_colo= document.getElementById("newBrwoserColo").value;
 							
 		var nucPuestaDisposi= document.getElementById("nucPuestaDisposi").value;
 		var codepostalidPeusta= document.getElementById("codepostalidPeusta").value;

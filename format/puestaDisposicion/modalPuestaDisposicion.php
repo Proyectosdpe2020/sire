@@ -47,6 +47,7 @@
 												$cuatro = $puestaData[0][16];
 												$cinco = $puestaData[0][17];
 												$narra = $puestaData[0][18];
+												$getIDMando = $puestaData[0][19];
 												$a = 1;
 
 												// OBTENER ID DE MUNICIPIO Y COLONIA APARTIR DE LA PUESTA Y LA FISCALIA
@@ -82,7 +83,7 @@
  					for ($h=0; $h < sizeof($mandos); $h++) { 
  						$idMando = $mandos[$h][6];	$nom = $mandos[$h][0];	$pat = $mandos[$h][1];	$mat = $mandos[$h][2];
  						$nombrecom = $nom." ".$pat." ".$mat; ?>
- 						<option style="color: black; font-weight: bold;" value="<? echo $idMando; ?>"><? echo $nombrecom; ?></option>
+ 						<option style="color: black; font-weight: bold;" value="<? echo $idMando; ?>" <?if($a == 1 && $idMando == $getIDMando ){ ?> selected <? } ?>><? echo $nombrecom; ?></option>
  					<? } ?>
  					</select>
  			</div>
@@ -114,35 +115,46 @@
  				</div>
  			</div>
  			<div class="col-xs-12 col-sm-12  col-md-2">
- 				<datalist id="newBrwosersFis">
- 			<?$fiscas = getFiscaliasEnlace($conn, $idEnlace);
- 			for ($o=0; $o < sizeof($fiscas); $o++) { 
- 				$idfis = $fiscas[$o][0];
- 				$nombrefis = $fiscas[$o][1];?>
- 				<option style="color: black; font-weight: bold;" value="<? echo $nombrefis; ?>" data-value="<? echo $idfis; ?>" data-id="<? echo $idfis; ?>"></option>
- 			<?}?>
- 			 </datalist>
  				<label for="heard">Fiscalía :</label>	<span class="aste">(Requerido)</span>
- 				<input class="form-control mandda gehit" onchange="getDataMunicip()" list="newBrwosersFis" value="<? if($a == 1){ echo $fiscalia; }else{  } ?>" id="newBrwoserFisca" name="newBrwoserFisca" type="text" <? if($b == 0){ echo "readonly"; } ?>><br>
+ 					<select class="dataAutocomplet form-control browser-default custom-select" onchange="getDataMunicip()" locked="locked" id="newBrwoserFisca" name="newBrwoserFisca" type="text" <? if($b == 0){ echo "readonly"; } ?> >
+ 						<option value="" ></option>
+ 						<?$fiscas = getFiscaliasEnlace($conn, $idEnlace);
+				 			for ($o=0; $o < sizeof($fiscas); $o++) { 
+				 				$idfis = $fiscas[$o][0];
+				 				$nombrefis = $fiscas[$o][1];?>
+				 				<option style="color: black; font-weight: bold;" value="<? echo $idfis; ?>" <?if($a == 1 && $idfis == $dataDire[0][0]){?> selected <? } ?> ><?echo $nombrefis; ?></option>
+				 			<?}?>
+ 					</select>
  			</div>
  			<div class="col-xs-12 col-sm-12  col-md-2">
- 				<label for="heard">Municipio :</label>	<span class="aste">(Requerido)</span>
- 				<div id="munciData">
- 					<datalist id="newBrwosersMun">
- 						<option style="color: black; font-weight: bold;" value="<? echo $muni; ?>" data-value="<? echo $dataDire[0][1]; ?>" data-id="<? echo $dataDire[0][1]; ?>"></option>
- 					</datalist>
- 					<input class="form-control mandda gehit" onchange="getDataColoni();" list="newBrwosersMun" id="newBrwoserMun" value="<? if($a == 1){ echo $muni; } ?>" name="newBrwoserMun" type="text" <? if($b == 0){ echo "readonly"; } ?>><br>
- 				</div>
+ 				<label for="heard">Municipio :</label>	<span class="aste">(Requerido)</span>		
+ 				<select class="dataAutocomplet form-control browser-default custom-select" onchange="getDataColoni();" locked="locked" id="newBrwoserMun" name="newBrwoserMun" type="text" <? if($b == 0){ echo "readonly"; } ?> >
+ 						<?if($a == 1){ 
+ 							$munis = getDataMunicipiosFiscalia($conn, $dataDire[0][0]);
+ 							for ($o=0; $o < sizeof($munis); $o++) { 
+ 								$idMuni = $munis[$o][0];
+ 								$nombreMuni = $munis[$o][1];
+ 							?>
+ 							<option value="<?echo $idMuni; ?>" <?if($idMuni == $dataDire[0][1]){?> selected <? } ?> ><? echo $nombreMuni;?></option>
+ 						<? } 
+ 					  }  ?>
+      
+						</select>
  			</div>
  			<div class="col-xs-12 col-sm-12  col-md-3">
  				<label for="heard">Colonia / Localidad :</label>	<span class="aste">(Requerido)</span>
- 				<div id="coloniData">
- 					<datalist id="newBrwosersColo">
- 						<option style="color: black; font-weight: bold;" value="<? echo $colo; ?>" data-value="<? echo $dataDire[0][2]; ?>" data-id="<? echo $dataDire[0][2]; ?>">
- 						</option>
- 					</datalist>
- 					<input class="form-control mandda gehit" onchange="getPOstalCode()" list="newBrwosersColo" value="<? if($a == 1){ echo $colo; } ?>" id="newBrwoserColo" name="newBrwoserColo" type="text" <? if($b == 0){ echo "readonly"; } ?>>
- 				</div>
+ 					<select class="dataAutocomplet form-control browser-default custom-select" onchange="getPOstalCode();" locked="locked" id="newBrwoserColo" name="newBrwoserColo" type="text" <? if($b == 0){ echo "readonly"; } ?> >
+ 							<?if($a == 1){ 
+ 									$coloni = getDataColoniMunicipio($conn, $dataDire[0][1]);
+ 							for ($o=0; $o < sizeof($coloni); $o++) { 	 
+ 									$idColoni = $coloni[$o][0];
+ 									$codipos = $coloni[$o][1];
+ 									$nombre = $coloni[$o][2];
+ 							?>
+ 							<option style="color: black; font-weight: bold;" value="<? echo $idColoni; ?>"  <?if($idColoni  == $dataDire[0][2]){?> selected <? } ?> ><? echo $nombre; ?></option>
+ 						<? } 
+ 					  }  ?>
+						</select>
  			</div>
  		</div><!-- ROOWWWWWW LOCALIDADES  -->
 

@@ -118,7 +118,7 @@
 						<label for="heard">Día:</label><br>
 							<div id="contDays">
 						<select id="diaSeleted" name="selMes" tabindex="6"class="form-control redondear selectTranparent" onchange="loadDataPuestDay(<? echo $anioCaptura; ?>, <? echo $idEnlace; ?>, 0)" required>
-							<option value="todo">Todo</option>
+							<option value="0">Todo</option>
 							<? 
 									$diasNumero = cal_days_in_month(CAL_GREGORIAN, $currentmonth, $anioCaptura);
 
