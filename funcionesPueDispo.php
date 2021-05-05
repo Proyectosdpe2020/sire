@@ -244,8 +244,8 @@ WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND 
 			WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND pd.mes = $mes AND pd.idFiscalia IN($valores) ORDER BY f.Nombre ";
 
 		}else{
-
-			$query = " SELECT pd.idPuestaDisposicion, m.nombre+' '+m.paterno+' '+m.materno as nombreMando, pd.nuc, pd.fechaEvento, pd.fechaInforme, f.Nombre as fiscalia, 
+   if($diames != 0){
+   		$query = " SELECT pd.idPuestaDisposicion, m.nombre+' '+m.paterno+' '+m.materno as nombreMando, pd.nuc, pd.fechaEvento, pd.fechaInforme, f.Nombre as fiscalia, 
 			mu.Nombre as municipio, col.Nombre as colonia, pd.calle, pd.numero, pd.codigoPostal
 			FROM pueDisposi.puestaDisposicion pd 
 			INNER JOIN pueDisposi.mando m ON m.idMando = pd.idMando
@@ -253,6 +253,16 @@ WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND 
 			INNER JOIN pueDisposi.CatMunicipios mu ON mu.CatMunicipiosID = pd.idMunicipio
 			INNER JOIN pueDisposi.CatColonias col ON col.CatColoniasID = pd.idColonia
 			WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND pd.mes = $mes AND pd.idFiscalia IN($valores) AND idEnlace = $idenlace ORDER BY f.Nombre ";
+   }else{
+   		$query = " SELECT pd.idPuestaDisposicion, m.nombre+' '+m.paterno+' '+m.materno as nombreMando, pd.nuc, pd.fechaEvento, pd.fechaInforme, f.Nombre as fiscalia, 
+			mu.Nombre as municipio, col.Nombre as colonia, pd.calle, pd.numero, pd.codigoPostal
+			FROM pueDisposi.puestaDisposicion pd 
+			INNER JOIN pueDisposi.mando m ON m.idMando = pd.idMando
+			INNER JOIN pueDisposi.Fiscalias f ON f.CatFiscaliasID = pd.idFiscalia
+			INNER JOIN pueDisposi.CatMunicipios mu ON mu.CatMunicipiosID = pd.idMunicipio
+			INNER JOIN pueDisposi.CatColonias col ON col.CatColoniasID = pd.idColonia
+			WHERE pd.anio = $anio AND pd.mes = $mes AND pd.idFiscalia IN($valores) AND idEnlace = $idenlace ORDER BY f.Nombre ";
+   }
 		}
 	}
 
@@ -690,7 +700,7 @@ FROM pueDisposi.personasDetenidas p
 function get_data_puesta($conn, $idPuestaDisposicion){
 
 			$query = "  SELECT m.nombre+' '+m.paterno+' '+m.materno as nombreCompleto,c.nombre as cargo, f.nombre as funcion, aa.nombre as areaAdscripcion , pd.nuc, pd.fechaEvento, pd.fechaInforme, pd.calle, 
-  pd.numero, pd.codigoPostal, fi.Nombre as fiscaliam, mu.Nombre as municipio, co.Nombre as colonia, pd.rel, pd.norel, pd.cate, pd.oper, pd.reco, pd.narracion
+  pd.numero, pd.codigoPostal, fi.Nombre as fiscaliam, mu.Nombre as municipio, co.Nombre as colonia, pd.rel, pd.norel, pd.cate, pd.oper, pd.reco, pd.narracion, pd.idMando
   FROM pueDisposi.puestaDisposicion pd 
   INNER JOIN pueDisposi.mando m ON m.idMando = pd.idMando 
   INNER JOIN pueDisposi.cargo c ON c.idCargo = m.idCargo
@@ -729,6 +739,7 @@ function get_data_puesta($conn, $idPuestaDisposicion){
 		$arreglo[$indice][16]=$row['oper'];
 		$arreglo[$indice][17]=$row['reco'];
 		$arreglo[$indice][18]=$row['narracion'];
+		$arreglo[$indice][19]=$row['idMando'];
 		$indice++;
 	}
 
@@ -899,7 +910,8 @@ function getDataMandos($conn){
 							$query = " SELECT m.idMando, m.nombre, m.paterno, m.materno, pdc.nombre as cargo, f.nombre as funcion, ad.nombre as areaAdscripcion FROM pueDisposi.mando m 
   INNER JOIN pueDisposi.cargo pdc ON pdc.idCargo = m.idCargo 
   INNER JOIN pueDisposi.funcion f ON f.idFuncion = m.idFuncion
-  INNER JOIN pueDisposi.areaAdscripcion ad ON ad.idAreaAdscripcion = m.idAreaAdscripcion ";
+  INNER JOIN pueDisposi.areaAdscripcion ad ON ad.idAreaAdscripcion = m.idAreaAdscripcion 
+  WHERE m.estatus = 'VI' ";
 
 
 							$indice = 0;

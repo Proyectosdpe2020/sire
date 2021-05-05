@@ -93,8 +93,9 @@ if($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || $
 
 
 	 <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+	 <link href="vendors/select2/dist/css/select2.min.css" rel="stylesheet" />
 
- 
+
 
 	<script type="text/javascript">
 
@@ -788,9 +789,7 @@ $("#table-body").append(data);
       <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
       <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
       <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
-
-
-
+      <script type="text/javascript" src="vendors/select2/dist/js/select2.min.js" ></script>
 
 </body>
 
