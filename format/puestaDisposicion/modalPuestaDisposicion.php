@@ -106,7 +106,7 @@
  		<div class="row"><!-- ROOWWWWWW LOCALIDADES  --> 
  			<div class="col-xs-12 col-sm-12  col-md-3">
  				<label for="heard">Nuc :</label>
- 				<input class="form-control gehit"  id="nucPuestaDisposi"  type="text" value="<? if($a == 1){ echo $nuc; } ?>" <? if($b == 0){ echo "readonly"; } ?>>
+ 				<input class="form-control gehit"  id="nucPuestaDisposi" maxlength="13"  type="number" value="<? if($a == 1){ echo $nuc; } ?>" <? if($b == 0){ echo "readonly"; } ?>>
  			</div>
  			<div class="col-xs-12 col-sm-12  col-md-2">
  				<label for="heard">Fecha Evento :</label><span class="aste"> (Requerido)</span>
@@ -213,7 +213,8 @@
  		<div class="row"><!-- ROOWWWWWW RELEVANCIAS -->
  			<div class="form-group col-md-12">
  				<label for="textObservaciones">Narración:</label>	
- 				<textarea id="textNarracion"  style="resize: none; height: 7vh; " class="form-control rounded-0" rows="2" <? if($b == 0){ echo "readonly"; } ?>><? if($a == 1){ echo $narra; } ?></textarea>
+ 				<textarea id="textNarracion" onkeypress="contCharTextBox()" onclick="contCharTextBox()"  style="resize: none; height: 7vh; " class="form-control rounded-0" rows="2" <? if($b == 0){ echo "readonly"; } ?>><? if($a == 1){ echo $narra; } ?></textarea>
+ 				<div class="text-right"><span id="caracteres" class="valid-text pt-3"></span></div>
  			</div>
  		</div><!-- ROOWWWWWW RELEVANCIAS  --> 
  		<div>

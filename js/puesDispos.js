@@ -3052,3 +3052,14 @@ function createExcelReport(month, year, data) {
 	});
 
 }
+//Valida texto de la narracion
+function contCharTextBox() {
+  var limit = 5000;
+  $("#textNarracion").attr('maxlength', limit);
+  var init = $("#textNarracion").val().length;
+  
+  if(init<limit){
+    init++;
+    $('#caracteres').text("Máximo 5000 caracteres:" + init); 
+  }
+}

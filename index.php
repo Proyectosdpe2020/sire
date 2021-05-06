@@ -65,6 +65,7 @@ if($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || $
 		<!-- Meta, title, CSS, favicons, etc. -->
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="google" value="notranslate">
 
 		<link rel="icon" href="img/pgje.png" type="imag/ico">	
 		<link rel="stylesheet" type="text/css" href="css/estilosPrincipal.css">
