@@ -299,7 +299,7 @@ function get_data_vehi_puesta($conn, $idPuestaDisposicion, $idVeicle){
 if($idVeicle == 0){
 			$query = " SELECT v.idVehiculo, cv.nombre as clasificacion, av.nombre as aseguramiento, dv.nombre as delito, tdv.nombre as tipoDelito, dis.nombre as dispocicion, mv.CatMarcasVehiculosID as marcaVehiculoID,
   mv.Nombre as marca, vl.Nombre as linea, tv.Nombre as tipo, v.color, v.modelo, v.placa, v.serie, v.motor, v.serieAlterada, 
-  v.motorAlterado, v.requeridoOtrasCorpor, v.oficio, v.observaciones, v.requeridoPor, v.avppcarpeta 
+  v.motorAlterado, v.requeridoOtrasCorpor, v.oficio, v.observaciones, v.requeridoPor, v.avppcarpeta , v.idLinea, v.idTipo
   FROM pueDisposi.vehiculo v 
   INNER JOIN pueDisposi.clasificacionVehi cv ON cv.idClasificacionVehi = v.idClasificacion 
   INNER JOIN pueDisposi.aseguramietoVehi av ON av.idAseguramientoVehi = v.idFormaAseguramiento
@@ -314,7 +314,7 @@ if($idVeicle == 0){
  }else{
  		$query = " SELECT v.idVehiculo, cv.nombre as clasificacion, av.nombre as aseguramiento, dv.nombre as delito, tdv.nombre as tipoDelito, dis.nombre as dispocicion, mv.CatMarcasVehiculosID as marcaVehiculoID,
   mv.Nombre as marca, vl.Nombre as linea, tv.Nombre as tipo, v.color, v.modelo, v.placa, v.serie, v.motor, v.serieAlterada, 
-  v.motorAlterado, v.requeridoOtrasCorpor, v.oficio, v.observaciones, v.requeridoPor, v.avppcarpeta 
+  v.motorAlterado, v.requeridoOtrasCorpor, v.oficio, v.observaciones, v.requeridoPor, v.avppcarpeta, v.idLinea, v.idTipo
   FROM pueDisposi.vehiculo v 
   INNER JOIN pueDisposi.clasificacionVehi cv ON cv.idClasificacionVehi = v.idClasificacion 
   INNER JOIN pueDisposi.aseguramietoVehi av ON av.idAseguramientoVehi = v.idFormaAseguramiento
@@ -358,7 +358,8 @@ if($idVeicle == 0){
 		$arreglo[$indice][19]=$row['avppcarpeta'];
 		$arreglo[$indice][20]=$row['dispocicion'];
 		$arreglo[$indice][21]=$row['marcaVehiculoID'];
-
+  $arreglo[$indice][22]=$row['idLinea'];
+  $arreglo[$indice][23]=$row['idTipo'];
 		$indice++;
 	}
 
@@ -518,7 +519,8 @@ END as sexo, cm.nombre as causaMuerte, d.movilMuerte, d.observaciones  FROM pueD
 
 function get_data_armas_puesta($conn, $idPuestaDisposicion, $idArma){
 if($idArma == 0){
-			$query = "  SELECT aa.idArmaAsegurada, ta.nombre as tipo, ma.nombre as marca, ca.nombre as calibre, ac.nombre as accesorio, mc.nombre as marcaCa, aa.observaciones FROM pueDisposi.aseguramientoArmas aa 
+			$query = "  SELECT aa.idArmaAsegurada, ta.nombre as tipo, ma.nombre as marca, ca.nombre as calibre, ac.nombre as accesorio, mc.nombre as marcaCa, aa.observaciones, aa.idTipoArma, aa.idMarcaArma, aa.idCalibre, aa.idAccesorios, aa.idMarcaCartuchos
+		FROM pueDisposi.aseguramientoArmas aa 
   INNER JOIN pueDisposi.CatTipoArma ta ON ta.CatTipoArmaID = aa.idTipoArma  
   INNER JOIN pueDisposi.CatMarcaArma ma ON ma.CatMarcaArmaID = aa.idMarcaArma
   INNER JOIN pueDisposi.CatCalibre ca ON ca.CatCalibreID = aa.idCalibre
@@ -526,7 +528,8 @@ if($idArma == 0){
   INNER JOIN pueDisposi.CatMarcaCartuchos mc ON mc.CatMarcaCartuchosID = aa.idMarcaCartuchos
   WHERE aa.idPueDisposicion = $idPuestaDisposicion ";
 }else{
-	$query = "  SELECT aa.idArmaAsegurada, ta.nombre as tipo, ma.nombre as marca, ca.nombre as calibre, ac.nombre as accesorio, mc.nombre as marcaCa, aa.observaciones FROM pueDisposi.aseguramientoArmas aa 
+	$query = "  SELECT aa.idArmaAsegurada, ta.nombre as tipo, ma.nombre as marca, ca.nombre as calibre, ac.nombre as accesorio, mc.nombre as marcaCa, aa.observaciones, aa.idTipoArma, aa.idMarcaArma, aa.idCalibre, aa.idAccesorios, aa.idMarcaCartuchos
+	 FROM pueDisposi.aseguramientoArmas aa 
   INNER JOIN pueDisposi.CatTipoArma ta ON ta.CatTipoArmaID = aa.idTipoArma  
   INNER JOIN pueDisposi.CatMarcaArma ma ON ma.CatMarcaArmaID = aa.idMarcaArma
   INNER JOIN pueDisposi.CatCalibre ca ON ca.CatCalibreID = aa.idCalibre
@@ -547,8 +550,11 @@ if($idArma == 0){
 		$arreglo[$indice][4]=$row['accesorio'];
 		$arreglo[$indice][5]=$row['marcaCa'];
 		$arreglo[$indice][6]=$row['observaciones'];
-
-
+		$arreglo[$indice][7]=$row['idTipoArma'];
+		$arreglo[$indice][8]=$row['idMarcaArma'];
+		$arreglo[$indice][9]=$row['idCalibre'];
+		$arreglo[$indice][10]=$row['idAccesorios'];
+		$arreglo[$indice][11]=$row['idMarcaCartuchos'];
 		$indice++;
 	}
 
@@ -601,7 +607,7 @@ function get_data_person_puesta($conn, $idPuestaDisposicion, $idPersona){
 
 			if($idPersona == 0){
 			$query = " SELECT p.idPersonaDetenida, p.nombre, p.ap_paterno, p.ap_materno, p.nombre+' '+p.ap_paterno+' '+p.ap_materno as nombreCompleto, p.alias, p.edad, d.delito as delitoPrincipal, p.bandas, p.agraviado, p.invFlag, p.bandaSolit, p.avPP, p.numdBas,
-	 p.aDispoDe, p.reqOtrasCorpo, p.oficio, p.observaciones,
+	 p.aDispoDe, p.reqOtrasCorpo, p.oficio, p.observaciones, p.idTipoDelito,
 	CASE
     WHEN p.sexo = 'M' THEN 'Masculino'
     WHEN p.sexo = 'F' THEN 'Femenino'
@@ -612,7 +618,7 @@ INNER JOIN pueDisposi.tipoDelitos d ON d.idTipoDelito = p.idTipoDelito
  WHERE idPuestaDisposicion = $idPuestaDisposicion  ORDER BY p.idPersonaDetenida DESC  ";
 }else{
 	$query = " SELECT p.idPersonaDetenida, p.nombre, p.ap_paterno, p.ap_materno, p.nombre+' '+p.ap_paterno+' '+p.ap_materno as nombreCompleto, p.alias, p.edad, d.delito as delitoPrincipal, p.bandas, p.agraviado, p.invFlag, p.bandaSolit, p.avPP, p.numdBas,
-	 p.aDispoDe, p.reqOtrasCorpo, p.oficio, p.observaciones,
+	 p.aDispoDe, p.reqOtrasCorpo, p.oficio, p.observaciones, p.idTipoDelito,
 	CASE
     WHEN p.sexo = 'M' THEN 'Masculino'
     WHEN p.sexo = 'F' THEN 'Femenino'
@@ -652,6 +658,7 @@ INNER JOIN pueDisposi.tipoDelitos d ON d.idTipoDelito = p.idTipoDelito
   $arreglo[$indice][18]=$row['reqOtrasCorpo'];
   $arreglo[$indice][19]=$row['oficio'];
   $arreglo[$indice][20]=$row['observaciones'];
+  $arreglo[$indice][21]=$row['idTipoDelito'];
 
 		$indice++;
 	}

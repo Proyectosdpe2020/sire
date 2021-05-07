@@ -21,12 +21,12 @@ function saveVehicle(idEnlace, typearch, b, tipoActualizacion , idVeicle){
 		var newLinea= document.getElementById("newLinea").value;
 		var newTypeMarca= document.getElementById("newTypeMarca").value;
 
-		if(selClasific != "" && selFormAsegur != "" && selAdispo != "" && selDelito != "" && selTipoDelito != "" && newMarca != "" 
-			&& newLinea != "" && newTypeMarca != ""){			
+		if(selClasific >= 1 && selFormAsegur >= 1 && selAdispo >= 1 && selDelito >= 1 && selTipoDelito >= 1 && newMarca >= 1 
+			&& newLinea >= 1 && newTypeMarca >= 1){			
 			
-			var newMarca_id= document.querySelector("#newMarcas"  + " option[value='" + newMarca+ "']").dataset.id;
-			var newLineas_id= document.querySelector("#newLineas"  + " option[value='" + newLinea+ "']").dataset.id;
-			var newTipo_id= document.querySelector("#newTypeVehicles"  + " option[value='" + newTypeMarca+ "']").dataset.id;
+			var newMarca_id= document.getElementById("newMarca").value;
+			var newLineas_id= document.getElementById("newLinea").value;
+			var newTipo_id= document.getElementById("newTypeMarca").value;
 
 			var nucVehiculo= document.getElementById("nucVehiculo").value;
 			var requeridoPorVehi= document.getElementById("requeridoPorVehi").value;
@@ -116,10 +116,10 @@ function saveVehicle(idEnlace, typearch, b, tipoActualizacion , idVeicle){
 function getDataLinea(){
 
 
-		var newMarca= document.getElementById("newMarca").value; 		
-		var newBrwosers_id= document.querySelector("#newMarcas"  + " option[value='" + newMarca+ "']").dataset.id;		
+		//var newMarca= document.getElementById("newMarca").value; 		
+		var newBrwosers_id= document.getElementById("newMarca").value;	
 
-		cont = document.getElementById('conteLinea');
+		cont = document.getElementById('newLinea');
 		ajax=objetoAjax();
 		ajax.open("POST", "format/puestaDisposicion/dataLinea.php");
 
@@ -154,7 +154,7 @@ anio = document.getElementById("anioCmasc").value;
 	ajax.onreadystatechange = function(){
 		if (ajax.readyState == 4 && ajax.status == 200) {
 			cont.innerHTML = ajax.responseText;	
-			$(".dataAutocomplet").select2({
+			$('.dataAutocomplet').select2({
 																																	    width: '100%',
 																																	    placeholder: "Seleccione",
                                      allowClear: false
@@ -288,7 +288,7 @@ function validateDataPuesta(){
 
 
 function modalVehicle(typeForm,tipoMOd, idEnlace, idVeicle, b){
-
+ 		
 	/////////////////////////// SI EL TIPO MODAL ES UNA NUEVA PUESTA ENTONCES ES  0 ///////////////////////////////
 	var idPuestaDisposicion= document.getElementById("idPuestaDisposicion").value;
 	
@@ -357,7 +357,8 @@ function modalVehicle(typeForm,tipoMOd, idEnlace, idVeicle, b){
 																				ajax.open("POST", "format/puestaDisposicion/modalVehicle.php");
 																				ajax.onreadystatechange = function(){
 																					if (ajax.readyState == 4 && ajax.status == 200) {
-																						cont.innerHTML = ajax.responseText;				
+																						cont.innerHTML = ajax.responseText;		
+																						$(".dataAutocomplet").select2({ width: '100%', placeholder: "Seleccione", allowClear: false });		
 																						$('#puestdispos').modal('hide'); 
 																						$('#puestdisposVehic').modal('show');
 																					}
@@ -394,7 +395,8 @@ function modalVehicle(typeForm,tipoMOd, idEnlace, idVeicle, b){
 				ajax.open("POST", "format/puestaDisposicion/modalVehicle.php");
 				ajax.onreadystatechange = function(){
 					if (ajax.readyState == 4 && ajax.status == 200) {
-						cont.innerHTML = ajax.responseText;				
+						cont.innerHTML = ajax.responseText;			
+						$(".dataAutocomplet").select2({ width: '100%', placeholder: "Seleccione", allowClear: false });			
 						$('#puestdispos').modal('hide'); 
 						$('#puestdisposVehic').modal('show');
 					}
@@ -627,7 +629,8 @@ function showmodalPersonas(tipoMOd, idEnlace, idPersona, b){
 				ajax.open("POST", "format/puestaDisposicion/modalPersonas.php");
 				ajax.onreadystatechange = function(){
 					if (ajax.readyState == 4 && ajax.status == 200) {
-						cont.innerHTML = ajax.responseText;				
+						cont.innerHTML = ajax.responseText;			
+						$(".dataAutocomplet").select2({ width: '100%', placeholder: "Seleccione", allowClear: false });	
 						$('#puestdispos').modal('hide'); 
 						$('#modalPersonas').modal('show');
 					}
@@ -652,7 +655,8 @@ function showmodalPersonas(tipoMOd, idEnlace, idPersona, b){
 				ajax.open("POST", "format/puestaDisposicion/modalPersonas.php");
 				ajax.onreadystatechange = function(){
 					if (ajax.readyState == 4 && ajax.status == 200) {
-						cont.innerHTML = ajax.responseText;				
+						cont.innerHTML = ajax.responseText;	
+						$(".dataAutocomplet").select2({ width: '100%', placeholder: "Seleccione", allowClear: false });				
 						$('#puestdispos').modal('hide'); 
 						$('#modalPersonas').modal('show');
 					}
@@ -761,7 +765,7 @@ function registrarPersona(idEnlace, tipoActualizacion, tipoArch, b, idPersona){
 	var textNumBas = $("#textNumBas").val();
 	var textRequerido = $("#textRequerido").val();
 	var textOficio = $("#textOficio").val();
-	var textTipoDelitoId = $("#listaCatDelitos").find("option[value='" + textCatDelitos + "']").attr('data-id');
+	var textTipoDelitoId = $("#textTipoDelito").val(); 
 	var textObservaciones = $("#textObservaciones").val();
 	var jObjectDelitos = {};
  
@@ -2257,7 +2261,7 @@ function modalArmasAseguradas(tipoMOd, idEnlace, idArma, b){
 			ajax.onreadystatechange = function(){
 				if (ajax.readyState == 4 && ajax.status == 200) {
 					cont.innerHTML = ajax.responseText;
-
+     $(".dataAutocomplet").select2({ width: '100%', placeholder: "Seleccione", allowClear: false });
 					$('#puestdispos').modal('hide'); 
 					$('#modalArmasAseguradas').modal('show');
 				}
@@ -2282,7 +2286,7 @@ function modalArmasAseguradas(tipoMOd, idEnlace, idArma, b){
 										ajax.onreadystatechange = function(){
 											if (ajax.readyState == 4 && ajax.status == 200) {
 												cont.innerHTML = ajax.responseText;
-
+            $(".dataAutocomplet").select2({ width: '100%', placeholder: "Seleccione", allowClear: false });
 												$('#puestdispos').modal('hide'); 
 												$('#modalArmasAseguradas').modal('show');
 											}
@@ -2312,24 +2316,38 @@ function registroArmasAseguradas(idEnlace, tipoArch, b, tipoActualizacion , idAr
  var textCatTipoArma = document.getElementById("textCatTipoArma").value;
  if(textCatTipoArma != ""){
  	
- var textCatTipoArma_id = document.querySelector("#listaCatTipoArma"  + " option[value='" +textCatTipoArma+ "']").dataset.id;
+ var textCatTipoArma_id = document.getElementById("textCatTipoArma").value;
  
  /*MARCA ARMA*/
  var textCatMarcaArma = document.getElementById("textCatMarcaArma").value;
- if(textCatMarcaArma == ""){textCatMarcaArma = "NO ESPECIFICADO";}
- var textCatMarcaArma_id = document.querySelector("#listaCatMarcaArma"  + " option[value='" +textCatMarcaArma+ "']").dataset.id;
+ if(textCatMarcaArma == ""){
+ 	var textCatMarcaArma_id = 1;
+ }else{
+ 	var textCatMarcaArma_id = document.getElementById("textCatMarcaArma").value;
+ }
  /*CALIBRE*/
  var textCatCalibre = document.getElementById("textCatCalibre").value;
- if(textCatCalibre == ""){textCatCalibre = "NO ESPECIFICADO";}
- var textCatCalibre_id = document.querySelector("#listaCatCalibre"  + " option[value='" +textCatCalibre+ "']").dataset.id;
+ if(textCatCalibre == ""){
+ 	var textCatCalibre_id = 1;
+ }else{
+ 	var textCatCalibre_id = document.getElementById("textCatCalibre").value;
+ }
+
  /*ACCESORIO ARMA*/
  var textCatAccesorioArma = document.getElementById("textCatAccesorioArma").value;
- if(textCatAccesorioArma == ""){textCatAccesorioArma = "NO ESPECIFICADO";}
- var textCatAccesorioArma_id = document.querySelector("#listaCatAccesorioArma"  + " option[value='" +textCatAccesorioArma+ "']").dataset.id;
+ if(textCatAccesorioArma == ""){
+ 	var textCatAccesorioArma_id = 1;
+ }else{
+ 	var textCatAccesorioArma_id = document.getElementById("textCatAccesorioArma").value;
+ }
  /*MARCA CARTUCHOS*/
  var textCatMarcaCartuchos = document.getElementById("textCatMarcaCartuchos").value;
- if(textCatMarcaCartuchos == ""){textCatMarcaCartuchos = "NO ESPECIFICADO";} 
- var textCatMarcaCartuchos_id = document.querySelector("#listaCatMarcaCartuchos"  + " option[value='" +textCatMarcaCartuchos+ "']").dataset.id;
+ if(textCatMarcaCartuchos == ""){
+ 	textCatMarcaCartuchos_id = 1;
+ }else{
+ 	var textCatMarcaCartuchos_id = document.getElementById("textCatMarcaCartuchos").value;
+ }
+ 
 
  var textObservaciones = $("#textObservacionesArmas").val();
 
@@ -3062,4 +3080,12 @@ function contCharTextBox() {
     init++;
     $('#caracteres').text("Máximo 5000 caracteres:" + init); 
   }
+}
+
+
+//Validar campo NUC
+function validateNuc(object){
+	if (object.value.length > object.maxLength){
+		object.value = object.value.slice(0, object.maxLength)
+	}
 }
