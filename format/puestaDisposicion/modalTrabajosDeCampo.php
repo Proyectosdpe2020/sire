@@ -103,7 +103,7 @@
 																				</div>
 																				<div class="form-row">
 																					<div class="form-group col-md-12">
-																								<label for="textIndividuaciones">Individuaciones:</label>	
+																								<label for="textIndividuaciones">Individualizaciones:</label>	
 																								<input value="<?php if($a == 1){ echo  $individuaciones; } ?>" type="number" class="form-control" id="textIndividuaciones" name="textIndividuaciones">
 																					</div>
 																			</div>

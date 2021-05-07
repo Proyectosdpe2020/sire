@@ -57,6 +57,8 @@
 		    $avppcarpeta = $arreglo[0][19];
 		    $disposicion = $arreglo[0][20];
 		    $marcaVehiculoID = $arreglo[0][21];
+		    $getIDLinea = $arreglo[0][22];
+		    $getIDTipo = $arreglo[0][23];
 
 		    // OBTENER ID DE MUNICIPIO Y COLONIA APARTIR DE LA PUESTA Y LA FISCALIA
 
@@ -73,6 +75,7 @@
    
 
 	?>
+
  <div class="modal-header" style="background-color:#152F4A;">
 												<center><label style=" color: white; font-weight: bold; font-size: 1.8rem;">Vehículo Asegurado</label></center>			
 											  </div>
@@ -111,8 +114,8 @@
 																				      <div class="row">																				      	
 																				      					<div class="col-xs-12 col-sm-12  col-md-4">
 																				      							<label class="" for="inputlg">Clasificación :<span class="aste">(*)</span></label>
-			    																											<select class="form-control browser-default custom-select " id="selClasific">		
-			    																												<option value="0">Selecciona</option>																								  
+			    																											<select class="dataAutocomplet form-control browser-default custom-select " id="selClasific" locked="locked" >		
+			    																												<option></option>																								  
 																																	  		<? 
 																																						$clasif = getClasificacionVehicle($conn);
 																																						for ($f=0; $f < sizeof($clasif); $f++) { 					
@@ -126,7 +129,7 @@
 																				      					</div>
 																				      					<div class="col-xs-12 col-sm-12  col-md-4">
 																				      								<label class="" for="inputlg">Forma de Aseguramiento :<span class="aste">(*)</span></label>
-			    																											<select class="form-control browser-default custom-select" id="selFormAsegur">	
+			    																											<select class="dataAutocomplet form-control browser-default custom-select" id="selFormAsegur">	
 			    																												<option value="0">Selecciona</option>																										  
 																																	  	<? 
 																																						$formaseg = getFormAsegurVehicle($conn);
@@ -147,7 +150,7 @@
 																				        <div class="row" style="margin-top: 10px;">																				      	
 																				      					<div class="col-xs-12 col-sm-12  col-md-6">
 																				      							<label class="" for="inputlg">A Disposición de :<span class="aste">(*)</span></label>
-			    																											<select class="form-control browser-default custom-select" id="selAdispo">																									  
+			    																											<select class="dataAutocomplet form-control browser-default custom-select" id="selAdispo">																									  
 																																	  	<option value="0">Selecciona</option>																										  
 																																	  	<? 
 																																						$dipos = getDisposicVehicle($conn);
@@ -168,7 +171,7 @@
 																				         <div class="row" style="margin-top: 10px;">																				      	
 																				      					<div class="col-xs-12 col-sm-12  col-md-6">
 																				      							<label class="" for="inputlg">Delito :<span class="aste">(*)</span></label>
-			    																									<select class="form-control browser-default custom-select " id="selDelito">																											  
+			    																									<select class="dataAutocomplet form-control browser-default custom-select " id="selDelito">																											  
 																																	  	<option value="0">Selecciona</option>																										  
 																																	  	<? 
 																																						$deli = getDelitoVehicle($conn);
@@ -183,7 +186,7 @@
 																				      					</div>
 																				      					<div class="col-xs-12 col-sm-12  col-md-6">
 																				      								<label class="" for="inputlg">Tipo en Delito :<span class="aste">(*)</span></label>
-			    																												<select class="form-control browser-default custom-select " id="selTipoDelito">																								  
+			    																												<select  class="dataAutocomplet form-control browser-default custom-select " id="selTipoDelito">																								  
 																																	  
 
 			    																																			<option value="0">Selecciona</option>																										  
@@ -211,43 +214,50 @@
 																				      <div class="row">
 																				      	
 																				      					<div class="col-xs-12 col-sm-12  col-md-4">
-																				      								<datalist id="newMarcas">
-																																			<? 
+																				      						<label for="heard">Marca : <span class="aste">(*)</span></label>
+																				      							<select class="dataAutocomplet form-control mandda" onchange="getDataLinea()" locked="locked" id="newMarca" name="newMarca" type="text" >
+																				      								<option></option>
+																				      									<? 
 																																						$marcas = getDataMarcaVehicle($conn);
 																																						for ($h=0; $h < sizeof($marcas); $h++) { 																																						
 																																									$idMarc = $marcas[$h][0];	$nom = $marcas[$h][1];	?>
-																																											<option style="color: black; font-weight: bold;" value="<? echo $nom; ?>" data-value="<? echo $idMarc; ?>" data-id="<? echo $idMarc; ?>"></option>
+																																											<option style="color: black; font-weight: bold;" value="<? echo $idMarc; ?>" <?if($a == 1 && $idMarc == $marcaVehiculoID ){ ?> selected <? } ?> > <? echo $nom; ?></option>
 																																									<?
 																																						}
 																																			 ?>
-																															</datalist>
-																																		<label for="heard">Marca : <span class="aste">(*)</span></label>	
-																															<input value="<?php if($a == 1){ echo $marca; } ?>" class="form-control mandda " onchange="getDataLinea()" list="newMarcas" id="newMarca" name="newMarca" type="text">
+																				      							</select>
 																				      					</div>
 																				      					<div class="col-xs-12 col-sm-12  col-md-4">
 																				      						<label for="heard">Linea : <span class="aste">(*)</span></label>	
-																				      								<div id="conteLinea">
-			    																															
-			    																															<datalist id="newLineas">
-			    																																	<option style="color: black; font-weight: bold;" value="<? echo $linea; ?>" data-value="<? echo $lineas[0][0]; ?>" data-id="<? echo $lineas[0][0]; ?>"></option>
-			    																																	</datalist>
-			    																																	<input value="<? if($a == 1){ echo $linea;; } ?>" class="form-control mandda " onchange="" list="newLineas" id="newLinea" name="newLinea" type="text">
-
-			    																												</div>
+																				      						<select class="dataAutocomplet form-control mandda" onchange="" locked="locked" id="newLinea" name="newLinea" type="text" >
+																				      							<?if($a == 1){?>
+																				      								<option></option>
+																				      									<? 
+																																						$lineas = getDataLineaVehicle($conn, $marcaVehiculoID);
+																																						for ($o=0; $o < sizeof($lineas); $o++) { 								
+																																								$idLinea = $lineas[$o][0];
+																																								$nombre = $lineas[$o][1];
+																																								?>
+																																										<option style="color: black; font-weight: bold;" value="<? echo $idLinea; ?>" <?if($a == 1 && $idLinea == $getIDLinea ){ ?> selected <? } ?> ><?echo $nombre ?></option>
+																																								<?
+																																					}
+																																				}
+																																			 ?>
+																				      						</select>
 																				      					</div>
 																				      						<div class="col-xs-12 col-sm-12  col-md-4">
-																				      									<datalist id="newTypeVehicles">
-																																			<? 
+																				      							<label for="heard">Tipo : <span class="aste">(*)</span></label>	
+																				      							<select class="dataAutocomplet form-control mandda" onchange="" locked="locked" id="newTypeMarca" name="newTypeMarca" type="text" >
+																				      								<option></option>
+																				      								<? 
 																																						$types = getDataTypeVehicle($conn);
 																																						for ($g=0; $g < sizeof($types); $g++) { 																																						
 																																									$idType = $types[$g][0];	$nom = $types[$g][1];	?>
-																																											<option style="color: black; font-weight: bold;" value="<? echo $nom; ?>" data-value="<? echo $idType; ?>" data-id="<? echo $idType; ?>"></option>
+																																											<option style="color: black; font-weight: bold;" value="<? echo $idType; ?>" <?if($a == 1 && $idType == $getIDTipo ){ ?> selected <? } ?> ><? echo $nom; ?></option>
 																																									<?
 																																						}
 																																			 ?>
-																															</datalist>
-																																		<label for="heard">Tipo : <span class="aste">(*)</span></label>	
-																															<input value="<?php if($a == 1){ echo $tipo; } ?>" class="form-control mandda " onchange="" list="newTypeVehicles" id="newTypeMarca" name="newTypeMarca" type="text">
+																				      							</select>
 																				      					</div>
 																				      </div>
 																				        <div class="row" style="margin-top: 10px;">
