@@ -38,8 +38,8 @@
 																							for ($h=0; $h < sizeof($dataPuestasDia) ; $h++) { 
 																									?>
 																										<tr><td style="font-weight: bolder;"> <? echo $dataPuestasDia[$h][0]; ?> </td>
-																									<!--	<?if($arch == 12){ ?> <td> <? echo $dataPuestasDia[$h][11]; ?> </td> <? } ?>	-->
 																										<td> <? echo $dataPuestasDia[$h][1]; ?> </td>
+																										<?if($arch == 12 && $idEnlace != 266){ ?> <td> <? echo $dataPuestasDia[$h][11]; ?> </td> <? } ?>	
 																										<td> <? echo $dataPuestasDia[$h][2]; ?> </td>
 																									<td> 	<center><? echo $dataPuestasDia[$h][3]->format('Y-m-d H:i'); ?></center> </td>
 																										<td> <center><? echo $dataPuestasDia[$h][4]->format('Y-m-d H:i'); ?></center></td>

@@ -209,7 +209,7 @@ WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND 
 }else{
   
  //Consulta para usuarios regionales 
-	if($idenlace == 192 || $idenlace == 193 || $idenlace == 197 || $idenlace == 198 || $idenlace == 199 || $idenlace == 200 || $idenlace == 201 	|| $idenlace == 202 || $idenlace == 203){
+	if($idenlace == 192 || $idenlace == 193 || $idenlace == 197 || $idenlace == 198 || $idenlace == 199 || $idenlace == 200 || $idenlace == 201 	|| $idenlace == 202 || $idenlace == 203 || $idenlace == 266){
    
 			$valoresEnlaceConsulta ="";
 			$arrFiscEnlaceConsulta = getFiscaliasEnlaceConsulta($conn, $idenlace); 
@@ -221,15 +221,27 @@ WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND 
 			$valoresEnlaceConsulta = substr($valoresEnlaceConsulta, 0, -1);
 		
 		$enlaceCaptura = 1;
-		$query = " SELECT pd.idPuestaDisposicion, m.nombre+' '+m.paterno+' '+m.materno as nombreMando, pd.nuc, pd.fechaEvento, pd.fechaInforme, f.Nombre as fiscalia, 
-		mu.Nombre as municipio, col.Nombre as colonia, pd.calle, pd.numero, pd.codigoPostal,e.nombre+' '+e.apellidoPaterno+' '+e.apellidoMarterno as nombreEnlace
-		FROM pueDisposi.puestaDisposicion pd 
-		INNER JOIN pueDisposi.mando m ON m.idMando = pd.idMando
-		INNER JOIN pueDisposi.Fiscalias f ON f.CatFiscaliasID = pd.idFiscalia
-		INNER JOIN pueDisposi.CatMunicipios mu ON mu.CatMunicipiosID = pd.idMunicipio
-		INNER JOIN pueDisposi.CatColonias col ON col.CatColoniasID = pd.idColonia
-		INNER JOIN dbo.enlace e ON e.idEnlace = pd.idEnlace
-		WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND pd.mes = $mes AND pd.idEnlace IN($valoresEnlaceConsulta) ORDER BY f.Nombre ";
+		 if($diames != 0){
+					$query = " SELECT pd.idPuestaDisposicion, m.nombre+' '+m.paterno+' '+m.materno as nombreMando, pd.nuc, pd.fechaEvento, pd.fechaInforme, f.Nombre as fiscalia, 
+					mu.Nombre as municipio, col.Nombre as colonia, pd.calle, pd.numero, pd.codigoPostal,e.nombre+' '+e.apellidoPaterno+' '+e.apellidoMarterno as nombreEnlace
+					FROM pueDisposi.puestaDisposicion pd 
+					INNER JOIN pueDisposi.mando m ON m.idMando = pd.idMando
+					INNER JOIN pueDisposi.Fiscalias f ON f.CatFiscaliasID = pd.idFiscalia
+					INNER JOIN pueDisposi.CatMunicipios mu ON mu.CatMunicipiosID = pd.idMunicipio
+					INNER JOIN pueDisposi.CatColonias col ON col.CatColoniasID = pd.idColonia
+					INNER JOIN dbo.enlace e ON e.idEnlace = pd.idEnlace
+					WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND pd.mes = $mes AND pd.idEnlace IN($valoresEnlaceConsulta) ORDER BY f.Nombre ";
+				}else{
+						$query = " SELECT pd.idPuestaDisposicion, m.nombre+' '+m.paterno+' '+m.materno as nombreMando, pd.nuc, pd.fechaEvento, pd.fechaInforme, f.Nombre as fiscalia, 
+					mu.Nombre as municipio, col.Nombre as colonia, pd.calle, pd.numero, pd.codigoPostal,e.nombre+' '+e.apellidoPaterno+' '+e.apellidoMarterno as nombreEnlace
+					FROM pueDisposi.puestaDisposicion pd 
+					INNER JOIN pueDisposi.mando m ON m.idMando = pd.idMando
+					INNER JOIN pueDisposi.Fiscalias f ON f.CatFiscaliasID = pd.idFiscalia
+					INNER JOIN pueDisposi.CatMunicipios mu ON mu.CatMunicipiosID = pd.idMunicipio
+					INNER JOIN pueDisposi.CatColonias col ON col.CatColoniasID = pd.idColonia
+					INNER JOIN dbo.enlace e ON e.idEnlace = pd.idEnlace
+					WHERE pd.anio = $anio  AND pd.mes = $mes AND pd.idEnlace IN($valoresEnlaceConsulta) ORDER BY f.Nombre ";
+				}
 	}else{
 
 		if($idenlace == 59 || $idenlace == 60 || $idenlace == 84 || $idenlace == 85 || $idenlace == 91 || $idenlace == 86 || $idenlace == 87|| $idenlace == 89 || $idenlace == 90){ //// THEY ARE ALL THE USERS CAN SEE EVERTHING
