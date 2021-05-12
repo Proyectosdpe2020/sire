@@ -169,7 +169,7 @@
 					<tr class="cabeceraConsultaPolicia">
 						<th class="textCent">ID</th>
 													<th class="textCent10">Mando</th>
-													<?if($idEnlace != 266){ ?>
+													<?if($tiparchiv == 12 && ($idEnlace != 266 && $idEnlace != 233 && $idEnlace != 225)){ ?>
 													<th class="textCent10">Capturista</th>
 												<? } ?>
 													<th class="">Nuc</th>
@@ -193,9 +193,10 @@
 																							for ($h=0; $h < sizeof($dataPuestasDia) ; $h++) { 
 
 																									?>
-																										<tr><td> <? echo $dataPuestasDia[$h][0]; ?> </td>
-																										<tr><td> <? echo $dataPuestasDia[$h][1]; ?> </td>
-																									 <?if($idEnlace != 266){ ?>
+																										<tr>
+																										<td> <? echo $dataPuestasDia[$h][0]; ?> </td>
+																										<td> <? echo $dataPuestasDia[$h][1]; ?> </td>
+																									 <?if($tiparchiv == 12 && ($idEnlace != 266 && $idEnlace != 233 && $idEnlace != 225)){ ?>
 																										<td> <? echo $dataPuestasDia[$h][11]; ?> </td>
 																											<? } ?>
 																										<td> <? echo $dataPuestasDia[$h][2]; ?> </td>

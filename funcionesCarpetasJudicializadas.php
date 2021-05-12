@@ -209,4 +209,40 @@ function getDataMonth($conn, $anioActual){
 	if(isset($arreglo)){return $arreglo;}
 }
 
+function getDataFechaInvComp($conn, $resolucionID){
+		$query = "SELECT idTermCom
+     												 ,resolucionID
+      												,fechaTermCom
+  									FROM ESTADISTICAV2.dbo.investigacionComplementaria
+  									WHERE resolucionID = $resolucionID";
+
+ 	$indice = 0;
+
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['idTermCom'];
+		$arreglo[$indice][1]=$row['resolucionID'];
+		$arreglo[$indice][2]=$row['fechaTermCom'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
+
+function fechaCastellano($fecha){
+	 $fecha = substr($fecha, 0, 10);
+	 $numeroDia = date('d', strtotime($fecha));
+  $dia = date('l', strtotime($fecha));
+  $mes = date('F', strtotime($fecha));
+  $anio = date('Y', strtotime($fecha));
+  $dias_ES = array("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo");
+  $dias_EN = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+  $nombredia = str_replace($dias_EN, $dias_ES, $dia);
+  $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
+  $meses_EN = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+  $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
+  return $numeroDia." de ".$nombreMes." de ".$anio;
+}
+
+
 ?>
