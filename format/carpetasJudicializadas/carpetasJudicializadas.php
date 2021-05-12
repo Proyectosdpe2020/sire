@@ -86,10 +86,10 @@
 
 <!-- ESTE ES EL MODAL QUE VA A CARGAR LA PANTALLA FINAL PARA LA VALIDACION NUCS CORRESPONDAN AL NUMERO PUESTO EL EL CAMPO NUMERICO  -->
 
-<div class="modal fade bs-example-modal-sm" id="modalForestales" role="dialog" data-backdrop="static" data-keyboard="false">
+<div class="modal fade bs-example-modal-sm" id="modalFechaTerminacion" role="dialog" data-backdrop="static" data-keyboard="false">
 	<div id="modalVistaCss" class="modal-dialog modal-sm" style = "width: 30%; margin-top: 2.5%;">
 		<div class="modal-content" style="">
-			<div id="contModalForestales">
+			<div id="contModalFechaTerminacion">
 			
 			</div>
 		</div>

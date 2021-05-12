@@ -2,6 +2,13 @@ function reloadTableConsulta(){
  var anio = document.getElementById("anio").value;
 	var mes = document.getElementById("mes").value;
 	var estatus = document.getElementById("estatus").value;
+  //Establecer fecha de terminacion de investigacion complementaria en vinculciones a proceso
+  if(estatus == 2){
+    $("#fechaTermino").remove();
+    $('.cabeceraConsulta').append('<th id="fechaTermino" style="text-align: center">Terminación de<br> investigación complementaria</th>');
+  }else{
+     $("#fechaTermino").remove();
+  }
  $('#preloaderIMG').show();
  var table = $('#grid').DataTable();
  $("#grid").hide();
@@ -33,6 +40,9 @@ function reloadTableConsulta(){
        {
           extend: 'pdfHtml5',
           title: '',
+          exportOptions: {
+                    columns: [ 0, 1, 2, 3, 4, 5, 6 ]
+                },
           messageTop: 'Información obtenida del Sistema Integral de Registro Estadístico (SIRE).',
                 customize: function ( doc ) {
                     doc.content.splice( 1, 0, {
@@ -52,3 +62,73 @@ function reloadTableConsulta(){
  });
 }
 
+function showModalFechaTerminacion(nuc, resolucionID, bandera, fecha){
+  ajax=objetoAjax();
+  ajax.open("POST", "format/carpetasJudicializadas/modalFechaTerminacion.php");
+  
+  cont = document.getElementById('contModalFechaTerminacion');
+  ajax.onreadystatechange = function(){
+    if (ajax.readyState == 4 && ajax.status == 200) {
+      cont.innerHTML = ajax.responseText; 
+     $('#modalFechaTerminacion').modal('show');
+    }
+  }
+  ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+  ajax.send('&nuc='+nuc+'&resolucionID='+resolucionID+'&bandera='+bandera+'&fecha='+fecha);
+}
+
+function closeModalFechaTerminacion(){
+  $('#modalFechaTerminacion').modal('hide');
+}
+
+function insertFechaTerminacion(resolucionID , bandera){
+ var fechaTermino = document.getElementById("fechaTerminoInv").value;
+ if(fechaTermino != ""){
+  $.ajax({
+    url:'format/carpetasJudicializadas/inserts/insertFechaTerminacion.php?resolucionID='+resolucionID+'&bandera='+bandera+'&fechaTermino='+fechaTermino,
+    type:'POST',
+    contentType:false,
+    processData:false,
+    cache:false,
+  }).done(function(respuesta){
+    var json = respuesta;
+    var obj = eval("(" + json + ")");
+    if (obj.first == "NO") { 
+      swal("", "No se registro verifique los datos.", "warning"); 
+    }else {
+      if (obj.first == "SI") {
+        var obj = eval("(" + json + ")");
+        swal("", "Información capturada exitosamente.", "success");
+        reloadTableConsulta();
+        closeModalFechaTerminacion();
+      }
+    }
+  });
+ }else{
+  swal("", "Información incompleta.", "warning");
+ }
+}
+
+
+function eliminarFechaTermino(resolucionID){
+  $.ajax({
+    url:'format/carpetasJudicializadas/inserts/eliminarFechaTerminacion.php?resolucionID='+resolucionID,
+    type:'POST',
+    contentType:false,
+    processData:false,
+    cache:false,
+  }).done(function(respuesta){
+    var json = respuesta;
+    var obj = eval("(" + json + ")");
+    if (obj.first == "NO") { 
+      swal("", "Al parecer hubo un problema, vuelva a intentarlo.", "warning"); 
+    }else {
+      if (obj.first == "SI") {
+        var obj = eval("(" + json + ")");
+        swal("", "Información eliminada.", "success");
+        reloadTableConsulta();
+        closeModalFechaTerminacion();
+      }
+    }
+  });
+}

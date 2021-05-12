@@ -26,6 +26,10 @@ if($estatus == 1){
   for ($i=0; $i < sizeof($data); $i++) {  
    $checkUnidadesLiti = checkUnidadesLiti($data[$i][11]); 
    $getDataUnidad = getDataUnidad($conn , $data[$i][11]);
+   $getDataFechaInvComp = getDataFechaInvComp($conn, $data[$i][2]);
+   if(sizeof($getDataFechaInvComp) > 0){
+    $fecha = fechaCastellano(date_format($getDataFechaInvComp[0][2],"Y/m/d H:i:s"));
+   }
    ?>
    <tr>
     <td><? echo $data[$i][0]; ?></td>
@@ -35,6 +39,7 @@ if($estatus == 1){
     <td><?if($checkUnidadesLiti){ echo $getDataUnidad[0][3].' '.ucwords(strtolower($getDataUnidad[0][2]));  }else{ echo $getDataUnidad[0][3];  } ?></td>
     <td><? echo $data[$i][9]; ?></td>
     <td><? echo $data[$i][6]; ?></td>
+    <td><center><?if(sizeof($getDataFechaInvComp) > 0){ ?><?echo $fecha; ?> <span onclick="showModalFechaTerminacion(<?echo $data[$i][0]; ?>, <? echo $data[$i][2]; ?>,1, '<?echo date_format($getDataFechaInvComp[0][2],"Y-m-d");?>' )" style="cursor: pointer; color: blue; font-size: 18px;" class="glyphicon glyphicon-edit"></span><? }else{ ?><span onclick="showModalFechaTerminacion(<?echo $data[$i][0]; ?>, <? echo $data[$i][2]; ?>, 0, 0)" style="cursor: pointer; color: green; font-size: 18px;" class="glyphicon glyphicon-calendar"></span><? } ?></center></td>
   </tr>
 <? } 
 }?>

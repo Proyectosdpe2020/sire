@@ -1491,6 +1491,8 @@ function enviarAindex(idArchivo){
 	if(idArchivo == 1){ var e = "CarpetasInvestigacion"; }
 	if(idArchivo == 4){ var e = "Litigacion"; }
 	if(idArchivo == 11){ var e = "Trimestral"; }
+	if(idArchivo == 12){ var e = "PoliciaConsulta"; }
+	if(idArchivo == 15){ var e = "carpetasJudicializadas"; }
 	
 	 setTimeout("location.href = '"+e+"';",10);
 
