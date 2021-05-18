@@ -2135,7 +2135,16 @@ function registroTrabajosDeCampo(idEnlace, typearch, b, tipoActualizacion , idTr
 	var textInvestigacionesCumplidas = $("#textInvestigacionesCumplidas").val(); if(textInvestigacionesCumplidas == "") {textInvestigacionesCumplidas = 0; }
 	var textInvestigacionesInformadas = $("#textInvestigacionesInformadas").val(); if(textInvestigacionesInformadas == "") {textInvestigacionesInformadas = 0; }
 	var textIndividuaciones = $("#textIndividuaciones").val(); if(textIndividuaciones == "") {textIndividuaciones = 0; }
-    var textObservaciones = $("#textObservacionesTrabCampo").val();
+	var solicitudVideos = $("#solicitudVideos").val(); if(solicitudVideos == "") {solicitudVideos = 0; }
+	var planimetrias = $("#planimetrias").val(); if(planimetrias == "") {planimetrias = 0; }
+	var recPersonas = $("#recPersonas").val(); if(recPersonas == "") {recPersonas = 0; }
+	var recObjetos = $("#recObjetos").val(); if(recObjetos == "") {recObjetos = 0; }
+	var recFotografias = $("#recFotografias").val(); if(recFotografias == "") {recFotografias = 0; }
+ var textObservaciones = $("#textObservacionesTrabCampo").val();
+
+ $totalTrabajo = parseInt(textEntrevistas) + parseInt(textVisitasDomiciliarias) + parseInt(textInvestigacionesCumplidas) + parseInt(textInvestigacionesInformadas) +
+                 parseInt(textIndividuaciones) + parseInt(solicitudVideos) + parseInt(planimetrias) + parseInt(recPersonas) + parseInt(recObjetos) + 
+                 parseInt(recFotografias);
 
  //// DATA DE LA PUESTA A DISPOSICION /////
 	var idPuestaDisposicion= document.getElementById("idPuestaDisposicion").value;
@@ -2173,12 +2182,14 @@ function registroTrabajosDeCampo(idEnlace, typearch, b, tipoActualizacion , idTr
 			     jObject = JSON.stringify(jObject);
  //// DATA DE LA PUESTA A DISPOSICION /////
 
-				
+	if($totalTrabajo > 0){	
 			$.ajax({
         type: "POST",
         dataType: 'html',
         url: "format/puestaDisposicion/registroTrabajosDeCampo.php",
-        data: "textEntrevistas="+textEntrevistas+"&textVisitasDomiciliarias="+textVisitasDomiciliarias+"&textInvestigacionesCumplidas="+textInvestigacionesCumplidas+"&textInvestigacionesInformadas="+textInvestigacionesInformadas+"&textIndividuaciones="+textIndividuaciones+"&textObservaciones="+textObservaciones+"&jObject="+jObject+"&idEnlace="+idEnlace+"&idPuestaDisposicion="+idPuestaDisposicion+"&tipoActualizacion="+tipoActualizacion+"&idTrabajoCampo="+idTrabajoCampo,
+        data: "textEntrevistas="+textEntrevistas+"&textVisitasDomiciliarias="+textVisitasDomiciliarias+"&textInvestigacionesCumplidas="+textInvestigacionesCumplidas+
+              "&textInvestigacionesInformadas="+textInvestigacionesInformadas+"&textIndividuaciones="+textIndividuaciones+"&solicitudVideos="+solicitudVideos+
+              "&planimetrias="+planimetrias+"&recPersonas="+recPersonas+"&recObjetos="+recObjetos+"&recFotografias="+recFotografias+"&textObservaciones="+textObservaciones+"&jObject="+jObject+"&idEnlace="+idEnlace+"&idPuestaDisposicion="+idPuestaDisposicion+"&tipoActualizacion="+tipoActualizacion+"&idTrabajoCampo="+idTrabajoCampo,
         success: function(resp){
             
 
@@ -2199,7 +2210,9 @@ function registroTrabajosDeCampo(idEnlace, typearch, b, tipoActualizacion , idTr
 
         }
     });
-		
+		}else{
+			swal("", "Información no valida, debe ingresar al menos un indicador.", "warning");
+		}
 }
 
 ////////////////////////////////////// MODAL TRABAJOS DE CAMPO  //////////////////////////////////////
