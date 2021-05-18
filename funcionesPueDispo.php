@@ -461,9 +461,9 @@ if($idObjeto == 0){
 
 function get_data_trabajoCampo_puesta($conn, $idPuestaDisposicion , $idTrabajoCampo){
 	if($idTrabajoCampo == 0){
-			$query = "   SELECT pueDisposi.TrabajoDeCampo.idTrabajoCampo,  pueDisposi.TrabajoDeCampo.entrevistas,  pueDisposi.TrabajoDeCampo.visitasDomiciliarias,  pueDisposi.TrabajoDeCampo.investigacionesCumplidas, pueDisposi.TrabajoDeCampo.investigacionesInformadas, pueDisposi.TrabajoDeCampo.individuaciones,  pueDisposi.TrabajoDeCampo.observaciones FROM pueDisposi.TrabajoDeCampo WHERE  pueDisposi.TrabajoDeCampo.idPueDisposicion = $idPuestaDisposicion ";
+			$query = "   SELECT pueDisposi.TrabajoDeCampo.idTrabajoCampo,  pueDisposi.TrabajoDeCampo.entrevistas,  pueDisposi.TrabajoDeCampo.visitasDomiciliarias,  pueDisposi.TrabajoDeCampo.investigacionesCumplidas, pueDisposi.TrabajoDeCampo.investigacionesInformadas, pueDisposi.TrabajoDeCampo.individuaciones, pueDisposi.TrabajoDeCampo.solicitudVideos, pueDisposi.TrabajoDeCampo.planimetrias, pueDisposi.TrabajoDeCampo.recPersonas,  pueDisposi.TrabajoDeCampo.recObjetos, pueDisposi.TrabajoDeCampo.recFotografias, pueDisposi.TrabajoDeCampo.observaciones FROM pueDisposi.TrabajoDeCampo WHERE  pueDisposi.TrabajoDeCampo.idPueDisposicion = $idPuestaDisposicion ";
 		}else{
-			$query = "   SELECT pueDisposi.TrabajoDeCampo.idTrabajoCampo,  pueDisposi.TrabajoDeCampo.entrevistas,  pueDisposi.TrabajoDeCampo.visitasDomiciliarias,  pueDisposi.TrabajoDeCampo.investigacionesCumplidas, pueDisposi.TrabajoDeCampo.investigacionesInformadas, pueDisposi.TrabajoDeCampo.individuaciones,  pueDisposi.TrabajoDeCampo.observaciones FROM pueDisposi.TrabajoDeCampo WHERE  pueDisposi.TrabajoDeCampo.idTrabajoCampo = $idTrabajoCampo ";
+			$query = "   SELECT pueDisposi.TrabajoDeCampo.idTrabajoCampo,  pueDisposi.TrabajoDeCampo.entrevistas,  pueDisposi.TrabajoDeCampo.visitasDomiciliarias,  pueDisposi.TrabajoDeCampo.investigacionesCumplidas, pueDisposi.TrabajoDeCampo.investigacionesInformadas, pueDisposi.TrabajoDeCampo.individuaciones, pueDisposi.TrabajoDeCampo.solicitudVideos, pueDisposi.TrabajoDeCampo.planimetrias, pueDisposi.TrabajoDeCampo.recPersonas,  pueDisposi.TrabajoDeCampo.recObjetos, pueDisposi.TrabajoDeCampo.recFotografias,  pueDisposi.TrabajoDeCampo.observaciones FROM pueDisposi.TrabajoDeCampo WHERE  pueDisposi.TrabajoDeCampo.idTrabajoCampo = $idTrabajoCampo ";
 		}
 
 
@@ -479,6 +479,11 @@ function get_data_trabajoCampo_puesta($conn, $idPuestaDisposicion , $idTrabajoCa
 		$arreglo[$indice][4]=$row['observaciones'];
 		$arreglo[$indice][5]=$row['visitasDomiciliarias'];
 		$arreglo[$indice][6]=$row['investigacionesInformadas'];
+		$arreglo[$indice][7]=$row['solicitudVideos'];
+		$arreglo[$indice][8]=$row['planimetrias'];
+		$arreglo[$indice][9]=$row['recPersonas'];
+		$arreglo[$indice][10]=$row['recObjetos'];
+		$arreglo[$indice][11]=$row['recFotografias'];
 		$indice++;
 	}
 

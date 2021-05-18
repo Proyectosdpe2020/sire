@@ -30,6 +30,11 @@
 		    $observaciones = $arreglo[0][4];
 		    $visitasDomiciliarias = $arreglo[0][5];
 		    $investigacionesInformadas = $arreglo[0][6];
+		    $solicitudVideos = $arreglo[0][7];
+		    $planimetrias = $arreglo[0][8];
+		    $recPersonas = $arreglo[0][9];
+		    $recObjetos = $arreglo[0][10];
+		    $recFotografias = $arreglo[0][11];
 		 }else{ 
 		 	//Si $idTrabajoCampo viene con valor 0 no es actualizacion y entra aqui
 		 	$a = 0;
@@ -107,7 +112,36 @@
 																								<input value="<?php if($a == 1){ echo  $individuaciones; } ?>" type="number" class="form-control" id="textIndividuaciones" name="textIndividuaciones">
 																					</div>
 																			</div>
-																				
+																				<div class="form-row">
+																					<div class="form-group col-md-12">
+																								<label for="solicitudVideos">Solicitud de videos:</label>	
+																								<input value="<?php if($a == 1){ echo  $solicitudVideos; } ?>" type="number" class="form-control" id="solicitudVideos" name="solicitudVideos">
+																					</div>
+																			 </div>
+																			 <div class="form-row">
+																					<div class="form-group col-md-12">
+																								<label for="planimetrias">Planimetrías:</label>	
+																								<input value="<?php if($a == 1){ echo  $planimetrias; } ?>" type="number" class="form-control" id="planimetrias" name="planimetrias">
+																					</div>
+																			 </div>
+																			 <div class="form-row">
+																						<div class="form-group col-md-12">
+																								<label for="recPersonas">Reconocimiento en fila de persona:</label>	
+																								<input value="<?php if($a == 1){ echo  $recPersonas; } ?>" type="number" class="form-control" id="recPersonas" name="recPersonas">
+																					</div>
+																			 </div>
+																			 <div class="form-row">
+																						<div class="form-group col-md-12">
+																								<label for="recObjetos">Reconocimiento de objeto:</label>	
+																								<input value="<?php if($a == 1){ echo  $recObjetos; } ?>" type="number" class="form-control" id="recObjetos" name="recObjetos">
+																					</div>
+																			 </div>
+																			 <div class="form-row">
+																						<div class="form-group col-md-12">
+																								<label for="recFotografias">Reconocimiento de fotografías:</label>	
+																								<input value="<?php if($a == 1){ echo  $recFotografias; } ?>" type="number" class="form-control" id="recFotografias" name="recFotografias">
+																					</div>
+																			 </div>
 																			</div>
 																	</div> 
 																

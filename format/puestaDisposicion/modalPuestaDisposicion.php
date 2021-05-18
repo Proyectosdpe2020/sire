@@ -718,6 +718,11 @@
 																																																						      <th scope="col"><center>Investigaciones Cumplidas</center></th>
 																																																						      <th scope="col"><center>Investigaciones Informadas</center></th>
 																																																						      <th scope="col"><center>Individualizaciones</center></th>
+																																																						      <th scope="col"><center>Solicitud de videos</center></th>
+																																																						      <th scope="col"><center>Planimetrías</center></th>
+																																																						      <th scope="col"><center>Reconocimiento en fila de persona</center></th>
+																																																						      <th scope="col"><center>Reconocimiento de objetos</center></th>
+																																																						      <th scope="col"><center>Reconocimiento de fotografías</center></th>
 																																																						      <th scope="col"><center>Observaciones</center></th>
 
 																																																						         <? if($b == 1){ ?>
@@ -737,7 +742,12 @@
 																																																							<td> <center><? echo $dataPuestaDIne[$h][2]; ?></center> </td>
 																																																							<td> <center><? echo $dataPuestaDIne[$h][6]; ?></center> </td>
 																																																							<td> <center><? echo $dataPuestaDIne[$h][3]; ?></center> </td>
-																																																									<td> <center><? echo $dataPuestaDIne[$h][4]; ?></center> </td>
+																																																							<td> <center><? echo $dataPuestaDIne[$h][7]; ?></center> </td>
+																																																							<td> <center><? echo $dataPuestaDIne[$h][8]; ?></center> </td>
+																																																							<td> <center><? echo $dataPuestaDIne[$h][9]; ?></center> </td>
+																																																							<td> <center><? echo $dataPuestaDIne[$h][10]; ?></center> </td>
+																																																							<td> <center><? echo $dataPuestaDIne[$h][11]; ?></center> </td>
+																																																							<td> <center><? echo $dataPuestaDIne[$h][4]; ?></center> </td>
 
 																																																									<? if($b == 1){ ?>
 																																																							<td> <center><span onclick="deleteItemForm(9, <? echo $dataPuestaDIne[$h][0]; ?>, <? echo $idEnlace; ?>, <? echo $idPuestaDisposicion; ?>)" title="Eliminar" style="cursor: pointer; color: red; font-size: 18px;" class="glyphicon glyphicon-trash"></span> </center></td>
