@@ -461,9 +461,23 @@ if($idObjeto == 0){
 
 function get_data_trabajoCampo_puesta($conn, $idPuestaDisposicion , $idTrabajoCampo){
 	if($idTrabajoCampo == 0){
-			$query = "   SELECT pueDisposi.TrabajoDeCampo.idTrabajoCampo,  pueDisposi.TrabajoDeCampo.entrevistas,  pueDisposi.TrabajoDeCampo.visitasDomiciliarias,  pueDisposi.TrabajoDeCampo.investigacionesCumplidas, pueDisposi.TrabajoDeCampo.investigacionesInformadas, pueDisposi.TrabajoDeCampo.individuaciones, pueDisposi.TrabajoDeCampo.solicitudVideos, pueDisposi.TrabajoDeCampo.planimetrias, pueDisposi.TrabajoDeCampo.recPersonas,  pueDisposi.TrabajoDeCampo.recObjetos, pueDisposi.TrabajoDeCampo.recFotografias, pueDisposi.TrabajoDeCampo.observaciones FROM pueDisposi.TrabajoDeCampo WHERE  pueDisposi.TrabajoDeCampo.idPueDisposicion = $idPuestaDisposicion ";
+			$query = "   SELECT pueDisposi.TrabajoDeCampo.idTrabajoCampo,  pueDisposi.TrabajoDeCampo.entrevistas,  pueDisposi.TrabajoDeCampo.visitasDomiciliarias,  pueDisposi.TrabajoDeCampo.investigacionesCumplidas, pueDisposi.TrabajoDeCampo.investigacionesInformadas, pueDisposi.TrabajoDeCampo.individuaciones, 
+			 CASE WHEN pueDisposi.TrabajoDeCampo.solicitudVideos IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.solicitudVideos END as solicitudVideos, 
+			 CASE WHEN pueDisposi.TrabajoDeCampo.planimetrias IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.planimetrias END as planimetrias,
+			 CASE WHEN pueDisposi.TrabajoDeCampo.recPersonas IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.recPersonas  END as recPersonas,
+			 CASE WHEN pueDisposi.TrabajoDeCampo.recObjetos IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.recObjetos END as recObjetos,
+			 CASE WHEN pueDisposi.TrabajoDeCampo.recFotografias IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.recFotografias END as recFotografias,
+			  pueDisposi.TrabajoDeCampo.observaciones 
+			  FROM pueDisposi.TrabajoDeCampo WHERE  pueDisposi.TrabajoDeCampo.idPueDisposicion = $idPuestaDisposicion ";
 		}else{
-			$query = "   SELECT pueDisposi.TrabajoDeCampo.idTrabajoCampo,  pueDisposi.TrabajoDeCampo.entrevistas,  pueDisposi.TrabajoDeCampo.visitasDomiciliarias,  pueDisposi.TrabajoDeCampo.investigacionesCumplidas, pueDisposi.TrabajoDeCampo.investigacionesInformadas, pueDisposi.TrabajoDeCampo.individuaciones, pueDisposi.TrabajoDeCampo.solicitudVideos, pueDisposi.TrabajoDeCampo.planimetrias, pueDisposi.TrabajoDeCampo.recPersonas,  pueDisposi.TrabajoDeCampo.recObjetos, pueDisposi.TrabajoDeCampo.recFotografias,  pueDisposi.TrabajoDeCampo.observaciones FROM pueDisposi.TrabajoDeCampo WHERE  pueDisposi.TrabajoDeCampo.idTrabajoCampo = $idTrabajoCampo ";
+			$query = "   SELECT pueDisposi.TrabajoDeCampo.idTrabajoCampo,  pueDisposi.TrabajoDeCampo.entrevistas,  pueDisposi.TrabajoDeCampo.visitasDomiciliarias,  pueDisposi.TrabajoDeCampo.investigacionesCumplidas, pueDisposi.TrabajoDeCampo.investigacionesInformadas, pueDisposi.TrabajoDeCampo.individuaciones,
+			 CASE WHEN pueDisposi.TrabajoDeCampo.solicitudVideos IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.solicitudVideos END as solicitudVideos, 
+			 CASE WHEN pueDisposi.TrabajoDeCampo.planimetrias IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.planimetrias END as planimetrias,
+			 CASE WHEN pueDisposi.TrabajoDeCampo.recPersonas IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.recPersonas END as recPersonas,
+			 CASE WHEN pueDisposi.TrabajoDeCampo.recObjetos IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.recObjetos END as recObjetos,
+			 CASE WHEN pueDisposi.TrabajoDeCampo.recFotografias IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.recFotografias END as recFotografias,
+			 pueDisposi.TrabajoDeCampo.observaciones 
+			 FROM pueDisposi.TrabajoDeCampo WHERE  pueDisposi.TrabajoDeCampo.idTrabajoCampo = $idTrabajoCampo ";
 		}
 
 

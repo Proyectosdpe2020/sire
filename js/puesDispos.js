@@ -3102,3 +3102,7 @@ function validateNuc(object){
 		object.value = object.value.slice(0, object.maxLength)
 	}
 }
+
+function closeModalPueDispo(){
+	$('#puestdispos').modal('hide');
+}
