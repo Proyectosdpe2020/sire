@@ -807,8 +807,11 @@
 
 										<div class="row">
 
-									
+									<?if($typeArch == 12){ ?>
+										<div class="col-xs-12 col-sm-12 col-md-12"><center><button  style="width: 95%; background-color: #38537e; font-weight: bolder; color: white;" onclick="closeModalPueDispo()" type="button" class="btn redondear" data-dismiss="modal">Salir</button></center></div>
+									<? }else{ ?>
 												<div class="col-xs-12 col-sm-12 col-md-12"><center><button  style="width: 95%; background-color: #38537e; font-weight: bolder; color: white;" onclick="saveDataPuesta( <? echo $typeArch; ?>, <? echo $anio ?>, <? echo $idEnlace; ?>, 0, <? echo $messelected; ?>, <? echo $diaselected ?>, <? echo $typeCheck; ?> )" type="button" class="btn redondear" data-dismiss="modal">Salir y Guardar Edición</button></center></div>
+									<? } ?>
 												  
 										</div> 
 
