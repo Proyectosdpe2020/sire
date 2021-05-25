@@ -2142,7 +2142,7 @@ function registroTrabajosDeCampo(idEnlace, typearch, b, tipoActualizacion , idTr
 	var recFotografias = $("#recFotografias").val(); if(recFotografias == "") {recFotografias = 0; }
  var textObservaciones = $("#textObservacionesTrabCampo").val();
 
- $totalTrabajo = parseInt(textEntrevistas) + parseInt(textVisitasDomiciliarias) + parseInt(textInvestigacionesCumplidas) + parseInt(textInvestigacionesInformadas) +
+ totalTrabajo = parseInt(textEntrevistas) + parseInt(textVisitasDomiciliarias) + parseInt(textInvestigacionesCumplidas) + parseInt(textInvestigacionesInformadas) +
                  parseInt(textIndividuaciones) + parseInt(solicitudVideos) + parseInt(planimetrias) + parseInt(recPersonas) + parseInt(recObjetos) + 
                  parseInt(recFotografias);
 
@@ -2182,7 +2182,7 @@ function registroTrabajosDeCampo(idEnlace, typearch, b, tipoActualizacion , idTr
 			     jObject = JSON.stringify(jObject);
  //// DATA DE LA PUESTA A DISPOSICION /////
 
-	if($totalTrabajo > 0){	
+	if(totalTrabajo > 0 || idEnlace == 95){	
 			$.ajax({
         type: "POST",
         dataType: 'html',
