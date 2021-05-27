@@ -994,7 +994,9 @@ function sendDataJudicializada(nuc, estatus, idMp, mes, anio, deten, idUnidad){
 	  $("input[type=radio]:checked").each(function(){ idCatModalidadEst = $(this).val() });
 }
 	if(typeof idCatModalidadEst !== 'undefined'){
-	 insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad,idCatModalidadEst);
+	 insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad);
+	 $('#modalNucsLitigInfo').modal('hide');
+			$('#modalNucsLitig').modal('show')
 	}else{
 		swal("", "Faltan datos por registrar.", "warning");
 	}
