@@ -2576,9 +2576,11 @@ function validartamanoLit(idinput, idMp, mes, anio, estatResolucion, deten, idUn
 										 				//getDatosNucDetermEstLit(nuc, idMp, estatResolucion, mes, anio, deten, idUnidad);
 										 				//caninsertLit(nuc, idMp, estatResolucion, mes, anio, deten, idUnidad);
 										 				getExpediente("expedCont", nuc);
-															
-															setTimeout("insertarNucLit2("+idMp+","+estatResolucion+","+mes+","+anio+","+nuc+","+deten+","+idUnidad+");",100);
-
+										 				if(estatResolucion == 19 || estatResolucion == 14){
+										 					setTimeout("showModalNucLitInfo2("+estatResolucion+","+nuc+","+idMp+","+mes+","+anio+","+deten+","+idUnidad+");",100);
+										 				}else{
+										 					setTimeout("insertarNucLit2("+idMp+","+estatResolucion+","+mes+","+anio+","+nuc+","+deten+","+idUnidad+");",100);
+										 				}
 
 										 }
 									}					
@@ -2596,7 +2598,7 @@ function validartamanoLit(idinput, idMp, mes, anio, estatResolucion, deten, idUn
 
 
 
-function insertarNucLit2(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad){				
+function insertarNucLit2(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad, opcInsert){				
 
 
 				acc = "insertNucLit";
@@ -2615,11 +2617,20 @@ function insertarNucLit2(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad)
 											if (objDatos.first == "NO") { swal("", "El NUC ya se encuentra registrado favor de revisar.", "Warning"); }else{
 
 										 if (objDatos.first == "SI") {
-
-
-
 										 				swal("", "Se Registro Correctamente.", "success");																		
-															updateTableNucsLit(idMp, anio, mes, estatResolucion, nuc, deten, idUnidad);			
+															updateTableNucsLit(idMp, anio, mes, estatResolucion, nuc, deten, idUnidad);
+															/*Despues de haber validado la información adicional de SENAP y haber guardado el NUC se extrae el idEstatusNucs para 
+														   proceder a insertar la informacion del senap en la respectiva tabla dependiendo del idEstatus*/
+														  switch(estatResolucion){
+														 	case 19:
+														 								setTimeout("insertFormAutoVincuProc_db("+objDatos.ResolucionID+","+estatResolucion+","+nuc+", "+opcInsert+");",100);  
+														 	break;
+														 	case 14:
+														 								setTimeout("insertSentencias_db("+objDatos.ResolucionID+","+estatResolucion+","+nuc+", "+opcInsert+");",100);  
+														 	break;
+														 default:
+														  break;
+														 }			
 										 }
 									}
 

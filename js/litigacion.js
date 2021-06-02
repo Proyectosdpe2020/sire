@@ -643,9 +643,18 @@ function existenuclitigacion(nuc, idMp, estatResolucion, mes, anio, idUnidad, de
 
 											if (objDatos.first == "SI") {
 															getExpedienteLit("expedCont", nuc);
-															if(estatResolucion == 1 || estatResolucion == 2){
+
+															if(estatResolucion == 1  || estatResolucion == 2  || estatResolucion == 3  || estatResolucion == 4  ||
+															   estatResolucion == 17 || estatResolucion == 18 || estatResolucion == 20 || estatResolucion == 21 ||
+															   estatResolucion == 22 || estatResolucion == 23 || estatResolucion == 24 || estatResolucion == 25 ||
+															   estatResolucion == 26 || estatResolucion == 27 || estatResolucion == 28 || estatResolucion == 29 ||
+															   estatResolucion == 30 || estatResolucion == 31 || estatResolucion == 95 || estatResolucion == 61 ||
+															   estatResolucion == 63 || estatResolucion == 89 || estatResolucion == 99 || estatResolucion == 101 ||
+															   estatResolucion == 103 || estatResolucion == 105 || estatResolucion == 106 || estatResolucion == 107 ||
+															   estatResolucion == 108 || estatResolucion == 109 || estatResolucion == 110 || estatResolucion == 111 ||
+															   estatResolucion == 64 || estatResolucion == 60 || estatResolucion == 91 || estatResolucion == 65 ||
+															   estatResolucion == 90 || estatResolucion == 66 || estatResolucion == 67 || estatResolucion == 68 ){
 																showModalNucLitInfo2(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad);
-															  //aqui poner modal
 															}else{
 																	setTimeout("insertarNucLit("+idMp+","+estatResolucion+","+mes+","+anio+","+nuc+","+deten+","+idUnidad+");",100);
 															}
@@ -740,7 +749,7 @@ function caninsertlit(nuc, idMp, estatResolucion, mes, anio, deten, idUnidad){
 
 ///////////////////////////////
 
-function insertarNucLit(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad){
+function insertarNucLit(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad, opcInsert){
 
 				acc = "insertNuc";
 					ajax=objetoAjax();
@@ -757,8 +766,49 @@ function insertarNucLit(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad){
 
 											if (objDatos.first == "SI") {
 
-															swal("", "Se Registro Correctamente.", "success");                  
-															updateTableNucsLiti(idMp, anio, mes, estatResolucion, nuc, deten, idUnidad);   
+															swal("", "Se Registro Correctamente."+objDatos.idEstatusNucs, "success");             
+														 updateTableNucsLiti(idMp, anio, mes, estatResolucion, nuc, deten, idUnidad); 
+														 /*Despues de haber validado la información adicional de SENAP y haber guardado el NUC se extrae el idEstatusNucs para 
+														   proceder a insertar la informacion del senap en la respectiva tabla dependiendo del idEstatus*/
+														 switch(estatResolucion){
+														 	case 1:
+														 	case 2:
+														 								setTimeout("insertFormJudicializada_db("+objDatos.idEstatusNucs+","+estatResolucion+","+nuc+", "+opcInsert+");",100);  
+														 	break;
+														 	case 3:
+														 	case 4:
+														 	       setTimeout("insertFormImputacion_db("+objDatos.idEstatusNucs+","+estatResolucion+","+nuc+", "+opcInsert+");",100);
+														 	break;
+														 	case 17: case 18: case 20: case 21: case 22: case 23: case 24: case 25: case 26: case 27: case 28: case 29: case 30: case 31: case 95:
+														 	       setTimeout("insertMedCautelar_db("+objDatos.idEstatusNucs+","+estatResolucion+","+nuc+", "+opcInsert+");",100);
+														 	break;
+														  case 61: case 63:
+														 	       setTimeout("insertAudienciaIntermedia_db("+objDatos.idEstatusNucs+","+estatResolucion+","+nuc+", "+opcInsert+");",100);
+														 	break;
+														  case 89: case 99: case 101: case 103: case 105: case 106: case 107: case 108: case 109: case 110: case 111:
+														 	       setTimeout("insertSobreseimientos_db("+objDatos.idEstatusNucs+","+estatResolucion+","+nuc+", "+opcInsert+");",100);
+														 	break;
+														 	case 64: 
+														 	       setTimeout("insertSuspCondProc_db("+objDatos.idEstatusNucs+","+estatResolucion+","+nuc+", "+opcInsert+");",100);
+														 	break;
+														 	case 60: 
+														 	       setTimeout("insertAudienciasJuicio_db("+objDatos.idEstatusNucs+","+estatResolucion+","+nuc+", "+opcInsert+");",100);
+														 	break;
+														 	case 91: 
+														 	       setTimeout("insertCriteriosOportunidad_db("+objDatos.idEstatusNucs+","+estatResolucion+","+nuc+", "+opcInsert+");",100);
+														 	break;
+														 	case 65: case 90: 
+														 	       setTimeout("insertAcuerdoReparatorio_db("+objDatos.idEstatusNucs+","+estatResolucion+","+nuc+", "+opcInsert+");",100);
+														 	break;
+														 	case 66: case 67: 
+														 	       setTimeout("insertSentencias_db("+objDatos.idEstatusNucs+","+estatResolucion+","+nuc+", "+opcInsert+");",100);
+														 	break;
+														 	case 68: 
+														 	       setTimeout("insertReparacionDanios_db("+objDatos.idEstatusNucs+","+estatResolucion+","+nuc+", "+opcInsert+");",100);
+														 	break;
+														 default:
+														  break;
+														 }
 											}
 									}
 
@@ -983,24 +1033,7 @@ function validarEstatusShowInfoSica(estatResolucion){
 	}
 }
 
-function sendDataJudicializada(nuc, estatus, idMp, mes, anio, deten, idUnidad){
-	if( $('.checkRecla').prop('checked') ) {
-   var reclasificacion = 1;
-   var newBrwosers_id = $("#newBrwoser").val();
-			var idCatModalidadEst = $("#newBrwosers").find("option[value='" + newBrwosers_id + "']").attr('data-id');
 
-}else{
-	  var reclasificacion = 0;
-	  $("input[type=radio]:checked").each(function(){ idCatModalidadEst = $(this).val() });
-}
-	if(typeof idCatModalidadEst !== 'undefined'){
-	 insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad);
-	 $('#modalNucsLitigInfo').modal('hide');
-			$('#modalNucsLitig').modal('show')
-	}else{
-		swal("", "Faltan datos por registrar.", "warning");
-	}
-}
 
 
 function insertarNucLitJud(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad,idCatModalidadEst){
@@ -1030,3 +1063,4 @@ function insertarNucLitJud(idMp, estatResolucion, mes, anio, nuc, deten, idUnida
 					ajax.send("&nuc="+nuc+"&acc="+acc+"&idMp="+idMp+"&estatResolucion="+estatResolucion+"&mes="+mes+"&anio="+anio+"&deten="+deten+"&idUnidad="+idUnidad);
 
 }
+

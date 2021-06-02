@@ -121,7 +121,7 @@ function insertMedCautelar_db(idEstatusNucs, estatus, nuc, opcInsert){
 	var formulacionAcusacion = document.getElementById("formulacionAcusacion").value;
 	var fechaEscritoAcusacion= document.getElementById("fechaEscritoAcusacion").value;
 
-	if(formulacionAcusacion != ""){
+	if(fechaCierreInvest != ""){
 		$.ajax({
 			type: "POST",
 		 dataType: "html",
@@ -482,6 +482,180 @@ function getDataDelitoSicap(){
 	ajax.send();
 }
 
+function sendDataJudicializada(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcInsert){
+	if( $('.checkRecla').prop('checked') ) {
+   var reclasificacion = 1;
+   var newBrwosers_id = $("#newBrwoser").val();
+			var idCatModalidadEst = $("#newBrwosers").find("option[value='" + newBrwosers_id + "']").attr('data-id');
+
+}else{
+	  var reclasificacion = 0;
+	  $("input[type=radio]:checked").each(function(){ idCatModalidadEst = $(this).val() });
+}
+	if(typeof idCatModalidadEst !== 'undefined'){
+	 insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert);
+	 $('#modalNucsLitigInfo').modal('hide');
+			$('#modalNucsLitig').modal('show');
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+function sendDataFormImputacion(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcInsert){
+	var fechaFormulacionImpu = document.getElementById("fechaFormulacionImpu").value;
+
+	if(fechaFormulacionImpu != ""){
+		 insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert);
+	  $('#modalNucsLitigInfo').modal('hide');
+			$('#modalNucsLitig').modal('show');
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+function sendDataAutoVincuProc(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcInsert){
+		var fechaAutoVinculacion = document.getElementById("fechaAutoVinculacion").value;
+
+	if(fechaAutoVinculacion != ""){
+		insertarNucLit2(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert);
+	  $('#modalNucsLitigInfo').modal('hide');
+			$('#modalNucsLitig').modal('show');
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+function sendDataMedCautelar(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcInsert){
+	var fechaCierreInvest = document.getElementById("fechaCierreInvest").value;
+	var formulacionAcusacion = document.getElementById("formulacionAcusacion").value;
+	var fechaEscritoAcusacion= document.getElementById("fechaEscritoAcusacion").value;
+
+	if(fechaCierreInvest != ""){
+		insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert);
+	  $('#modalNucsLitigInfo').modal('hide');
+			$('#modalNucsLitig').modal('show');
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+function sendDataAudienciaIntermedia(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcInsert){
+	var fechaAudienciaIntermedia = document.getElementById("fechaAudienciaIntermedia").value;
+	var mediosDePrueba = document.getElementById("mediosDePrueba").value;
+	var tipoMedioPrueba = document.getElementById("tipoMedioPrueba").value;
+	var acuerdoProbatorio = document.getElementById("acuerdoProbatorio").value;
+	var apertJuiOral = document.getElementById("apertJuiOral").value;
+
+	if(fechaAudienciaIntermedia != "" && mediosDePrueba != 0 ){
+		insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert);
+	  $('#modalNucsLitigInfo').modal('hide');
+			$('#modalNucsLitig').modal('show');
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+function sendDataSobreseimientos(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcInsert){
+	var fechaDictoSobresei = document.getElementById("fechaDictoSobresei").value;
+	var tipoSobreseimiento = document.getElementById("tipoSobreseimiento").value;
+
+	if(fechaDictoSobresei != "" &&tipoSobreseimiento != 0 ){
+			insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert);
+	  $('#modalNucsLitigInfo').modal('hide');
+			$('#modalNucsLitig').modal('show');
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+function sendDataSuspCondProc(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcInsert){
+	var fechaDictoSuspConProc = document.getElementById("fechaDictoSuspConProc").value;
+	var etapaSuspCondProc = document.getElementById("etapaSuspCondProc").value;
+	var CondImpuSuspConProc = document.getElementById("CondImpuSuspConProc").value;
+	var reaperturaProc = document.getElementById("reaperturaProc").value;
+	var fechaReaperProc = document.getElementById("fechaReaperProc").value;
+	var fechaCumpSuspCondPro = document.getElementById("fechaCumpSuspCondPro").value;
+
+	if(fechaDictoSuspConProc != ""  ){
+		 insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert);
+	  $('#modalNucsLitigInfo').modal('hide');
+			$('#modalNucsLitig').modal('show');
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+function sendDataAudienciasJuicio(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcInsert){
+	var fechaAudienciaJuicio = document.getElementById("fechaAudienciaJuicio").value;
+	var pruebasAudienciaJuicio = document.getElementById("pruebasAudienciaJuicio").value;
+
+	if(fechaAudienciaJuicio != "" && pruebasAudienciaJuicio != 0  ){
+		 insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert);
+	  $('#modalNucsLitigInfo').modal('hide');
+			$('#modalNucsLitig').modal('show');
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+function sendDataCriteriosOportunidad(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcInsert){
+	var tipoCriterioOportunidad = document.getElementById("tipoCriterioOportunidad").value;
+
+	if(tipoCriterioOportunidad != 0  ){
+	insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert);
+	  $('#modalNucsLitigInfo').modal('hide');
+			$('#modalNucsLitig').modal('show');
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+function sendDataAcuerdoReparatorio(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcInsert){
+	var tipoAcuerdosRep = document.getElementById("tipoAcuerdosRep").value;
+
+	if(tipoAcuerdosRep != 0  ){
+		insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert);
+	  $('#modalNucsLitigInfo').modal('hide');
+			$('#modalNucsLitig').modal('show');
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+function sendDataSentencias(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcInsert){
+	var fechaDictoSentencia = document.getElementById("fechaDictoSentencia").value;
+	var tipoSentencia = document.getElementById("tipoSentencia").value;
+	var aniosPrision = document.getElementById("aniosPrision").value;
+	var sentenciaFirme = document.getElementById("sentenciaFirme").value;
+	var sentDerivaProcAbrv = document.getElementById("sentDerivaProcAbrv").value;
+	var fechaDictoProcAbrv = document.getElementById("fechaDictoProcAbrv").value;
+
+	if(fechaDictoSentencia != "" && tipoSentencia > 0){
+		if(estatus == 14){
+   insertarNucLit2(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert);
+    $('#modalNucsLitigInfo').modal('hide');
+			 $('#modalNucsLitig').modal('show');
+		}else{
+			insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert);
+	  $('#modalNucsLitigInfo').modal('hide');
+			$('#modalNucsLitig').modal('show');
+		}
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+function sendDataReparacionDanios(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcInsert){
+	var montoRepDanio = document.getElementById("montoRepDanio").value;
+
+	if(montoRepDanio != ""){
+		insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert);
+	  $('#modalNucsLitigInfo').modal('hide');
+			$('#modalNucsLitig').modal('show');
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
 /*
 //Mecanismo para cambiar de formulario a otro
 function openForm(evt, etapa) {

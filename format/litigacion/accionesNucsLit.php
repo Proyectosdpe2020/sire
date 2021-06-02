@@ -157,7 +157,9 @@ switch ($acc) {
                               BEGIN TRANSACTION
                                   SET NOCOUNT ON    
                                
-                                              INSERT INTO estatusNucs (nuc, idEstatus, idmp, idUnidad, fecha, anio, mes, idCarpeta) VALUES ('$nuc', $estatResolucion, $idMp, $idUnidad, GETDATE(), $anio, $mes, $carpid)             
+                                              INSERT INTO estatusNucs (nuc, idEstatus, idmp, idUnidad, fecha, anio, mes, idCarpeta) VALUES ('$nuc', $estatResolucion, $idMp, $idUnidad, GETDATE(), $anio, $mes, $carpid)   
+
+                                              SELECT MAX(idEstatusNucs) AS idEstatusNucs FROM estatusNucs         
 
                                   COMMIT
                             END TRY
@@ -174,7 +176,11 @@ switch ($acc) {
                           //echo $queryTransaction;
 
                         if ($result) {
-                            echo json_encode(array('first'=>$arreglo[0]));
+                             while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC )){
+                             $idEstatusNucs = $row['idEstatusNucs']; //Obtenemos el idEstatusNucs para guardar datos de senap
+                            }
+                            $arreglo[2] = $idEstatusNucs;
+                            echo json_encode(array('first'=>$arreglo[0] , 'idEstatusNucs' => $arreglo[2]));
                           }else{
                             echo json_encode(array('first'=>$arreglo[1]));
                           }
