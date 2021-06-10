@@ -773,7 +773,7 @@ $("#table-body").append(data);
 		<script language="JavaScript" type="text/javascript" src="js/litigacion.js"></script>
 		<script language="JavaScript" type="text/javascript" src="js/trimestral.js"></script>
 			<script language="JavaScript" type="text/javascript" src="js/desapar.js"></script>
-				<script language="JavaScript" type="text/javascript" src="js/puesDispos.js"></script>
+				<script language="JavaScript" type="text/javascript" src="js/puesDispos210525.js"></script>
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <!--<script src="vendors/jquery/dist/jquery.min.js"></script>-->
 <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
