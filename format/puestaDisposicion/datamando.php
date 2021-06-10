@@ -17,15 +17,15 @@
 	?>
 
 
-								<div class="col-xs-6 col-sm-4  col-md-3">
+								<div class="col-xs-12 col-sm-12  col-md-3">
 									<label for="heard">Cargo :</label>
 									<input class="form-control mandda gehit" value="<? echo $cargo; ?>"  type="text" disabled>
 								</div>
-								<div class="col-xs-6 col-sm-4  col-md-2">
+								<div class="col-xs-12 col-sm-12  col-md-2">
 									<label for="heard">Función :</label>
 									<input class="form-control mandda gehit" value="<? echo $funcion; ?>"  id="newBrwoser"  type="text" disabled>
 								</div>
-								<div class="col-xs-6 col-sm-4  col-md-3">
+								<div class="col-xs-12 col-sm-12  col-md-3">
 									<label for="heard">Area de Adscripción :</label>
 									<input class="form-control mandda gehit" value="<? echo $areadscri; ?>" id="newBrwoser"  type="text" disabled>
 								</div>

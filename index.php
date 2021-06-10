@@ -24,6 +24,7 @@ if($format == "Trimestral"){ $format = 11; }
 if($format == "Administrador"){ $format = 0; }
 if($format == "AdmonPolicias"){ $format = 13; }
 if($format == "Forestales"){ $format = 14; }
+if($format == "carpetasJudicializadas"){ $format = 15; }
 
 
 $_SESSION['formatis']=$format;
@@ -64,6 +65,12 @@ if($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || $
 		<!-- Meta, title, CSS, favicons, etc. -->
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="google" value="notranslate">
+
+		<meta http-equiv="Expires" content="0">
+  <meta http-equiv="Last-Modified" content="0">
+  <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+  <meta http-equiv="Pragma" content="no-cache">
 
 		<link rel="icon" href="img/pgje.png" type="imag/ico">	
 		<link rel="stylesheet" type="text/css" href="css/estilosPrincipal.css">
@@ -78,6 +85,7 @@ if($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || $
 		<link rel="stylesheet" type="text/css" href="css/principal.css">
 		<link rel="stylesheet" type="text/css" href="css/puesDispo.css">
 		<link rel="stylesheet" type="text/css" href="css/trimestral.css">
+		<link rel="stylesheet" type="text/css" href="css/carpetasJudicializadas.css">
 		
 		<link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">	
 
@@ -88,6 +96,11 @@ if($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || $
 		<link rel="stylesheet" type="text/css" href="css/forestales.css">
 		<link rel="stylesheet" type="text/css" href="css/litigacionSENAP.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+
+	 <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+  <link href="vendors/select2/dist/css/select2.min.css" rel="stylesheet" />
+
 
 	<script type="text/javascript">
 
@@ -170,6 +183,7 @@ $("#table-body").append(data);
 			if($format  == 12){ ?>  	onload="loadtablaFormat(0, 'puestaDisposicionConsulta.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
 			if($format  == 13){ ?>  	onload="loadtablaFormat(0, 'cambioAdscripcionPueDispo.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" 	<? }
    if($format  == 14){ ?>  	onload="loadtablaFormat(0, 'forestales.php', 'forestales', <? echo $idEnlace; ?>);" 	<? }
+   if($format  == 15){ ?>  	onload="loadtablaFormat(0, 'carpetasJudicializadas.php', 'carpetasJudicializadas', <? echo $idEnlace; ?>);" 	<? }
 
 	}
 
@@ -451,6 +465,7 @@ $("#table-body").append(data);
 	<br />
 
 	<div id ="contenido">
+
 
 		<div style="margin: 0 auto; width: 100%; max-height: 780px; overflow-y: scroll;">
 				
@@ -750,10 +765,6 @@ $("#table-body").append(data);
 
 		</div>
 
-		<script>
-
-</script>
-
 
 	<script language="JavaScript" type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -771,9 +782,24 @@ $("#table-body").append(data);
 <script language="JavaScript" type="text/javascript" src="dist/sweetalert.min.js"></script>
 <script language="JavaScript" type="text/javascript" src="format/trimestral/pdf/js/function.js"></script>
 <script language="JavaScript" type="text/javascript" src="js/forestales.js"></script>
-<script language="JavaScript" type="text/javascript" src="js/litigacionSENAP.js"></script>	    
+<script language="JavaScript" type="text/javascript" src="js/litigacionSENAP.js"></script>
+<script type="text/javascript" src="js/carpetasJudicializadas.js"></script>
+
+ <!--<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>-->
+      <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.js"></script>
+      <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+      <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
+      <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+      <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+      <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+      <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+      <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+      
+      <script type="text/javascript" src="vendors/select2/dist/js/select2.min.js" ></script>
+
 
 </body>
+</html>
 
 
 

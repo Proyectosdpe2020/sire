@@ -36,7 +36,7 @@
 
 
 
-	$anioCaptura = 2020;
+	//$anioCaptura = 2020;
 
  	
  	$idUsuario = $_SESSION['useridIE'];
@@ -86,8 +86,13 @@
 
 					<div class="col-xs-6 col-sm-4  col-md-1">
 						<label for="heard">Año:</label><br>
-						<select id="anioCmasc" name="selMes" tabindex="6" class="form-control redondear selectTranparent" required>
-							<option value="<? echo $anioCaptura; ?>" selected><? echo $anioCaptura; ?></option>
+						<select id="anioCmasc" name="selMes" tabindex="6" class="form-control redondear selectTranparent" onchange="reloadDaysMonth(<? echo $idEnlace; ?>)" required>
+							 <?php
+							 $dataAnio = getDataAnio();
+							 for ($i = 0; $i < sizeof($dataAnio); $i++){
+							 	$anioCaptura = $dataAnio[$i][0];	?>
+									<option value="<? echo $anioCaptura; ?>" selected><? echo $anioCaptura; ?></option>
+								<? } ?>
 						</select>
 					</div>
 
@@ -116,6 +121,7 @@
 						<label for="heard">Día:</label><br>
 							<div id="contDays">
 						<select id="diaSeleted" name="selMes" tabindex="6"class="form-control redondear selectTranparent" onchange="loadDataPuestDay(<? echo $anioCaptura; ?>, <? echo $idEnlace; ?>, 0)" required>
+							<option value="0">Todo</option>
 							<? 
 									$diasNumero = cal_days_in_month(CAL_GREGORIAN, $currentmonth, $anioCaptura);
 
@@ -151,23 +157,21 @@
 
 					</div>
 					
-
 				</div>
 
-				<div id="respuestaDescargarCarpeta"> 
-								
-				</div>
+				<br>
+				<div class="col-md-6 col-md-offset-3" id="preloaderIMG" hidden>
+						<img src="images/cargando.gif"/>
+					</div>
 
-					<div class="contTblMPs" id="contTblMPs2">
-
-						<div id="tablePuestasData" class="row pad20">							
-					
-								<table class="table table-striped  table-hover">
-									<thead>
-										<tr class="cabezeraTabla10">
-											<th class="textCent">ID</th>
-										  	<th class="textCent10">Mando</th>
-													<th class="textCent10">Enlace</th>
+				<table id="gridPolicia" class="display table table-striped  table-hover" width="100%" >
+				<thead>
+					<tr class="cabeceraConsultaPolicia">
+						<th class="textCent">ID</th>
+													<th class="textCent10">Mando</th>
+													<?if($tiparchiv == 12 && ($idEnlace != 266 && $idEnlace != 233 && $idEnlace != 225)){ ?>
+													<th class="textCent10">Capturista</th>
+												<? } ?>
 													<th class="">Nuc</th>
 													<th class=" textCent">Fecha Evento</th>
 													<th class=" textCent">Fecha Informe</th>
@@ -176,25 +180,25 @@
 													<th class=" textCent">Colonia</th>
 													<th class=" textCent">Calle </th>
 													<th class=" textCent">Numero</th>													
-													<th class=" textCent">Codigo Postal</th>
-													
+													<th class=" textCent">Codigo Postal</th>	
 													<th class="textCent">Accion </th>
-
-										</tr>
-									</thead>
-									<tbody>
-										
-
-															<? 
+		
+					</tr>
+				</thead> 
+				<tbody id="contentConsulta">
+					<? 
 																				$dataPuestasDia = get_data_puesta_dia($conn, $numeroDia, $diames, $anioCaptura, $idfisca, $idEnlace, $currentmonth);
 
 
 																							for ($h=0; $h < sizeof($dataPuestasDia) ; $h++) { 
 
 																									?>
-																										<tr><td> <? echo $dataPuestasDia[$h][0]; ?> </td>
-																										<tr><td> <? echo $dataPuestasDia[$h][11]; ?> </td>
+																										<tr>
+																										<td> <? echo $dataPuestasDia[$h][0]; ?> </td>
 																										<td> <? echo $dataPuestasDia[$h][1]; ?> </td>
+																									 <?if($tiparchiv == 12 && ($idEnlace != 266 && $idEnlace != 233 && $idEnlace != 225)){ ?>
+																										<td> <? echo $dataPuestasDia[$h][11]; ?> </td>
+																											<? } ?>
 																										<td> <? echo $dataPuestasDia[$h][2]; ?> </td>
 																									<td> 	<center><? echo $dataPuestasDia[$h][3]->format('Y-m-d H:i'); ?></center> </td>
 																										<td> <center><? echo $dataPuestasDia[$h][4]->format('Y-m-d H:i'); ?></center></td>
@@ -204,20 +208,15 @@
 																										<td> <? echo $dataPuestasDia[$h][8]; ?> </td>
 																										<td> <center><? echo $dataPuestasDia[$h][9]; ?></center> </td>
 																										<td> <center><? echo $dataPuestasDia[$h][10]; ?></center> </td>
-<td><center><label class="glyphicon glyphicon-edit" data-toggle="modal" href="#puestdispos" onclick="showmodalPueDispo(1, <? echo $idEnlace; ?>, <? echo $dataPuestasDia[$h][0]; ?>, <? echo 	$tiparchiv; ?>, 1)" style="width: 95%; cursor: pointer; font-weight: bold; color: green;">  Editar</label></center></td></tr>
+																										<td><center><label class="glyphicon glyphicon-search" data-toggle="modal" href="#puestdispos" onclick="showmodalPueDispo(1, <? echo $idEnlace; ?>, <? echo $dataPuestasDia[$h][0]; ?>, <? echo 	$tiparchiv; ?>, 1)" style="width: 95%; cursor: pointer; font-weight: bold; color: green;">  Ver </label></center></td></tr>
 																									<?		
 
 																							}																			
 
 															 ?>
+   </tbody>
+  </table><br>
 
-
-									</tbody>
-									</table>
-							
-							</div>
-
-						</div><br>
 
 										<div class="x_panel piepanel">
 												<div class="piepanel2">
