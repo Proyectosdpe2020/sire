@@ -47,6 +47,12 @@
 	 }else{ 	$opcInsert = 0;  $reclasificado = 0; }?>
 	<div class="row">
 		<div class="col-xs-12 col-sm-12  col-md-12">
+			 <div class="row">
+			 	<div class="col-xs-12 col-sm-12  col-md-12">
+			 			<label class="colorLetras" for="inputlg">Número asignado a la causa penal :</label>
+											<input type="text"  class="first" id="cadCustodia"  />
+			 	</div>
+			 </div><br>
 			<!-- TABLA DELITOS POR LA CUAL SE JUDICIALIZO-->
 			<div class="row">
 				<div class="col-xs-12 col-sm-12  col-md-12">
@@ -796,6 +802,64 @@
 	</div>
  <? } ?>
  <!-- Termina Monto de la reparación del daño impuesta :-->
+
+  <? if($estatus == 129){ 
+  		$getData = getDataMedidasProteccion($conn, $idEstatusNucs);
+	 	if(sizeof($getData) > 0){ 
+	 		$opcInsert = 1; 
+	 			$masculino = $getData[0][3];
+		 		$femenino = $getData[0][4];
+		 		$moral = $getData[0][5];
+		 		$desconocido = $getData[0][6];
+	 	}else{ 	$opcInsert = 0; }
+	 ?>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12  col-md-12">
+		<!--Monto de la reparación del daño impuesta :-->
+		<div class="row">
+				<div class="col-xs-12 col-sm-12  col-md-12">
+						<label for="personaFisMasc">Total de víctimas de medidas de protección : </label>
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12  col-md-12">
+						<label for="personaFisMasc">Persona fisica sexo masculino : </label>
+						<input id="personaFisMasc" type="number" value="<?if($opcInsert == 1){echo $masculino;}?>" name="personaFisMasc" class="fechas form-control gehit"  />
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12  col-md-12">
+						<label for="personaFisFem">Persona fisica sexo femenino : </label>
+						<input id="personaFisFem" type="number" value="<?if($opcInsert == 1){echo $femenino;}?>" name="personaFisFem" class="fechas form-control gehit"  />
+				</div>
+			</div><br>
+			<div class="row">
+					<div class="col-xs-12 col-sm-12  col-md-12">
+						<label for="personaMoral">Persona moral : </label>
+						<input id="personaMoral" type="number" value="<?if($opcInsert == 1){echo $moral;}?>" name="personaMoral" class="fechas form-control gehit"  />
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12  col-md-12">
+						<label for="desconocido">Desconocido : </label>
+						<input id="desconocido" type="number" value="<?if($opcInsert == 1){echo $desconocido;}?>" name="desconocido" class="fechas form-control gehit"  />
+				</div>
+			</div>
+			</div>
+	 </div><br><br><br><br>
+	<div class="row">
+		<div class="col-xs-12 col-sm-6 col-md-6">
+			<button style="width: 88%;" onclick="closeModalNucsLitigInfo()" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button>
+		</div>
+		<div class="col-xs-12 col-sm-6  col-md-6 ">
+			<?if(	$opcInsert == 0){ ?>
+			<button style="width: 88%;" onclick="sendDataMedidasProteccion(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> ,  <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
+			<?}elseif(	$opcInsert == 1 ){?>
+			<button style="width: 88%;" onclick="insertMedidaProteccion_db(<?echo $idEstatusNucs; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
+			<? } ?>
+		</div>
+	</div>
+ <? } ?>
 
 </div>
 

@@ -368,7 +368,7 @@
 												<td class="tdRowMain"><? echo $anioCaptura; ?></td>											
 
 
-														<? if($env == 1){} else { ?>
+														<? if($env == 0){} else { ?>
 														<td class="tdRowMain"><center> <button type="button" data-toggle="modal" href="#modalFormatoLitig"  onclick="cargarMOdalFormatoLit(<? echo $idEnlace; ?>,'<? echo $nomCompleto; ?>',<? echo $idMp; ?>, <? echo $idUnidad; ?>, <? echo $mesCapturar; ?>, <? echo $anioCaptura; ?>);" class="btn btn-primary btn-sm redondear btnCapturarTbl" ><span class="glyphicon glyphicon-pencil"></span> Capturar </button></center></td>
 														
 														<? } ?>
@@ -431,7 +431,7 @@
 
 		<div class="modal fade bs-example-modal-sm" id="modalFormatoLitig" role="dialog" data-backdrop="static" data-keyboard="false">
 
-										<div id="modalVistaCss" class="modal-dialog modal-sm" style = "width: 40%; margin-top: 1%;">
+										<div id="modalVistaCss" class="modal-dialog modal-sm" style = "width: 90%; margin-top: 1%;">
 
 																	<div class="modal-content">
 

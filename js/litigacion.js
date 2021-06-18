@@ -653,7 +653,8 @@ function existenuclitigacion(nuc, idMp, estatResolucion, mes, anio, idUnidad, de
 															   estatResolucion == 103 || estatResolucion == 105 || estatResolucion == 106 || estatResolucion == 107 ||
 															   estatResolucion == 108 || estatResolucion == 109 || estatResolucion == 110 || estatResolucion == 111 ||
 															   estatResolucion == 64 || estatResolucion == 60 || estatResolucion == 91 || estatResolucion == 65 ||
-															   estatResolucion == 90 || estatResolucion == 66 || estatResolucion == 67 || estatResolucion == 68 ){
+															   estatResolucion == 90 || estatResolucion == 66 || estatResolucion == 67 || estatResolucion == 68 || 
+															   estatResolucion == 129){
 																showModalNucLitInfo2(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad);
 															}else{
 																	setTimeout("insertarNucLit("+idMp+","+estatResolucion+","+mes+","+anio+","+nuc+","+deten+","+idUnidad+");",100);
@@ -766,7 +767,7 @@ function insertarNucLit(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad, 
 
 											if (objDatos.first == "SI") {
 
-															swal("", "Se Registro Correctamente."+objDatos.idEstatusNucs, "success");             
+															swal("", "Se Registro Correctamente.", "success");             
 														 updateTableNucsLiti(idMp, anio, mes, estatResolucion, nuc, deten, idUnidad); 
 														 /*Despues de haber validado la información adicional de SENAP y haber guardado el NUC se extrae el idEstatusNucs para 
 														   proceder a insertar la informacion del senap en la respectiva tabla dependiendo del idEstatus*/
@@ -805,6 +806,9 @@ function insertarNucLit(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad, 
 														 	break;
 														 	case 68: 
 														 	       setTimeout("insertReparacionDanios_db("+objDatos.idEstatusNucs+","+estatResolucion+","+nuc+", "+opcInsert+");",100);
+														 	break;
+														 		case 129: 
+														 	       setTimeout("insertMedidaProteccion_db("+objDatos.idEstatusNucs+","+estatResolucion+","+nuc+", "+opcInsert+");",100);
 														 	break;
 														 default:
 														  break;
@@ -1025,7 +1029,7 @@ function validarEstatusShowInfoSica(estatResolucion){
 		|| estatResolucion == 106 || estatResolucion == 89 || estatResolucion == 107 || estatResolucion == 108 || estatResolucion == 109
 		 || estatResolucion == 110 || estatResolucion == 111 || estatResolucion == 64 || estatResolucion == 60 || estatResolucion == 14 
 		 || estatResolucion == 65 || estatResolucion == 66 || estatResolucion == 67 || estatResolucion == 68 || estatResolucion == 90 
-		 || estatResolucion == 91){
+		 || estatResolucion == 91 || estatResolucion == 129){
 		return true;
 	}
 	else{
@@ -1064,3 +1068,16 @@ function insertarNucLitJud(idMp, estatResolucion, mes, anio, nuc, deten, idUnida
 
 }
 
+function openEtapa(evt, etapa) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(etapa).style.display = "block";
+  evt.currentTarget.className += " active";
+}

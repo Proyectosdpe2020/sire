@@ -2840,7 +2840,7 @@ function validarEstatusShowInfoSica(estatResolucion){
 		|| estatResolucion == 106 || estatResolucion == 89 || estatResolucion == 107 || estatResolucion == 108 || estatResolucion == 109
 		 || estatResolucion == 110 || estatResolucion == 111 || estatResolucion == 64 || estatResolucion == 60 || estatResolucion == 14 
 		 || estatResolucion == 65 || estatResolucion == 66 || estatResolucion == 67 || estatResolucion == 68 || estatResolucion == 90 
-		 || estatResolucion == 91){
+		 || estatResolucion == 91 || estatResolucion == 129){
 		return true;
 	}
 	else{

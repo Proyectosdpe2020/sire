@@ -502,5 +502,24 @@ function getDataDelitosSica($conSic){
 
 }
 
+//Función para obtener el total de victimas de medidas de proteccion
+function getDataMedidasProteccion($conn, $idEstatusNucs){
+	 $query = "SELECT * FROM medidasDeProteccion WHERE idEstatusNucs = '$idEstatusNucs' "; 
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['idMedidaProteccion'];
+		$arreglo[$indice][1]=$row['idEstatusNucs'];
+		$arreglo[$indice][2]=$row['nuc'];
+		$arreglo[$indice][3]=$row['masculino'];
+		$arreglo[$indice][4]=$row['femenino'];
+		$arreglo[$indice][5]=$row['moral'];
+		$arreglo[$indice][6]=$row['desconocido'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
+
 
 ?>

@@ -455,6 +455,44 @@ function insertFormJudicializada_db(idEstatusNucs, estatus, nuc, opcInsert){
 	}
 }
 
+/****Ingresa a la bd la informacion de SENAP de Criterios de Oportunidad****/
+function insertMedidaProteccion_db(idEstatusNucs, estatus, nuc, opcInsert){
+		var masculino = document.getElementById("personaFisMasc").value;
+		var femenino = document.getElementById("personaFisFem").value;
+		var moral = document.getElementById("personaMoral").value;
+		var desconocido = document.getElementById("desconocido").value;
+
+	if(masculino > 0 || femenino > 0 || moral > 0 || desconocido > 0 ){
+		if(masculino == ""){ masculino = 0; }
+		if(femenino == ""){ femenino = 0; }
+		if(moral == ""){ moral = 0; }
+		if(desconocido == ""){ desconocido = 0; }
+		$.ajax({
+			type: "POST",
+		 dataType: "html",
+			url:  "format/litigacion/insertSenap/insert_FormMedidaProteccion.php",
+		 data: 'idEstatusNucs='+idEstatusNucs+'&nuc='+nuc+'&opcInsert='+opcInsert+'&masculino='+masculino+'&femenino='+femenino+'&moral='+moral+'&desconocido='+desconocido,
+		 success: function(respuesta){
+		 	var json = respuesta;
+		 	var obj = eval("(" + json + ")");
+		 	if (obj.first == "NO") { 
+		 		swal("", "No se registro verifique los datos.", "warning"); 
+		 	}else{
+		 		if (obj.first == "SI") {
+		 			var obj = eval("(" + json + ")");
+		 			swal("", "Registro exitosamente.", "success");
+		 			//reloadOpcInsertButton(idEstatusNucs, estatus, nuc,  1);
+		 			$('#modalNucsLitigInfo').modal('hide');
+		 			$('#modalNucsLitig').modal('show');
+		 		}
+		 	}
+		 }
+		});
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
 
 
 function reclasificar(){
@@ -649,6 +687,21 @@ function sendDataReparacionDanios(nuc, estatus, idMp, mes, anio, deten, idUnidad
 	var montoRepDanio = document.getElementById("montoRepDanio").value;
 
 	if(montoRepDanio != ""){
+		insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert);
+	  $('#modalNucsLitigInfo').modal('hide');
+			$('#modalNucsLitig').modal('show');
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+function sendDataMedidasProteccion(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcInsert){
+	var masculino = document.getElementById("personaFisMasc").value;
+	var femenino = document.getElementById("personaFisFem").value;
+	var moral = document.getElementById("personaMoral").value;
+	var desconocido = document.getElementById("desconocido").value;
+
+	if(masculino > 0 || femenino > 0 || moral > 0 || desconocido > 0 ){
 		insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert);
 	  $('#modalNucsLitigInfo').modal('hide');
 			$('#modalNucsLitig').modal('show');
