@@ -126,7 +126,7 @@ $involved_people = array(
         ),
         'validated_by' => array(
             'name' => 'Mtro. Jorge Alberto Camacho Delgado',
-            'position' => 'Titular de la unidad de asuntos especiales de la fiscalia coordinadora'
+            'position' => 'Titular de la Fiscalía de Asuntos Especiales'
         )
     ),
     27 => array(

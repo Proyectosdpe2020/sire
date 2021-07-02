@@ -104,6 +104,7 @@ $estaNom = $estatusArr[0][0];;
 							$sumador = 0;
 							$carpeAgente = getDistincCarpetasAgente($conSic, $idMp, $estatus, $mes, $anio, $deten);
 							$carpeAgente3 = getDistincCarpetasAgente3($conSic, $idMp, $estatus, $mes, $anio, $deten, $idUnidad); //// SE AGREGA EL ID DE UNIDAD PARA QUE SOLO SE BUSQUEN NUCS DE LA UNIDAD EN LA QUE SE ENCUENTRA ACTUALMENTE
+								
 							$carpeAgente2 = getDistincCarpetasDataUNidReso($conSic, $idMp, $estatus, $mes, $anio, $deten);
 
 							for ($i = 0; $i < sizeof($carpeAgente3); $i++) {
@@ -117,6 +118,8 @@ $estaNom = $estatusArr[0][0];;
 								$reinicidassi = knowisReinicida($conSic, $anio, $mes, $idUnidad, $CaepetaId);
 
 								if ($reinicidassi) {
+
+							
 
 
 									//echo $idre."<br><br>";
@@ -148,12 +151,7 @@ $estaNom = $estatusArr[0][0];;
 									}
 								} else {
 
-
-
-
-
 									//// Por cada Carpeta ob_etaghandler(data, mode)ner la Ultima Determinacion que se realizo
-
 
 									$lastDetermin = getLastDeterminacionCarpeta($conSic, $CaepetaId);
 									$conum = sizeof($lastDetermin);

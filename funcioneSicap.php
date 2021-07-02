@@ -328,6 +328,8 @@ function getDistincCarpetasAgente3($conn, $idMp, $estatus, $mes, $anio, $deten, 
 	$query = " SELECT DISTINCT CarpetaID, idUnidad, ResolucionID FROM Resoluciones 
 WHERE AgenteID = $idMp AND EstatusID = $estatus AND mes = $mes AND anio = $anio AND deten = $deten AND idUnidad = $idUnidad  Group BY CarpetaID, idUnidad, ResolucionID";
 
+
+
 	   $indice = 0;
 
 	$stmt = sqlsrv_query($conn, $query);

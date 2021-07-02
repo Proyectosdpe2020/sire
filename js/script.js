@@ -2868,7 +2868,7 @@ function validarEstatusShowInfoSica(estatResolucion) {
 
 
 
-function deleteResolReini(idCaperta, idMp, anio, mes, estatResolucion, nuc, deten, idUnidad) {
+function deleteResolReini(idCaperta, idMp, anio, mes, estatResolucion, nuc, deten, idUnidad, idResolucion) {
 
 	swal({
 		title: "",
@@ -2886,7 +2886,7 @@ function deleteResolReini(idCaperta, idMp, anio, mes, estatResolucion, nuc, dete
 
 				acc = "deleteResolReini";
 				ajax = objetoAjax();
-				ajax.open("POST", "formatos/accionesNucs.php");
+				ajax.open("POST", "formatos/accionesNucs.php"); 
 
 				ajax.onreadystatechange = function () {
 					if (ajax.readyState == 4 && ajax.status == 200) {
