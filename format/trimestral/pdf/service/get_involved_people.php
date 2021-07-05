@@ -145,8 +145,8 @@ $involved_people = array(
             'position' => ''
         ),
         'validated_by' => array(
-            'name' => 'Lic. Verónica Guzmán Perez',
-            'position' => 'Fiscal de investigacion y persecucion del homicidio doloso contra la mujer y feminicidio'
+            'name' => 'Mtra. Verónica Guzmán Perez',
+            'position' => 'Fiscal de investigación del homicidio doloso contra la mujer y feminicidio'
         )
     ),
     29 => array(
@@ -286,7 +286,7 @@ $involved_people = array(
         ),
         'validated_by' => array(
             'name' => 'Mtro. Andrés Vieyra Castro',
-            'position' => 'Director Regional de Carpetas de Investigacion'
+            'position' => 'Director Regional de Carpetas de Investigación'
         )
     ),
     77 => array(
