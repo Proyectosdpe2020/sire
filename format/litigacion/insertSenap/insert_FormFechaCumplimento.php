@@ -11,9 +11,7 @@ if (isset($_POST['nuc'])){ $nuc = $_POST['nuc']; }
 
 
 /*DATOS FORMULARIO SENAP*/
-if (isset($_POST['idCatModalidadEst'])){ $idCatModalidadEst = $_POST['idCatModalidadEst']; }  
-if (isset($_POST['reclasificacion'])){ $reclasificacion = $_POST['reclasificacion']; } 
-if (isset($_POST['causaPenal'])){ $causaPenal = $_POST['causaPenal']; } 
+if (isset($_POST['fechaCumplimiento'])){ $fechaCumplimiento = $_POST['fechaCumplimiento']; }   
 
 if (isset($_POST['opcInsert'])){ $opcInsert = $_POST['opcInsert']; } 
 
@@ -26,8 +24,8 @@ if($opcInsert == 0){
                                 BEGIN TRANSACTION
                                       SET NOCOUNT ON 
 
-                                        INSERT INTO senap.judicializadas (idEstatusNucs, idModalidadEstadistica, reclasificacion, causaPenal) 
-                                        VALUES('$idEstatusNucs', $idCatModalidadEst, $reclasificacion, '$causaPenal')
+                                        INSERT INTO senap.ordenesAprehension (idEstatusNucs, fechaCumplimento) 
+                                        VALUES('$idEstatusNucs', '$fechaCumplimiento')
                                                   
                                       COMMIT
                               END TRY
@@ -44,10 +42,8 @@ if($opcInsert == 0){
                                 BEGIN TRANSACTION
                                       SET NOCOUNT ON 
 
-                                        UPDATE senap.judicializadas SET 
-                                        idModalidadEstadistica = $idCatModalidadEst,
-                                        reclasificacion = $reclasificacion,
-                                        causaPenal = '$causaPenal'
+                                        UPDATE senap.ordenesAprehension SET 
+                                        fechaCumplimento = '$fechaCumplimiento'
                                         WHERE idEstatusNucs = '$idEstatusNucs' ;
                                                   
                                       COMMIT

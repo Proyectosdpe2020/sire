@@ -68,3 +68,16 @@ hr{
   overflow-x:hidden;
 
 }
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+
+#inicio{
+  display: block;
+}

@@ -267,7 +267,7 @@ $indice = 0;
 function getDatosLitigacionMpUnidad($conn, $idMp, $mes, $anio, $idFiscalia, $idUnidad){
 
 
-	$query = "  SELECT [existenciaAnterior],[carpetasJudicializadas],[judicializadasConDetenido],[judicializadasSinDetenido],[autoDeVinculacion],[autoDeNoVinculacion],[Mixtos],[imposicionMedidasCautelares],[prisionPreventivaOficiosa],[prisionPreventivaJustificada],[presentacionPeriodicaAnteElJuez],[exhibicionGarantiaEconomica],[embargoDeBienes],[inmovilizacionDeCuentasValores],[prohibicionSalirSinAutorizacionDelJuez],[sometimientoCuidadoVigilanciaInstitucion],[prohibicionConcurrirDeterminadasReunionesLugares],[prohibicionConvivirComunicarseDeterminadasPersonas],[separacionInmediataDelDomicilio],[suspensionTemporalEjercicioDelCargo],[suspensionTemporalActividadProfesionalLaboral],[colocacionLocalizadoresElectronicos],[resguardoPropioDomicilioModalidades],[sobreseimientosDecretados],[sobreseimientosPrescripcionAccionPenal],[sobreseimientosMecanismosAlternativos],[sobreseimientosAcuerdoReparatorio],[sobreseimientosSuspensionCondicionalProceso],[sobreseimientosCriterioOportunidad],[terminacionAnticipada],[procedimientosAbreviados],[acumulacion],[citaciones],[cateosSolilcitados],[cateosConcedidos],[cateosNegados],[ordenesNegadas],[ordenesNegadasAprehension],[ordenesNegadasComparecencia],[desistimientoDelRecurso],[desistimientoDelRecursoParterAcusado],[desistimientoDelRecursoParteDefensor],[desistimientoDelRecursoMP],[apelacionesNoAdmitidas],[sentenciasDictadas],[sentenciasDictadasRevoca],[sentenciasDictadasModifica],[sentenciasDictadasConfirma],[reposicionProcedimiento],[totalJudicializadasTramite],[mandamientosJudicialesGirados],[MandamientosJudicialesGiradosOrdenesAprehension],[MandamientosJudicialesGiradosOrdenesComparecencia],[mandamientosJudicialesCumplidos],[MandamientosJudicialesCumplidosOrdenesAprehension],[MandamientosJudicialesCumplidosOrdenesComparecencia],[totalAudiencias],[acusacionesPresentadas],[audienciaIntermediaEscrita],[audienciaIntermediaOral],[solucionesAlternas],[solucionesAlternasSuspensionCondicionalProceso],[solucionesAlternasAcuerdoReparatorio],[sentencias],[sentenciasCondenatorias],[sentenciasAbsolutorias],[sentenciasMixtas],[sentenciasCondenaReparacionDanos],[sentenciasNoCondenaReparacionDanos],[incompetencias],[incompetenciasDecretadas],[incompetenciasAdmitidas],[apelacionesContraResolucionJuezControl],[apelacionesNegarAnticipoPrueba],[apelacionesNegarAcuerdoReparatorio],[apelacionesNegarCancelarOrdenAprehension],[apelacionesNegarOrdenCateo],[apelacionesProvidenciasPrecautoriasMedidaCautelar],[apelacionesQuePonganTerminoAlProcedimiento],[apelacionesAutoQueResuelveVinculacionAProceso],[apelacionesQueConcedanRevoquenNieguenSuspension],[apelacionesNegativaAbrirProcedimientoAbreviado],[apelacionesSetenciaDefinitivaProcedimientoAbreviado],[apelacionesExcluirMedioPrueba],[apelacionesContraResolucionesTribunalEnjuiciamiento],[apelacionesDesistimientoAccionPenal],[apelacionesSentenciaDefinitiva],[deLasSentenciasDictadas],[revocacionesFavorablesAlMP],[modificacionesFavorablesAlMP],[confirmacionesFavorablesAlMP],[porCambioDeclaradosSituacionJuridicaDeclaradaSinMateria],[FormulaImputacion_Soli],[FormulaImputacion_Otorga],[FormulaImputacion_Negadas],[LegalDetencion],[IlegalDetencion],[Med_CautelresSolicitadas],[Med_CautelaresNegadas],[Med_CautelaresOtorgadas],[SobreseimientosMuerteImputado],[recibiOtmp],[cesefunciones] FROM Litigacion WHERE idMes = $mes AND idAnio = $anio AND idFiscalia = $idFiscalia AND idMp = $idMp AND idUnidad = $idUnidad";
+	$query = "  SELECT [existenciaAnterior],[carpetasJudicializadas],[judicializadasConDetenido],[judicializadasSinDetenido],[autoDeVinculacion],[autoDeNoVinculacion],[Mixtos],[imposicionMedidasCautelares],[prisionPreventivaOficiosa],[prisionPreventivaJustificada],[presentacionPeriodicaAnteElJuez],[exhibicionGarantiaEconomica],[embargoDeBienes],[inmovilizacionDeCuentasValores],[prohibicionSalirSinAutorizacionDelJuez],[sometimientoCuidadoVigilanciaInstitucion],[prohibicionConcurrirDeterminadasReunionesLugares],[prohibicionConvivirComunicarseDeterminadasPersonas],[separacionInmediataDelDomicilio],[suspensionTemporalEjercicioDelCargo],[suspensionTemporalActividadProfesionalLaboral],[colocacionLocalizadoresElectronicos],[resguardoPropioDomicilioModalidades],[sobreseimientosDecretados],[sobreseimientosPrescripcionAccionPenal],[sobreseimientosMecanismosAlternativos],[sobreseimientosAcuerdoReparatorio],[sobreseimientosSuspensionCondicionalProceso],[sobreseimientosCriterioOportunidad],[terminacionAnticipada],[procedimientosAbreviados],[acumulacion],[citaciones],[cateosSolilcitados],[cateosConcedidos],[cateosNegados],[ordenesNegadas],[ordenesNegadasAprehension],[ordenesNegadasComparecencia],[desistimientoDelRecurso],[desistimientoDelRecursoParterAcusado],[desistimientoDelRecursoParteDefensor],[desistimientoDelRecursoMP],[apelacionesNoAdmitidas],[sentenciasDictadas],[sentenciasDictadasRevoca],[sentenciasDictadasModifica],[sentenciasDictadasConfirma],[reposicionProcedimiento],[totalJudicializadasTramite],[mandamientosJudicialesGirados],[MandamientosJudicialesGiradosOrdenesAprehension],[MandamientosJudicialesGiradosOrdenesComparecencia],[mandamientosJudicialesCumplidos],[MandamientosJudicialesCumplidosOrdenesAprehension],[MandamientosJudicialesCumplidosOrdenesComparecencia],[totalAudiencias],[acusacionesPresentadas],[audienciaIntermediaEscrita],[audienciaIntermediaOral],[solucionesAlternas],[solucionesAlternasSuspensionCondicionalProceso],[solucionesAlternasAcuerdoReparatorio],[sentencias],[sentenciasCondenatorias],[sentenciasAbsolutorias],[sentenciasMixtas],[sentenciasCondenaReparacionDanos],[sentenciasNoCondenaReparacionDanos],[incompetencias],[incompetenciasDecretadas],[incompetenciasAdmitidas],[apelacionesContraResolucionJuezControl],[apelacionesNegarAnticipoPrueba],[apelacionesNegarAcuerdoReparatorio],[apelacionesNegarCancelarOrdenAprehension],[apelacionesNegarOrdenCateo],[apelacionesProvidenciasPrecautoriasMedidaCautelar],[apelacionesQuePonganTerminoAlProcedimiento],[apelacionesAutoQueResuelveVinculacionAProceso],[apelacionesQueConcedanRevoquenNieguenSuspension],[apelacionesNegativaAbrirProcedimientoAbreviado],[apelacionesSetenciaDefinitivaProcedimientoAbreviado],[apelacionesExcluirMedioPrueba],[apelacionesContraResolucionesTribunalEnjuiciamiento],[apelacionesDesistimientoAccionPenal],[apelacionesSentenciaDefinitiva],[deLasSentenciasDictadas],[revocacionesFavorablesAlMP],[modificacionesFavorablesAlMP],[confirmacionesFavorablesAlMP],[porCambioDeclaradosSituacionJuridicaDeclaradaSinMateria],[FormulaImputacion_Soli],[FormulaImputacion_Otorga],[FormulaImputacion_Negadas],[LegalDetencion],[IlegalDetencion],[Med_CautelresSolicitadas],[Med_CautelaresNegadas],[Med_CautelaresOtorgadas],[SobreseimientosMuerteImputado],[recibiOtmp],[cesefunciones],[ordenesSolicitadas],[ordenesSolicitadasAprehension],[ordenesSolicitadasComparecencia], [medidasProteccion], [totalVictProt], [actosInvestigacionControlJudicial], [controlJudicialIntervencionTR], [controlJudicialTomaMuestras], [controlJudicialExhumacion], [controlJudicialObDatosReservados], [controlJudicialIntervencionCME], [controlJudicialProvPrecautoria], [actosInvestigacionSinControlJudicial], [sinControlJudicialCadCustodia], [sinControlJudicialInspLugDis], [sinControlJudicialInspInmuebles], [sinControlJudicialEntrevistasTestigos], [sinControlJudicialReconocimientoPer], [sinControlJudicialSolInfoPericiales], [sinControlJudicialInfInstiSeg], [sinControlJudicialexamenFisPersona], [resolucionesJuicioOral], [audienciaJuicioOral], [audienciaFallo], [absolutorio], [audienciaIndiviSancion], [procedimientoEspecial], [audienciaCondenatorio], [mecanismosAceleracion], [apelacionesAmparo], [amparos], [amparoDirecto], [amparoIndirecto] FROM Litigacion WHERE idMes = $mes AND idAnio = $anio AND idFiscalia = $idFiscalia AND idMp = $idMp AND idUnidad = $idUnidad";
 
 
 
@@ -404,7 +404,39 @@ function getDatosLitigacionMpUnidad($conn, $idMp, $mes, $anio, $idFiscalia, $idU
 		$arreglo[$indice][99]=$row['SobreseimientosMuerteImputado'];
 		$arreglo[$indice][100]=$row['recibiOtmp'];
 		$arreglo[$indice][101]=$row['cesefunciones'];
-
+		$arreglo[$indice][102]=$row['ordenesSolicitadas'];
+		$arreglo[$indice][103]=$row['ordenesSolicitadasAprehension'];
+		$arreglo[$indice][104]=$row['ordenesSolicitadasComparecencia'];
+		$arreglo[$indice][105]=$row['medidasProteccion'];
+		$arreglo[$indice][106]=$row['totalVictProt'];
+		$arreglo[$indice][107]=$row['actosInvestigacionControlJudicial'];
+		$arreglo[$indice][108]=$row['controlJudicialIntervencionTR'];
+  $arreglo[$indice][109]=$row['controlJudicialTomaMuestras'];
+  $arreglo[$indice][110]=$row['controlJudicialExhumacion'];
+  $arreglo[$indice][111]=$row['controlJudicialObDatosReservados'];
+  $arreglo[$indice][112]=$row['controlJudicialIntervencionCME'];
+  $arreglo[$indice][113]=$row['controlJudicialProvPrecautoria'];
+  $arreglo[$indice][114]=$row['actosInvestigacionSinControlJudicial'];
+  $arreglo[$indice][115]=$row['sinControlJudicialCadCustodia'];
+  $arreglo[$indice][116]=$row['sinControlJudicialInspLugDis'];
+  $arreglo[$indice][117]=$row['sinControlJudicialInspInmuebles'];
+  $arreglo[$indice][118]=$row['sinControlJudicialEntrevistasTestigos'];
+  $arreglo[$indice][119]=$row['sinControlJudicialReconocimientoPer'];
+  $arreglo[$indice][120]=$row['sinControlJudicialSolInfoPericiales'];
+  $arreglo[$indice][121]=$row['sinControlJudicialInfInstiSeg'];
+  $arreglo[$indice][122]=$row['sinControlJudicialexamenFisPersona'];
+  $arreglo[$indice][123]=$row['resolucionesJuicioOral'];
+  $arreglo[$indice][124]=$row['audienciaJuicioOral'];
+  $arreglo[$indice][125]=$row['audienciaFallo'];
+  $arreglo[$indice][126]=$row['absolutorio'];
+  $arreglo[$indice][127]=$row['audienciaIndiviSancion'];
+  $arreglo[$indice][128]=$row['procedimientoEspecial'];
+  $arreglo[$indice][129]=$row['audienciaCondenatorio'];
+  $arreglo[$indice][130]=$row['mecanismosAceleracion'];
+  $arreglo[$indice][131]=$row['apelacionesAmparo'];
+  $arreglo[$indice][132]=$row['amparos'];
+  $arreglo[$indice][133]=$row['amparoDirecto'];
+  $arreglo[$indice][134]=$row['amparoIndirecto'];
 		$indice++;
 	}
 	if(isset($arreglo)){return $arreglo;}
@@ -2308,5 +2340,22 @@ function getPeriodoActual($conn , $anio){
 	if(isset($arreglo)){return $arreglo;}
 }
 
+//Función para obtener el total de victimas de medidas de proteccion
+function getDataVic($conn, $idEstatusNucs, $mes, $idMp){
+	 $query = "SELECT COALESCE(SUM(medPro.masculino),0) + 
+	                  COALESCE(SUM(medPro.femenino),0) + 
+	                  COALESCE(SUM(medPro.moral),0) + 
+	                  COALESCE(SUM(medPro.desconocido),0) AS totalVictimas
+				 						 FROM [ESTADISTICAV2].[dbo].[estatusNucs] estNuc
+				 						 LEFT JOIN medidasDeProteccion medPro ON medPro.idEstatusNucs = estNuc.idEstatusNucs
+				  						where estNuc.idEstatus = $idEstatusNucs and estNuc.mes = $mes and estNuc.idMp = $idMp"; 
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['totalVictimas'];
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
 
 ?>

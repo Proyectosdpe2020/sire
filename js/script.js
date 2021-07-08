@@ -2592,11 +2592,19 @@ function validartamanoLit(idinput, idMp, mes, anio, estatResolucion, deten, idUn
 				ajax.onreadystatechange = function () {
 					if (ajax.readyState == 4 && ajax.status == 200) {
 
+										 if (objDatos.first == "SI") {
+										 				//getDatosNucDetermEstLit(nuc, idMp, estatResolucion, mes, anio, deten, idUnidad);
+										 				//caninsertLit(nuc, idMp, estatResolucion, mes, anio, deten, idUnidad);
+										 				getExpediente("expedCont", nuc);
+										 				if(estatResolucion == 19 || estatResolucion == 14){
+										 					setTimeout("showModalNucLitInfo2("+estatResolucion+","+nuc+","+idMp+","+mes+","+anio+","+deten+","+idUnidad+");",100);
+										 				}else{
+										 					setTimeout("insertarNucLit2("+idMp+","+estatResolucion+","+mes+","+anio+","+nuc+","+deten+","+idUnidad+");",100);
+										 				}
 
-						var cadCodificadaJSON = ajax.responseText;
-						var objDatos = eval("(" + cadCodificadaJSON + ")");
-
-						if (objDatos.first == "NO") { getExpediente("expedCont", nuc); swal("", "El numero de caso no existe.", "warning"); } else {
+										 }
+									}					
+								
 
 							if (objDatos.first == "SI") {
 								//getDatosNucDetermEstLit(nuc, idMp, estatResolucion, mes, anio, deten, idUnidad);
@@ -2622,7 +2630,7 @@ function validartamanoLit(idinput, idMp, mes, anio, estatResolucion, deten, idUn
 
 
 
-function insertarNucLit2(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad) {
+function insertarNucLit2(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad, opcInsert){				
 
 
 	acc = "insertNucLit";
@@ -2638,11 +2646,23 @@ function insertarNucLit2(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad)
 			var cadCodificadaJSON = ajax.responseText;
 			var objDatos = eval("(" + cadCodificadaJSON + ")");
 
-			if (objDatos.first == "NO") { swal("", "El NUC ya se encuentra registrado favor de revisar.", "Warning"); } else {
-
-				if (objDatos.first == "SI") {
-
-
+										 if (objDatos.first == "SI") {
+										 				swal("", "Se Registro Correctamente.", "success");																		
+															updateTableNucsLit(idMp, anio, mes, estatResolucion, nuc, deten, idUnidad);
+															/*Despues de haber validado la información adicional de SENAP y haber guardado el NUC se extrae el idEstatusNucs para 
+														   proceder a insertar la informacion del senap en la respectiva tabla dependiendo del idEstatus*/
+														  switch(estatResolucion){
+														 	case 19:
+														 								setTimeout("insertFormAutoVincuProc_db("+objDatos.ResolucionID+","+estatResolucion+","+nuc+", "+opcInsert+");",100);  
+														 	break;
+														 	case 14:
+														 								setTimeout("insertSentencias_db("+objDatos.ResolucionID+","+estatResolucion+","+nuc+", "+opcInsert+");",100);  
+														 	break;
+														 default:
+														  break;
+														 }			
+										 }
+									}
 
 					swal("", "Se Registro Correctamente.", "success");
 					updateTableNucsLit(idMp, anio, mes, estatResolucion, nuc, deten, idUnidad);
@@ -2853,9 +2873,9 @@ function validarEstatusShowInfoSica(estatResolucion) {
 		|| estatResolucion == 30 || estatResolucion == 31 || estatResolucion == 95 || estatResolucion == 61 || estatResolucion == 63
 		|| estatResolucion == 99 || estatResolucion == 89 || estatResolucion == 101 || estatResolucion == 103 || estatResolucion == 105
 		|| estatResolucion == 106 || estatResolucion == 89 || estatResolucion == 107 || estatResolucion == 108 || estatResolucion == 109
-		|| estatResolucion == 110 || estatResolucion == 111 || estatResolucion == 64 || estatResolucion == 60 || estatResolucion == 14
-		|| estatResolucion == 65 || estatResolucion == 66 || estatResolucion == 67 || estatResolucion == 68 || estatResolucion == 90
-		|| estatResolucion == 91) {
+		 || estatResolucion == 110 || estatResolucion == 111 || estatResolucion == 64 || estatResolucion == 60 || estatResolucion == 14 
+		 || estatResolucion == 65 || estatResolucion == 66 || estatResolucion == 67 || estatResolucion == 68 || estatResolucion == 90 
+		 || estatResolucion == 91 || estatResolucion == 129 || estatResolucion == 57){
 		return true;
 	}
 	else {
