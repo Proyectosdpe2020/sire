@@ -368,7 +368,7 @@
 												<td class="tdRowMain"><? echo $anioCaptura; ?></td>											
 
 
-														<? if($env == 0){} else { ?>
+														<? if($env == 1){} else { ?>
 														<td class="tdRowMain"><center> <button type="button" data-toggle="modal" href="#modalFormatoLitig"  onclick="cargarMOdalFormatoLit(<? echo $idEnlace; ?>,'<? echo $nomCompleto; ?>',<? echo $idMp; ?>, <? echo $idUnidad; ?>, <? echo $mesCapturar; ?>, <? echo $anioCaptura; ?>);" class="btn btn-primary btn-sm redondear btnCapturarTbl" ><span class="glyphicon glyphicon-pencil"></span> Capturar </button></center></td>
 														
 														<? } ?>

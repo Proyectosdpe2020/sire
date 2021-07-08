@@ -118,6 +118,34 @@
 					</div><br>
 					<div class="panel panel-default fd1">
 						<div class="panel-body">
+							<h5 class="text-on-pannel"><strong> Formulaciones de Imputación   </strong></h5>
+							<div class="row">
+								<div class="col-xs-12 col-sm-12 col-md-4">
+									<label class="colorLetras" for="inputlg">Solicitadas :</label>
+									<div class="iconiput">
+										<input type="number" placeholder="cantidad" class="first" id="FIsolic" value="<? if($a == 1 ){ echo  $datalit[0][91]; }else {echo 0;} ?>"/>
+										<span onclick="sendDataModalLitigacion('FIsolic',3,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkFIsolic"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-12 col-md-4">
+									<label class="colorLetras" for="inputlg">Otorgadas :</label>
+									<div class="iconiput">
+										<input type="number" placeholder="cantidad" class="first" id="FIotor" value="<? if($a == 1 ){ echo  $datalit[0][92]; } ?>"/>
+										<span onclick="sendDataModalLitigacion('FIotor',4,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkFIotor"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-12 col-md-4">
+									<label class="colorLetras" for="inputlg">Negadas :</label>
+									<div class="iconiput">
+										<input type="number" placeholder="cantidad" class="first" id="FInega" value="<? if($a == 1 ){ echo  $datalit[0][93]; } ?>"/>
+										<span onclick="sendDataModalLitigacion('FInega',5,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkFInega"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default fd1">
+						<div class="panel-body">
 							<h5 class="text-on-pannel"><strong> Control de la Detención  </strong></h5>
 							<div class="row">
 								<div class="col-xs-6">
@@ -380,20 +408,20 @@
 							<div class="row">
 								<div class="col-xs-12 col-sm-12 col-md-4">
 									<label class="colorLetras" for="inputlg">Ordenes solicitadas :</label>
-									<input type="number" value="<? if($a == 1 ){ echo  $datalit[0][36]; }else {echo 0;} ?>" placeholder="" disabled="" class="first" id="ONSoli"/>
+									<input type="number" value="<? if($a == 1 ){ echo  $datalit[0][102]; }else {echo 0;} ?>" placeholder="" disabled="" class="first" id="OS"/>
 								</div>
 								<div class="col-xs-12 col-sm-12 col-md-4">
 									<label class="colorLetras" for="inputlg">Aprehensión :</label>
 									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="ONapreSoli" onblur="sumcordnes(event)" value="<? if($a == 1 ){ echo  $datalit[0][37]; } ?>"/>
-										<span onclick="sendDataModalLitigacion('ONapreSoli',112,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkONapreSoli"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+										<input type="number" placeholder="cantidad" class="first" id="OSapre" onblur="sumcordnesSoli(event)" value="<? if($a == 1 ){ echo  $datalit[0][103]; } ?>"/>
+										<span onclick="sendDataModalLitigacion('OSapre',112,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkOSapre"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 									</div>
 								</div>
 								<div class="col-xs-12 col-sm-12 col-md-4">
 									<label class="colorLetras" for="inputlg">Comparecencia :</label>
 									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="ONcompSoli" onblur="sumcordnes(event)" value="<? if($a == 1 ){ echo  $datalit[0][38]; } ?>"/>
-										<span onclick="sendDataModalLitigacion('ONcompSoli',113,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkONcompSoli"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+										<input type="number" placeholder="cantidad" class="first" id="OScomp" onblur="sumcordnesSoli(event)" value="<? if($a == 1 ){ echo  $datalit[0][104]; } ?>"/>
+										<span onclick="sendDataModalLitigacion('OScomp',113,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkOScomp"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 									</div>
 								</div>
 							</div>
@@ -451,45 +479,17 @@
 					</div>
 					<div class="panel panel-default fd1">
 						<div class="panel-body">
-							<h5 class="text-on-pannel"><strong> Formulaciones de Imputación   </strong></h5>
-							<div class="row">
-								<div class="col-xs-12 col-sm-12 col-md-4">
-									<label class="colorLetras" for="inputlg">Solicitadas :</label>
-									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="FIsolic" value="<? if($a == 1 ){ echo  $datalit[0][91]; }else {echo 0;} ?>"/>
-										<span onclick="sendDataModalLitigacion('FIsolic',3,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkFIsolic"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
-									</div>
-								</div>
-								<div class="col-xs-12 col-sm-12 col-md-4">
-									<label class="colorLetras" for="inputlg">Otorgadas :</label>
-									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="FIotor" value="<? if($a == 1 ){ echo  $datalit[0][92]; } ?>"/>
-										<span onclick="sendDataModalLitigacion('FIotor',4,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkFIotor"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
-									</div>
-								</div>
-								<div class="col-xs-12 col-sm-12 col-md-4">
-									<label class="colorLetras" for="inputlg">Negadas :</label>
-									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="FInega" value="<? if($a == 1 ){ echo  $datalit[0][93]; } ?>"/>
-										<span onclick="sendDataModalLitigacion('FInega',5,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkFInega"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="panel panel-default fd1">
-						<div class="panel-body">
 							<h5 class="text-on-pannel"><strong> Medidas de protección   </strong></h5>
 							<div class="row">
 									<div class="col-xs-12 col-sm-12 col-md-3">
 										<label class="colorLetras" for="inputlg">Total de víctimas de protección :</label>
-										<input type="number" value="<? if($a == 1 ){ echo  $datalit[0][53]; }else {echo 0;} ?>" placeholder="" disabled="" class="first" id="MJC"/>
+										<input type="number" value="<? if($a == 1 ){ echo  $datalit[0][106]; }else{ echo 0; } ?>" placeholder="" disabled="" class="first" id="MPV"/>
 								 </div>
 									<div class="col-xs-12 col-sm-12 col-md-3">
 									<label class="colorLetras" for="inputlg">Medidas de protección :</label>
 									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="FIsolic" value="<? if($a == 1 ){ echo  0; }else {echo 0;} ?>"/>
-										<span onclick="sendDataModalLitigacion('FIsolic',129,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkFIsolic"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+										<input type="number" placeholder="cantidad" class="first" id="medidasProteccion" value="<? if($a == 1 ){ echo  $datalit[0][105]; } ?>"/>
+										<span onclick="sendDataModalLitigacion('medidasProteccion',129,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkMedidasProteccion"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 									</div>
 								</div>
 								</div>
@@ -501,35 +501,35 @@
 								<h5 class="text-on-pannel"><strong> Actos de investigación CON control judicial </strong></h5>
 								<div class="row">
 									<div class="col-xs-12 col-sm-12 col-md-3">
-										<input type="number" value="<? if($a == 1 ){ echo  0; }else {echo 0;} ?>" placeholder="" disabled="" class="first" id="AICJ"/>
+										<input type="number" value="<? if($a == 1 ){ echo  $datalit[0][107]; }else{ echo 0; } ?>" placeholder="" disabled="" class="first" id="AICJ"/>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-xs-12 col-sm-12 col-md-3">
 										<label class="colorLetras" for="inputlg">Intervención en tiempo real :</label>
 										<div class="iconiput">
-											<input type="number" placeholder="cantidad" class="first" id="intervencionTR" onblur="sumActInvConJud(event)" value="<? if($a == 1 ){ echo  0; } ?>"/>
+											<input type="number" placeholder="cantidad" class="first" id="intervencionTR" onblur="sumActInvConJud(event)" value="<? if($a == 1 ){ echo  $datalit[0][108]; } ?>"/>
 											<span onclick="sendDataModalLitigacion('intervencionTR',114,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkIntervencionTR"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 										</div>
 									</div>
 									<div class="col-xs-12 col-sm-12 col-md-3">
 										<label class="colorLetras" for="inputlg">Toma de muestras</label>
 										<div class="iconiput">
-											<input type="number" placeholder="cantidad" class="first" id="tomaMuestras" onblur="sumActInvConJud(event)" value="<? if($a == 1 ){ echo  0; } ?>"/>
+											<input type="number" placeholder="cantidad" class="first" id="tomaMuestras" onblur="sumActInvConJud(event)" value="<? if($a == 1 ){ echo $datalit[0][109]; } ?>"/>
 											<span onclick="sendDataModalLitigacion('tomaMuestras',115,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkTomaMuestras"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 										</div>
 									</div>
 									<div class="col-xs-12 col-sm-12 col-md-3">
 										<label class="colorLetras" for="inputlg">Exhumación :</label>
 										<div class="iconiput">
-											<input type="number" placeholder="cantidad" class="first" id="exhumacion" onblur="sumActInvConJud(event)" value="<? if($a == 1 ){ echo 0; } ?>"/>
+											<input type="number" placeholder="cantidad" class="first" id="exhumacion" onblur="sumActInvConJud(event)" value="<? if($a == 1 ){ echo $datalit[0][110]; } ?>"/>
 											<span onclick="sendDataModalLitigacion('exhumacion',116,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkExhumacion"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 										</div>
 									</div>
 									<div class="col-xs-12 col-sm-12 col-md-3">
 										<label class="colorLetras" for="inputlg">Obtención de datos reservados :</label>
 										<div class="iconiput">
-											<input type="number" placeholder="cantidad" class="first" id="obDatosReservados" onblur="sumActInvConJud(event)" value="<? if($a == 1 ){ echo  0; } ?>"/>
+											<input type="number" placeholder="cantidad" class="first" id="obDatosReservados" onblur="sumActInvConJud(event)" value="<? if($a == 1 ){ echo $datalit[0][111]; } ?>"/>
 											<span onclick="sendDataModalLitigacion('obDatosReservados',117,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkObDatosReservados"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 										</div>
 									</div>	
@@ -538,14 +538,14 @@
 									<div class="col-xs-12 col-sm-12 col-md-3">
 										<label class="colorLetras" for="inputlg">Intervención de comunicación en su modalidad de extracción :</label>
 										<div class="iconiput">
-											<input type="number" placeholder="cantidad" class="first" id="intervencionCME" onblur="sumActInvConJud(event)" value="<? if($a == 1 ){ echo  0; } ?>"/>
+											<input type="number" placeholder="cantidad" class="first" id="intervencionCME" onblur="sumActInvConJud(event)" value="<? if($a == 1 ){ echo $datalit[0][112]; } ?>"/>
 											<span onclick="sendDataModalLitigacion('intervencionCME',119,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkIntervencionCME"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 										</div>
 									</div>
 									<div class="col-xs-12 col-sm-12 col-md-3">
 										<label class="colorLetras" for="inputlg">La providencia precautoria (embargo de bienes e inmovilizacion de cuentas bancarias)</label>
 										<div class="iconiput">
-											<input type="number" placeholder="cantidad" class="first" id="provPrecautoria" onblur="sumActInvConJud(event)" value="<? if($a == 1 ){ echo  0; } ?>"/>
+											<input type="number" placeholder="cantidad" class="first" id="provPrecautoria" onblur="sumActInvConJud(event)" value="<? if($a == 1 ){ echo $datalit[0][113]; } ?>"/>
 											<span onclick="sendDataModalLitigacion('provPrecautoria',120,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkProvPrecautoria"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 										</div>
 									</div>
@@ -559,38 +559,35 @@
 								<h5 class="text-on-pannel"><strong> Actos de investigación SIN control judicial </strong></h5>
 								<div class="row">
 									<div class="col-xs-12 col-sm-12 col-md-3">
-										<label class="colorLetras" for="inputlg">Cantidad :</label>
-										<div class="iconiput">
-											<input type="number" placeholder="cantidad" class="first" id="AISCJ" disabled="" value="<? if($a == 1 ){ echo 0; }else {echo 0;} ?>"/>
-										</div>
+										<input type="number" value="<? if($a == 1 ){ echo  $datalit[0][114]; }else{ echo 0; } ?>" placeholder="" disabled="" class="first" id="AISCJ"/>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-xs-12 col-sm-12 col-md-3">
 										<label class="colorLetras" for="inputlg">Cadena de custodia :</label>
 										<div class="iconiput">
-											<input type="number" placeholder="cantidad" class="first" id="cadCustodia" onblur="sumActInvSinConJud(event)" value="0"/>
+											<input type="number" placeholder="cantidad" class="first" id="cadCustodia" onblur="sumActInvSinConJud(event)" value="<? if($a == 1 ){ echo $datalit[0][115]; } ?>"/>
 											<span onclick="sendDataModalLitigacion('cadCustodia',121,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkCadCustodia"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 										</div>
 									</div>
 									<div class="col-xs-12 col-sm-12 col-md-3">
 										<label class="colorLetras" for="inputlg">Inspección de lugar distinto a hechos :</label>
 										<div class="iconiput">
-											<input type="number" placeholder="cantidad" class="first" id="InspLugDis" onblur="sumActInvSinConJud(event)" value="0"/>
+											<input type="number" placeholder="cantidad" class="first" id="InspLugDis" onblur="sumActInvSinConJud(event)" value="<? if($a == 1 ){ echo $datalit[0][116]; } ?>"/>
 											<span onclick="sendDataModalLitigacion('InspLugDis',122,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkInspLugDis"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 										</div>
 									</div>
 									<div class="col-xs-12 col-sm-12 col-md-3">
 										<label class="colorLetras" for="inputlg">Inspección de inmuebles :</label>
 										<div class="iconiput">
-											<input type="number" placeholder="cantidad" class="first" id="InspInmuebles" onblur="sumActInvSinConJud(event)" value="0"/>
+											<input type="number" placeholder="cantidad" class="first" id="InspInmuebles" onblur="sumActInvSinConJud(event)" value="<? if($a == 1 ){ echo $datalit[0][117]; } ?>"/>
 											<span onclick="sendDataModalLitigacion('InspInmuebles',123,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkInspInmuebles"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 										</div>
 									</div>
 									<div class="col-xs-12 col-sm-12 col-md-3">
 										<label class="colorLetras" for="inputlg">Entrevistas entre testigos :</label>
 										<div class="iconiput">
-											<input type="number" placeholder="cantidad" class="first" id="entrevistasTestigos" onblur="sumActInvSinConJud(event)" value="0"/>
+											<input type="number" placeholder="cantidad" class="first" id="entrevistasTestigos" onblur="sumActInvSinConJud(event)" value="<? if($a == 1 ){ echo $datalit[0][118]; } ?>"/>
 											<span onclick="sendDataModalLitigacion('entrevistasTestigos',124,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkEntrevistasTestigos"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 										</div>
 									</div>
@@ -599,28 +596,28 @@
 									<div class="col-xs-12 col-sm-12 col-md-3">
 										<label class="colorLetras" for="inputlg">Reconocimiento entre personas :</label>
 										<div class="iconiput">
-											<input type="number" placeholder="cantidad" class="first" id="reconocimientoPer" onblur="sumActInvSinConJud(event)" value="0"/>
+											<input type="number" placeholder="cantidad" class="first" id="reconocimientoPer" onblur="sumActInvSinConJud(event)" value="<? if($a == 1 ){ echo $datalit[0][119]; } ?>"/>
 											<span onclick="sendDataModalLitigacion('reconocimientoPer',125,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkReconocimientoPer"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 										</div>
 									</div>
 									<div class="col-xs-12 col-sm-12 col-md-3">
 										<label class="colorLetras" for="inputlg">Solicitud de informes periciales :</label>
 										<div class="iconiput">
-											<input type="number" placeholder="cantidad" class="first" id="solInfoPericiales" onblur="sumActInvSinConJud(event)" value="0"/>
+											<input type="number" placeholder="cantidad" class="first" id="solInfoPericiales" onblur="sumActInvSinConJud(event)" value="<? if($a == 1 ){ echo $datalit[0][120]; } ?>"/>
 											<span onclick="sendDataModalLitigacion('solInfoPericiales',126,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkSolInfoPericiales"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 										</div>
 									</div>
 									<div class="col-xs-12 col-sm-12 col-md-3">
 										<label class="colorLetras" for="inputlg">Solicitud de información de Institutos de Seguridad :</label>
 										<div class="iconiput">
-											<input type="number" placeholder="cantidad" class="first" id="InfInstiSeg" onblur="sumActInvSinConJud(event)" value="0"/>
+											<input type="number" placeholder="cantidad" class="first" id="InfInstiSeg" onblur="sumActInvSinConJud(event)" value="<? if($a == 1 ){ echo $datalit[0][121]; } ?>"/>
 											<span onclick="sendDataModalLitigacion('InfInstiSeg',127,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkInfInstiSeg"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 										</div>
 									</div>
 									<div class="col-xs-12 col-sm-12 col-md-3">
 										<label class="colorLetras" for="inputlg">Reconocimiento o examen físico de persona :</label>
 										<div class="iconiput">
-											<input type="number" placeholder="cantidad" class="first" id="examenFisPersona" onblur="sumActInvSinConJud(event)" value="0"/>
+											<input type="number" placeholder="cantidad" class="first" id="examenFisPersona" onblur="sumActInvSinConJud(event)" value="<? if($a == 1 ){ echo $datalit[0][122]; } ?>"/>
 											<span onclick="sendDataModalLitigacion('examenFisPersona',128,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkExamenFisPersona"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 										</div>
 									</div>
@@ -640,10 +637,9 @@
 							<h5 class="text-on-pannel"><strong> Acusaciones presentadas </strong></h5>
 							<div class="row">
 								<div class="col-xs-12 col-sm-12 col-md-4">
+									<label class="colorLetras" for="inputlg">Total :</label>
 									<input type="number" value="<? if($a == 1 ){ echo  $datalit[0][99]; }else {echo 0;} ?>"  placeholder="" disabled="" class="first" id="ACPRE"/>
 								</div>
-							</div>
-							<div class="row">
 								<div class="col-xs-12 col-sm-12 col-md-4">
 									<label class="colorLetras" for="inputlg">Audiencia intermedia escrita :</label>
 									<div class="iconiput">
@@ -656,86 +652,6 @@
 									<div class="iconiput">
 										<input type="number" placeholder="cantidad" class="first" id="ACPREaio" onblur="sumAcusaPres(event)" value="<? if($a == 1 ){ echo  $datalit[0][58]; } ?>"/>
 										<span onclick="sendDataModalLitigacion('ACPREaio',63,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkACPREaio"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
-									</div>
-								</div>
-								<div class="col-xs-12 col-sm-12 col-md-4">
-									<label class="colorLetras" for="inputlg">Acusación por escrito :</label>
-									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="ACPREscrito" onblur="sumAcusaPres(event)" value="<? if($a == 1 ){ echo  $datalit[0][58]; } ?>"/>
-										<span onclick="sendDataModalLitigacion('ACPREscrito',63,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkACPREscrito"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="panel panel-default fd1">
-						<div class="panel-body">
-							<h5 class="text-on-pannel"><strong> Desglose de actuaciones </strong></h5>
-							<div class="row">
-								<div class="col-xs-12 col-sm-12 col-md-4">
-									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="DACTU" disabled="" value="<? if($a == 1 ){ echo  $datalit[0][91]; }else {echo 0;} ?>"/>
-										<span onclick="sendDataModalLitigacion('FIsolic',3,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkFIsolic"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-12 col-sm-12 col-md-3">
-									<label class="colorLetras" for="inputlg">Cadena de custodia :</label>
-									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="DACTUcadCustodia" onblur="sumDesgloceActuaciones(event)" value="0"/>
-										<span onclick="sendDataModalLitigacion('DACTUcadCustodia',36,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkONapre"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
-									</div>
-								</div>
-								<div class="col-xs-12 col-sm-12 col-md-3">
-									<label class="colorLetras" for="inputlg">Inspección de lugar distinto a hechos :</label>
-									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="DACTUInspLugDis" onblur="sumDesgloceActuaciones(event)" value="0"/>
-										<span onclick="sendDataModalLitigacion('DACTUInspLugDis',36,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkONapre"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
-									</div>
-								</div>
-								<div class="col-xs-12 col-sm-12 col-md-3">
-									<label class="colorLetras" for="inputlg">Inspección de inmuebles :</label>
-									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="DACTUInspInmuebles" onblur="sumDesgloceActuaciones(event)" value="0"/>
-										<span onclick="sendDataModalLitigacion('DACTUInspInmuebles',36,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkONapre"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
-									</div>
-								</div>
-								<div class="col-xs-12 col-sm-12 col-md-3">
-									<label class="colorLetras" for="inputlg">Entrevistas entre testigos :</label>
-									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="DACTUentrevistasJ" onblur="sumDesgloceActuaciones(event)" value="0"/>
-										<span onclick="sendDataModalLitigacion('DACTUentrevistasJ',36,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkONapre"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-12 col-sm-12 col-md-3">
-									<label class="colorLetras" for="inputlg">Reconocimiento entre personas :</label>
-									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="DACTUreconocimientoPer" onblur="sumDesgloceActuaciones(event)" value="0"/>
-										<span onclick="sendDataModalLitigacion('DACTUreconocimientoPer',36,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkONapre"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
-									</div>
-								</div>
-								<div class="col-xs-12 col-sm-12 col-md-3">
-									<label class="colorLetras" for="inputlg">Solicitud de informes periciales :</label>
-									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="DACTUsolInfoPericiales" onblur="sumDesgloceActuaciones(event)" value="0"/>
-										<span onclick="sendDataModalLitigacion('DACTUsolInfoPericiales',36,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkONapre"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
-									</div>
-								</div>
-								<div class="col-xs-12 col-sm-12 col-md-3">
-									<label class="colorLetras" for="inputlg">Solicitud de información de Institutos de Seguridad :</label>
-									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="DACTUInfInstiSeg" onblur="sumDesgloceActuaciones(event)" value="0"/>
-										<span onclick="sendDataModalLitigacion('DACTUInfInstiSeg',36,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkONapre"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
-									</div>
-								</div>
-								<div class="col-xs-12 col-sm-12 col-md-3">
-									<label class="colorLetras" for="inputlg">Reconocimiento o examen físico de persona :</label>
-									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="DACTUexamenFisPersona" onblur="sumDesgloceActuaciones(event)" value="0"/>
-										<span onclick="sendDataModalLitigacion('DACTUexamenFisPersona',36,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkONapre"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 									</div>
 								</div>
 							</div>
@@ -752,48 +668,55 @@
 					<!--Audiencias de Juicio Oral-->
 					<div class="panel panel-default fd1">
 						<div class="panel-body">
-							<h5 class="text-on-pannel"><strong> Audiencias de juicio oral </strong></h5>
-							<div class="row">
+							<h5 class="text-on-pannel"><strong> Resoluciones de Juicio Oral </strong></h5>
+								<div class="row">
 								<div class="col-xs-12 col-sm-12 col-md-4">
-									<input type="number" value=""  placeholder="" disabled="" class="first" id="AJO"/>
+									<input type="number" value="<? if($a == 1 ){ echo $datalit[0][123]; }else {echo 0; } ?>" placeholder="" disabled="" class="first" id="RESOJuiOral"/>
 								</div>
 							</div>
 							<div class="row">
+									<div class="col-xs-12 col-sm-12 col-md-4">
+									<label class="colorLetras" for="inputlg">Audiencia de juicio oral :</label>
+									<div class="iconiput">
+										<input type="number" placeholder="cantidad" class="first" id="audJuiOral" onblur="sumResoJuicioOral(event)" value="<? if($a == 1 ){ echo  $datalit[0][124]; } ?>"/>
+										<span onclick="sendDataModalLitigacion('audJuiOral',140,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkAudJuiOral"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+									</div>
+								</div>
 								<div class="col-xs-12 col-sm-12 col-md-4">
 									<label class="colorLetras" for="inputlg">Audiencia de fallo :</label>
 									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="audFallo" onblur="sumAcusaPres(event)" value=""/>
-										<span onclick="sendDataModalLitigacion('audFallo',61,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id=""><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+										<input type="number" placeholder="cantidad" class="first" id="audFallo" onblur="sumResoJuicioOral(event)" value="<? if($a == 1 ){ echo  $datalit[0][125]; } ?>"/>
+										<span onclick="sendDataModalLitigacion('audFallo',139,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkAudFallo"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 									</div>
 								</div>
 								<div class="col-xs-12 col-sm-12 col-md-4">
 									<label class="colorLetras" for="inputlg">Absolutorio :</label>
 									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="ACPREaie" onblur="sumAcusaPres(event)" value="<? if($a == 1 ){ echo  $datalit[0][57]; } ?>"/>
-										<span onclick="sendDataModalLitigacion('ACPREaie',61,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkACPREaie"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
-									</div>
-								</div>
-								<div class="col-xs-12 col-sm-12 col-md-4">
-									<label class="colorLetras" for="inputlg">Condenatorio :</label>
-									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="ACPREaio" onblur="sumAcusaPres(event)" value="<? if($a == 1 ){ echo  $datalit[0][58]; } ?>"/>
-										<span onclick="sendDataModalLitigacion('ACPREaio',63,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkACPREaio"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+										<input type="number" placeholder="cantidad" class="first" id="absolutorio" onblur="sumResoJuicioOral(event)" value="<? if($a == 1 ){ echo  $datalit[0][126]; } ?>"/>
+										<span onclick="sendDataModalLitigacion('absolutorio',141,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkAbsolutorio"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-xs-12 col-sm-12 col-md-4">
-									<label class="colorLetras" for="inputlg">Audiencia de individualización de sanción  :</label>
+									<label class="colorLetras" for="inputlg">Audiencia de individualización de sanción :</label>
 									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="ACPREaie" onblur="sumAcusaPres(event)" value="<? if($a == 1 ){ echo  $datalit[0][57]; } ?>"/>
-										<span onclick="sendDataModalLitigacion('ACPREaie',61,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkACPREaie"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+										<input type="number" placeholder="cantidad" class="first" id="AudIndiSan" onblur="sumResoJuicioOral(event)" value="<? if($a == 1 ){ echo  $datalit[0][127]; } ?>"/>
+										<span onclick="sendDataModalLitigacion('AudIndiSan',144,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkAIDS"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 									</div>
 								</div>
 								<div class="col-xs-12 col-sm-12 col-md-4">
-									<label class="colorLetras" for="inputlg">Procedimiento especial  :</label>
+									<label class="colorLetras" for="inputlg">Procedimiento especial :</label>
 									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="ACPREaio" onblur="sumAcusaPres(event)" value="<? if($a == 1 ){ echo  $datalit[0][58]; } ?>"/>
-										<span onclick="sendDataModalLitigacion('ACPREaio',63,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkACPREaio"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+										<input type="number" placeholder="cantidad" class="first" id="procEspecial" onblur="sumResoJuicioOral(event)" value="<? if($a == 1 ){ echo  $datalit[0][128]; } ?>"/>
+										<span onclick="sendDataModalLitigacion('procEspecial',145,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkProcEspecial"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-12 col-md-4">
+									<label class="colorLetras" for="inputlg">Condenatorio :</label>
+									<div class="iconiput">
+										<input type="number" placeholder="cantidad" class="first" id="audCondenatorio" onblur="sumResoJuicioOral(event)" value="<? if($a == 1 ){ echo  $datalit[0][129]; } ?>"/>
+										<span onclick="sendDataModalLitigacion('audCondenatorio',142,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkAudCondenatorio"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 									</div>
 								</div>
 							</div>
@@ -849,32 +772,6 @@
 							</div>
 						</div>
 					</div>
-					<div class="panel panel-default fd1">
-						<div class="panel-body">
-							<h5 class="text-on-pannel"><strong> Incompetencia </strong></h5>
-							<div class="row">
-								<div class="col-xs-12">
-									<input type="number" value="<? if($a == 1 ){ echo  $datalit[0][68]; }else {echo 0;} ?>" placeholder="" disabled="" class="first" id="INCOM"/>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-6">
-									<label class="colorLetras" for="inputlg">Decretadas :</label>
-									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="INCOMdecre" onblur="sumImcompetenc(event)" value="<? if($a == 1 ){ echo  $datalit[0][69]; } ?>"/>
-										<span onclick="sendDataModalLitigacion('INCOMdecre',70,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkINCOMdecre"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
-									</div>
-								</div>
-								<div class="col-xs-6">
-									<label class="colorLetras" for="inputlg">Admitidas :</label>
-									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="INCOMadmi" onblur="sumImcompetenc(event)" value="<? if($a == 1 ){ echo  $datalit[0][70]; } ?>"/>
-										<span onclick="sendDataModalLitigacion('INCOMadmi',71,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkINCOMadmi"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
 					<div class="row">
 						<div class="col-xs-12">
 						<label class="colorLetras" for="inputlg">Total de audiencias :</label>
@@ -884,32 +781,6 @@
 						</div>
 					</div>
 				</div><br>
-				<div class="panel panel-default fd1">
-					<div class="panel-body">
-						<h5 class="text-on-pannel"><strong> Apelaciones contra resoluciones del tribunal de enjuiciamiento </strong></h5>
-						<div class="row">
-							<div class="col-xs-12">
-								<input type="number" value="<? if($a == 1 ){ echo  $datalit[0][83]; }else {echo 0;} ?>" placeholder="" disabled="" class="first" id="ARTE"/>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-6">
-								<label class="colorLetras" for="inputlg">Desistimiento de la acción penal :</label>
-								<div class="iconiput">
-									<input type="number" placeholder="cantidad" class="first"  id="ARTEdap" onblur="sumApelacResolTribuEnj(event)" value="<? if($a == 1 ){ echo  $datalit[0][84]; } ?>"/>
-									<span onclick="sendDataModalLitigacion('ARTEdap',83,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkARTEdap"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
-								</div>
-							</div>
-							<div class="col-xs-6">
-								<label class="colorLetras" for="inputlg">Sentencia definitiva :</label>
-								<div class="iconiput">
-									<input type="number" placeholder="cantidad" class="first" id="ARTEsd" onblur="sumApelacResolTribuEnj(event)" value="<? if($a == 1 ){ echo  $datalit[0][85]; } ?>"/>
-									<span onclick="sendDataModalLitigacion('ARTEsd',84,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkARTEsd"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 				<div class="panel panel-default fd1">
 					<div class="panel-body">
 						<h5 class="text-on-pannel"><strong> De las sentencias dictadas </strong></h5>
@@ -941,21 +812,6 @@
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12">
-						<label class="colorLetras" for="inputlg"> Por cambio de situación jurídica declarados sin materia :</label>
-						<div class="iconiput">
-							<input type="number" placeholder="cantidad" class="first"  id="csjdsm" value="<? if($a == 1 ){ echo  $datalit[0][90]; } ?>"/>
-							<span onclick="sendDataModalLitigacion('csjdsm',88,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkcsjdsm"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12">
-						<label class="colorLetras" for="inputlg"> Canalizadas por cese de funciones del Ministerio Público  :</label>
-						<input type="number" placeholder="" class="first"  id="cesefunciones" value="<? if($a == 1 ){ echo  $datalit[0][101]; } ?>"/>
 					</div>
 				</div>
 			</div>
@@ -1001,24 +857,17 @@
 									<input type="number" placeholder="cantidad" class="first" id="proabre" onblur="sumTotCarpJudTram(event)" value="<? if($a == 1 ){ echo  $datalit[0][30]; } ?>"/><!-- Enviar a sicap  -->		<span onclick="sendDataModalSicap('proabre',13,0,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkproabre"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 								</div>
 							</div>
-							<div class="col-xs-12 col-sm-12 col-md-4">
-								<label class="colorLetras" for="inputlg">Mecanismos de aceleración :</label>
-								<div class="iconiput">
-									<input type="number" placeholder="cantidad" class="first" id="proabre" onblur="sumTotCarpJudTram(event)" value="<? if($a == 1 ){ echo  $datalit[0][30]; } ?>"/><!-- Enviar a sicap  -->		<span onclick="sendDataModalSicap('proabre',13,0,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkproabre"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
-								</div>
-							</div>
 						</div>
 					</div>
 				</div>
-				<div class="panel panel-default fd1">
+					<div class="panel panel-default fd1">
 					<div class="panel-body">
-						<h5 class="text-on-pannel"><strong>Criterios de Oportunidad</strong></h5>
+						<h5 class="text-on-pannel"><strong> Mecanismos de aceleración  </strong></h5>	
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-4">
-								<label class="colorLetras" for="inputlg">Criterio de oportunidad :</label>
+								<label class="colorLetras" for="inputlg">Mecanismos de aceleración :</label>
 								<div class="iconiput">
-									<input type="number" placeholder="cantidad" class="first" onblur="summecanalternat(event)" id="criopor" value="<? if($a == 1 ){ echo  $datalit[0][28]; } ?>"/>
-									<span onclick="sendDataModalLitigacion('criopor',91,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkcriopor"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+									<input type="number" placeholder="cantidad" class="first" id="mecanismosAceleracion" onblur="" value="<? if($a == 1 ){ echo  $datalit[0][130]; } ?>"/>	<span onclick="sendDataModalLitigacion('mecanismosAceleracion',146,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkMecanismoAcele"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 								</div>
 							</div>
 						</div>
@@ -1133,6 +982,77 @@
 				</div>
 				<div class="panel panel-default fd1">
 					<div class="panel-body">
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-4">
+								<label class="colorLetras" for="inputlg">Apelaciones no admitidas :</label>
+								<div class="iconiput">
+									<input type="number" placeholder="cantidad" class="first" id="apenoadmi" value="<? if($a == 1 ){ echo  $datalit[0][43]; } ?>"/>
+									<span onclick="sendDataModalLitigacion('apenoadmi',44,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkapenoadmi"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-12 col-md-4">
+								<label class="colorLetras" for="inputlg">Apelaciones por amparo :</label>
+								<div class="iconiput">
+									<input type="number" placeholder="cantidad" class="first" id="apeamparo" value="<? if($a == 1 ){ echo  $datalit[0][131]; } ?>"/>
+									<span onclick="sendDataModalLitigacion('apeamparo',147,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkapeamparo"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default fd1">
+					<div class="panel-body">
+						<h5 class="text-on-pannel"><strong> Amparos </strong></h5>
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-4">
+								<label class="colorLetras" for="inputlg">Total :</label>
+								<input type="number" value="<? if($a == 1 ){ echo  $datalit[0][132]; }else {echo 0;} ?>" placeholder="" disabled="" class="first" id="amparos"/>
+							</div>
+							<div class="col-xs-12 col-sm-12 col-md-4">
+								<label class="colorLetras" for="inputlg">Amparo directo :</label>
+								<div class="iconiput">
+									<input type="number" placeholder="cantidad" class="first"  id="amparoDirecto" onblur="sumAmparo(event)" value="<? if($a == 1 ){ echo  $datalit[0][133]; } ?>"/>
+									<span onclick="sendDataModalLitigacion('amparoDirecto',148,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkAmparoDirecto"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-12 col-md-4">
+								<label class="colorLetras" for="inputlg">Amparo indirecto :</label>
+								<div class="iconiput">
+									<input type="number" placeholder="cantidad" class="first" id="amparoIndirecto" onblur="sumAmparo(event)" value="<? if($a == 1 ){ echo  $datalit[0][134]; } ?>"/>
+									<span onclick="sendDataModalLitigacion('amparoIndirecto',149,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkAmparoIndirecto"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+					<div class="panel panel-default fd1">
+					<div class="panel-body">
+						<h5 class="text-on-pannel"><strong> Apelaciones contra resoluciones del tribunal de enjuiciamiento </strong></h5>
+						<div class="row">
+							<div class="col-xs-12">
+								<input type="number" value="<? if($a == 1 ){ echo  $datalit[0][83]; }else {echo 0;} ?>" placeholder="" disabled="" class="first" id="ARTE"/>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-6">
+								<label class="colorLetras" for="inputlg">Desistimiento de la acción penal :</label>
+								<div class="iconiput">
+									<input type="number" placeholder="cantidad" class="first"  id="ARTEdap" onblur="sumApelacResolTribuEnj(event)" value="<? if($a == 1 ){ echo  $datalit[0][84]; } ?>"/>
+									<span onclick="sendDataModalLitigacion('ARTEdap',83,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkARTEdap"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<label class="colorLetras" for="inputlg">Sentencia definitiva :</label>
+								<div class="iconiput">
+									<input type="number" placeholder="cantidad" class="first" id="ARTEsd" onblur="sumApelacResolTribuEnj(event)" value="<? if($a == 1 ){ echo  $datalit[0][85]; } ?>"/>
+									<span onclick="sendDataModalLitigacion('ARTEsd',84,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkARTEsd"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default fd1">
+					<div class="panel-body">
 						<h5 class="text-on-pannel"><strong> Sobreseimientos Decretados </strong></h5>
 						<div class="row">
 							<div class="col-xs-12">
@@ -1177,6 +1097,15 @@
 							</div>
 						</div>
 						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-12">
+								<label class="colorLetras" for="inputlg">Criterio de oportunidad :</label>
+								<div class="iconiput">
+									<input type="number" placeholder="cantidad" class="first" onblur="summecanalternat(event)" id="criopor" value="<? if($a == 1 ){ echo  $datalit[0][28]; } ?>"/>
+									<span onclick="sendDataModalLitigacion('criopor',91,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkcriopor"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+								</div>
+							</div>
+						</div>
+						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-4">
 								<label class="colorLetras" for="inputlg">Terminación anticipada :</label>
 								<div class="iconiput">
@@ -1192,6 +1121,32 @@
 								</div>
 							</div>
 						</div>
+						<div class="panel panel-default fd1">
+						<div class="panel-body">
+							<h5 class="text-on-pannel"><strong> Incompetencia </strong></h5>
+							<div class="row">
+								<div class="col-xs-12">
+									<input type="number" value="<? if($a == 1 ){ echo  $datalit[0][68]; }else {echo 0;} ?>" placeholder="" disabled="" class="first" id="INCOM"/>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-6">
+									<label class="colorLetras" for="inputlg">Decretadas :</label>
+									<div class="iconiput">
+										<input type="number" placeholder="cantidad" class="first" id="INCOMdecre" onblur="sumImcompetenc(event)" value="<? if($a == 1 ){ echo  $datalit[0][69]; } ?>"/>
+										<span onclick="sendDataModalLitigacion('INCOMdecre',70,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkINCOMdecre"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+									</div>
+								</div>
+								<div class="col-xs-6">
+									<label class="colorLetras" for="inputlg">Admitidas :</label>
+									<div class="iconiput">
+										<input type="number" placeholder="cantidad" class="first" id="INCOMadmi" onblur="sumImcompetenc(event)" value="<? if($a == 1 ){ echo  $datalit[0][70]; } ?>"/>
+										<span onclick="sendDataModalLitigacion('INCOMadmi',71,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkINCOMadmi"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 						<div class="panel panel-default fd1">
 							<div class="panel-body">
 								<h5 class="text-on-pannel"><strong> Desistimiento del recurso  </strong></h5>
@@ -1222,22 +1177,6 @@
 											<span onclick="sendDataModalLitigacion('DRppmp',43,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkDRppmp"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 										</div>
 									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-12 col-sm-12 col-md-4">
-								<label class="colorLetras" for="inputlg">Apelaciones no admitidas :</label>
-								<div class="iconiput">
-									<input type="number" placeholder="cantidad" class="first" id="apenoadmi" value="<? if($a == 1 ){ echo  $datalit[0][43]; } ?>"/>
-									<span onclick="sendDataModalLitigacion('apenoadmi',44,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkapenoadmi"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
-								</div>
-							</div>
-							<div class="col-xs-12 col-sm-12 col-md-4">
-								<label class="colorLetras" for="inputlg">Apelaciones por amparo :</label>
-								<div class="iconiput">
-									<input type="number" placeholder="cantidad" class="first" id="apeamparo" value="<? if($a == 1 ){ echo  $datalit[0][43]; } ?>"/>
-									<span onclick="sendDataModalLitigacion('apeamparo',0,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkapeamparo"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 								</div>
 							</div>
 						</div>
@@ -1283,6 +1222,21 @@
 								</div>
 							</div>
 						</div>
+						<div class="row">
+					<div class="col-xs-12">
+						<label class="colorLetras" for="inputlg"> Por cambio de situación jurídica declarados sin materia :</label>
+						<div class="iconiput">
+							<input type="number" placeholder="cantidad" class="first"  id="csjdsm" value="<? if($a == 1 ){ echo  $datalit[0][90]; } ?>"/>
+							<span onclick="sendDataModalLitigacion('csjdsm',88,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkcsjdsm"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<label class="colorLetras" for="inputlg"> Canalizadas por cese de funciones del Ministerio Público  :</label>
+						<input type="number" placeholder="" class="first"  id="cesefunciones" value="<? if($a == 1 ){ echo  $datalit[0][101]; } ?>"/>
+					</div>
+				</div>
 						<div class="row">
 							<div class="col-xs-12">
 								<label class="colorLetras" for="inputlg">Total de carpetas judicializadas en tramite:</label>

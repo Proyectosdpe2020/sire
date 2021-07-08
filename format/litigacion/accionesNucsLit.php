@@ -251,7 +251,7 @@ switch ($acc) {
                   <table class="table table-striped tblTransparente">
                                         <thead>
                                            <tr class="cabezeraTabla">
-                                                      <th class="col-xs-1 col-sm-1 col-md-1 textCent">No<? echo $estatResolucion; ?></th>
+                                                      <th class="col-xs-1 col-sm-1 col-md-1 textCent">No</th>
                                                       <th class="col-xs-4 col-sm-4 col-md-4 textCent">Numero Caso </th>
                                                       <th class="col-xs-6 col-sm-6 col-md-6 textCent">Expediente</th>          
                                                       <th class="col-xs-1 col-sm-1 col-md-1 textCent">Acción</th>
@@ -489,7 +489,7 @@ switch ($acc) {
 
           $vari = "valor";
 
-          $arregloEsatusLit = array( 1,2,3,4,5,6,7,10,12,98,97,96,17,18,95,20,21,22,23,24,25,26,27,28,29,30,31,89,99,90,91,93,32,33,34,35,36,38,40,41,43,44,45,46,48,49,50,53,57,58,60,61,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88 );
+          $arregloEsatusLit = array( 1,2,3,4,5,6,7,10,12,98,97,96,17,18,95,20,21,22,23,24,25,26,27,28,29,30,31,89,99,90,91,93,32,33,34,35,36,38,40,41,43,44,45,46,48,49,50,53,57,58,60,61,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,112,113,129,114,115,116,117,119,120,121,122,123,124,125,126,127,128,140,139,141,144,145,142,146,147,148,149);
 
          
           for ($p=0; $p < sizeof($arregloEsatusLit) ; $p++) {                 

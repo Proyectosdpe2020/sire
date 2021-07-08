@@ -1,5 +1,5 @@
 //Muestra modal para ingresar información adicional del NUC solicitado por SENAP
-function showModalNucLitInfo(idEstatusNucs, estatus, nuc, idCarpeta){
+function showModalNucLitInfo(idEstatusNucs, estatus, nuc, idCarpeta, idMp, mes, anio){
 	ajax=objetoAjax();
 	ajax.open("POST", "format/litigacion/modalNucsInfoLitig.php");
 
@@ -12,7 +12,7 @@ function showModalNucLitInfo(idEstatusNucs, estatus, nuc, idCarpeta){
 		}
 	}
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	ajax.send('&idEstatusNucs='+idEstatusNucs+'&estatus='+estatus+'&nuc='+nuc+'&idCarpeta='+idCarpeta);
+	ajax.send('&idEstatusNucs='+idEstatusNucs+'&estatus='+estatus+'&nuc='+nuc+'&idCarpeta='+idCarpeta+'&idMp='+idMp+'&mes='+mes+'&anio='+anio);
 }
 
 //Muestra modal para ingresar información adicional del NUC solicitado por SENAP
@@ -423,17 +423,19 @@ function insertFormJudicializada_db(idEstatusNucs, estatus, nuc, opcInsert){
    var reclasificacion = 1;
    var newBrwosers_id = $("#newBrwoser").val();
 			var idCatModalidadEst = $("#newBrwosers").find("option[value='" + newBrwosers_id + "']").attr('data-id');
+			var causaPenal = document.getElementById("causaPenal").value;
 
 }else{
 	  var reclasificacion = 0;
 	  $("input[type=radio]:checked").each(function(){ idCatModalidadEst = $(this).val() });
+	  var causaPenal = document.getElementById("causaPenal").value;
 }
-	if(typeof idCatModalidadEst !== 'undefined'){
+	if(typeof idCatModalidadEst !== 'undefined' && causaPenal != ""){
 		$.ajax({
 			type: "POST",
 		 dataType: "html",
 			url:  "format/litigacion/insertSenap/insert_FormJudicializada.php",
-		 data: 'idEstatusNucs='+idEstatusNucs+'&nuc='+nuc+'&opcInsert='+opcInsert+'&idCatModalidadEst='+idCatModalidadEst+'&reclasificacion='+reclasificacion,
+		 data: 'idEstatusNucs='+idEstatusNucs+'&nuc='+nuc+'&opcInsert='+opcInsert+'&idCatModalidadEst='+idCatModalidadEst+'&reclasificacion='+reclasificacion+'&causaPenal='+causaPenal,
 		 success: function(respuesta){
 		 	var json = respuesta;
 		 	var obj = eval("(" + json + ")");
@@ -455,8 +457,8 @@ function insertFormJudicializada_db(idEstatusNucs, estatus, nuc, opcInsert){
 	}
 }
 
-/****Ingresa a la bd la informacion de SENAP de Criterios de Oportunidad****/
-function insertMedidaProteccion_db(idEstatusNucs, estatus, nuc, opcInsert){
+/****Ingresa a la bd la informacion de medidas de proteccion****/
+function insertMedidaProteccion_db(idEstatusNucs, estatus, nuc, opcInsert, idMp, mes, anio){
 		var masculino = document.getElementById("personaFisMasc").value;
 		var femenino = document.getElementById("personaFisFem").value;
 		var moral = document.getElementById("personaMoral").value;
@@ -471,7 +473,38 @@ function insertMedidaProteccion_db(idEstatusNucs, estatus, nuc, opcInsert){
 			type: "POST",
 		 dataType: "html",
 			url:  "format/litigacion/insertSenap/insert_FormMedidaProteccion.php",
-		 data: 'idEstatusNucs='+idEstatusNucs+'&nuc='+nuc+'&opcInsert='+opcInsert+'&masculino='+masculino+'&femenino='+femenino+'&moral='+moral+'&desconocido='+desconocido,
+		 data: 'idEstatusNucs='+idEstatusNucs+'&nuc='+nuc+'&opcInsert='+opcInsert+'&masculino='+masculino+'&femenino='+femenino+'&moral='+moral+'&desconocido='+desconocido+'&idMp='+idMp+'&mes='+mes+'&anio='+anio,
+		 success: function(respuesta){
+		 	var json = respuesta;
+		 	var obj = eval("(" + json + ")");
+		 	if (obj.first == "NO") { 
+		 		swal("", "No se registro verifique los datos.", "warning"); 
+		 	}else{
+		 		if (obj.first == "SI") {
+		 			$('#MPV').val(obj.victimas); //actualizamos el numero de victimas
+		 			var obj = eval("(" + json + ")");
+		 			swal("", "Registro exitosamente. ", "success");
+		 			$('#modalNucsLitigInfo').modal('hide');
+		 			$('#modalNucsLitig').modal('show');
+		 		}
+		 	}
+		 }
+		});
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+/****Ingresa a la bd la informacion de fecha de cumplimento de mandamiento judicial orden de aprehension****/
+function insertFechaCumplimento_db(idEstatusNucs, estatus, nuc, opcInsert, idMp, mes, anio){
+		var fechaCumplimiento = document.getElementById("fechaCumplimiento").value;
+
+	if(fechaCumplimiento != ""){
+		$.ajax({
+			type: "POST",
+		 dataType: "html",
+			url:  "format/litigacion/insertSenap/insert_FormFechaCumplimento.php",
+		 data: 'idEstatusNucs='+idEstatusNucs+'&nuc='+nuc+'&opcInsert='+opcInsert+'&fechaCumplimiento='+fechaCumplimiento+'&idMp='+idMp+'&mes='+mes+'&anio='+anio,
 		 success: function(respuesta){
 		 	var json = respuesta;
 		 	var obj = eval("(" + json + ")");
@@ -480,8 +513,7 @@ function insertMedidaProteccion_db(idEstatusNucs, estatus, nuc, opcInsert){
 		 	}else{
 		 		if (obj.first == "SI") {
 		 			var obj = eval("(" + json + ")");
-		 			swal("", "Registro exitosamente.", "success");
-		 			//reloadOpcInsertButton(idEstatusNucs, estatus, nuc,  1);
+		 			swal("", "Registro exitosamente. ", "success");
 		 			$('#modalNucsLitigInfo').modal('hide');
 		 			$('#modalNucsLitig').modal('show');
 		 		}
@@ -525,12 +557,14 @@ function sendDataJudicializada(nuc, estatus, idMp, mes, anio, deten, idUnidad, o
    var reclasificacion = 1;
    var newBrwosers_id = $("#newBrwoser").val();
 			var idCatModalidadEst = $("#newBrwosers").find("option[value='" + newBrwosers_id + "']").attr('data-id');
+   var causaPenal = document.getElementById("causaPenal").value;
 
 }else{
 	  var reclasificacion = 0;
 	  $("input[type=radio]:checked").each(function(){ idCatModalidadEst = $(this).val() });
+	  var causaPenal = document.getElementById("causaPenal").value;
 }
-	if(typeof idCatModalidadEst !== 'undefined'){
+	if(typeof idCatModalidadEst !== 'undefined' && causaPenal != ""){
 	 insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert);
 	 $('#modalNucsLitigInfo').modal('hide');
 			$('#modalNucsLitig').modal('show');
@@ -709,6 +743,20 @@ function sendDataMedidasProteccion(nuc, estatus, idMp, mes, anio, deten, idUnida
 		swal("", "Faltan datos por registrar.", "warning");
 	}
 }
+
+function sendDataFechaCumplimento(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcInsert){
+		var fechaCumplimiento = document.getElementById("fechaCumplimiento").value;
+
+	if(fechaCumplimiento != ""){
+		insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert);
+	  $('#modalNucsLitigInfo').modal('hide');
+			$('#modalNucsLitig').modal('show');
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+
 /*
 //Mecanismo para cambiar de formulario a otro
 function openForm(evt, etapa) {

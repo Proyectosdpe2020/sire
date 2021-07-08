@@ -42,6 +42,7 @@
 	 		$opcInsert = 1; 
 	 		$idModalidadEstadistica = $getData[0][2]; 
 	 		$reclasificado = $getData[0][3];
+	 		$causaPenal = $getData[0][4];
 	 		$getName = getDataDelitoNombre($conSic , $idModalidadEstadistica );
 	 		$nombreDelito = $getName[0][1];
 	 }else{ 	$opcInsert = 0;  $reclasificado = 0; }?>
@@ -50,7 +51,7 @@
 			 <div class="row">
 			 	<div class="col-xs-12 col-sm-12  col-md-12">
 			 			<label class="colorLetras" for="inputlg">Número asignado a la causa penal :</label>
-											<input type="text"  class="first" id="cadCustodia"  />
+											<input type="text"  class="first" id="causaPenal" value="<? if($opcInsert == 1){ echo $causaPenal; } ?>" />
 			 	</div>
 			 </div><br>
 			<!-- TABLA DELITOS POR LA CUAL SE JUDICIALIZO-->
@@ -855,8 +856,36 @@
 			<?if(	$opcInsert == 0){ ?>
 			<button style="width: 88%;" onclick="sendDataMedidasProteccion(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> ,  <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
 			<?}elseif(	$opcInsert == 1 ){?>
-			<button style="width: 88%;" onclick="insertMedidaProteccion_db(<?echo $idEstatusNucs; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
+			<button style="width: 88%;" onclick="insertMedidaProteccion_db(<?echo $idEstatusNucs; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>, <? echo $idMp; ?> , <? echo $mes; ?>, <? echo $anio; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
 			<? } ?>
+		</div>
+	</div>
+ <? } ?>
+
+ <? if($estatus == 57){ 
+ 	$getData = getDataFechaCumplimento($conn, $idEstatusNucs);
+	 	if(sizeof($getData) > 0){ 
+	 		$opcInsert = 1; 
+	 		$fecha = $getData[0][2] ->format('Y-m-d'); 
+	 	}else{ 	$opcInsert = 0; }
+	 	?>
+	<div class="row">
+		<!--fecha cumplimento mandamiento judicial :-->
+		<div class="col-xs-12 col-sm-12  col-md-12">
+			<label for="fechaCumplimiento">Fecha de cumplimiento : </label>
+			<input id="fechaCumplimiento" type="date" value="<?if($opcInsert == 1){echo $fecha;}?>" name="fechaCumplimiento" class="fechas form-control gehit"  />
+		</div>
+	</div><br><br><br><br>
+	<div class="row">
+		<div class="col-xs-12 col-sm-6 col-md-6">
+			<button style="width: 88%;" onclick="closeModalNucsLitigInfo()" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button>
+		</div>
+		<div class="col-xs-12 col-sm-6  col-md-6 ">
+		<?if(	$opcInsert == 0){ ?>
+			<button style="width: 88%;" onclick="sendDataFechaCumplimento(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> ,  <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
+			<?}elseif(	$opcInsert == 1 ){?>
+			<button style="width: 88%;" onclick="insertFechaCumplimento_db(<? echo $idEstatusNucs; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
+		<? } ?>
 		</div>
 	</div>
  <? } ?>

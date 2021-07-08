@@ -21,29 +21,22 @@
 
 
 																																	<div class="col-xs-12 col-sm-12 col-md-12" style=" ">
-																																		      	<div class="x_panel panelCabezera">
+																																		      
 
-					<table border="0" class="alwidth">						
-							<tr>								
-								<td id="nomostrar" class="imgSelloCabezera" width="5%" height="125"></td>								
-								<td width="50%">
-																									<div class="tituloCentralSegu">
-																										<div class="titulosCabe1">
-																											<h4> <label class="titulo2">Fiscalía General del Estado de Michoácan</label></h4>
-																											<label class="titulo100" style="color: #566573 ; font-weight: bolder;">DIRECCIÓN GENERAL DE TECNOLOGÍAS DE LA INFORMACIÓN, PLANEACIÓN Y ESTADÍSTICA</label>
-																											<h4> <label class="titulo2">Dirección de Planeación y Estadística</label></h4>
-																										</div>
-																									</div>
-																						</td>
-								<td id="nomostrar" class="imgdgtipeCabezera" width="10%" height="125"></td>
-							</tr>
-					</table>
+								    	</table>
 
 
-				</div>
+																						<div class="row"  style=" padding: 10px; margin: 10px;">
+																				
+																							<div class="col-xs-12 col-sm-12  col-md-12">
+																									
+																														<div class="row" id="contDataUpdLitigacionUnidad">
+																																	
+																																		<div class="col-xs-12 col-sm-4 col-md-4" style=" ">
 
-																																									<table  border="0" id="#table_inicio" width="100%" style="margin-top: 10px;">
-																																											<tr >					
+																																									<table border="0" id="table1110" width="100%" style="margin-top: -10px;">						
+																		                        	<div id="respDesc"></div>
+																																													<tr >					
 																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia">Existencia anterior (+)</label></td>			
 																																																<td style="width: 3%; font-weight: bold;" class="tdFiscalia"><center><? echo $data[0][0] ?></center></td>		
 																																												</tr>
@@ -51,7 +44,8 @@
 																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia">Recibidas por Otro Ministerio Público</label></td>			
 																																																<td style="width: 3%; font-weight: bold;" class="tdFiscalia"><center><? echo $data[0][105] ?></center></td>		
 																																												</tr>
-																																														<tr>				
+																																												
+																																													<tr>				
 																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Carpetas Judicializadas</label></td>			
 																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][1] ?></center></td>		
 																																												</tr>
@@ -59,21 +53,31 @@
 																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Con detenido (+)</label></td>			
 																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][2] ?></center></td>				
 																																												</tr>
-																																															<tr>				
+																																												 <tr>				
 																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Sin detenido (+)</label></td>			
 																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][3] ?></center></td>		
 																																												</tr>
-																																									</table>
-
-																																		</div>
-																																	
-																																		<div class="col-xs-12 col-sm-12 col-md-12" style=" ">
-
-																																									<table  id="table1110" width="100%" style="margin-top: 10px;">						
-																				                       <div id="respDesc"></div>
-																																													<tr >					
-																																																<td style="width: 100%; text-align: center;" class="tdFiscalia"><label class="labelFiscalia">ETAPA INICIAL </label></td>			
-																																												 </tr>
+																																												<tr>
+																																													<td>
+																																														<br><label class="labelFiscalia">ETAPA INICIAL</label>
+																																													</td>
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Formulaciones de Imputación</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][92] + $data[0][93]; ?></center></td>		
+																																												</tr>
+																																													<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Solicitadas</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][91] ?></center></td>				
+																																												</tr>
+																																															<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Otorgadas</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][92] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Negadas</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][93] ?></center></td>		
+																																												</tr>
 
 																																														<tr>				
 																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Control de la Detención</label></td>			
@@ -189,12 +193,7 @@
 																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">El resguardo en su propio domicilio con las modalidades que el juez disponga</label></td>			
 																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][22] ?></center></td>		
 																																												</tr>
-
-																																													<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Acumulación (-)</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][31] ?></center></td>		
-																																												</tr>
-
+	
 																																												<tr>				
 																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Citaciones</label></td>			
 																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][32] ?></center></td>		
@@ -226,13 +225,21 @@
 																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Comparecencia</label></td>			
 																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][38] ?></center></td>		
 																																												</tr>
-																																												<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Apelaciones no admitidas</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][43] ?></center></td>		
-																																												</tr>
-
 
 																																														<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Órdenes Solicitadas</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][107] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Aprehensión</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][108] ?></center></td>				
+																																												</tr>
+																																															<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Comparecencia</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][109] ?></center></td>		
+																																												</tr>
+
+																																													<tr>				
 																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Mandamientos Judiciales Girados</label></td>			
 																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][50] ?></center></td>		
 																																												</tr>
@@ -259,40 +266,6 @@
 																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][55] ?></center></td>		
 																																												</tr>
 
-																																													<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia">Actos de investigación con control judicial </label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center>0</center></td>		
-																																												</tr>
-
-																																													<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia">La providencia precautoria (embargo de bienes e inmovilizacion de cuentas bancarias) </label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center>0</center></td>		
-																																												</tr>
-
-																																												<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia">Toma de muestras </label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center>0</center></td>		
-																																												</tr>
-
-																																													<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia">Exhumación </label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center>0</center></td>		
-																																												</tr>
-
-																																													<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia">Obtención de datos reservados </label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center>0</center></td>		
-																																												</tr>
-
-																																												<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia">Extracción de contenido </label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center>0</center></td>		
-																																												</tr>
-
-																																													<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia">Intervención en tiempo real</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center>0</center></td>		
-																																												</tr>
 																																									
 																																									
 
@@ -303,15 +276,92 @@
 																																			</div>
 																																	 
 
-																																		<div class="col-xs-12 col-sm-12 col-md-12" style="">
+																																	 	<div class="col-xs-12 col-sm-4 col-md-4" style="">
 
 
-																																				<table border="0" id="table_intermedia" width="100%" style="margin-top: 10px;">						
-																		
-																																													
-																																														<tr>				
-																																																<td style="width: 100%; text-align: center;" class="tdFiscalia"><br><label class="labelFiscalia">ETAPA INTERMEDIA</label></td>			
-																																
+																																	 			<table border="0" id="table1110" width="100%" style="margin-top: -10px;">	
+
+																																	 				      <tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Medidas de protección</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][110] ?></center></td>		
+																																												</tr>
+																																															<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Total de víctimas de protección </label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][111] ?></center></td>		
+																																												</tr>
+
+
+																																	 				      <tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Actos de investigación CON control judicial</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][112] ?></center></td>		
+																																												</tr>
+																																															<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Intervención en tiempo real </label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][113] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Toma de muestras </label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][114] ?></center></td>		
+																																												</tr>
+																																													<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Exhumación </label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][115] ?></center></td>		
+																																												</tr>
+																																													<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Obtención de datos reservados </label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][116] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Intervención de comunicación en su modalidad de extracción </label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][117] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">La providencia precautoria (embargo de bienes e inmovilizacion de cuentas bancarias) </label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][118] ?></center></td>		
+																																												</tr>
+
+
+																																	 				      <tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Actos de investigación SIN control judicial</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][119] ?></center></td>		
+																																												</tr>
+																																															<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Cadena de custodia </label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][120] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Inspección de lugar distinto a hechos </label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][121] ?></center></td>		
+																																												</tr>
+																																													<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Inspección de inmuebles </label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][122] ?></center></td>		
+																																												</tr>
+																																													<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Entrevistas entre testigos  </label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][123] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Reconocimiento entre personas </label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][124] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Solicitud de informes periciales </label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][125] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Solicitud de información de Institutos de Seguridad </label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][126] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Reconocimiento o examen físico de persona </label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][127] ?></center></td>		
+																																												</tr>
+
+																																												<tr>
+																																													<td>
+																																														<br><label class="labelFiscalia">ETAPA INTERMEDIA</label>
+																																													</td>
 																																												</tr>
 
 																																													<tr>				
@@ -319,156 +369,143 @@
 																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][99] ?></center></td>		
 																																												</tr>
 																																												<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Acusaciones por escrito </label></td>			
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Audiencia Intermedia escrita </label></td>			
 																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][57] ?></center></td>				
 																																												</tr>
 																																															<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Audiencia Intermedia  </label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][58] ?></center></td>		
-																																												</tr>
-																																												<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Duración (Horas)  </label></td>			
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Audiencia Intermedia oral </label></td>			
 																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][58] ?></center></td>		
 																																												</tr>
 
-
-																																										</table>
-
-
-																																		</div>
-
-																																		<div class="col-xs-12 col-sm-12 col-md-12" style="">
-
-
-																																				<table border="0" id="table_alternas" width="100%" style="margin-top: 10px;">						
-																		
-																																													
-																																														<tr>				
-																																																<td style="width: 100%; text-align: center;" class="tdFiscalia"><br><label class="labelFiscalia">SALIDAS ALTERNAS</label></td>			
-																																
+																																												<tr>
+																																													<td>
+																																														<br><label class="labelFiscalia">JUICIO ORAL</label>
+																																													</td>
 																																												</tr>
 
 																																													<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia2">Soluciones alternas</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][99] ?></center></td>		
+																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Resoluciones de Juicio oral</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][128] ?></center></td>		
 																																												</tr>
 																																												<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Suspensión condicional del proceso </label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][57] ?></center></td>				
-																																												</tr>
-																																															<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Acuerdo reparatorio   </label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][58] ?></center></td>		
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Audiencia de juicio oral </label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][129] ?></center></td>				
 																																												</tr>
 																																												<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Mecanismos de aceleración  </label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][58] ?></center></td>		
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Audiencia de fallo </label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][130] ?></center></td>				
 																																												</tr>
-																																												<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Procedimientos Abreviados  </label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][58] ?></center></td>		
-																																												</tr>
-
-																																										</table>
-
-
-																																		</div>
-
-
-																																		<div class="col-xs-12 col-sm-12 col-md-12" style="">
-
-
-																																				<table border="0" id="table_juicioOral" width="100%" style="margin-top: 10px;">						
-																		
-																																													
-																																														<tr>				
-																																																<td style="width: 100%; text-align: center;" class="tdFiscalia"><br><label class="labelFiscalia">Juicio Oral</label></td>			
-																																
-																																												</tr>
-																																												<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Audiencias de juicio oral</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br>0</center></td>		
-																																												</tr>
-
 																																													<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Audiencia de fallo</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center>0</center></td>		
-																																												</tr>
-																																												<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Absolutorio</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center>0</center></td>		
-																																												</tr>
-																																												<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Condenatorio</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center>0</center></td>		
-																																												</tr>
-																																												<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Audiencia de individualización desanción </label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center>0</center></td>		
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Audiencia de individualización de sanción </label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][132] ?></center></td>				
 																																												</tr>
 																																												<tr>				
 																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Procedimiento especial </label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center>0</center></td>		
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][133] ?></center></td>				
+																																												</tr>
+																																													<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Absolutorio </label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][131] ?></center></td>				
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Condenatorio </label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][134] ?></center></td>				
 																																												</tr>
 
 																																												<tr>				
 																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Sentencias</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br>0</center></td>		
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][62] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Condenatorias (-)</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][63] ?></center></td>				
+																																												</tr>
+																																															<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Absolutorias (-)</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][64] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Mixtas (-)</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][65] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Se condena reparación del daño</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][66] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">No se condena reparación del daño</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][67] ?></center></td>		
+																																												</tr>
+
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Total de audiencias</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][56] ?></center></td>		
+																																												</tr>
+
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">De las sentencias dictadas</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][86] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Revocaciones favorables al Ministerio Público</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][87] ?></center></td>				
+																																												</tr>
+																																															<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Modificaciones favorables al Ministerio Público</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][88] ?></center></td>		
 																																												</tr>
 
 																																													<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Condenatorias</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center>0</center></td>		
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Confirmaciones favorables al Ministerio Público</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][89] ?></center></td>		
+																																												</tr>
+
+																																												<tr>
+																																													<td>
+																																														<br><label class="labelFiscalia">SALIDAS ALTERNAS Y/O TERMINACIÓN ANTICIPADA</label>
+																																													</td>
+																																												</tr>		
+
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Soluciones alternas</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][59] ?></center></td>		
 																																												</tr>
 																																												<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Absolutorias </label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center>0</center></td>		
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Suspensión condicional del proceso </label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][60] ?></center></td>				
 																																												</tr>
-																																												<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Mixta</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center>0</center></td>		
+																																															<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Acuerdo reparatorio </label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][61] ?></center></td>		
 																																												</tr>
-																																												<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Se condena reparación del daño </label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center>0</center></td>		
-																																												</tr>
-																																												<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">No se condena reparación del daño </label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center>0</center></td>		
+																																														<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Procedimientos abreviados </label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][30] ?></center></td>		
 																																												</tr>
 																																													<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Incompetencias</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br>0</center></td>		
+																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Mecanismos de aceleración </label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][135] ?></center></td>		
 																																												</tr>
-																																												<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Decretadas </label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center>0</center></td>		
-																																												</tr>
-																																												<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Admitidas </label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center>0</center></td>		
-																																												</tr>
-
-
 
 																																										</table>
 
 
-																																		</div>
+																																	 	</div>
+
+
+																																			<div class="col-xs-12 col-sm-4 col-md-4" style="">
 
 
 
-																																			<div class="col-xs-12 col-sm-12 col-md-12" style="">
+																																							<table border="0" id="table1110" width="100%" style="margin-top: -10px;">			
 
+																																												<tr>
+																																													<td>
+																																														<br><label class="labelFiscalia">INCIDENTES Y/O RECURSOS NO SUJETOS A ETAPA PROCESAL</label>
+																																													</td>
+																																												</tr>			
+																																													
 
-
-																																							<table border="0" id="table_etapaProcesal" width="100%" style="margin-top: 10px;">	
-
-																																							<tr>				
-																																																<td style="width: 100%; text-align: center;" class="tdFiscalia"><br><label class="labelFiscalia">	INCIDENTES Y/O RESERVAS NO SUJETAS A ETAPA PROCESAL</label></td>			
-																																
-																																												</tr>					
-						
 																																												<tr>				
 																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Apelaciones contra resolución del juez de control</label></td>			
 																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][71] ?></center></td>		
@@ -490,16 +527,16 @@
 																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][75] ?></center></td>		
 																																												</tr>
 																																												<tr>				
-																																																<td style="width: 25%; " class="tdFiscalia"><br><label class="labelFiscalia">Providencias Precautorias o Medida Cautelar</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><br><center><? echo $data[0][76] ?></center></td>		
+																																																<td style="width: 25%; " class="tdFiscalia"><label class="labelFiscalia2">Providencias Precautorias o Medida Cautelar</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][76] ?></center></td>		
 																																												</tr>
 																																												<tr>				
 																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Las que pongan termino al procedimiento o lo suspedan</label></td>			
 																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][77] ?></center></td>		
 																																												</tr>
 																																												<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Auto que resuelve la vinculaciona proceso</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><br><center><? echo $data[0][78] ?></center></td>		
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Auto que resuelve la vinculaciona proceso</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][78] ?></center></td>		
 																																												</tr>
 																																														<tr>				
 																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Las que concedan, revoquen o nieguenla suspensión condicional del proceso</label></td>			
@@ -507,8 +544,8 @@
 																																												</tr>
 
 		<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Negativa de abrir procedimiento abreviado</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><br><center><? echo $data[0][80] ?></center></td>		
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Negativa de abrir procedimiento abreviado</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][80] ?></center></td>		
 																																												</tr>
 
 		<tr>				
@@ -517,87 +554,160 @@
 																																												</tr>
 
 		<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Amparo</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br>0</center></td>		
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Excluir algún medio de prueba</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][82] ?></center></td>		
 																																												</tr>
-
-
-
-																																														<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Directo</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center>0</center></td>		
-																																												</tr>
-																																												<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Indirecto</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][84] ?></center></td>				
-																																												</tr>
-																																															
 
 																																												<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Sobreseimientos Decretados</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br>0</center></td>		
+																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Apelaciones no admitidas</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][43] ?></center></td>		
 																																												</tr>
-																																												<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Prescripción de la acción pena</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br></center></td>				
-																																												</tr>
-																																															<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Por Muerte del Imputado </label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center>0</center></td>		
+																																													<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Apelaciones por amparo</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][136] ?></center></td>		
 																																												</tr>
 
 																																													<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Por mecanismos alternativos</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center>0</center></td>		
+																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Amparos</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][137] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Amparo directo</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][138] ?></center></td>				
+																																												</tr>
+																																															<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Amparo indirecto</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][139] ?></center></td>		
 																																												</tr>
 
+
+
 																																														<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Acuerdo reparatorio</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center>0</center></td>		
+																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Apelaciones contra resoluciones del Tribunal de enjuiciamiento</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][83] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Desistimiento de la acción penal</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][84] ?></center></td>				
+																																												</tr>
+																																															<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Sentencia definitiva</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][85] ?></center></td>		
 																																												</tr>
 
 																																												<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Suspensión condicional del proceso</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br>0</center></td>		
+																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Sobreseimientos decretados</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][23] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Prescripción de la acción penal (-)</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][24] ?></center></td>				
+																																												</tr>
+																																															<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Por mecanismos alternativos (-)</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][25] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Acuerdo reparatorio</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][26] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Suspension condicional del proceso</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][27] ?></center></td>		
 																																												</tr>
 																																												<tr>				
 																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Criterio de oportunidad</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center>0</center></td>				
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][28] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Terminación anticipada (-)</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][29] ?></center></td>		
+																																												</tr>
+
+																																													<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Acumulación (-)</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][31] ?></center></td>		
+																																												</tr>
+
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Incompetencias</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][68] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Decretadas (-)</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][69] ?></center></td>				
+																																												</tr>
+																																															<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Admitidas (+)</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][70] ?></center></td>		
+																																												</tr>
+
+																																												
+
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Causas dados de baja (-)</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][90] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Por cambio de situación jurídica declarados sin materia</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][90] ?></center></td>				
 																																												</tr>
 
 
 																																														<tr >					
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Terminación anticipada</label></td>			
-																																																<td style="width: 3%; font-weight: bold;" class="tdFiscalia"><center>0</center></td>		
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia">Canalizadas por cese de funciones del Ministerio Público</label></td>			
+																																																<td style="width: 3%; font-weight: bold;" class="tdFiscalia"><center><? echo $data[0][106] ?></center></td>		
 																																												</tr>
-
 
 
 																																														<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Acumulación</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br>0</center></td>		
-																																												</tr>
-																																													<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Desistimiento del recurso</label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br>0</center></td>		
+																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Desistimiento del recurso (-)</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][39] ?></center></td>		
 																																												</tr>
 																																												<tr>				
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Por parte del acusado </label></td>			
-																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center>0</center></td>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Por parte del acusado</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][40] ?></center></td>				
+																																												</tr>
+																																															<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Por parte del defensor</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][41] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Por parte del Ministerio Público</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][42] ?></center></td>		
+																																												</tr>
+
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Sentencias dictadas (-)</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][44] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Revoca</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][45] ?></center></td>				
+																																												</tr>
+																																															<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Modifica</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][46] ?></center></td>		
+																																												</tr>
+																																												<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Confirma</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][47] ?></center></td>		
+																																												</tr>
+																																														<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Reposición del procedimiento</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><? echo $data[0][48] ?></center></td>		
 																																												</tr>
 
 
-																																														<tr >					
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Por parte del defensor </label></td>			
-																																																<td style="width: 3%; font-weight: bold;" class="tdFiscalia"><center>0</center></td>		
+
+																																													<tr>				
+																																																<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Total de Carpetas Judicializadas en trámite</label></td>			
+																																																<td style="width: 3%; font-weight: bold" class="tdFiscalia"><center><br><? echo $data[0][49] ?></center></td>		
 																																												</tr>
 
-																																												<tr >					
-																																																<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Por parte del Ministerio Público </label></td>			
-																																																<td style="width: 3%; font-weight: bold;" class="tdFiscalia"><center>0</center></td>		
-																																												</tr>
 
 																																										</table>
+
 
 
 
