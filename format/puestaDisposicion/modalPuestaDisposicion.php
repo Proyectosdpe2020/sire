@@ -47,6 +47,7 @@
 												$cuatro = $puestaData[0][16];
 												$cinco = $puestaData[0][17];
 												$narra = $puestaData[0][18];
+												$getIDMando = $puestaData[0][19];
 												$a = 1;
 
 												// OBTENER ID DE MUNICIPIO Y COLONIA APARTIR DE LA PUESTA Y LA FISCALIA
@@ -64,189 +65,183 @@
 	?>
 
  <div class="modal-header" style="background-color:#152F4A;">
-												<center><label style=" color: white; font-weight: bold; font-size: 2rem;">Registro Principal de Actividades</label></center>				
-											  </div>
-													<div class="col-md-12 col-sm-12 col-xs-12 form-group panelunoDisposic" >															
-															<div class="row"  style="padding: 2%;">															
-																<div class="row"><!-- ROOWWWWWW PRINCIPAL -->				
+ 	<center><label style=" color: white; font-weight: bold; font-size: 2rem;">Registro Principal de Actividades</label></center>
+ </div>
 
-																					<input type="hidden" id="idPuestaDisposicion" value="<? if($tipoModal == 0){ } else if($tipoModal == 1){ echo $puestaSaveId; } ?>" name="idPuestaDisposicion">																		
-																					
-																					<div class="row"><!-- ROOWWWWWW MANDOS  -->
-																														<div class="col-xs-12 col-sm-12  col-md-4">
-																																<datalist id="newBrwosers">
-																																			<? 
-																																						$mandos = getDataMandos($conn, "VI");
-																																						for ($h=0; $h < sizeof($mandos); $h++) { 
-																																							
-																																									$idMando = $mandos[$h][6];	$nom = $mandos[$h][0];	$pat = $mandos[$h][1];	$mat = $mandos[$h][2];
-																																									$nombrecom = $nom." ".$pat." ".$mat;
-																																									?>
-																																											<option style="color: black; font-weight: bold;" value="<? echo $nombrecom; ?>" data-value="<? echo $idMando; ?>" data-id="<? echo $idMando; ?>"></option>
-																																									<?
-																																						}
-																																			 ?>
-																															</datalist>
-																																		<label for="heard">Selecciona Mando : <span class="aste">(Requerido)</span></label>	
-																															<input class="form-control mandda gehit" value="<? if($a == 1){ echo $nombrecompleto; } ?>" onchange="getData()" list="newBrwosers" id="newBrwoser" name="newBrwoser" type="text" <? if($b == 0){ echo "readonly"; } ?>><br>
-																														</div>																				
-																														<div id="contDataMando">			
-																														<div class="col-xs-12 col-sm-12  col-md-3">
-																															<label for="heard">Cargo :</label>
-																															<input class="form-control mandda gehit" value="<? if($a == 1){ echo $cargo; } ?>"  id="newBrwoser"  type="text" disabled>
-																														</div>
-																														<div class="col-xs-12 col-sm-12 col-md-2">
-																															<label for="heard">Función :</label>
-																															<input class="form-control mandda gehit" value="<? if($a == 1){ echo $funcion; } ?>"  id="newBrwoser"  type="text" disabled>
-																														</div>
-																														<div class="col-xs-12 col-sm-12  col-md-3">
-																															<label for="heard">Area de Adscripción :</label>
-																															<input class="form-control mandda gehit" value="<? if($a == 1){ echo $areaad; } ?>" id="newBrwoser"  type="text" disabled>
-																														</div>
-																													</div>
-																				</div><!-- ROOWWWWWW MANDOS  -->   
-																					<div class="row"><!-- ROOWWWWWW LOCALIDADES  -->   					
-																								<div class="col-xs-6 col-sm-4  col-md-3">
-																								<label for="heard">Nuc :</label>
-																								<input class="form-control gehit"  id="nucPuestaDisposi"  type="text" value="<? if($a == 1){ echo $nuc; } ?>" <? if($b == 0){ echo "readonly"; } ?>>
-																							</div>
-																									<div class="col-xs-6 col-sm-4  col-md-2">
-																								<label for="heard">Fecha Evento :</label><span class="aste"> (Requerido)</span>
-																								<div >
-															               <input id="fechaevento" type="datetime-local" value="<? if($a == 1){  echo 	$fechaev=str_ireplace(' ','T',$fechaev); } ?>" name="fechaevento" class="fechas form-control gehit" <? if($b == 0){ echo "readonly"; } ?> />	
-															            </div>
-																							</div>
-																										<div class="col-xs-6 col-sm-4  col-md-2">
-																													<datalist id="newBrwosersFis">
-																																			<? 
-																																						$fiscas = getFiscaliasEnlace($conn, $idEnlace);
-																																						for ($o=0; $o < sizeof($fiscas); $o++) { 								
-																																									$idfis = $fiscas[$o][0];
-																																									$nombrefis = $fiscas[$o][1];
-																																									?>
-																																											<option style="color: black; font-weight: bold;" value="<? echo $nombrefis; ?>" data-value="<? echo $idfis; ?>" data-id="<? echo $idfis; ?>"></option>
-																																									<?
-																																						}
-																																			 ?>
-																															</datalist>
-																														<label for="heard">Fiscalía :</label>	<span class="aste">(Requerido)</span>
-																											<input class="form-control mandda gehit" onchange="getDataMunicip()" list="newBrwosersFis" value="<? if($a == 1){ echo $fiscalia; }else{  } ?>" id="newBrwoserFisca" name="newBrwoserFisca" type="text" <? if($b == 0){ echo "readonly"; } ?>><br>
-																							</div>																						
-																							<div class="col-xs-6 col-sm-4  col-md-2">
-																								<label for="heard">Municipio :</label>	<span class="aste">(Requerido)</span>
-																								<div id="munciData">	
-																										<datalist id="newBrwosersMun">
-																													<option style="color: black; font-weight: bold;" value="<? echo $muni; ?>" data-value="<? echo $dataDire[0][1]; ?>" data-id="<? echo $dataDire[0][1]; ?>"></option>
-																										</datalist>
-																										<input class="form-control mandda gehit" onchange="getDataColoni();" list="newBrwosersMun" id="newBrwoserMun" value="<? if($a == 1){ echo $muni; } ?>" name="newBrwoserMun" type="text" <? if($b == 0){ echo "readonly"; } ?>><br>
+ <div class="col-md-12 col-sm-12 col-xs-12 form-group panelunoDisposic" >
+ 	<div class="row"  style="padding: 2%;">
 
-																								</div>
-																							</div>
-																									<div class="col-xs-6 col-sm-4  col-md-3">
-																									<label for="heard">Colonia / Localidad :</label>	<span class="aste">(Requerido)</span>
-																								<div id="coloniData">	
+ 	
+ 			<input type="hidden" id="idPuestaDisposicion" value="<? if($tipoModal == 0){ } else if($tipoModal == 1){ echo $puestaSaveId; } ?>" name="idPuestaDisposicion">
 
-																											<datalist id="newBrwosersColo">
-																												<option style="color: black; font-weight: bold;" value="<? echo $colo; ?>" data-value="<? echo $dataDire[0][2]; ?>" data-id="<? echo $dataDire[0][2]; ?>"></option>
-																											</datalist>
-														<input class="form-control mandda gehit" onchange="getPOstalCode()" list="newBrwosersColo" value="<? if($a == 1){ echo $colo; } ?>" id="newBrwoserColo" name="newBrwoserColo" type="text" <? if($b == 0){ echo "readonly"; } ?>>
+ 			<div class="row"><!-- ROOWWWWWW MANDOS  -->
+ 				<div class="col-xs-12 col-sm-12  col-md-4">
+ 					<label for="heard">Selecciona Mando : <span class="aste">(Requerido)</span></label><br>	
+ 					<select class="dataAutocomplet form-control browser-default custom-select" onchange="getData()" id="newBrwosers_id" locked="locked" name="newBrwoser" type="text" <? if($b == 0){ echo "readonly"; } ?> >
+ 						<option></option>
+ 						<? $mandos = getDataMandos($conn, "VI");
+ 					for ($h=0; $h < sizeof($mandos); $h++) { 
+ 						$idMando = $mandos[$h][6];	$nom = $mandos[$h][0];	$pat = $mandos[$h][1];	$mat = $mandos[$h][2];
+ 						$nombrecom = $nom." ".$pat." ".$mat; ?>
+ 						<option style="color: black; font-weight: bold;" value="<? echo $idMando; ?>" <?if($a == 1 && $idMando == $getIDMando ){ ?> selected <? } ?>><? echo $nombrecom; ?></option>
+ 					<? } ?>
+ 					</select>
+ 			</div>
+ 			<div id="contDataMando">	
+ 				<div class="col-xs-12 col-sm-12  col-md-3">
+ 					<label for="heard">Cargo :</label>
+ 					<input class="form-control mandda gehit" value="<? if($a == 1){ echo $cargo; } ?>"  id="newBrwoser"  type="text" disabled>
+ 				</div>
+ 				<div class="col-xs-12 col-sm-12 col-md-2">
+ 					<label for="heard">Función :</label>
+ 					<input class="form-control mandda gehit" value="<? if($a == 1){ echo $funcion; } ?>"  id="newBrwoser"  type="text" disabled>
+ 				</div>
+ 				<div class="col-xs-12 col-sm-12  col-md-3">
+ 					<label for="heard">Area de Adscripción :</label>
+ 					<input class="form-control mandda gehit" value="<? if($a == 1){ echo $areaad; } ?>" id="newBrwoser"  type="text" disabled>
+ 				</div>
+ 			</div>
+ 		</div><!-- ROOWWWWWW MANDOS  --> 
 
-																								</div>
-																							</div>
-																			</div><!-- ROOWWWWWW LOCALIDADES  -->   
-																			<div class="row"><!-- ROOWWWWWW DIRECCION  -->   								
-																									<div class="col-xs-6 col-sm-4  col-md-2">
-																									<label for="heard">Codigo Postal :</label> <span class="aste">(Requerido)</span>
-																									<div id="codepostalid"><input class="form-control"  id="codepostalidPeusta" value="<? if($a == 1){ echo $codigop; } ?>"  type="text" readonly=""></div>
-																								</div>
-																								<div class="col-xs-6 col-sm-4  col-md-5">
-																									<label for="heard">Calle / Carretera / Brecha :</label><span class="aste"> (Requerido)</span><br>
-																									<input class="form-control"  id="calleInputPuesta" value="<? if($a == 1){ echo $calle; } ?>" type="text" <? if($b == 0){ echo "readonly"; } ?>>
-																								</div>
-																								<div class="col-xs-6 col-sm-4  col-md-1">
-																									<label for="heard">Numero :</label><br>
-																									<input class="form-control"  id="numberCallePuesta" value="<? if($a == 1){ echo $numero; } ?>" type="number" <? if($b == 0){ echo "readonly"; } ?>>
-																								</div>																						
-																										<div class="col-xs-6 col-sm-4  col-md-4">
-																									<label for="heard">Fecha del Informe :</label>
-																									<input class="form-control"  id="newBrwoser" value="<? if($a == 0){ echo $fecha; }else{ echo $fechain; } ?>"  type="text" readonly><br>
-																								</div>
-																				</div><!-- ROOWWWWWW DIRECCION  -->   
+ 		<div class="row"><!-- ROOWWWWWW LOCALIDADES  --> 
+ 			<div class="col-xs-12 col-sm-12  col-md-3">
+ 				<label for="heard">Nuc :</label>
+ 				<input class="form-control gehit"  id="nucPuestaDisposi" maxlength="13" oninput="validateNuc(this)"  type="number" value="<? if($a == 1){ echo $nuc; } ?>" <? if($b == 0){ echo "readonly"; } ?>>
+ 			</div>
+ 			<div class="col-xs-12 col-sm-12  col-md-2">
+ 				<label for="heard">Fecha Evento :</label><span class="aste"> (Requerido)</span>
+ 				<div >
+ 					<input id="fechaevento" type="datetime-local" value="<? if($a == 1){  echo 	$fechaev=str_ireplace(' ','T',$fechaev); } ?>" name="fechaevento" class="fechas form-control gehit" <? if($b == 0){ echo "readonly"; } ?> />	
+ 				</div>
+ 			</div>
+ 			<div class="col-xs-12 col-sm-12  col-md-2">
+ 				<label for="heard">Fiscalía :</label>	<span class="aste">(Requerido)</span>
+ 					<select class="dataAutocomplet form-control browser-default custom-select" onchange="getDataMunicip()" locked="locked" id="newBrwoserFisca" name="newBrwoserFisca" type="text" <? if($b == 0){ echo "readonly"; } ?> >
+ 						<option value="" ></option>
+ 						<?$fiscas = getFiscaliasEnlace($conn, $idEnlace);
+				 			for ($o=0; $o < sizeof($fiscas); $o++) { 
+				 				$idfis = $fiscas[$o][0];
+				 				$nombrefis = $fiscas[$o][1];?>
+				 				<option style="color: black; font-weight: bold;" value="<? echo $idfis; ?>" <?if($a == 1 && $idfis == $dataDire[0][0]){?> selected <? } ?> ><?echo $nombrefis; ?></option>
+				 			<?}?>
+ 					</select>
+ 			</div>
+ 			<div class="col-xs-12 col-sm-12  col-md-2">
+ 				<label for="heard">Municipio :</label>	<span class="aste">(Requerido)</span>		
+ 				<select class="dataAutocomplet form-control browser-default custom-select" onchange="getDataColoni();" locked="locked" id="newBrwoserMun" name="newBrwoserMun" type="text" <? if($b == 0){ echo "readonly"; } ?> >
+ 						<?if($a == 1){ 
+ 							$munis = getDataMunicipiosFiscalia($conn, $dataDire[0][0]);
+ 							for ($o=0; $o < sizeof($munis); $o++) { 
+ 								$idMuni = $munis[$o][0];
+ 								$nombreMuni = $munis[$o][1];
+ 							?>
+ 							<option value="<?echo $idMuni; ?>" <?if($idMuni == $dataDire[0][1]){?> selected <? } ?> ><? echo $nombreMuni;?></option>
+ 						<? } 
+ 					  }  ?>
+      
+						</select>
+ 			</div>
+ 			<div class="col-xs-12 col-sm-12  col-md-3">
+ 				<label for="heard">Colonia / Localidad :</label>	<span class="aste">(Requerido)</span>
+ 					<select class="dataAutocomplet form-control browser-default custom-select" onchange="getPOstalCode();" locked="locked" id="newBrwoserColo" name="newBrwoserColo" type="text" <? if($b == 0){ echo "readonly"; } ?> >
+ 							<?if($a == 1){ 
+ 									$coloni = getDataColoniMunicipio($conn, $dataDire[0][1]);
+ 							for ($o=0; $o < sizeof($coloni); $o++) { 	 
+ 									$idColoni = $coloni[$o][0];
+ 									$codipos = $coloni[$o][1];
+ 									$nombre = $coloni[$o][2];
+ 							?>
+ 							<option style="color: black; font-weight: bold;" value="<? echo $idColoni; ?>"  <?if($idColoni  == $dataDire[0][2]){?> selected <? } ?> ><? echo $nombre; ?></option>
+ 						<? } 
+ 					  }  ?>
+						</select>
+ 			</div>
+ 		</div><!-- ROOWWWWWW LOCALIDADES  -->
 
+ 		<div class="row"><!-- ROOWWWWWW DIRECCION  -->
+ 			<div class="col-xs-12 col-sm-12  col-md-2">
+ 				<label for="heard">Codigo Postal :</label> <span class="aste">(Requerido)</span>
+ 				<div id="codepostalid"><input class="form-control"  id="codepostalidPeusta" value="<? if($a == 1){ echo $codigop; } ?>"  type="text" readonly=""></div>
+ 			</div>
+ 			<div class="col-xs-12 col-sm-12  col-md-5">
+ 				<label for="heard">Calle / Carretera / Brecha :</label><span class="aste"> (Requerido)</span><br>
+ 				<input class="form-control"  id="calleInputPuesta" value="<? if($a == 1){ echo $calle; } ?>" type="text" <? if($b == 0){ echo "readonly"; } ?>>
+ 			</div>
+ 			<div class="col-xs-12 col-sm-12  col-md-1">
+ 				<label for="heard">Numero :</label><br>
+ 				<input class="form-control"  id="numberCallePuesta" value="<? if($a == 1){ echo $numero; } ?>" type="number" <? if($b == 0){ echo "readonly"; } ?>>
+ 			</div>
+ 			<div class="col-xs-12 col-sm-12  col-md-4">
+ 				<label for="heard">Fecha del Informe :</label>
+ 				<input class="form-control"  id="newBrwoser" value="<? if($a == 0){ echo $fecha; }else{ echo $fechain; } ?>"  type="text" readonly><br>
+ 			</div>
+ 		</div><!-- ROOWWWWWW DIRECCION  -->
 
-															     <div class="row" style="margin-left: 10%;"><!-- ROOWWWWWW RELEVANCIAS -->   								
-																									<div class="col-xs-12 col-sm-2  col-md-2">																															
-																												<div class="demo">
-																												    <input type="checkbox" id="acepto1" name="acepto1" <? if($uno == 1){ echo "checked"; } ?> <? if($b == 0){ echo "disabled"; } ?>>
-																												    <label for="acepto1"><span></span>Evento Relevante</label>
-																												</div>
-																								</div>
-																								<div class="col-xs-12 col-sm-2  col-md-2">
-																									<div class="demo">
-																												    <input type="checkbox" id="acepto2" name="acepto2" <? if($dos == 1){ echo "checked"; } ?> <? if($b == 0){ echo "disabled"; } ?>>
-																												    <label for="acepto2"><span></span>Evento no Relevante</label>
-																												</div>
-																								</div>
-																								<div class="col-xs-12 col-sm-2  col-md-2">
-																									<div class="demo">
-																												    <input type="checkbox" id="acepto3" name="acepto3" <? if($tres == 1){ echo "checked"; } ?> <? if($b == 0){ echo "disabled"; } ?>>	
-																												    <label for="acepto3"><span></span>Mediante Cateo</label>
-																												</div>
-																								</div>																						
-																										<div class="col-xs-12 col-sm-2 col-md-2">
-																									<div class="demo">
-																												    <input type="checkbox" id="acepto4" name="acepto4" <? if($cuatro == 1){ echo "checked"; } ?> <? if($b == 0){ echo "disabled"; } ?>>
-																												    <label for="acepto4"><span></span>Mediante Operativo</label>
-																												</div>
-																								</div>
-																								<div class="col-xs-12 col-sm-2  col-md-2">
-																									<div class="demo">
-																												    <input type="checkbox" id="acepto5" name="acepto5" <? if($cinco == 1){ echo "checked"; } ?> <? if($b == 0){ echo "disabled"; } ?>>
-																												    <label for="acepto5"><span></span>Mediante Recorrido</label>
-																												</div>
-																								</div>
-																				</div><!-- ROOWWWWWW RELEVANCIAS  -->   
-																					
-																													<div class="row"><!-- ROOWWWWWW RELEVANCIAS -->   								
-																		
+ 		<div class="row" style="margin-left: 10%;"><!-- ROOWWWWWW RELEVANCIAS --> 
+ 			<div class="col-xs-12 col-sm-2  col-md-2">
+ 				<div class="demo">
+ 					<input type="checkbox" id="acepto1" name="acepto1" <? if($uno == 1){ echo "checked"; } ?> <? if($b == 0){ echo "disabled"; } ?>>
+ 					<label for="acepto1"><span></span>Evento Relevante</label>
+ 				</div>
+ 			</div>
+ 			<div class="col-xs-12 col-sm-2  col-md-2">
+ 				<div class="demo">
+ 					<input type="checkbox" id="acepto2" name="acepto2" <? if($dos == 1){ echo "checked"; } ?> <? if($b == 0){ echo "disabled"; } ?>>
+ 					<label for="acepto2"><span></span>Evento no Relevante</label>
+ 				</div>
+ 			</div>
+ 			<div class="col-xs-12 col-sm-2  col-md-2">
+ 				<div class="demo">
+ 					<input type="checkbox" id="acepto3" name="acepto3" <? if($tres == 1){ echo "checked"; } ?> <? if($b == 0){ echo "disabled"; } ?>>
+ 					<label for="acepto3"><span></span>Mediante Cateo</label>
+ 				</div>
+ 			</div>
+ 			<div class="col-xs-12 col-sm-2 col-md-2">
+ 				<div class="demo">
+ 					<input type="checkbox" id="acepto4" name="acepto4" <? if($cuatro == 1){ echo "checked"; } ?> <? if($b == 0){ echo "disabled"; } ?>>
+ 					<label for="acepto4"><span></span>Mediante Operativo</label>
+ 				</div>
+ 			</div>
+ 			<div class="col-xs-12 col-sm-2  col-md-2">
+ 				<div class="demo">
+ 					<input type="checkbox" id="acepto5" name="acepto5" <? if($cinco == 1){ echo "checked"; } ?> <? if($b == 0){ echo "disabled"; } ?>>
+ 					<label for="acepto5"><span></span>Mediante Recorrido</label>
+ 				</div>
+ 			</div>
+ 		</div><!-- ROOWWWWWW RELEVANCIAS  -->
 
-																														 <div class="form-group col-md-12">
-																	       <label for="textObservaciones">Narración:</label>	
-																								<textarea id="textNarracion"  style="resize: none; height: 7vh; " class="form-control rounded-0" rows="2" <? if($b == 0){ echo "readonly"; } ?>><? if($a == 1){ echo $narra; } ?></textarea>
-																	    </div>
+ 		<div class="row"><!-- ROOWWWWWW RELEVANCIAS -->
+ 			<div class="form-group col-md-12">
+ 				<label for="textObservaciones">Narración:</label>	
+ 				<textarea id="textNarracion" onkeypress="contCharTextBox()" onclick="contCharTextBox()"  style="resize: none; height: 7vh; " class="form-control rounded-0" rows="2" <? if($b == 0){ echo "readonly"; } ?>><? if($a == 1){ echo $narra; } ?></textarea>
+ 				<div class="text-right"><span id="caracteres" class="valid-text pt-3"></span></div>
+ 			</div>
+ 		</div><!-- ROOWWWWWW RELEVANCIAS  --> 
+ 		<div>
 
-																				</div><!-- ROOWWWWWW RELEVANCIAS  -->   	
-
-																				<div>
-																					
-
-																													<!-- ROOWWWWWW ICONOS  -->
-																						<div class="row" id="contIcones" >	
-																				
-																											   
-																													<div style="background-color: #FBFBFC; border: solid 1px lightgray;  width: 100%;">
-																											    <center><table id="contIons" style="background-color: #FBFBFC;   width: 90%;">
-																											    
-																											    <? if($b == 1){ ?>
-																											    		<tr>																											    						
-																											    						<td id="veic">	<img src="img/iconosPuestaDispo/Cuadrados/Azul-01.png" onmouseover="hoverv(this, 've');" onmouseout="unhoverv(this, 've')" width="100" height="100" id="imgVeicle" onclick="modalVehicle(0,<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,0,<? echo $b; ?>)" alt="Armas"></td>
-																											    						<td >		<img src="img/iconosPuestaDispo/Cuadrados/Azul-02.png" id="imgPerson" width="100" height="100" alt="Armas" class="poicur"  onclick="showmodalPersonas(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, 0,<? echo $b; ?>);" onmouseover="hoverv(this, 'pe');" onmouseout="unhoverv(this, 'pe')"></br></td>
-																											    					
-																											    						<td >	<img src="img/iconosPuestaDispo/Cuadrados/Azul-03.png" width="100" height="100" alt="Armas" class="poicur" onclick="modalArmasAseguradas(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, 0,<? echo $b; ?>)" onmouseover="hoverv(this, 'ar');" onmouseout="unhoverv(this, 'ar')"></br></td>
-																											    						<td><img src="img/iconosPuestaDispo/Cuadrados/Azul-04.png" onclick="modalDrogas(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,0,<? echo $b; ?>);" width="100" height="100" alt="Armas" class="poicur" onmouseover="hoverv(this, 'dr');" onmouseout="unhoverv(this, 'dr')"></br></td>
-																											    						<!--<td>       <img src="img/iconosPuestaDispo/Cuadrados/Azul-05.png" width="100" height="100" alt="Armas" class="poicur" onmouseover="hoverv(this, 'op');" onmouseout="unhoverv(this, 'op')"></br></td>-->
-																											    						<td><img src="img/iconosPuestaDispo/Cuadrados/Azul-06.png" onclick="modalForestales(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,0,<? echo $b; ?>)" width="100" height="100" alt="Armas" class="poicur" onmouseover="hoverv(this, 'fo');" onmouseout="unhoverv(this, 'fo')"></br></td>
-																											    						<td> <img src="img/iconosPuestaDispo/Cuadrados/Azul-07.png" onclick="modalObjetoAsegurado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,0,<? echo $b; ?>)" width="100" height="100" alt="Armas" class="poicur" onmouseover="hoverv(this, 'he');" onmouseout="unhoverv(this, 'he')"></br></td>
-																											    						<td> <img src="img/iconosPuestaDispo/Cuadrados/Azul-08.png" onclick="modalDineroAsegurado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,0,<? echo $b; ?>);" width="100" height="100" alt="Armas" class="poicur" onmouseover="hoverv(this, 'ma');" onmouseout="unhoverv(this, 'ma')"></br></td>
-																											    					 <td> <img src="img/iconosPuestaDispo/Cuadrados/Azul-09.png" onclick="modalDefunciones(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,0,<? echo $b; ?>)" width="100" height="100" alt="Armas" class="poicur" onmouseover="hoverv(this, 'en');" onmouseout="unhoverv(this, 'en')"></br></td>
-																											    				<td><img src="img/iconosPuestaDispo/Cuadrados/Azul-10.png" onclick="modalTrabajosDeCampo(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,0,<? echo $b; ?>)" width="100" height="100" alt="Armas" class="poicur" onmouseover="hoverv(this, 'in');" onmouseout="unhoverv(this, 'in')"></br></td>
-																											    		</tr>
-																											    	<? } ?>
-
-																											    </table>	</center>							
-																													</div>
-
-																							</div>
+ 		<!-- ROOWWWWWW ICONOS  -->
+ 		<div class="row" id="contIcones" >
+ 			<div style="background-color: #FBFBFC; border: solid 1px lightgray;  width: 100%;">
+ 				<center>
+ 					<table id="contIons" style="background-color: #FBFBFC;   width: 90%;">
+ 					<? if($b == 1){ ?>
+ 						<tr>
+ 							<td id="veic">	<img src="img/iconosPuestaDispo/Cuadrados/Azul-01.png" onmouseover="hoverv(this, 've');" onmouseout="unhoverv(this, 've')" width="100" height="100" id="imgVeicle" onclick="modalVehicle(0,<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,0,<? echo $b; ?>)" alt="Armas"></td>
+								<td >		<img src="img/iconosPuestaDispo/Cuadrados/Azul-02.png" id="imgPerson" width="100" height="100" alt="Armas" class="poicur"  onclick="showmodalPersonas(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, 0,<? echo $b; ?>);" onmouseover="hoverv(this, 'pe');" onmouseout="unhoverv(this, 'pe')"></br></td>
+								<td >	<img src="img/iconosPuestaDispo/Cuadrados/Azul-03.png" width="100" height="100" alt="Armas" class="poicur" onclick="modalArmasAseguradas(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, 0,<? echo $b; ?>)" onmouseover="hoverv(this, 'ar');" onmouseout="unhoverv(this, 'ar')"></br></td>
+								<td><img src="img/iconosPuestaDispo/Cuadrados/Azul-04.png" onclick="modalDrogas(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,0,<? echo $b; ?>);" width="100" height="100" alt="Armas" class="poicur" onmouseover="hoverv(this, 'dr');" onmouseout="unhoverv(this, 'dr')"></br></td>
+								<!--<td>       <img src="img/iconosPuestaDispo/Cuadrados/Azul-05.png" width="100" height="100" alt="Armas" class="poicur" onmouseover="hoverv(this, 'op');" onmouseout="unhoverv(this, 'op')"></br></td>-->
+								<td><img src="img/iconosPuestaDispo/Cuadrados/Azul-06.png" onclick="modalForestales(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,0,<? echo $b; ?>)" width="100" height="100" alt="Armas" class="poicur" onmouseover="hoverv(this, 'fo');" onmouseout="unhoverv(this, 'fo')"></br></td>
+								<td> <img src="img/iconosPuestaDispo/Cuadrados/Azul-07.png" onclick="modalObjetoAsegurado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,0,<? echo $b; ?>)" width="100" height="100" alt="Armas" class="poicur" onmouseover="hoverv(this, 'he');" onmouseout="unhoverv(this, 'he')"></br></td>
+								<td> <img src="img/iconosPuestaDispo/Cuadrados/Azul-08.png" onclick="modalDineroAsegurado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,0,<? echo $b; ?>);" width="100" height="100" alt="Armas" class="poicur" onmouseover="hoverv(this, 'ma');" onmouseout="unhoverv(this, 'ma')"></br></td>
+								<td> <img src="img/iconosPuestaDispo/Cuadrados/Azul-09.png" onclick="modalDefunciones(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,0,<? echo $b; ?>)" width="100" height="100" alt="Armas" class="poicur" onmouseover="hoverv(this, 'en');" onmouseout="unhoverv(this, 'en')"></br></td>
+								<td><img src="img/iconosPuestaDispo/Cuadrados/Azul-10.png" onclick="modalTrabajosDeCampo(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,0,<? echo $b; ?>)" width="100" height="100" alt="Armas" class="poicur" onmouseover="hoverv(this, 'in');" onmouseout="unhoverv(this, 'in')"></br></td>
+								</tr>
+								<? } ?>
+							</table>
+						</center>
+					</div>
+				</div>
 
 
 																							<div class="row" id="generalInfoPuesta">
@@ -723,6 +718,11 @@
 																																																						      <th scope="col"><center>Investigaciones Cumplidas</center></th>
 																																																						      <th scope="col"><center>Investigaciones Informadas</center></th>
 																																																						      <th scope="col"><center>Individualizaciones</center></th>
+																																																						      <th scope="col"><center>Solicitud de videos</center></th>
+																																																						      <th scope="col"><center>Planimetrías</center></th>
+																																																						      <th scope="col"><center>Reconocimiento en fila de persona</center></th>
+																																																						      <th scope="col"><center>Reconocimiento de objetos</center></th>
+																																																						      <th scope="col"><center>Reconocimiento de fotografías</center></th>
 																																																						      <th scope="col"><center>Observaciones</center></th>
 
 																																																						         <? if($b == 1){ ?>
@@ -742,7 +742,12 @@
 																																																							<td> <center><? echo $dataPuestaDIne[$h][2]; ?></center> </td>
 																																																							<td> <center><? echo $dataPuestaDIne[$h][6]; ?></center> </td>
 																																																							<td> <center><? echo $dataPuestaDIne[$h][3]; ?></center> </td>
-																																																									<td> <center><? echo $dataPuestaDIne[$h][4]; ?></center> </td>
+																																																							<td> <center><? echo $dataPuestaDIne[$h][7]; ?></center> </td>
+																																																							<td> <center><? echo $dataPuestaDIne[$h][8]; ?></center> </td>
+																																																							<td> <center><? echo $dataPuestaDIne[$h][9]; ?></center> </td>
+																																																							<td> <center><? echo $dataPuestaDIne[$h][10]; ?></center> </td>
+																																																							<td> <center><? echo $dataPuestaDIne[$h][11]; ?></center> </td>
+																																																							<td> <center><? echo $dataPuestaDIne[$h][4]; ?></center> </td>
 
 																																																									<? if($b == 1){ ?>
 																																																							<td> <center><span onclick="deleteItemForm(9, <? echo $dataPuestaDIne[$h][0]; ?>, <? echo $idEnlace; ?>, <? echo $idPuestaDisposicion; ?>)" title="Eliminar" style="cursor: pointer; color: red; font-size: 18px;" class="glyphicon glyphicon-trash"></span> </center></td>
@@ -785,7 +790,7 @@
 
 													
 
-																	</div> <!-- ROOWWWWWW PRINCIPAL -->
+																
 
 
 																</div>										
@@ -802,8 +807,11 @@
 
 										<div class="row">
 
-									
+									<?if($typeArch == 12){ ?>
+										<div class="col-xs-12 col-sm-12 col-md-12"><center><button  style="width: 95%; background-color: #38537e; font-weight: bolder; color: white;" onclick="closeModalPueDispo()" type="button" class="btn redondear" data-dismiss="modal">Salir</button></center></div>
+									<? }else{ ?>
 												<div class="col-xs-12 col-sm-12 col-md-12"><center><button  style="width: 95%; background-color: #38537e; font-weight: bolder; color: white;" onclick="saveDataPuesta( <? echo $typeArch; ?>, <? echo $anio ?>, <? echo $idEnlace; ?>, 0, <? echo $messelected; ?>, <? echo $diaselected ?>, <? echo $typeCheck; ?> )" type="button" class="btn redondear" data-dismiss="modal">Salir y Guardar Edición</button></center></div>
+									<? } ?>
 												  
 										</div> 
 

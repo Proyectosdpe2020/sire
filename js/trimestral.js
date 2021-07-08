@@ -888,6 +888,7 @@ function consultarPeriodoTrimes(){
 		$( ".contentQuest" ).html( respuesta );
 		reloadCabeceraPeriodo(anioTrimes , periodoTrimes);
 	});
+}
 
 function reloadCabeceraPeriodo(anioTrimes , periodoTrimes){
 $.ajax({
@@ -901,7 +902,23 @@ $.ajax({
 	});
 }
 
-
+function generarExcelDesglose(){
+	anioTrimes = document.getElementById("anioTrimes").value;
+ periodoTrimes = document.getElementById("periodoTrimes").value;
+ $.ajax({
+  type: "POST",
+  dataType: 'json',
+  url: 'format/trimestral/excel/generarExcelDesglose.php?periodoTrimes='+periodoTrimes+'&anioTrimes='+anioTrimes,
+  //data: "fecha1="+fecha1+"&fecha2="+fecha2,
+ }).done(function(data){
+    var $a = $("<a>");
+    $a.attr("href",data.file);
+    $("body").append($a);
+    $a.attr("download","reporte.xlsx");
+    $a[0].click();
+    $a.remove();
+});
 
 }
+
 

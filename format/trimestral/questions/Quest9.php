@@ -13,6 +13,8 @@
 					if($per == 3){ $m1 = "Julio"; $m2 = "Agosto"; $m3 = "Septiembre"; $nme = "Julio - Septiembre"; $arr = array(7,8,9); $per1 = "IN(7,8,9)"; }
 					if($per == 4){ $m1 = "Octubre"; $m2 = "Noviembre"; $m3 = "Diciembre"; $nme = "Octubre - Diciembre"; $arr = array(10,11,12); $per1 = "IN(10,11,12)"; }
 
+					if($idUnidad == 48){ $idUnidad = 172; }
+
 					$data = getDAtaQuestion($conn, 48, $per, $anio, $idUnidad);
 					$data2 = getDAtaQuestion($conn, 49, $per, $anio, $idUnidad);
 					$data3 = getDAtaQuestion($conn, 50, $per, $anio, $idUnidad);

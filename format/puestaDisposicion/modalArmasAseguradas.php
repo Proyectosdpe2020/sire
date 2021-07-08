@@ -29,6 +29,11 @@
 		    $accesorio = $arreglo[0][4];
 		    $marcaCa = $arreglo[0][5];
 		    $observaciones = $arreglo[0][6];
+		    $getIDTipoArma = $arreglo[0][7];
+		    $getIDMarcaArma = $arreglo[0][8];
+		    $getIDCalibre = $arreglo[0][9];
+		    $getIDAccesorios = $arreglo[0][10];
+		    $getIDMarcaCartuchos = $arreglo[0][11];
 		 }else{ 
 		 	//Si $idArma viene con valor 0 no es actualizacion y entra aqui
 		 	$a = 0;
@@ -79,85 +84,65 @@
 																				<div class="form-row">
 																					<div class="form-group col-md-4">
 																	      	<label for="textCatTipoArma">Tipo de arma:</label>	
-																								  <input value="<?php if($a == 1){ echo $tipo; } ?>" class="form-control" onchange="getData()" list="listaCatTipoArma" id="textCatTipoArma" 
-																									        name="textCatTipoArma" type="text">
-																									        
-																	       <datalist id="listaCatTipoArma">					       		
-																	       	  <?php
+																	      <select class="dataAutocomplet form-control mandda" onchange="getData()" locked="locked" id="textCatTipoArma"
+																	      name="textCatTipoArma" type="text" >
+																							<option></option>
+																							<?php
 																	       	  $catTipoArma = getDataTipoArma($conn);
-
 																	       	  	for ($i = 0; $i < sizeof($catTipoArma); $i++){
 																	       	  		$idCaTipoArma= $catTipoArma[$i][0];	$nombre = $catTipoArma[$i][1];	?>
-																	       	  		<option style="color: black; font-weight: bold;" value="<?php echo $nombre; ?>" 
-																	       	  			data-value="<? echo $idCaTipoArma; ?>" data-id="<? echo $idCaTipoArma; ?>" ></option>	
-																	       	  <?php } ?>
-																									 </datalist>
+																	       	  		<option value="<?php echo $idCaTipoArma; ?>" <?if($a == 1 && $idCaTipoArma == $getIDTipoArma){?>selected <? } ?> ><?echo $nombre; ?></option>	
+																	       <?php } ?>
+																						 </select>
 																	    </div>
 																	    <div class="form-group col-md-4">
 																		    	<label for="textCatMarcaArma">Marca de arma:</label>	
-																								  <input value="<?php if($a == 1){ echo $marca; } ?>" class="form-control" onchange="getData()" list="listaCatMarcaArma" id="textCatMarcaArma" 
-																									        name="textCatMarcaArma" type="text">
-																									        
-																	       <datalist id="listaCatMarcaArma">					       		
-																	       	  <?php
-																	       	  $catMarcaArma = getDataMarcaArma($conn);
-
-																	       	  	for ($i = 0; $i < sizeof($catMarcaArma); $i++){
-																	       	  		$idCatMarcaArma= $catMarcaArma[$i][0];	$nombre = $catMarcaArma[$i][1];	?>
-																	       	  		<option style="color: black; font-weight: bold;" value="<?php echo $nombre; ?>" 
-																	       	  			data-value="<? echo $idCatMarcaArma; ?>" data-id="<? echo $idCatMarcaArma; ?>" ></option>	
-																	       	  <?php } ?>
-																									 </datalist>
+																		    	<select class="dataAutocomplet form-control mandda" onchange="getData()" locked="locked" id="textCatMarcaArma" name="textCatMarcaArma" type="text">
+																		    		<option></option>
+																		    		<? $catMarcaArma = getDataMarcaArma($conn);
+																		    		for ($i = 0; $i < sizeof($catMarcaArma); $i++){
+																	       	  		$idCatMarcaArma = $catMarcaArma[$i][0];	$nombre = $catMarcaArma[$i][1];	?>
+																	       	  		<option style="color: black; font-weight: bold;" value="<?php echo $idCatMarcaArma; ?>" <?if($a == 1 && $idCatMarcaArma == $getIDMarcaArma){?>selected <? } ?> ><?echo $nombre; ?></option>	
+																	       <?php } ?>
+																		    	</select>
 																	    </div>
 																	    <div class="form-group col-md-4">
-																	      		<label for="textCatCalibre">Calibre:</label>	
-																								  <input value="<?php if($a == 1){ echo $calibre; } ?>" class="form-control" onchange="getData()" list="listaCatCalibre" id="textCatCalibre" 
-																									        name="textCatCalibre" type="text">
-																									        
-																	       <datalist id="listaCatCalibre">					       		
-																	       	  <?php
+																	    	<label for="textCatCalibre">Calibre:</label>	
+																	    	<select class="dataAutocomplet form-control mandda" onchange="getData()" locked="locked" id="textCatCalibre" name="textCatCalibre" type="text">
+																		    		<option></option>
+																		    	 <?php
 																	       	  $catCalibre = getDataCatCalibre($conn);
-
 																	       	  	for ($i = 0; $i < sizeof($catCalibre); $i++){
 																	       	  		$idCatCalibre= $catCalibre[$i][0];	$nombre = $catCalibre[$i][1];	?>
-																	       	  		<option style="color: black; font-weight: bold;" value="<?php echo $nombre; ?>" 
-																	       	  			data-value="<? echo $idCatCalibre; ?>" data-id="<? echo $idCatCalibre; ?>" ></option>	
+																	       	  		<option style="color: black; font-weight: bold;" value="<?php echo $idCatCalibre; ?>" <?if($a == 1 && $idCatCalibre == $getIDCalibre){?>selected <? } ?> ><? echo $nombre; ?></option>	
 																	       	  <?php } ?>
-																									 </datalist>
+																		    	</select>
 																	    </div>
 																	  </div>
 																	  	<div class="form-row">
 																	  		<div class="form-group col-md-6">
-																	      	<label for="textCatAccesorioArma">Accesorios asegurados:</label>	
-																								  <input value="<?php if($a == 1){ echo $accesorio; } ?>" class="form-control" onchange="getData()" list="listaCatAccesorioArma" id="textCatAccesorioArma" 
-																									        name="textCatAccesorioArma" type="text">
-																									        
-																	       <datalist id="listaCatAccesorioArma">					       		
-																	       	  <?php
+																	      	<label for="textCatAccesorioArma">Accesorios asegurados:</label>
+																	      	<select class="dataAutocomplet form-control mandda" onchange="getData()" locked="locked" id="textCatAccesorioArma" name="textCatAccesorioArma" type="text">
+																		    		<option></option>
+																		    	 <?php
 																	       	  $catAccesorioArma = getDataAccesorioArma($conn);
-
 																	       	  	for ($i = 0; $i < sizeof($catAccesorioArma); $i++){
 																	       	  		$idCatAccesorioArma= $catAccesorioArma[$i][0];	$nombre = $catAccesorioArma[$i][1];	?>
-																	       	  		<option style="color: black; font-weight: bold;" value="<?php echo $nombre; ?>" 
-																	       	  			data-value="<? echo $idCatAccesorioArma; ?>" data-id="<? echo $idCatAccesorioArma; ?>" ></option>	
-																	       	  <?php } ?>
-																									 </datalist>
+																	       	  		<option style="color: black; font-weight: bold;" value="<?php echo $idCatAccesorioArma; ?>" <?if($a == 1 && $idCatAccesorioArma == $getIDAccesorios){?>selected <? } ?> ><? echo $nombre; ?></option>	
+																	       <?php } ?>
+																		    	</select>	
 																	    </div>
 																	     <div class="form-group col-md-6">
-																	      	<label for="textCatMarcaCartuchos">Marca de cartuchos:</label>	
-																								  <input value="<?php if($a == 1){ echo $marcaCa; } ?>" class="form-control" onchange="getData()" list="listaCatMarcaCartuchos" id="textCatMarcaCartuchos" 
-																									        name="textCatMarcaCartuchos" type="text">
-																									        
-																	       <datalist id="listaCatMarcaCartuchos">					       		
-																	       	  <?php
+																	      	<label for="textCatMarcaCartuchos">Marca de cartuchos:</label>
+																	      	<select class="dataAutocomplet form-control mandda" onchange="getData()" locked="locked" id="textCatMarcaCartuchos" name="textCatMarcaCartuchos" type="text">
+																		    		<option></option>
+																		    	 <?php
 																	       	  $catMarcaCartuchos = getDataMarcaCartuchos($conn);
-
 																	       	  	for ($i = 0; $i < sizeof($catMarcaCartuchos); $i++){
-																	       	  		$idCatMarcaCartuchos= $catMarcaCartuchos[$i][0];	$nombre = $catMarcaCartuchos[$i][1];	?>
-																	       	  		<option style="color: black; font-weight: bold;" value="<?php echo $nombre; ?>" 
-																	       	  			data-value="<? echo $idCatMarcaCartuchos; ?>" data-id="<? echo $idCatMarcaCartuchos; ?>" ></option>	
+																	       	  		$idCatMarcaCartuchos = $catMarcaCartuchos[$i][0];	$nombre = $catMarcaCartuchos[$i][1];	?>
+																	       	  		<option style="color: black; font-weight: bold;" value="<?php echo $idCatMarcaCartuchos; ?>" <?if($a == 1 && $idCatMarcaCartuchos == $getIDMarcaCartuchos){?>selected <? } ?>><? echo $nombre; ?></option>	
 																	       	  <?php } ?>
-																									 </datalist>
+																		    	</select>
 																	    </div>
 																	  	</div>
 																			</div>

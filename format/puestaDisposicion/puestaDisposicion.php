@@ -118,6 +118,7 @@
 						<label for="heard">Día:</label><br>
 							<div id="contDays">
 						<select id="diaSeleted" name="selMes" tabindex="6"class="form-control redondear selectTranparent" onchange="loadDataPuestDay(<? echo $anioCaptura; ?>, <? echo $idEnlace; ?>, 0)" required>
+							<option value="0">Todo</option>
 							<? 
 									$diasNumero = cal_days_in_month(CAL_GREGORIAN, $currentmonth, $anioCaptura);
 
@@ -147,7 +148,7 @@
 					</div>
  
 		
-					<div class="col-xs-6 col-sm-4  col-md-3">
+					<div class="col-xs-12 col-sm-12  col-md-3">
 								<label class="transparente">.</label>		
 								<center><button type="button" data-toggle="modal" href="#puestdispos" style="white-space: normal;"  onclick="showmodalPueDispo(0, <? echo $idEnlace; ?>,0,<? echo $tiparchiv; ?>, 1);" class="btn btn-success btn-sm redondear btnCapturarTbl"><span class="glyphicon glyphicon-plus-sign"></span> Registro Nueva Actividad </button></center>
 
@@ -155,19 +156,15 @@
 					
 
 				</div>
+				<br>
+				<div class="col-md-6 col-md-offset-3" id="preloaderIMG" hidden>
+						<img src="images/cargando.gif"/>
+					</div>
 
-				<div id="respuestaDescargarCarpeta"> 
-								
-				</div>
-
-					<div class="contTblMPs" id="contTblMPs2">
-
-						<div id="tablePuestasData" class="row pad20">							
-					
-								<table class="table table-striped  table-hover">
-									<thead>
-										<tr class="cabezeraTabla10">
-											<th class="textCent">ID</th>
+				<table id="gridPolicia" class="display table table-striped  table-hover" width="100%" >
+				<thead>
+					<tr class="cabeceraConsultaPolicia">
+						<th class="textCent">ID</th>
 													<th class="textCent10">Mando</th>
 													<th class="">Nuc</th>
 													<th class=" textCent">Fecha Evento</th>
@@ -177,16 +174,13 @@
 													<th class=" textCent">Colonia</th>
 													<th class=" textCent">Calle </th>
 													<th class=" textCent">Numero</th>													
-													<th class=" textCent">Codigo Postal</th>
-													
+													<th class=" textCent">Codigo Postal</th>	
 													<th class="textCent">Accion </th>
-
-										</tr>
-									</thead>
-									<tbody>
-										
-
-															<? 
+		
+					</tr>
+				</thead> 
+				<tbody id="contentConsulta">
+					<? 
 																				$dataPuestasDia = get_data_puesta_dia($conn, $numeroDia, $diames, $anioCaptura, $idfisca, $idEnlace, $currentmonth);
 
 
@@ -210,14 +204,10 @@
 																							}																			
 
 															 ?>
+   </tbody>
+  </table><br>
 
-
-									</tbody>
-									</table>
-							
-							</div>
-
-						</div><br>
+				
 
 										<div class="x_panel piepanel">
 												<div class="piepanel2">
@@ -331,9 +321,6 @@
 						</div>
 
 		
-
-
-
 
 
 
