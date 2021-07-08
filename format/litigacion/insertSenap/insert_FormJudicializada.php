@@ -13,7 +13,6 @@ if (isset($_POST['nuc'])){ $nuc = $_POST['nuc']; }
 /*DATOS FORMULARIO SENAP*/
 if (isset($_POST['idCatModalidadEst'])){ $idCatModalidadEst = $_POST['idCatModalidadEst']; }  
 if (isset($_POST['reclasificacion'])){ $reclasificacion = $_POST['reclasificacion']; } 
-if (isset($_POST['causaPenal'])){ $causaPenal = $_POST['causaPenal']; } 
 
 if (isset($_POST['opcInsert'])){ $opcInsert = $_POST['opcInsert']; } 
 
@@ -26,8 +25,8 @@ if($opcInsert == 0){
                                 BEGIN TRANSACTION
                                       SET NOCOUNT ON 
 
-                                        INSERT INTO senap.judicializadas (idEstatusNucs, idModalidadEstadistica, reclasificacion, causaPenal) 
-                                        VALUES('$idEstatusNucs', $idCatModalidadEst, $reclasificacion, '$causaPenal')
+                                        INSERT INTO senap.judicializadas (idEstatusNucs, idModalidadEstadistica, reclasificacion) 
+                                        VALUES('$idEstatusNucs', $idCatModalidadEst, $reclasificacion)
                                                   
                                       COMMIT
                               END TRY
@@ -46,8 +45,7 @@ if($opcInsert == 0){
 
                                         UPDATE senap.judicializadas SET 
                                         idModalidadEstadistica = $idCatModalidadEst,
-                                        reclasificacion = $reclasificacion,
-                                        causaPenal = '$causaPenal'
+                                        reclasificacion = $reclasificacion
                                         WHERE idEstatusNucs = '$idEstatusNucs' ;
                                                   
                                       COMMIT

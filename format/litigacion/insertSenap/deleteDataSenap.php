@@ -232,40 +232,6 @@ if (isset($_POST["estatResolucion"])){ $estatResolucion = $_POST["estatResolucio
 										                    END
 										                  "; 
 		break;
-		case 129:
-  	$queryTransaction = "BEGIN                     
-										                    BEGIN TRY 
-										                      BEGIN TRANSACTION
-										                          SET NOCOUNT ON
-										                                   
-										                             DELETE FROM medidasDeProteccion WHERE idEstatusNucs = '$idEstatusNucs' 
-
-										                          COMMIT
-										                    END TRY
-										                    BEGIN CATCH 
-										                          ROLLBACK TRANSACTION
-										                          RAISERROR('No se realizo la transaccion',16,1)
-										                    END CATCH
-										                    END
-										                  "; 
-		break;
-		case 57:
-  	$queryTransaction = "BEGIN                     
-										                    BEGIN TRY 
-										                      BEGIN TRANSACTION
-										                          SET NOCOUNT ON
-										                                   
-										                             DELETE FROM senap.ordenesAprehension WHERE idEstatusNucs = '$idEstatusNucs' 
-
-										                          COMMIT
-										                    END TRY
-										                    BEGIN CATCH 
-										                          ROLLBACK TRANSACTION
-										                          RAISERROR('No se realizo la transaccion',16,1)
-										                    END CATCH
-										                    END
-										                  "; 
-		break;
  }
 	$result1 = sqlsrv_query($conn,$queryTransaction, array(), array( "Scrollable" => 'static' ));
 
