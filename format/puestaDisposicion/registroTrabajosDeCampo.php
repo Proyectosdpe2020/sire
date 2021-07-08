@@ -42,11 +42,6 @@ if (isset($_POST['textVisitasDomiciliarias'])){ $getTextVisitasDomiciliarias = $
 if (isset($_POST['textInvestigacionesCumplidas'])){ $getTextInvestigacionesCumplidas = $_POST['textInvestigacionesCumplidas']; }
 if (isset($_POST['textInvestigacionesInformadas'])){ $getTextInvestigacionesInformadas = $_POST['textInvestigacionesInformadas']; }
 if (isset($_POST['textIndividuaciones'])){ $getTextIndividuaciones = $_POST['textIndividuaciones']; }
-if (isset($_POST['solicitudVideos'])){ $solicitudVideos = $_POST['solicitudVideos']; }
-if (isset($_POST['planimetrias'])){ $planimetrias = $_POST['planimetrias']; }
-if (isset($_POST['recPersonas'])){ $recPersonas = $_POST['recPersonas']; }
-if (isset($_POST['recObjetos'])){ $recObjetos = $_POST['recObjetos']; }
-if (isset($_POST['recFotografias'])){ $recFotografias = $_POST['recFotografias']; }
 
 if (isset($_POST['textObservaciones'])){ $getTextObservaciones = $_POST['textObservaciones']; }
 if (isset($_POST['idEnlace'])){ $idEnlace = $_POST['idEnlace']; }
@@ -83,12 +78,9 @@ if (isset($_POST['idTrabajoCampo'])){ $idTrabajoCampo = $_POST['idTrabajoCampo']
                                           select @insertado = @@IDENTITY
 
 
-                                          INSERT INTO pueDisposi.TrabajoDeCampo (idPueDisposicion , entrevistas , visitasDomiciliarias , investigacionesCumplidas , investigacionesInformadas, individuaciones , solicitudVideos, planimetrias,
-                                           recPersonas, recObjetos, recFotografias, observaciones) 
+                                          INSERT INTO pueDisposi.TrabajoDeCampo (idPueDisposicion , entrevistas , visitasDomiciliarias , investigacionesCumplidas , investigacionesInformadas, individuaciones , observaciones) 
                                               VALUES(@insertado , $getTextEntrevistas , $getTextVisitasDomiciliarias , 
-                                                    $getTextInvestigacionesCumplidas , $getTextInvestigacionesInformadas, $getTextIndividuaciones ,
-                                                    $solicitudVideos, $planimetrias, $recPersonas, $recObjetos, $recFotografias, 
-                                                    '$getTextObservaciones')
+                                                    $getTextInvestigacionesCumplidas , $getTextInvestigacionesInformadas, $getTextIndividuaciones , '$getTextObservaciones')
 
 
                                              SELECT MAX(idPuestaDisposicion) AS id FROM pueDisposi.puestaDisposicion   
@@ -140,11 +132,9 @@ if (isset($_POST['idTrabajoCampo'])){ $idTrabajoCampo = $_POST['idTrabajoCampo']
                       BEGIN TRANSACTION
                             SET NOCOUNT ON    
                                               
-                                          INSERT INTO pueDisposi.TrabajoDeCampo (idPueDisposicion , entrevistas , visitasDomiciliarias , investigacionesCumplidas , investigacionesInformadas,  individuaciones , solicitudVideos, planimetrias,
-                                           recPersonas, recObjetos, recFotografias,  observaciones) 
+                                          INSERT INTO pueDisposi.TrabajoDeCampo (idPueDisposicion , entrevistas , visitasDomiciliarias , investigacionesCumplidas , investigacionesInformadas,  individuaciones , observaciones) 
                                           VALUES($idPuestaDisposicion , $getTextEntrevistas , $getTextVisitasDomiciliarias , 
-                                                $getTextInvestigacionesCumplidas , $getTextInvestigacionesInformadas , $getTextIndividuaciones , 
-                                                 $solicitudVideos, $planimetrias, $recPersonas, $recObjetos, $recFotografias,'$getTextObservaciones')
+                                                $getTextInvestigacionesCumplidas , $getTextInvestigacionesInformadas , $getTextIndividuaciones , '$getTextObservaciones')
 
 
                           COMMIT
@@ -167,11 +157,6 @@ if (isset($_POST['idTrabajoCampo'])){ $idTrabajoCampo = $_POST['idTrabajoCampo']
                                            investigacionesCumplidas = $getTextInvestigacionesCumplidas, 
                                            investigacionesInformadas = $getTextInvestigacionesInformadas, 
                                            individuaciones = $getTextIndividuaciones,
-                                           solicitudVideos = $solicitudVideos,
-                                           planimetrias = $planimetrias,
-                                           recPersonas = $recPersonas, 
-                                           recObjetos = $recObjetos,
-                                           recFotografias = $recFotografias,
                                            observaciones = '$getTextObservaciones'
                                            WHERE idTrabajoCampo = $idTrabajoCampo
                                               

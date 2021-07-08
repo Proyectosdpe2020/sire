@@ -208,8 +208,8 @@ WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND 
 
 }else{
   
- //Consulta para usuarios regionales Y de Homicidios
-	if($idenlace == 192 || $idenlace == 193 || $idenlace == 197 || $idenlace == 198 || $idenlace == 199 || $idenlace == 200 || $idenlace == 201 	|| $idenlace == 202 || $idenlace == 203 || $idenlace == 266 || $idenlace == 233 || $idenlace == 225){
+ //Consulta para usuarios regionales 
+	if($idenlace == 192 || $idenlace == 193 || $idenlace == 197 || $idenlace == 198 || $idenlace == 199 || $idenlace == 200 || $idenlace == 201 	|| $idenlace == 202 || $idenlace == 203){
    
 			$valoresEnlaceConsulta ="";
 			$arrFiscEnlaceConsulta = getFiscaliasEnlaceConsulta($conn, $idenlace); 
@@ -221,27 +221,15 @@ WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND 
 			$valoresEnlaceConsulta = substr($valoresEnlaceConsulta, 0, -1);
 		
 		$enlaceCaptura = 1;
-		 if($diames != 0){
-					$query = " SELECT pd.idPuestaDisposicion, m.nombre+' '+m.paterno+' '+m.materno as nombreMando, pd.nuc, pd.fechaEvento, pd.fechaInforme, f.Nombre as fiscalia, 
-					mu.Nombre as municipio, col.Nombre as colonia, pd.calle, pd.numero, pd.codigoPostal,e.nombre+' '+e.apellidoPaterno+' '+e.apellidoMarterno as nombreEnlace
-					FROM pueDisposi.puestaDisposicion pd 
-					INNER JOIN pueDisposi.mando m ON m.idMando = pd.idMando
-					INNER JOIN pueDisposi.Fiscalias f ON f.CatFiscaliasID = pd.idFiscalia
-					INNER JOIN pueDisposi.CatMunicipios mu ON mu.CatMunicipiosID = pd.idMunicipio
-					INNER JOIN pueDisposi.CatColonias col ON col.CatColoniasID = pd.idColonia
-					INNER JOIN dbo.enlace e ON e.idEnlace = pd.idEnlace
-					WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND pd.mes = $mes AND pd.idEnlace IN($valoresEnlaceConsulta) ORDER BY f.Nombre ";
-				}else{
-						$query = " SELECT pd.idPuestaDisposicion, m.nombre+' '+m.paterno+' '+m.materno as nombreMando, pd.nuc, pd.fechaEvento, pd.fechaInforme, f.Nombre as fiscalia, 
-					mu.Nombre as municipio, col.Nombre as colonia, pd.calle, pd.numero, pd.codigoPostal,e.nombre+' '+e.apellidoPaterno+' '+e.apellidoMarterno as nombreEnlace
-					FROM pueDisposi.puestaDisposicion pd 
-					INNER JOIN pueDisposi.mando m ON m.idMando = pd.idMando
-					INNER JOIN pueDisposi.Fiscalias f ON f.CatFiscaliasID = pd.idFiscalia
-					INNER JOIN pueDisposi.CatMunicipios mu ON mu.CatMunicipiosID = pd.idMunicipio
-					INNER JOIN pueDisposi.CatColonias col ON col.CatColoniasID = pd.idColonia
-					INNER JOIN dbo.enlace e ON e.idEnlace = pd.idEnlace
-					WHERE pd.anio = $anio  AND pd.mes = $mes AND pd.idEnlace IN($valoresEnlaceConsulta) ORDER BY f.Nombre ";
-				}
+		$query = " SELECT pd.idPuestaDisposicion, m.nombre+' '+m.paterno+' '+m.materno as nombreMando, pd.nuc, pd.fechaEvento, pd.fechaInforme, f.Nombre as fiscalia, 
+		mu.Nombre as municipio, col.Nombre as colonia, pd.calle, pd.numero, pd.codigoPostal,e.nombre+' '+e.apellidoPaterno+' '+e.apellidoMarterno as nombreEnlace
+		FROM pueDisposi.puestaDisposicion pd 
+		INNER JOIN pueDisposi.mando m ON m.idMando = pd.idMando
+		INNER JOIN pueDisposi.Fiscalias f ON f.CatFiscaliasID = pd.idFiscalia
+		INNER JOIN pueDisposi.CatMunicipios mu ON mu.CatMunicipiosID = pd.idMunicipio
+		INNER JOIN pueDisposi.CatColonias col ON col.CatColoniasID = pd.idColonia
+		INNER JOIN dbo.enlace e ON e.idEnlace = pd.idEnlace
+		WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND pd.mes = $mes AND pd.idEnlace IN($valoresEnlaceConsulta) ORDER BY f.Nombre ";
 	}else{
 
 		if($idenlace == 59 || $idenlace == 60 || $idenlace == 84 || $idenlace == 85 || $idenlace == 91 || $idenlace == 86 || $idenlace == 87|| $idenlace == 89 || $idenlace == 90){ //// THEY ARE ALL THE USERS CAN SEE EVERTHING
@@ -256,8 +244,8 @@ WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND 
 			WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND pd.mes = $mes AND pd.idFiscalia IN($valores) ORDER BY f.Nombre ";
 
 		}else{
-   if($diames != 0){
-   		$query = " SELECT pd.idPuestaDisposicion, m.nombre+' '+m.paterno+' '+m.materno as nombreMando, pd.nuc, pd.fechaEvento, pd.fechaInforme, f.Nombre as fiscalia, 
+
+			$query = " SELECT pd.idPuestaDisposicion, m.nombre+' '+m.paterno+' '+m.materno as nombreMando, pd.nuc, pd.fechaEvento, pd.fechaInforme, f.Nombre as fiscalia, 
 			mu.Nombre as municipio, col.Nombre as colonia, pd.calle, pd.numero, pd.codigoPostal
 			FROM pueDisposi.puestaDisposicion pd 
 			INNER JOIN pueDisposi.mando m ON m.idMando = pd.idMando
@@ -265,16 +253,6 @@ WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND 
 			INNER JOIN pueDisposi.CatMunicipios mu ON mu.CatMunicipiosID = pd.idMunicipio
 			INNER JOIN pueDisposi.CatColonias col ON col.CatColoniasID = pd.idColonia
 			WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND pd.mes = $mes AND pd.idFiscalia IN($valores) AND idEnlace = $idenlace ORDER BY f.Nombre ";
-   }else{
-   		$query = " SELECT pd.idPuestaDisposicion, m.nombre+' '+m.paterno+' '+m.materno as nombreMando, pd.nuc, pd.fechaEvento, pd.fechaInforme, f.Nombre as fiscalia, 
-			mu.Nombre as municipio, col.Nombre as colonia, pd.calle, pd.numero, pd.codigoPostal
-			FROM pueDisposi.puestaDisposicion pd 
-			INNER JOIN pueDisposi.mando m ON m.idMando = pd.idMando
-			INNER JOIN pueDisposi.Fiscalias f ON f.CatFiscaliasID = pd.idFiscalia
-			INNER JOIN pueDisposi.CatMunicipios mu ON mu.CatMunicipiosID = pd.idMunicipio
-			INNER JOIN pueDisposi.CatColonias col ON col.CatColoniasID = pd.idColonia
-			WHERE pd.anio = $anio AND pd.mes = $mes AND pd.idFiscalia IN($valores) AND idEnlace = $idenlace ORDER BY f.Nombre ";
-   }
 		}
 	}
 
@@ -311,7 +289,7 @@ function get_data_vehi_puesta($conn, $idPuestaDisposicion, $idVeicle){
 if($idVeicle == 0){
 			$query = " SELECT v.idVehiculo, cv.nombre as clasificacion, av.nombre as aseguramiento, dv.nombre as delito, tdv.nombre as tipoDelito, dis.nombre as dispocicion, mv.CatMarcasVehiculosID as marcaVehiculoID,
   mv.Nombre as marca, vl.Nombre as linea, tv.Nombre as tipo, v.color, v.modelo, v.placa, v.serie, v.motor, v.serieAlterada, 
-  v.motorAlterado, v.requeridoOtrasCorpor, v.oficio, v.observaciones, v.requeridoPor, v.avppcarpeta , v.idLinea, v.idTipo
+  v.motorAlterado, v.requeridoOtrasCorpor, v.oficio, v.observaciones, v.requeridoPor, v.avppcarpeta 
   FROM pueDisposi.vehiculo v 
   INNER JOIN pueDisposi.clasificacionVehi cv ON cv.idClasificacionVehi = v.idClasificacion 
   INNER JOIN pueDisposi.aseguramietoVehi av ON av.idAseguramientoVehi = v.idFormaAseguramiento
@@ -326,7 +304,7 @@ if($idVeicle == 0){
  }else{
  		$query = " SELECT v.idVehiculo, cv.nombre as clasificacion, av.nombre as aseguramiento, dv.nombre as delito, tdv.nombre as tipoDelito, dis.nombre as dispocicion, mv.CatMarcasVehiculosID as marcaVehiculoID,
   mv.Nombre as marca, vl.Nombre as linea, tv.Nombre as tipo, v.color, v.modelo, v.placa, v.serie, v.motor, v.serieAlterada, 
-  v.motorAlterado, v.requeridoOtrasCorpor, v.oficio, v.observaciones, v.requeridoPor, v.avppcarpeta, v.idLinea, v.idTipo
+  v.motorAlterado, v.requeridoOtrasCorpor, v.oficio, v.observaciones, v.requeridoPor, v.avppcarpeta 
   FROM pueDisposi.vehiculo v 
   INNER JOIN pueDisposi.clasificacionVehi cv ON cv.idClasificacionVehi = v.idClasificacion 
   INNER JOIN pueDisposi.aseguramietoVehi av ON av.idAseguramientoVehi = v.idFormaAseguramiento
@@ -370,8 +348,7 @@ if($idVeicle == 0){
 		$arreglo[$indice][19]=$row['avppcarpeta'];
 		$arreglo[$indice][20]=$row['dispocicion'];
 		$arreglo[$indice][21]=$row['marcaVehiculoID'];
-  $arreglo[$indice][22]=$row['idLinea'];
-  $arreglo[$indice][23]=$row['idTipo'];
+
 		$indice++;
 	}
 
@@ -461,23 +438,9 @@ if($idObjeto == 0){
 
 function get_data_trabajoCampo_puesta($conn, $idPuestaDisposicion , $idTrabajoCampo){
 	if($idTrabajoCampo == 0){
-			$query = "   SELECT pueDisposi.TrabajoDeCampo.idTrabajoCampo,  pueDisposi.TrabajoDeCampo.entrevistas,  pueDisposi.TrabajoDeCampo.visitasDomiciliarias,  pueDisposi.TrabajoDeCampo.investigacionesCumplidas, pueDisposi.TrabajoDeCampo.investigacionesInformadas, pueDisposi.TrabajoDeCampo.individuaciones, 
-			 CASE WHEN pueDisposi.TrabajoDeCampo.solicitudVideos IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.solicitudVideos END as solicitudVideos, 
-			 CASE WHEN pueDisposi.TrabajoDeCampo.planimetrias IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.planimetrias END as planimetrias,
-			 CASE WHEN pueDisposi.TrabajoDeCampo.recPersonas IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.recPersonas  END as recPersonas,
-			 CASE WHEN pueDisposi.TrabajoDeCampo.recObjetos IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.recObjetos END as recObjetos,
-			 CASE WHEN pueDisposi.TrabajoDeCampo.recFotografias IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.recFotografias END as recFotografias,
-			  pueDisposi.TrabajoDeCampo.observaciones 
-			  FROM pueDisposi.TrabajoDeCampo WHERE  pueDisposi.TrabajoDeCampo.idPueDisposicion = $idPuestaDisposicion ";
+			$query = "   SELECT pueDisposi.TrabajoDeCampo.idTrabajoCampo,  pueDisposi.TrabajoDeCampo.entrevistas,  pueDisposi.TrabajoDeCampo.visitasDomiciliarias,  pueDisposi.TrabajoDeCampo.investigacionesCumplidas, pueDisposi.TrabajoDeCampo.investigacionesInformadas, pueDisposi.TrabajoDeCampo.individuaciones,  pueDisposi.TrabajoDeCampo.observaciones FROM pueDisposi.TrabajoDeCampo WHERE  pueDisposi.TrabajoDeCampo.idPueDisposicion = $idPuestaDisposicion ";
 		}else{
-			$query = "   SELECT pueDisposi.TrabajoDeCampo.idTrabajoCampo,  pueDisposi.TrabajoDeCampo.entrevistas,  pueDisposi.TrabajoDeCampo.visitasDomiciliarias,  pueDisposi.TrabajoDeCampo.investigacionesCumplidas, pueDisposi.TrabajoDeCampo.investigacionesInformadas, pueDisposi.TrabajoDeCampo.individuaciones,
-			 CASE WHEN pueDisposi.TrabajoDeCampo.solicitudVideos IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.solicitudVideos END as solicitudVideos, 
-			 CASE WHEN pueDisposi.TrabajoDeCampo.planimetrias IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.planimetrias END as planimetrias,
-			 CASE WHEN pueDisposi.TrabajoDeCampo.recPersonas IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.recPersonas END as recPersonas,
-			 CASE WHEN pueDisposi.TrabajoDeCampo.recObjetos IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.recObjetos END as recObjetos,
-			 CASE WHEN pueDisposi.TrabajoDeCampo.recFotografias IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.recFotografias END as recFotografias,
-			 pueDisposi.TrabajoDeCampo.observaciones 
-			 FROM pueDisposi.TrabajoDeCampo WHERE  pueDisposi.TrabajoDeCampo.idTrabajoCampo = $idTrabajoCampo ";
+			$query = "   SELECT pueDisposi.TrabajoDeCampo.idTrabajoCampo,  pueDisposi.TrabajoDeCampo.entrevistas,  pueDisposi.TrabajoDeCampo.visitasDomiciliarias,  pueDisposi.TrabajoDeCampo.investigacionesCumplidas, pueDisposi.TrabajoDeCampo.investigacionesInformadas, pueDisposi.TrabajoDeCampo.individuaciones,  pueDisposi.TrabajoDeCampo.observaciones FROM pueDisposi.TrabajoDeCampo WHERE  pueDisposi.TrabajoDeCampo.idTrabajoCampo = $idTrabajoCampo ";
 		}
 
 
@@ -493,11 +456,6 @@ function get_data_trabajoCampo_puesta($conn, $idPuestaDisposicion , $idTrabajoCa
 		$arreglo[$indice][4]=$row['observaciones'];
 		$arreglo[$indice][5]=$row['visitasDomiciliarias'];
 		$arreglo[$indice][6]=$row['investigacionesInformadas'];
-		$arreglo[$indice][7]=$row['solicitudVideos'];
-		$arreglo[$indice][8]=$row['planimetrias'];
-		$arreglo[$indice][9]=$row['recPersonas'];
-		$arreglo[$indice][10]=$row['recObjetos'];
-		$arreglo[$indice][11]=$row['recFotografias'];
 		$indice++;
 	}
 
@@ -550,8 +508,7 @@ END as sexo, cm.nombre as causaMuerte, d.movilMuerte, d.observaciones  FROM pueD
 
 function get_data_armas_puesta($conn, $idPuestaDisposicion, $idArma){
 if($idArma == 0){
-			$query = "  SELECT aa.idArmaAsegurada, ta.nombre as tipo, ma.nombre as marca, ca.nombre as calibre, ac.nombre as accesorio, mc.nombre as marcaCa, aa.observaciones, aa.idTipoArma, aa.idMarcaArma, aa.idCalibre, aa.idAccesorios, aa.idMarcaCartuchos
-		FROM pueDisposi.aseguramientoArmas aa 
+			$query = "  SELECT aa.idArmaAsegurada, ta.nombre as tipo, ma.nombre as marca, ca.nombre as calibre, ac.nombre as accesorio, mc.nombre as marcaCa, aa.observaciones FROM pueDisposi.aseguramientoArmas aa 
   INNER JOIN pueDisposi.CatTipoArma ta ON ta.CatTipoArmaID = aa.idTipoArma  
   INNER JOIN pueDisposi.CatMarcaArma ma ON ma.CatMarcaArmaID = aa.idMarcaArma
   INNER JOIN pueDisposi.CatCalibre ca ON ca.CatCalibreID = aa.idCalibre
@@ -559,8 +516,7 @@ if($idArma == 0){
   INNER JOIN pueDisposi.CatMarcaCartuchos mc ON mc.CatMarcaCartuchosID = aa.idMarcaCartuchos
   WHERE aa.idPueDisposicion = $idPuestaDisposicion ";
 }else{
-	$query = "  SELECT aa.idArmaAsegurada, ta.nombre as tipo, ma.nombre as marca, ca.nombre as calibre, ac.nombre as accesorio, mc.nombre as marcaCa, aa.observaciones, aa.idTipoArma, aa.idMarcaArma, aa.idCalibre, aa.idAccesorios, aa.idMarcaCartuchos
-	 FROM pueDisposi.aseguramientoArmas aa 
+	$query = "  SELECT aa.idArmaAsegurada, ta.nombre as tipo, ma.nombre as marca, ca.nombre as calibre, ac.nombre as accesorio, mc.nombre as marcaCa, aa.observaciones FROM pueDisposi.aseguramientoArmas aa 
   INNER JOIN pueDisposi.CatTipoArma ta ON ta.CatTipoArmaID = aa.idTipoArma  
   INNER JOIN pueDisposi.CatMarcaArma ma ON ma.CatMarcaArmaID = aa.idMarcaArma
   INNER JOIN pueDisposi.CatCalibre ca ON ca.CatCalibreID = aa.idCalibre
@@ -581,11 +537,8 @@ if($idArma == 0){
 		$arreglo[$indice][4]=$row['accesorio'];
 		$arreglo[$indice][5]=$row['marcaCa'];
 		$arreglo[$indice][6]=$row['observaciones'];
-		$arreglo[$indice][7]=$row['idTipoArma'];
-		$arreglo[$indice][8]=$row['idMarcaArma'];
-		$arreglo[$indice][9]=$row['idCalibre'];
-		$arreglo[$indice][10]=$row['idAccesorios'];
-		$arreglo[$indice][11]=$row['idMarcaCartuchos'];
+
+
 		$indice++;
 	}
 
@@ -638,7 +591,7 @@ function get_data_person_puesta($conn, $idPuestaDisposicion, $idPersona){
 
 			if($idPersona == 0){
 			$query = " SELECT p.idPersonaDetenida, p.nombre, p.ap_paterno, p.ap_materno, p.nombre+' '+p.ap_paterno+' '+p.ap_materno as nombreCompleto, p.alias, p.edad, d.delito as delitoPrincipal, p.bandas, p.agraviado, p.invFlag, p.bandaSolit, p.avPP, p.numdBas,
-	 p.aDispoDe, p.reqOtrasCorpo, p.oficio, p.observaciones, p.idTipoDelito,
+	 p.aDispoDe, p.reqOtrasCorpo, p.oficio, p.observaciones,
 	CASE
     WHEN p.sexo = 'M' THEN 'Masculino'
     WHEN p.sexo = 'F' THEN 'Femenino'
@@ -649,7 +602,7 @@ INNER JOIN pueDisposi.tipoDelitos d ON d.idTipoDelito = p.idTipoDelito
  WHERE idPuestaDisposicion = $idPuestaDisposicion  ORDER BY p.idPersonaDetenida DESC  ";
 }else{
 	$query = " SELECT p.idPersonaDetenida, p.nombre, p.ap_paterno, p.ap_materno, p.nombre+' '+p.ap_paterno+' '+p.ap_materno as nombreCompleto, p.alias, p.edad, d.delito as delitoPrincipal, p.bandas, p.agraviado, p.invFlag, p.bandaSolit, p.avPP, p.numdBas,
-	 p.aDispoDe, p.reqOtrasCorpo, p.oficio, p.observaciones, p.idTipoDelito,
+	 p.aDispoDe, p.reqOtrasCorpo, p.oficio, p.observaciones,
 	CASE
     WHEN p.sexo = 'M' THEN 'Masculino'
     WHEN p.sexo = 'F' THEN 'Femenino'
@@ -689,7 +642,6 @@ INNER JOIN pueDisposi.tipoDelitos d ON d.idTipoDelito = p.idTipoDelito
   $arreglo[$indice][18]=$row['reqOtrasCorpo'];
   $arreglo[$indice][19]=$row['oficio'];
   $arreglo[$indice][20]=$row['observaciones'];
-  $arreglo[$indice][21]=$row['idTipoDelito'];
 
 		$indice++;
 	}
@@ -738,7 +690,7 @@ FROM pueDisposi.personasDetenidas p
 function get_data_puesta($conn, $idPuestaDisposicion){
 
 			$query = "  SELECT m.nombre+' '+m.paterno+' '+m.materno as nombreCompleto,c.nombre as cargo, f.nombre as funcion, aa.nombre as areaAdscripcion , pd.nuc, pd.fechaEvento, pd.fechaInforme, pd.calle, 
-  pd.numero, pd.codigoPostal, fi.Nombre as fiscaliam, mu.Nombre as municipio, co.Nombre as colonia, pd.rel, pd.norel, pd.cate, pd.oper, pd.reco, pd.narracion, pd.idMando
+  pd.numero, pd.codigoPostal, fi.Nombre as fiscaliam, mu.Nombre as municipio, co.Nombre as colonia, pd.rel, pd.norel, pd.cate, pd.oper, pd.reco, pd.narracion
   FROM pueDisposi.puestaDisposicion pd 
   INNER JOIN pueDisposi.mando m ON m.idMando = pd.idMando 
   INNER JOIN pueDisposi.cargo c ON c.idCargo = m.idCargo
@@ -777,7 +729,6 @@ function get_data_puesta($conn, $idPuestaDisposicion){
 		$arreglo[$indice][16]=$row['oper'];
 		$arreglo[$indice][17]=$row['reco'];
 		$arreglo[$indice][18]=$row['narracion'];
-		$arreglo[$indice][19]=$row['idMando'];
 		$indice++;
 	}
 
@@ -948,8 +899,7 @@ function getDataMandos($conn){
 							$query = " SELECT m.idMando, m.nombre, m.paterno, m.materno, pdc.nombre as cargo, f.nombre as funcion, ad.nombre as areaAdscripcion FROM pueDisposi.mando m 
   INNER JOIN pueDisposi.cargo pdc ON pdc.idCargo = m.idCargo 
   INNER JOIN pueDisposi.funcion f ON f.idFuncion = m.idFuncion
-  INNER JOIN pueDisposi.areaAdscripcion ad ON ad.idAreaAdscripcion = m.idAreaAdscripcion 
-  WHERE m.estatus = 'VI' ";
+  INNER JOIN pueDisposi.areaAdscripcion ad ON ad.idAreaAdscripcion = m.idAreaAdscripcion ";
 
 
 							$indice = 0;

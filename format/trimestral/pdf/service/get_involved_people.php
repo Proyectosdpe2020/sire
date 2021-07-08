@@ -36,12 +36,12 @@ $involved_people = array(
     ),
     6 => array(
         'elaborated_by' => array(
-            'name' => 'Teresa Paulina Cazarez Ramírez',
-            'position' => 'Ministerio Público'
+            'name' => 'Lic. Blanca Cristina Mendoza Mendoza',
+            'position' => ''
         ),
         'validated_by' => array(
-            'name' => 'Mtro. Jorge Alejandro Montiel Villaseñor',
-            'position' => 'Titular de la Agencia de Inteligencia Criminal'
+            'name' => 'Mtro. Mario Aurelio Tirado Rayón',
+            'position' => 'Titular de la unidad de investigación y persecución de delitos cometidos a través de medios cibernéticos'
         )
     ),
     9 => array(
@@ -71,8 +71,8 @@ $involved_people = array(
     ),
     14 => array(
         'elaborated_by' => array(
-            'name' => 'Ana Guadalupe Sánchez Maldonado',
-            'position' => 'Auxiliar Administrativo'
+            'name' => 'Dilsa Melissa Varela Martínez',
+            'position' => ''
         ),
         'validated_by' => array(
             'name' => 'Mtra. Isidra Marin Hernandez',
@@ -126,7 +126,7 @@ $involved_people = array(
         ),
         'validated_by' => array(
             'name' => 'Mtro. Jorge Alberto Camacho Delgado',
-            'position' => 'Titular de la Fiscalía de Asuntos Especiales'
+            'position' => 'Titular de la unidad de asuntos especiales de la fiscalia coordinadora'
         )
     ),
     27 => array(
@@ -145,13 +145,13 @@ $involved_people = array(
             'position' => ''
         ),
         'validated_by' => array(
-            'name' => 'Mtra. Verónica Guzmán Perez',
-            'position' => 'Fiscal de investigación del homicidio doloso contra la mujer y feminicidio'
+            'name' => 'Lic. Verónica Guzmán Perez',
+            'position' => 'Fiscal de investigacion y persecucion del homicidio doloso contra la mujer y feminicidio'
         )
     ),
     29 => array(
         'elaborated_by' => array(
-            'name' => 'Lic Nestor Gerardo Morfin Alvarez',
+            'name' => 'Miryam Atziri Camacho López',
             'position' => ''
         ),
         'validated_by' => array(
@@ -191,7 +191,7 @@ $involved_people = array(
     ),
     38 => array(
         'elaborated_by' => array(
-            'name' => 'Mtro. en D. Jonathan Angeles Luna',
+            'name' => 'Lic. David Salvador Martínez Santoyo',
             'position' => ''
         ),
         'validated_by' => array(
@@ -286,7 +286,7 @@ $involved_people = array(
         ),
         'validated_by' => array(
             'name' => 'Mtro. Andrés Vieyra Castro',
-            'position' => 'Director Regional de Carpetas de Investigación'
+            'position' => 'Director Regional de Carpetas de Investigacion'
         )
     ),
     77 => array(

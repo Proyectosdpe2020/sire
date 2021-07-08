@@ -28,7 +28,7 @@ $anioActual = date("Y");
 						</select>
 					</div>
 
-					<div class="col-xs-12 col-sm-10  col-md-3">
+					<div class="col-xs-12 col-sm-10  col-md-6">
 						<label for="unidadTrimes">Unidad:</label>
 						<div id="contenidoProyectosListAgru">							
 							<select id="unidadTrimes" class="form-control redondear selectTranparent" required disabled="">								
@@ -39,12 +39,7 @@ $anioActual = date("Y");
 
 					<div class="col-xs-12 col-sm-4  col-md-3">
 						<label class="transparente">.</label>
-						<center><button type="button" data-toggle="modal" href="#puestdispos" style="white-space: normal;"  onclick="generarExcel();" class="btn btn-success btn-sm redondear btnCapturarTbl"><span class="glyphicon glyphicon-plus-sign"></span> REPORTE GENERAL </button></center>
-					</div>
-
-					<div class="col-xs-12 col-sm-4  col-md-3">
-						<label class="transparente">.</label>
-						<center><button type="button" data-toggle="modal" href="#puestdispos" style="white-space: normal;"  onclick="generarExcelDesglose();" class="btn btn-success btn-sm redondear btnCapturarTbl"><span class="glyphicon glyphicon-plus-sign"></span> REPORTE DESGLOSADO </button></center>
+						<center><button type="button" data-toggle="modal" href="#puestdispos" style="white-space: normal;"  onclick="generarExcel();" class="btn btn-success btn-sm redondear btnCapturarTbl"><span class="glyphicon glyphicon-plus-sign"></span> GENERAR REPORTE </button></center>
 					</div>
 
 					<br>

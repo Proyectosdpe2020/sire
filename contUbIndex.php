@@ -53,22 +53,7 @@
 														</div>
 											</div>		
 									<?}
-										if($dataEnlaceArc[$i][0] == 12){ 
-									?>
-											<div class="col-xs-12 col-sm-<?echo $colum;?>  col-md-<?echo $colum;?> policiaLogo" onclick="enviarAindex(12);">
-														<div id="imgPoliLogo">													
-															<div class="imgCentralPolicia <? if($tam == 3){ echo "img80"; }else{ echo "img50"; } ?>"></div>
-														</div>
-											</div>		
-									<?}
-										if($dataEnlaceArc[$i][0] == 15){ 
-									?>
-											<div class="col-xs-12 col-sm-<?echo $colum;?>  col-md-<?echo $colum;?> carpJudLogo" onclick="enviarAindex(15);">
-														<div id="imgCarpJud">													
-															<div class="imgCarpJud <? if($tam == 3){ echo "img80"; }else{ echo "img50"; } ?>"></div>
-														</div>
-											</div>		
-									<?}
+									
 								}
 
 						 ?>

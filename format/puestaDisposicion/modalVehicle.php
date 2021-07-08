@@ -57,8 +57,6 @@
 		    $avppcarpeta = $arreglo[0][19];
 		    $disposicion = $arreglo[0][20];
 		    $marcaVehiculoID = $arreglo[0][21];
-		    $getIDLinea = $arreglo[0][22];
-		    $getIDTipo = $arreglo[0][23];
 
 		    // OBTENER ID DE MUNICIPIO Y COLONIA APARTIR DE LA PUESTA Y LA FISCALIA
 
@@ -75,7 +73,6 @@
    
 
 	?>
-
  <div class="modal-header" style="background-color:#152F4A;">
 												<center><label style=" color: white; font-weight: bold; font-size: 1.8rem;">Vehículo Asegurado</label></center>			
 											  </div>
@@ -112,10 +109,10 @@
 
 																				      <h5 class="text-on-pannel"><strong> Datos Generales </strong></h5>																				       
 																				      <div class="row">																				      	
-																				      					<div class="col-xs-12 col-sm-12  col-md-4">
+																				      					<div class="col-xs-4">
 																				      							<label class="" for="inputlg">Clasificación :<span class="aste">(*)</span></label>
-			    																											<select class="dataAutocomplet form-control browser-default custom-select " id="selClasific" locked="locked" >		
-			    																												<option></option>																								  
+			    																											<select class="form-control browser-default custom-select " id="selClasific">		
+			    																												<option value="0">Selecciona</option>																								  
 																																	  		<? 
 																																						$clasif = getClasificacionVehicle($conn);
 																																						for ($f=0; $f < sizeof($clasif); $f++) { 					
@@ -127,9 +124,9 @@
 																																			 ?>
 																																	</select>
 																				      					</div>
-																				      					<div class="col-xs-12 col-sm-12  col-md-4">
+																				      					<div class="col-xs-4">
 																				      								<label class="" for="inputlg">Forma de Aseguramiento :<span class="aste">(*)</span></label>
-			    																											<select class="dataAutocomplet form-control browser-default custom-select" id="selFormAsegur">	
+			    																											<select class="form-control browser-default custom-select" id="selFormAsegur">	
 			    																												<option value="0">Selecciona</option>																										  
 																																	  	<? 
 																																						$formaseg = getFormAsegurVehicle($conn);
@@ -142,15 +139,15 @@
 																																			 ?>
 																																	</select>
 																				      					</div>
-																				      							<div class="col-xs-12 col-sm-12  col-md-4">
+																				      							<div class="col-xs-4">
 																				      								<label class="" for="inputlg">AVPP / NUC / Carpeta :</label>
 			    																													<input value="<?php if($a == 1){ echo $avppcarpeta; } ?>" class="form-control input-md redondear " id="nucVehiculo" type="text"  >
 																				      					</div>
 																				      </div>
 																				        <div class="row" style="margin-top: 10px;">																				      	
-																				      					<div class="col-xs-12 col-sm-12  col-md-6">
+																				      					<div class="col-xs-6">
 																				      							<label class="" for="inputlg">A Disposición de :<span class="aste">(*)</span></label>
-			    																											<select class="dataAutocomplet form-control browser-default custom-select" id="selAdispo">																									  
+			    																											<select class="form-control browser-default custom-select" id="selAdispo">																									  
 																																	  	<option value="0">Selecciona</option>																										  
 																																	  	<? 
 																																						$dipos = getDisposicVehicle($conn);
@@ -163,15 +160,15 @@
 																																			 ?>																													
 																																	 </select>
 																				      					</div>
-																				      					<div class="col-xs-12 col-sm-12  col-md-6">
+																				      					<div class="col-xs-6">
 																				      								<label class="" for="inputlg">Requerido por :</label>
 			    																												<input value="<?php if($a == 1){ echo $requeridoPor; } ?>" class="form-control input-md redondear " id="requeridoPorVehi" type="text"  >
 																				      					</div>
 																				      </div>
 																				         <div class="row" style="margin-top: 10px;">																				      	
-																				      					<div class="col-xs-12 col-sm-12  col-md-6">
+																				      					<div class="col-xs-6">
 																				      							<label class="" for="inputlg">Delito :<span class="aste">(*)</span></label>
-			    																									<select class="dataAutocomplet form-control browser-default custom-select " id="selDelito">																											  
+			    																									<select class="form-control browser-default custom-select " id="selDelito">																											  
 																																	  	<option value="0">Selecciona</option>																										  
 																																	  	<? 
 																																						$deli = getDelitoVehicle($conn);
@@ -184,9 +181,9 @@
 																																			 ?>		
 																																	</select>
 																				      					</div>
-																				      					<div class="col-xs-12 col-sm-12  col-md-6">
+																				      					<div class="col-xs-6">
 																				      								<label class="" for="inputlg">Tipo en Delito :<span class="aste">(*)</span></label>
-			    																												<select  class="dataAutocomplet form-control browser-default custom-select " id="selTipoDelito">																								  
+			    																												<select class="form-control browser-default custom-select " id="selTipoDelito">																								  
 																																	  
 
 			    																																			<option value="0">Selecciona</option>																										  
@@ -213,75 +210,68 @@
 																				       
 																				      <div class="row">
 																				      	
-																				      					<div class="col-xs-12 col-sm-12  col-md-4">
-																				      						<label for="heard">Marca : <span class="aste">(*)</span></label>
-																				      							<select class="dataAutocomplet form-control mandda" onchange="getDataLinea()" locked="locked" id="newMarca" name="newMarca" type="text" >
-																				      								<option></option>
-																				      									<? 
+																				      					<div class="col-xs-4">
+																				      								<datalist id="newMarcas">
+																																			<? 
 																																						$marcas = getDataMarcaVehicle($conn);
 																																						for ($h=0; $h < sizeof($marcas); $h++) { 																																						
 																																									$idMarc = $marcas[$h][0];	$nom = $marcas[$h][1];	?>
-																																											<option style="color: black; font-weight: bold;" value="<? echo $idMarc; ?>" <?if($a == 1 && $idMarc == $marcaVehiculoID ){ ?> selected <? } ?> > <? echo $nom; ?></option>
+																																											<option style="color: black; font-weight: bold;" value="<? echo $nom; ?>" data-value="<? echo $idMarc; ?>" data-id="<? echo $idMarc; ?>"></option>
 																																									<?
 																																						}
 																																			 ?>
-																				      							</select>
+																															</datalist>
+																																		<label for="heard">Marca : <span class="aste">(*)</span></label>	
+																															<input value="<?php if($a == 1){ echo $marca; } ?>" class="form-control mandda " onchange="getDataLinea()" list="newMarcas" id="newMarca" name="newMarca" type="text">
 																				      					</div>
-																				      					<div class="col-xs-12 col-sm-12  col-md-4">
+																				      					<div class="col-xs-4">
 																				      						<label for="heard">Linea : <span class="aste">(*)</span></label>	
-																				      						<select class="dataAutocomplet form-control mandda" onchange="" locked="locked" id="newLinea" name="newLinea" type="text" >
-																				      							<?if($a == 1){?>
-																				      								<option></option>
-																				      									<? 
-																																						$lineas = getDataLineaVehicle($conn, $marcaVehiculoID);
-																																						for ($o=0; $o < sizeof($lineas); $o++) { 								
-																																								$idLinea = $lineas[$o][0];
-																																								$nombre = $lineas[$o][1];
-																																								?>
-																																										<option style="color: black; font-weight: bold;" value="<? echo $idLinea; ?>" <?if($a == 1 && $idLinea == $getIDLinea ){ ?> selected <? } ?> ><?echo $nombre ?></option>
-																																								<?
-																																					}
-																																				}
-																																			 ?>
-																				      						</select>
+																				      								<div id="conteLinea">
+			    																															
+			    																															<datalist id="newLineas">
+			    																																	<option style="color: black; font-weight: bold;" value="<? echo $linea; ?>" data-value="<? echo $lineas[0][0]; ?>" data-id="<? echo $lineas[0][0]; ?>"></option>
+			    																																	</datalist>
+			    																																	<input value="<? if($a == 1){ echo $linea;; } ?>" class="form-control mandda " onchange="" list="newLineas" id="newLinea" name="newLinea" type="text">
+
+			    																												</div>
 																				      					</div>
-																				      						<div class="col-xs-12 col-sm-12  col-md-4">
-																				      							<label for="heard">Tipo : <span class="aste">(*)</span></label>	
-																				      							<select class="dataAutocomplet form-control mandda" onchange="" locked="locked" id="newTypeMarca" name="newTypeMarca" type="text" >
-																				      								<option></option>
-																				      								<? 
+																				      						<div class="col-xs-4">
+																				      									<datalist id="newTypeVehicles">
+																																			<? 
 																																						$types = getDataTypeVehicle($conn);
 																																						for ($g=0; $g < sizeof($types); $g++) { 																																						
 																																									$idType = $types[$g][0];	$nom = $types[$g][1];	?>
-																																											<option style="color: black; font-weight: bold;" value="<? echo $idType; ?>" <?if($a == 1 && $idType == $getIDTipo ){ ?> selected <? } ?> ><? echo $nom; ?></option>
+																																											<option style="color: black; font-weight: bold;" value="<? echo $nom; ?>" data-value="<? echo $idType; ?>" data-id="<? echo $idType; ?>"></option>
 																																									<?
 																																						}
 																																			 ?>
-																				      							</select>
+																															</datalist>
+																																		<label for="heard">Tipo : <span class="aste">(*)</span></label>	
+																															<input value="<?php if($a == 1){ echo $tipo; } ?>" class="form-control mandda " onchange="" list="newTypeVehicles" id="newTypeMarca" name="newTypeMarca" type="text">
 																				      					</div>
 																				      </div>
 																				        <div class="row" style="margin-top: 10px;">
 																				      	
-																				      					<div class="col-xs-12 col-sm-12  col-md-4">
+																				      					<div class="col-xs-4">
 																				      							<label class="" for="inputlg">Color :</label>
 			    																								<input value="<?php if($a == 1){ echo $color; } ?>" class="form-control input-md redondear " id="colorVehi" type="text"  >
 																				      					</div>
-																				      					<div class="col-xs-12 col-sm-12  col-md-4">
+																				      					<div class="col-xs-4">
 																				      								<label class="" for="inputlg">Modelo :</label>
 			    																												<input value="<?php if($a == 1){ echo $modelo; } ?>" class="form-control input-md redondear " id="modeloVehi" type="number"  >
 																				      					</div>
-																				      						<div class="col-xs-12 col-sm-12  col-md-4">
+																				      						<div class="col-xs-4">
 																				      								<label class="" for="inputlg">Placa :</label>
 			    																											<input value="<?php if($a == 1){ echo $placa; } ?>" class="form-control input-md redondear " id="placaVehi" type="text"  >
 																				      					</div>
 																				      </div>
 																				       <div class="row" style="margin-top: 10px;">
 																				      	
-																				      					<div class="col-xs-12 col-sm-12  col-md-6">
+																				      					<div class="col-xs-6">
 																				      							<label class="" for="inputlg">Serie :</label>
 			    																								<input value="<?php if($a == 1){ echo $serie; } ?>" class="form-control input-md redondear " id="serieVehi" type="text"  >
 																				      					</div>
-																				      					<div class="col-xs-12 col-sm-12  col-md-6">
+																				      					<div class="col-xs-6">
 																				      								<label class="" for="inputlg">Serie Alterada :</label>
 			    																												<input value="<?php if($a == 1){ echo $serieAlterada; } ?>" class="form-control input-md redondear " id="serieAlVehi" type="text"  >
 																				      					</div>
@@ -289,11 +279,11 @@
 																				       								
 																				       								 <div class="row" style="margin-top: 10px;">
 																				      	
-																				      					<div class="col-xs-12 col-sm-12  col-md-6">
+																				      					<div class="col-xs-6">
 																				      							<label class="" for="inputlg">Motor :</label>
 			    																								<input value="<?php if($a == 1){ echo $motor; } ?>" class="form-control input-md redondear " id="motorVehi" type="text"  >
 																				      					</div>
-																				      					<div class="col-xs-12 col-sm-12  col-md-6">
+																				      					<div class="col-xs-6">
 																				      								<label class="" for="inputlg">Motor Alterado :</label>
 			    																												<input value="<?php if($a == 1){ echo $motorAlterado; } ?>" class="form-control input-md redondear " id="motorAlVehi" type="text"  >
 																				      					</div>
@@ -310,18 +300,18 @@
 																				    <div class="panel-body">
 																				      <h5 class="text-on-pannel"><strong> Otros Datos </strong></h5>																				       
 																				      <div class="row">																				      	
-																				      					<div class="col-xs-12 col-sm-12  col-md-6">
+																				      					<div class="col-xs-6">
 																				      							<label class="" for="inputlg">Requerido por Otras Corporaciones :</label>
 			    																								<input value="<?php if($a == 1){ echo $requeridoOtrasCorpor; } ?>" class="form-control input-md redondear " id="requeOtroCopro" type="text"  >
 																				      					</div>
-																				      					<div class="col-xs-12 col-sm-12  col-md-6">
+																				      					<div class="col-xs-6">
 																				      								<label class="" for="inputlg">Oficio :</label>
 			    																											<input value="<?php if($a == 1){ echo $oficio; } ?>" class="form-control input-md redondear " id="oficioVehi" type="text"  >
 																				      					</div>
 																				      </div>
 																				        <div class="row" style="margin-top: 10px;">
 																				      	
-																				      					<div class="col-xs-12 col-sm-12  col-md-12">
+																				      					<div class="col-xs-12">
 																				      							<label class="" for="inputlg">Observaciones :</label>
 			    																										<div class="form-group">
 																																  <textarea class="form-control rounded-0" id="observaVehi" rows="3"><?php if($a == 1){ echo $observaciones; } ?></textarea>

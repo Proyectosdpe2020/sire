@@ -61,7 +61,6 @@
 		    $reqOtrasCorpo = $arreglo[0][18];
 		    $oficio = $arreglo[0][19];
 		    $observaciones = $arreglo[0][20];
-		    $idTipoDelito = $arreglo[0][21];
      
 		 }else{ 
 		 	//Si $idPersona viene con valor 0 no es actualizacion y entra aqui
@@ -182,16 +181,16 @@
 																					  <tr class="table-row" id="table-row-<?php echo $posts[$k]["id"]; ?>">
 																						<td contenteditable="false" onBlur="saveToDatabase(this,'id','<?php echo $posts[$k]["id"]; ?>')" onClick="editRow(this);">1</td>      
 																						<td contenteditable="true" onBlur="saveToDatabase(this,'articulo_titulo','<?php echo $posts[$k]["id"]; ?>')" onClick="editRow(this);">
-																						<select class="dataAutocomplet form-control mandda" onchange="getData()" locked="locked" id="textTipoDelito" name="textTipoDelito" type="text" >
-																							<option></option>
-																							 <?php
+																						<input value="<?php if($a == 1){ echo $delitoPrincipal; } ?>" class="form-control" onchange="getData()" list="listaCatDelitos" id="textTipoDelito" name="textTipoDelito" type="text">										        
+																	       <datalist id="listaCatDelitos">
+																	       	  <?php
 																	       	  $catDelitos = getDataDelitos($conn);
 																	       	  	for ($i = 0; $i < sizeof($catDelitos); $i++){
 																	       	  		$idCatTipoDelito =  $catDelitos[$i][0];	$nombreDeli = $catDelitos[$i][1];	?>
-																	       	  		<option style="color: black; font-weight: bold;" value="<?php echo $idCatTipoDelito; ?>" <?if($a == 1 && $idCatTipoDelito == $idTipoDelito ){ ?> selected <? } ?> ><?echo $nombreDeli; ?></option>	
-																	       <?php } ?>
-																						</select>
-																					
+																	       	  		<option style="color: black; font-weight: bold;" value="<?php echo $nombreDeli; ?>" 
+																	       	  			data-value="<? echo $idCatTipoDelito; ?>" data-id="<? echo $idCatTipoDelito; ?>" ></option>	
+																	       	  <?php } ?>
+																									 </datalist>
 																						</td>
 																						
 																						<!--<td><a class="ajax-action-links" onclick="#">Cancelar</a></td>-->

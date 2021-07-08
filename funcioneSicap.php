@@ -321,29 +321,6 @@ function getDistincCarpetasAgente($conn, $idMp, $estatus, $mes, $anio, $deten){
 
 }
 
-
-function getDistincCarpetasAgente3($conn, $idMp, $estatus, $mes, $anio, $deten, $idUnidad){
-
-
-	$query = " SELECT DISTINCT CarpetaID, idUnidad, ResolucionID FROM Resoluciones 
-WHERE AgenteID = $idMp AND EstatusID = $estatus AND mes = $mes AND anio = $anio AND deten = $deten AND idUnidad = $idUnidad  Group BY CarpetaID, idUnidad, ResolucionID";
-
-
-
-	   $indice = 0;
-
-	$stmt = sqlsrv_query($conn, $query);
-	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
-	{
-		$arreglo[$indice][0]=$row['CarpetaID'];
-		$arreglo[$indice][1]=$row['idUnidad'];
-		$arreglo[$indice][2]=$row['ResolucionID'];
-		$indice++;
-	}
-	if(isset($arreglo)){return $arreglo;}
-
-}
-
 //// SIN DETENIDO NI TIPO DE RESOLUCIONE
 
 function getResolucionesMPtotalsic12($conn, $idMp, $mes, $anio){
@@ -553,17 +530,17 @@ function getLAstResolucionesFromAdeterm($conn, $idMp, $estatResolucion, $mes, $a
 
 
 		$carpeAgente = getDistincCarpetasAgente($conn, $idMp, $estatResolucion, $mes, $anio, $deten);
-		$carpeAgente3 = getDistincCarpetasAgente3($conn, $idMp, $estatResolucion, $mes, $anio, $deten, $idUnidad); //// SE AGREGA EL ID DE UNIDAD PARA QUE SOLO SE BUSQUEN NUCS DE LA UNIDAD EN LA QUE SE ENCUENTRA ACTUALMENTE
+
 
 	//$carpeAgente =  getDistincCarpetasAgenteDetemrn20($conn, $idMp, $mes, $anio, $deten, $estatResolucion);
 	$carpeAgente2 = getDistincCarpetasDataUNidReso($conn, $idMp, $estatResolucion, $mes, $anio, $deten);
 	
 	$numResol = 0;
 
-          for ($i=0; $i < sizeof($carpeAgente3); $i++) { 
+          for ($i=0; $i < sizeof($carpeAgente); $i++) { 
             
-              $CaepetaId = $carpeAgente3[$i][0];
-              $unid = $carpeAgente3[$i][1];             
+              $CaepetaId = $carpeAgente[$i][0];
+              $unid = $carpeAgente2[$i][1];             
 
 
 
@@ -719,3 +696,7 @@ function getDataDelitoNombre($conSic , $idDelito){
 	}
 	if(isset($arreglo)){return $arreglo;}	
 }
+
+	
+
+?>

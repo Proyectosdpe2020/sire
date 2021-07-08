@@ -1,25 +1,5 @@
 <?php
 
-
-function getDataUSER($conn, $idusername){
-
-	$query = "  SELECT nombre, paterno, materno, areaNombre FROM usuario WHERE idUsuario = $idusername ";
-
-
-	$indice = 0;
-	$stmt = sqlsrv_query($conn, $query);
-	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))	
-	{
-		$arreglo[$indice][0]=$row['nombre'];
-		$arreglo[$indice][1]=$row['paterno'];
-		$arreglo[$indice][2]=$row['materno'];
-		$arreglo[$indice][3]=$row['areaNombre'];
-		$indice++;
-	}
-	if(isset($arreglo)){return $arreglo;}	
-
-}
-
 function getArchvsEnla($conn, $idEnlace){
 
 	$query = " SELECT idFormtato FROM enlaceFormato WHERE idEnlace = $idEnlace ";
@@ -478,7 +458,7 @@ $indice = 0;
 
 function getMesCapEnlaceArchivo($conn, $idEnlace, $idFormato){
 
-		$query = " SELECT mesCap, idAnio FROM enlaceMesValidaEnviado WHERE idEnlace = $idEnlace AND idFormato = $idFormato ";
+		$query = " SELECT mesCap FROM enlaceMesValidaEnviado WHERE idEnlace = $idEnlace AND idFormato = $idFormato ";
 		//echo $query;
 
 $indice = 0;
@@ -486,7 +466,6 @@ $indice = 0;
 	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))	
 	{
 		$arreglo[$indice][0]=$row['mesCap'];
-		$arreglo[$indice][1]=$row['idAnio'];
 		$indice++;
 	}
 	if(isset($arreglo)){return $arreglo;}	
