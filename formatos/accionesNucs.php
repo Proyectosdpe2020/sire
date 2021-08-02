@@ -264,9 +264,7 @@ switch ($acc) {
                       BEGIN TRANSACTION
                           SET NOCOUNT ON    
                        
-                            INSERT INTO Resoluciones (CarpetaID, Fechaoficio, Fechaingreso, Judicializada, CatModalidadesEstadisticasID, EstatusID, AgenteID, UsuarioID, NumOficio, deten, mes, anio, idUnidad) VALUES ($carpid, GETDATE(), GETDATE(), 0, 0, $estatResolucion, $idMp, 0, 'S/O', $deten, $mes, $anio, $idUnidad) 
-
-                             SELECT MAX(ResolucionID) AS ResolucionID FROM Resoluciones                      
+                            INSERT INTO Resoluciones (CarpetaID, Fechaoficio, Fechaingreso, Judicializada, CatModalidadesEstadisticasID, EstatusID, AgenteID, UsuarioID, NumOficio, deten, mes, anio, idUnidad) VALUES ($carpid, GETDATE(), GETDATE(), 0, 0, $estatResolucion, $idMp, 0, 'S/O', $deten, $mes, $anio, $idUnidad)                       
 
                           COMMIT
                     END TRY
@@ -282,11 +280,7 @@ switch ($acc) {
                   //echo $queryTransaction;
 
                 if ($result) {
-                    while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC )){
-                    $ResolucionID = $row['ResolucionID']; //Obtenemos el $ResolucionID para guardar datos de senap
-                   }
-                   $arreglo[2] = $ResolucionID;
-                    echo json_encode(array('first'=>$arreglo[0] , 'ResolucionID' => $arreglo[2] ));
+                    echo json_encode(array('first'=>$arreglo[0]));
                   }else{
                     echo json_encode(array('first'=>$arreglo[1]));
                   }

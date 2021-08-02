@@ -462,11 +462,13 @@ function getDataDelitoJudicializado($conn, $idEstatusNucs){
 		$arreglo[$indice][1]=$row['idEstatusNucs'];
 		$arreglo[$indice][2]=$row['idModalidadEstadistica'];
 		$arreglo[$indice][3]=$row['reclasificacion'];
+
 		$arreglo[$indice][4]=$row['causaPenal'];
 		$arreglo[$indice][5]=$row['fechaCausaPenal'];
 		$arreglo[$indice][6]=$row['audienciaInicial'];
 		$arreglo[$indice][7]=$row['motivoNoCelebracion'];
 		$arreglo[$indice][8]=$row['fechaAudienciaInicial'];
+
 		$indice++;
 	}
 	if(isset($arreglo)){return $arreglo;}
@@ -506,6 +508,7 @@ function getDataDelitosSica($conSic){
 								if(isset($arreglo)){return $arreglo;}	
 
 }
+
 
 //Función para obtener el total de NUCS de medidas de proteccion
 function getDataMedidasProteccion($conn, $idEstatusNucs){
@@ -554,5 +557,6 @@ function getMotivosAudienciaInicial($conSic){
 	}
 	if(isset($arreglo)){return $arreglo;}	
 }
+
 
 ?>
