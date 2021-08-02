@@ -43,16 +43,54 @@
 	 		$idModalidadEstadistica = $getData[0][2]; 
 	 		$reclasificado = $getData[0][3];
 	 		$causaPenal = $getData[0][4];
+	 		$fechaCausaPenal = $getData[0][5] ->format('Y-m-d');
+	 		$audienciaInicial = $getData[0][6];
+	 		$motivoNoCelebracion = $getData[0][7];
+	 		$fechaAudienciaInicial = $getData[0][8]  ->format('Y-m-d');
 	 		$getName = getDataDelitoNombre($conSic , $idModalidadEstadistica );
 	 		$nombreDelito = $getName[0][1];
 	 }else{ 	$opcInsert = 0;  $reclasificado = 0; }?>
 	<div class="row">
 		<div class="col-xs-12 col-sm-12  col-md-12">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6  col-md-6">
+						<label for="causaPenal">Número asignado a la causa penal :</label>
+						<input id="causaPenal" type="text" value="<? if($opcInsert == 1){ echo $causaPenal; } ?>"  class="fechas form-control gehit"  />
+				</div>
+				<div class="col-xs-12 col-sm-6  col-md-6">
+						<label for="fechaCausaPenal">Fecha de ingreso de la causa penal: </label>
+						<input id="fechaCausaPenal" type="date" value="<?if($opcInsert == 1){echo $fechaCausaPenal; }?>" name="fechaCausaPenal" class="fechas form-control gehit"  />
+					</div>
+			</div><br>
 			 <div class="row">
-			 	<div class="col-xs-12 col-sm-12  col-md-12">
-			 			<label class="colorLetras" for="inputlg">Número asignado a la causa penal :</label>
-											<input type="text"  class="first" id="causaPenal" value="<? if($opcInsert == 1){ echo $causaPenal; } ?>" />
-			 	</div>
+					<div class="col-xs-12 col-sm-6  col-md-6">
+						<label for="celebracionAudIniOk">¿Hubó celebración de audiencia inicial?: </label>
+						<select id="celebracionAudIniOk" name="celebracionAudIniOk" tabindex="6" class="form-control redondear"  onchange="validateFormulacionJudicializada()">
+							<option style="color: black; font-weight: bold;" value="0" > Seleccione </option>
+							<?$getOptionDictonomica = getOptionDictonomica($conn);
+							for ($i=0; $i < sizeof($getOptionDictonomica); $i++) {
+								$idOpcion = $getOptionDictonomica[$i][0];	$opc = $getOptionDictonomica[$i][1];	?>
+								<option style="color: black; font-weight: bold;" value="<? echo $idOpcion; ?>" <?if($opcInsert == 1 && $idOpcion == $audienciaInicial ){ ?> selected <? } ?> > <? echo $opc; ?> </option>
+							<? } ?>
+						</select>
+					</div>
+					<div class="col-xs-12 col-sm-6  col-md-6">
+						<label for="motivoNoAudienciaIni">Motivo de no celebración de audiencia inicial: </label>
+						<select id="motivoNoAudienciaIni" name="motivoNoAudienciaIni" tabindex="6" class="form-control redondear" disabled onchange="">
+							<option style="color: black; font-weight: bold;" value="0" >Seleccione</option>
+							<?$getMotivosAudienciaInicial = getMotivosAudienciaInicial($conSic);
+							for ($i=0; $i < sizeof($getMotivosAudienciaInicial); $i++) {
+								$idOpcion = $getMotivosAudienciaInicial[$i][0];	$opc = $getMotivosAudienciaInicial[$i][1];	?>
+								<option style="color: black; font-weight: bold;" value="<? echo $idOpcion; ?>" <?if($opcInsert == 1 && $idOpcion == $motivoNoCelebracion ){ ?> selected <? } ?> ><? echo $opc; ?> </option>
+							<? } ?>
+						</select>
+					</div>
+				</div><br>
+				<div class="row">
+			 	<div class="col-xs-12 col-sm-6  col-md-6">
+						<label for="fechaAudienciaInicial">Fecha de la audiencia inicial: </label>
+						<input id="fechaAudienciaInicial" type="date" value="<?if($opcInsert == 1){echo $fechaAudienciaInicial; }?>" name="fechaAudienciaInicial" disabled class="fechas form-control gehit"  />
+					</div>
 			 </div><br>
 			<!-- TABLA DELITOS POR LA CUAL SE JUDICIALIZO-->
 			<div class="row">
@@ -199,11 +237,9 @@
 			<button style="width: 88%;" onclick="closeModalNucsLitigInfo()" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button>
 		</div>
 		<div class="col-xs-12 col-sm-6  col-md-6 ">
-		<?if(	$opcInsert == 0){ ?>
-			<button style="width: 88%;" onclick="sendDataAutoVincuProc(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> ,  <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
-			<?}elseif(	$opcInsert == 1 ){?>
+		
 			<button style="width: 88%;" onclick="insertFormAutoVincuProc_db(<? echo $idResolMP; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
-		<? } ?>
+
 		</div>
 	</div>
  <? } ?>
@@ -283,11 +319,12 @@
 				<div class="row">
 					<div class="col-xs-12 col-sm-12  col-md-12">
 						<label for="formulacionAcusacion">¿Se formuló acusación?: </label>
-						<select id="formulacionAcusacion" name="formulacionAcusacion" tabindex="6" class="form-control redondear"  onchange="">
+						<select id="formulacionAcusacion" name="formulacionAcusacion" tabindex="6" class="form-control redondear"  onchange="validateMedidasCautelares()">
+							<option style="color: black; font-weight: bold;" value="0"> Seleccione </option>
 							<?$getOptionDictonomica = getOptionDictonomica($conn);
 							for ($i=0; $i < sizeof($getOptionDictonomica); $i++) {
 								$idOpcion = $getOptionDictonomica[$i][0];	$opc = $getOptionDictonomica[$i][1];	?>
-								<option style="color: black; font-weight: bold;" value="<? echo $idOpcion; ?>" <?if($opcInsert == 1 && $idOpcion == $formulacionAcusacion ){ ?> selected <? }elseif($idOpcion == 3){ ?>selected <? } ?> ><? echo $opc; ?> </option>
+								<option style="color: black; font-weight: bold;" value="<? echo $idOpcion; ?>" <?if($opcInsert == 1 && $idOpcion == $formulacionAcusacion ){ ?> selected <? } ?> ><? echo $opc; ?> </option>
 							<? } ?>
 						</select>
 					</div>
@@ -295,7 +332,7 @@
 				<div class="row">
 					<div class="col-xs-12 col-sm-12  col-md-12">
 						<label for="fechaEscritoAcusacion">Fecha del escrito de acusación: </label>
-						<input id="fechaEscritoAcusacion" type="date" value="<?if($opcInsert == 1){echo $fechaEscritoAcusacion;}?>" name="fechaEscritoAcusacion" class="fechas form-control gehit"  />
+						<input id="fechaEscritoAcusacion" type="date" value="<?if($opcInsert == 1){echo $fechaEscritoAcusacion;}?>" name="fechaEscritoAcusacion" class="fechas form-control gehit" disabled />
 					</div>
 				</div>	
 		</div>	
@@ -761,8 +798,12 @@
 			<button style="width: 88%;" onclick="closeModalNucsLitigInfo()" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button>
 		</div>
 		<div class="col-xs-12 col-sm-6  col-md-6 ">
-			<?if(	$opcInsert == 0){ ?>
+			<?if(	$opcInsert == 0){ 
+				if($estatus == 14){?>
+			<button style="width: 88%;" onclick="insertSentencias_db(<?if($estatus == 14){ echo $idResolMP; }else{ echo $idEstatusNucs; } ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
+		<? } else{?>
 			<button style="width: 88%;" onclick="sendDataSentencias(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> ,  <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
+		<? } ?>
 				<?}elseif(	$opcInsert == 1 ){?>
 			<button style="width: 88%;" onclick="insertSentencias_db(<?if($estatus == 14){ echo $idResolMP; }else{ echo $idEstatusNucs; } ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
 		 <? } ?>

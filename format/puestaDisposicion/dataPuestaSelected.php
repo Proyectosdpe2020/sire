@@ -32,34 +32,14 @@
 
 			?>
 
-				<table class="table table-striped  table-hover">
-									<thead>
-										<tr class="cabezeraTabla10">
-											<th class="textCent">ID</th>
-											  <?if($arch == 12){ ?> <th class="textCent10">Enlace</th> <? } ?>
-													<th class="textCent10">Mando</th>	
-													<th class="">Nuc</th>
-													<th class=" textCent">Fecha Evento</th>
-													<th class=" textCent">Fecha Informe</th>
-													<th class=" textCent">Fiscalía</th>	
-													<th class=" textCent">Municipio</th>
-													<th class=" textCent">Colonia</th>
-													<th class=" textCent">Calle </th>
-													<th class=" textCent">Numero</th>													
-													<th class=" textCent">Codigo Postal</th>
-													
-													<th class="textCent">Accion </th>
-
-										</tr>
-									</thead>
-									<tbody>
+				
 															<? 
 																				$dataPuestasDia = get_data_puesta_dia($conn, $dianum, $diaselected, $anio, $idfisca, $idEnlace, $messelected);
 																							for ($h=0; $h < sizeof($dataPuestasDia) ; $h++) { 
 																									?>
 																										<tr><td style="font-weight: bolder;"> <? echo $dataPuestasDia[$h][0]; ?> </td>
-																										<?if($arch == 12){ ?> <td> <? echo $dataPuestasDia[$h][11]; ?> </td> <? } ?>	
 																										<td> <? echo $dataPuestasDia[$h][1]; ?> </td>
+																										<?if($arch == 12 && ($idEnlace != 266 && $idEnlace != 233 && $idEnlace != 225) ){ ?> <td> <? echo $dataPuestasDia[$h][11]; ?> </td> <? } ?>	
 																										<td> <? echo $dataPuestasDia[$h][2]; ?> </td>
 																									<td> 	<center><? echo $dataPuestasDia[$h][3]->format('Y-m-d H:i'); ?></center> </td>
 																										<td> <center><? echo $dataPuestasDia[$h][4]->format('Y-m-d H:i'); ?></center></td>
@@ -69,13 +49,13 @@
 																										<td> <? echo $dataPuestasDia[$h][8]; ?> </td>
 																										<td> <center><? echo $dataPuestasDia[$h][9]; ?></center> </td>
 																										<td> <center><? echo $dataPuestasDia[$h][10]; ?></center> </td>
-																										<td><center><label class="glyphicon glyphicon-search" data-toggle="modal" href="#puestdispos" onclick="showmodalPueDispo(1, <? echo $idEnlace; ?>, <? echo $dataPuestasDia[$h][0]; ?>, <? echo 	$tiparchiv; ?>, 1)" style="width: 95%; cursor: pointer; font-weight: bold; color: green;">Editar<? /*if($a == 1){echo "Revisar";}else{ echo "Editar"; }*/ ?></label></center></td></tr>
+																										<?if($tiparchiv == 12){ ?>
+																											<td><center><label class="glyphicon glyphicon-search" data-toggle="modal" href="#puestdispos" onclick="showmodalPueDispo(1, <? echo $idEnlace; ?>, <? echo $dataPuestasDia[$h][0]; ?>, <? echo 	$tiparchiv; ?>, 1)" style="width: 95%; cursor: pointer; font-weight: bold; color: green;"> Ver <? /*if($a == 1){echo "Revisar";}else{ echo "Editar"; }*/ ?></label></center></td>
+																										<? }else{ ?>
+																										<td><center><label class="glyphicon glyphicon-edit" data-toggle="modal" href="#puestdispos" onclick="showmodalPueDispo(1, <? echo $idEnlace; ?>, <? echo $dataPuestasDia[$h][0]; ?>, <? echo 	$tiparchiv; ?>, 1)" style="width: 95%; cursor: pointer; font-weight: bold; color: green;">Editar<? /*if($a == 1){echo "Revisar";}else{ echo "Editar"; }*/ ?></label></center></td>
+																									<? } ?>
+																									</tr>
 																									<?		/// METHOD SHOWMODALPUEDISPO TYPECHECK IS 1 BEACAUSE ALWAYS CAN BE CAPTURED EVERYDAY AND $a = 0 here and it´s changed to 1 Editar
 																							}															
 
 															 ?>
-									</tbody>
-									</table>
-
-
-								

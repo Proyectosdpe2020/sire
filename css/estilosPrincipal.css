@@ -342,7 +342,39 @@ width: 100%;
 
 }
 
+.imgCentralPolicia{
 
+
+  height: 40vh !important;
+  margin: 0 auto;
+  margin-top: 30%;
+  background-image: url('../img/Icono-Policia-1.png') !important;
+    background-size: cover;
+ background-repeat: no-repeat;  
+  background-position: center; 
+ background-size: 100%; 
+  background-position-y: 50%;
+
+
+
+}
+
+.imgCarpJud{
+
+
+  height: 40vh !important;
+  margin: 0 auto;
+  margin-top: 30%;
+  background-image: url('../img/Icono-Carpetas-jud-1.png') !important;
+    background-size: cover;
+ background-repeat: no-repeat;  
+  background-position: center; 
+ background-size: 100%; 
+  background-position-y: 50%;
+
+
+
+}
 
 .carpetasLogo:hover{
 
@@ -381,4 +413,40 @@ width: 100%;
 .litigacionLogo:hover .imgCentralTrimestral{
 
     background-image: url('../img/Icono trimestral 2.2.png') !important;
+}
+
+.policiaLogo:hover{
+
+    background: rgba(0,139,202,1);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0,139,202,1)), color-stop(100%, rgba(255,175,3,0)));
+    background: -webkit-linear-gradient(top, rgba(0,139,202,1) 0%, rgba(0,139,202,0) 100%);
+    background: linear-gradient(to bottom, rgba(0,139,202,1) 0%, rgba(0,139,202,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffaf03', endColorstr='#ffaf03', GradientType=0 );
+    cursor: pointer;
+
+
+
+}
+
+.carpJudLogo:hover .imgCarpJud{
+
+    background-image: url('../img/Icono-Carpetas-jud-2.2.png') !important;
+}
+
+.carpJudLogo:hover{
+
+    background: rgba(0,139,202,1);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0,139,202,1)), color-stop(100%, rgba(255,175,3,0)));
+    background: -webkit-linear-gradient(top, rgba(0,139,202,1) 0%, rgba(0,139,202,0) 100%);
+    background: linear-gradient(to bottom, rgba(0,139,202,1) 0%, rgba(0,139,202,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffaf03', endColorstr='#ffaf03', GradientType=0 );
+    cursor: pointer;
+
+
+
+}
+
+.policiaLogo:hover .imgCentralPolicia{
+
+    background-image: url('../img/Icono-Policia-2.2.png') !important;
 }

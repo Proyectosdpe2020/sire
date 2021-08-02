@@ -212,3 +212,12 @@ font-size: 12px;
   counter-increment: contadorMando;
   content: counter(contadorMando);
 }
+
+.cabeceraConsultaPolicia{
+  background: rgba(21,47,74,.9);
+  color: white;
+}
+
+.dataAutocomplet{
+  width:100%!important;
+}

@@ -463,6 +463,10 @@ function getDataDelitoJudicializado($conn, $idEstatusNucs){
 		$arreglo[$indice][2]=$row['idModalidadEstadistica'];
 		$arreglo[$indice][3]=$row['reclasificacion'];
 		$arreglo[$indice][4]=$row['causaPenal'];
+		$arreglo[$indice][5]=$row['fechaCausaPenal'];
+		$arreglo[$indice][6]=$row['audienciaInicial'];
+		$arreglo[$indice][7]=$row['motivoNoCelebracion'];
+		$arreglo[$indice][8]=$row['fechaAudienciaInicial'];
 		$indice++;
 	}
 	if(isset($arreglo)){return $arreglo;}
@@ -537,5 +541,18 @@ function getDataFechaCumplimento($conn, $idEstatusNucs){
 	if(isset($arreglo)){return $arreglo;}
 }
 
+//Función que obtiene el catalogo de motivos por el cual no se celebro la audiencia inicial
+function getMotivosAudienciaInicial($conSic){
+	$query = "SELECT * FROM CatMotivosAudienciaInicial "; 
+	$indice = 0;
+	$stmt = sqlsrv_query($conSic, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['CatMotivoAudienciaInicialID'];
+		$arreglo[$indice][1]=$row['Nombre'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}	
+}
 
 ?>

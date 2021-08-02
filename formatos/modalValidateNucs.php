@@ -126,6 +126,9 @@
                    }
                   }
 
+																		///// SE MODIFICO PAA QUE AGARRE LA UNIDAD A LA QUE PERTENECE
+																		$carpeAgente3 = getDistincCarpetasAgente3($conSic, $idMp, $arrayEstatus[$q], $mesCapturar, $anioCaptura, $deten, $idUnidad); //// SE AGREGA EL ID DE UNIDAD PARA QUE SOLO SE BUSQUEN NUCS DE LA UNIDAD EN LA QUE SE ENCUENTRA ACTUALMENTE
+
                   			$carpeAgente = getDistincCarpetasAgente($conSic, $idMp, $arrayEstatus[$q], $mesCapturar, $anioCaptura, $deten);
                   			$carpeAgente2 = getDistincCarpetasDataUNidReso($conSic, $idMp, $arrayEstatus[$q], $mesCapturar, $anioCaptura, $deten);
 
@@ -133,11 +136,11 @@
 
 
 
-         for ($n=0; $n < sizeof($carpeAgente) ; $n++) { 
+         for ($n=0; $n < sizeof($carpeAgente3) ; $n++) { 
                                       
-                                       $CaepetaId = $carpeAgente[$n][0];
+                                       $CaepetaId = $carpeAgente3[$n][0];
                                        
-                                       $unds = $carpeAgente2[$n][1];
+                                       $unds = $carpeAgente3[$n][1];
 
                                        ////////////// revisar si existe como reiniciada con el estatus de abierto 
 									   $reinicidassi = knowisReinicida($conSic, $anioCaptura, $mesCapturar, $idUnidad, $CaepetaId);		
