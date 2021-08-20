@@ -1,4 +1,4 @@
-
+ 
 	<?php
 	session_start();
 
@@ -12,8 +12,6 @@
 		include("../../funcionesPueDispo.php");	
 
 
-
-
  	$idUsuario = $_SESSION['useridIE'];
  	
 
@@ -23,35 +21,37 @@
 	$idEnlace = $enlace[0][0];
 	$idfisca = $enlace[0][1];	
 
+
 	$tipoArchov = get_type_archive($conn, $idEnlace);
 	$tiparchiv = $tipoArchov[0][0];
 
-
-	$mescap = getMesCapEnlaceArchivo($conn, $idEnlace, 10);	
+	$mescap = getMesCapEnlaceArchivo($conn, $idEnlace, 9);	
 	$mescapen = $mescap[0][0];
 
-	$mesCapturar = $mescapen;	
-	
-	$anioCaptura = 2020;
+	$mesCapturar = $mescapen;
 
 
 
 
+	//$anioCaptura = 2021;
 
+ 	
  	$idUsuario = $_SESSION['useridIE'];
 
  	 	if(date("l") === "Monday"){ $numeroDia = 1; $diaLetra = "Lunes"; }
- 	    if(date("l") === "Tuesday"){ $numeroDia = 2; 	$diaLetra = "Martes";}
- 	    if(date("l") === "Wednesday"){ $numeroDia = 3; 	$diaLetra = "Miercoles";}
-   		if(date("l") === "Thursday"){ $numeroDia = 4; 	$diaLetra = "Jueves";}
+ 	  if(date("l") === "Tuesday"){ $numeroDia = 2; 	$diaLetra = "Martes";}
+ 	  if(date("l") === "Wednesday"){ $numeroDia = 3; 	$diaLetra = "Miercoles";}
+   	if(date("l") === "Thursday"){ $numeroDia = 4; 	$diaLetra = "Jueves";}
  	 	if(date("l") === "Friday"){ $numeroDia = 5; 	$diaLetra = "Viernes";}
  	 	if(date("l") === "Saturday"){ $numeroDia = 6; 	$diaLetra = "Sabado";}
  	 	if(date("l") === "Sunday"){ $numeroDia = 7; 	$diaLetra = "Domingo";}
 
  	 	$diames= date("d");
- 	 		 	$currentmonth = date("m");
+ 	 	
+ 	 	$currentmonth = date("m");
  	 	$meses = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
- 	 	 	$mesNom = Mes_Nombre($currentmonth);
+		$mesNom = Mes_Nombre($currentmonth);
+
 	?>
 
 	<div id="contenido" style="">
@@ -64,15 +64,14 @@
 					<table border="0" class="alwidth">						
 							<tr>								
 								<td id="nomostrar" class="imgSelloCabezera" width="5%" height="125"></td>								
-									<td width="50%">
-																									<div class="tituloCentralSegu">
-																										<div class="titulosCabe1">
-																											<h4> <label class="titulo2">Registro Diario de Puestas a Disposición</label></h4>
-																											<label class="titulo100" style="color: #566573 ; font-weight: bolder;">DIRECCIÓN GENERAL DE TECNOLOGÍAS DE LA INFORMACIÓN, PLANEACIÓN Y ESTADÍSTICA</label>
-																											<h4> <label class="titulo2">Dirección de Planeación y Estadística</label></h4>
-																										</div>
-																									</div>
-																						</td>
+								<td width="50%">
+											<div class="tituloCentralSegu">
+												<div class="titulosCabe1">
+													<label class="titulo1" style="color: #686D72;">Registro Diario de Actividades</label>
+													<h4> <label id="titfisc" class="titulo2">Fiscalía General del Estado de Michoácan</label></h4>
+												</div>
+											</div>
+								</td>
 								<td id="nomostrar" class="imgdgtipeCabezera" width="10%" height="125"></td>
 							</tr>
 					</table>
@@ -84,22 +83,27 @@
 
 					<div class="col-xs-6 col-sm-4  col-md-1">
 						<label for="heard">Año:</label><br>
-						<select id="anioCmasc" name="selMes" tabindex="6" class="form-control redondear selectTranparent" required>
-							<option value="<? echo $anioCaptura; ?>" selected><? echo $anioCaptura; ?></option>
+						<select id="anioCmasc" name="selMes" tabindex="6" class="form-control redondear selectTranparent" onchange="reloadDaysMonth(<? echo $idEnlace; ?>)" required>
+							 <?php
+							 $dataAnio = getDataAnio();
+							 for ($i = 0; $i < sizeof($dataAnio); $i++){
+							 	$anioCaptura = $dataAnio[$i][0];	?>
+									<option value="<? echo $anioCaptura; ?>" selected><? echo $anioCaptura; ?></option>
+								<? } ?>
 						</select>
 					</div>
 
 					<div class="col-xs-6 col-sm-4  col-md-1">
-						<label for="heard">Mes:</label><br>						
+						<label for="heard">Mes:</label><br><div id="contMonth">
 						<select id="mesPuestaSelected" name="selMes" tabindex="6"class="form-control redondear selectTranparent" onchange="loadDaysMonth(<? echo $anioCaptura; ?>, <? echo $idEnlace; ?>, 0)" required>
 							
 							<? 
 								for ($g=1; $g <= 12 ; $g++) { 											
-											if($g== $currentmonth){
+											if($g == intval($currentmonth)){
 													?>
 													<option value="<? echo $currentmonth; ?>" selected><? echo $mesNom; ?></option>
 													<?
-												}else{
+												}else{ 
 													?>
 													<option value="<? echo $g; ?>" ><? echo $meses[$g-1]; ?></option>
 													<?
@@ -107,16 +111,15 @@
 										}
 							 ?>
 							
-						</select>
+						</select></div>
 					</div>
 
-					<div class="col-xs-6 col-sm-4  col-md-2">
+					<div class="col-xs-6 col-sm-4  col-md-1">
 						<label for="heard">Día:</label><br>
-						<div id="contDays">
+							<div id="contDays">
 						<select id="diaSeleted" name="selMes" tabindex="6"class="form-control redondear selectTranparent" onchange="loadDataPuestDay(<? echo $anioCaptura; ?>, <? echo $idEnlace; ?>, 0)" required>
-
+							<option value="0">Todo</option>
 							<? 
-
 									$diasNumero = cal_days_in_month(CAL_GREGORIAN, $currentmonth, $anioCaptura);
 
 									for ($t=1; $t <= $diasNumero ; $t++) { 												
@@ -137,38 +140,33 @@
 						</select></div>
 					</div>
 
-					<div class="col-xs-6 col-sm-4  col-md-5">
+					<div class="col-xs-6 col-sm-4  col-md-6">
 						<label for="heard">Mando:</label><br>
 						<select id="mesCmasc" name="selMes" tabindex="6"class="form-control redondear selectTranparent" required>
-							<option value="<? echo $mesCapturar; ?>" selected>  Todos </option>
+							<option value="" >  Todos </option>
 						</select>
 					</div>
-
+ 
 		
-					<div class="col-xs-6 col-sm-4  col-md-3">
+					<div class="col-xs-12 col-sm-12  col-md-3">
 								<label class="transparente">.</label>		
-								<center>
-									<button type="button" style="width: 49%; float: left;" data-toggle="modal" href="#puestdispos" style="white-space: normal;"  onclick="showmodalPueDispo(0, <? echo $idEnlace; ?>, 0, <? echo 	$tiparchiv; ?>,1);" class="btn btn-success btn-sm redondear btnCapturarTbl"><span class="glyphicon glyphicon-plus-sign"></span> Nueva Puesta Disposición </button>
-									<button type="button" style="white-space: normal; width: 49%; float: right;"  onclick="downloadExcelReport();" class="btn btn-primary btn-sm redondear btnCapturarTbl"><span class="glyphicon glyphicon-arrow-down"></span> Generar Reporte </button>
-								</center>
+								<center><button type="button" data-toggle="modal" href="#puestdispos" style="white-space: normal;"  onclick="showmodalPueDispo(0, <? echo $idEnlace; ?>,0,<? echo $tiparchiv; ?>, 1);" class="btn btn-success btn-sm redondear btnCapturarTbl"><span class="glyphicon glyphicon-plus-sign"></span> Registro Nueva Actividad </button>
+								<button type="button" style="white-space: normal; width: 49%; float: right;"  onclick="downloadExcelReport();" class="btn btn-primary btn-sm redondear btnCapturarTbl"><span class="glyphicon glyphicon-arrow-down"></span> Generar Reporte </button>
+								</center></center>
 
 					</div>
 					
 
 				</div>
+				<br>
+				<div class="col-md-6 col-md-offset-3" id="preloaderIMG" hidden>
+						<img src="images/cargando.gif"/>
+					</div>
 
-				<div id="respuestaDescargarCarpeta"> 
-								
-				</div>
-
-					<div class="contTblMPs" id="contTblMPs2">
-
-						<div id="tablePuestasData" class="row pad20">							
-					
-								<table class="table table-striped  table-hover">
-									<thead>
-										<tr class="cabezeraTabla10">
-											<th class="textCent">ID</th>
+				<table id="gridPolicia" class="display table table-striped  table-hover" width="100%" >
+				<thead>
+					<tr class="cabeceraConsultaPolicia">
+						<th class="textCent">ID</th>
 													<th class="textCent10">Mando</th>
 													<th class="">Nuc</th>
 													<th class=" textCent">Fecha Evento</th>
@@ -178,18 +176,20 @@
 													<th class=" textCent">Colonia</th>
 													<th class=" textCent">Calle </th>
 													<th class=" textCent">Numero</th>													
-													<th class=" textCent">Codigo Postal</th>
-													
+													<th class=" textCent">Codigo Postal</th>	
 													<th class="textCent">Accion </th>
-
-										</tr>
-									</thead>
-									<tbody>
-															<? 
+		
+					</tr>
+				</thead> 
+				<tbody id="contentConsulta">
+					<? 
 																				$dataPuestasDia = get_data_puesta_dia($conn, $numeroDia, $diames, $anioCaptura, $idfisca, $idEnlace, $currentmonth);
+
+
 																							for ($h=0; $h < sizeof($dataPuestasDia) ; $h++) { 
+
 																									?>
-																										<tr><td style="font-weight: bolder;"> <? echo $dataPuestasDia[$h][0]; ?> </td>
+																										<tr><td> <? echo $dataPuestasDia[$h][0]; ?> </td>
 																										<td> <? echo $dataPuestasDia[$h][1]; ?> </td>
 																										<td> <? echo $dataPuestasDia[$h][2]; ?> </td>
 																									<td> 	<center><? echo $dataPuestasDia[$h][3]->format('Y-m-d H:i'); ?></center> </td>
@@ -200,17 +200,16 @@
 																										<td> <? echo $dataPuestasDia[$h][8]; ?> </td>
 																										<td> <center><? echo $dataPuestasDia[$h][9]; ?></center> </td>
 																										<td> <center><? echo $dataPuestasDia[$h][10]; ?></center> </td>
-																										<td><center><label data-toggle="modal" href="#puestdispos" onclick="showmodalPueDispo(1, <? echo $idEnlace; ?>, <? echo $dataPuestasDia[$h][0]; ?>, <? echo 	$tiparchiv; ?>, 1)" style="width: 95%; cursor: pointer; font-weight: bold; color: green;">Editar</label></center></td></tr>
+<td><center><label class="glyphicon glyphicon-edit" data-toggle="modal" href="#puestdispos" onclick="showmodalPueDispo(1, <? echo $idEnlace; ?>, <? echo $dataPuestasDia[$h][0]; ?>, <? echo 	$tiparchiv; ?>, 1)" style="width: 95%; cursor: pointer; font-weight: bold; color: green;">  Editar</label></center></td></tr>
 																									<?		
-																							}															
+
+																							}																			
 
 															 ?>
-									</tbody>
-									</table>
-							
-							</div>
+   </tbody>
+  </table><br>
 
-						</div><br>
+				
 
 										<div class="x_panel piepanel">
 												<div class="piepanel2">
@@ -327,8 +326,3 @@
 
 
 
-
-
-
-
-	</html>

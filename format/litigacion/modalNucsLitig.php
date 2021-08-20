@@ -200,6 +200,7 @@
 																				  for ($i=0; $i < sizeof($carpeAgente) ; $i++) { 
 
 																						$nuc = $carpeAgente[$i][0];
+																							$idEstatusNucsThisNUC = $carpeAgente[$i][1]; //se agrego para obtener el idEstatusNucs 
 																						//// Por cada Carpeta Obtener la Ultima Determinacion que se realizo
 																									$lastDetermin = getLastDeterminacionCarpetaLitig($conn, $nuc);
 
@@ -224,9 +225,9 @@
 																										  <td class="tdRowMain negr"><? echo $exp; ?></td>
                             <!--SE AGREGO EL BOTON PARA ABRIR EL NUEVO MODAL-->
                             <? if($validaInfo){?>
-                            <td class="tdRowMain"><center><div class="buttonInfo"><button type="button" onclick="showModalNucLitInfo(<? echo $idEstatusNucs; ?>, <? echo $estatus; ?>, <? echo $nuc; ?>, <? echo $idCarpeta; ?>)" class="btn btn-success btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-pencil"></span> Agregar </button></div></center></td>
+                            <td class="tdRowMain"><center><div class="buttonInfo"><button type="button" onclick="showModalNucLitInfo(<? echo $idEstatusNucsThisNUC; ?>, <? echo $estatus; ?>, <? echo $nuc; ?>, <? echo $idCarpeta; ?>, <? echo $idMp; ?>, <? echo $mes; ?> , <? echo $anio; ?> )" class="btn btn-success btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-pencil"></span> Agregar </button></div></center></td>
                             <? } ?>
-																										  <td class="tdRowMain"><center><button type="button" onclick="deleteResolLit(<? echo $idEstatusNucs; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatus ?>, <? echo $nuc; ?>, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
+																										  <td class="tdRowMain"><center><button type="button" onclick="deleteResolLit(<? echo $idEstatusNucsThisNUC; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatus ?>, <? echo $nuc; ?>, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
 
 																									   </tr>
 																											 <?		

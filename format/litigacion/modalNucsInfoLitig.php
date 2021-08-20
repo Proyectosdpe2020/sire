@@ -7,14 +7,21 @@
 	include("../../funcioneLit.php");
 	include("../../funcionesLitSENAP.php");
 
-	if (isset($_POST["idEstatusNucs"])){ $idEstatusNucs = $_POST["idEstatusNucs"]; }
+	if (isset($_POST["idEstatusNucs"])){ $idEstatusNucs = $_POST["idEstatusNucs"]; } else{ $idEstatusNucs = 0; }
 	if (isset($_POST["estatus"])){ $estatus = $_POST["estatus"]; }
 	if (isset($_POST["nuc"])){ $nuc = $_POST["nuc"]; }
 	if (isset($_POST["idCarpeta"])){ $idCarpeta = $_POST["idCarpeta"]; }
+
+		if (isset($_POST["idMp"])){ $idMp = $_POST["idMp"]; }
+	if (isset($_POST["mes"])){ $mes = $_POST["mes"]; }
+	if (isset($_POST["anio"])){ $anio = $_POST["anio"]; }
+	if (isset($_POST["deten"])){ $deten = $_POST["deten"]; }
+		if (isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }
+
 	$getNucExpedienteSicap = getNucExpedienteSicap($conSic, $nuc);
 	$expediente = $getNucExpedienteSicap[0][0];
 
-	if($estatus == 19 || $estatus == 14){ if (isset($_POST["idResolMP"])){ $idResolMP = $_POST["idResolMP"]; } }
+	if($estatus == 19 || $estatus == 14){ if (isset($_POST["idResolMP"])){ $idResolMP = $_POST["idResolMP"]; }else{ $idResolMP = 0; } }
 	
 ?>
 
@@ -35,11 +42,56 @@
 	 		$opcInsert = 1; 
 	 		$idModalidadEstadistica = $getData[0][2]; 
 	 		$reclasificado = $getData[0][3];
+	 		$causaPenal = $getData[0][4];
+	 		$fechaCausaPenal = $getData[0][5] ->format('Y-m-d');
+	 		$audienciaInicial = $getData[0][6];
+	 		$motivoNoCelebracion = $getData[0][7];
+	 		$fechaAudienciaInicial = $getData[0][8]  ->format('Y-m-d');
 	 		$getName = getDataDelitoNombre($conSic , $idModalidadEstadistica );
 	 		$nombreDelito = $getName[0][1];
-	 }else{ 	$opcInsert = 0; }?>
+	 }else{ 	$opcInsert = 0;  $reclasificado = 0; }?>
 	<div class="row">
 		<div class="col-xs-12 col-sm-12  col-md-12">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6  col-md-6">
+						<label for="causaPenal">Número asignado a la causa penal :</label>
+						<input id="causaPenal" type="text" value="<? if($opcInsert == 1){ echo $causaPenal; } ?>"  class="fechas form-control gehit"  />
+				</div>
+				<div class="col-xs-12 col-sm-6  col-md-6">
+						<label for="fechaCausaPenal">Fecha de ingreso de la causa penal: </label>
+						<input id="fechaCausaPenal" type="date" value="<?if($opcInsert == 1){echo $fechaCausaPenal; }?>" name="fechaCausaPenal" class="fechas form-control gehit"  />
+					</div>
+			</div><br>
+			 <div class="row">
+					<div class="col-xs-12 col-sm-6  col-md-6">
+						<label for="celebracionAudIniOk">¿Hubó celebración de audiencia inicial?: </label>
+						<select id="celebracionAudIniOk" name="celebracionAudIniOk" tabindex="6" class="form-control redondear"  onchange="validateFormulacionJudicializada()">
+							<option style="color: black; font-weight: bold;" value="0" > Seleccione </option>
+							<?$getOptionDictonomica = getOptionDictonomica($conn);
+							for ($i=0; $i < sizeof($getOptionDictonomica); $i++) {
+								$idOpcion = $getOptionDictonomica[$i][0];	$opc = $getOptionDictonomica[$i][1];	?>
+								<option style="color: black; font-weight: bold;" value="<? echo $idOpcion; ?>" <?if($opcInsert == 1 && $idOpcion == $audienciaInicial ){ ?> selected <? } ?> > <? echo $opc; ?> </option>
+							<? } ?>
+						</select>
+					</div>
+					<div class="col-xs-12 col-sm-6  col-md-6">
+						<label for="motivoNoAudienciaIni">Motivo de no celebración de audiencia inicial: </label>
+						<select id="motivoNoAudienciaIni" name="motivoNoAudienciaIni" tabindex="6" class="form-control redondear" disabled onchange="">
+							<option style="color: black; font-weight: bold;" value="0" >Seleccione</option>
+							<?$getMotivosAudienciaInicial = getMotivosAudienciaInicial($conSic);
+							for ($i=0; $i < sizeof($getMotivosAudienciaInicial); $i++) {
+								$idOpcion = $getMotivosAudienciaInicial[$i][0];	$opc = $getMotivosAudienciaInicial[$i][1];	?>
+								<option style="color: black; font-weight: bold;" value="<? echo $idOpcion; ?>" <?if($opcInsert == 1 && $idOpcion == $motivoNoCelebracion ){ ?> selected <? } ?> ><? echo $opc; ?> </option>
+							<? } ?>
+						</select>
+					</div>
+				</div><br>
+				<div class="row">
+			 	<div class="col-xs-12 col-sm-6  col-md-6">
+						<label for="fechaAudienciaInicial">Fecha de la audiencia inicial: </label>
+						<input id="fechaAudienciaInicial" type="date" value="<?if($opcInsert == 1){echo $fechaAudienciaInicial; }?>" name="fechaAudienciaInicial" disabled class="fechas form-control gehit"  />
+					</div>
+			 </div><br>
 			<!-- TABLA DELITOS POR LA CUAL SE JUDICIALIZO-->
 			<div class="row">
 				<div class="col-xs-12 col-sm-12  col-md-12">
@@ -58,7 +110,9 @@
 											</tr>
 										</thead>
 										<tbody id="">
-										<? $getDataDelito = getDataDelito($conSic, $idCarpeta);
+										<?
+             $datossicap=get_datos_carpeta_capturado($conSic, $nuc);  
+										   $getDataDelito = getDataDelito($conSic, $datossicap[0][0]);
 										   $k=0;
 										for ($i=0; $i < sizeof($getDataDelito); $i++) {  ?>
 											<tr>
@@ -87,7 +141,7 @@
 			 	<label>Reclasificar delito: &nbsp&nbsp<input type="checkbox"class="checkRecla" id="cbox1" value="" onclick="reclasificar()"></label>
 			 	</div>
 			 </div><br>
-			 <div class="row" id="tableReclasificar" <?if($opcInsert == 1 && $reclasificado != 1){ ?> hidden <? } ?> >
+			 <div class="row" id="tableReclasificar" <?if($opcInsert == 0 && $reclasificado == 0){ ?> hidden <? } ?> >
 				<div class="col-xs-12 col-sm-12  col-md-12">
 					<div id="tablePuestasDataMando" class="row pad20">	
 									<table class="table table-striped  table-hover">
@@ -128,7 +182,11 @@
 			<button style="width: 88%;" onclick="closeModalNucsLitigInfo()" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button>
 		</div>
 		<div class="col-xs-12 col-sm-6  col-md-6 ">
+			<?if(	$opcInsert == 0){ ?>
+			<button style="width: 88%;" onclick="sendDataJudicializada(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> ,  <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
+			<?}elseif(	$opcInsert == 1 ){?>
 			<button style="width: 88%;" onclick="insertFormJudicializada_db(<? echo $idEstatusNucs; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
+		<? } ?>
 		</div>
 	</div>
  <? } ?>
@@ -151,7 +209,11 @@
 			<button style="width: 88%;" onclick="closeModalNucsLitigInfo()" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button>
 		</div>
 		<div class="col-xs-12 col-sm-6  col-md-6 ">
+			<?if(	$opcInsert == 0){ ?>
+			<button style="width: 88%;" onclick="sendDataFormImputacion(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> ,  <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
+			<?}elseif(	$opcInsert == 1 ){?>
 			<button style="width: 88%;" onclick="insertFormImputacion_db(<? echo $idEstatusNucs; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
+			<? } ?>
 		</div>
 	</div>
  <? } ?>
@@ -175,7 +237,9 @@
 			<button style="width: 88%;" onclick="closeModalNucsLitigInfo()" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button>
 		</div>
 		<div class="col-xs-12 col-sm-6  col-md-6 ">
+		
 			<button style="width: 88%;" onclick="insertFormAutoVincuProc_db(<? echo $idResolMP; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
+
 		</div>
 	</div>
  <? } ?>
@@ -255,12 +319,12 @@
 				<div class="row">
 					<div class="col-xs-12 col-sm-12  col-md-12">
 						<label for="formulacionAcusacion">¿Se formuló acusación?: </label>
-						<select id="formulacionAcusacion" name="formulacionAcusacion" tabindex="6" class="form-control redondear"  onchange="">
-							<option value="0">Selecciona</option>
+						<select id="formulacionAcusacion" name="formulacionAcusacion" tabindex="6" class="form-control redondear"  onchange="validateMedidasCautelares()">
+							<option style="color: black; font-weight: bold;" value="0"> Seleccione </option>
 							<?$getOptionDictonomica = getOptionDictonomica($conn);
 							for ($i=0; $i < sizeof($getOptionDictonomica); $i++) {
 								$idOpcion = $getOptionDictonomica[$i][0];	$opc = $getOptionDictonomica[$i][1];	?>
-								<option style="color: black; font-weight: bold;" value="<? echo $idOpcion; ?>" <?if($opcInsert == 1 && $idOpcion == $formulacionAcusacion ){ ?> selected <? } ?>><? echo $opc; ?> </option>
+								<option style="color: black; font-weight: bold;" value="<? echo $idOpcion; ?>" <?if($opcInsert == 1 && $idOpcion == $formulacionAcusacion ){ ?> selected <? } ?> ><? echo $opc; ?> </option>
 							<? } ?>
 						</select>
 					</div>
@@ -268,7 +332,7 @@
 				<div class="row">
 					<div class="col-xs-12 col-sm-12  col-md-12">
 						<label for="fechaEscritoAcusacion">Fecha del escrito de acusación: </label>
-						<input id="fechaEscritoAcusacion" type="date" value="<?if($opcInsert == 1){echo $fechaEscritoAcusacion;}?>" name="fechaEscritoAcusacion" class="fechas form-control gehit"  />
+						<input id="fechaEscritoAcusacion" type="date" value="<?if($opcInsert == 1){echo $fechaEscritoAcusacion;}?>" name="fechaEscritoAcusacion" class="fechas form-control gehit" disabled />
 					</div>
 				</div>	
 		</div>	
@@ -278,7 +342,11 @@
 			<button style="width: 88%;" onclick="closeModalNucsLitigInfo()" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button>
 		</div>
 		<div class="col-xs-12 col-sm-6  col-md-6 ">
+			<?if(	$opcInsert == 0){ ?>
+			<button style="width: 88%;" onclick="sendDataMedCautelar(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> ,  <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
+				<?}elseif(	$opcInsert == 1 ){?>
 			<button style="width: 88%;" onclick="insertMedCautelar_db(<? echo $idEstatusNucs; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
+		<? } ?>
 		</div>
 	</div>
  <? } ?>
@@ -363,7 +431,11 @@
 			<button style="width: 88%;" onclick="closeModalNucsLitigInfo()" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button>
 		</div>
 		<div class="col-xs-12 col-sm-6  col-md-6 ">
+			<?if(	$opcInsert == 0){ ?>
+			<button style="width: 88%;" onclick="sendDataAudienciaIntermedia(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> ,  <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
+			<?}elseif(	$opcInsert == 1 ){?>
 			<button style="width: 88%;" onclick="insertAudienciaIntermedia_db(<? echo $idEstatusNucs; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
+		<? } ?>
 		</div>
 	</div>
  <? } ?>
@@ -406,7 +478,11 @@
 			<button style="width: 88%;" onclick="closeModalNucsLitigInfo()" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button>
 		</div>
 		<div class="col-xs-12 col-sm-6  col-md-6 ">
+			<?if(	$opcInsert == 0){ ?>
+			<button style="width: 88%;" onclick="sendDataSobreseimientos(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> ,  <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
+			<?}elseif(	$opcInsert == 1 ){?>
 			<button style="width: 88%;" onclick="insertSobreseimientos_db(<? echo $idEstatusNucs; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
+		<? } ?>
 		</div>
 	</div>
  <? } ?>
@@ -493,7 +569,11 @@
 			<button style="width: 88%;" onclick="closeModalNucsLitigInfo()" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button>
 		</div>
 		<div class="col-xs-12 col-sm-6  col-md-6 ">
+			<?if(	$opcInsert == 0){ ?>
+				<button style="width: 88%;" onclick="sendDataSuspCondProc(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> ,  <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
+				<?}elseif(	$opcInsert == 1 ){?>
 			<button style="width: 88%;" onclick="insertSuspCondProc_db(<? echo $idEstatusNucs; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
+		<? } ?>
 		</div>
 	</div>
  <? } ?>
@@ -536,7 +616,11 @@
 			<button style="width: 88%;" onclick="closeModalNucsLitigInfo()" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button>
 		</div>
 		<div class="col-xs-12 col-sm-6  col-md-6 ">
+			<?if(	$opcInsert == 0){ ?>
+			<button style="width: 88%;" onclick="sendDataAudienciasJuicio(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> ,  <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
+			<?}elseif(	$opcInsert == 1 ){?>
 			<button style="width: 88%;" onclick="insertAudienciasJuicio_db(<? echo $idEstatusNucs; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
+		 <? } ?>
 		</div>
 	</div>
  <? } ?>
@@ -573,7 +657,11 @@
 			<button style="width: 88%;" onclick="closeModalNucsLitigInfo()" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button>
 		</div>
 		<div class="col-xs-12 col-sm-6  col-md-6 ">
+			<?if(	$opcInsert == 0){ ?>
+			<button style="width: 88%;" onclick="sendDataCriteriosOportunidad(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> ,  <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
+			<?}elseif(	$opcInsert == 1 ){?>
 			<button style="width: 88%;" onclick="insertCriteriosOportunidad_db(<? echo $idEstatusNucs; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
+		<? } ?>
 		</div>
 	</div>
  <? } ?>
@@ -609,7 +697,11 @@
 			<button style="width: 88%;" onclick="closeModalNucsLitigInfo()" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button>
 		</div>
 		<div class="col-xs-12 col-sm-6  col-md-6 ">
+				<?if(	$opcInsert == 0){ ?>
+				<button style="width: 88%;" onclick="sendDataAcuerdoReparatorio(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> ,  <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
+					<?}elseif(	$opcInsert == 1 ){?>
 			<button style="width: 88%;" onclick="insertAcuerdoReparatorio_db(<? echo $idEstatusNucs; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
+		<? } ?>
 		</div>
 	</div>
  <? } ?>
@@ -617,9 +709,17 @@
 
  <? if($estatus == 14 || $estatus == 66 ||$estatus == 67 ){ 
  	if($estatus == 14){ //Para poder hacer consulta en caso de que el estatus sea 14 ya que esta se recibe en la tabla de resoluciones de la BD Prueba
- 	$getData = getDataSentencias($conn,  $idResolMP, $estatus);
+ 	if($idResolMP == 0){
+ 		$getData = getDataSentencias($conn,  'null', $estatus); 
+ 	}else{
+ 		$getData = getDataSentencias($conn,  $idResolMP, $estatus);
+ 	}
  }else{
- 	$getData = getDataSentencias($conn,  $idEstatusNucs, $estatus);
+ 	if($idEstatusNucs == 0){
+ 		$getData = getDataSentencias($conn, 'null' , $estatus);
+ 	}else{
+ 		$getData = getDataSentencias($conn,  $idEstatusNucs, $estatus);
+ 	}
  }
 	 	if(sizeof($getData) > 0){ 
 	 		$opcInsert = 1; 
@@ -636,7 +736,7 @@
 		<!--¿La sentencia fue derivada de un procedimiento abreviado? :-->
 			<div class="row">
 				<div class="col-xs-12 col-sm-12  col-md-12">
-					<label for="fechaDictoSentencia">Fecha en que se dictó la sentencia: </label>
+					<label for="fechaDictoSentencia">Fecha en que se dictó la sentencia:</label>
 					<input id="fechaDictoSentencia" type="date" value="<?if($opcInsert == 1){echo $fechaDictoSentencia;}?>" name="fechaDictoSentencia" class="fechas form-control gehit"  />
 				</div>
 			</div><br>
@@ -698,7 +798,15 @@
 			<button style="width: 88%;" onclick="closeModalNucsLitigInfo()" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button>
 		</div>
 		<div class="col-xs-12 col-sm-6  col-md-6 ">
+			<?if(	$opcInsert == 0){ 
+				if($estatus == 14){?>
+			<button style="width: 88%;" onclick="insertSentencias_db(<?if($estatus == 14){ echo $idResolMP; }else{ echo $idEstatusNucs; } ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
+		<? } else{?>
+			<button style="width: 88%;" onclick="sendDataSentencias(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> ,  <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
+		<? } ?>
+				<?}elseif(	$opcInsert == 1 ){?>
 			<button style="width: 88%;" onclick="insertSentencias_db(<?if($estatus == 14){ echo $idResolMP; }else{ echo $idEstatusNucs; } ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
+		 <? } ?>
 		</div>
 	</div>
  <? } ?>
@@ -727,11 +835,101 @@
 			<button style="width: 88%;" onclick="closeModalNucsLitigInfo()" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button>
 		</div>
 		<div class="col-xs-12 col-sm-6  col-md-6 ">
+			<?if(	$opcInsert == 0){ ?>
+			<button style="width: 88%;" onclick="sendDataReparacionDanios(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> ,  <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
+			<?}elseif(	$opcInsert == 1 ){?>
 			<button style="width: 88%;" onclick="insertReparacionDanios_db(<?echo $idEstatusNucs; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
+			<? } ?>
 		</div>
 	</div>
  <? } ?>
  <!-- Termina Monto de la reparación del daño impuesta :-->
+
+  <? if($estatus == 129){ 
+  		$getData = getDataMedidasProteccion($conn, $idEstatusNucs);
+	 	if(sizeof($getData) > 0){ 
+	 		$opcInsert = 1; 
+	 			$masculino = $getData[0][3];
+		 		$femenino = $getData[0][4];
+		 		$moral = $getData[0][5];
+		 		$desconocido = $getData[0][6];
+	 	}else{ 	$opcInsert = 0; }
+	 ?>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12  col-md-12">
+		<!--Monto de la reparación del daño impuesta :-->
+		<div class="row">
+				<div class="col-xs-12 col-sm-12  col-md-12">
+						<label for="personaFisMasc">Total de víctimas de medidas de protección : </label>
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12  col-md-12">
+						<label for="personaFisMasc">Persona fisica sexo masculino : </label>
+						<input id="personaFisMasc" type="number" value="<?if($opcInsert == 1){echo $masculino;}?>" name="personaFisMasc" class="fechas form-control gehit"  />
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12  col-md-12">
+						<label for="personaFisFem">Persona fisica sexo femenino : </label>
+						<input id="personaFisFem" type="number" value="<?if($opcInsert == 1){echo $femenino;}?>" name="personaFisFem" class="fechas form-control gehit"  />
+				</div>
+			</div><br>
+			<div class="row">
+					<div class="col-xs-12 col-sm-12  col-md-12">
+						<label for="personaMoral">Persona moral : </label>
+						<input id="personaMoral" type="number" value="<?if($opcInsert == 1){echo $moral;}?>" name="personaMoral" class="fechas form-control gehit"  />
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12  col-md-12">
+						<label for="desconocido">Desconocido : </label>
+						<input id="desconocido" type="number" value="<?if($opcInsert == 1){echo $desconocido;}?>" name="desconocido" class="fechas form-control gehit"  />
+				</div>
+			</div>
+			</div>
+	 </div><br><br><br><br>
+	<div class="row">
+		<div class="col-xs-12 col-sm-6 col-md-6">
+			<button style="width: 88%;" onclick="closeModalNucsLitigInfo()" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button>
+		</div>
+		<div class="col-xs-12 col-sm-6  col-md-6 ">
+			<?if(	$opcInsert == 0){ ?>
+			<button style="width: 88%;" onclick="sendDataMedidasProteccion(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> ,  <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
+			<?}elseif(	$opcInsert == 1 ){?>
+			<button style="width: 88%;" onclick="insertMedidaProteccion_db(<?echo $idEstatusNucs; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>, <? echo $idMp; ?> , <? echo $mes; ?>, <? echo $anio; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
+			<? } ?>
+		</div>
+	</div>
+ <? } ?>
+
+ <? if($estatus == 57){ 
+ 	$getData = getDataFechaCumplimento($conn, $idEstatusNucs);
+	 	if(sizeof($getData) > 0){ 
+	 		$opcInsert = 1; 
+	 		$fecha = $getData[0][2] ->format('Y-m-d'); 
+	 	}else{ 	$opcInsert = 0; }
+	 	?>
+	<div class="row">
+		<!--fecha cumplimento mandamiento judicial :-->
+		<div class="col-xs-12 col-sm-12  col-md-12">
+			<label for="fechaCumplimiento">Fecha de cumplimiento : </label>
+			<input id="fechaCumplimiento" type="date" value="<?if($opcInsert == 1){echo $fecha;}?>" name="fechaCumplimiento" class="fechas form-control gehit"  />
+		</div>
+	</div><br><br><br><br>
+	<div class="row">
+		<div class="col-xs-12 col-sm-6 col-md-6">
+			<button style="width: 88%;" onclick="closeModalNucsLitigInfo()" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button>
+		</div>
+		<div class="col-xs-12 col-sm-6  col-md-6 ">
+		<?if(	$opcInsert == 0){ ?>
+			<button style="width: 88%;" onclick="sendDataFechaCumplimento(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> ,  <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
+			<?}elseif(	$opcInsert == 1 ){?>
+			<button style="width: 88%;" onclick="insertFechaCumplimento_db(<? echo $idEstatusNucs; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
+		<? } ?>
+		</div>
+	</div>
+ <? } ?>
 
 </div>
 

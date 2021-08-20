@@ -157,7 +157,9 @@ switch ($acc) {
                               BEGIN TRANSACTION
                                   SET NOCOUNT ON    
                                
-                                              INSERT INTO estatusNucs (nuc, idEstatus, idmp, idUnidad, fecha, anio, mes, idCarpeta) VALUES ('$nuc', $estatResolucion, $idMp, $idUnidad, GETDATE(), $anio, $mes, $carpid)             
+                                              INSERT INTO estatusNucs (nuc, idEstatus, idmp, idUnidad, fecha, anio, mes, idCarpeta) VALUES ('$nuc', $estatResolucion, $idMp, $idUnidad, GETDATE(), $anio, $mes, $carpid)   
+
+                                              SELECT MAX(idEstatusNucs) AS idEstatusNucs FROM estatusNucs         
 
                                   COMMIT
                             END TRY
@@ -174,7 +176,11 @@ switch ($acc) {
                           //echo $queryTransaction;
 
                         if ($result) {
-                            echo json_encode(array('first'=>$arreglo[0]));
+                             while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC )){
+                             $idEstatusNucs = $row['idEstatusNucs']; //Obtenemos el idEstatusNucs para guardar datos de senap
+                            }
+                            $arreglo[2] = $idEstatusNucs;
+                            echo json_encode(array('first'=>$arreglo[0] , 'idEstatusNucs' => $arreglo[2]));
                           }else{
                             echo json_encode(array('first'=>$arreglo[1]));
                           }
@@ -245,7 +251,7 @@ switch ($acc) {
                   <table class="table table-striped tblTransparente">
                                         <thead>
                                            <tr class="cabezeraTabla">
-                                                      <th class="col-xs-1 col-sm-1 col-md-1 textCent">No<? echo $estatResolucion; ?></th>
+                                                      <th class="col-xs-1 col-sm-1 col-md-1 textCent">No</th>
                                                       <th class="col-xs-4 col-sm-4 col-md-4 textCent">Numero Caso </th>
                                                       <th class="col-xs-6 col-sm-6 col-md-6 textCent">Expediente</th>          
                                                       <th class="col-xs-1 col-sm-1 col-md-1 textCent">Acción</th>
@@ -267,6 +273,7 @@ switch ($acc) {
                                   for ($i=0; $i < sizeof($carpeAgente) ; $i++) { 
 
                                     $nuc = $carpeAgente[$i][0];
+                                    $idEstatusNucsThisNUC = $carpeAgente[$i][1]; //se agrego para obtener el idEstatusNucs 
                                     //// Por cada Carpeta Obtener la Ultima Determinacion que se realizo
                                        $lastDetermin = getLastDeterminacionCarpetaLitig($conn, $nuc);
                                        
@@ -291,9 +298,9 @@ switch ($acc) {
                                               <td class="tdRowMain negr"><? echo $nuc; ?></td>
                                               <td class="tdRowMain negr"><? echo $exp; ?></td>
                                               <? if($validaInfo){?>
-                                              <td class="tdRowMain"><center><div class="buttonInfo"><button type="button" onclick="showModalNucLitInfo(<? echo $idEstatusNucs; ?>, <? echo $estatResolucion; ?>, <? echo $nuc; ?>, <? echo $idCarpeta; ?>)" class="btn btn-success btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-pencil"></span> Agregar </button></div></center></td>
+                                              <td class="tdRowMain"><center><div class="buttonInfo"><button type="button" onclick="showModalNucLitInfo(<? echo $idEstatusNucsThisNUC; ?>, <? echo $estatResolucion; ?>, <? echo $nuc; ?>, <? echo $idCarpeta; ?>)" class="btn btn-success btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-pencil"></span> Agregar </button></div></center></td>
                                               <? } ?>
-                                              <td class="tdRowMain"><center><button type="button" onclick="deleteResolLit(<? echo $idEstatusNucs; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatResolucion ?>, <? echo $nuc; ?>, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
+                                              <td class="tdRowMain"><center><button type="button" onclick="deleteResolLit(<? echo $idEstatusNucsThisNUC; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatResolucion ?>, <? echo $nuc; ?>, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
 
                                            </tr>
                                            <?  
@@ -483,7 +490,7 @@ switch ($acc) {
 
           $vari = "valor";
 
-          $arregloEsatusLit = array( 1,2,3,4,5,6,7,10,12,98,97,96,17,18,95,20,21,22,23,24,25,26,27,28,29,30,31,89,99,90,91,93,32,33,34,35,36,38,40,41,43,44,45,46,48,49,50,53,57,58,60,61,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88 );
+          $arregloEsatusLit = array( 1,2,3,4,5,6,7,10,12,98,97,96,17,18,95,20,21,22,23,24,25,26,27,28,29,30,31,89,99,90,91,93,32,33,34,35,36,38,40,41,43,44,45,46,48,49,50,53,57,58,60,61,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,112,113,129,114,115,116,117,119,120,121,122,123,124,125,126,127,128,140,139,141,144,145,142,146,147,148,149,151,152,153,154);
 
          
           for ($p=0; $p < sizeof($arregloEsatusLit) ; $p++) {                 
@@ -537,17 +544,17 @@ switch ($acc) {
 
           //// para los campos de SICAP
 
-          $vincproceso = getLAstResolucionesFromAdetermLitigSicap($conSic, $idMp, 19, $mes, $anio, 0, $idUnidad);
-          $scproceso = getLAstResolucionesFromAdetermLitigSicap($conSic, $idMp, 15, $mes, $anio, 0, $idUnidad);
-          $proAbre = getLAstResolucionesFromAdetermLitigSicap($conSic, $idMp, 13, $mes, $anio, 0, $idUnidad);
-          $condena = getLAstResolucionesFromAdetermLitigSicap($conSic, $idMp, 14, $mes, $anio, 0, $idUnidad);
+          //$vincproceso = getLAstResolucionesFromAdetermLitigSicap($conSic, $idMp, 19, $mes, $anio, 0, $idUnidad);
+          //$scproceso = getLAstResolucionesFromAdetermLitigSicap($conSic, $idMp, 15, $mes, $anio, 0, $idUnidad);
+          //$proAbre = getLAstResolucionesFromAdetermLitigSicap($conSic, $idMp, 13, $mes, $anio, 0, $idUnidad);
+          //$condena = getLAstResolucionesFromAdetermLitigSicap($conSic, $idMp, 14, $mes, $anio, 0, $idUnidad);
 
           ?>
 
-          <input id="vincproceso" type="hidden" value="<? echo $vincproceso; ?>" name="">
-          <input id="scproceso" type="hidden" value="<? echo $scproceso; ?>" name="">
-          <input id="proAbre" type="hidden" value="<? echo $proAbre; ?>" name="">
-          <input id="condena" type="hidden" value="<? echo $condena; ?>" name="">
+          <!-- <input id="vincproceso" type="hidden" value="<? echo $vincproceso; ?>" name="">-->
+          <!--<input id="scproceso" type="hidden" value="<? echo $scproceso; ?>" name="">-->
+          <!--<input id="proAbre" type="hidden" value="<? echo $proAbre; ?>" name="">-->
+          <!--<input id="condena" type="hidden" value="<? echo $condena; ?>" name="">-->
 
         <?
          
@@ -814,7 +821,7 @@ switch ($acc) {
    
             /// SI LOS ESTATUS SON AUDIENCIAS, FORMULACIONES, ORDENES APREHENSION, VINCULACIONES A PROCESO
             /// SE AGREGARON LOS IDS 17 y 18 para poder agregar doble nuc en los imputados de prision preventiva
-            if($estatResolucion == 60 || $estatResolucion == 61 || $estatResolucion == 63 || $estatResolucion == 50 || $estatResolucion == 53 || $estatResolucion == 3 || $estatResolucion == 4 || $estatResolucion == 5 || $estatResolucion == 10 || $estatResolucion == 12 || $estatResolucion == 78 || $estatResolucion == 17 || $estatResolucion == 18){
+            if($estatResolucion == 60 || $estatResolucion == 61 || $estatResolucion == 63 || $estatResolucion == 50 || $estatResolucion == 53 || $estatResolucion == 3 || $estatResolucion == 4 || $estatResolucion == 5 || $estatResolucion == 10 || $estatResolucion == 12 || $estatResolucion == 78 || $estatResolucion == 17 || $estatResolucion == 18 || $estatResolucion == 114 || $estatResolucion == 115 || $estatResolucion == 116 || $estatResolucion == 117 || $estatResolucion == 119 || $estatResolucion == 120 || $estatResolucion == 121 || $estatResolucion == 122 || $estatResolucion == 123 || $estatResolucion == 124 || $estatResolucion == 125 || $estatResolucion == 126 || $estatResolucion == 127 || $estatResolucion == 128 || $estatResolucion == 140){
 
                 echo json_encode(array('first'=>$arreglo[0]));
 

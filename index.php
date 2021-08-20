@@ -193,26 +193,22 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 </head>
 
 <body style="zoom: 83%;" <? if ($tipoUser == 1) {
-																										if ($format == 1) { 	?> onload="loadtablaFormatos(<? echo $idUnidadSelect; ?>);" <? } else {
-																																																																																																											/*if($format  == 2){ ?> 	onload="loadtablaFormat(0, 'formatCmasc.php', 'cmasc', <? echo $idEnlace; ?>);" 	<? }*/
-																																																																																																											if ($format  == 4) { ?> onload="loadtablaFormat(0, 'formatLitigacion.php', 'litigacion', <? echo $idEnlace; ?>);" <? }
-																																																																																																																																																																																																																												/*if($format  == 6){ ?>  	onload="loadtablaFormat(0, 'formatDesaparecidos.php', 'desaparecidos', <? echo $idEnlace; ?>);" 	<? }*/
-																																																																																																																																																																																																																												if ($format  == 11) { ?> onload="loadtablaFormat(<? echo $idUnidEnlac ?>, 'trimestral.php', 'trimestral', <? echo $idEnlace; ?>);" <? }
-																																																																																																																																																																																																																																																																																																																																																														if ($format  == 9) { ?> onload="loadtablaFormat(0, 'puestaDisposicion.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" <? }
-																																																																																																																																																																																																																																																																																																																																																																																																																																																														if ($format  == 10) { ?> onload="loadtablaFormat(0, 'puestaDisposicionSuper.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" <? }
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																												if ($format  == 12) { ?> onload="loadtablaFormat(0, 'puestaDisposicionConsulta.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" <? }
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													if ($format  == 13) { ?> onload="loadtablaFormat(0, 'cambioAdscripcionPueDispo.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" <? }
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																						if ($format  == 14) { ?> onload="loadtablaFormat(0, 'forestales.php', 'forestales', <? echo $idEnlace; ?>);" <? }
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																						if ($format  == 15) { ?> onload="loadtablaFormat(0, 'carpetasJudicializadas.php', 'carpetasJudicializadas', <? echo $idEnlace; ?>);" <? }
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																										}
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																									} else {
+		if ($format == 1) { 	?> onload="loadCarpetasFormat(<? echo $idUnidadSelect; ?>);" <? } else {
+		/*if($format  == 2){ ?> 	onload="loadtablaFormat(0, 'formatCmasc.php', 'cmasc', <? echo $idEnlace; ?>);" 	<? }*/
+		if ($format  == 4) { ?> onload="loadtablaFormat(0, 'formatLitigacion.php', 'litigacion', <? echo $idEnlace; ?>);" <? }
+		/*if($format  == 6){ ?>  	onload="loadtablaFormat(0, 'formatDesaparecidos.php', 'desaparecidos', <? echo $idEnlace; ?>);" 	<? }*/
+		if ($format  == 11) { ?> onload="loadtablaFormat(<? echo $idUnidEnlac ?>, 'trimestral.php', 'trimestral', <? echo $idEnlace; ?>);" <? }
+		if ($format  == 9) { ?> onload="loadtablaFormat(0, 'puestaDisposicion.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" <? }
+		if ($format  == 10) { ?> onload="loadtablaFormat(0, 'puestaDisposicionSuper.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" <? }
+		if ($format  == 12) { ?> onload="loadtablaFormat(0, 'puestaDisposicionConsulta.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" <? }
+		if ($format  == 13) { ?> onload="loadtablaFormat(0, 'cambioAdscripcionPueDispo.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" <? }
+		if ($format  == 14) { ?> onload="loadtablaFormat(0, 'forestales.php', 'forestales', <? echo $idEnlace; ?>);" <? }
+		if ($format  == 15) { ?> onload="loadtablaFormat(0, 'carpetasJudicializadas.php', 'carpetasJudicializadas', <? echo $idEnlace; ?>);" <? }
+		}
 
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																										if ($tipoUser == 3) {
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																												?> onload="cargaContHistoricoEnlaceDatosConsulta(<? echo $idUsuario; ?>, <? echo $idEnlace; ?>, <? echo $format; ?>, <? echo $idUnidEnlac; ?>)" <?
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																									} else {
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																										?> onload="loadEnlacesFaltantes();" <?
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																									}
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																								} ?>>
+		} else {																																	
+			if ($tipoUser == 3) {		?> onload="cargaContHistoricoEnlaceDatosConsulta(<? echo $idUsuario; ?>, <? echo $idEnlace; ?>, <? echo $format; ?>, <? echo $idUnidEnlac; ?>)" <? 		
+		} else {	?> onload="loadEnlacesFaltantes();" <?	}	} ?>>
 
 	<div id="opacity"></div>
 	<header>
@@ -272,7 +268,7 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 								<? if ($format == 1) { ?>
 
 
-									<a onclick="loadtablaFormatos(<? echo $idUnidadSelect; ?>)" href="#">Formato Mensual</a>
+									<a onclick="loadCarpetasFormat(<? echo $idUnidadSelect; ?>)" href="#">Formato Mensual</a>
 
 
 								<? } else { ?>
@@ -622,7 +618,7 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 
 			<div class="modal fade bs-example-modal-sm" id="myModaFormato" role="dialog" data-backdrop="static" data-keyboard="false">
 
-				<div id="modalVistaCss" class="modal-dialog modal-sm" style="width: 30%; margin-top: 1%;">
+				<div id="modalVistaCss" class="modal-dialog modal-sm" style="width: 35%; margin-top: 1%;">
 
 					<div class="modal-content">
 
@@ -635,7 +631,7 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 
 			<div class="modal fade bs-example-modal-sm" id="modalNucs" role="dialog" data-backdrop="static" data-keyboard="false">
 
-				<div id="modalVistaCss" class="modal-dialog modal-sm" style="width: 30%; margin-top: 1%;">
+				<div id="modalVistaCss" class="modal-dialog modal-sm" style="width: 45%; margin-top: 1%;">
 
 					<div class="modal-content">
 
@@ -808,6 +804,7 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 	<script language="JavaScript" type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 		<script language="JavaScript" type="text/javascript" src="js/script.js"></script>
+			<script language="JavaScript" type="text/javascript" src="js/scriptCarpetas.js"></script>
 		<script language="JavaScript" type="text/javascript" src="js/cmasc.js"></script>
 		<script language="JavaScript" type="text/javascript" src="js/litigacion.js"></script>
 		<script language="JavaScript" type="text/javascript" src="js/trimestral.js"></script>
