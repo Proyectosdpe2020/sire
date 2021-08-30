@@ -723,6 +723,19 @@ switch ($acc) {
 
  $dataLasResolucion = getLastResolucionCarpetaV2($conn, $idCarpeta);
 
+ if($dataLasResolucion[0][2] == 1){ $mesee = "Enero"; }
+ if($dataLasResolucion[0][2] == 2){ $mesee = "Febrero"; }
+ if($dataLasResolucion[0][2] == 3){ $mesee = "Marzo"; }
+ if($dataLasResolucion[0][2] == 4){ $mesee = "Abril"; }
+ if($dataLasResolucion[0][2] == 5){ $mesee = "Mayo"; }
+ if($dataLasResolucion[0][2] == 6){ $mesee = "Junio"; }
+ if($dataLasResolucion[0][2] == 7){ $mesee = "Julio"; }
+ if($dataLasResolucion[0][2] == 8){ $mesee = "Agosto"; }
+ if($dataLasResolucion[0][2] == 9){ $mesee = "Septiembre"; }
+ if($dataLasResolucion[0][2] == 10){ $mesee = "Octubre"; }
+ if($dataLasResolucion[0][2] == 11){ $mesee = "Noviembre"; }
+ if($dataLasResolucion[0][2] == 12){ $mesee = "Diciembre"; }
+
  $band1 = 0;
 
  if($dataLasResolucion != null){
@@ -742,7 +755,7 @@ switch ($acc) {
   if($band1){ 
 
       /////// CUALQUIERA DE ESTOS ESTATUS RECHAZAN EL VOLVER INSERTAR LA CARPETA DE NUEVO POR QUE EL PROCESO A FINALIZADO
-   echo json_encode(   array(  'first'=>$arreglo[3]   )   );
+   echo json_encode(   array(  'first'=>$arreglo[3], 'nombre'=>$dataLasResolucion[0][6], 'unidad'=>$dataLasResolucion[0][4], 'fiscalia'=>$dataLasResolucion[0][5], 'estatus'=>$dataLasResolucion[0][1], 'anio'=>$dataLasResolucion[0][3], 'mes'=>$mesee   )   );
 
   }else{     
 
@@ -755,7 +768,7 @@ switch ($acc) {
     if($estatus == 1){ 
 
         //////// EL ULTIMO ESTATUS DE LA CAPETAS ES REINICIADO NO SE PUEDE VOLVER A INGRESAR COMO REINICIADO
-     echo json_encode(   array(  'first'=>$arreglo[5]   )   );
+     echo json_encode(   array(  'first'=>$arreglo[5], 'nombre'=>$dataLasResolucion[0][6], 'unidad'=>$dataLasResolucion[0][4], 'fiscalia'=>$dataLasResolucion[0][5], 'estatus'=>$dataLasResolucion[0][1], 'anio'=>$dataLasResolucion[0][3], 'mes'=>$mesee   )   );
 
     }else{
 
@@ -780,7 +793,7 @@ switch ($acc) {
 
 
           ///// SE DEBDE REINICIAR EL NUC PARA PODER UTILIZARLO EN CUALQUIERA DE LOS DEMAS ESTATUS
-     echo json_encode(   array(  'first'=>$arreglo[4]   )   );
+     echo json_encode(   array(  'first'=>$arreglo[4], 'nombre'=>$dataLasResolucion[0][6], 'unidad'=>$dataLasResolucion[0][4], 'fiscalia'=>$dataLasResolucion[0][5], 'estatus'=>$dataLasResolucion[0][1], 'anio'=>$dataLasResolucion[0][3], 'mes'=>$mesee  )   );
 
        }
 

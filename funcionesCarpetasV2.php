@@ -63,7 +63,7 @@ function getLastResolucionCarpetaV2($conn, $carpetaId){
 	INNER JOIN mp ON mp.idMp = estatusNucsCarpetas.idMp
 	WHERE idCarpeta = $carpetaId ORDER BY fecha DESC 
 ";
-
+	
 
 
 	$indice = 0;

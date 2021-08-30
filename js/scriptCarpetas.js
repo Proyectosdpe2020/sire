@@ -81,9 +81,9 @@ function cargarMOdalFormatoCarpetas(nombreCompletoMP, idMp, idUnidad, mes, anio)
 
 function sendModalCarpetasNucs(estatus, idMp, mes, anio, idUnidad, deten) {
 
-	
+
 	cont = document.getElementById('contmodalnucs');
-	
+
 	$('#nuc').focus();
 	ajax = objetoAjax();
 	ajax.open("POST", "carpetas/modalNucsCarpetas.php");
@@ -95,12 +95,12 @@ function sendModalCarpetasNucs(estatus, idMp, mes, anio, idUnidad, deten) {
 		}
 	}
 	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	ajax.send("&idMp=" + idMp + "&mes=" + mes + "&anio=" + anio + "&estatus=" + estatus + "&idUnidad=" + idUnidad+ "&deten=" + deten);	
+	ajax.send("&idMp=" + idMp + "&mes=" + mes + "&anio=" + anio + "&estatus=" + estatus + "&idUnidad=" + idUnidad + "&deten=" + deten);
 
 }
 
 
-function validateCarpetJudicializade2(idMp, mes, anio, estatResolucion, idUnidad, deten){
+function validateCarpetJudicializade2(idMp, mes, anio, estatResolucion, idUnidad, deten) {
 
 
 	acc = "validateJudicializte2";
@@ -112,14 +112,14 @@ function validateCarpetJudicializade2(idMp, mes, anio, estatResolucion, idUnidad
 	nuc = document.getElementById("nuc").value;
 
 	ajax.onreadystatechange = function () {
-		if (ajax.readyState == 4 && ajax.status == 200) {	
+		if (ajax.readyState == 4 && ajax.status == 200) {
 
 			//cont.innerHTML = ajax.responseText;			
 
 			var cadCodificadaJSON = ajax.responseText;
 			var objDatos = eval("(" + cadCodificadaJSON + ")");
 
-			if (objDatos.first == "NO") { 
+			if (objDatos.first == "NO") {
 
 
 				saveCarpetJudicidFirstTime(idMp, mes, anio, estatResolucion, idUnidad, deten);
@@ -141,7 +141,7 @@ function validateCarpetJudicializade2(idMp, mes, anio, estatResolucion, idUnidad
 		}
 	}
 	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	ajax.send("&acc=" + acc + "&idMp=" + idMp + "&estatResolucion=" + estatResolucion + "&mes=" + mes 
+	ajax.send("&acc=" + acc + "&idMp=" + idMp + "&estatResolucion=" + estatResolucion + "&mes=" + mes
 		+ "&anio=" + anio + "&nuc=" + nuc + "&idUnidad=" + idUnidad + "&deten=" + deten);
 
 
@@ -150,7 +150,7 @@ function validateCarpetJudicializade2(idMp, mes, anio, estatResolucion, idUnidad
 
 
 
-function validateCarpetJudicializade(idMp, mes, anio, estatResolucion, idUnidad, deten){
+function validateCarpetJudicializade(idMp, mes, anio, estatResolucion, idUnidad, deten) {
 
 
 	acc = "validateJudicializte";
@@ -162,22 +162,22 @@ function validateCarpetJudicializade(idMp, mes, anio, estatResolucion, idUnidad,
 	nuc = document.getElementById("nuc").value;
 
 	ajax.onreadystatechange = function () {
-		if (ajax.readyState == 4 && ajax.status == 200) {	
+		if (ajax.readyState == 4 && ajax.status == 200) {
 
-			cont.innerHTML = ajax.responseText;			
+			cont.innerHTML = ajax.responseText;
 
 
 		}
 	}
 	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	ajax.send("&acc=" + acc + "&idMp=" + idMp + "&estatResolucion=" + estatResolucion + "&mes=" + mes 
+	ajax.send("&acc=" + acc + "&idMp=" + idMp + "&estatResolucion=" + estatResolucion + "&mes=" + mes
 		+ "&anio=" + anio + "&nuc=" + nuc + "&idUnidad=" + idUnidad + "&deten=" + deten);
 
 
 }
 
-function saveCarpetJudicidFirstTime(idMp, mes, anio, estatResolucion, idUnidad, deten){
-	
+function saveCarpetJudicidFirstTime(idMp, mes, anio, estatResolucion, idUnidad, deten) {
+
 
 
 	texto = document.getElementById("nuc").value;
@@ -193,53 +193,53 @@ function saveCarpetJudicidFirstTime(idMp, mes, anio, estatResolucion, idUnidad, 
 		if (cantidadinicio < 13) { } else {
 
 			if (cantidadinicio == 13) {
-		
-
-						nuc = document.getElementById('nuc').value;
-
-						acc = "existeNuc";
-						ajax = objetoAjax();
-						ajax.open("POST", "carpetas/accionesNucsCarpetas.php");
-
-						ajax.onreadystatechange = function () {
-							if (ajax.readyState == 4 && ajax.status == 200) {
 
 
-								var cadCodificadaJSON = ajax.responseText;
-								var objDatos = eval("(" + cadCodificadaJSON + ")");
+				nuc = document.getElementById('nuc').value;
 
-								if (objDatos.first == "NO") { swal("", "El numero de caso no existe.", "warning"); } else {
+				acc = "existeNuc";
+				ajax = objetoAjax();
+				ajax.open("POST", "carpetas/accionesNucsCarpetas.php");
 
-									if (objDatos.first == "SI") {
-
-										document.getElementById('btnSaveNuc').disabled = true;
-
-											////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS
-											validarReglasNUC(nuc, estatResolucion, mes, anio, nuc, idUnidad, idMp, deten, envioselect);
-											////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS										
-
-										}
-									}
+				ajax.onreadystatechange = function () {
+					if (ajax.readyState == 4 && ajax.status == 200) {
 
 
-								}
+						var cadCodificadaJSON = ajax.responseText;
+						var objDatos = eval("(" + cadCodificadaJSON + ")");
+
+						if (objDatos.first == "NO") { swal("", "El numero de caso no existe.", "warning"); } else {
+
+							if (objDatos.first == "SI") {
+
+								document.getElementById('btnSaveNuc').disabled = true;
+
+								////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS
+								validarReglasNUC(nuc, estatResolucion, mes, anio, nuc, idUnidad, idMp, deten, envioselect);
+								////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS										
+
 							}
-							ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-							ajax.send("&nuc=" + nuc + "&acc=" + acc + "&estatResolucion=" + estatResolucion);
+						}
 
-						
+
+					}
 				}
+				ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+				ajax.send("&nuc=" + nuc + "&acc=" + acc + "&estatResolucion=" + estatResolucion);
+
+
 			}
 		}
-
-
-
 	}
 
 
 
-function saveCarpetJudicid(idMp, mes, anio, estatResolucion, idUnidad, deten){
-	
+}
+
+
+
+function saveCarpetJudicid(idMp, mes, anio, estatResolucion, idUnidad, deten) {
+
 
 
 	texto = document.getElementById("nuc").value;
@@ -257,9 +257,87 @@ function saveCarpetJudicid(idMp, mes, anio, estatResolucion, idUnidad, deten){
 			if (cantidadinicio == 13) {
 
 
-				if(envioselect == 0){ swal("", "Debe seleccionar un motivo.", "warning"); }else{
+				if (envioselect == 0) { swal("", "Debe seleccionar un motivo.", "warning"); } else {
 
-		
+
+
+					nuc = document.getElementById('nuc').value;
+
+					acc = "existeNuc";
+					ajax = objetoAjax();
+					ajax.open("POST", "carpetas/accionesNucsCarpetas.php");
+
+					ajax.onreadystatechange = function () {
+						if (ajax.readyState == 4 && ajax.status == 200) {
+
+
+							var cadCodificadaJSON = ajax.responseText;
+							var objDatos = eval("(" + cadCodificadaJSON + ")");
+
+							if (objDatos.first == "NO") { swal("", "El numero de caso no existe.", "warning"); } else {
+
+								if (objDatos.first == "SI") {
+
+									document.getElementById('btnSaveNuc').disabled = true;
+
+									////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS
+									validarReglasNUC(nuc, estatResolucion, mes, anio, nuc, idUnidad, idMp, deten, envioselect);
+									////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS										
+
+								}
+							}
+
+
+						}
+					}
+					ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+					ajax.send("&nuc=" + nuc + "&acc=" + acc + "&estatResolucion=" + estatResolucion);
+
+
+
+				}
+
+
+
+
+			}
+		}
+	}
+
+
+
+}
+
+
+
+
+function saveCarpet(idMp, mes, anio, estatResolucion, idUnidad, deten) {
+
+
+
+	texto = document.getElementById("nuc").value;
+	cantidadinicio = document.getElementById("nuc").value.length;
+
+
+
+	if (estatResolucion == 22) { envioselect = document.getElementById("envioselect").value; } else {
+		envioselect = 0;
+	}
+
+
+	if (cantidadinicio > 13) {
+		var slice2 = texto.slice(0, -1);
+		document.getElementById("nuc").value = slice2;
+	} else {
+
+		if (cantidadinicio < 13) { } else {
+
+			if (cantidadinicio == 13) {
+
+
+				if (estatResolucion == 22 && envioselect == 0) { swal("", "Debe seleccionar un motivo.", "warning"); } else {
+
+					if (estatResolucion == 22 && envioselect > 0) {
 
 						nuc = document.getElementById('nuc').value;
 
@@ -280,169 +358,92 @@ function saveCarpetJudicid(idMp, mes, anio, estatResolucion, idUnidad, deten){
 
 										document.getElementById('btnSaveNuc').disabled = true;
 
-											////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS
-											validarReglasNUC(nuc, estatResolucion, mes, anio, nuc, idUnidad, idMp, deten, envioselect);
-											////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS										
+										////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS
+										validarReglasNUC(nuc, estatResolucion, mes, anio, nuc, idUnidad, idMp, deten, envioselect);
+										////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS										
 
-										}
 									}
-
-
 								}
+
+
 							}
-							ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-							ajax.send("&nuc=" + nuc + "&acc=" + acc + "&estatResolucion=" + estatResolucion);
-
-						
-
-					}
-
-
-
-
-				}
-			}
-		}
-
-
-
-	}
-
-
-
-
-	function saveCarpet(idMp, mes, anio, estatResolucion, idUnidad, deten){
-
-
-
-		texto = document.getElementById("nuc").value;
-		cantidadinicio = document.getElementById("nuc").value.length;
-
-
-
-		if(estatResolucion == 22){ envioselect = document.getElementById("envioselect").value; }else{
-			envioselect = 0;
-		}
-
-
-		if (cantidadinicio > 13) {
-			var slice2 = texto.slice(0, -1);
-			document.getElementById("nuc").value = slice2;
-		} else {
-
-			if (cantidadinicio < 13) { } else {
-
-				if (cantidadinicio == 13) {
-
-
-					if(estatResolucion == 22 && envioselect == 0){ swal("", "Debe seleccionar un motivo.", "warning"); }else{
-
-						if(estatResolucion == 22 && envioselect > 0){
-
-							nuc = document.getElementById('nuc').value;
-
-							acc = "existeNuc";
-							ajax = objetoAjax();
-							ajax.open("POST", "carpetas/accionesNucsCarpetas.php");
-
-							ajax.onreadystatechange = function () {
-								if (ajax.readyState == 4 && ajax.status == 200) {
-
-
-									var cadCodificadaJSON = ajax.responseText;
-									var objDatos = eval("(" + cadCodificadaJSON + ")");
-
-									if (objDatos.first == "NO") { swal("", "El numero de caso no existe.", "warning"); } else {
-
-										if (objDatos.first == "SI") {
-
-											document.getElementById('btnSaveNuc').disabled = true;
-
-											////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS
-											validarReglasNUC(nuc, estatResolucion, mes, anio, nuc, idUnidad, idMp, deten, envioselect);
-											////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS										
-
-										}
-									}
-
-
-								}
-							}
-							ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-							ajax.send("&nuc=" + nuc + "&acc=" + acc + "&estatResolucion=" + estatResolucion);
-
-						}else{
-
-
-							nuc = document.getElementById('nuc').value;
-
-							acc = "existeNuc";
-							ajax = objetoAjax();
-							ajax.open("POST", "carpetas/accionesNucsCarpetas.php");
-
-							ajax.onreadystatechange = function () {
-								if (ajax.readyState == 4 && ajax.status == 200) {
-
-
-									var cadCodificadaJSON = ajax.responseText;
-									var objDatos = eval("(" + cadCodificadaJSON + ")");
-
-									if (objDatos.first == "NO") { swal("", "El numero de caso no existe.", "warning"); } else {
-
-										if (objDatos.first == "SI") {
-
-											document.getElementById('btnSaveNuc').disabled = true;
-
-											////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS
-											validarReglasNUC(nuc, estatResolucion, mes, anio, nuc, idUnidad, idMp, deten, envioselect);
-											////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS										
-
-										}
-									}
-
-
-								}
-							}
-							ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-							ajax.send("&nuc=" + nuc + "&acc=" + acc + "&estatResolucion=" + estatResolucion);
-
-
 						}
+						ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+						ajax.send("&nuc=" + nuc + "&acc=" + acc + "&estatResolucion=" + estatResolucion);
+
+					} else {
+
+
+						nuc = document.getElementById('nuc').value;
+
+						acc = "existeNuc";
+						ajax = objetoAjax();
+						ajax.open("POST", "carpetas/accionesNucsCarpetas.php");
+
+						ajax.onreadystatechange = function () {
+							if (ajax.readyState == 4 && ajax.status == 200) {
+
+
+								var cadCodificadaJSON = ajax.responseText;
+								var objDatos = eval("(" + cadCodificadaJSON + ")");
+
+								if (objDatos.first == "NO") { swal("", "El numero de caso no existe.", "warning"); } else {
+
+									if (objDatos.first == "SI") {
+
+										document.getElementById('btnSaveNuc').disabled = true;
+
+										////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS
+										validarReglasNUC(nuc, estatResolucion, mes, anio, nuc, idUnidad, idMp, deten, envioselect);
+										////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS										
+
+									}
+								}
+
+
+							}
+						}
+						ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+						ajax.send("&nuc=" + nuc + "&acc=" + acc + "&estatResolucion=" + estatResolucion);
+
 
 					}
 
-
-
-
 				}
+
+
+
+
 			}
 		}
-
-
-
-
-
-
 	}
 
 
-	function validarReglasNUC(nuc, estatus, mes, anio, nuc, idUnidad, idMp, deten, envioselect){
-
-
-		acc = "reglasValidacionV2";
-		cont = document.getElementById("contTableNucsV2");
-		ajax = objetoAjax();
-		ajax.open("POST", "carpetas/accionesNucsCarpetas.php");
-
-		ajax.onreadystatechange = function () {
-			if (ajax.readyState == 4 && ajax.status == 200) {
 
 
 
-				var cadCodificadaJSON = ajax.responseText;
-				var objDatos = eval("(" + cadCodificadaJSON + ")");
 
-				if (objDatos.first == "NOR") { swal("", "No se puede ingresar como reiniciado en la primera vez que ingresa a sistema.", "warning"); 
+}
+
+
+function validarReglasNUC(nuc, estatus, mes, anio, nuc, idUnidad, idMp, deten, envioselect) {
+
+
+	acc = "reglasValidacionV2";
+	cont = document.getElementById("contTableNucsV2");
+	ajax = objetoAjax();
+	ajax.open("POST", "carpetas/accionesNucsCarpetas.php");
+
+	ajax.onreadystatechange = function () {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+
+
+
+			var cadCodificadaJSON = ajax.responseText;
+			var objDatos = eval("(" + cadCodificadaJSON + ")");
+
+			if (objDatos.first == "NOR") {
+				swal("", "No se puede ingresar como reiniciado en la primera vez que ingresa a sistema.", "warning");
 
 				clearModalNUcsCarpe();
 
@@ -450,25 +451,35 @@ function saveCarpetJudicid(idMp, mes, anio, estatResolucion, idUnidad, deten){
 
 				if (objDatos.first == "SI") {
 
-					document.getElementById('btnSaveNuc').disabled = true;		
-					insertNucCarpetas(idMp, estatus, mes, anio, nuc, idUnidad, deten, envioselect);		
+					document.getElementById('btnSaveNuc').disabled = true;
+					insertNucCarpetas(idMp, estatus, mes, anio, nuc, idUnidad, deten, envioselect);
 
-				}else{
+				} else {
 
-					if(objDatos.first == "NOIR"){  
+					if (objDatos.first == "NOIR") {
 
-						swal("", "El NUC debe ser reiniciado para poder ser utilizado.", "warning");  
-						clearModalNUcsCarpe(); 
+						/// OBTENER DATOS DEL NUC DONDE Y QUE ESTATUS TIENE Y QUIEN LO REALIZO Y LA FECHA
+
+						
+
+						swal("", "El NUC debe ser reiniciado para poder ser utilizado. \n\n ULTIMA DETERMINACIÓN \n Ministerio Público: "+objDatos.nombre+'\n Unidad: '+objDatos.unidad+' - '+objDatos.fiscalia+'\n Estatus: '+objDatos.estatus+'\n Fecha: '+objDatos.mes+' - '+objDatos.anio, "warning");
+						clearModalNUcsCarpe();
 					}
 
-					if(objDatos.first == "NOCF"){
-						swal("", "El NUC no puede ser insertado por que ha finalizado su proceso.", "warning");
-						clearModalNUcsCarpe(); 
+					if (objDatos.first == "NOCF") {
+
+						/// OBTENER DATOS DEL NUC DONDE Y QUIEN LO FINALIZO Y LA FECHA
+
+						swal("", "El NUC no puede ser insertado por que ha finalizado su proceso.\n\n ULTIMA DETERMINACIÓN \n Ministerio Público: "+objDatos.nombre+'\n Unidad: '+objDatos.unidad+' - '+objDatos.fiscalia+'\n Estatus: '+objDatos.estatus+'\n Fecha: '+objDatos.mes+' - '+objDatos.anio, "warning");
+						clearModalNUcsCarpe();
 					}
 
-					if(objDatos.first == "NOIRN"){
-						swal("", "El ultimo Estatus del NUC es Reiniciado, no puede volver a entrar como reiniciado.", "warning");
-						clearModalNUcsCarpe(); 
+					if (objDatos.first == "NOIRN") {
+
+						/// OBTENER DATOS DEL NUC DONDE Y QUIEN LO REINICIO Y LA FECHA
+
+						swal("", "El ultimo Estatus del NUC es Reiniciado, no puede volver a entrar como reiniciado. \n\n ULTIMA DETERMINACIÓN \n Ministerio Público: "+objDatos.nombre+'\n Unidad: '+objDatos.unidad+' - '+objDatos.fiscalia+'\n Estatus: '+objDatos.estatus+'\n Fecha: '+objDatos.mes+' - '+objDatos.anio, "warning");
+						clearModalNUcsCarpe();
 					}
 
 
@@ -486,12 +497,12 @@ function saveCarpetJudicid(idMp, mes, anio, estatResolucion, idUnidad, deten){
 
 }
 
-function clearModalNUcsCarpe(){
+function clearModalNUcsCarpe() {
 	document.getElementById('btnSaveNuc').disabled = false;
 	document.getElementById('nuc').value = "";
 }
 
-function insertNucCarpetas(idMp, estatResolucion, mes, anio, nuc, idUnidad, deten, envioselect){
+function insertNucCarpetas(idMp, estatResolucion, mes, anio, nuc, idUnidad, deten, envioselect) {
 
 
 	acc = "insertNucCarpetas";
@@ -513,7 +524,7 @@ function insertNucCarpetas(idMp, estatResolucion, mes, anio, nuc, idUnidad, dete
 					updateTableNucsCarpetasV2(idMp, anio, mes, estatResolucion, nuc, idUnidad, deten);
 					clearModalNUcsCarpe();
 
-						document.getElementById("contentMotivo").style.display = "none";
+					document.getElementById("contentMotivo").style.display = "none";
 
 				}
 			}
@@ -521,13 +532,13 @@ function insertNucCarpetas(idMp, estatResolucion, mes, anio, nuc, idUnidad, dete
 		}
 	}
 	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	ajax.send("&nuc=" + nuc + "&acc=" + acc + "&idMp=" + idMp + "&estatResolucion=" + estatResolucion + "&mes=" + mes + "&anio=" + anio + "&idUnidad=" + idUnidad+ "&deten=" + deten+ "&envioselect=" + envioselect);
+	ajax.send("&nuc=" + nuc + "&acc=" + acc + "&idMp=" + idMp + "&estatResolucion=" + estatResolucion + "&mes=" + mes + "&anio=" + anio + "&idUnidad=" + idUnidad + "&deten=" + deten + "&envioselect=" + envioselect);
 
 
 }
 
 
-function updateTableNucsCarpetasV2(idMp, anio, mes, estatResolucion, nuc, idUnidad, deten){
+function updateTableNucsCarpetasV2(idMp, anio, mes, estatResolucion, nuc, idUnidad, deten) {
 
 
 	acc = "showtableCarpetasNucsV2";
@@ -537,17 +548,17 @@ function updateTableNucsCarpetasV2(idMp, anio, mes, estatResolucion, nuc, idUnid
 
 	ajax.onreadystatechange = function () {
 		if (ajax.readyState == 4 && ajax.status == 200) {
-			cont.innerHTML = ajax.responseText;			
+			cont.innerHTML = ajax.responseText;
 		}
 	}
 	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	ajax.send("&acc=" + acc + "&idMp=" + idMp + "&estatResolucion=" + estatResolucion + "&mes=" + mes 
+	ajax.send("&acc=" + acc + "&idMp=" + idMp + "&estatResolucion=" + estatResolucion + "&mes=" + mes
 		+ "&anio=" + anio + "&nuc=" + nuc + "&idUnidad=" + idUnidad + "&deten=" + deten);
 
 }
 
 
-function deleteCarpetaResolV2(id,idMp, anio, mes, estatResolucion, idUnidad){
+function deleteCarpetaResolV2(id, idMp, anio, mes, estatResolucion, idUnidad) {
 
 
 	swal({
@@ -561,40 +572,40 @@ function deleteCarpetaResolV2(id,idMp, anio, mes, estatResolucion, idUnidad){
 		closeOnConfirm: true,
 		closeOnCancel: true
 	},
-	function (isConfirm) {
-		if (isConfirm) {
+		function (isConfirm) {
+			if (isConfirm) {
 
-			acc = "deleteResolCarpeV2";
-			ajax = objetoAjax();
-			ajax.open("POST", "carpetas/accionesNucsCarpetas.php");
+				acc = "deleteResolCarpeV2";
+				ajax = objetoAjax();
+				ajax.open("POST", "carpetas/accionesNucsCarpetas.php");
 
-			ajax.onreadystatechange = function () {
-				if (ajax.readyState == 4 && ajax.status == 200) {
+				ajax.onreadystatechange = function () {
+					if (ajax.readyState == 4 && ajax.status == 200) {
 
-					var cadCodificadaJSON = ajax.responseText;
-					var objDatos = eval("(" + cadCodificadaJSON + ")");
+						var cadCodificadaJSON = ajax.responseText;
+						var objDatos = eval("(" + cadCodificadaJSON + ")");
 
-					if (objDatos.first == "NO") { swal("", "Hubo un problema al eliminar favor de revisar.", "warning"); } else {
+						if (objDatos.first == "NO") { swal("", "Hubo un problema al eliminar favor de revisar.", "warning"); } else {
 
-						if (objDatos.first == "SI") {
-							nuc = document.getElementById("nuc").value;
-							updateTableNucsCarpetasV2(idMp, anio, mes, estatResolucion, nuc, idUnidad);
+							if (objDatos.first == "SI") {
+								nuc = document.getElementById("nuc").value;
+								updateTableNucsCarpetasV2(idMp, anio, mes, estatResolucion, nuc, idUnidad);
+							}
+
 						}
 
 					}
-
 				}
-			}
-			ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-			ajax.send("&acc=" + acc + "&id=" + id);
+				ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+				ajax.send("&acc=" + acc + "&id=" + id);
 
-		}
-	});
+			}
+		});
 
 
 }
 
-function saveDataCarpetasV2(mes, anio, idUnidad, idMp){
+function saveDataCarpetasV2(mes, anio, idUnidad, idMp) {
 
 
 	inputCdeten = document.getElementById("inputCdeten").value;
@@ -606,7 +617,7 @@ function saveDataCarpetasV2(mes, anio, idUnidad, idMp){
 	inputEnvUI = document.getElementById("inputEnvUI").value;
 	inputEnvImpDesc = document.getElementById("inputEnvImpDesc").value;
 
-	if( inputCdeten!= "" &&  inputSdeten!= "" &&  reCbreCbOtrUni!= "" &&  inputEnvUATP!= "" &&  inputEnvUI!= "" &&  inputEnvImpDesc!= "" ){
+	if (inputCdeten != "" && inputSdeten != "" && reCbreCbOtrUni != "" && inputEnvUATP != "" && inputEnvUI != "" && inputEnvImpDesc != "") {
 
 		acc = "insertDataCarpetas";
 		ajax = objetoAjax();
@@ -615,37 +626,37 @@ function saveDataCarpetasV2(mes, anio, idUnidad, idMp){
 
 		ajax.onreadystatechange = function () {
 			if (ajax.readyState == 4 && ajax.status == 200) {
-			//cont.innerHTML = ajax.responseText;
+				//cont.innerHTML = ajax.responseText;
 
-			var cadCodificadaJSON = ajax.responseText;
-			var objDatos = eval("(" + cadCodificadaJSON + ")");
+				var cadCodificadaJSON = ajax.responseText;
+				var objDatos = eval("(" + cadCodificadaJSON + ")");
 
-			if (objDatos.first == "NO") { swal("", "Hubo un problema al actualizar favor de revisar.", "warning"); } else {
+				if (objDatos.first == "NO") { swal("", "Hubo un problema al actualizar favor de revisar.", "warning"); } else {
 
-				if (objDatos.first == "SI") {
+					if (objDatos.first == "SI") {
 
-					swal("", "Se actualizo Correctamente.", "success");
-					document.getElementById("btnsavecarp").disabled = false;
-					updateALLFormCarpe(idMp, anio, mes, idUnidad);
+						swal("", "Se actualizo Correctamente.", "success");
+						document.getElementById("btnsavecarp").disabled = false;
+						updateALLFormCarpe(idMp, anio, mes, idUnidad);
+					}
 				}
+
 			}
-
 		}
+		ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		ajax.send("&inputCdeten=" + inputCdeten + "&acc=" + acc + "&idMp=" + idMp + "&inputSdeten=" + inputSdeten + "&mes=" + mes + "&anio=" + anio + "&idUnidad=" + idUnidad + "&reCbreCbOtrUni=" + reCbreCbOtrUni
+			+ "&inputEnvUATP=" + inputEnvUATP + "&inputEnvUI=" + inputEnvUI + "&inputEnvImpDesc=" + inputEnvImpDesc);
+
+	} else {
+
+		swal("", "Complete los datos para poder avanzar.", "warning");
 	}
-	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	ajax.send("&inputCdeten=" + inputCdeten + "&acc=" + acc + "&idMp=" + idMp + "&inputSdeten=" + inputSdeten + "&mes=" + mes + "&anio=" + anio + "&idUnidad=" + idUnidad+ "&reCbreCbOtrUni=" + reCbreCbOtrUni
-		+"&inputEnvUATP=" + inputEnvUATP+"&inputEnvUI=" + inputEnvUI+"&inputEnvImpDesc=" + inputEnvImpDesc);
-
-}else{
-
-	swal("", "Complete los datos para poder avanzar.", "warning");
-} 
 
 
 }
 
 
-function updateTotalTrabajar(idMp, anio, mes, idUnidad){
+function updateTotalTrabajar(idMp, anio, mes, idUnidad) {
 
 
 	acc = "updateTotalTrabajar";
@@ -655,16 +666,16 @@ function updateTotalTrabajar(idMp, anio, mes, idUnidad){
 
 	ajax.onreadystatechange = function () {
 		if (ajax.readyState == 4 && ajax.status == 200) {
-			cont.innerHTML = ajax.responseText;			
+			cont.innerHTML = ajax.responseText;
 		}
 	}
 	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	ajax.send("&acc=" + acc + "&idMp=" + idMp + "&mes=" + mes 
+	ajax.send("&acc=" + acc + "&idMp=" + idMp + "&mes=" + mes
 		+ "&anio=" + anio + "&idUnidad=" + idUnidad);
 
 }
 
-function updateALLFormCarpe(idMp, anio, mes, idUnidad){
+function updateALLFormCarpe(idMp, anio, mes, idUnidad) {
 
 
 	acc = "updateAllFormCarpetsForm";
@@ -674,11 +685,11 @@ function updateALLFormCarpe(idMp, anio, mes, idUnidad){
 
 	ajax.onreadystatechange = function () {
 		if (ajax.readyState == 4 && ajax.status == 200) {
-			cont.innerHTML = ajax.responseText;			
+			cont.innerHTML = ajax.responseText;
 		}
 	}
 	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	ajax.send("&acc=" + acc + "&idMp=" + idMp + "&mes=" + mes 
+	ajax.send("&acc=" + acc + "&idMp=" + idMp + "&mes=" + mes
 		+ "&anio=" + anio + "&idUnidad=" + idUnidad);
 
 }
@@ -747,18 +758,18 @@ function enviarDPEvalidatesV2(anio, mes, incorrectReni, idEnlace, format) {
 			closeOnConfirm: false,
 			closeOnCancel: true
 		},
-		function (isConfirm) {
-			if (isConfirm) {
+			function (isConfirm) {
+				if (isConfirm) {
 
-				ajax = objetoAjax();
-				ajax.open("POST", "carpetas/actualizarEnviado.php");
-				ajax.onreadystatechange = function () {
-					if (ajax.readyState == 4 && ajax.status == 200) {
-						var json = ajax.responseText;
-						var obj = eval("(" + json + ")");
-						if (obj.first == "NO") { swal("", "No se envió verifique los datos.", "warning"); } else {
-							if (obj.first == "SI") {
-								swal("", "Tu información ha sido enviada.", "success");
+					ajax = objetoAjax();
+					ajax.open("POST", "carpetas/actualizarEnviado.php");
+					ajax.onreadystatechange = function () {
+						if (ajax.readyState == 4 && ajax.status == 200) {
+							var json = ajax.responseText;
+							var obj = eval("(" + json + ")");
+							if (obj.first == "NO") { swal("", "No se envió verifique los datos.", "warning"); } else {
+								if (obj.first == "SI") {
+									swal("", "Tu información ha sido enviada.", "success");
 									//descargar(format, idUnidad, mes, anio, idEnlace);
 									setTimeout("location.href = 'index.php?format=" + format + "';", 400);
 								}
@@ -770,7 +781,7 @@ function enviarDPEvalidatesV2(anio, mes, incorrectReni, idEnlace, format) {
 				}
 			});
 	}
-	
+
 }
 
 
