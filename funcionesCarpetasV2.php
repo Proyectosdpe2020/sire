@@ -265,7 +265,58 @@ $row_count = sqlsrv_num_rows( $stmt );
 
 }
 
+function getEstatusCMASC($conCMASC, $nuc){
 
+	$query = " SELECT top 1
+										       ci.CarpetaIngresadaID
+										      ,ci.FechaInicioSigi
+										      ,ci.FechaIngreso
+										      ,ci.Delito
+										      ,ci.NUC
+										      ,ci.MPCanalizador
+										      ,ci.Unidad
+										      ,ci.CarpetaRecibida
+										      ,ci.MotivoRechazo
+											     ,mr.Nombre
+										      ,ci.Canalizador
+										      ,ci.Fiscalia
+										      ,ci.Municipio
+										      ,ci.Observaciones
+										      ,ci.FechaCarpetas
+										      ,ci.Facilitador
+										      ,ci.FechaLibro
+										      ,ci.UsuarioID
+											FROM dbo.CarpetasIngresadas ci 
+											LEFT JOIN cat.MotivoRechazo mr ON mr.MotivoID = ci.MotivoRechazo
+											WHERE ci.FechaIngreso IN (SELECT max(FechaIngreso) FROM dbo.CarpetasIngresadas where NUC = '$nuc') AND ci.NUC = '$nuc' order BY ci.CarpetaIngresadaID desc ";
+
+	$indice = 0;
+	$stmt = sqlsrv_query($conCMASC, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['CarpetaIngresadaID'];
+		$arreglo[$indice][1]=$row['FechaInicioSigi'];
+		$arreglo[$indice][2]=$row['FechaIngreso'];
+		$arreglo[$indice][3]=$row['Delito'];
+		$arreglo[$indice][4]=$row['NUC'];
+		$arreglo[$indice][5]=$row['MPCanalizador'];
+		$arreglo[$indice][6]=$row['Unidad'];
+		$arreglo[$indice][7]=$row['CarpetaRecibida'];
+		$arreglo[$indice][8]=$row['MotivoRechazo'];
+		$arreglo[$indice][9]=$row['Nombre'];
+		$arreglo[$indice][10]=$row['Canalizador'];
+		$arreglo[$indice][11]=$row['Fiscalia'];
+		$arreglo[$indice][12]=$row['Municipio'];
+		$arreglo[$indice][13]=$row['Observaciones'];
+		$arreglo[$indice][14]=$row['FechaCarpetas'];
+		$arreglo[$indice][15]=$row['Facilitador'];
+		$arreglo[$indice][16]=$row['FechaLibro'];
+		$arreglo[$indice][17]=$row['UsuarioID'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+
+}
 
 
 
