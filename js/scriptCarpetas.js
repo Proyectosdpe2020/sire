@@ -482,6 +482,29 @@ function validarReglasNUC(nuc, estatus, mes, anio, nuc, idUnidad, idMp, deten, e
 						clearModalNUcsCarpe();
 					}
 
+						if (objDatos.first == "NOIRN") {
+
+						/// OBTENER DATOS DEL NUC DONDE Y QUIEN LO REINICIO Y LA FECHA
+
+						swal("", "El ultimo Estatus del NUC es Reiniciado, no puede volver a entrar como reiniciado. \n\n ULTIMA DETERMINACIÓN \n Ministerio Público: "+objDatos.nombre+'\n Unidad: '+objDatos.unidad+' - '+objDatos.fiscalia+'\n Estatus: '+objDatos.estatus+'\n Fecha: '+objDatos.mes+' - '+objDatos.anio, "warning");
+						clearModalNUcsCarpe();
+					}
+
+					if (objDatos.first == "NOCMASC") {
+
+						/// OBTENER DATOS DEL NUC DONDE Y QUIEN LO REINICIO Y LA FECHA
+
+						swal("", "El NUC no se ha recibido por el CMASC ", "warning");
+						clearModalNUcsCarpe();
+					}
+
+					if (objDatos.first == "RECHAZOCMASC") {
+
+						/// OBTENER DATOS DEL NUC DONDE Y QUIEN LO REINICIO Y LA FECHA
+						swal("", "El NUC fue rechazado por el CMASC por el siguiente motivo:\n\n "+objDatos.motivoRechazo+'.'+'\n\n Favor de verificar.', "warning");
+						clearModalNUcsCarpe();
+					}
+
 
 				}
 			}

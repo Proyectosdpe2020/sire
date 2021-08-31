@@ -5,6 +5,7 @@ include ("../Conexiones/conexionSicap1.php");
 include("../funcioneSicap.php");
 
 include ("../Conexiones/Conexion.php");
+include ("../Conexiones/conexionCMASC.php");
 include("../funciones.php");
 include("../funcionesCarpetasV2.php");
 
@@ -708,6 +709,8 @@ switch ($acc) {
  $arreglo[3] = "NOCF"; /// NO SE INSERTA POR QUE SU ULTIMO ESTATUS ES DE UN PROCESO QUE YA FINALIZO LA CARPETA
  $arreglo[4] = "NOIR"; /// NO SE INSERTA POR QUE SE DEBE REINICIAR PRIMERO
  $arreglo[5] = "NOIRN"; /// NO SE INSERTA POR QUE SE DEBE REINICIAR PRIMERO
+ $arreglo[6] = "NOCMASC"; ///MEDIACION NO SE ENCUENTRA EN LA BASE DE DATOS DE CMASC
+ $arreglo[7] = "RECHAZOCMASC"; ///MEDIACION RECIBIDA EN CMASC PERO RECHAZADA
 
 
  if (isset($_POST["nuc"])){ $nuc = $_POST["nuc"]; }
@@ -771,9 +774,29 @@ switch ($acc) {
      echo json_encode(   array(  'first'=>$arreglo[5], 'nombre'=>$dataLasResolucion[0][6], 'unidad'=>$dataLasResolucion[0][4], 'fiscalia'=>$dataLasResolucion[0][5], 'estatus'=>$dataLasResolucion[0][1], 'anio'=>$dataLasResolucion[0][3], 'mes'=>$mesee   )   );
 
     }else{
+      //UNA VEZ REALIZADA LAS VALIDACIONES VERIFICAMOS SI EL ESTATUS ES UNA MEDIACION Y CHECAMOS SI EL NUC FUE MANDADO PRIMERO A LA UNIDAD DE MEDIACION
+     if($estatus == 23){
+      $checkCMASC = getEstatusCMASC($conCMASC, $nuc);
+      $carpetaRecibida = $checkCMASC[0][7];
+      $motivoRechazo = $checkCMASC[0][9];
+      //PRIMER PASO SE VERIFICA SI EL NUC INGRESADO YA SE HA RECIBIDO EN CMASC DE LO CONTRARIO NO SE PODRA GUARDAR
+      if(sizeof($checkCMASC) > 0){
+         ////// SI EXISTE EL NUC SE VALIDA SI LA CARPETA RECIBIDA SE ENCUENTRA RECHAZADA, DE SER ASI OBTENER EL MOTIVO DE RECHAZO Y NO DEJAR GUARDAR
+           if($carpetaRecibida == 0){
+            echo json_encode(   array(  'first'=>$arreglo[7], 'motivoRechazo'=>$motivoRechazo  )   );
+           }else{
+            //SI EL NUC SE HA RECIBIDO POR EL CMASC DEJAR GUARDAR
+            echo json_encode(   array(  'first'=>$arreglo[0]   )   ); 
+           }
+      } else{
+       echo json_encode(   array(  'first'=>$arreglo[6]   )   ); //NO EXISTE EL NUC EN BASE DE DATOS DE CMASC
+      }
 
-        ////// SE PUEDE INGRESAR EL NUC CON EL ESTATUS 
+     }else{
+       ////// SE PUEDE INGRESAR EL NUC CON EL ESTATUS 
      echo json_encode(   array(  'first'=>$arreglo[0]   )   );
+     }
+
     }
 
 
@@ -800,9 +823,30 @@ switch ($acc) {
         
 
     }else{
+      //UNA VEZ REALIZADA LAS VALIDACIONES VERIFICAMOS SI EL ESTATUS ES UNA MEDIACION Y CHECAMOS SI EL NUC FUE MANDADO PRIMERO A LA UNIDAD DE MEDIACION
+     if($estatus == 23){
+      $checkCMASC = getEstatusCMASC($conCMASC, $nuc);
+      $carpetaRecibida = $checkCMASC[0][7];
+      $motivoRechazo = $checkCMASC[0][9];
+      //PRIMER PASO SE VERIFICA SI EL NUC INGRESADO YA SE HA RECIBIDO EN CMASC DE LO CONTRARIO NO SE PODRA GUARDAR
+      if(sizeof($checkCMASC) > 0){
+         ////// SI EXISTE EL NUC SE VALIDA SI LA CARPETA RECIBIDA SE ENCUENTRA RECHAZADA, DE SER ASI OBTENER EL MOTIVO DE RECHAZO Y NO DEJAR GUARDAR
+           if($carpetaRecibida == 0){
+            echo json_encode(   array(  'first'=>$arreglo[7], 'motivoRechazo'=>$motivoRechazo  )   );
+           }else{
+            //SI EL NUC SE HA RECIBIDO POR EL CMASC DEJAR GUARDAR
+            echo json_encode(   array(  'first'=>$arreglo[0]   )   ); 
+           }
+      } else{
+       echo json_encode(   array(  'first'=>$arreglo[6]   )   ); //NO EXISTE EL NUC EN BASE DE DATOS DE CMASC
+      }
 
-        ////// SE PUEDE INGRESAR EL NUC CON EL ESTATUS 
+     }else{
+       ////// SE PUEDE INGRESAR EL NUC CON EL ESTATUS 
      echo json_encode(   array(  'first'=>$arreglo[0]   )   );
+     }
+
+       
 
     } 
 
@@ -819,8 +863,28 @@ switch ($acc) {
       ///////////////////////////////// SE INSERTA SIMPLEMENTE EL NUC PERO SE VERIFICA QUE ANTES NO PROVENGA DEL ESTATUS DE REINICIADO POR QUE SERIA LA PRIMERA VEZ QUE ENTRA
   if($estatus !=  1 ){
 
-        ///// SE INSERTA
-   echo json_encode(   array(  'first'=>$arreglo[0]   )   );
+ //UNA VEZ REALIZADA LAS VALIDACIONES VERIFICAMOS SI EL ESTATUS ES UNA MEDIACION Y CHECAMOS SI EL NUC FUE MANDADO PRIMERO A LA UNIDAD DE MEDIACION
+     if($estatus == 23){
+      $checkCMASC = getEstatusCMASC($conCMASC, $nuc);
+      $carpetaRecibida = $checkCMASC[0][7];
+      $motivoRechazo = $checkCMASC[0][9];
+      //PRIMER PASO SE VERIFICA SI EL NUC INGRESADO YA SE HA RECIBIDO EN CMASC DE LO CONTRARIO NO SE PODRA GUARDAR
+      if(sizeof($checkCMASC) > 0){
+         ////// SI EXISTE EL NUC SE VALIDA SI LA CARPETA RECIBIDA SE ENCUENTRA RECHAZADA, DE SER ASI OBTENER EL MOTIVO DE RECHAZO Y NO DEJAR GUARDAR
+           if($carpetaRecibida == 0){
+            echo json_encode(   array(  'first'=>$arreglo[7], 'motivoRechazo'=>$motivoRechazo  )   );
+           }else{
+            //SI EL NUC SE HA RECIBIDO POR EL CMASC DEJAR GUARDAR
+            echo json_encode(   array(  'first'=>$arreglo[0]   )   ); 
+           }
+      } else{
+       echo json_encode(   array(  'first'=>$arreglo[6]   )   ); //NO EXISTE EL NUC EN BASE DE DATOS DE CMASC
+      }
+
+     }else{
+       ////// SE PUEDE INGRESAR EL NUC CON EL ESTATUS 
+     echo json_encode(   array(  'first'=>$arreglo[0]   )   );
+     }
 
   }else{
 
