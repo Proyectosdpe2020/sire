@@ -494,14 +494,14 @@ function validarReglasNUC(nuc, estatus, mes, anio, nuc, idUnidad, idMp, deten, e
 
 						/// OBTENER DATOS DEL NUC DONDE Y QUIEN LO REINICIO Y LA FECHA
 
-						swal("", "El NUC no se ha recibido por el CMASC ", "warning");
+						swal("", "Este NUC no se encuentra registrado como recibido en el CMASC para su revision, favor de comunicarse al CMASC. ", "warning");
 						clearModalNUcsCarpe();
 					}
 
 					if (objDatos.first == "RECHAZOCMASC") {
 
 						/// OBTENER DATOS DEL NUC DONDE Y QUIEN LO REINICIO Y LA FECHA
-						swal("", "El NUC fue rechazado por el CMASC por el siguiente motivo:\n\n "+objDatos.motivoRechazo+'.'+'\n\n Favor de verificar.', "warning");
+						swal("", "El NUC fue rechazado por el CMASC por el siguiente motivo:\n\n "+objDatos.motivoRechazo+'.'+'\n\n Favor de comunicarse al CMASC.', "warning");
 						clearModalNUcsCarpe();
 					}
 
