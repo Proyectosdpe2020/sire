@@ -19,45 +19,86 @@ $nomUnidad = $unInfo[0][1];
 if($mes == 1){ $mesAnterior = 12; $anioAnte = ($anio-1); }else{ $anioAnte = $anio; $mesAnterior = ($mes - 1); 	}
 
 
+if ($anio <= 2021 && $mes <= 6) {
 
-$existenciaAnt = getExistenciaAnterior($conn, $mesAnterior, $anioAnte, $idUnidad, $idMp);
 
-if($existenciaAnt){ 
 
-	$tramiteAnte = $existenciaAnt[0][0];  
-	$bandHabTramite = 0;
-}else{ 
+	$existenciaAnt = getExistenciaAnterior($conn, $mesAnterior, $anioAnte, $idUnidad, $idMp);
 
-	$tramiteAnte = 0; 
-	$bandHabTramite = 1;
+	////////////// OBTIENE EL TRAMITE ANTERIOR DE LOS DATOS INGRESADOS DEL MES ANTERIOR /////////////////////
+	
+	
+	if ($existenciaAnt) {
+	
+		$tramiteAnte = $existenciaAnt[0][0];
+		$bandHabTramite = 0;
+	} else {
+	
+		$tramiteAnte = 0;
+		$bandHabTramite = 1;
+	}
 
-}
 
-$d1 = getCountNucs($conn, 1, $mes, $anio, $idUnidad, $idMp, 0);
+}else{
 
-$d2 = getCountNucs($conn, 22, $mes, $anio, $idUnidad, $idMp, 1); 
-$d3 = getCountNucs($conn, 22, $mes, $anio, $idUnidad, $idMp, 0); 
+	
 
-$d4 = getCountNucs($conn, 2, $mes, $anio, $idUnidad, $idMp, 0); 
-$d5 = getCountNucs($conn, 5, $mes, $anio, $idUnidad, $idMp, 0); 
-$d6 = getCountNucs($conn, 20, $mes, $anio, $idUnidad, $idMp, 0); 
-$d7 = getCountNucs($conn, 21, $mes, $anio, $idUnidad, $idMp, 0); 
-$d8 = getCountNucs($conn, 3, $mes, $anio, $idUnidad, $idMp, 0); 
-$d9 = getCountNucs($conn, 23, $mes, $anio, $idUnidad, $idMp, 0); 
-$d10 = getCountNucs($conn, 24, $mes, $anio, $idUnidad, $idMp, 0); 
-$d11 = getCountNucs($conn, 25, $mes, $anio, $idUnidad, $idMp, 0); 
-$d12 = getCountNucs($conn, 15, $mes, $anio, $idUnidad, $idMp, 0); 
+	
+
+	if ($mes == 1) {
+		$mesAnterior = 12;
+		$anioAnte = ($anio - 1);
+	} else {
+		$anioAnte = $anio;
+		$mesAntAnterior = ($mes - 2);
+		$mesAnterior = ($mes - 1);
+	}
+
+	$existenciaAnt = getExistenciaAnterior($conn, $mesAntAnterior, $anioAnte, $idUnidad, $idMp);
+
+	if ($existenciaAnt) {
+	
+		$tramiteAnte = $existenciaAnt[0][0];
+		$bandHabTramite = 0;
+	} else {
+	
+		$tramiteAnte = 0;
+		$bandHabTramite = 1;
+	}
+
+	
+
+	
+
+////////////////////// NUEVOS TRAMITES COUNT NUCSS //////////////////////////
+
+$existNew = getDataCarpetasDatosExistenciaAnteriorV2($conn, $mesAnterior, $anioAnte, $idUnidad, $idMp);
+
+
+$d1 = getCountNucs($conn, 1, $mesAnterior, $anioAnte, $idUnidad, $idMp, 0);
+
+$d2 = getCountNucs($conn, 22, $mesAnterior, $anioAnte, $idUnidad, $idMp, 1);
+$d3 = getCountNucs($conn, 22, $mesAnterior, $anioAnte, $idUnidad, $idMp, 0);
+
+$d4 = getCountNucs($conn, 2, $mesAnterior, $anioAnte, $idUnidad, $idMp, 0);
+$d5 = getCountNucs($conn, 5, $mesAnterior, $anioAnte, $idUnidad, $idMp, 0);
+$d6 = getCountNucs($conn, 20, $mesAnterior, $anioAnte, $idUnidad, $idMp, 0);
+$d7 = getCountNucs($conn, 21, $mesAnterior, $anioAnte, $idUnidad, $idMp, 0);
+$d8 = getCountNucs($conn, 3, $mesAnterior, $anioAnte, $idUnidad, $idMp, 0);
+$d9 = getCountNucs($conn, 23, $mesAnterior, $anioAnte, $idUnidad, $idMp, 0);
+$d10 = getCountNucs($conn, 24, $mesAnterior, $anioAnte, $idUnidad, $idMp, 0);
+$d11 = getCountNucs($conn, 25, $mesAnterior, $anioAnte, $idUnidad, $idMp, 0);
+$d12 = getCountNucs($conn, 15, $mesAnterior, $anioAnte, $idUnidad, $idMp, 0);
+
+$totaTrabvajar = $tramiteAnte + $existNew[0][0] + $d1[0][0] + $existNew[0][1] ;
 
 $totDeterminaciones = $d2[0][0] + $d3[0][0] + $d4[0][0] + $d5[0][0] + $d6[0][0] + $d7[0][0] + $d8[0][0] + $d9[0][0] + $d10[0][0] + $d11[0][0] + $d12[0][0];
+$enviads = $existNew[0][2] + $existNew[0][3] + $existNew[0][4];
+$enviaddetermns = $enviads + $totDeterminaciones;
 
-$datoCar = getDatosCarpetas($conn, $mes, $anio, $idUnidad, $idMp);
-$totIni = $datoCar[0][6];
-$recibiotrund = $datoCar[0][2];
+$totTramitss = $totaTrabvajar - $enviaddetermns;
 
-$totaTrabvajar = $tramiteAnte + $totIni + $d1[0][0] + $recibiotrund ;
-$totalJudicializadass = $d2[0][0] + $d3[0][0];
-
-$totTramitss = $totaTrabvajar - ($totDeterminaciones + $datoCar[0][3] + $datoCar[0][4] + $datoCar[0][5])
+}
 
 
 ?>
@@ -83,7 +124,7 @@ $totTramitss = $totaTrabvajar - ($totDeterminaciones + $datoCar[0][3] + $datoCar
 					<div class="panel panel-default fd1" style="">
 						<div class="panel-body">
 							<h5 class="text-on-pannel"><strong> Existencia Anterior </strong></h5>
-							<input class="form-control input-md redondear fdesv" id="inputTramiteAnterior" type="number" value="<? if( $bandHabTramite == 1 ){ echo $tramiteAnte; } else { echo $tramiteAnte; } ?>"  <?  echo "readonly"; ?> >
+							<input class="form-control input-md redondear fdesv" id="inputTramiteAnterior" type="number" value="<? if( $bandHabTramite == 1 ){ echo $totTramitss; } else { echo $totTramitss; } ?>"  <?  echo "readonly"; ?> >
 						</div>
 					</div><br>
 

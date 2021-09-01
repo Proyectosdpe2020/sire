@@ -1649,6 +1649,25 @@ function getExistenciaAnterior($conn, $mesAnterior, $aniocaptura, $idUnidad, $id
 	if(isset($arreglo)){return $arreglo;}
 }
 
+function getDataCarpetasDatosExistenciaAnteriorV2($conn, $mesAnterior, $aniocaptura, $idUnidad, $idMp){
+
+	$query = "  SELECT totalIniciadas,recibidasPorOtraUnidad, enviadasUATP, enviadasUI, enviImpDes FROM carpetasDatos WHERE idAnio = $aniocaptura AND idMes = $mesAnterior AND idUnidad = $idUnidad AND idMp = $idMp ";
+
+	
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['totalIniciadas'];
+		$arreglo[$indice][1]=$row['recibidasPorOtraUnidad'];
+		$arreglo[$indice][2]=$row['enviadasUATP'];
+		$arreglo[$indice][3]=$row['enviadasUI'];
+		$arreglo[$indice][4]=$row['enviImpDes'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
+
 
 function getInfoUnidad($conn, $idunidad){
 
