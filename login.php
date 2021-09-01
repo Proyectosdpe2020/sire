@@ -136,7 +136,7 @@
     }
     else{    
 
-
+/*
         ?>
         <div class="animate form login_form">
         <section class="login_content">
@@ -154,7 +154,7 @@
             <div>
               <h1><i class="fa fa-laptop"></i> SIRE</h1>
               <h1>NO ES COMPATIBLE CON  </h1>
-                <h1> <?   echo $navegador ?> </h1>
+                <h1> <?   echo //$navegador ?> </h1>
                   <h1> Ingresar con: Google Chrome </h1>
 
               <p>©2018 SISTEMA INTEGRAL DE REGISTRO ESTADISTICO </p>
@@ -164,7 +164,7 @@
           </section>
         </div>
 
-        <?
+        <?*/
     }
     ?>
       </div>

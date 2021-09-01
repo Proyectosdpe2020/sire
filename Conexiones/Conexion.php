@@ -2,7 +2,7 @@
 
 
 
-	$serverName = "localhost";
+	$serverName = "172.16.2.27";
 	//$connectionInfo = array( "Database"=>"michoacan-pg-prod", "CharacterSet" => "UTF-8");
 
 	$connectionInfo = array( "Database"=>"ESTADISTICAV2", "UID"=>"SIREADMIN", "PWD"=>"S1I2R3E4AD5MON","CharacterSet" => "UTF-8");
