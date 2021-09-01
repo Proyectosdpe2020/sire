@@ -218,11 +218,11 @@
 	</div>
  <? } ?>
 
- <? if($estatus == 19){ 
- 	$getData = getDataFechaAutoVincuProc($conn, $idResolMP);
+ <? if($estatus == 151){ 
+ 	$getData = getDataFechaAutoVincuProc($conn, $idEstatusNucs);
 	 	if(sizeof($getData) > 0){ 
 	 		$opcInsert = 1; 
-	 		$fecha = $getData[0][2] ->format('Y-m-d'); 
+	 		$fecha = $getData[0][3] ->format('Y-m-d'); 
 	 	}else{ 	$opcInsert = 0; }
 	 	?>
 	<div class="row">
@@ -237,9 +237,11 @@
 			<button style="width: 88%;" onclick="closeModalNucsLitigInfo()" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button>
 		</div>
 		<div class="col-xs-12 col-sm-6  col-md-6 ">
-		
-			<button style="width: 88%;" onclick="insertFormAutoVincuProc_db(<? echo $idResolMP; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
-
+			<?if(	$opcInsert == 0){ ?>
+			<button style="width: 88%;" onclick="sendDataFormAutoVincuProc(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> ,  <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
+			<?}elseif(	$opcInsert == 1 ){ ?>
+			<button style="width: 88%;" onclick="insertFormAutoVincuProc_db(<? echo $idEstatusNucs; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
+		 <? } ?>
 		</div>
 	</div>
  <? } ?>

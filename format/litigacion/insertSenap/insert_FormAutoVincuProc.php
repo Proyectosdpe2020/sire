@@ -23,7 +23,7 @@ if($opcInsert == 0){
                                 BEGIN TRANSACTION
                                       SET NOCOUNT ON 
 
-                                        INSERT INTO senap.autoVincuProc (ResolucionID, fechaAutoVincuProc) 
+                                        INSERT INTO senap.autoVincuProc (idEstatusNucs, fechaAutoVincuProc) 
                                         VALUES('$idResolMP', '$fechaAutoVinculacion')
                                                   
                                       COMMIT
@@ -43,7 +43,7 @@ if($opcInsert == 0){
 
                                         UPDATE senap.autoVincuProc SET 
                                         fechaAutoVincuProc = '$fechaAutoVinculacion'
-                                        WHERE ResolucionID = '$idResolMP' ;
+                                        WHERE idEstatusNucs = '$idResolMP' ;
                                                   
                                       COMMIT
                               END TRY
