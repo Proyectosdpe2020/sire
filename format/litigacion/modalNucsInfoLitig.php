@@ -218,11 +218,11 @@
 	</div>
  <? } ?>
 
- <? if($estatus == 19){ 
- 	$getData = getDataFechaAutoVincuProc($conn, $idResolMP);
+ <? if($estatus == 151){ 
+ 	$getData = getDataFechaAutoVincuProc($conn, $idEstatusNucs);
 	 	if(sizeof($getData) > 0){ 
 	 		$opcInsert = 1; 
-	 		$fecha = $getData[0][2] ->format('Y-m-d'); 
+	 		$fecha = $getData[0][3] ->format('Y-m-d'); 
 	 	}else{ 	$opcInsert = 0; }
 	 	?>
 	<div class="row">
@@ -237,9 +237,11 @@
 			<button style="width: 88%;" onclick="closeModalNucsLitigInfo()" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button>
 		</div>
 		<div class="col-xs-12 col-sm-6  col-md-6 ">
-		
-			<button style="width: 88%;" onclick="insertFormAutoVincuProc_db(<? echo $idResolMP; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
-
+			<?if(	$opcInsert == 0){ ?>
+			<button style="width: 88%;" onclick="sendDataFormAutoVincuProc(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> ,  <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
+			<?}elseif(	$opcInsert == 1 ){ ?>
+			<button style="width: 88%;" onclick="insertFormAutoVincuProc_db(<? echo $idEstatusNucs; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
+		 <? } ?>
 		</div>
 	</div>
  <? } ?>
@@ -264,46 +266,49 @@
 						<?$getTipoMedCautelar = getTipoMedCautelar($conSic);
 						for ($i=0; $i < sizeof($getTipoMedCautelar); $i++) {
 							$idTipoMedidaCautelar = $getTipoMedCautelar[$i][0];	$nombre = $getTipoMedCautelar[$i][1];	
-							if(($estatus == 17 || $estatus == 18)  && $idTipoMedidaCautelar == 14){?>
+							if($estatus == 17 && $idTipoMedidaCautelar == 1){?>
 							<option style="color: black; font-weight: bold;" value="<? echo $idTipoMedidaCautelar; ?>" selected><? echo $nombre; ?> </option>
 						 <?   } ?>
-						 <?if($estatus == 95 && $idTipoMedidaCautelar == 1){?>
+						 <?if($estatus == 18 && $idTipoMedidaCautelar == 2){?>
 							<option style="color: black; font-weight: bold;" value="<? echo $idTipoMedidaCautelar; ?>" selected><? echo $nombre; ?> </option>
 						 <?   } ?>
-						 <?if($estatus == 21 && $idTipoMedidaCautelar == 3){?>
+						 <?if($estatus == 95 && $idTipoMedidaCautelar == 15){?>
 							<option style="color: black; font-weight: bold;" value="<? echo $idTipoMedidaCautelar; ?>" selected><? echo $nombre; ?> </option>
 						 <?   } ?>
-						 <?if($estatus == 20 && $idTipoMedidaCautelar == 2){?>
+						 <?if($estatus == 21 && $idTipoMedidaCautelar == 4){?>
 							<option style="color: black; font-weight: bold;" value="<? echo $idTipoMedidaCautelar; ?>" selected><? echo $nombre; ?> </option>
 						 <?   } ?>
-						 <?if($estatus == 22 && $idTipoMedidaCautelar == 4){?>
+						 <?if($estatus == 20 && $idTipoMedidaCautelar == 3){?>
 							<option style="color: black; font-weight: bold;" value="<? echo $idTipoMedidaCautelar; ?>" selected><? echo $nombre; ?> </option>
 						 <?   } ?>
-						 <?if($estatus == 23 && $idTipoMedidaCautelar == 5){?>
+						 <?if($estatus == 22 && $idTipoMedidaCautelar == 5){?>
 							<option style="color: black; font-weight: bold;" value="<? echo $idTipoMedidaCautelar; ?>" selected><? echo $nombre; ?> </option>
 						 <?   } ?>
-						 <?if($estatus == 24 && $idTipoMedidaCautelar == 6){?>
+						 <?if($estatus == 23 && $idTipoMedidaCautelar == 6){?>
 							<option style="color: black; font-weight: bold;" value="<? echo $idTipoMedidaCautelar; ?>" selected><? echo $nombre; ?> </option>
 						 <?   } ?>
-						 <?if($estatus == 25 && $idTipoMedidaCautelar == 7){?>
+						 <?if($estatus == 24 && $idTipoMedidaCautelar == 7){?>
 							<option style="color: black; font-weight: bold;" value="<? echo $idTipoMedidaCautelar; ?>" selected><? echo $nombre; ?> </option>
 						 <?   } ?>
-						 <?if($estatus == 26 && $idTipoMedidaCautelar == 8){?>
+						 <?if($estatus == 25 && $idTipoMedidaCautelar == 8){?>
 							<option style="color: black; font-weight: bold;" value="<? echo $idTipoMedidaCautelar; ?>" selected><? echo $nombre; ?> </option>
 						 <?   } ?>
-						  <?if($estatus == 27 && $idTipoMedidaCautelar == 9){?>
+						 <?if($estatus == 26 && $idTipoMedidaCautelar == 9){?>
 							<option style="color: black; font-weight: bold;" value="<? echo $idTipoMedidaCautelar; ?>" selected><? echo $nombre; ?> </option>
 						 <?   } ?>
-						 <?if($estatus == 28 && $idTipoMedidaCautelar == 10){?>
+						  <?if($estatus == 27 && $idTipoMedidaCautelar == 10){?>
 							<option style="color: black; font-weight: bold;" value="<? echo $idTipoMedidaCautelar; ?>" selected><? echo $nombre; ?> </option>
 						 <?   } ?>
-						 <?if($estatus == 29 && $idTipoMedidaCautelar == 11){?>
+						 <?if($estatus == 28 && $idTipoMedidaCautelar == 11){?>
 							<option style="color: black; font-weight: bold;" value="<? echo $idTipoMedidaCautelar; ?>" selected><? echo $nombre; ?> </option>
 						 <?   } ?>
-						 <?if($estatus == 30 && $idTipoMedidaCautelar == 12){?>
+						 <?if($estatus == 29 && $idTipoMedidaCautelar == 12){?>
 							<option style="color: black; font-weight: bold;" value="<? echo $idTipoMedidaCautelar; ?>" selected><? echo $nombre; ?> </option>
 						 <?   } ?>
-						 <?if($estatus == 31 && $idTipoMedidaCautelar == 13){?>
+						 <?if($estatus == 30 && $idTipoMedidaCautelar == 13){?>
+							<option style="color: black; font-weight: bold;" value="<? echo $idTipoMedidaCautelar; ?>" selected><? echo $nombre; ?> </option>
+						 <?   } ?>
+						 <?if($estatus == 31 && $idTipoMedidaCautelar == 14){?>
 							<option style="color: black; font-weight: bold;" value="<? echo $idTipoMedidaCautelar; ?>" selected><? echo $nombre; ?> </option>
 						 <?   } ?>
 							<? } ?>

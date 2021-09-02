@@ -901,6 +901,18 @@ function validateMedidasCautelares(){
 	}
 }
 
+function sendDataFormAutoVincuProc(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcInsert){
+	var fechaAutoVinculacion = document.getElementById("fechaAutoVinculacion").value;
+
+	if(fechaAutoVinculacion != ""){
+		 insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert);
+	  $('#modalNucsLitigInfo').modal('hide');
+			$('#modalNucsLitig').modal('show');
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
 
 /*
 //Mecanismo para cambiar de formulario a otro
