@@ -494,7 +494,7 @@ function validarReglasNUC(nuc, estatus, mes, anio, nuc, idUnidad, idMp, deten, e
 
 						/// OBTENER DATOS DEL NUC DONDE Y QUIEN LO REINICIO Y LA FECHA
 
-						swal("", "Este NUC no se encuentra registrado como recibido en el CMASC para su revision, favor de comunicarse al CMASC. ", "warning");
+						swal("", "Este NUC no se encuentra registrado como recibido en el CMASC para su revisión, favor de comunicarse al CMASC. ", "warning");
 						clearModalNUcsCarpe();
 					}
 
