@@ -921,6 +921,9 @@ function insertarNucLit(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad, 
 														 	case 57: 
 														 	       setTimeout("insertFechaCumplimento_db("+objDatos.idEstatusNucs+","+estatResolucion+","+nuc+", "+opcInsert+","+idMp+", "+mes+", "+anio+");",100);
 														 	break;
+														 		case 151:
+														 								setTimeout("insertFormAutoVincuProc_db("+objDatos.idEstatusNucs+","+estatResolucion+","+nuc+", "+opcInsert+","+idMp+", "+mes+", "+anio+");",100);
+														 	break;
 														 default:
 														  break;
 														 }
