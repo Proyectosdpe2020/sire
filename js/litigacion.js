@@ -762,7 +762,7 @@ function existenuclitigacion(nuc, idMp, estatResolucion, mes, anio, idUnidad, de
 															   estatResolucion == 108 || estatResolucion == 109 || estatResolucion == 110 || estatResolucion == 111 ||
 															   estatResolucion == 64 || estatResolucion == 60 || estatResolucion == 91 || estatResolucion == 65 ||
 															   estatResolucion == 90 || estatResolucion == 66 || estatResolucion == 67 || estatResolucion == 68 || 
-															   estatResolucion == 129 || estatResolucion == 57){
+															   estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151){
 																showModalNucLitInfo2(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad);
 															}else{
 																	setTimeout("insertarNucLit("+idMp+","+estatResolucion+","+mes+","+anio+","+nuc+","+deten+","+idUnidad+");",100);
@@ -1140,7 +1140,7 @@ function validarEstatusShowInfoSica(estatResolucion){
 		|| estatResolucion == 106 || estatResolucion == 89 || estatResolucion == 107 || estatResolucion == 108 || estatResolucion == 109
 		 || estatResolucion == 110 || estatResolucion == 111 || estatResolucion == 64 || estatResolucion == 60 || estatResolucion == 14 
 		 || estatResolucion == 65 || estatResolucion == 66 || estatResolucion == 67 || estatResolucion == 68 || estatResolucion == 90 
-		 || estatResolucion == 91 || estatResolucion == 129 || estatResolucion == 57){
+		 || estatResolucion == 91 || estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151){
 		return true;
 	}
 	else{

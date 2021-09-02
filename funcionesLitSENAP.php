@@ -267,14 +267,15 @@ function getDataFechaFormImpu($conn, $idEstatusNucs){
 
 //Funcion para obtener la información de SENAP sobre fecha del auto de vinculacion a proceso
 function getDataFechaAutoVincuProc($conn, $idResolMP){
-	$query = "SELECT * FROM senap.autoVincuProc WHERE ResolucionID = '$idResolMP' "; 
+	$query = "SELECT * FROM senap.autoVincuProc WHERE idEstatusNucs = '$idResolMP' "; 
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
 	{
 		$arreglo[$indice][0]=$row['idAutoVincuProc'];
 		$arreglo[$indice][1]=$row['ResolucionID'];
-		$arreglo[$indice][2]=$row['fechaAutoVincuProc'];
+		$arreglo[$indice][2]=$row['idEstatusNucs'];
+		$arreglo[$indice][3]=$row['fechaAutoVincuProc'];
 		$indice++;
 	}
 	if(isset($arreglo)){return $arreglo;}
