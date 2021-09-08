@@ -1636,7 +1636,7 @@ function getExistenciaAnterior($conn, $mesAnterior, $aniocaptura, $idUnidad, $id
 
 	$query = "SELECT tramite FROM Carpetas WHERE idMes = $mesAnterior AND idAnio = $aniocaptura AND idUnidad = $idUnidad AND idMp = $idMp ";
 
-		//echo $query."<br><br>";
+	
 
 	
 	$indice = 0;
@@ -1651,7 +1651,7 @@ function getExistenciaAnterior($conn, $mesAnterior, $aniocaptura, $idUnidad, $id
 
 function getDataCarpetasDatosExistenciaAnteriorV2($conn, $mesAnterior, $aniocaptura, $idUnidad, $idMp){
 
-	$query = "  SELECT totalIniciadas,recibidasPorOtraUnidad, enviadasUATP, enviadasUI, enviImpDes FROM carpetasDatos WHERE idAnio = $aniocaptura AND idMes = $mesAnterior AND idUnidad = $idUnidad AND idMp = $idMp ";
+	$query = "  SELECT iniciadasConDetenido, iniciadasSinDetenido, totalIniciadas,recibidasPorOtraUnidad, enviadasUATP, enviadasUI, enviImpDes FROM carpetasDatos WHERE idAnio = $aniocaptura AND idMes = $mesAnterior AND idUnidad = $idUnidad AND idMp = $idMp ";
 
 	
 	$indice = 0;
@@ -1663,6 +1663,8 @@ function getDataCarpetasDatosExistenciaAnteriorV2($conn, $mesAnterior, $aniocapt
 		$arreglo[$indice][2]=$row['enviadasUATP'];
 		$arreglo[$indice][3]=$row['enviadasUI'];
 		$arreglo[$indice][4]=$row['enviImpDes'];
+		$arreglo[$indice][5]=$row['iniciadasConDetenido'];
+		$arreglo[$indice][6]=$row['iniciadasSinDetenido'];
 		$indice++;
 	}
 	if(isset($arreglo)){return $arreglo;}

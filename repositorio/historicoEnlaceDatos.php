@@ -327,23 +327,65 @@ switch ($format) {
 
 												/////////////////TRAMITES
 
-									if($mescapen == 1){ $mesAnterior = 12; $anioAnte = ($anioCaptura-1); }else{ $anioAnte = $anioCaptura; $mesAnterior = ($mescapen - 1); 	}
+									if($mescapen == 1){ 
+										$mesAnterior = 12; 
+										$anioAnte = ($anioCaptura-1); 
+									}else{ 
+										$anioAnte = $anioCaptura; 
+										$mesAntAnterior = ($mescapen - 2);
+										$mesAnterior = ($mescapen - 1); 	
+									}
 
 									/// OBTENER LA UNIDAD A LA QUE REALMENTE CORRESPONDE EL MP 
 
 									
 									$existenciaAnt = getExistenciaAnterior($conn, $mesAnterior, $anioAnte, $idUnidadese, $datazx[$k][8]);
 
-									if($existenciaAnt){ 
+									$existenciaAnt2 = getExistenciaAnterior($conn, $mesAntAnterior, $anioAnte, $idUnidadese, $datazx[$k][8]);
+
+									if($existenciaAnt2){ 
 
 										$tramiteAnte = $existenciaAnt[0][0];  
+										$tramiteAnte2 = $existenciaAnt2[0][0];  
 										$bandHabTramite = 0;
 									}else{ 
 
 										$tramiteAnte = 0; 
 										$bandHabTramite = 1;
-
+										$tramiteAnte2 = 0;  
 									}
+
+									//////////////////////////////////// TRAMITE ANTERIOR //////////////////////////////////////
+ 
+									$existNew = getDataCarpetasDatosExistenciaAnteriorV2($conn, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8]);
+									//$existNew2 = getDataCarpetasDatosExistenciaAnteriorV2($conn, $mes, $anio, $idUnidad, $idMp);
+									
+									
+									$d11 = getCountNucs($conn, 1, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 0);
+									
+									$d21 = getCountNucs($conn, 22, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 1);
+									$d31 = getCountNucs($conn, 22, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 0);
+									
+									$d41 = getCountNucs($conn, 2, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 0);
+									$d51 = getCountNucs($conn, 5, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 0);
+									$d61 = getCountNucs($conn, 20, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 0);
+									$d71 = getCountNucs($conn, 21, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 0);
+									$d81 = getCountNucs($conn, 3, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 0);
+									$d91= getCountNucs($conn, 23, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 0);
+									$d101 = getCountNucs($conn, 24, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 0);
+									$d111 = getCountNucs($conn, 25, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 0);
+									$d121 = getCountNucs($conn, 15, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 0);
+									
+									$totaTrabvajar1 = $tramiteAnte2 + $existNew[0][0] + $d11[0][0] + $existNew[0][1] ;
+									
+									$totDeterminaciones1 = $d21[0][0] + $d31[0][0] + $d41[0][0] + $d51[0][0] + $d61[0][0] + $d71[0][0] + $d81[0][0] + $d91[0][0] + $d101[0][0] + $d111[0][0] + $d121[0][0];
+									$enviads1 = $existNew[0][2] + $existNew[0][3] + $existNew[0][4];
+									$enviaddetermns = $enviads1 + $totDeterminaciones1;
+									
+									$totTramitss1 = $totaTrabvajar1 - $totDeterminaciones1;
+									
+									//////////////////////////////////// TRAMITE ANTERIOR //////////////////////////////////////
+
 
 									////// TRAMITES ///////////
 
@@ -363,7 +405,7 @@ switch ($format) {
 									$d12 = getCountNucs($conn, 15, $mescapen, $aniocapen, $datazx[$k][7], $datazx[$k][8], 0); 
 
 
-									$totaTrabvajar = $tramiteAnte + $datazx[$k][6] + $d1[0][0] + $datazx[$k][2] ;
+									$totaTrabvajar = $totTramitss1 + $datazx[$k][6] + $d1[0][0] + $datazx[$k][2] ;
 									$totjud = $d3[0][0] + $d2[0][0];
 
 									$totDeterminaciones = $d2[0][0] + $d3[0][0] + $d4[0][0] + $d5[0][0] + $d6[0][0] + $d7[0][0] + $d8[0][0] + $d9[0][0] + $d10[0][0] + $d11[0][0] + $d12[0][0];
@@ -376,7 +418,7 @@ switch ($format) {
 
 									/////////////////////////////////////
 
-									$dos2 = $dos2 + $tramiteAnte; $dos3 = $dos3 + $datazx[$k][0]; 	$dos4 = $dos4 + $datazx[$k][1]; 	$dos5 = $dos5 + $datazx[$k][6]; 	$dos6 = $dos6 + number_format($d1[0][0]); 
+									$dos2 = $dos2 + $totTramitss1; $dos3 = $dos3 + $datazx[$k][0]; 	$dos4 = $dos4 + $datazx[$k][1]; 	$dos5 = $dos5 + $datazx[$k][6]; 	$dos6 = $dos6 + number_format($d1[0][0]); 
 
 									$dos7 = $dos7 + $datazx[$k][2]; $dos8 = $dos8 + number_format($totaTrabvajar); 	$dos9 = $dos9 + number_format($d2[0][0]); 	$dos10 = $dos10 + number_format($d3[0][0]); 	$dos11 = $dos11 + number_format($totjud); 
 
@@ -392,7 +434,7 @@ switch ($format) {
 
 									<tr style="background-color:rgba(255,255,255,0.8); border: solid 1px #E4E4E4 !important; ">																															
 										<td style="width: 300px !important;  padding: 10px !important;  border: solid 1px #E4E4E4 !important;">	<? echo "<label style='font-weight: bold;'>".$nombre."</label><br>".$naun[0][0]; ?></td>
-										<td style="font-weight: bold;  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo $tramiteAnte; ?></td>
+										<td style="font-weight: bold;  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo $totTramitss1; ?></td>
 										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo $datazx[$k][0]; ?></td>
 										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo $datazx[$k][1]; ?></td>
 										<td style="font-weight: bold;  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo $datazx[$k][6]; ?></td>

@@ -174,8 +174,6 @@ if (isset($_POST["mes"])){ $mes = $_POST["mes"]; }
 
 		else{
 
-
-
 						for(  $k=0; $k<sizeof($datazx); $k++  ){
 
 									$idUnidadese = $datazx[$k][7];
@@ -185,63 +183,175 @@ if (isset($_POST["mes"])){ $mes = $_POST["mes"]; }
 
 												/////////////////TRAMITES
 
-									if($mes == 1){ $mesAnterior = 12; $anioAnte = ($anio-1); }else{ $anioAnte = $anio; $mesAnterior = ($mes - 1); 	}
-
-									$existenciaAnt = getExistenciaAnterior($conn, $mesAnterior, $anioAnte, $idUnidad, $datazx[$k][8]);
-
-									if($existenciaAnt){ 
-
-										$tramiteAnte = $existenciaAnt[0][0];  
-										$bandHabTramite = 0;
+									if($mes == 1){ 
+										$mesAnterior = 12; 
+										$anioAnte = ($anio-1); 
 									}else{ 
+										$anioAnte = $anio; 
+										$mesAntAnterior = ($mes - 2);
+										$mesAnterior = ($mes - 1); 
+										}
 
-										$tramiteAnte = 0; 
-										$bandHabTramite = 1;
+						
 
-									}
-
-									////// TRAMITES ///////////
-
-									$d1 = getCountNucs($conn, 1, $mes, $anio, $datazx[$k][7], $datazx[$k][8], 0);
-
-									$d2 = getCountNucs($conn, 22, $mes, $anio, $datazx[$k][7], $datazx[$k][8], 1); 
-									$d3 = getCountNucs($conn, 22, $mes, $anio, $datazx[$k][7], $datazx[$k][8], 0); 
-
-									$d4 = getCountNucs($conn, 2, $mes, $anio, $datazx[$k][7], $datazx[$k][8], 0); 
-									$d5 = getCountNucs($conn, 5, $mes, $anio, $datazx[$k][7], $datazx[$k][8], 0); 
-									$d6 = getCountNucs($conn, 20, $mes, $anio, $datazx[$k][7], $datazx[$k][8], 0); 
-									$d7 = getCountNucs($conn, 21, $mes, $anio, $datazx[$k][7], $datazx[$k][8], 0); 
-									$d8 = getCountNucs($conn, 3, $mes, $anio, $datazx[$k][7], $datazx[$k][8], 0); 
-									$d9 = getCountNucs($conn, 23, $mes, $anio, $datazx[$k][7], $datazx[$k][8], 0); 
-									$d10 = getCountNucs($conn, 24, $mes, $anio, $datazx[$k][7], $datazx[$k][8], 0); 
-									$d11 = getCountNucs($conn, 25, $mes, $anio, $datazx[$k][7], $datazx[$k][8], 0); 
-									$d12 = getCountNucs($conn, 15, $mes, $anio, $datazx[$k][7], $datazx[$k][8], 0); 
+									////////////// SI EL MES ES 7 /////////////////////////
+									////////////// SI EL MES ES 7 /////////////////////////
+									////////////// SI EL MES ES 7 /////////////////////////
 
 
-									$totaTrabvajar = $tramiteAnte + $datazx[$k][6] + $d1[0][0] + $datazx[$k][2] ;
-									$totjud = $d3[0][0] + $d2[0][0];
-
-									$totDeterminaciones = $d2[0][0] + $d3[0][0] + $d4[0][0] + $d5[0][0] + $d6[0][0] + $d7[0][0] + $d8[0][0] + $d9[0][0] + $d10[0][0] + $d11[0][0] + $d12[0][0];
+									
 
 
 
-									$enviads = $datazx[$k][3] + $datazx[$k][4] + $datazx[$k][5];
+										$d11 = getCountNucs($conn, 1, 7, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+									
+										$d21 = getCountNucs($conn, 22, 7, $anio, $datazx[$k][7], $datazx[$k][8], 1);
+										$d31 = getCountNucs($conn, 22, 7, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+										
+										$d41 = getCountNucs($conn, 2, 7, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+										$d51 = getCountNucs($conn, 5, 7, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+										$d61 = getCountNucs($conn, 20, 7, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+										$d71 = getCountNucs($conn, 21, 7, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+										$d81 = getCountNucs($conn, 3, 7, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+										$d91= getCountNucs($conn, 23, 7, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+										$d101 = getCountNucs($conn, 24, 7, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+										$d111 = getCountNucs($conn, 25, 7, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+										$d121 = getCountNucs($conn, 15, 7, $anio, $datazx[$k][7], $datazx[$k][8], 0);	
 
-									$enviaddetermns = $enviads + $totDeterminaciones;
+										$existNewJulio = getDataCarpetasDatosExistenciaAnteriorV2($conn, 7, $anio, $datazx[$k][7], $datazx[$k][8]);
 
-									$totTramitss = $totaTrabvajar - $enviaddetermns;
+										$exiAntJulio = getExistenciaAnterior($conn, 6, $anio, $datazx[$k][7], $datazx[$k][8]);
+										
+										$totaTrabJulio = $exiAntJulio[0][0] + $existNewJulio[0][0] + $d11[0][0] + $existNewJulio[0][1] ;
+										$totDeterminacionesJulio = $d21[0][0] + $d31[0][0] + $d41[0][0] + $d51[0][0] + $d61[0][0] + $d71[0][0] + $d81[0][0] + $d91[0][0] + $d101[0][0] + $d111[0][0] + $d121[0][0];
+										
+										$enviadsJulio = $existNewJulio[0][2] + $existNewJulio[0][3] + $existNewJulio[0][4];
+										$enviaddetermnsJulio = $enviadsJulio + $totDeterminacionesJulio;
+											
+									$totTramiteJulio = $totaTrabJulio - $enviaddetermnsJulio;							
+
+
+									////////////// SI EL MES ES 7 /////////////////////////
+									////////////// SI EL MES ES 7 /////////////////////////
+									////////////// SI EL MES ES 7 /////////////////////////
+
+
+									////////////// SI EL MES ES 8 /////////////////////////
+									////////////// SI EL MES ES 8 /////////////////////////
+									////////////// SI EL MES ES 8 /////////////////////////
+
+									$d1 = getCountNucs($conn, 1, 8, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+									
+									$d2 = getCountNucs($conn, 22, 8, $anio, $datazx[$k][7], $datazx[$k][8], 1);
+									$d3 = getCountNucs($conn, 22, 8, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+									
+									$d4 = getCountNucs($conn, 2, 8, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+									$d5 = getCountNucs($conn, 5, 8, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+									$d6 = getCountNucs($conn, 20, 8, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+									$d7 = getCountNucs($conn, 21, 8, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+									$d8 = getCountNucs($conn, 3, 8, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+									$d9= getCountNucs($conn, 23, 8, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+									$d10 = getCountNucs($conn, 24, 8, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+									$d11 = getCountNucs($conn, 25, 8, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+									$d12 = getCountNucs($conn, 15, 8, $anio, $datazx[$k][7], $datazx[$k][8], 0);	
+
+									$existNewAgos = getDataCarpetasDatosExistenciaAnteriorV2($conn, 8, $anio, $datazx[$k][7], $datazx[$k][8]);
+										
+										$totaTrabAgo = $totTramiteJulio + $existNewAgos[0][0] + $d1[0][0] + $existNewAgos[0][1] ;
+										$totDeterminacionesAgo = $d2[0][0] + $d3[0][0] + $d4[0][0] + $d5[0][0] + $d6[0][0] + $d7[0][0] + $d8[0][0] + $d9[0][0] + $d10[0][0] + $d11[0][0] + $d12[0][0];
+								
+										$enviadsAgo = $existNewAgos[0][2] + $existNewAgos[0][3] + $existNewAgos[0][4];
+										$enviaddetermnsAgo = $enviadsAgo + $totDeterminacionesAgo;
+											
+									$totTramiteAgosto = $totaTrabAgo - $enviaddetermnsAgo;
+
+								if($mes == 7){ 
+
+		
+												$tramAnterior =  $exiAntJulio[0][0] ;
+
+												$de11 = getCountNucs($conn, 1, 7, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+									
+												$de21 = getCountNucs($conn, 22, 7, $anio, $datazx[$k][7], $datazx[$k][8], 1);
+												$de31 = getCountNucs($conn, 22, 7, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+												
+												$de41 = getCountNucs($conn, 2, 7, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+												$de51 = getCountNucs($conn, 5, 7, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+												$de61 = getCountNucs($conn, 20, 7, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+												$de71 = getCountNucs($conn, 21, 7, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+												$de81 = getCountNucs($conn, 3, 7, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+												$de91= getCountNucs($conn, 23, 7, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+												$de101 = getCountNucs($conn, 24, 7, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+												$de111 = getCountNucs($conn, 25, 7, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+												$de121 = getCountNucs($conn, 15, 7, $anio, $datazx[$k][7], $datazx[$k][8], 0);	
+
+												
+												$iniciadas = $existNewJulio[0][0];
+												$recibidas = $existNewJulio[0][1];
+												$totalTrabajar = $totaTrabJulio;
+												$judicializadas = $de21[0][0] + $de31[0][0];
+												$totResoluciones = $totDeterminacionesJulio;
+												$enviUATP = $existNewJulio[0][2];
+												$enviUI = $existNewJulio[0][3];
+												$enviMp = $existNewJulio[0][4];
+
+												$tramiteFinls = 	$totTramiteJulio;  
+											
+											}
+								if($mes == 8){ 
+										
+									
+										
+											$tramAnterior =  $totTramiteJulio;
+
+											$de11 = getCountNucs($conn, 1, 8, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+									
+											$de21 = getCountNucs($conn, 22, 8, $anio, $datazx[$k][7], $datazx[$k][8], 1);
+											$de31 = getCountNucs($conn, 22, 8, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+											
+											$de41 = getCountNucs($conn, 2, 8, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+											$de51 = getCountNucs($conn, 5, 8, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+											$de61 = getCountNucs($conn, 20, 8, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+											$de71 = getCountNucs($conn, 21, 8, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+											$de81 = getCountNucs($conn, 3, 8, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+											$de91= getCountNucs($conn, 23, 8, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+											$de101 = getCountNucs($conn, 24, 8, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+											$de111 = getCountNucs($conn, 25, 8, $anio, $datazx[$k][7], $datazx[$k][8], 0);
+											$de121 = getCountNucs($conn, 15, 8, $anio, $datazx[$k][7], $datazx[$k][8], 0);	
+
+
+											$iniciadas = $existNewAgos[0][0];
+											$recibidas = $existNewAgos[0][1];
+											$totalTrabajar = $totaTrabAgo;
+											$judicializadas = $de21[0][0] + $de31[0][0];
+											$totResoluciones = $totDeterminacionesAgo;
+											$enviUATP = $existNewAgos[0][2];
+											$enviUI = $existNewAgos[0][3];
+											$enviMp = $existNewAgos[0][4];
+
+											$tramiteFinls = 	$totTramiteAgosto;  
+																		
+										
+										}
+
+
+									////////////// SI EL MES ES 8 /////////////////////////
+									////////////// SI EL MES ES 8 /////////////////////////
+									////////////// SI EL MES ES 8 /////////////////////////
+
+
 
 									/////////////////////////////////////
 
-									$dos2 = $dos2 + $tramiteAnte; $dos3 = $dos3 + $datazx[$k][0]; 	$dos4 = $dos4 + $datazx[$k][1]; 	$dos5 = $dos5 + $datazx[$k][6]; 	$dos6 = $dos6 + number_format($d1[0][0]); 
+									$dos2 = $dos2 + $tramAnterior; $dos3 = $dos3 + $datazx[$k][0]; 	$dos4 = $dos4 + $datazx[$k][1]; 	$dos5 = $dos5 + $datazx[$k][6]; 	$dos6 = $dos6 + number_format($de11[0][0]); 
 
-									$dos7 = $dos7 + $datazx[$k][2]; $dos8 = $dos8 + number_format($totaTrabvajar); 	$dos9 = $dos9 + number_format($d2[0][0]); 	$dos10 = $dos10 + number_format($d3[0][0]); 	$dos11 = $dos11 + number_format($totjud); 
+									$dos7 = $dos7 + $datazx[$k][2]; $dos8 = $dos8 + number_format($totalTrabajar); 	$dos9 = $dos9 + number_format($de21[0][0]); 	$dos10 = $dos10 + number_format($de31[0][0]); 	$dos11 = $dos11 + number_format($judicializadas); 
 
-									$dos12 = $dos12 + number_format($d4[0][0]); $dos13 = $dos13 + number_format($d5[0][0]); $dos14 = $dos14 + number_format($d6[0][0]); 	$dos15 = $dos15 + number_format($d9[0][0]); $dos16 = $dos16 + number_format($d10[0][0]); 
+									$dos12 = $dos12 + number_format($de41[0][0]); $dos13 = $dos13 + number_format($de51[0][0]); $dos14 = $dos14 + number_format($de61[0][0]); 	$dos15 = $dos15 + number_format($de91[0][0]); $dos16 = $dos16 + number_format($de101[0][0]); 
 
-									$dos17 = $dos17 + number_format($d11[0][0]); $dos18 = $dos18 + number_format($d12[0][0]); $dos19 = $dos19 + number_format($d7[0][0]);	$dos20 = $dos20 + number_format($d8[0][0]); 	$dos21 = $dos21 + number_format($totDeterminaciones);
+									$dos17 = $dos17 + number_format($de111[0][0]); $dos18 = $dos18 + number_format($de121[0][0]); $dos19 = $dos19 + number_format($de71[0][0]);	$dos20 = $dos20 + number_format($de81[0][0]); 	$dos21 = $dos21 + number_format($totResoluciones);
 
-									$dos22 = $dos22 + $datazx[$k][3]; $dos23 = $dos23 + $datazx[$k][4]; $dos24 = $dos24 + $datazx[$k][5]; 	$dos25 = $dos25 + number_format($totTramitss);
+									$dos22 = $dos22 + $datazx[$k][3]; $dos23 = $dos23 + $datazx[$k][4]; $dos24 = $dos24 + $datazx[$k][5]; 	$dos25 = $dos25 + number_format($tramiteFinls);
 
 
 
@@ -249,32 +359,32 @@ if (isset($_POST["mes"])){ $mes = $_POST["mes"]; }
 
 									<tr style="background-color:rgba(255,255,255,0.8); border: solid 1px #E4E4E4 !important; ">																															
 										<td style="width: 300px !important;  padding: 10px !important;  border: solid 1px #E4E4E4 !important;">	<? echo "<label style='font-weight: bold;'>".$nombre."</label><br>".$naun[0][0]; ?></td>
-										<td style="font-weight: bold;  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo $tramiteAnte; ?></td>
+										<td style="font-weight: bold;  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo $tramAnterior; ?></td>
 										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo $datazx[$k][0]; ?></td>
 										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo $datazx[$k][1]; ?></td>
 										<td style="font-weight: bold;  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo $datazx[$k][6]; ?></td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($d1[0][0]); ?></td>
+										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($de11[0][0]); ?></td>
 										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo $datazx[$k][2]; ?></td>
-										<td style=" font-weight: bold; border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($totaTrabvajar); ?></td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($d2[0][0]); ?></td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;">	<? echo number_format($d3[0][0]); ?></td>
-										<td style=" font-weight: bold; border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo number_format($totjud); ?>	</td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo number_format($d4[0][0]); ?>	</td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;">	<? echo number_format($d5[0][0]); ?></td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($d6[0][0]); ?>	</td>
+										<td style=" font-weight: bold; border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($totalTrabajar); ?></td>
+										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($de21[0][0]); ?></td>
+										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;">	<? echo number_format($de31[0][0]); ?></td>
+										<td style=" font-weight: bold; border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo number_format($judicializadas); ?>	</td>
+										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo number_format($de41[0][0]); ?>	</td>
+										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;">	<? echo number_format($de51[0][0]); ?></td>
+										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($de61[0][0]); ?>	</td>
 
 
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($d9[0][0]); ?></td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($d10[0][0]); ?>	</td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($d11[0][0]); ?></td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;">	<? echo number_format($d12[0][0]); ?></td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($d7[0][0]); ?>	</td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;">	<? echo number_format($d8[0][0]); ?></td>
-										<td style=" font-weight: bold; border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($totDeterminaciones); ?></td>
+										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($de91[0][0]); ?></td>
+										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($de101[0][0]); ?>	</td>
+										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($de111[0][0]); ?></td>
+										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;">	<? echo number_format($de121[0][0]); ?></td>
+										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($de71[0][0]); ?>	</td>
+										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;">	<? echo number_format($de81[0][0]); ?></td>
+										<td style=" font-weight: bold; border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($totResoluciones); ?></td>
 										<td style=" border: solid 1px #E4E4E4 !important; text-align: center;">	<? echo $datazx[$k][3]; ?></td>
 										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo $datazx[$k][4]; ?>	</td>
 										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;">	<? echo $datazx[$k][5]; ?></td>
-										<td style=" font-weight: bold; border: solid 1px #E4E4E4 !important; text-align: center;">	<? echo number_format($totTramitss); ?></td>
+										<td style=" font-weight: bold; border: solid 1px #E4E4E4 !important; text-align: center;">	<? echo number_format($tramiteFinls); ?></td>
 									</tr>			
 
 									<?

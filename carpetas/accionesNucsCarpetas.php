@@ -336,44 +336,115 @@ switch ($acc) {
  if (isset($_POST["idMp"])){ $idMp = $_POST["idMp"]; }
 
 
- $existenciaAnt = getExistenciaAnterior($conn, $mes, $anio, $idUnidad, $idMp);
+ if($mes == 1){ $mesAnterior = 12; $anioAnte = ($anio-1); }else{ $anioAnte = $anio; $mesAnterior = ($mes - 1); 	}
 
- if($existenciaAnt){ 
 
-  $tramiteAnte = $existenciaAnt[0][0];  
-  $bandHabTramite = 0;
- }else{ 
-
-  $tramiteAnte = 0; 
-  $bandHabTramite = 1;
-
+ if ($anio <= 2021 && $mes <= 6) {
+ 
+ 
+ 
+   $existenciaAnt = getExistenciaAnterior($conn, $mesAnterior, $anioAnte, $idUnidad, $idMp);
+ 
+   ////////////// OBTIENE EL TRAMITE ANTERIOR DE LOS DATOS INGRESADOS DEL MES ANTERIOR /////////////////////
+   
+   
+   if ($existenciaAnt) {
+   
+     $tramiteAnte = $existenciaAnt[0][0];
+     $bandHabTramite = 0;
+   } else {
+   
+     $tramiteAnte = 0;
+     $bandHabTramite = 1;
+   }
+ 
+ 
+ }else{
+ 
+   
+ 
+   
+ 
+   if ($mes == 1) {
+     $mesAnterior = 12;
+     $anioAnte = ($anio - 1);
+   } else {
+     $anioAnte = $anio;
+     $mesAntAnterior = ($mes - 2);
+     $mesAnterior = ($mes - 1);
+   }
+ 
+   $existenciaAnt = getExistenciaAnterior($conn, $mesAntAnterior, $anioAnte, $idUnidad, $idMp);
+ 
+   if ($existenciaAnt) {
+   
+     $tramiteAnte = $existenciaAnt[0][0];
+     $bandHabTramite = 0;
+   } else {
+   
+     $tramiteAnte = 0;
+     $bandHabTramite = 1;
+   }
+ 
+   
+ 
+   
+ 
+ ////////////////////// NUEVOS TRAMITES COUNT NUCSS //////////////////////////
+ 
+ $existNew = getDataCarpetasDatosExistenciaAnteriorV2($conn, $mesAnterior, $anioAnte, $idUnidad, $idMp);
+ $existNew2 = getDataCarpetasDatosExistenciaAnteriorV2($conn, $mes, $anio, $idUnidad, $idMp);
+ 
+ 
+ $d1 = getCountNucs($conn, 1, $mesAnterior, $anioAnte, $idUnidad, $idMp, 0);
+ 
+ $d2 = getCountNucs($conn, 22, $mesAnterior, $anioAnte, $idUnidad, $idMp, 1);
+ $d3 = getCountNucs($conn, 22, $mesAnterior, $anioAnte, $idUnidad, $idMp, 0);
+ 
+ $d4 = getCountNucs($conn, 2, $mesAnterior, $anioAnte, $idUnidad, $idMp, 0);
+ $d5 = getCountNucs($conn, 5, $mesAnterior, $anioAnte, $idUnidad, $idMp, 0);
+ $d6 = getCountNucs($conn, 20, $mesAnterior, $anioAnte, $idUnidad, $idMp, 0);
+ $d7 = getCountNucs($conn, 21, $mesAnterior, $anioAnte, $idUnidad, $idMp, 0);
+ $d8 = getCountNucs($conn, 3, $mesAnterior, $anioAnte, $idUnidad, $idMp, 0);
+ $d9 = getCountNucs($conn, 23, $mesAnterior, $anioAnte, $idUnidad, $idMp, 0);
+ $d10 = getCountNucs($conn, 24, $mesAnterior, $anioAnte, $idUnidad, $idMp, 0);
+ $d11 = getCountNucs($conn, 25, $mesAnterior, $anioAnte, $idUnidad, $idMp, 0);
+ $d12 = getCountNucs($conn, 15, $mesAnterior, $anioAnte, $idUnidad, $idMp, 0);
+ 
+ $totaTrabvajar = $tramiteAnte + $existNew[0][0] + $d1[0][0] + $existNew[0][1] ;
+ 
+ $totDeterminaciones = $d2[0][0] + $d3[0][0] + $d4[0][0] + $d5[0][0] + $d6[0][0] + $d7[0][0] + $d8[0][0] + $d9[0][0] + $d10[0][0] + $d11[0][0] + $d12[0][0];
+ $enviads = $existNew[0][2] + $existNew[0][3] + $existNew[0][4];
+ $enviaddetermns = $enviads + $totDeterminaciones;
+ 
+ $totTramitss = $totaTrabvajar - $enviaddetermns;
+ 
  }
 
- $d1 = getCountNucs($conn, 1, $mes, $anio, $idUnidad, $idMp, 0);
 
- $d2 = getCountNucs($conn, 22, $mes, $anio, $idUnidad, $idMp, 1); 
- $d3 = getCountNucs($conn, 22, $mes, $anio, $idUnidad, $idMp, 0); 
 
- $d4 = getCountNucs($conn, 2, $mes, $anio, $idUnidad, $idMp, 0); 
- $d5 = getCountNucs($conn, 5, $mes, $anio, $idUnidad, $idMp, 0); 
- $d6 = getCountNucs($conn, 20, $mes, $anio, $idUnidad, $idMp, 0); 
- $d7 = getCountNucs($conn, 21, $mes, $anio, $idUnidad, $idMp, 0); 
- $d8 = getCountNucs($conn, 3, $mes, $anio, $idUnidad, $idMp, 0); 
- $d9 = getCountNucs($conn, 23, $mes, $anio, $idUnidad, $idMp, 0); 
- $d10 = getCountNucs($conn, 24, $mes, $anio, $idUnidad, $idMp, 0); 
- $d11 = getCountNucs($conn, 25, $mes, $anio, $idUnidad, $idMp, 0); 
- $d12 = getCountNucs($conn, 15, $mes, $anio, $idUnidad, $idMp, 0); 
 
- $totDeterminaciones = $d2[0][0] + $d3[0][0] + $d4[0][0] + $d5[0][0] + $d6[0][0] + $d7[0][0] + $d8[0][0] + $d9[0][0] + $d10[0][0] + $d11[0][0] + $d12[0][0];
 
- $datoCar = getDatosCarpetas($conn, $mes, $anio, $idUnidad, $idMp);
- $totIni = $datoCar[0][6];
- $recibiotrund = $datoCar[0][2];
+ $d11 = getCountNucs($conn, 1, $mes, $anio, $idUnidad, $idMp, 0);
 
- $totaTrabvajar = $tramiteAnte + $totIni + $d1[0][0] + $recibiotrund ;
- $totalJudicializadass = $d2[0][0] + $d3[0][0];
+$d22 = getCountNucs($conn, 22, $mes, $anio, $idUnidad, $idMp, 1);
+$d33 = getCountNucs($conn, 22, $mes, $anio, $idUnidad, $idMp, 0);
 
- $totTramitss = $totaTrabvajar - ($totDeterminaciones + $datoCar[0][3] + $datoCar[0][4] + $datoCar[0][5])
+$d44 = getCountNucs($conn, 2, $mes, $anio, $idUnidad, $idMp, 0);
+$d55 = getCountNucs($conn, 5, $mes, $anio, $idUnidad, $idMp, 0);
+$d66 = getCountNucs($conn, 20, $mes, $anio, $idUnidad, $idMp, 0);
+$d77 = getCountNucs($conn, 21, $mes, $anio, $idUnidad, $idMp, 0);
+$d88 = getCountNucs($conn, 3, $mes, $anio, $idUnidad, $idMp, 0);
+$d99 = getCountNucs($conn, 23, $mes, $anio, $idUnidad, $idMp, 0);
+$d101 = getCountNucs($conn, 24, $mes, $anio, $idUnidad, $idMp, 0);
+$d111 = getCountNucs($conn, 25, $mes, $anio, $idUnidad, $idMp, 0);
+$d121 = getCountNucs($conn, 15, $mes, $anio, $idUnidad, $idMp, 0);
+
+$totaTrabvajar2 = $totTramitss  + $existNew2[0][0] + $d11[0][0] + $existNew2[0][1] ;
+$totDeterminaciones1 = $d22[0][0] + $d33[0][0] + $d44[0][0] + $d55[0][0] + $d66[0][0] + $d77[0][0] + $d88[0][0] + $d99[0][0] + $d101[0][0] + $d111[0][0] + $d121[0][0];
+$enviads1 = $existNew2[0][2] + $existNew2[0][3] + $existNew2[0][4];
+
+$tramitefinal = $totaTrabvajar2 - ($totDeterminaciones1 + $enviads1);
 
 
  ?>
@@ -385,7 +456,7 @@ switch ($acc) {
    <div class="panel panel-default fd1" style="">
     <div class="panel-body">
      <h5 class="text-on-pannel"><strong> Existencia Anterior </strong></h5>
-     <input class="form-control input-md redondear fdesv" id="inputTramiteAnterior" type="number" value="<? if( $bandHabTramite == 1 ){ echo $tramiteAnte; } else { echo $tramiteAnte; } ?>"  <?  echo "readonly"; ?> >
+     <input class="form-control input-md redondear fdesv" id="inputTramiteAnterior" type="number" value="<? if( $bandHabTramite == 1 ){ echo $totTramitss; } else { echo $totTramitss; } ?>"  <?  echo "readonly"; ?> >
     </div>
    </div><br>
 
@@ -397,11 +468,11 @@ switch ($acc) {
 
       <div class="col-xs-6">
        <label class="colorLetras"  for="inputlg">Con Detenido :</label>
-       <input value="<? echo number_format($datoCar[0][0]); ?>" class="form-control input-md redondear fdesv" id="inputCdeten" type="number">
+       <input value="<? echo number_format($existNew2[0][5]); ?>" class="form-control input-md redondear fdesv" id="inputCdeten" type="number">
       </div>
       <div class="col-xs-6">
        <label class="colorLetras"  for="inputlg">Sin Detenido :</label>
-       <input value="<? echo number_format($datoCar[0][1]); ?>" class="form-control input-md redondear fdesv" id="inputSdeten" type="number">
+       <input value="<? echo number_format($existNew2[0][6]); ?>" class="form-control input-md redondear fdesv" id="inputSdeten" type="number">
       </div>
 
      </div>
@@ -410,7 +481,7 @@ switch ($acc) {
 
       <div class="col-md-12 col-sm-12 col-xs-12">
        <label class="colorLetras" for="inputlg">Total Iniciadas :</label>
-       <div id="inicidadas"><input value="<? echo number_format($datoCar[0][6]); ?>" class="form-control input-md redondear fdesv colorBloqueado" value="0" id="inpuTotIniciadas" type="number" readonly></div>
+       <div id="inicidadas"><input value="<? echo number_format($existNew2[0][0]); ?>" class="form-control input-md redondear fdesv colorBloqueado" value="0" id="inpuTotIniciadas" type="number" readonly></div>
       </div>
 
      </div>                         
@@ -426,7 +497,7 @@ switch ($acc) {
       <div class="panel-body">
        <h5 class="text-on-pannel"><strong>Reiniciadas :</strong></h5>
        <div class="iconiput">
-        <input type="number" value="<? echo number_format($d1[0][0]); ?>" onclick="sendModalCarpetasNucs(1,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)" style="cursor: pointer;" readonly placeholder="Clic para ingresar NUCS" class="first"  id="reiniciadasInser"/>
+        <input type="number" value="<? echo number_format($d11[0][0]); ?>" onclick="sendModalCarpetasNucs(1,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)" style="cursor: pointer;" readonly placeholder="Clic para ingresar NUCS" class="first"  id="reiniciadasInser"/>
         <span onclick="sendModalCarpetasNucs(1,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)"><div id="checkreiniciadas"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
        </div>  
 
@@ -444,7 +515,7 @@ switch ($acc) {
      <div class="panel panel-default fd1" style="">
       <div class="panel-body">
        <h5 class="text-on-pannel"><strong>Recibidas por otra Unidad :</strong></h5>
-       <input class="form-control input-md redondear fdesv" value="<? echo number_format($datoCar[0][2]); ?>" id="reCbOtrUni" type="number">
+       <input class="form-control input-md redondear fdesv" value="<? echo number_format($existNew2[0][1]); ?>" id="reCbOtrUni" type="number">
       </div>
      </div>                                  
     </div>
@@ -459,7 +530,7 @@ switch ($acc) {
 
        <div id="totTrabajarContent"> 
         <h5 class="text-on-pannel"><strong> Total a Trabajar</strong></h5>
-        <div id="totalTrabajar"><input class="form-control input-md redondear fdesv" id="inputTotalTrabajar" value="<? echo number_format($totaTrabvajar) ?>" type="number" readonly></div>
+        <div id="totalTrabajar"><input class="form-control input-md redondear fdesv" id="inputTotalTrabajar" value="<? echo number_format($totaTrabvajar2) ?>" type="number" readonly></div>
        </div>
 
       </div>
@@ -484,7 +555,7 @@ switch ($acc) {
 
        <label class="colorLetras" for="inputlg">Enviadas a Litigación Con Detenido :</label>
        <div class="iconiput">
-        <input type="number" value="<? echo number_format($d2[0][0]); ?>" onclick="sendModalCarpetasNucs(22,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 1)" readonly style="cursor: pointer;" placeholder="Clic para ingresar NUCS" class="first" id="inputCdetenju"/>
+        <input type="number" value="<? echo number_format($d22[0][0]); ?>" onclick="sendModalCarpetasNucs(22,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 1)" readonly style="cursor: pointer;" placeholder="Clic para ingresar NUCS" class="first" id="inputCdetenju"/>
         <span onclick="sendModalCarpetasNucs(22,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 1)"><div id="checkCdetenju"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
        </div> 
 
@@ -492,7 +563,7 @@ switch ($acc) {
       <div class="col-xs-6">
        <label class="colorLetras" for="inputlg">Enviadas a Litigación Sin Detenido :</label>
        <div class="iconiput">
-        <input type="number" value="<? echo number_format($d3[0][0]); ?>" onclick="sendModalCarpetasNucs(22,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)" readonly style="cursor: pointer;" placeholder="Clic para ingresar NUCS" class="first" id="inputSdetenju"/>
+        <input type="number" value="<? echo number_format($d33[0][0]); ?>" onclick="sendModalCarpetasNucs(22,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)" readonly style="cursor: pointer;" placeholder="Clic para ingresar NUCS" class="first" id="inputSdetenju"/>
         <span onclick="sendModalCarpetasNucs(22,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)"><div id="checkSdetenju"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
        </div> 
 
@@ -523,7 +594,7 @@ switch ($acc) {
        <div class="col-xs-12">
         <label class="colorLetras" for="inputlg">Abstención de Investigación :</label>
         <div class="iconiput">
-         <input type="number" value="<? echo number_format($d4[0][0]); ?>" onclick="sendModalCarpetasNucs(2,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>,0)" readonly style="cursor: pointer;" placeholder="Clic para ingresar NUCS" class="first"  id="inputAbsInves"/>
+         <input type="number" value="<? echo number_format($d44[0][0]); ?>" onclick="sendModalCarpetasNucs(2,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>,0)" readonly style="cursor: pointer;" placeholder="Clic para ingresar NUCS" class="first"  id="inputAbsInves"/>
          <span onclick="sendModalCarpetasNucs(2,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)"><div id="checkAbsInves"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
         </div> 
        </div>
@@ -531,7 +602,7 @@ switch ($acc) {
        <div class="col-xs-12">
         <label class="colorLetras" for="inputlg">Archivo Temporal :</label>
         <div class="iconiput">
-         <input type="number" value="<? echo number_format($d5[0][0]); ?>" onclick="sendModalCarpetasNucs(5,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)" readonly style="cursor: pointer;" placeholder="Clic para ingresar NUCS" class="first" id="inputArcTem"/>
+         <input type="number" value="<? echo number_format($d55[0][0]); ?>" onclick="sendModalCarpetasNucs(5,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)" readonly style="cursor: pointer;" placeholder="Clic para ingresar NUCS" class="first" id="inputArcTem"/>
          <span onclick="sendModalCarpetasNucs(5,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)"><div id="checkArcTem"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
         </div> 
 
@@ -539,7 +610,7 @@ switch ($acc) {
        <div class="col-xs-12">
         <label class="colorLetras" for="inputlg">No ejercicio de la acción penal :</label>
         <div class="iconiput">
-         <input type="number" value="<? echo number_format($d6[0][0]); ?>" onclick="sendModalCarpetasNucs(20,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)" readonly style="cursor: pointer;" placeholder="Clic para ingresar NUCS" class="first"  id="inputNEAP"/>
+         <input type="number" value="<? echo number_format($d66[0][0]); ?>" onclick="sendModalCarpetasNucs(20,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)" readonly style="cursor: pointer;" placeholder="Clic para ingresar NUCS" class="first"  id="inputNEAP"/>
          <span onclick="sendModalCarpetasNucs(20,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)"><div id="checkNEAP"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
         </div> 
 
@@ -547,7 +618,7 @@ switch ($acc) {
        <div class="col-xs-12">
         <label class="colorLetras" for="inputlg">Incompetencia:</label>
         <div class="iconiput">
-         <input type="number" value="<? echo number_format($d7[0][0]); ?>" onclick="sendModalCarpetasNucs(21,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)" readonly style="cursor: pointer;" placeholder="Clic para ingresar NUCS" class="first" id="inputIncompe"/>
+         <input type="number" value="<? echo number_format($d77[0][0]); ?>" onclick="sendModalCarpetasNucs(21,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)" readonly style="cursor: pointer;" placeholder="Clic para ingresar NUCS" class="first" id="inputIncompe"/>
          <span onclick="sendModalCarpetasNucs(21,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)"><div id="checkIncompe"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
         </div> 
 
@@ -555,7 +626,7 @@ switch ($acc) {
        <div class="col-xs-12">
         <label class="colorLetras" for="inputlg">Acumulación :</label>
         <div class="iconiput">
-         <input type="number" value="<? echo number_format($d8[0][0]); ?>" onclick="sendModalCarpetasNucs(3,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)" readonly style="cursor: pointer;" placeholder="Clic para ingresar NUCS" class="first" id="inputAcumulacion"/>
+         <input type="number" value="<? echo number_format($d88[0][0]); ?>" onclick="sendModalCarpetasNucs(3,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)" readonly style="cursor: pointer;" placeholder="Clic para ingresar NUCS" class="first" id="inputAcumulacion"/>
          <span onclick="sendModalCarpetasNucs(3,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)"><div id="checkAcumulacion"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
         </div> 
         <br>
@@ -586,7 +657,7 @@ switch ($acc) {
       <div class="col-xs-6">
        <label class="colorLetras" for="inputlg">Mediación :</label>
        <div class="iconiput">
-        <input type="number" value="<? echo number_format($d9[0][0]); ?>" onclick="sendModalCarpetasNucs(23,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)" readonly style="cursor: pointer;" placeholder="Clic para ingresar NUCS" class="first" id="inputMediacion"/>
+        <input type="number" value="<? echo number_format($d99[0][0]); ?>" onclick="sendModalCarpetasNucs(23,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)" readonly style="cursor: pointer;" placeholder="Clic para ingresar NUCS" class="first" id="inputMediacion"/>
         <span onclick="sendModalCarpetasNucs(23,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)"><div id="checkMediacion"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
        </div> 
 
@@ -594,7 +665,7 @@ switch ($acc) {
       <div class="col-xs-6">
        <label class="colorLetras" for="inputlg">Conciliación :</label>
        <div class="iconiput">
-        <input type="number" value="<? echo number_format($d10[0][0]); ?>" onclick="sendModalCarpetasNucs(24,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)" readonly style="cursor: pointer;" placeholder="Clic para ingresar NUCS" class="first" id="inputConciliacion"/>
+        <input type="number" value="<? echo number_format($d101[0][0]); ?>" onclick="sendModalCarpetasNucs(24,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)" readonly style="cursor: pointer;" placeholder="Clic para ingresar NUCS" class="first" id="inputConciliacion"/>
         <span onclick="sendModalCarpetasNucs(24,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)"><div id="checkConciliacion"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
        </div> 
       </div>
@@ -605,7 +676,7 @@ switch ($acc) {
       <div class="col-xs-6">
        <label class="colorLetras" for="inputlg">Criterios de Oportunidad :</label>
        <div class="iconiput">
-        <input type="number" value="<? echo number_format($d11[0][0]); ?>" onclick="sendModalCarpetasNucs(25,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)" readonly style="cursor: pointer;" placeholder="Clic para ingresar NUCS" class="first" id="inputCriteOpor"/>
+        <input type="number" value="<? echo number_format($d111[0][0]); ?>" onclick="sendModalCarpetasNucs(25,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)" readonly style="cursor: pointer;" placeholder="Clic para ingresar NUCS" class="first" id="inputCriteOpor"/>
         <span onclick="sendModalCarpetasNucs(25,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)"><div id="checkCriteOpor"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
        </div> 
 
@@ -613,7 +684,7 @@ switch ($acc) {
       <div class="col-xs-6">
        <label class="colorLetras" for="inputlg">Suspensión Condicional del Proceso :</label>
        <div class="iconiput">
-        <input type="number" value="<? echo number_format($d12[0][0]); ?>" onclick="sendModalCarpetasNucs(15,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)" readonly style="cursor: pointer;" placeholder="Clic para ingresar NUCS" class="first" id="inputSCP"/>
+        <input type="number" value="<? echo number_format($d121[0][0]); ?>" onclick="sendModalCarpetasNucs(15,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)" readonly style="cursor: pointer;" placeholder="Clic para ingresar NUCS" class="first" id="inputSCP"/>
         <span onclick="sendModalCarpetasNucs(15,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)"><div id="checkSCP"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
        </div> 
 
@@ -633,7 +704,7 @@ switch ($acc) {
      <div class="panel panel-default fd1" style="">
       <div class="panel-body">
        <h5 class="text-on-pannel"><strong> Total de Resoluciones o Determinadas </strong></h5>
-       <div id="totalResoluciones"><input class="form-control input-md redondear fdesv" id="inputResoluciones" value="<? echo number_format($totDeterminaciones); ?>" type="number" readonly=""></div>
+       <div id="totalResoluciones"><input class="form-control input-md redondear fdesv" id="inputResoluciones" value="<? echo number_format($totDeterminaciones1); ?>" type="number" readonly=""></div>
       </div>
      </div>
 
@@ -647,19 +718,19 @@ switch ($acc) {
 
        <div class="col-xs-12">
         <label class="colorLetras" for="inputlg">Canalizadas a Unidad de Atención Temprana :</label>
-        <input class="first" value="<? echo number_format($datoCar[0][3]); ?>" id="inputEnvUATP" type="number">
+        <input class="first" value="<? echo number_format($existNew2[0][2]); ?>" id="inputEnvUATP" type="number">
        </div>
        <div class="col-xs-12">
         <label class="colorLetras" for="inputlg">Canalizadas a Unidad de Investigación :</label>
-        <input class="first" value="<? echo number_format($datoCar[0][4]); ?>"  id="inputEnvUI" type="number">
+        <input class="first" value="<? echo number_format($existNew2[0][3]); ?>"  id="inputEnvUI" type="number">
        </div>
        <div class="col-xs-12">
         <label class="colorLetras" for="inputlg">Canalizadas a Imputado Desconocido :</label>
-        <input class="first"  value="<? echo number_format($datoCar[0][5]); ?>" id="inputEnvImpDesc" type="number">
+        <input class="first"  value="<? echo number_format($existNew2[0][4]); ?>" id="inputEnvImpDesc" type="number">
        </div>
        <div class="col-xs-12">
         <label class="colorLetras" for="inputlg">Trámite :</label>
-        <div id="tramiteFinal"><input class="form-control input-md redondear fdesv" id="inputTramiteFinal" value="<? echo number_format($totTramitss); ?>" type="number" readonly=""></div>
+        <div id="tramiteFinal"><input class="form-control input-md redondear fdesv" id="inputTramiteFinal" value="<? echo number_format($tramitefinal); ?>" type="number" readonly=""></div>
        </div>
 
 
@@ -747,8 +818,8 @@ switch ($acc) {
   for ($h=0; $h < sizeof($dataLasResolucion) ; $h++) { 
      # code...
    $d = $dataLasResolucion[$h][0];
-
-   if($d == 15 || $d == 25 || $d == 2 ){
+    //$d == 15 || 
+   if($d == 15 ||  $d == 25 || $d == 2 ){
     $band1 = 1; 
     break;
    }
