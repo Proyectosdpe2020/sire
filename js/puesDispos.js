@@ -3106,3 +3106,9 @@ function validateNuc(object){
 function closeModalPueDispo(){
 	$('#puestdispos').modal('hide');
 }
+
+//Validar si la fecha del evento no sea mayor a la fecha del informe
+
+function checkDateInforme(fecha){
+	alert(fecha);
+}

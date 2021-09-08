@@ -2395,4 +2395,19 @@ function getDataMedidasProteccionMP($conn, $idMp, $mes, $anio, $idUnidad){
 	if(isset($arreglo)){return $arreglo;}
 }
 
+function getIdUnidEnlaceMPunidad($conn, $idEnlace){
+
+	$query = "    SELECT idUnidad FROM mpUnidad WHERE idEnlace = $idEnlace AND idFormato = 4 ";
+
+$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['idUnidad'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
+
+
 ?>
