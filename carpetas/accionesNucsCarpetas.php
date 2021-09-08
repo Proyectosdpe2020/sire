@@ -846,7 +846,7 @@ $tramitefinal = $totaTrabvajar2 - ($totDeterminaciones1 + $enviads1);
 
     }else{
       //UNA VEZ REALIZADA LAS VALIDACIONES VERIFICAMOS SI EL ESTATUS ES UNA MEDIACION Y CHECAMOS SI EL NUC FUE MANDADO PRIMERO A LA UNIDAD DE MEDIACION
-     if($estatus == 23){
+     if($estatus == 230){
       $checkCMASC = getEstatusCMASC($conCMASC, $nuc);
       $carpetaRecibida = $checkCMASC[0][7];
       $motivoRechazo = $checkCMASC[0][9];
@@ -895,7 +895,7 @@ $tramitefinal = $totaTrabvajar2 - ($totDeterminaciones1 + $enviads1);
 
     }else{
       //UNA VEZ REALIZADA LAS VALIDACIONES VERIFICAMOS SI EL ESTATUS ES UNA MEDIACION Y CHECAMOS SI EL NUC FUE MANDADO PRIMERO A LA UNIDAD DE MEDIACION
-     if($estatus == 23){
+     if($estatus == 230){
       $checkCMASC = getEstatusCMASC($conCMASC, $nuc);
       $carpetaRecibida = $checkCMASC[0][7];
       $motivoRechazo = $checkCMASC[0][9];
@@ -935,7 +935,7 @@ $tramitefinal = $totaTrabvajar2 - ($totDeterminaciones1 + $enviads1);
   if($estatus !=  1 ){
 
  //UNA VEZ REALIZADA LAS VALIDACIONES VERIFICAMOS SI EL ESTATUS ES UNA MEDIACION Y CHECAMOS SI EL NUC FUE MANDADO PRIMERO A LA UNIDAD DE MEDIACION
-     if($estatus == 23){
+     if($estatus == 230){
       $checkCMASC = getEstatusCMASC($conCMASC, $nuc);
       $carpetaRecibida = $checkCMASC[0][7];
       $motivoRechazo = $checkCMASC[0][9];

@@ -22,10 +22,15 @@
 	$idEnlace = $enlace[0][0]; 
 	$idfisca = $enlace[0][1];	
 
-
-	$unids = getEnlaceIDlitigacion($conn, $idEnlace, 4);
+//VALIDAR PRIMERO A LOS ENLACES QUE CAPTURAN SIRE CARPETAS Y LITIGACION CON LOS MISMOS MP 
+if($idEnlace == 30 || $idEnlace == 28){
+ $unis = getIdUnidEnlaceMPunidad($conn, $idEnlace);
+}else{
+		$unids = getEnlaceIDlitigacion($conn, $idEnlace, 4);
 
 	$unis = getUnidadEnlace($conn, $unids[0][0]);
+}
+
 
 
 
