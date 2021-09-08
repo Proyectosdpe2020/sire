@@ -1636,7 +1636,7 @@ function getExistenciaAnterior($conn, $mesAnterior, $aniocaptura, $idUnidad, $id
 
 	$query = "SELECT tramite FROM Carpetas WHERE idMes = $mesAnterior AND idAnio = $aniocaptura AND idUnidad = $idUnidad AND idMp = $idMp ";
 
-		//echo $query."<br><br>";
+	
 
 	
 	$indice = 0;

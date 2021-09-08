@@ -1,5 +1,94 @@
 <? 
 
+///////////////////////////////// FUNCION GET EXISTENCIA ANTERIOR /////////////////////////////////
+///////////////////////////////// FUNCION GET EXISTENCIA ANTERIOR /////////////////////////////////
+///////////////////////////////// FUNCION GET EXISTENCIA ANTERIOR /////////////////////////////////
+
+///// La modificacion se realiza por que a partir de julio se contabilizaran nucs en ves de registros ////
+
+function getAnyExistenciaAnteriorV2($conn, $mes, $anio, $idUnidad, $idMp){
+
+
+	if ($mes == 1) {
+		$mesAnterior = 12;
+		$anioAnterior = ($anio - 1);
+		$mesAntAnt = ($mes - 2);
+	  } else {
+		$anioAnterior = $anio;
+		$mesAnterior = ($mes - 1);
+		$mesAntAnt = ($mes - 2);
+	  }
+	////// PRIMERO LLEGA EL MES Y EL AÑO Y SE ANALIZA PARA SABER DE DONDE TOMAR LOS DATOS //////////
+
+	///// si el mes del que quieren el tramite anteior es julio de 2021 o menos a esa fecha entonces la existencia anterior sera tomada de la tabla de Carpetas 
+
+	if($anioAnterior <= 2021 && $mesAnterior <= 6){
+		
+		$existenciaAnt = getExistenciaAnterior($conn, $mesAnterior, $anioAnterior, $idUnidad, $idMp);
+		return $existenciaAnt[0][0];
+
+	}else{
+
+		//////// SI EL MES ANTERIOR ES 6 SE SACA EL TRAMITE DE CARPETAS Y SE SACAN LOS NUCS PARA SABER LAS DETERMINACIONES
+		if($mesAnterior == 7 AND $anioAnterior = 2021){
+
+			$d11 = getCountNucs($conn, 1, $mesAnterior, $anioAnterior, $idUnidad, $idMp, 0);
+			$d22 = getCountNucs($conn, 22, $mesAnterior, $anioAnterior, $idUnidad, $idMp, 1);
+			$d33 = getCountNucs($conn, 22, $mesAnterior, $anioAnterior, $idUnidad, $idMp, 0);			
+			$d44 = getCountNucs($conn, 2, $mesAnterior, $anioAnterior, $idUnidad, $idMp, 0);
+			$d55 = getCountNucs($conn, 5, $mesAnterior, $anioAnterior, $idUnidad, $idMp, 0);
+			$d66 = getCountNucs($conn, 20, $mesAnterior, $anioAnterior, $idUnidad, $idMp, 0);
+			$d77 = getCountNucs($conn, 21, $mesAnterior, $anioAnterior, $idUnidad, $idMp, 0);
+			$d88 = getCountNucs($conn, 3, $mesAnterior, $anioAnterior, $idUnidad, $idMp, 0);
+			$d99 = getCountNucs($conn, 23, $mesAnterior, $anioAnterior, $idUnidad, $idMp, 0);
+			$d101 = getCountNucs($conn, 24, $mesAnterior, $anioAnterior, $idUnidad, $idMp, 0);
+			$d111 = getCountNucs($conn, 25, $mesAnterior, $anioAnterior, $idUnidad, $idMp, 0);
+			$d121 = getCountNucs($conn, 15, $mesAnterior, $anioAnterior, $idUnidad, $idMp, 0);
+
+			$existAntAnt = getExistenciaAnterior($conn, $mesAntAnt, $anioAnterior, $idUnidad, $idMp);
+			$existNew = getDataCarpetasDatosExistenciaAnteriorV2($conn, $mesAnterior, $anioAnterior, $idUnidad, $idMp);
+			$totIniciads = $existNew[0][5] +  $existNew[0][6];
+			$totaTrabvajar2 = $existAntAnt  + $existNew[0][0] + $d11[0][0] + $existNew[0][1] ;
+			$totDeterminaciones10 = $d22[0][0] + $d33[0][0] + $d44[0][0] + $d55[0][0] + $d66[0][0] + $d77[0][0] + $d88[0][0] + $d99[0][0] + $d101[0][0] + $d111[0][0] + $d121[0][0];
+			$enviads10 = $existNew[0][2] + $existNew[0][3] + $existNew[0][4];
+
+			$tramitefinal = $totaTrabvajar2 - ($totDeterminaciones10 + $enviads10);
+			return $tramitefinal;
+
+		}else{
+
+
+
+		}
+
+	}
+
+	$query = "  SELECT iniciadasConDetenido, iniciadasSinDetenido, totalIniciadas,recibidasPorOtraUnidad, enviadasUATP, enviadasUI, enviImpDes FROM carpetasDatos WHERE idAnio = $aniocaptura AND idMes = $mesAnterior AND idUnidad = $idUnidad AND idMp = $idMp ";
+
+	
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['totalIniciadas'];
+		$arreglo[$indice][1]=$row['recibidasPorOtraUnidad'];
+		$arreglo[$indice][2]=$row['enviadasUATP'];
+		$arreglo[$indice][3]=$row['enviadasUI'];
+		$arreglo[$indice][4]=$row['enviImpDes'];
+		$arreglo[$indice][5]=$row['iniciadasConDetenido'];
+		$arreglo[$indice][6]=$row['iniciadasSinDetenido'];
+		$indice++;
+	}
+	//if(isset($arreglo)){return $arreglo;}
+}
+
+
+///////////////////////////////// FUNCION GET EXISTENCIA ANTERIOR /////////////////////////////////
+///////////////////////////////// FUNCION GET EXISTENCIA ANTERIOR /////////////////////////////////
+///////////////////////////////// FUNCION GET EXISTENCIA ANTERIOR /////////////////////////////////
+
+
+
 function getLastResolJudicializateCarpet($conn, $carpetaId){
 
 	$query = "SELECT top 1  nuc, idEstatusNucsCarpetas, fecha, idCarpeta, idEstatus, ec.nombre as estatusCar, ec.EstatusID, estatusNucsCarpetas.mes, estatusNucsCarpetas.anio, estatusNucsCarpetas.idUnidad,
@@ -11,7 +100,7 @@ function getLastResolJudicializateCarpet($conn, $carpetaId){
 	INNER JOIN mp ON mp.idMp = estatusNucsCarpetas.idMp
 	WHERE idCarpeta = $carpetaId AND idEstatus = 22 ORDER BY fecha DESC ";
 
-	
+
 
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
