@@ -199,6 +199,7 @@ if (isset($_POST["estatResolucion"])){ $estatResolucion = $_POST["estatResolucio
 		break;
 		case 66:
 		case 67:
+		case 154:
   	$queryTransaction = "BEGIN                     
 										                    BEGIN TRY 
 										                      BEGIN TRANSACTION

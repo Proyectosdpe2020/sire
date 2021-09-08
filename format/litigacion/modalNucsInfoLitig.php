@@ -712,7 +712,7 @@
  <? } ?>
  <!-- En caso de acuerdos reparatorios, ¿tipo de acuerdos reparatorios? :-->
 
- <? if($estatus == 14 || $estatus == 66 ||$estatus == 67 ){ 
+ <? if($estatus == 154 || $estatus == 66 ||$estatus == 67 || $estatus == 14){ 
  	if($estatus == 14){ //Para poder hacer consulta en caso de que el estatus sea 14 ya que esta se recibe en la tabla de resoluciones de la BD Prueba
  	if($idResolMP == 0){
  		$getData = getDataSentencias($conn,  'null', $estatus); 
