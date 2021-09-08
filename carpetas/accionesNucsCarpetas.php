@@ -818,8 +818,8 @@ $tramitefinal = $totaTrabvajar2 - ($totDeterminaciones1 + $enviads1);
   for ($h=0; $h < sizeof($dataLasResolucion) ; $h++) { 
      # code...
    $d = $dataLasResolucion[$h][0];
-
-   if($d == 15 || $d == 25 || $d == 2 ){
+    //$d == 15 || 
+   if($d == 15 ||  $d == 25 || $d == 2 ){
     $band1 = 1; 
     break;
    }
