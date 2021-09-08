@@ -3106,3 +3106,7 @@ function validateNuc(object){
 function closeModalPueDispo(){
 	$('#puestdispos').modal('hide');
 }
+
+function checkDateInforme(fecha){
+	alert(fecha);
+}

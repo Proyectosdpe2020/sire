@@ -67,13 +67,19 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 } else {
 
 	if ($idEnlace != 0) {
-
-		$unienla = getIdUnidEnlace($conn, $idEnlace);
-		$idUnidEnlac = $unienla[0][0];
+		//VALIDAR PRIMERO A LOS ENLACES QUE CAPTURAN SIRE CARPETAS Y LITIGACION CON LOS MISMOS MP 
+		if( ($idEnlace == 30 || $idEnlace == 28 )&& $format == 4){
+			$unienla = getIdUnidEnlaceMPunidad($conn, $idEnlace);
+		 $idUnidEnlac = $unienla[0][0];
+		}else{
+				$unienla = getIdUnidEnlace($conn, $idEnlace);
+		  $idUnidEnlac = $unienla[0][0];
+		}
 	} else {
 		$idUnidEnlac = 0;
 	}
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
