@@ -30,6 +30,8 @@
 							$enlace = getInfoEnlaceUsuario($conn, $idUsuario);
 	      $idfisca = $enlace[0][1];	
 
+	      $validateMonthCap = validateMonthCapture($messelected, $anio);
+
 			?>
 
 				
@@ -45,15 +47,17 @@
 																										<td> <center><? echo $dataPuestasDia[$h][4]->format('Y-m-d H:i'); ?></center></td>
 																										<td> <center><? echo $dataPuestasDia[$h][5]; ?></center> </td>
 																										<td> <center><? echo $dataPuestasDia[$h][6]; ?></center> </td>
-																										<td> <? echo $dataPuestasDia[$h][7]; ?> </td>
+																										<td> <? echo $validateMonthCap; ?> </td>
 																										<td> <? echo $dataPuestasDia[$h][8]; ?> </td>
 																										<td> <center><? echo $dataPuestasDia[$h][9]; ?></center> </td>
 																										<td> <center><? echo $dataPuestasDia[$h][10]; ?></center> </td>
 																										<?if($tiparchiv == 12){ ?>
 																											<td><center><label class="glyphicon glyphicon-search" data-toggle="modal" href="#puestdispos" onclick="showmodalPueDispo(1, <? echo $idEnlace; ?>, <? echo $dataPuestasDia[$h][0]; ?>, <? echo 	$tiparchiv; ?>, 1)" style="width: 95%; cursor: pointer; font-weight: bold; color: green;"> Ver <? /*if($a == 1){echo "Revisar";}else{ echo "Editar"; }*/ ?></label></center></td>
-																										<? }else{ ?>
-																										<td><center><label class="glyphicon glyphicon-edit" data-toggle="modal" href="#puestdispos" onclick="showmodalPueDispo(1, <? echo $idEnlace; ?>, <? echo $dataPuestasDia[$h][0]; ?>, <? echo 	$tiparchiv; ?>, 1)" style="width: 95%; cursor: pointer; font-weight: bold; color: green;">Editar<? /*if($a == 1){echo "Revisar";}else{ echo "Editar"; }*/ ?></label></center></td>
-																									<? } ?>
+																										<? }else{ if($validateMonthCap == "SI"){ ?>
+																										<td><center><label class="glyphicon glyphicon-edit" data-toggle="modal" href="#puestdispos" onclick="showmodalPueDispo(1, <? echo $idEnlace; ?>, <? echo $dataPuestasDia[$h][0]; ?>, <? echo 	$tiparchiv; ?>, 1)" style="width: 95%; cursor: pointer; font-weight: bold; color: green;">Editar<? /*if($a == 1){echo "Revisar";}else{ echo "Editar"; }*/ ?></label></center></td><? }elseif($validateMonthCap == "NO"){ ?>
+																											<td><center><label class="glyphicon glyphicon-edit" data-toggle="modal" href="#puestdispos" onclick="showmodalPueDispo(1, <? echo $idEnlace; ?>, <? echo $dataPuestasDia[$h][0]; ?>, <? echo 	$tiparchiv; ?>, 0)" style="width: 95%; cursor: pointer; font-weight: bold; color: green;">Ver<? /*if($a == 1){echo "Revisar";}else{ echo "Editar"; }*/ ?></label></center></td>
+																									<? } 
+																								  }?>
 																									</tr>
 																									<?		/// METHOD SHOWMODALPUEDISPO TYPECHECK IS 1 BEACAUSE ALWAYS CAN BE CAPTURED EVERYDAY AND $a = 0 here and it´s changed to 1 Editar
 																							}															

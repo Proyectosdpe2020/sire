@@ -1305,6 +1305,52 @@ function getDataAnio(){
 	return $arreglo;
 }
 
+function getMesCapEnlacePolicia($conn, $idEnlace, $idFormato){
+
+		$query = " SELECT idAnio, mesCap, enviado, enviadoArchivo FROM pueDisposi.enlaceMesValidaEnviado WHERE idEnlace = $idEnlace AND idFormato = $idFormato ";
+		//echo $query;
+
+ $indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))	
+	{
+		$arreglo[$indice][0]=$row['idAnio'];
+		$arreglo[$indice][1]=$row['mesCap'];
+		$arreglo[$indice][2]=$row['enviado'];
+		$arreglo[$indice][3]=$row['enviadoArchivo'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}	
+
+}
+
+//Funcion para validar fecha de captura
+function validateMonthCapture($mesSelected, $anioSelected){
+	$diamesActual= date("d");
+	$mesActual = date("m");
+	$anioActual = date("Y");
+	$daysToSendData = array(1,2,3); //Podra 
+
+	$valida[0][0] = "NO"; //SIN EDITAR
+	$valida[0][1] = "SI"; //PERMITE EDITAR
+
+	if($mesActual == $mesSelected && $anioActual == $anioSelected){
+			if(in_array($diamesActual, $daysToSendData)){
+				return $valida[0][1];
+			}else{
+				return $valida[0][1];
+			}
+	}else{
+		if(in_array($diamesActual, $daysToSendData)){
+			return $valida[0][1];
+		}else{
+			return $valida[0][0];
+		}
+	}
+
+}
+
+
 
 ?>
 

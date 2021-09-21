@@ -76,7 +76,7 @@
 
  			<div class="row"><!-- ROOWWWWWW MANDOS  -->
  				<div class="col-xs-12 col-sm-12  col-md-4">
- 					<label for="heard">Selecciona Mando : <span class="aste">(Requerido)</span></label><br>	
+ 					<label for="heard">Selecciona Agente : <span class="aste">(Requerido)</span></label><br>	
  					<select class="dataAutocomplet form-control browser-default custom-select" onchange="getData()" id="newBrwosers_id" locked="locked" name="newBrwoser" type="text" <? if($b == 0){ echo "readonly"; } ?> >
  						<option></option>
  						<? $mandos = getDataMandos($conn, "VI");
@@ -111,7 +111,7 @@
  			<div class="col-xs-12 col-sm-12  col-md-2">
  				<label for="heard">Fecha Evento :</label><span class="aste"> (Requerido)</span>
  				<div >
- 					<input id="fechaevento" type="datetime-local" value="<? if($a == 1){  echo 	$fechaev=str_ireplace(' ','T',$fechaev); } ?>" name="fechaevento" class="fechas form-control gehit" <? if($b == 0){ echo "readonly"; } ?> />	
+ 					<input id="fechaevento" type="datetime-local" value="<? if($a == 1){  echo 	$fechaev=str_ireplace(' ','T',$fechaev); } ?>" name="fechaevento" class="fechas form-control gehit" min="2021-09-01T00:00:00" max="2021-09-15T23:59:59" onchange="checkDateInforme('<?echo $fecha; ?>');" <? if($b == 0){ echo "readonly"; } ?> />	
  				</div>
  			</div>
  			<div class="col-xs-12 col-sm-12  col-md-2">
@@ -809,9 +809,9 @@
 
 									<?if($typeArch == 12){ ?>
 										<div class="col-xs-12 col-sm-12 col-md-12"><center><button  style="width: 95%; background-color: #38537e; font-weight: bolder; color: white;" onclick="closeModalPueDispo()" type="button" class="btn redondear" data-dismiss="modal">Salir</button></center></div>
-									<? }else{ ?>
-												<div class="col-xs-12 col-sm-12 col-md-12"><center><button  style="width: 95%; background-color: #38537e; font-weight: bolder; color: white;" onclick="saveDataPuesta( <? echo $typeArch; ?>, <? echo $anio ?>, <? echo $idEnlace; ?>, 0, <? echo $messelected; ?>, <? echo $diaselected ?>, <? echo $typeCheck; ?> )" type="button" class="btn redondear" data-dismiss="modal">Salir y Guardar Edición</button></center></div>
-									<? } ?>
+									<? }else{ if($b == 0){?>
+												<div class="col-xs-12 col-sm-12 col-md-12"><center><button  style="width: 95%; background-color: #38537e; font-weight: bolder; color: white;" onclick="closeModalPueDispo()" type="button" class="btn redondear" data-dismiss="modal">Salir</button></center></div>
+									<? }else{?> <div class="col-xs-12 col-sm-12 col-md-12"><center><button  style="width: 95%; background-color: #38537e; font-weight: bolder; color: white;" onclick="saveDataPuesta( <? echo $typeArch; ?>, <? echo $anio ?>, <? echo $idEnlace; ?>, 0, <? echo $messelected; ?>, <? echo $diaselected ?>, <? echo $typeCheck; ?> )" type="button" class="btn redondear" data-dismiss="modal">Salir y Guardar Edición</button></center></div> <? } }?>
 												  
 										</div> 
 

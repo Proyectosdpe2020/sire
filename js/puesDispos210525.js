@@ -3108,5 +3108,9 @@ function closeModalPueDispo(){
 }
 
 function checkDateInforme(fecha){
-	alert(fecha);
+	var fechaEvento = document.getElementById("fechaevento").value; 
+	if(Date.parse(fecha) < Date.parse(fechaEvento)){
+		swal("", "La fecha del evento no puede ser mayor a la fecha del informe.", "warning");	
+		document.getElementById("fechaevento").value = ''; 
+	}
 }
