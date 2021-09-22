@@ -34,6 +34,7 @@
 		    $getIDCalibre = $arreglo[0][9];
 		    $getIDAccesorios = $arreglo[0][10];
 		    $getIDMarcaCartuchos = $arreglo[0][11];
+		    $matricula = $arreglo[0][12];
 		 }else{ 
 		 	//Si $idArma viene con valor 0 no es actualizacion y entra aqui
 		 	$a = 0;
@@ -120,7 +121,11 @@
 																	    </div>
 																	  </div>
 																	  	<div class="form-row">
-																	  		<div class="form-group col-md-6">
+																	  		 <div class="form-group col-md-4">
+																	      <label for="textMatricula">Matricula<span class="aste">(*)</span></label>
+																	      <input value="<?php if($a == 1){ echo $matricula; } ?>" type="text" class="form-control" id="textMatricula" name="textMatricula">
+																	    </div>
+																	  		<div class="form-group col-md-4">
 																	      	<label for="textCatAccesorioArma">Accesorios asegurados:</label>
 																	      	<select class="dataAutocomplet form-control mandda" onchange="getData()" locked="locked" id="textCatAccesorioArma" name="textCatAccesorioArma" type="text">
 																		    		<option></option>
@@ -132,7 +137,7 @@
 																	       <?php } ?>
 																		    	</select>	
 																	    </div>
-																	     <div class="form-group col-md-6">
+																	     <div class="form-group col-md-4">
 																	      	<label for="textCatMarcaCartuchos">Marca de cartuchos:</label>
 																	      	<select class="dataAutocomplet form-control mandda" onchange="getData()" locked="locked" id="textCatMarcaCartuchos" name="textCatMarcaCartuchos" type="text">
 																		    		<option></option>

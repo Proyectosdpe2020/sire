@@ -6,6 +6,10 @@
 				$fecha_actual=date("d/m/Y");
 				$fecha=strftime( "%Y-%m-%d %H:%M:%S", time() );
 
+				$hoy = date("Y-m-d");//Fecha calendario
+				$m = date("m");
+				$anioActual = date("Y");
+
 				if (isset($_POST["tipoModal"])){ $tipoModal = $_POST["tipoModal"]; }
 					if (isset($_POST["idEnlace"])){ $idEnlace = $_POST["idEnlace"]; }
 					if (isset($_POST["typeArch"])){ $typeArch = $_POST["typeArch"]; }
@@ -111,7 +115,7 @@
  			<div class="col-xs-12 col-sm-12  col-md-2">
  				<label for="heard">Fecha Evento :</label><span class="aste"> (Requerido)</span>
  				<div >
- 					<input id="fechaevento" type="datetime-local" value="<? if($a == 1){  echo 	$fechaev=str_ireplace(' ','T',$fechaev); } ?>" name="fechaevento" class="fechas form-control gehit" min="2021-09-01T00:00:00" max="2021-09-15T23:59:59" onchange="checkDateInforme('<?echo $fecha; ?>');" <? if($b == 0){ echo "readonly"; } ?> />	
+ 					<input id="fechaevento" type="datetime-local" value="<? if($a == 1){  echo 	$fechaev=str_ireplace(' ','T',$fechaev); } ?>" name="fechaevento" class="fechas form-control gehit" min="<?echo $anioActual; ?>-<?echo $m; ?>-01T00:00:00" max="<?echo $hoy; ?>T23:59:59" onchange="checkDateInforme('<?echo $fecha; ?>');" <? if($b == 0){ echo "readonly"; } ?> />	
  				</div>
  			</div>
  			<div class="col-xs-12 col-sm-12  col-md-2">
@@ -268,8 +272,6 @@
 																																																						      <th scope="col">Edad</th>
 																																																						      <th scope="col">Sexo</th>
 																																																						      <th scope="col">Organización Criminal</th>
-																																																						    
-																																																						      <th scope="col">Fecha Detención</th>
 																																																						      
 																																																						      <? if($b == 1){ ?>
 																																																						      <th scope="col"><center>Accion</center></th>
@@ -289,7 +291,6 @@
 																																																							<td> <? echo $dataPuestaPersonas[$h][3]; ?> </td>
 																																																							<td> <? echo $dataPuestaPersonas[$h][4]; ?> </td>
 																																																							<td> <? echo $dataPuestaPersonas[$h][5]; ?> </td>
-																																																							<td> <? echo $dataPuestaPersonas[$h][11]; ?> </td>
 
 																																																							<? if($b == 1){ ?>
 																																																							<td> <center><span onclick="deleteItemForm(1, <? echo $dataPuestaPersonas[$h][0]; ?>, <? echo $idEnlace; ?>, <? echo $idPuestaDisposicion; ?>)" title="Eliminar" style="cursor: pointer; color: red; font-size: 18px;" class="glyphicon glyphicon-trash"></span> </center></td>
@@ -553,7 +554,6 @@
 																																																						      <th scope="col">#</th>
 																																																						      <th scope="col">Producto Forestal</th>
 																																																						      <th scope="col"><center>Volumen</center></th>
-																																																						      <th scope="col"><center>Semovientes</center></th>
 																																																						      <th scope="col"><center>Observaciones</center></th>
 																																																						        <? if($b == 1){ ?>
 																																																						      <th scope="col"><center>Accion</center></th>
@@ -569,7 +569,6 @@
 																																																							<td> <? echo ($h+1) ?> </td>
 																																																							<td> <? echo $dataPuestaForesta[$h][1]; ?> </td>
 																																																							<td> <center><? echo $dataPuestaForesta[$h][2]; ?></center> </td>
-																																																							<td> <center><? echo $dataPuestaForesta[$h][3]; ?></center> </td>
 																																																							<td> <center><? echo $dataPuestaForesta[$h][4]; ?></center> </td>
 
 																																																							<? if($b == 1){ ?>

@@ -143,7 +143,7 @@
 																																	</select>
 																				      					</div>
 																				      							<div class="col-xs-12 col-sm-12  col-md-4">
-																				      								<label class="" for="inputlg">AVPP / NUC / Carpeta :</label>
+																				      								<label class="" for="inputlg">AVPP / NUC :</label>
 			    																													<input value="<?php if($a == 1){ echo $avppcarpeta; } ?>" class="form-control input-md redondear " id="nucVehiculo" type="text"  >
 																				      					</div>
 																				      </div>
