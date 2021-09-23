@@ -144,7 +144,7 @@
 					</div>
 
 					<div class="col-xs-6 col-sm-4  col-md-6">
-						<label for="heard">Mando:</label><br>
+						<label for="heard">Agente:</label><br>
 						<select id="mesCmasc" name="selMes" tabindex="6"class="form-control redondear selectTranparent" required>
 							<option value="" >  Todos </option>
 						</select>
@@ -168,7 +168,7 @@
 				<thead>
 					<tr class="cabeceraConsultaPolicia">
 						<th class="textCent">ID</th>
-													<th class="textCent10">Mando</th>
+													<th class="textCent10">Agente</th>
 													<?if($tiparchiv == 12 && ($idEnlace != 266 && $idEnlace != 233 && $idEnlace != 225)){ ?>
 													<th class="textCent10">Capturista</th>
 												<? } ?>
@@ -208,7 +208,7 @@
 																										<td> <? echo $dataPuestasDia[$h][8]; ?> </td>
 																										<td> <center><? echo $dataPuestasDia[$h][9]; ?></center> </td>
 																										<td> <center><? echo $dataPuestasDia[$h][10]; ?></center> </td>
-																										<td><center><label class="glyphicon glyphicon-search" data-toggle="modal" href="#puestdispos" onclick="showmodalPueDispo(1, <? echo $idEnlace; ?>, <? echo $dataPuestasDia[$h][0]; ?>, <? echo 	$tiparchiv; ?>, 1)" style="width: 95%; cursor: pointer; font-weight: bold; color: green;">  Ver </label></center></td></tr>
+																										<td><center><label class="glyphicon glyphicon-search" data-toggle="modal" href="#puestdispos" onclick="showmodalPueDispo(1, <? echo $idEnlace; ?>, <? echo $dataPuestasDia[$h][0]; ?>, <? echo 	$tiparchiv; ?>, 1)" style="width: 95%; cursor: pointer; font-weight: bold; color: green;">  Editar </label></center></td></tr>
 																									<?		
 
 																							}																			

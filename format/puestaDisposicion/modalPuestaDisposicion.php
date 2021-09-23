@@ -806,7 +806,7 @@
 
 										<div class="row">
 
-									<?if($typeArch == 12){ ?>
+									<?if($typeArch == 12 && ($idEnlace != 266 && $idEnlace != 233 && $idEnlace != 225) ){ ?>
 										<div class="col-xs-12 col-sm-12 col-md-12"><center><button  style="width: 95%; background-color: #38537e; font-weight: bolder; color: white;" onclick="closeModalPueDispo()" type="button" class="btn redondear" data-dismiss="modal">Salir</button></center></div>
 									<? }else{ if($b == 0){?>
 												<div class="col-xs-12 col-sm-12 col-md-12"><center><button  style="width: 95%; background-color: #38537e; font-weight: bolder; color: white;" onclick="closeModalPueDispo()" type="button" class="btn redondear" data-dismiss="modal">Salir</button></center></div>

@@ -3110,12 +3110,29 @@ function checkDateInforme(fecha){
 	}
 }
 
+//Funcion para validar cuando el tipo de automovil es un remolque, accesorio o agroindustriales no se requerira ingresar marca
 function checkClasificacion(){
 	var selClasific = document.getElementById("selClasific").value; 
+	var flag = 0;
 	if(selClasific == 5 || selClasific == 6 || selClasific == 7 ){
-		//	document.getElementById("newMarca").options.item(1).selected = 'selected';
-			//document.getElementById("newMarca").value = ''; 
 			$("#newMarca").select2();
 	 	$('#newMarca').val('141').trigger('change.select2');
+	 	$("#newMarca").prop("disabled", true);
+	 	$("#newLinea").select2();
+	 	$('#newLinea').val('945').trigger('change.select2');
+	 	$("#newLinea").prop("disabled", true);
+	 	$("#newTypeMarca").select2();
+	 	$('#newTypeMarca').val('130').trigger('change.select2');
+	 	$("#newTypeMarca").prop("disabled", true);
+	 	flag = 1;
+	}else{
+		if($('#newMarca').is(':disabled')){
+    $("#newMarca").select2();
+				$("#newMarca").prop("disabled", false);
+				$('#newMarca').val('1').trigger('change.select2');
+				$("#newLinea").prop("disabled", false);
+				$("#newTypeMarca").prop("disabled", false);
+				$('#newTypeMarca').val('1').trigger('change.select2');
+			}
 	}
 }
