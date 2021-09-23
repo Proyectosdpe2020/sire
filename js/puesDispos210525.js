@@ -3109,3 +3109,13 @@ function checkDateInforme(fecha){
 		document.getElementById("fechaevento").value = ''; 
 	}
 }
+
+function checkClasificacion(){
+	var selClasific = document.getElementById("selClasific").value; 
+	if(selClasific == 5 || selClasific == 6 || selClasific == 7 ){
+		//	document.getElementById("newMarca").options.item(1).selected = 'selected';
+			//document.getElementById("newMarca").value = ''; 
+			$("#newMarca").select2();
+	 	$('#newMarca').val('141').trigger('change.select2');
+	}
+}

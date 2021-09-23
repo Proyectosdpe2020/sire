@@ -136,7 +136,7 @@ if (isset($_POST['idArma'])){ $idArma = $_POST['idArma']; }
                             SET NOCOUNT ON    
 
                                               
-                                          INSERT INTO pueDisposi.aseguramientoArmas (idPueDisposicion , idTipoArma , idMarcaArma , idCalibre , idAccesorios , idMarcaCartuchos , textMatricula, matricula, observaciones) 
+                                          INSERT INTO pueDisposi.aseguramientoArmas (idPueDisposicion , idTipoArma , idMarcaArma , idCalibre , idAccesorios , idMarcaCartuchos ,  matricula, observaciones) 
                                          VALUES($idPuestaDisposicion , $getTextCatTipoArma_id , $getTextCatMarcaArma_id , $getTextCatCalibre_id ,  $getTextCatAccesorioArma_id , $getTextCatMarcaCartuchos_id , '$getTextMatricula', '$getTextObservaciones')
 
 

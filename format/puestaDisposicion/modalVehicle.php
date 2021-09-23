@@ -114,7 +114,7 @@
 																				      <div class="row">																				      	
 																				      					<div class="col-xs-12 col-sm-12  col-md-4">
 																				      							<label class="" for="inputlg">Clasificación :<span class="aste">(*)</span></label>
-			    																											<select class="dataAutocomplet form-control browser-default custom-select " id="selClasific" locked="locked" >		
+			    																											<select class="dataAutocomplet form-control browser-default custom-select " id="selClasific" locked="locked" onchange="checkClasificacion()" >		
 			    																												<option></option>																								  
 																																	  		<? 
 																																						$clasif = getClasificacionVehicle($conn);
