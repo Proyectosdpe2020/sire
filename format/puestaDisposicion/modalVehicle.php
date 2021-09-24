@@ -215,7 +215,7 @@
 																				      	
 																				      					<div class="col-xs-12 col-sm-12  col-md-4">
 																				      						<label for="heard">Marca : <span class="aste">(*)</span></label>
-																				      							<select class="dataAutocomplet form-control mandda" onchange="getDataLinea()" locked="locked" id="newMarca" name="newMarca" type="text" >
+																				      							<select <?if($idClas == 5 || $idClas == 6 || $idClas == 7){ ?> disabled="disabled" <? } ?> class="dataAutocomplet form-control mandda" onchange="getDataLinea()" locked="locked" id="newMarca" name="newMarca" type="text" >
 																				      								<option></option>
 																				      									<? 
 																																						$marcas = getDataMarcaVehicle($conn);
