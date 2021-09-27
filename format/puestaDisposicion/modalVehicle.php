@@ -71,7 +71,7 @@
 		 }
 		}
 
-		
+		$idClasValida = 0;
    
 
 	?>
@@ -121,7 +121,7 @@
 																																						for ($f=0; $f < sizeof($clasif); $f++) { 					
 
 																																									$idClas = $clasif[$f][0];	$nombre = $clasif[$f][1];	?>
-																																											<option style="color: black; font-weight: bold;" value="<? echo $idClas; ?>" <?php if($a == 1 && $clasificacion == $nombre ){?> selected <?php } ?> ><? echo $nombre; ?></option>
+																																											<option style="color: black; font-weight: bold;" value="<? echo $idClas; ?>" <?php if($a == 1 && $clasificacion == $nombre ){$idClasValida = 	$idClas; ?> selected <?php } ?> ><? echo $nombre; ?></option>
 																																									<?
 																																						}
 																																			 ?>
@@ -214,8 +214,8 @@
 																				      <div class="row">
 																				      	
 																				      					<div class="col-xs-12 col-sm-12  col-md-4">
-																				      						<label for="heard">Marca : <span class="aste">(*)</span></label>
-																				      							<select <?if($idClas == 5 || $idClas == 6 || $idClas == 7){ ?> disabled="disabled" <? } ?> class="dataAutocomplet form-control mandda" onchange="getDataLinea()" locked="locked" id="newMarca" name="newMarca" type="text" >
+																				      						<label for="heard">Marca :<span class="aste">(*)</span></label>
+																				      							<select <?if($idClasValida == 5 || $idClasValida == 6 || $idClasValida == 7){ ?> disabled="disabled" <? } ?> class="dataAutocomplet form-control mandda" onchange="getDataLinea()" locked="locked" id="newMarca" name="newMarca" type="text" >
 																				      								<option></option>
 																				      									<? 
 																																						$marcas = getDataMarcaVehicle($conn);
@@ -229,7 +229,7 @@
 																				      					</div>
 																				      					<div class="col-xs-12 col-sm-12  col-md-4">
 																				      						<label for="heard">Linea : <span class="aste">(*)</span></label>	
-																				      						<select class="dataAutocomplet form-control mandda" onchange="" locked="locked" id="newLinea" name="newLinea" type="text" >
+																				      						<select  <?if($idClasValida == 5 || $idClasValida == 6 || $idClasValida == 7){ ?> disabled="disabled" <? } ?> class="dataAutocomplet form-control mandda" onchange="" locked="locked" id="newLinea" name="newLinea" type="text" >
 																				      							<?if($a == 1){?>
 																				      								<option></option>
 																				      									<? 
@@ -247,7 +247,7 @@
 																				      					</div>
 																				      						<div class="col-xs-12 col-sm-12  col-md-4">
 																				      							<label for="heard">Tipo : <span class="aste">(*)</span></label>	
-																				      							<select class="dataAutocomplet form-control mandda" onchange="" locked="locked" id="newTypeMarca" name="newTypeMarca" type="text" >
+																				      							<select  <?if($idClasValida == 5 || $idClasValida == 6 || $idClasValida == 7){ ?> disabled="disabled" <? } ?> class="dataAutocomplet form-control mandda" onchange="" locked="locked" id="newTypeMarca" name="newTypeMarca" type="text" >
 																				      								<option></option>
 																				      								<? 
 																																						$types = getDataTypeVehicle($conn);
