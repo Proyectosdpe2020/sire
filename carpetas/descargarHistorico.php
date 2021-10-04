@@ -401,11 +401,6 @@ $Inicio = "11";
 									////////////// SI EL MES ES 7 /////////////////////////
 									////////////// SI EL MES ES 7 /////////////////////////
 
-
-									
-
-
-
 									$d11 = getCountNucs($conn, 1, 7, $anio, $datazx[$i][7], $datazx[$i][8], 0);
 									
 									$d21 = getCountNucs($conn, 22, 7, $anio, $datazx[$i][7], $datazx[$i][8], 1);
@@ -468,31 +463,65 @@ $Inicio = "11";
 										
 								$totTramiteAgosto = $totaTrabAgo - $enviaddetermnsAgo;
 
+								////////////// SI EL MES ES 8 /////////////////////////
+								////////////// SI EL MES ES 8 /////////////////////////
+								////////////// SI EL MES ES 8 /////////////////////////
+
+										////////////// SI EL MES ES 9 /////////////////////////
+								////////////// SI EL MES ES 9 /////////////////////////
+								////////////// SI EL MES ES 9 /////////////////////////
+
+								$dd1 = getCountNucs($conn, 1, 9, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								
+								$dd2 = getCountNucs($conn, 22, 9, $anio, $datazx[$i][7], $datazx[$i][8], 1);
+								$dd3 = getCountNucs($conn, 22, 9, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								
+								$dd4 = getCountNucs($conn, 2, 9, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$dd5 = getCountNucs($conn, 5, 9, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$dd6 = getCountNucs($conn, 20, 9, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$dd7 = getCountNucs($conn, 21, 9, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$dd8 = getCountNucs($conn, 3, 9, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$dd9= getCountNucs($conn, 23, 9, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$dd10 = getCountNucs($conn, 24, 9, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$dd11 = getCountNucs($conn, 25, 9, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$dd12 = getCountNucs($conn, 15, 9, $anio, $datazx[$i][7], $datazx[$i][8], 0);	
+
+								$existNewSep = getDataCarpetasDatosExistenciaAnteriorV2($conn, 9, $anio, $datazx[$i][7], $datazx[$i][8]);
+									
+									$totaTrabSep = $totTramiteAgosto + $existNewSep[0][0] + $dd1[0][0] + $existNewSep[0][1] ;
+									$totDeterminacionesSep = $dd2[0][0] + $dd3[0][0] + $dd4[0][0] + $dd5[0][0] + $dd6[0][0] + $dd7[0][0] + $dd8[0][0] + $dd9[0][0] + $dd10[0][0] + $dd11[0][0] + $dd12[0][0];
+							
+									$enviadsSep = $existNewSep[0][2] + $existNewSep[0][3] + $existNewSep[0][4];
+									$enviaddetermnsSep = $enviadsSep + $totDeterminacionesSep;
+										
+								$totTramiteSepiembre = $totaTrabSep - $enviaddetermnsSep;
+
+								////////////// SI EL MES ES 9 /////////////////////////
+								////////////// SI EL MES ES 9 /////////////////////////
+								////////////// SI EL MES ES 9 /////////////////////////
+
 							if($mes == 7){ 
 
-											
-											$tramAnterior =  $exiAntJulio[0][0] ;
-
-											$de11 = getCountNucs($conn, 1, 7, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$ddd1 = getCountNucs($conn, 1, 7, $anio, $datazx[$i][7], $datazx[$i][8], 0);
 								
-											$de21 = getCountNucs($conn, 22, 7, $anio, $datazx[$i][7], $datazx[$i][8], 1);
-											$de31 = getCountNucs($conn, 22, 7, $anio, $datazx[$i][7], $datazx[$i][8], 0);
-											
-											$de41 = getCountNucs($conn, 2, 7, $anio, $datazx[$i][7], $datazx[$i][8], 0);
-											$de51 = getCountNucs($conn, 5, 7, $anio, $datazx[$i][7], $datazx[$i][8], 0);
-											$de61 = getCountNucs($conn, 20, 7, $anio, $datazx[$i1][7], $datazx[$i][8], 0);
-											$de71 = getCountNucs($conn, 21, 7, $anio, $datazx[$i][7], $datazx[$i][8], 0);
-											$de81 = getCountNucs($conn, 3, 7, $anio, $datazx[$i][7], $datazx[$i][8], 0);
-											$de91= getCountNucs($conn, 23, 7, $anio, $datazx[$i][7], $datazx[$i][8], 0);
-											$de101 = getCountNucs($conn, 24, 7, $anio, $datazx[$i][7], $datazx[$i][8], 0);
-											$de111 = getCountNucs($conn, 25, 7, $anio, $datazx[$i][7], $datazx[$i][8], 0);
-											$de121 = getCountNucs($conn, 15, 7, $anio, $datazx[$i][7], $datazx[$i][8], 0);	
+								$ddd2 = getCountNucs($conn, 22, 7, $anio, $datazx[$i][7], $datazx[$i][8], 1);
+								$ddd3 = getCountNucs($conn, 22, 7, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								
+								$ddd4 = getCountNucs($conn, 2, 7, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$ddd5 = getCountNucs($conn, 5, 7, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$ddd6 = getCountNucs($conn, 20, 7, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$ddd7 = getCountNucs($conn, 21, 7, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$ddd8 = getCountNucs($conn, 3, 7, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$ddd9= getCountNucs($conn, 23, 7, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$ddd10 = getCountNucs($conn, 24, 7, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$ddd11 = getCountNucs($conn, 25, 7, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$ddd12 = getCountNucs($conn, 15, 7, $anio, $datazx[$i][7], $datazx[$i][8], 0);				
 
-											
+											$tramAnterior =  $exiAntJulio[0][0] ;																
 											$iniciadas = $existNewJulio[0][0];
 											$recibidas = $existNewJulio[0][1];
 											$totalTrabajar = $totaTrabJulio;
-											$judicializadas = $de21[0][0] + $de31[0][0];
+											$judicializadas = $d21[0][0] + $d31[0][0];
 											$totResoluciones = $totDeterminacionesJulio;
 											$enviUATP = $existNewJulio[0][2];
 											$enviUI = $existNewJulio[0][3];
@@ -501,32 +530,30 @@ $Inicio = "11";
 											$tramiteFinls = 	$totTramiteJulio;  
 										
 										}
-							if($mes == 8){ 
-									
+							if($mes == 8){ 								
 								
+
+								$ddd1 = getCountNucs($conn, 1, 8, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								
+								$ddd2 = getCountNucs($conn, 22, 8, $anio, $datazx[$i][7], $datazx[$i][8], 1);
+								$ddd3 = getCountNucs($conn, 22, 8, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								
+								$ddd4 = getCountNucs($conn, 2, 8, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$ddd5 = getCountNucs($conn, 5, 8, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$ddd6 = getCountNucs($conn, 20, 8, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$ddd7 = getCountNucs($conn, 21, 8, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$ddd8 = getCountNucs($conn, 3, 8, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$ddd9= getCountNucs($conn, 23, 8, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$ddd10 = getCountNucs($conn, 24, 8, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$ddd11 = getCountNucs($conn, 25, 8, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$ddd12 = getCountNucs($conn, 15, 8, $anio, $datazx[$i][7], $datazx[$i][8], 0);	
 									
 										$tramAnterior =  $totTramiteJulio;
-
-										$de11 = getCountNucs($conn, 1, 8, $anio, $datazx[$i][7], $datazx[$i][8], 0);
-								
-										$de21 = getCountNucs($conn, 22, 8, $anio, $datazx[$i][7], $datazx[$i][8], 1);
-										$de31 = getCountNucs($conn, 22, 8, $anio, $datazx[$i][7], $datazx[$i][8], 0);
 										
-										$de41 = getCountNucs($conn, 2, 8, $anio, $datazx[$i][7], $datazx[$i][8], 0);
-										$de51 = getCountNucs($conn, 5, 8, $anio, $datazx[$i][7], $datazx[$i][8], 0);
-										$de61 = getCountNucs($conn, 20, 8, $anio, $datazx[$i][7], $datazx[$i][8], 0);
-										$de71 = getCountNucs($conn, 21, 8, $anio, $datazx[$i][7], $datazx[$i][8], 0);
-										$de81 = getCountNucs($conn, 3, 8, $anio, $datazx[$i][7], $datazx[$i][8], 0);
-										$de91= getCountNucs($conn, 23, 8, $anio, $datazx[$i][7], $datazx[$i][8], 0);
-										$de101 = getCountNucs($conn, 24, 8, $anio, $datazx[$i][7], $datazx[$i][8], 0);
-										$de111 = getCountNucs($conn, 25, 8, $anio, $datazx[$i][7], $datazx[$i][8], 0);
-										$de121 = getCountNucs($conn, 15, 8, $anio, $datazx[$i][7], $datazx[$i][8], 0);	
-
-
 										$iniciadas = $existNewAgos[0][0];
 										$recibidas = $existNewAgos[0][1];
 										$totalTrabajar = $totaTrabAgo;
-										$judicializadas = $de21[0][0] + $de31[0][0];
+										$judicializadas = $d2[0][0] + $d3[0][0];
 										$totResoluciones = $totDeterminacionesAgo;
 										$enviUATP = $existNewAgos[0][2];
 										$enviUI = $existNewAgos[0][3];
@@ -535,22 +562,44 @@ $Inicio = "11";
 										$tramiteFinls = 	$totTramiteAgosto;  
 																	
 									
-									}
+									}			
+									if($mes == 9){ 								
+								
+
+										$ddd1 = getCountNucs($conn, 1, 9, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								
+								$ddd2 = getCountNucs($conn, 22, 9, $anio, $datazx[$i][7], $datazx[$i][8], 1);
+								$ddd3 = getCountNucs($conn, 22, 9, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								
+								$ddd4 = getCountNucs($conn, 2, 9, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$ddd5 = getCountNucs($conn, 5, 9, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$ddd6 = getCountNucs($conn, 20, 9, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$ddd7 = getCountNucs($conn, 21, 9, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$ddd8 = getCountNucs($conn, 3, 9, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$ddd9= getCountNucs($conn, 23, 9, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$ddd10 = getCountNucs($conn, 24, 9, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$ddd11 = getCountNucs($conn, 25, 9, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								$ddd12 = getCountNucs($conn, 15, 9, $anio, $datazx[$i][7], $datazx[$i][8], 0);	
+									
+										$tramAnterior =  $totTramiteAgosto;
+										$iniciadas = $existNewSep[0][0];
+										$recibidas = $existNewSep[0][1];
+										$totalTrabajar = $totaTrabSep;
+										$judicializadas = $dd2[0][0] + $dd3[0][0];
+										$totResoluciones = $totDeterminacionesSep;
+										$enviUATP = $existNewSep[0][2];
+										$enviUI = $existNewSep[0][3];
+										$enviMp = $existNewSep[0][4];
+
+										$tramiteFinls = 	$totTramiteSepiembre;  
+																	
+									
+									}						
 
 
-								////////////// SI EL MES ES 8 /////////////////////////
-								////////////// SI EL MES ES 8 /////////////////////////
-								////////////// SI EL MES ES 8 /////////////////////////
-
-
-				//////////////////////////////// NUEVOS DATOS DE JULIO Y AGOSTO ////////////////////////////////////////
-				//////////////////////////////// NUEVOS DATOS DE JULIO Y AGOSTO ////////////////////////////////////////
-				//////////////////////////////// NUEVOS DATOS DE JULIO Y AGOSTO ////////////////////////////////////////
-
-
-
-
-
+				//////////////////////////////// NUEVOS DATOS DE JULIO Y AGOSTO Y SEPTIEMBRE ////////////////////////////////////////
+				//////////////////////////////// NUEVOS DATOS DE JULIO Y AGOSTO Y SEPTIEMBRE ////////////////////////////////////////
+				//////////////////////////////// NUEVOS DATOS DE JULIO Y AGOSTO Y SEPTIEMBRE ////////////////////////////////////////
 
 		
 					$objPHPExcel->getActiveSheet()->SetCellValue("D$Inicio", $tramAnterior);  $acum1 = $acum1 + $tramAnterior;
@@ -559,28 +608,28 @@ $Inicio = "11";
 						$objPHPExcel->getActiveSheet()->SetCellValue("F$Inicio", $datazx[$i][1]);	$acum3 = $acum3 + $datazx[$i][1];
 						$objPHPExcel->getActiveSheet()->SetCellValue("G$Inicio", $datazx[$i][6]);	$acum4 = $acum4 + $datazx[$i][6];
 
-						$objPHPExcel->getActiveSheet()->SetCellValue("H$Inicio", $d1[0][0]);	$acum24 = $acum24 + $d1[0][0];
+						$objPHPExcel->getActiveSheet()->SetCellValue("H$Inicio", $ddd1[0][0]);	$acum24 = $acum24 + $ddd1[0][0];
 						$objPHPExcel->getActiveSheet()->SetCellValue("I$Inicio", $datazx[$i][2]);	$acum5 = $acum5 + $datazx[$i][2];
 
 						$objPHPExcel->getActiveSheet()->SetCellValue("J$Inicio", $totalTrabajar);	$acum6 = $acum6 + $totalTrabajar;
 
-						$objPHPExcel->getActiveSheet()->SetCellValue("K$Inicio", $d2[0][0]);	$acum7 = $acum7 + $d2[0][0];
-						$objPHPExcel->getActiveSheet()->SetCellValue("L$Inicio", $d3[0][0]);	$acum8 = $acum8 + $d3[0][0];
+						$objPHPExcel->getActiveSheet()->SetCellValue("K$Inicio", $ddd2[0][0]);	$acum7 = $acum7 + $ddd2[0][0];
+						$objPHPExcel->getActiveSheet()->SetCellValue("L$Inicio", $ddd3[0][0]);	$acum8 = $acum8 + $ddd3[0][0];
 						$objPHPExcel->getActiveSheet()->SetCellValue("M$Inicio", $judicializadas);	$acum9 = $acum9 + $judicializadas;
 
-						$objPHPExcel->getActiveSheet()->SetCellValue("N$Inicio", $d4[0][0]);	$acum10 = $acum10 + $d4[0][0];
-						$objPHPExcel->getActiveSheet()->SetCellValue("O$Inicio", $d5[0][0]);	$acum11 = $acum11 + $d5[0][0];
-						$objPHPExcel->getActiveSheet()->SetCellValue("P$Inicio", $d6[0][0]);	$acum12 = $acum12 + $d6[0][0];
+						$objPHPExcel->getActiveSheet()->SetCellValue("N$Inicio", $ddd4[0][0]);	$acum10 = $acum10 + $ddd4[0][0];
+						$objPHPExcel->getActiveSheet()->SetCellValue("O$Inicio", $ddd5[0][0]);	$acum11 = $acum11 + $ddd5[0][0];
+						$objPHPExcel->getActiveSheet()->SetCellValue("P$Inicio", $ddd6[0][0]);	$acum12 = $acum12 + $ddd6[0][0];
 
-						$objPHPExcel->getActiveSheet()->SetCellValue("Q$Inicio", $d9[0][0]);	$acum13 = $acum13 + $d9[0][0];
+						$objPHPExcel->getActiveSheet()->SetCellValue("Q$Inicio", $ddd9[0][0]);	$acum13 = $acum13 + $ddd9[0][0];
 
-						$objPHPExcel->getActiveSheet()->SetCellValue("R$Inicio", $d10[0][0]);	$acum14 = $acum14 + $d10[0][0];
+						$objPHPExcel->getActiveSheet()->SetCellValue("R$Inicio", $ddd10[0][0]);	$acum14 = $acum14 + $ddd10[0][0];
 
-						$objPHPExcel->getActiveSheet()->SetCellValue("S$Inicio", $d11[0][0]);	$acum15 = $acum15 + $d11[0][0];
+						$objPHPExcel->getActiveSheet()->SetCellValue("S$Inicio", $ddd11[0][0]);	$acum15 = $acum15 + $ddd11[0][0];
 
-						$objPHPExcel->getActiveSheet()->SetCellValue("T$Inicio", $d12[0][0]);	$acum16 = $acum16 + $d12[0][0];
-						$objPHPExcel->getActiveSheet()->SetCellValue("U$Inicio", $d7[0][0]);	$acum17 = $acum17 + $d7[0][0];
-						$objPHPExcel->getActiveSheet()->SetCellValue("V$Inicio", $d8[0][0]);	$acum18 = $acum18 + $d8[0][0];
+						$objPHPExcel->getActiveSheet()->SetCellValue("T$Inicio", $ddd12[0][0]);	$acum16 = $acum16 + $ddd12[0][0];
+						$objPHPExcel->getActiveSheet()->SetCellValue("U$Inicio", $ddd7[0][0]);	$acum17 = $acum17 + $ddd7[0][0];
+						$objPHPExcel->getActiveSheet()->SetCellValue("V$Inicio", $ddd8[0][0]);	$acum18 = $acum18 + $ddd8[0][0];
 
 						$objPHPExcel->getActiveSheet()->SetCellValue("W$Inicio", $totResoluciones);	$acum19 = $acum19 + $totResoluciones;
 

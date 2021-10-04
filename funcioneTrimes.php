@@ -37,7 +37,7 @@ function getDataQ($conn, $quest, $per, $anio, $idUnidad){
 	$query = " SELECT
        sum([iniciadasConDetenido]) as 'IniDetenido'
       ,sum([iniciadasSinDetenido]) as 'IniSinDetenido'
-  FROM [ESTADISTICAV2].[dbo].[Carpetas] WHERE idUnidad $idUnidad AND idAnio = $anio AND idMes = $mes GROUP BY idMes ORDER BY idMes ";
+  FROM [ESTADISTICAV2].[dbo].[carpetasDatos] WHERE idUnidad $idUnidad AND idAnio = $anio AND idMes = $mes GROUP BY idMes ORDER BY idMes ";
 //echo $query."<br>";
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
@@ -51,14 +51,14 @@ function getDataQ($conn, $quest, $per, $anio, $idUnidad){
 	
 	}
 
-	function getDAtaSIREQuestionEstatus($conSic, $mes, $anio, $idUnidad, $estatus, $per){
+	function getDAtaSIREQuestionEstatus($conn, $mes, $anio, $idUnidad, $estatus, $per){
 
-	$query = " SELECT COUNT(resoluciones.CarpetaID) as m
-  FROM [PRUEBA].[dbo].[Resoluciones] INNER JOIN Carpeta c ON c.CarpetaID = Resoluciones.CarpetaID 
-  WHERE idUnidad $idUnidad AND mes IN($mes) AND EstatusID = $estatus AND anio = $anio AND YEAR(FechaInicio) = $anio AND MONTH(FechaInicio) $per ";
+	$query = " SELECT COUNT(estNucCarpe.idCarpeta) as m
+  FROM ESTADISTICAV2.dbo.estatusNucsCarpetas estNucCarpe INNER JOIN PRUEBA.dbo.Carpeta c ON c.CarpetaID = estNucCarpe.idCarpeta 
+  WHERE estNucCarpe.idUnidad $idUnidad AND estNucCarpe.mes IN($mes) AND estNucCarpe.idEstatus = $estatus AND estNucCarpe.anio = $anio AND YEAR(c.FechaInicio) = $anio AND MONTH(c.FechaInicio) $per ";
 
 	$indice = 0;
-	$stmt = sqlsrv_query($conSic, $query);
+	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
 	{
 		$arreglo[$indice][0]=$row['m'];

@@ -799,6 +799,9 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 			</div>
 
 
+			<div style="display: none;" id="laodimgmain" class="jm-loadingpage"></div>
+
+
 
 
 

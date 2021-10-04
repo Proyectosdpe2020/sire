@@ -407,6 +407,16 @@ function getEstatusCMASC($conCMASC, $nuc){
 
 }
 
+ /* Función */
+ function check_in_range($fechaInicialCaptura, $fechaLimiteCaptura, $fechaIngreso){
+ 	$fecha_inicio = strtotime($fechaInicialCaptura);
+ 	$fecha_fin = strtotime($fechaLimiteCaptura);
+ 	$fecha = strtotime($fechaIngreso);
+ 	if(($fecha >= $fecha_inicio) && ($fecha <= $fecha_fin))
+ 		return true;
+ 	else
+ 		return false;
+ }
 
 
 

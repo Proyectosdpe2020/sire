@@ -221,7 +221,7 @@ switch ($acc) {
   BEGIN TRANSACTION
   SET NOCOUNT ON
 
-  INSERT INTO carpetasDatos VALUES($mes,$anio,$idUnidad,$idMp,GETDATE(), $inputCdeten, $inputSdeten, $reCbreCbOtrUni, $inputEnvUATP, $inputEnvUI, $inputEnvImpDesc)
+  INSERT INTO carpetasDatos VALUES($mes,$anio,$idUnidad,$idMp,GETDATE(), $inputCdeten, $inputSdeten, $reCbreCbOtrUni, $inputEnvUATP, $inputEnvUI, $inputEnvImpDesc, 0, 0)
 
   COMMIT
   END TRY
@@ -782,10 +782,13 @@ $tramitefinal = $totaTrabvajar2 - ($totDeterminaciones1 + $enviads1);
  $arreglo[5] = "NOIRN"; /// NO SE INSERTA POR QUE SE DEBE REINICIAR PRIMERO
  $arreglo[6] = "NOCMASC"; ///MEDIACION NO SE ENCUENTRA EN LA BASE DE DATOS DE CMASC
  $arreglo[7] = "RECHAZOCMASC"; ///MEDIACION RECIBIDA EN CMASC PERO RECHAZADA
+ $arreglo[8] = "NOCONTABILIZA"; ///MEDIACION RECIBIDA EN CMASC PERO A PARTIR DEL DIA 26 DEL MES A CAPTURAR, INGRESAR AL SIGUIENTE MES
 
 
  if (isset($_POST["nuc"])){ $nuc = $_POST["nuc"]; }
  if (isset($_POST["estatus"])){ $estatus = $_POST["estatus"]; }
+ if (isset($_POST["mes"])){ $mes = $_POST["mes"]; }
+ if (isset($_POST["anio"])){ $anio = $_POST["anio"]; }
 
 
 
@@ -846,18 +849,31 @@ $tramitefinal = $totaTrabvajar2 - ($totDeterminaciones1 + $enviads1);
 
     }else{
       //UNA VEZ REALIZADA LAS VALIDACIONES VERIFICAMOS SI EL ESTATUS ES UNA MEDIACION Y CHECAMOS SI EL NUC FUE MANDADO PRIMERO A LA UNIDAD DE MEDIACION
-     if($estatus == 230){
+     if($estatus == 23){
       $checkCMASC = getEstatusCMASC($conCMASC, $nuc);
       $carpetaRecibida = $checkCMASC[0][7];
       $motivoRechazo = $checkCMASC[0][9];
+      $fechaIngreso = $checkCMASC[0][2]->format('Y-n-d');
+      $anioCapturaSire = $anio;
+      $mesCapturaSire = $mes;
+      $diaInicialCapturaSire = 26;
+      $diaLimiteCapturaSire = 25;
+      $fechaCapturaSire = $anioCapturaSire.'-'.$mesCapturaSire.'-'.$diaInicialCapturaSire; //Periodo de captura inician 26 de cada mes anterior
+      $periodoIngresoSire = strtotime('- 1 month', strtotime($fechaCapturaSire)); //Se resta un mes al mes de captura actual
+      $fechaInicialCaptura = date('d-m-Y',  $periodoIngresoSire);
+      $fechaLimiteCaptura = $diaLimiteCapturaSire.'-'.$mesCapturaSire.'-'.$anioCapturaSire;
       //PRIMER PASO SE VERIFICA SI EL NUC INGRESADO YA SE HA RECIBIDO EN CMASC DE LO CONTRARIO NO SE PODRA GUARDAR
       if(sizeof($checkCMASC) > 0){
          ////// SI EXISTE EL NUC SE VALIDA SI LA CARPETA RECIBIDA SE ENCUENTRA RECHAZADA, DE SER ASI OBTENER EL MOTIVO DE RECHAZO Y NO DEJAR GUARDAR
            if($carpetaRecibida == 0){
             echo json_encode(   array(  'first'=>$arreglo[7], 'motivoRechazo'=>$motivoRechazo  )   );
            }else{
-            //SI EL NUC SE HA RECIBIDO POR EL CMASC DEJAR GUARDAR
-            echo json_encode(   array(  'first'=>$arreglo[0]   )   ); 
+           if (check_in_range($fechaInicialCaptura, $fechaLimiteCaptura, $fechaIngreso)){
+              //SI EL NUC SE HA RECIBIDO POR EL CMASC Y ESTA EN EL RAGO DEJAR GUARDAR
+              echo json_encode(   array(  'first'=>$arreglo[0]   )   ); 
+            }else{
+              echo json_encode(   array(  'first'=>$arreglo[8]  )   );
+            }
            }
       } else{
        echo json_encode(   array(  'first'=>$arreglo[6]   )   ); //NO EXISTE EL NUC EN BASE DE DATOS DE CMASC
@@ -895,18 +911,31 @@ $tramitefinal = $totaTrabvajar2 - ($totDeterminaciones1 + $enviads1);
 
     }else{
       //UNA VEZ REALIZADA LAS VALIDACIONES VERIFICAMOS SI EL ESTATUS ES UNA MEDIACION Y CHECAMOS SI EL NUC FUE MANDADO PRIMERO A LA UNIDAD DE MEDIACION
-     if($estatus == 230){
+     if($estatus == 23){
       $checkCMASC = getEstatusCMASC($conCMASC, $nuc);
       $carpetaRecibida = $checkCMASC[0][7];
       $motivoRechazo = $checkCMASC[0][9];
+      $fechaIngreso = $checkCMASC[0][2]->format('Y-n-d');
+      $anioCapturaSire = $anio;
+      $mesCapturaSire = $mes;
+      $diaInicialCapturaSire = 26;
+      $diaLimiteCapturaSire = 25;
+      $fechaCapturaSire = $anioCapturaSire.'-'.$mesCapturaSire.'-'.$diaInicialCapturaSire; //Periodo de captura inician 26 de cada mes anterior
+      $periodoIngresoSire = strtotime('- 1 month', strtotime($fechaCapturaSire)); //Se resta un mes al mes de captura actual
+      $fechaInicialCaptura = date('d-m-Y',  $periodoIngresoSire);
+      $fechaLimiteCaptura = $diaLimiteCapturaSire.'-'.$mesCapturaSire.'-'.$anioCapturaSire;
       //PRIMER PASO SE VERIFICA SI EL NUC INGRESADO YA SE HA RECIBIDO EN CMASC DE LO CONTRARIO NO SE PODRA GUARDAR
       if(sizeof($checkCMASC) > 0){
          ////// SI EXISTE EL NUC SE VALIDA SI LA CARPETA RECIBIDA SE ENCUENTRA RECHAZADA, DE SER ASI OBTENER EL MOTIVO DE RECHAZO Y NO DEJAR GUARDAR
            if($carpetaRecibida == 0){
             echo json_encode(   array(  'first'=>$arreglo[7], 'motivoRechazo'=>$motivoRechazo  )   );
            }else{
-            //SI EL NUC SE HA RECIBIDO POR EL CMASC DEJAR GUARDAR
-            echo json_encode(   array(  'first'=>$arreglo[0]   )   ); 
+            if (check_in_range($fechaInicialCaptura, $fechaLimiteCaptura, $fechaIngreso)){
+              //SI EL NUC SE HA RECIBIDO POR EL CMASC Y ESTA EN EL RAGO DEJAR GUARDAR
+              echo json_encode(   array(  'first'=>$arreglo[0]   )   ); 
+            }else{
+              echo json_encode(   array(  'first'=>$arreglo[8]  )   );
+            }
            }
       } else{
        echo json_encode(   array(  'first'=>$arreglo[6]   )   ); //NO EXISTE EL NUC EN BASE DE DATOS DE CMASC
@@ -935,18 +964,31 @@ $tramitefinal = $totaTrabvajar2 - ($totDeterminaciones1 + $enviads1);
   if($estatus !=  1 ){
 
  //UNA VEZ REALIZADA LAS VALIDACIONES VERIFICAMOS SI EL ESTATUS ES UNA MEDIACION Y CHECAMOS SI EL NUC FUE MANDADO PRIMERO A LA UNIDAD DE MEDIACION
-     if($estatus == 230){
+     if($estatus == 23){
       $checkCMASC = getEstatusCMASC($conCMASC, $nuc);
       $carpetaRecibida = $checkCMASC[0][7];
       $motivoRechazo = $checkCMASC[0][9];
+      $fechaIngreso = $checkCMASC[0][2]->format('Y-n-d');
+      $anioCapturaSire = $anio;
+      $mesCapturaSire = $mes;
+      $diaInicialCapturaSire = 26;
+      $diaLimiteCapturaSire = 25;
+      $fechaCapturaSire = $anioCapturaSire.'-'.$mesCapturaSire.'-'.$diaInicialCapturaSire; //Periodo de captura inician 26 de cada mes anterior
+      $periodoIngresoSire = strtotime('- 1 month', strtotime($fechaCapturaSire)); //Se resta un mes al mes de captura actual
+      $fechaInicialCaptura = date('d-m-Y',  $periodoIngresoSire);
+      $fechaLimiteCaptura = $diaLimiteCapturaSire.'-'.$mesCapturaSire.'-'.$anioCapturaSire;
       //PRIMER PASO SE VERIFICA SI EL NUC INGRESADO YA SE HA RECIBIDO EN CMASC DE LO CONTRARIO NO SE PODRA GUARDAR
       if(sizeof($checkCMASC) > 0){
          ////// SI EXISTE EL NUC SE VALIDA SI LA CARPETA RECIBIDA SE ENCUENTRA RECHAZADA, DE SER ASI OBTENER EL MOTIVO DE RECHAZO Y NO DEJAR GUARDAR
            if($carpetaRecibida == 0){
             echo json_encode(   array(  'first'=>$arreglo[7], 'motivoRechazo'=>$motivoRechazo  )   );
            }else{
-            //SI EL NUC SE HA RECIBIDO POR EL CMASC DEJAR GUARDAR
-            echo json_encode(   array(  'first'=>$arreglo[0]   )   ); 
+            if (check_in_range($fechaInicialCaptura, $fechaLimiteCaptura, $fechaIngreso)){
+              //SI EL NUC SE HA RECIBIDO POR EL CMASC Y ESTA EN EL RAGO DEJAR GUARDAR
+              echo json_encode(   array(  'first'=>$arreglo[0]   )   ); 
+            }else{
+              echo json_encode(   array(  'first'=>$arreglo[8]  )   );
+            }
            }
       } else{
        echo json_encode(   array(  'first'=>$arreglo[6]   )   ); //NO EXISTE EL NUC EN BASE DE DATOS DE CMASC
@@ -1077,10 +1119,89 @@ $tramitefinal = $totaTrabvajar2 - ($totDeterminaciones1 + $enviads1);
 
  }
 
-
-
-
  break;
+
+
+
+
+ case 'updateTramites':
+
+
+
+  if (isset($_POST["mes"])){ $mes = $_POST["mes"]; }
+  if (isset($_POST["anio"])){ $anio = $_POST["anio"]; }
+  if (isset($_POST["idEnlace"])){ $idEnlace = $_POST["idEnlace"]; }
+  
+  $arreglo[0] = "NO"; 
+  $arreglo[1] = "SI"; 
+  $arreglo[2] = "NOS"; 
+
+  $mpsList = getMpsEnlaceUnidadFormato($conn, $idEnlace, 1);
+  $band = 0; //// bandera para saber si ya fueron capturados todos los mps del enlace si alguno no esta capturado entonces no se pued enviar la informacion
+
+
+  for ($i = 0; $i < sizeof($mpsList); $i++) {
+
+    $dataCarpe = getDataCarpeDatos($conn, $mpsList[$i][4], $mes, $anio, $mpsList[$i][3]);
+    if($dataCarpe[0][0] == null){    $band = 1;    break;    }
+
+  }
+
+  if($band == 1 ){ echo json_encode(   array(  'first'=>$arreglo[2]   )   ); } /// NO SE PUEDE ENVIAR
+  else{
+
+    $bande = 0;
+
+    for ($j = 0; $j < sizeof($mpsList); $j++) {
+
+      if ($mes == 1) {
+        $mesAnterior = 12;
+        $anioAnte = ($anio - 1);
+      } else {
+        $anioAnte = $anio;
+        $mesAnterior = ($mes - 1);
+      }
+
+
+        //// IR ACTUALIZANDO CADA UNO DE LOS TRAMITES POR MP
+        $tramis = getTramitesActuales($conn, $mpsList[$j][3], $mpsList[$j][4], $anio, $mes);
+        $tramisAnte = getTramitesActuales($conn, $mpsList[$j][3], $mpsList[$j][4], $anioAnte, $mesAnterior);
+    
+        $queryTransaction = "  
+        BEGIN                     
+        BEGIN TRY 
+        BEGIN TRANSACTION
+        SET NOCOUNT ON
+     
+        UPDATE carpetasDatos SET tramitee = ".$tramis." WHERE idMp = ".$mpsList[$j][4]." AND idAnio = ".$anio." AND idMes = ".$mes." AND idUnidad = ".$mpsList[$j][3]."
+        UPDATE carpetasDatos SET tramiteAnterior = ".$tramisAnte." WHERE idMp = ".$mpsList[$j][4]." AND idAnio = ".$anio." AND idMes = ".$mes." AND idUnidad = ".$mpsList[$j][3]."
+     
+        COMMIT
+        END TRY
+        BEGIN CATCH 
+        ROLLBACK TRANSACTION
+        RAISERROR('No se realizo la transaccion',16,1)
+        END CATCH
+        END
+        ";  
+
+        //echo $queryTransaction."<br>";
+
+        $result = sqlsrv_query($conn,$queryTransaction, array(), array( "Scrollable" => 'static' ));  
+        if ($result){}else{
+          $bande = 1; break;          
+        }  
+    }
+
+    if($bande == 0){
+      echo json_encode(   array(  'first'=>$arreglo[1]   )   ); /// SE PUEDE ENVIAR Y SE ACTUALIZO
+    }
+    if($bande == 1){
+      echo json_encode(   array(  'first'=>$arreglo[0]   )   );/// NO SE PUEDE ENVIAR HUBO UN ERROR
+    }
+   
+  }
+  break;
 
 
 
