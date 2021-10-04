@@ -731,7 +731,7 @@ function registrarPersona(idEnlace, tipoActualizacion, tipoArch, b, idPersona){
 	var textApMaterno = $("#textApMaterno").val();
 	var textEdad = $("#textEdad").val();
 	var textSexo = $("#textSexo").val();
-	var fechaDetencion = moment($("#fechaDetencion").val(), 'YYYY/MM/DD'); 
+	//var fechaDetencion = moment($("#fechaDetencion").val(), 'YYYY/MM/DD'); 
  var textCatDelitos = $("#textTipoDelito").val(); 
  var textDisposicionDe = $("#textDisposicionDe").val();
 
@@ -744,25 +744,21 @@ function registrarPersona(idEnlace, tipoActualizacion, tipoArch, b, idPersona){
 
 
 
-    if(textNombre!= "" && textApPaterno != "" && textApMaterno != "" && fechaDetencion != "" && textEdad  != "" 
+    if(textNombre!= "" && textApPaterno != "" && textApMaterno != ""  && textEdad  != "" 
 			&& textSexo != "" && textCatDelitos != "" && textInvFlag != 0 && textDisposicionDe != 0 ){
 
 	/*Obtener datos del formulario*/
 
 	var textAlias = $("#textAlias").val();
 
-	var dia = fechaDetencion.format('D'); 
-	var mes = fechaDetencion.format('M'); 
-	var anio = fechaDetencion.format('YYYY'); 
 
-    
-	var textBandas = $("#textBandas").val();
+	//var textBandas = $("#textBandas").val();
 	var textOrgCriminal = $("#textOrgCriminal").val();
-	var textAgraviado = $("#textAgraviado").val();
+	//var textAgraviado = $("#textAgraviado").val();
 	var textInvFlag = $("#textInvFlag").val();
 	var textBandaSolitario = $("#textBandaSolitario").val();
-	var textAvPP = $("#textAvPP").val();
-	var textNumBas = $("#textNumBas").val();
+	//var textAvPP = $("#textAvPP").val();
+	//var textNumBas = $("#textNumBas").val();
 	var textRequerido = $("#textRequerido").val();
 	var textOficio = $("#textOficio").val();
 	var textTipoDelitoId = $("#textTipoDelito").val(); 
@@ -819,9 +815,8 @@ function registrarPersona(idEnlace, tipoActualizacion, tipoArch, b, idPersona){
         dataType: 'html',
         url: "format/puestaDisposicion/registroPersonas.php",
         data: "nombre="+textNombre+"&ap_paterno="+textApPaterno+"&ap_materno="+textApMaterno+"&alias="+textAlias+"&edad="+textEdad+'&sexo='+textSexo+
-              "&dia="+dia+"&mes="+mes+"&anio="+anio+"&bandas="+textBandas+"&orgCriminal="+textOrgCriminal+
-              "&agraviado="+textAgraviado+"&inv_flag="+textInvFlag+"&banda_solitario="+textBandaSolitario+"&AvPP="+textAvPP+
-              "&numBas="+textNumBas+"&DisposicionDe="+textDisposicionDe+"&requerido="+textRequerido+"&oficio="+textOficio+"&tipoDelitoId="+textTipoDelitoId+
+              "&orgCriminal="+textOrgCriminal+"&inv_flag="+textInvFlag+"&banda_solitario="+textBandaSolitario+
+              "&DisposicionDe="+textDisposicionDe+"&requerido="+textRequerido+"&oficio="+textOficio+"&tipoDelitoId="+textTipoDelitoId+
          "&observaciones="+textObservaciones+"&arrayDelitos="+jObjectDelitos+"&jObject="+jObject+"&idEnlace="+idEnlace+"&idPuestaDisposicion="+idPuestaDisposicion+"&tipoActualizacion="+tipoActualizacion+"&idPersona="+idPersona,
         success: function(resp){
             
@@ -1042,10 +1037,8 @@ function closemodalForestales(){
 
 			 var textVolumen = $("#textVolumen").val();
 
-				var semovientenumber = $("#semovientenumber").val();
-
 				    /// VALIDACIONES ///
-				if( textVolumen != "" && semovientenumber != "" ){
+				if( textVolumen != "" ){
 
 					var textObservaciones = $("#textObservacionesForest").val();
 					//// DATA DE LA PUESTA A DISPOSICION /////
@@ -1091,7 +1084,7 @@ function closemodalForestales(){
 				        type: "POST",
 				        dataType: 'html',
 				        url: "format/puestaDisposicion/registroForestales.php",
-				        data: "catMadera_id="+objMadera+"&volumen="+textVolumen+"&semoviente="+semovientenumber+"&observaciones="+textObservaciones+"&jObject="+jObject+"&idEnlace="+idEnlace+
+				        data: "catMadera_id="+objMadera+"&volumen="+textVolumen+"&observaciones="+textObservaciones+"&jObject="+jObject+"&idEnlace="+idEnlace+
 				               "&idPuestaDisposicion="+idPuestaDisposicion+"&tipoActualizacion="+tipoActualizacion+"&idForestales="+idForestales,
 				        success: function(resp){
 				           
@@ -2364,6 +2357,8 @@ function registroArmasAseguradas(idEnlace, tipoArch, b, tipoActualizacion , idAr
 
  var textObservaciones = $("#textObservacionesArmas").val();
 
+ var textMatricula = document.getElementById("textMatricula").value;
+
  //// DATA DE LA PUESTA A DISPOSICION /////
 	var idPuestaDisposicion= document.getElementById("idPuestaDisposicion").value;
 	var tipoMOd= document.getElementById("tipoMOd").value;
@@ -2408,7 +2403,7 @@ function registroArmasAseguradas(idEnlace, tipoArch, b, tipoActualizacion , idAr
         data: "textCatTipoArma_id="+textCatTipoArma_id+"&textCatMarcaArma_id="+textCatMarcaArma_id+"&textCatCalibre_id="+textCatCalibre_id+
               "&textCatAccesorioArma_id="+textCatAccesorioArma_id+"&textCatMarcaCartuchos_id="+textCatMarcaCartuchos_id+"&textObservaciones="+textObservaciones+
               "&jObject="+jObject+"&idEnlace="+idEnlace+"&idPuestaDisposicion="+idPuestaDisposicion+"&tipoActualizacion="+tipoActualizacion+
-              "&idArma="+idArma,
+              "&idArma="+idArma+"&textMatricula="+textMatricula,
         success: function(resp){
             
 
@@ -3108,5 +3103,36 @@ function closeModalPueDispo(){
 }
 
 function checkDateInforme(fecha){
-	alert(fecha);
+	var fechaEvento = document.getElementById("fechaevento").value; 
+	if(Date.parse(fecha) < Date.parse(fechaEvento)){
+		swal("", "La fecha del evento no puede ser mayor a la fecha del informe.", "warning");	
+		document.getElementById("fechaevento").value = ''; 
+	}
+}
+
+//Funcion para validar cuando el tipo de automovil es un remolque, accesorio o agroindustriales no se requerira ingresar marca
+function checkClasificacion(){
+	var selClasific = document.getElementById("selClasific").value; 
+	var flag = 0;
+	if(selClasific == 5 || selClasific == 6 || selClasific == 7 ){
+			$("#newMarca").select2();
+	 	$('#newMarca').val('141').trigger('change.select2');
+	 	$("#newMarca").prop("disabled", true);
+	 	$("#newLinea").select2();
+	 	$('#newLinea').val('945').trigger('change.select2');
+	 	$("#newLinea").prop("disabled", true);
+	 	$("#newTypeMarca").select2();
+	 	$('#newTypeMarca').val('130').trigger('change.select2');
+	 	$("#newTypeMarca").prop("disabled", true);
+	 	flag = 1;
+	}else{
+		if($('#newMarca').is(':disabled')){
+    $("#newMarca").select2();
+				$("#newMarca").prop("disabled", false);
+				$('#newMarca').val('1').trigger('change.select2');
+				$("#newLinea").prop("disabled", false);
+				$("#newTypeMarca").prop("disabled", false);
+				$('#newTypeMarca').val('1').trigger('change.select2');
+			}
+	}
 }

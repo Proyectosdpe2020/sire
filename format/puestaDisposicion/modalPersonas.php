@@ -50,13 +50,13 @@
 		    $edad = $arreglo[0][3];
 		    $sexo = $arreglo[0][4]; 
 		    $delitoPrincipal = $arreglo[0][9];
-		    $fechaDetencion = $arreglo[0][11];
-		    $bandas = $arreglo[0][10]; 
-		    $agraviado = $arreglo[0][12]; 
+		    //$fechaDetencion = $arreglo[0][11];
+		    //$bandas = $arreglo[0][10]; 
+		    //$agraviado = $arreglo[0][12]; 
 		    $invFlag = $arreglo[0][13]; 
 		    $bandaSolit = $arreglo[0][14];
-		    $avPP = $arreglo[0][15];
-		    $numdBas = $arreglo[0][16];
+		    //$avPP = $arreglo[0][15];
+		    //$numdBas = $arreglo[0][16];
 		    $aDispoDe = $arreglo[0][17];
 		    $reqOtrasCorpo = $arreglo[0][18];
 		    $oficio = $arreglo[0][19];
@@ -135,15 +135,15 @@
 																	    </div>
 																	  </div>
 																	  <div class="form-row">
-																	    <div class="form-group col-md-3">
+																	    <div class="form-group col-md-4">
 																	      <label for="textAlias">Alias</label>
 																	      <input value="<?php if($a == 1){ echo $alias; } ?>" type="text" class="form-control" id="textAlias" name="textAlias" >
 																	    </div>
-																	    <div class="form-group col-md-3">
+																	    <div class="form-group col-md-4">
 																	      <label for="textEdad">Edad<span class="aste">(*)</span></label>
 																	      <input value="<?php if($a == 1){ echo $edad; } ?>" type="number" class="form-control" id="textEdad" name="textEdad">
 																	    </div>
-																	     <div class="form-group col-md-3">
+																	     <div class="form-group col-md-4">
 																	      <label for="textSexo">Sexo<span class="aste">(*)</span></label>
 																	      <select id="textSexo" class="form-control" name="textSexo">
 																	      	  <option value="N/E">Selecciona</option>
@@ -151,13 +151,6 @@
 																	         <option value="F" <?php if($a == 1 && $sexo == "Femenino"){ ?> selected <? } ?> >Femenino</option>
 																	      </select>
 																	    </div>
-																	    <div class="form-group col-md-3">
-																	    	<label for="heard">Fecha de detención:<span class="aste">(*)</span></label>
-																									<div >
-																               <input class="form-control gehit" type="date" id="fechaDetencion" name="trip-start" 
-																               value="<? if($a == 1){ echo $fechaDetencion; }else{ echo $fecha_actual; } ?>" >
-																            </div>
-																						</div>
 																	  </div>
 																			</div>
 																	</div>
@@ -261,23 +254,7 @@
 																			<div class="panel-body">
 																				<h5 class="text-on-pannel"><strong> Datos del aseguramiento </strong></h5>
 																				<div class="form-row">
-																	   		
-																	     <div class="form-group col-md-3">
-																	      <label for="textBandas">No. de bandas</label>
-																	      <input value="<?php if($a == 1){ echo $bandas; } ?>" type="text" class="form-control" id="textBandas" name="textBandas">
-																	    </div>
-																	    <div class="form-group col-md-3">
-																	      <label for="textOrgCriminal">Org. criminal o banda delictiva</label>
-																	      <input value="<?php if($a == 1){ echo $orgCriminalPertenece; } ?>" type="text" class="form-control" id="textOrgCriminal" name="textOrgCriminal">
-																	    </div>
-																	  </div>
-
-																	  	<div class="form-row">
-																	     <div class="form-group col-md-3">
-																	      <label for="textAgraviado">Agraviado</label>
-																	      <input value="<?php if($a == 1){ echo $agraviado; } ?>" type="text" class="form-control" id="textAgraviado" name="textAgraviado">
-																	    </div>
-																	    <div class="form-group col-md-3">
+																					<div class="form-group col-md-3">
 																	      <label for="textInvFlag">Flagrancia / Mandato Judicial<span class="aste">(*)</span></label>
 																	      <select id="textInvFlag" name="textInvFlag" tabindex="6" class="form-control redondear selectTranparent" required>
 																	       	<option value="0">Selecciona</option>
@@ -285,6 +262,10 @@
 																	       	<option style="color: black; font-weight: bold;" value="2" <?php if($a == 1 && $invFlag == 2){ ?> selected <? }?>>Mandato Judicial</option>
 																								</select>
 																	    </div>
+																	    
+																	  </div>
+
+																	  	<div class="form-row">
 																	     <div class="form-group col-md-3">
 																	     	<label for="textBandaSolitario">Banda / Solitario</label>
 																	      <select id="textBandaSolitario" name="textBandaSolitario" tabindex="6" class="form-control redondear selectTranparent">
@@ -293,17 +274,13 @@
 																	       	<option style="color: black; font-weight: bold;" value="S" <?php if($a == 1 && $bandaSolit == 'S'){ ?> selected <? } ?> >Solitario</option>
 																								</select>
 																	    </div>
-																	    <div class="form-group col-md-3">
-																	      <label for="textAvPP">Av.P.P</label>
-																	      <input value="<?php if($a == 1){ echo $avPP; } ?>" type="text" class="form-control" id="textAvPP" name="textAvPP">
+																	     <div class="form-group col-md-3">
+																	      <label for="textOrgCriminal">Org. criminal o banda delictiva</label>
+																	      <input value="<?php if($a == 1){ echo $orgCriminalPertenece; } ?>" type="text" class="form-control" id="textOrgCriminal" name="textOrgCriminal">
 																	    </div>
 																	    </div>
 
 																	    <div class="form-row">
-																	    <div class="form-group col-md-3">
-																	      <label for="textNumBas">Num d bas</label>
-																	      <input value="<?php if($a == 1){ echo $numdBas; } ?>" type="number" class="form-control" id="textNumBas" name="textNumBas" >
-																	    </div>
 																	    <div class="form-group col-md-3">
 																	      <label for="textDisposicion">A disposicion de <span class="aste">(*)</span></label>
 																	      	<select class="form-control browser-default custom-select" id="textDisposicionDe" name="textDisposicionDe">																									  
