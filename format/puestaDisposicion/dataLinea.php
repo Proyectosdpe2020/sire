@@ -7,7 +7,7 @@
 
 				$lineas = getDataLineaVehicle($conn, $newBrwosers_id);
 ?>
-<option ></option>
+
 <?
  
 																					

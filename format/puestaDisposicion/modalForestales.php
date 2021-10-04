@@ -33,7 +33,7 @@
 		    $arreglo = get_data_foesta_puesta($conn, $idPuestaDisposicion , $idForestales);
 		    $nombre = $arreglo[0][1];
 		    $volumen = $arreglo[0][2];
-		    $semoviente = $arreglo[0][3];
+		    //$semoviente = $arreglo[0][3];
 		    $observaciones = $arreglo[0][4];
 		 }else{ 
 		 	//Si idForestales viene con valor 0 no es actualizacion y entra aqui
@@ -83,8 +83,8 @@
 																				    	<!-- DATOS DE LA PUESTA A DISPOSICION EN CASO DE QUE SEA NUEVA -->  
 																				<h5 class="text-on-pannel"><strong> Producto forestal asegurado </strong></h5>
 																				<div class="form-row">
-																	    <div class="form-group col-md-4">
-																	      <label for="textCatMadera">Género<span class="aste">(*)</span></label>
+																	    <div class="form-group col-md-6">
+																	      <label for="textCatMadera">Tipo de madera<span class="aste">(*)</span></label>
 																	       <input value="<?php if($a == 1){ echo $nombre; } ?>" class="form-control" onchange="getData()" list="listaCatMadera" id="textCatMadera" 
 																									        name="textCatMadera" type="text">
 																									        
@@ -98,16 +98,10 @@
 																	       	  <?php } ?>
 																									 </datalist>
 																	    </div>
-																	    <div class="form-group col-md-4">
+																	    <div class="form-group col-md-6">
 																	      <label for="textVolumen">Volúmen M3<span class="aste">(*)</span></label>
 																	      <input value="<?php if($a == 1){ echo $volumen; } ?>"  type="text" class="form-control" id="textVolumen" name="textVolumen">
 																	    </div>
-																	    <div class="form-group col-md-4">
-																	    	<label for="heard">Semoviente:</label>
-																									<div>
-																               <input value="<?php if($a == 1){ echo $semoviente; } ?>" class="form-control" type="number" id="semovientenumber"  value="">
-																            </div>
-																						</div>
 																	  </div>
 																			</div>
 																	</div>

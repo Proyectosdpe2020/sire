@@ -24,13 +24,19 @@
 
 	$tipoArchov = get_type_archive($conn, $idEnlace);
 	$tiparchiv = $tipoArchov[0][0];
-
+/*
 	$mescap = getMesCapEnlaceArchivo($conn, $idEnlace, 9);	
 	$mescapen = $mescap[0][0];
 
 	$mesCapturar = $mescapen;
+ */
 
-
+ $mescap = getMesCapEnlacePolicia($conn, $idEnlace, 9);	
+	$anioCap = $mescap[0][0];
+	$mesCap = $mescap[0][1];
+	$enviado = $mescap[0][2];
+	$enviadoArc = $mescap[0][3];
+ 
 
 
 	//$anioCaptura = 2021;
@@ -48,7 +54,7 @@
 
  	 	$diames= date("d");
  	 	
- 	 	$currentmonth = date("m");
+ 	 	$currentmonth = date("n");
  	 	$meses = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
 		$mesNom = Mes_Nombre($currentmonth);
 
@@ -141,13 +147,13 @@
 					</div>
 
 					<div class="col-xs-6 col-sm-4  col-md-6">
-						<label for="heard">Mando:</label><br>
+						<label for="heard">Agente:</label><br>
 						<select id="mesCmasc" name="selMes" tabindex="6"class="form-control redondear selectTranparent" required>
 							<option value="" >  Todos </option>
 						</select>
 					</div>
- 
-		
+
+			
 					<div class="col-xs-12 col-sm-12  col-md-3">
 								<label class="transparente">.</label>		
 								<center><button type="button" data-toggle="modal" href="#puestdispos" style="white-space: normal;"  onclick="showmodalPueDispo(0, <? echo $idEnlace; ?>,0,<? echo $tiparchiv; ?>, 1);" class="btn btn-success btn-sm redondear btnCapturarTbl"><span class="glyphicon glyphicon-plus-sign"></span> Registro Nueva Actividad </button></center>
@@ -165,7 +171,7 @@
 				<thead>
 					<tr class="cabeceraConsultaPolicia">
 						<th class="textCent">ID</th>
-													<th class="textCent10">Mando</th>
+													<th class="textCent10">Agente</th>
 													<th class="">Nuc</th>
 													<th class=" textCent">Fecha Evento</th>
 													<th class=" textCent">Fecha Informe</th>

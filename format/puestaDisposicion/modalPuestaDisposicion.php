@@ -6,6 +6,10 @@
 				$fecha_actual=date("d/m/Y");
 				$fecha=strftime( "%Y-%m-%d %H:%M:%S", time() );
 
+				$hoy = date("Y-m-d");//Fecha calendario
+				$m = date("m");
+				$anioActual = date("Y");
+
 				if (isset($_POST["tipoModal"])){ $tipoModal = $_POST["tipoModal"]; }
 					if (isset($_POST["idEnlace"])){ $idEnlace = $_POST["idEnlace"]; }
 					if (isset($_POST["typeArch"])){ $typeArch = $_POST["typeArch"]; }
@@ -76,7 +80,7 @@
 
  			<div class="row"><!-- ROOWWWWWW MANDOS  -->
  				<div class="col-xs-12 col-sm-12  col-md-4">
- 					<label for="heard">Selecciona Mando : <span class="aste">(Requerido)</span></label><br>	
+ 					<label for="heard">Selecciona Agente : <span class="aste">(Requerido)</span></label><br>	
  					<select class="dataAutocomplet form-control browser-default custom-select" onchange="getData()" id="newBrwosers_id" locked="locked" name="newBrwoser" type="text" <? if($b == 0){ echo "readonly"; } ?> >
  						<option></option>
  						<? $mandos = getDataMandos($conn, "VI");
@@ -111,7 +115,7 @@
  			<div class="col-xs-12 col-sm-12  col-md-2">
  				<label for="heard">Fecha Evento :</label><span class="aste"> (Requerido)</span>
  				<div >
- 					<input id="fechaevento" type="datetime-local" value="<? if($a == 1){  echo 	$fechaev=str_ireplace(' ','T',$fechaev); } ?>" name="fechaevento" class="fechas form-control gehit" <? if($b == 0){ echo "readonly"; } ?> />	
+ 					<input id="fechaevento" type="datetime-local" value="<? if($a == 1){  echo 	$fechaev=str_ireplace(' ','T',$fechaev); } ?>" name="fechaevento" class="fechas form-control gehit" min="<?echo $anioActual; ?>-<?echo $m; ?>-01T00:00:00" max="<?echo $hoy; ?>T23:59:59" onchange="checkDateInforme('<?echo $fecha; ?>');" <? if($b == 0){ echo "readonly"; } ?> />	
  				</div>
  			</div>
  			<div class="col-xs-12 col-sm-12  col-md-2">
@@ -268,8 +272,6 @@
 																																																						      <th scope="col">Edad</th>
 																																																						      <th scope="col">Sexo</th>
 																																																						      <th scope="col">Organización Criminal</th>
-																																																						    
-																																																						      <th scope="col">Fecha Detención</th>
 																																																						      
 																																																						      <? if($b == 1){ ?>
 																																																						      <th scope="col"><center>Accion</center></th>
@@ -289,7 +291,6 @@
 																																																							<td> <? echo $dataPuestaPersonas[$h][3]; ?> </td>
 																																																							<td> <? echo $dataPuestaPersonas[$h][4]; ?> </td>
 																																																							<td> <? echo $dataPuestaPersonas[$h][5]; ?> </td>
-																																																							<td> <? echo $dataPuestaPersonas[$h][11]; ?> </td>
 
 																																																							<? if($b == 1){ ?>
 																																																							<td> <center><span onclick="deleteItemForm(1, <? echo $dataPuestaPersonas[$h][0]; ?>, <? echo $idEnlace; ?>, <? echo $idPuestaDisposicion; ?>)" title="Eliminar" style="cursor: pointer; color: red; font-size: 18px;" class="glyphicon glyphicon-trash"></span> </center></td>
@@ -553,7 +554,6 @@
 																																																						      <th scope="col">#</th>
 																																																						      <th scope="col">Producto Forestal</th>
 																																																						      <th scope="col"><center>Volumen</center></th>
-																																																						      <th scope="col"><center>Semovientes</center></th>
 																																																						      <th scope="col"><center>Observaciones</center></th>
 																																																						        <? if($b == 1){ ?>
 																																																						      <th scope="col"><center>Accion</center></th>
@@ -569,7 +569,6 @@
 																																																							<td> <? echo ($h+1) ?> </td>
 																																																							<td> <? echo $dataPuestaForesta[$h][1]; ?> </td>
 																																																							<td> <center><? echo $dataPuestaForesta[$h][2]; ?></center> </td>
-																																																							<td> <center><? echo $dataPuestaForesta[$h][3]; ?></center> </td>
 																																																							<td> <center><? echo $dataPuestaForesta[$h][4]; ?></center> </td>
 
 																																																							<? if($b == 1){ ?>
@@ -807,11 +806,11 @@
 
 										<div class="row">
 
-									<?if($typeArch == 12){ ?>
+									<?if($typeArch == 12 && ($idEnlace != 266 && $idEnlace != 233 && $idEnlace != 225) ){ ?>
 										<div class="col-xs-12 col-sm-12 col-md-12"><center><button  style="width: 95%; background-color: #38537e; font-weight: bolder; color: white;" onclick="closeModalPueDispo()" type="button" class="btn redondear" data-dismiss="modal">Salir</button></center></div>
-									<? }else{ ?>
-												<div class="col-xs-12 col-sm-12 col-md-12"><center><button  style="width: 95%; background-color: #38537e; font-weight: bolder; color: white;" onclick="saveDataPuesta( <? echo $typeArch; ?>, <? echo $anio ?>, <? echo $idEnlace; ?>, 0, <? echo $messelected; ?>, <? echo $diaselected ?>, <? echo $typeCheck; ?> )" type="button" class="btn redondear" data-dismiss="modal">Salir y Guardar Edición</button></center></div>
-									<? } ?>
+									<? }else{ if($b == 0){?>
+												<div class="col-xs-12 col-sm-12 col-md-12"><center><button  style="width: 95%; background-color: #38537e; font-weight: bolder; color: white;" onclick="closeModalPueDispo()" type="button" class="btn redondear" data-dismiss="modal">Salir</button></center></div>
+									<? }else{?> <div class="col-xs-12 col-sm-12 col-md-12"><center><button  style="width: 95%; background-color: #38537e; font-weight: bolder; color: white;" onclick="saveDataPuesta( <? echo $typeArch; ?>, <? echo $anio ?>, <? echo $idEnlace; ?>, 0, <? echo $messelected; ?>, <? echo $diaselected ?>, <? echo $typeCheck; ?> )" type="button" class="btn redondear" data-dismiss="modal">Salir y Guardar Edición</button></center></div> <? } }?>
 												  
 										</div> 
 

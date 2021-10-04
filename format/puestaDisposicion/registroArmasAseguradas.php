@@ -43,6 +43,7 @@ if (isset($_POST['textCatCalibre_id'])){ $getTextCatCalibre_id = $_POST['textCat
 if (isset($_POST['textCatAccesorioArma_id'])){ $getTextCatAccesorioArma_id = $_POST['textCatAccesorioArma_id']; }
 if (isset($_POST['textCatMarcaCartuchos_id'])){ $getTextCatMarcaCartuchos_id = $_POST['textCatMarcaCartuchos_id']; }
 if (isset($_POST['textObservaciones'])){ $getTextObservaciones = $_POST['textObservaciones']; }
+if (isset($_POST['textMatricula'])){ $getTextMatricula = $_POST['textMatricula']; }
 if (isset($_POST['idEnlace'])){ $idEnlace = $_POST['idEnlace']; }
 
 ////TIPO DE ACTUALIZACION Y ID DEL ARMA////
@@ -81,9 +82,9 @@ if (isset($_POST['idArma'])){ $idArma = $_POST['idArma']; }
                                           select @insertado = @@IDENTITY
 
 
-                                        INSERT INTO pueDisposi.aseguramientoArmas (idPueDisposicion , idTipoArma , idMarcaArma , idCalibre , idAccesorios , idMarcaCartuchos , observaciones) 
+                                        INSERT INTO pueDisposi.aseguramientoArmas (idPueDisposicion , idTipoArma , idMarcaArma , idCalibre , idAccesorios , idMarcaCartuchos , matricula,  observaciones) 
                                          VALUES(@insertado , $getTextCatTipoArma_id , $getTextCatMarcaArma_id , $getTextCatCalibre_id , 
-                                                $getTextCatAccesorioArma_id , $getTextCatMarcaCartuchos_id , '$getTextObservaciones')
+                                                $getTextCatAccesorioArma_id , $getTextCatMarcaCartuchos_id , '$getTextMatricula', '$getTextObservaciones')
 
 
                                              SELECT MAX(idPuestaDisposicion) AS id FROM pueDisposi.puestaDisposicion   
@@ -135,8 +136,8 @@ if (isset($_POST['idArma'])){ $idArma = $_POST['idArma']; }
                             SET NOCOUNT ON    
 
                                               
-                                          INSERT INTO pueDisposi.aseguramientoArmas (idPueDisposicion , idTipoArma , idMarcaArma , idCalibre , idAccesorios , idMarcaCartuchos , observaciones) 
-                                         VALUES($idPuestaDisposicion , $getTextCatTipoArma_id , $getTextCatMarcaArma_id , $getTextCatCalibre_id ,  $getTextCatAccesorioArma_id , $getTextCatMarcaCartuchos_id , '$getTextObservaciones')
+                                          INSERT INTO pueDisposi.aseguramientoArmas (idPueDisposicion , idTipoArma , idMarcaArma , idCalibre , idAccesorios , idMarcaCartuchos ,  matricula, observaciones) 
+                                         VALUES($idPuestaDisposicion , $getTextCatTipoArma_id , $getTextCatMarcaArma_id , $getTextCatCalibre_id ,  $getTextCatAccesorioArma_id , $getTextCatMarcaCartuchos_id , '$getTextMatricula', '$getTextObservaciones')
 
 
                           COMMIT
@@ -159,6 +160,7 @@ if (isset($_POST['idArma'])){ $idArma = $_POST['idArma']; }
                                            idCalibre = $getTextCatCalibre_id, 
                                            idAccesorios = $getTextCatAccesorioArma_id,
                                            idMarcaCartuchos = $getTextCatMarcaCartuchos_id,
+                                           matricula = '$getTextMatricula',
                                            observaciones = '$getTextObservaciones'
                                            WHERE idArmaAsegurada = $idArma
                                               

@@ -41,7 +41,6 @@ if (isset($_POST["idPuestaDisposicion"])){
 
 if (isset($_POST['catMadera_id'])){ $getCatMadera_id = $_POST['catMadera_id']; }
 if (isset($_POST['volumen'])){ $getVolumen = $_POST['volumen']; }
-if (isset($_POST['semoviente'])){ $semoviente = $_POST['semoviente']; }
 
 
 if (isset($_POST['observaciones'])){ $getObservaciones = $_POST['observaciones']; }
@@ -76,8 +75,8 @@ if (isset($_POST['idForestales'])){ $idForestales = $_POST['idForestales']; }
                                           select @insertado = @@IDENTITY
 
 
-                                            INSERT INTO pueDisposi.Forestales (idPueDisposicion , idGenero , volumen , semoviente , observaciones) 
-                                              VALUES(@insertado , $getCatMadera_id, $getVolumen , $semoviente, '$getObservaciones')
+                                            INSERT INTO pueDisposi.Forestales (idPueDisposicion , idGenero , volumen , observaciones) 
+                                              VALUES(@insertado , $getCatMadera_id, $getVolumen , '$getObservaciones')
 
 
                                              SELECT MAX(idPuestaDisposicion) AS id FROM pueDisposi.puestaDisposicion   
@@ -129,8 +128,8 @@ if (isset($_POST['idForestales'])){ $idForestales = $_POST['idForestales']; }
                             SET NOCOUNT ON    
 
                                           
-                                            INSERT INTO pueDisposi.Forestales (idPueDisposicion , idGenero , volumen , semoviente , observaciones) 
-                                              VALUES($idPuestaDisposicion , $getCatMadera_id, $getVolumen , $semoviente, 
+                                            INSERT INTO pueDisposi.Forestales (idPueDisposicion , idGenero , volumen , observaciones) 
+                                              VALUES($idPuestaDisposicion , $getCatMadera_id, $getVolumen , 
                                               '$getObservaciones')
 
 
@@ -151,7 +150,7 @@ if (isset($_POST['idForestales'])){ $idForestales = $_POST['idForestales']; }
                                   SET NOCOUNT ON 
 
                                     UPDATE pueDisposi.Forestales SET idGenero = $getCatMadera_id , volumen = $getVolumen, 
-                                           semoviente = $semoviente , observaciones = '$getObservaciones'
+                                           observaciones = '$getObservaciones'
                                            WHERE idForestales = $idForestales
                                               
                                 COMMIT
