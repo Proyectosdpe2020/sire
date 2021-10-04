@@ -1,5 +1,230 @@
 <?php
 
+//////// FUCION PROVISIONAL PARA SABER EL TRAMITE DE CADA MP /////////////////
+
+function getTramitesActuales($conn, $idUnidad, $idMp, $anio, $mes){
+				////////////// SI EL MES ES 7 /////////////////////////	
+				////////////// SI EL MES ES 7 /////////////////////////
+				////////////// SI EL MES ES 7 /////////////////////////
+
+				$d11 = getCountNucs($conn, 1, 7, $anio, $idUnidad, $idMp, 0);
+
+				$d21 = getCountNucs($conn, 22, 7, $anio, $idUnidad, $idMp, 1);
+				$d31 = getCountNucs($conn, 22, 7, $anio, $idUnidad, $idMp, 0);
+
+				$d41 = getCountNucs($conn, 2, 7, $anio, $idUnidad, $idMp, 0);
+				$d51 = getCountNucs($conn, 5, 7, $anio, $idUnidad, $idMp, 0);
+				$d61 = getCountNucs($conn, 20, 7, $anio, $idUnidad, $idMp, 0);
+				$d71 = getCountNucs($conn, 21, 7, $anio, $idUnidad, $idMp, 0);
+				$d81 = getCountNucs($conn, 3, 7, $anio, $idUnidad, $idMp, 0);
+				$d91 = getCountNucs($conn, 23, 7, $anio, $idUnidad, $idMp, 0);
+				$d101 = getCountNucs($conn, 24, 7, $anio, $idUnidad, $idMp, 0);
+				$d111 = getCountNucs($conn, 25, 7, $anio, $idUnidad, $idMp, 0);
+				$d121 = getCountNucs($conn, 15, 7, $anio, $idUnidad, $idMp, 0);
+
+				$existNewJulio = getDataCarpetasDatosExistenciaAnteriorV2($conn, 7, $anio, $idUnidad, $idMp);
+				$exiAntJulio = getExistenciaAnterior($conn, 6, $anio, $idUnidad, $idMp);
+
+				$totaTrabJulio = $exiAntJulio[0][0] + $existNewJulio[0][0] + $d11[0][0] + $existNewJulio[0][1];
+				$totDeterminacionesJulio = $d21[0][0] + $d31[0][0] + $d41[0][0] + $d51[0][0] + $d61[0][0] + $d71[0][0] + $d81[0][0] + $d91[0][0] + $d101[0][0] + $d111[0][0] + $d121[0][0];
+
+				$enviadsJulio = $existNewJulio[0][2] + $existNewJulio[0][3] + $existNewJulio[0][4];
+				$enviaddetermnsJulio = $enviadsJulio + $totDeterminacionesJulio;
+				$totTramiteJulio = $totaTrabJulio - $enviaddetermnsJulio;
+				////////////// SI EL MES ES 7 /////////////////////////
+				////////////// SI EL MES ES 7 /////////////////////////
+				////////////// SI EL MES ES 8 /////////////////////////
+				////////////// SI EL MES ES 8 /////////////////////////
+				////////////// SI EL MES ES 8 /////////////////////////
+
+				$d1 = getCountNucs($conn, 1, 8, $anio, $idUnidad, $idMp, 0);
+
+				$d2 = getCountNucs($conn, 22, 8, $anio, $idUnidad, $idMp, 1);
+				$d3 = getCountNucs($conn, 22, 8, $anio, $idUnidad, $idMp, 0);
+
+				$d4 = getCountNucs($conn, 2, 8, $anio, $idUnidad, $idMp, 0);
+				$d5 = getCountNucs($conn, 5, 8, $anio, $idUnidad, $idMp, 0);
+				$d6 = getCountNucs($conn, 20, 8, $anio, $idUnidad, $idMp, 0);
+				$d7 = getCountNucs($conn, 21, 8, $anio, $idUnidad, $idMp, 0);
+				$d8 = getCountNucs($conn, 3, 8, $anio, $idUnidad, $idMp, 0);
+				$d9 = getCountNucs($conn, 23, 8, $anio, $idUnidad, $idMp, 0);
+				$d10 = getCountNucs($conn, 24, 8, $anio, $idUnidad, $idMp, 0);
+				$d11 = getCountNucs($conn, 25, 8, $anio, $idUnidad, $idMp, 0);
+				$d12 = getCountNucs($conn, 15, 8, $anio, $idUnidad, $idMp, 0);
+
+				$existNewAgos = getDataCarpetasDatosExistenciaAnteriorV2($conn, 8, $anio, $idUnidad, $idMp);
+
+				$totaTrabAgo = $totTramiteJulio + $existNewAgos[0][0] + $d1[0][0] + $existNewAgos[0][1];
+				$totDeterminacionesAgo = $d2[0][0] + $d3[0][0] + $d4[0][0] + $d5[0][0] + $d6[0][0] + $d7[0][0] + $d8[0][0] + $d9[0][0] + $d10[0][0] + $d11[0][0] + $d12[0][0];
+
+				$enviadsAgo = $existNewAgos[0][2] + $existNewAgos[0][3] + $existNewAgos[0][4];
+				$enviaddetermnsAgo = $enviadsAgo + $totDeterminacionesAgo;
+
+				$totTramiteAgosto = $totaTrabAgo - $enviaddetermnsAgo;
+
+				////////////// SI EL MES ES 8 /////////////////////////
+				////////////// SI EL MES ES 8 /////////////////////////
+				////////////// SI EL MES ES 8 /////////////////////////
+				////////////// SI EL MES ES 9 /////////////////////////
+				////////////// SI EL MES ES 9 /////////////////////////
+				////////////// SI EL MES ES 9 /////////////////////////
+
+				$dd1 = getCountNucs($conn, 1, 9, $anio, $idUnidad, $idMp, 0);
+
+				$dd2 = getCountNucs($conn, 22, 9, $anio, $idUnidad, $idMp, 1);
+				$dd3 = getCountNucs($conn, 22, 9, $anio, $idUnidad, $idMp, 0);
+
+				$dd4 = getCountNucs($conn, 2, 9, $anio, $idUnidad, $idMp, 0);
+				$dd5 = getCountNucs($conn, 5, 9, $anio, $idUnidad, $idMp, 0);
+				$dd6 = getCountNucs($conn, 20, 9, $anio, $idUnidad, $idMp, 0);
+				$dd7 = getCountNucs($conn, 21, 9, $anio, $idUnidad, $idMp, 0);
+				$dd8 = getCountNucs($conn, 3, 9, $anio, $idUnidad, $idMp, 0);
+				$dd9 = getCountNucs($conn, 23, 9, $anio, $idUnidad, $idMp, 0);
+				$dd10 = getCountNucs($conn, 24, 9, $anio, $idUnidad, $idMp, 0);
+				$dd11 = getCountNucs($conn, 25, 9, $anio, $idUnidad, $idMp, 0);
+				$dd12 = getCountNucs($conn, 15, 9, $anio, $idUnidad, $idMp, 0);
+
+				$existNewSep = getDataCarpetasDatosExistenciaAnteriorV2($conn, 9, $anio, $idUnidad, $idMp, 0);
+
+				$totaTrabSep = $totTramiteAgosto + $existNewSep[0][0] + $dd1[0][0] + $existNewSep[0][1];
+				$totDeterminacionesSep = $dd2[0][0] + $dd3[0][0] + $dd4[0][0] + $dd5[0][0] + $dd6[0][0] + $dd7[0][0] + $dd8[0][0] + $dd9[0][0] + $dd10[0][0] + $dd11[0][0] + $dd12[0][0];
+
+				$enviadsSep = $existNewSep[0][2] + $existNewSep[0][3] + $existNewSep[0][4];
+				$enviaddetermnsSep = $enviadsSep + $totDeterminacionesSep;
+
+				$totTramiteSeptiembre = $totaTrabSep - $enviaddetermnsSep;
+
+				////////////// SI EL MES ES 9 /////////////////////////
+				////////////// SI EL MES ES 9 /////////////////////////
+				////////////// SI EL MES ES 9 /////////////////////////
+
+				if ($mes == 7) {
+
+
+					$tramAnterior =  $exiAntJulio[0][0];
+
+					$de11 = getCountNucs($conn, 1, 7, $anio, $idUnidad, $idMp, 0);
+
+					$de21 = getCountNucs($conn, 22, 7, $anio, $idUnidad, $idMp, 1);
+					$de31 = getCountNucs($conn, 22, 7, $anio, $idUnidad, $idMp, 0);
+
+					$de41 = getCountNucs($conn, 2, 7, $anio, $idUnidad, $idMp, 0);
+					$de51 = getCountNucs($conn, 5, 7, $anio, $idUnidad, $idMp, 0);
+					$de61 = getCountNucs($conn, 20, 7, $anio, $idUnidad, $idMp, 0);
+					$de71 = getCountNucs($conn, 21, 7, $anio, $idUnidad, $idMp, 0);
+					$de81 = getCountNucs($conn, 3, 7, $anio, $idUnidad, $idMp, 0);
+					$de91 = getCountNucs($conn, 23, 7, $anio, $idUnidad, $idMp, 0);
+					$de101 = getCountNucs($conn, 24, 7, $anio, $idUnidad, $idMp, 0);
+					$de111 = getCountNucs($conn, 25, 7, $anio, $idUnidad, $idMp, 0);
+					$de121 = getCountNucs($conn, 15, 7, $anio, $idUnidad, $idMp, 0);
+
+
+					$iniciadas = $existNewJulio[0][0];
+					$recibidas = $existNewJulio[0][1];
+					$totalTrabajar = $totaTrabJulio;
+					$judicializadas = $de21[0][0] + $de31[0][0];
+					$totResoluciones = $totDeterminacionesJulio;
+					$enviUATP = $existNewJulio[0][2];
+					$enviUI = $existNewJulio[0][3];
+					$enviMp = $existNewJulio[0][4];
+
+					$tramiteFinls = 	$totTramiteJulio;
+				}
+				if ($mes == 8) {
+
+
+
+					$tramAnterior =  $totTramiteJulio;
+
+					$de11 = getCountNucs($conn, 1, 8, $anio, $idUnidad, $idMp, 0);
+
+					$de21 = getCountNucs($conn, 22, 8, $anio, $idUnidad, $idMp, 1);
+					$de31 = getCountNucs($conn, 22, 8, $anio, $idUnidad, $idMp, 0);
+
+					$de41 = getCountNucs($conn, 2, 8, $anio, $idUnidad, $idMp, 0);
+					$de51 = getCountNucs($conn, 5, 8, $anio, $idUnidad, $idMp, 0);
+					$de61 = getCountNucs($conn, 20, 8, $anio, $idUnidad, $idMp, 0);
+					$de71 = getCountNucs($conn, 21, 8, $anio, $idUnidad, $idMp, 0);
+					$de81 = getCountNucs($conn, 3, 8, $anio, $idUnidad, $idMp, 0);
+					$de91 = getCountNucs($conn, 23, 8, $anio, $idUnidad, $idMp, 0);
+					$de101 = getCountNucs($conn, 24, 8, $anio, $idUnidad, $idMp, 0);
+					$de111 = getCountNucs($conn, 25, 8, $anio, $idUnidad, $idMp, 0);
+					$de121 = getCountNucs($conn, 15, 8, $anio, $idUnidad, $idMp, 0);
+
+
+					$iniciadas = $existNewAgos[0][0];
+					$recibidas = $existNewAgos[0][1];
+					$totalTrabajar = $totaTrabAgo;
+					$judicializadas = $de21[0][0] + $de31[0][0];
+					$totResoluciones = $totDeterminacionesAgo;
+					$enviUATP = $existNewAgos[0][2];
+					$enviUI = $existNewAgos[0][3];
+					$enviMp = $existNewAgos[0][4];
+
+					$tramiteFinls = 	$totTramiteAgosto;
+				}
+
+				if ($mes == 9) {
+
+
+
+					$tramAnterior =  $totTramiteAgosto;
+
+
+
+					$de11 = getCountNucs($conn, 1, 9, $anio, $idUnidad, $idMp, 0);
+
+					$de21 = getCountNucs($conn, 22, 9, $anio, $idUnidad, $idMp, 1);
+					$de31 = getCountNucs($conn, 22, 9, $anio, $idUnidad, $idMp, 0);
+
+					$de41 = getCountNucs($conn, 2, 9, $anio, $idUnidad, $idMp, 0);
+					$de51 = getCountNucs($conn, 5, 9, $anio, $idUnidad, $idMp, 0);
+					$de61 = getCountNucs($conn, 20, 9, $anio, $idUnidad, $idMp, 0);
+					$de71 = getCountNucs($conn, 21, 9, $anio, $idUnidad, $idMp, 0);
+					$de81 = getCountNucs($conn, 3, 9, $anio, $idUnidad, $idMp, 0);
+					$de91 = getCountNucs($conn, 23, 9, $anio, $idUnidad, $idMp, 0);
+					$de101 = getCountNucs($conn, 24, 9, $anio, $idUnidad, $idMp, 0);
+					$de111 = getCountNucs($conn, 25, 9, $anio, $idUnidad, $idMp, 0);
+					$de121 = getCountNucs($conn, 15, 9, $anio, $idUnidad, $idMp, 0);
+
+					$iniciadasCd = $existNewSep[0][5];
+					$iniciadasSd = $existNewSep[0][6];
+					$iniciadas = $existNewSep[0][0];
+					$recibidas = $existNewSep[0][1];
+					$totalTrabajar = $totaTrabSep;
+					$judicializadas = $de21[0][0] + $de31[0][0];
+					$totResoluciones = $totDeterminacionesSep;
+					$enviUATP = $existNewSep[0][2];
+					$enviUI = $existNewSep[0][3];
+					$enviMp = $existNewSep[0][4];
+
+					$tramiteFinls = 	$totTramiteSeptiembre;
+				}
+
+				return $tramiteFinls;
+
+
+}
+
+//////// FUCION PROVISIONAL PARA SABER EL TRAMITE DE CADA MP /////////////////
+
+
+
+function getDataCarpeDatos($conn, $idMp, $mes, $anio, $idunidad){
+
+	$query = " SELECT idCarpetasDatos FROM carpetasDatos WHERE idMp = $idMp AND idMes = $mes AND idAnio = $anio AND idUnidad = $idunidad";
+		
+
+$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))	
+	{
+		$arreglo[$indice][0]=$row['idCarpetasDatos'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}	
+
+}
 
 function getDataUSER($conn, $idusername){
 

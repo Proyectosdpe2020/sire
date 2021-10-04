@@ -40,6 +40,7 @@ function descargarHisrtoricV2(format, idUnidad, idEnlace) {
 
 	var anio = document.getElementById("anioHistorique").value;
 	var mes = document.getElementById("mesHistorique").value;
+	document.getElementById('laodimgmain').style.display = "block";
 
 	ajax = objetoAjax();
 	ajax.open("POST", "carpetas/descargarHistorico.php");
@@ -49,7 +50,11 @@ function descargarHisrtoricV2(format, idUnidad, idEnlace) {
 	ajax.onreadystatechange = function () {
 		if (ajax.readyState == 4 && ajax.status == 200) {
 			cont.innerHTML = ajax.responseText;
-			document.location.href = "carpetas/downloadReport/" + nombrereporte + ".xlsx";
+			
+				document.getElementById('laodimgmain').style.display = "none";
+				document.location.href = "carpetas/downloadReport/" + nombrereporte + ".xlsx";
+		
+			
 		}
 	}
 	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -504,6 +509,12 @@ function validarReglasNUC(nuc, estatus, mes, anio, nuc, idUnidad, idMp, deten, e
 						swal("", "El NUC fue rechazado por el CMASC por el siguiente motivo:\n\n "+objDatos.motivoRechazo+'.'+'\n\n Favor de comunicarse al CMASC.', "warning");
 						clearModalNUcsCarpe();
 					}
+					if (objDatos.first == "NOCONTABILIZA") {
+
+						/// OBTENER DATOS DEL NUC DONDE Y QUIEN LO REINICIO Y LA FECHA
+						swal("", "El NUC fue recibido por CMASC pero fue recibido despues de la fecha limite (día 25 de cada mes), favor de ingresarlo el siguiente mes de captura", "warning");
+						clearModalNUcsCarpe();
+					}
 
 
 				}
@@ -515,7 +526,7 @@ function validarReglasNUC(nuc, estatus, mes, anio, nuc, idUnidad, idMp, deten, e
 		}
 	}
 	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	ajax.send("&acc=" + acc + "&nuc=" + nuc + "&estatus=" + estatus);
+	ajax.send("&acc=" + acc + "&nuc=" + nuc + "&estatus=" + estatus + "&mes=" + mes + "&anio=" + anio);
 
 
 }
@@ -679,6 +690,10 @@ function saveDataCarpetasV2(mes, anio, idUnidad, idMp) {
 }
 
 
+
+///////// VALIDAR Y ACTUALIZAR DATOS DE TRAMITE FINAL DE CADA MP ////////////////////////////
+
+
 function updateTotalTrabajar(idMp, anio, mes, idUnidad) {
 
 
@@ -746,6 +761,71 @@ function mostrarModalValidacionNUcsV2(validado, idEnlace, mesCapturar, anioCaptu
 }
 
 
+///////// VALIDAR Y ACTUALIZAR DATOS DE TRAMITE FINAL DE CADA MP ////////////////////////////
+
+function updateTramites(idEnlace, anio, mes, format){
+
+	acc = "updateTramites"; 
+	//cont = document.getElementById("totTrabajarContent");
+	ajax = objetoAjax();
+	ajax.open("POST", "carpetas/accionesNucsCarpetas.php");
+
+	document.getElementById('laodimgmain').style.display = "block";
+
+	ajax.onreadystatechange = function () {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			//cont.innerHTML = ajax.responseText;
+			var json = ajax.responseText;
+			var obj = eval("(" + json + ")");
+
+			if(obj.first == "NOS"){ 
+				swal("", "No se han capturado todos los Ministerios Públicos.", "warning"); 
+				document.getElementById('laodimgmain').style.display = "none";
+			}else{
+
+				if (obj.first == "NO") { swal("", "No se actualizaron los tramites.", "warning"); } else {
+					if (obj.first == "SI") {						
+						UpdatesEnviado(idEnlace, format);
+					}
+				}
+
+			}
+
+		
+		}
+	}
+	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	ajax.send("&acc=" + acc + "&idEnlace=" + idEnlace + "&mes=" + mes
+		+ "&anio=" + anio);
+
+}
+
+function UpdatesEnviado(idEnlace, format){
+
+
+	ajax = objetoAjax();
+	ajax.open("POST", "carpetas/actualizarEnviado.php");
+	ajax.onreadystatechange = function () {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			var json = ajax.responseText;
+			var obj = eval("(" + json + ")");
+			if (obj.first == "NO") { swal("", "No se envió verifique los datos.", "warning"); } else {
+				if (obj.first == "SI") {
+					swal("", "Tu información ha sido enviada.", "success");
+					document.getElementById('laodimgmain').style.display = "none";
+					//descargar(format, idUnidad, mes, anio, idEnlace);
+					setTimeout("location.href = 'index.php?format=" + format + "';", 400);
+				}
+			}
+		}
+	}
+	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	ajax.send('&idEnlace=' + idEnlace + '&format=' + format);
+
+
+}
+
+
 function enviarDPEvalidatesV2(anio, mes, incorrectReni, idEnlace, format) {
 
 
@@ -784,23 +864,8 @@ function enviarDPEvalidatesV2(anio, mes, incorrectReni, idEnlace, format) {
 			function (isConfirm) {
 				if (isConfirm) {
 
-					ajax = objetoAjax();
-					ajax.open("POST", "carpetas/actualizarEnviado.php");
-					ajax.onreadystatechange = function () {
-						if (ajax.readyState == 4 && ajax.status == 200) {
-							var json = ajax.responseText;
-							var obj = eval("(" + json + ")");
-							if (obj.first == "NO") { swal("", "No se envió verifique los datos.", "warning"); } else {
-								if (obj.first == "SI") {
-									swal("", "Tu información ha sido enviada.", "success");
-									//descargar(format, idUnidad, mes, anio, idEnlace);
-									setTimeout("location.href = 'index.php?format=" + format + "';", 400);
-								}
-							}
-						}
-					}
-					ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-					ajax.send('&idEnlace=' + idEnlace + '&format=' + format);
+					updateTramites(idEnlace, anio, mes, format);
+				
 				}
 			});
 	}
@@ -814,11 +879,15 @@ function cargaContHistoricoEnlaceDatosV2(idUsuario, idEnlace, format, idUnidad) 
 	cont = document.getElementById('contenido');
 	ajax = objetoAjax();
 	ajax.open("POST", "repositorio/historicoEnlaceDatos.php");
+	document.getElementById('laodimgmain').style.display = "block";
 
 	ajax.onreadystatechange = function () {
 		if (ajax.readyState == 4 && ajax.status == 200) {
 
 			cont.innerHTML = ajax.responseText;
+			if(ajax.responseText){
+				document.getElementById('laodimgmain').style.display = "none";
+			}
 		}
 	}
 	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");

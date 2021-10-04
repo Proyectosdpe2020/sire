@@ -392,11 +392,15 @@ function cargaContHistoricoEnlaceDatos(idUsuario, idEnlace, format, idUnidad) {
 	cont = document.getElementById('contenido');
 	ajax = objetoAjax();
 	ajax.open("POST", "repositorio/historicoEnlaceDatos.php");
+	document.getElementById('laodimgmain').style.display = "block";
 
 	ajax.onreadystatechange = function () {
 		if (ajax.readyState == 4 && ajax.status == 200) {
 
 			cont.innerHTML = ajax.responseText;
+			if(ajax.responseText){
+				document.getElementById('laodimgmain').style.display = "none";
+			}
 		}
 	}
 	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -554,11 +558,15 @@ function cargaContHistoricoEnlaceDatosLiti(idUsuario, idEnlace, format, idUnidad
 	cont = document.getElementById('contenido');
 	ajax = objetoAjax();
 	ajax.open("POST", "repositorio/historicoEnlaceDatosLiti.php");
+	document.getElementById('laodimgmain').style.display = "block";
 
 	ajax.onreadystatechange = function () {
 		if (ajax.readyState == 4 && ajax.status == 200) {
 
 			cont.innerHTML = ajax.responseText;
+			if(ajax.responseText){
+				document.getElementById('laodimgmain').style.display = "none";
+			}
 		}
 	}
 	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -570,6 +578,8 @@ function getDataHistoricaBD(idUnidad, idEnlace) {
 	mes = document.getElementById("mesHistorique").value;
 	anio = document.getElementById("anioHistorique").value;
 
+	document.getElementById('laodimgmain').style.display = "block";
+
 	cont = document.getElementById('contTableDataHistorique');
 	ajax = objetoAjax();
 	ajax.open("POST", "repositorio/historicoEnlaceDatosTable.php");
@@ -578,6 +588,9 @@ function getDataHistoricaBD(idUnidad, idEnlace) {
 		if (ajax.readyState == 4 && ajax.status == 200) {
 
 			cont.innerHTML = ajax.responseText;
+			if(ajax.responseText){
+				document.getElementById('laodimgmain').style.display = "none";
+			}
 		}
 	}
 	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
