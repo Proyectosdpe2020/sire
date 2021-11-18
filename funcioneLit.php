@@ -363,7 +363,7 @@ function getLastDeterminacionCarpetalit($conn, $idCarp){
 function getDistincCarpetasAgenteDetemrn20Lit($conn, $idMp, $mes, $anio,  $deten ,  $estatus, $idUnidad){
 		
 
-		if($estatus == 60 || $estatus == 61 || $estatus == 63 || $estatus == 114 || $estatus == 115 || $estatus == 116 || $estatus == 117 || $estatus == 119 || $estatus == 120 || $estatus == 121 || $estatus == 122 || $estatus == 123 || $estatus == 124 || $estatus == 125 || $estatus == 126 || $estatus == 127 || $estatus == 128 || $estatus == 140 ){
+		if($estatus == 60 || $estatus == 61 || $estatus == 63 || $estatus == 114 || $estatus == 115 || $estatus == 116 || $estatus == 117 || $estatus == 119 || $estatus == 120 || $estatus == 121 || $estatus == 122 || $estatus == 123 || $estatus == 124 || $estatus == 125 || $estatus == 126 || $estatus == 127 || $estatus == 128 || $estatus == 140 || $estatus == 3 ){
 
 
 				$query = "  SELECT nuc FROM estatusNucs 

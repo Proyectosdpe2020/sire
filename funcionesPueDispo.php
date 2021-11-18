@@ -209,7 +209,7 @@ WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND 
 }else{
   
  //Consulta para usuarios regionales Y de Homicidios
-	if($idenlace == 192 || $idenlace == 193 || $idenlace == 197 || $idenlace == 198 || $idenlace == 199 || $idenlace == 200 || $idenlace == 201 	|| $idenlace == 202 || $idenlace == 203 || $idenlace == 266 || $idenlace == 233 || $idenlace == 225){
+	if($idenlace == 192 || $idenlace == 193 || $idenlace == 197 || $idenlace == 198 || $idenlace == 199 || $idenlace == 200 || $idenlace == 201 	|| $idenlace == 202 || $idenlace == 203 || $idenlace == 266 || $idenlace == 233 || $idenlace == 225 || $idenlace == 311){
    
 			$valoresEnlaceConsulta ="";
 			$arrFiscEnlaceConsulta = getFiscaliasEnlaceConsulta($conn, $idenlace); 
@@ -1327,10 +1327,12 @@ function getMesCapEnlacePolicia($conn, $idEnlace, $idFormato){
 
 //Funcion para validar fecha de captura
 function validateMonthCapture($mesSelected, $anioSelected){
-	$diamesActual= date("d");
+	$diamesActual= date("j");
 	$mesActual = date("m");
 	$anioActual = date("Y");
 	$daysToSendData = array(1,2,3); //Podra 
+
+	$diferencia = abs($mesActual - $mesSelected);
 
 	$valida[0][0] = "NO"; //SIN EDITAR
 	$valida[0][1] = "SI"; //PERMITE EDITAR
@@ -1342,7 +1344,7 @@ function validateMonthCapture($mesSelected, $anioSelected){
 				return $valida[0][1];
 			}
 	}else{
-		if(in_array($diamesActual, $daysToSendData)){
+		if(in_array($diamesActual, $daysToSendData) && $diferencia == 1){
 			return $valida[0][1];
 		}else{
 			return $valida[0][0];

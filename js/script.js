@@ -19,60 +19,80 @@ function objetoAjax() {
 
 function loadBiEstadistics(idEnlace) {
 
-	if (idEnlace == 14) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiZDU4OTdkZjItOWE2MC00OTQwLTkxNzEtYWU0YTQ4MjhlYThjIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 1) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiNDczY2FmOWUtY2Q4Yi00ZTFhLWJhZGYtYTMwMGFkZDVhMThhIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 16) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiNWQ5Zjc2YjUtNDMxZC00OTJlLTg1MGItMjZlMTgxZWI0MTJkIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 22) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiNTkwOGIwN2MtMTI1MC00OWUwLWI1MTItNjI1NjA1MjkxNzk5IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 18) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiZjQ2MGZlMzktMmRiMy00YTI5LWJiZjQtNTc1MWE5NTRmYjlmIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 17) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiZmYzZjliYmUtYmM3Mi00NTBjLThmMWItNDYwZDRlZDc2MWJhIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 21) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiNmEyMDNlYzAtMGQ2My00ZjgyLWIxZmQtOTQ2NjRhN2I1NmNiIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 15) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiZTY4NzljNjItODVmNS00NTZlLWI5YjktNmJlOTI5NmE3NGY0IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 19) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiZmYzYThmOTUtNzg1OC00MmVlLWJlZjMtNjM1OThiZGYyZWFiIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 23) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiNmMxNGQ1MjYtNTIzNC00MjIyLWJmZjAtOGU5NGNhMGRmNWI0IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 31) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMjA5ZjBmYjItNzZkZi00NjI1LTk4MmMtZmE5NjZiOWM4ZDE2IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 29) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMjA5ZjBmYjItNzZkZi00NjI1LTk4MmMtZmE5NjZiOWM4ZDE2IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 27) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMjA5ZjBmYjItNzZkZi00NjI1LTk4MmMtZmE5NjZiOWM4ZDE2IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 3) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMjA5ZjBmYjItNzZkZi00NjI1LTk4MmMtZmE5NjZiOWM4ZDE2IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 5) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiN2U3ZTZjY2MtNzA2YS00NzA3LTgxNTUtZmMyZGQ3M2QxNWViIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9&pageName=ReportSectionb8b91ccc43aec5e1d655', '_blank'); }
-	if (idEnlace == 26) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiZGRlYTRhOGEtMTRhNC00M2YyLTlkMTktMGY1YmQxZDM1MTczIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 2) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiOWQ2NjFkNmItZTk0YS00NTA5LTk3YjYtYTFjNzRiZDBiYjgzIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 6) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiODI3OTA2ZWMtNjUyNS00ZDBjLTkzMWYtZjFhNmZhMzkzODUyIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 37) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMTk3ZGFmYzQtZjFiMi00OGY5LWFkN2UtNGIxNjMyYmQ2MGNlIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9&pageName=ReportSectionb8b91ccc43aec5e1d655', '_blank'); }
-	if (idEnlace == 66) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiYmEyYTdiODAtYzlkYy00NzFkLWI5NjQtMmIxOWU1ZDYzNDk1IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 10) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiZmE2ZGY4MTEtM2RjNy00ODFkLTk2ZDAtODI2NmE5YTg4ZTFjIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 28) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMzU5ZDFlZmYtNGIwYy00Yzk3LWFiNDctN2FjZTk1M2RiNzA1IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 30) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMzU5ZDFlZmYtNGIwYy00Yzk3LWFiNDctN2FjZTk1M2RiNzA1IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 9) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiZDM2MThlZGMtN2M2NC00ZmY4LWFiOTgtYzA1NmIxOGNiOGZmIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 12) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiNDY3MWFmMTEtZDUzNi00M2JiLWEyYjctOWE2NjljZWM5MmFiIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 38) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiOTgxNGE4OWItNGI3NC00NGU1LThmYmMtYjRlZmU2M2Q5N2Y2IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 34) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiNTYwNjM0MGEtYzA2OS00MTVkLWE1ZDUtZDAwNTNmMWVlMjdmIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9&pageName=ReportSectionb8b91ccc43aec5e1d655', '_blank'); }
-	if (idEnlace == 35) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiNTYwNjM0MGEtYzA2OS00MTVkLWE1ZDUtZDAwNTNmMWVlMjdmIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9&pageName=ReportSectionb8b91ccc43aec5e1d655', '_blank'); }
-	if (idEnlace == 33) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiYmEyYTdiODAtYzlkYy00NzFkLWI5NjQtMmIxOWU1ZDYzNDk1IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 36) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiYmEyYTdiODAtYzlkYy00NzFkLWI5NjQtMmIxOWU1ZDYzNDk1IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 14) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiYWI0YWIzNWQtNGVjMy00MTc1LTg4ZGUtNDYxODgxZWNmZjFmIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 1) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiZTFjYjQ5OWMtMTE4YS00NzEwLTllODQtMGVjOGI4YzNjOTQzIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 16) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiOGQ1MjY3MWMtMzVkYy00ODRmLThlZTgtMTkwNWU3YjlmMmNiIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 22) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiZWI3MWMzNTEtZDgyMi00MjJmLWE4NzctOTdjMzJlZjNlMWQxIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 18) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMjYyZGY4ODAtMGFlZi00Y2I0LTllMTktNWVhYzI2ZjJiZmNmIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 17) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiYTlmNWM2YWUtNTdkOS00NWZlLWIxMmEtMzZkMzllYjU3MWZkIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 21) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMjhjZmM3NDQtMTA5Yy00MmEwLWFjYTYtYjRiYTQ2YzlkY2Q3IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 15) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiNzI1MWM1NWItNDNlMy00MGQyLWI4NGYtMDdjMTg5YjgwNWQ4IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 19) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiNDA3ZGZmNTAtMjUxNC00ZDRmLWEyYTUtNzU5YzIxZjY4Yzc5IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 23) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiOGVhOGM5MTQtNjg1MC00NmNiLTg1N2QtM2NkNDY4MTQ1ZjNlIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 31) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMGJlYTdhZDUtMWZiNC00YTk0LTk3YTctZTgwMGI0MGJkNjBjIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 29) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMGJlYTdhZDUtMWZiNC00YTk0LTk3YTctZTgwMGI0MGJkNjBjIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 27) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMGJlYTdhZDUtMWZiNC00YTk0LTk3YTctZTgwMGI0MGJkNjBjIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 3) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMGJlYTdhZDUtMWZiNC00YTk0LTk3YTctZTgwMGI0MGJkNjBjIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 5) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMTdhMWJhYTItMjg1MS00MTg0LTlhMDYtYjZmYmRlZGNhMWM2IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 26) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiZTk2OWRjNTctYTg3OC00OTdmLWIwYWYtM2E4MDJmY2Q1YjQzIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 2) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMDkyOTE3NjQtZGM5Mi00ZGU3LTg2MDctOGFlNjk0YWJlNDExIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 6) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMGJmNGM3OGEtYmRmMC00ZGU0LWI0NTktMDc1MmZkY2U5ODZiIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 37) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMDVmMmE2Y2UtYjQ4OC00ZTU1LTk4YTItOTcwMTM0NTlkZjQ1IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 66) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMDdiZjc4NjktYWJjYy00OWE2LTg1NTEtMDE0NWZlZDNkMGQ5IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 10) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMjc4OWNlNDMtYmNjMS00OWM4LTg5ZGMtMzliYzhkNzQwZWM0IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 28) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMGM2MWMyYTItNjY4MC00YmY4LTkzMDktMDM2Njc1MDUzNGM2IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 30) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMGM2MWMyYTItNjY4MC00YmY4LTkzMDktMDM2Njc1MDUzNGM2IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 9) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiYjFhM2MzY2EtNGIwYS00ZDA0LTkwYWYtZjZmZWViYjM2ZGFjIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 12) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiY2MxMTg2ZDUtMzYwYS00ZTk2LWFjMTMtMTk3MGI0OGEwMDdmIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 38) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiNjg1NjI2MTItYjg0YS00MTY0LWEzYjUtN2M2NzhlNmZlODZkIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 34) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiYmMyMmQwM2MtYjJlMC00ZTllLWE4ODktZWJhMjFiOTQ3NzcwIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 35) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiYmMyMmQwM2MtYjJlMC00ZTllLWE4ODktZWJhMjFiOTQ3NzcwIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 33) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMDdiZjc4NjktYWJjYy00OWE2LTg1NTEtMDE0NWZlZDNkMGQ5IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 36) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMDdiZjc4NjktYWJjYy00OWE2LTg1NTEtMDE0NWZlZDNkMGQ5IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 8) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMTNiOTJhMWEtZmNiNi00YzRlLTk3OWMtOWM5YTRmYTVjMWYzIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 65) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMGJlYTdhZDUtMWZiNC00YTk0LTk3YTctZTgwMGI0MGJkNjBjIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 80) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiY2MxMTg2ZDUtMzYwYS00ZTk2LWFjMTMtMTk3MGI0OGEwMDdmIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+
 }
 
 function loadBiEstadisticsLiti(idEnlace) {
 
-	if (idEnlace == 14 || idEnlace == 50) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMTZlMzMwMWYtNTBkMi00YTc1LThkMmUtYTNlNTQzN2FjOWE1IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }	
-	if (idEnlace == 16 || idEnlace == 56) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMmJmOWU1NDItMDljZi00OTIwLTg2MWUtYjc1ZmRmMjY3ZmRiIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }	
-	if (idEnlace == 22 || idEnlace == 55) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiZGE2OTk4NDUtMTEyNi00MzMxLTliYzItOWJhZTI4YWExOTAwIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }	
-	if (idEnlace == 18 || idEnlace == 52) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiZjJiNmZlYWYtNmVmMC00YjllLTkwOTgtYTM1Yjc4OTEwZDI1IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }	
-	if (idEnlace == 17 || idEnlace == 51) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMDI0MGQwMTAtMjU4NS00MGUwLWJhZWMtMmY4MzUxNzY1ODJmIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 21 || idEnlace == 48) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMDRlMTBmMmQtMDFkZC00NzBhLWEwYTEtZjRhZWM4NmVjNjUyIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 41) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiZTkwNDc3NjItMmQxZC00YzJhLTljNTAtMDk2ZmJkMjNkN2VhIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 15 || idEnlace == 53) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMzc4OTYxM2QtMzA0MS00MTYwLWI0OGYtYzUwYWI0MDJiM2QxIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 19 || idEnlace == 54) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiZWU1MTc4ZTYtNTIzOC00NDQ3LTk0MmQtNDRhNjA1YzYxYTRjIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 23 || idEnlace == 49) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiYzE5ZWRhNTMtMmEyOS00ZGYwLTllMjEtMjNlMGQ3ZTc4YmY2IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 40) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiNDk3MDFlZDItNDBhNC00MTExLWE4Y2ItMjE0NzYxMmJkZWM4IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 44) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiYWRkNWM2ZDItZmI4NC00NTcwLTg4M2MtMjc0NTQwZTUzZjc4IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 43) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMjFmODI5M2QtMzkyMS00ZGFiLWIyNTYtNjBkN2IzZTNkZjllIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 42) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiNWQwMWViNTQtMmFmNS00ZDJkLWFkZmYtNWJmNDIyZjJmNTYyIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 64) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiYTczZTYzODUtMDIzMy00ZjQ5LWI0MjktYjRhMmE4MTlkMzU1IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 46) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiYTk5MTI1OWEtNjNiNC00MGVlLTg3NDItNjc0ODdkNTM5MDNhIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 62) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiNzEzNDQ2YmEtNTM4MC00MjFjLTlmNzItZDBiZDcwZWM4NWNiIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 63) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiOWExMzkxNzgtZTljOC00ZGMxLTk1MWEtMmJiMDNlZjA2ZTAxIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 47) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiYjYwZjUyOWMtZmY3OC00YzcyLWEzMDYtZmYzYTI0OGI5MmNhIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-	if (idEnlace == 39) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiODU0ZTRlMzAtMzY5Mi00ODIxLWJjZGQtZWEwMTJmM2I2MGVmIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+
+	if(idEnlace == 14) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiYTFhMTkzYWMtMzlhMC00NDljLThiNTEtMWJlN2I3NGJlMmE5IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 50) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiYTFhMTkzYWMtMzlhMC00NDljLThiNTEtMWJlN2I3NGJlMmE5IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 16) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiYmRkMWFhZjAtMzkwMi00MWY0LThlOTItNDIwNWY1NjFhY2FkIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 56) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiYmRkMWFhZjAtMzkwMi00MWY0LThlOTItNDIwNWY1NjFhY2FkIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 22) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiNWZjOGI4ZmItZjY0OS00ZjgyLThlYTMtNzM5ODA1MTRhZTNkIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 55) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiNWZjOGI4ZmItZjY0OS00ZjgyLThlYTMtNzM5ODA1MTRhZTNkIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 18) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMTRlMzAxZTAtZjEzZC00NGFmLTk3OTUtMGIwOGUxZmViMzRlIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 52) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMTRlMzAxZTAtZjEzZC00NGFmLTk3OTUtMGIwOGUxZmViMzRlIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 17) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMDZhZGE2ZWEtYmE4Ni00NjY4LTkwZTUtZWZjNmM0NDU0ZTgxIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 51) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMDZhZGE2ZWEtYmE4Ni00NjY4LTkwZTUtZWZjNmM0NDU0ZTgxIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 21) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiNjEyYjk3ZmMtZTgyMy00ZGM5LWFhNmEtZjY0NjA1YzM2OTE5IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 48) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiNjEyYjk3ZmMtZTgyMy00ZGM5LWFhNmEtZjY0NjA1YzM2OTE5IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 41) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMzMyNTBkNDMtMmNjMS00ZjU4LTk1OGQtMzY3MDk4OTEyYWJmIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 15) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMDk3MzQwNWUtZmU3Yy00ZGYzLTk4ODMtY2IzNWU2ZGU1ZmM4IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 53) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMDk3MzQwNWUtZmU3Yy00ZGYzLTk4ODMtY2IzNWU2ZGU1ZmM4IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 19) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiY2Y1YzAzNDUtZmMxOC00YWNhLWEyMGYtZTdlOWFjMjBkMWU5IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 54) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiY2Y1YzAzNDUtZmMxOC00YWNhLWEyMGYtZTdlOWFjMjBkMWU5IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 23) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiZDk0N2YwMmYtNWFiMy00OTg2LWE3MTUtZThmZDIwMDc2ZWU0IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 49) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiZDk0N2YwMmYtNWFiMy00OTg2LWE3MTUtZThmZDIwMDc2ZWU0IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 40) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiODcyODM5ZDItZmZiNC00NzM5LWE3YzMtZDlhNTI5ZjgxZTVkIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 44) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiODUyMDYxMTItNGZlZC00M2Q0LWE3NDktYzNhNTE3NGIzN2E2IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 43) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiNmZlOTI1YWEtZGNkMy00ZjUyLThmZGItMGNjN2M1YzBkMjViIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 42) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiM2VmOGZmN2UtNTY4My00MjZlLWEzMzYtMjc2MTZiNThiZGNjIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 64) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiODBkOWQzNDgtNDYzZS00YTc5LWE3YjEtOTZiNjA4NDU2OTBiIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 46) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiNjM5MmFkNzEtNDFmNi00ZGEyLWJhNmItMzg4NTJmYmU0M2MzIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 62) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiOWNhZDFkMDktNmU5YS00OTM1LTlhZmQtOWFkYTc3YzI2MjNlIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 63) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiNWViZjVlYzItODZlYy00MjIwLWI3MGYtYWM1ZTI1NDBkZWQ0IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 47) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiZTg2MDJmM2ItZDk5NC00ZmJkLTlkYTUtM2Q0NWRjNWExZTIyIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 39) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiYzhhYzhjNGYtODQwMC00MDZmLWFhNWEtODg3NmJlMDYxMDc3IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 45) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiNzExY2YyMWUtYzExNy00ODM3LTgyYzUtODI2YWFhMWU0ZTRhIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 26) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiODE0MTRkM2MtM2UyZi00MGYwLWE4ZjAtOWVlOWY4OWJkNzI2IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 28) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiOWNhZDFkMDktNmU5YS00OTM1LTlhZmQtOWFkYTc3YzI2MjNlIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+	if(idEnlace == 30) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiOWNhZDFkMDktNmU5YS00OTM1LTlhZmQtOWFkYTc3YzI2MjNlIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+
+
 }
 
 

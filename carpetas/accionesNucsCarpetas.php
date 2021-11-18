@@ -800,6 +800,9 @@ $tramitefinal = $totaTrabvajar2 - ($totDeterminaciones1 + $enviads1);
 
  $dataLasResolucion = getLastResolucionCarpetaV2($conn, $idCarpeta);
 
+	/// SE AGREGA ESTA FUNCION PARA OBTENER LOS DATOS DE LAS DETERMINACIONES QUE FINALIZAN SU PROCESO 
+	$dataLasResolucionTermin = getLastResolucionCarpetaV2termin($conn, $idCarpeta);
+
  if($dataLasResolucion[0][2] == 1){ $mesee = "Enero"; }
  if($dataLasResolucion[0][2] == 2){ $mesee = "Febrero"; }
  if($dataLasResolucion[0][2] == 3){ $mesee = "Marzo"; }
@@ -832,7 +835,7 @@ $tramitefinal = $totaTrabvajar2 - ($totDeterminaciones1 + $enviads1);
   if($band1){ 
 
       /////// CUALQUIERA DE ESTOS ESTATUS RECHAZAN EL VOLVER INSERTAR LA CARPETA DE NUEVO POR QUE EL PROCESO A FINALIZADO
-   echo json_encode(   array(  'first'=>$arreglo[3], 'nombre'=>$dataLasResolucion[0][6], 'unidad'=>$dataLasResolucion[0][4], 'fiscalia'=>$dataLasResolucion[0][5], 'estatus'=>$dataLasResolucion[0][1], 'anio'=>$dataLasResolucion[0][3], 'mes'=>$mesee   )   );
+   echo json_encode(   array(  'first'=>$arreglo[3], 'nombre'=>$dataLasResolucionTermin[0][6], 'unidad'=>$dataLasResolucionTermin[0][4], 'fiscalia'=>$dataLasResolucionTermin[0][5], 'estatus'=>$dataLasResolucionTermin[0][1], 'anio'=>$dataLasResolucionTermin[0][3], 'mes'=>$mesee   )   );
 
   }else{     
 
@@ -851,7 +854,10 @@ $tramitefinal = $totaTrabvajar2 - ($totDeterminaciones1 + $enviads1);
       //UNA VEZ REALIZADA LAS VALIDACIONES VERIFICAMOS SI EL ESTATUS ES UNA MEDIACION Y CHECAMOS SI EL NUC FUE MANDADO PRIMERO A LA UNIDAD DE MEDIACION
      if($estatus == 23){
       $checkCMASC = getEstatusCMASC($conCMASC, $nuc);
-      $carpetaRecibida = $checkCMASC[0][7];
+      
+      //PRIMER PASO SE VERIFICA SI EL NUC INGRESADO YA SE HA RECIBIDO EN CMASC DE LO CONTRARIO NO SE PODRA GUARDAR
+      if(sizeof($checkCMASC) > 0){
+        $carpetaRecibida = $checkCMASC[0][7];
       $motivoRechazo = $checkCMASC[0][9];
       $fechaIngreso = $checkCMASC[0][2]->format('Y-n-d');
       $anioCapturaSire = $anio;
@@ -862,13 +868,12 @@ $tramitefinal = $totaTrabvajar2 - ($totDeterminaciones1 + $enviads1);
       $periodoIngresoSire = strtotime('- 1 month', strtotime($fechaCapturaSire)); //Se resta un mes al mes de captura actual
       $fechaInicialCaptura = date('d-m-Y',  $periodoIngresoSire);
       $fechaLimiteCaptura = $diaLimiteCapturaSire.'-'.$mesCapturaSire.'-'.$anioCapturaSire;
-      //PRIMER PASO SE VERIFICA SI EL NUC INGRESADO YA SE HA RECIBIDO EN CMASC DE LO CONTRARIO NO SE PODRA GUARDAR
-      if(sizeof($checkCMASC) > 0){
+      $prioridad = $checkCMASC[0][18]; //para saber si es con detenido debe ser = 1
          ////// SI EXISTE EL NUC SE VALIDA SI LA CARPETA RECIBIDA SE ENCUENTRA RECHAZADA, DE SER ASI OBTENER EL MOTIVO DE RECHAZO Y NO DEJAR GUARDAR
            if($carpetaRecibida == 0){
             echo json_encode(   array(  'first'=>$arreglo[7], 'motivoRechazo'=>$motivoRechazo  )   );
            }else{
-           if (check_in_range($fechaInicialCaptura, $fechaLimiteCaptura, $fechaIngreso)){
+           if (check_in_range($fechaInicialCaptura, $fechaLimiteCaptura, $fechaIngreso) || $prioridad == 1){
               //SI EL NUC SE HA RECIBIDO POR EL CMASC Y ESTA EN EL RAGO DEJAR GUARDAR
               echo json_encode(   array(  'first'=>$arreglo[0]   )   ); 
             }else{
@@ -913,7 +918,10 @@ $tramitefinal = $totaTrabvajar2 - ($totDeterminaciones1 + $enviads1);
       //UNA VEZ REALIZADA LAS VALIDACIONES VERIFICAMOS SI EL ESTATUS ES UNA MEDIACION Y CHECAMOS SI EL NUC FUE MANDADO PRIMERO A LA UNIDAD DE MEDIACION
      if($estatus == 23){
       $checkCMASC = getEstatusCMASC($conCMASC, $nuc);
-      $carpetaRecibida = $checkCMASC[0][7];
+      
+      //PRIMER PASO SE VERIFICA SI EL NUC INGRESADO YA SE HA RECIBIDO EN CMASC DE LO CONTRARIO NO SE PODRA GUARDAR
+      if(sizeof($checkCMASC) > 0){
+        $carpetaRecibida = $checkCMASC[0][7];
       $motivoRechazo = $checkCMASC[0][9];
       $fechaIngreso = $checkCMASC[0][2]->format('Y-n-d');
       $anioCapturaSire = $anio;
@@ -924,13 +932,12 @@ $tramitefinal = $totaTrabvajar2 - ($totDeterminaciones1 + $enviads1);
       $periodoIngresoSire = strtotime('- 1 month', strtotime($fechaCapturaSire)); //Se resta un mes al mes de captura actual
       $fechaInicialCaptura = date('d-m-Y',  $periodoIngresoSire);
       $fechaLimiteCaptura = $diaLimiteCapturaSire.'-'.$mesCapturaSire.'-'.$anioCapturaSire;
-      //PRIMER PASO SE VERIFICA SI EL NUC INGRESADO YA SE HA RECIBIDO EN CMASC DE LO CONTRARIO NO SE PODRA GUARDAR
-      if(sizeof($checkCMASC) > 0){
+      $prioridad = $checkCMASC[0][18]; //para saber si es con detenido debe ser = 1
          ////// SI EXISTE EL NUC SE VALIDA SI LA CARPETA RECIBIDA SE ENCUENTRA RECHAZADA, DE SER ASI OBTENER EL MOTIVO DE RECHAZO Y NO DEJAR GUARDAR
            if($carpetaRecibida == 0){
             echo json_encode(   array(  'first'=>$arreglo[7], 'motivoRechazo'=>$motivoRechazo  )   );
            }else{
-            if (check_in_range($fechaInicialCaptura, $fechaLimiteCaptura, $fechaIngreso)){
+            if (check_in_range($fechaInicialCaptura, $fechaLimiteCaptura, $fechaIngreso) || $prioridad == 1 ){
               //SI EL NUC SE HA RECIBIDO POR EL CMASC Y ESTA EN EL RAGO DEJAR GUARDAR
               echo json_encode(   array(  'first'=>$arreglo[0]   )   ); 
             }else{
@@ -966,24 +973,30 @@ $tramitefinal = $totaTrabvajar2 - ($totDeterminaciones1 + $enviads1);
  //UNA VEZ REALIZADA LAS VALIDACIONES VERIFICAMOS SI EL ESTATUS ES UNA MEDIACION Y CHECAMOS SI EL NUC FUE MANDADO PRIMERO A LA UNIDAD DE MEDIACION
      if($estatus == 23){
       $checkCMASC = getEstatusCMASC($conCMASC, $nuc);
-      $carpetaRecibida = $checkCMASC[0][7];
-      $motivoRechazo = $checkCMASC[0][9];
-      $fechaIngreso = $checkCMASC[0][2]->format('Y-n-d');
-      $anioCapturaSire = $anio;
-      $mesCapturaSire = $mes;
-      $diaInicialCapturaSire = 26;
-      $diaLimiteCapturaSire = 25;
-      $fechaCapturaSire = $anioCapturaSire.'-'.$mesCapturaSire.'-'.$diaInicialCapturaSire; //Periodo de captura inician 26 de cada mes anterior
-      $periodoIngresoSire = strtotime('- 1 month', strtotime($fechaCapturaSire)); //Se resta un mes al mes de captura actual
-      $fechaInicialCaptura = date('d-m-Y',  $periodoIngresoSire);
-      $fechaLimiteCaptura = $diaLimiteCapturaSire.'-'.$mesCapturaSire.'-'.$anioCapturaSire;
+
+    
       //PRIMER PASO SE VERIFICA SI EL NUC INGRESADO YA SE HA RECIBIDO EN CMASC DE LO CONTRARIO NO SE PODRA GUARDAR
       if(sizeof($checkCMASC) > 0){
+
+
+        $carpetaRecibida = $checkCMASC[0][7];
+        $motivoRechazo = $checkCMASC[0][9];
+        $fechaIngreso = $checkCMASC[0][2]->format('Y-n-d');
+        $anioCapturaSire = $anio;
+        $mesCapturaSire = $mes;
+        $diaInicialCapturaSire = 26;
+        $diaLimiteCapturaSire = 25;
+        $fechaCapturaSire = $anioCapturaSire.'-'.$mesCapturaSire.'-'.$diaInicialCapturaSire; //Periodo de captura inician 26 de cada mes anterior
+        $periodoIngresoSire = strtotime('- 1 month', strtotime($fechaCapturaSire)); //Se resta un mes al mes de captura actual
+        $fechaInicialCaptura = date('d-m-Y',  $periodoIngresoSire);
+        $fechaLimiteCaptura = $diaLimiteCapturaSire.'-'.$mesCapturaSire.'-'.$anioCapturaSire;
+        $prioridad = $checkCMASC[0][18]; //para saber si es con detenido debe ser = 1
+
          ////// SI EXISTE EL NUC SE VALIDA SI LA CARPETA RECIBIDA SE ENCUENTRA RECHAZADA, DE SER ASI OBTENER EL MOTIVO DE RECHAZO Y NO DEJAR GUARDAR
            if($carpetaRecibida == 0){
             echo json_encode(   array(  'first'=>$arreglo[7], 'motivoRechazo'=>$motivoRechazo  )   );
            }else{
-            if (check_in_range($fechaInicialCaptura, $fechaLimiteCaptura, $fechaIngreso)){
+            if (check_in_range($fechaInicialCaptura, $fechaLimiteCaptura, $fechaIngreso) || $prioridad == 1 ){
               //SI EL NUC SE HA RECIBIDO POR EL CMASC Y ESTA EN EL RAGO DEJAR GUARDAR
               echo json_encode(   array(  'first'=>$arreglo[0]   )   ); 
             }else{

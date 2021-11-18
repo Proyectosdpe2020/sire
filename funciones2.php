@@ -192,6 +192,25 @@ function getTEnlacesVICarpLiti($conn){
 								if(isset($arreglo)){return $arreglo;}	
 }
 
+function getTramiteMp2($conn, $idUnidad, $anio, $idMp){
+
+	$query = " SELECT TOP 1 idCarpetasDatos,fechaInsert,[idMes],[idAnio],[idUnidad],[tramiteAnterior],[tramitee]
+	FROM [ESTADISTICAV2].[dbo].[carpetasDatos] WHERE idUnidad = $idUnidad AND idAnio = $anio AND idMp = $idMp ORDER BY idCarpetasDatos DESC ";
+
+							 $indice = 0;
+
+								$stmt = sqlsrv_query($conn, $query);
+								while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))	
+								{
+							
+									$arreglo[$indice][0]=$row['idCarpetasDatos'];				
+									$arreglo[$indice][1]=$row['tramiteAnterior'];	
+									$arreglo[$indice][2]=$row['tramitee'];	
+									$indice++;
+								}
+								if(isset($arreglo)){return $arreglo;}	
+}
+
 
 function getTramiteMp($conn, $idUnidad, $anio, $idMp){
 

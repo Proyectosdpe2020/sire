@@ -270,7 +270,7 @@
 						</tr>
 						<tr>
 							<th scope="row">7.8</th>
-							<td style="text-align: left;">Por otra causa que exiga la acción penal</td>
+							<td style="text-align: left;">Por otra causa que extinga la acción penal</td>
 							<td><input type="number" value="<? echo $data8[0][0]; ?>" id="p25m1" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data8[0][1]; ?>" id="p25m2" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data8[0][2]; ?>" id="p25m3" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
@@ -344,7 +344,7 @@
 										else{
 											if($has_litigation){ 
 												
-												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 19, $per1);
+												$data = getDAtaSIREQuestionEstatus($conn , $arr[$o] , $anio, $idUn, 19, $per1);
 
 												if($data_sended){ //all trimester sended
 													$quest_value = $data[0][0];

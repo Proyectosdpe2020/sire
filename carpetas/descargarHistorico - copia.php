@@ -251,7 +251,7 @@ $Inicio = "11";
 		$objPHPExcel->getActiveSheet()->SetCellValue("Y$totales", $acum21);
 		$objPHPExcel->getActiveSheet()->SetCellValue("Z$totales", $acum22);
 		$objPHPExcel->getActiveSheet()->SetCellValue("AA$totales", $acum23);
-
+ 
 		$firma = $renglonquedado + 4;
 		$nomTitularCargo = $firma +1;
 		$nomTitular = $nomTitularCargo +1;

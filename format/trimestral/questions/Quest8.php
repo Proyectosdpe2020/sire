@@ -226,7 +226,7 @@
 										else{
 											if($has_litigation){ 
 
-												$data = getDAtaSIREQuestionEstatus($conSic , $arr[$o] , $anio, $idUn, 15, $per1);
+												$data = getDAtaSIREQuestionEstatus($conn , $arr[$o] , $anio, $idUn, 15, $per1);
 
 												if($data_sended){ //all trimester sended
 													$quest_value = $data[0][0];

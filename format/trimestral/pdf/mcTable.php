@@ -82,7 +82,7 @@
 			// Logo
 			$this->Image('assets/img/segob.png', 10, 10, 70);
 
-			$this->Image('assets/img/lv2020.jpg', 85, 10, 40);
+			$this->Image('assets/img/q2021.jpeg', 85, 10, 40);
 
 			$this->SetFont('Arial','B',8);
 

@@ -174,6 +174,39 @@ function getLastResolucionCarpetaV2($conn, $carpetaId){
 
 }
 
+function getLastResolucionCarpetaV2termin($conn, $carpetaId){
+
+	$query ="   SELECT   nuc, idEstatusNucsCarpetas, fecha, idCarpeta, idEstatus, ec.nombre as estatusCar, ec.EstatusID, estatusNucsCarpetas.mes, estatusNucsCarpetas.anio, estatusNucsCarpetas.idUnidad,
+	u.nUnidad as unidad, f.nFiscalia as fiscalia, estatusNucsCarpetas.idMp, mp.nombre+' '+mp.paterno+' '+mp.materno as ministerio
+	FROM estatusNucsCarpetas 
+	INNER JOIN estatusCarpetasResoluciones ec ON ec.EstatusID = estatusNucsCarpetas.idEstatus
+	INNER JOIN CatUnidad u ON u.idUnidad = estatusNucsCarpetas.idUnidad
+	INNER JOIN CatFiscalia f ON f.idFiscalia = u.idFiscalia
+	INNER JOIN mp ON mp.idMp = estatusNucsCarpetas.idMp
+	WHERE idCarpeta = $carpetaId AND idEstatus IN(15,25,2) ORDER BY fecha DESC 
+";
+	
+
+
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['EstatusID'];
+		$arreglo[$indice][1]=$row['estatusCar'];
+		$arreglo[$indice][2]=$row['mes'];
+		$arreglo[$indice][3]=$row['anio'];
+		$arreglo[$indice][4]=$row['unidad'];
+		$arreglo[$indice][5]=$row['fiscalia'];
+		$arreglo[$indice][6]=$row['ministerio'];
+		$arreglo[$indice][7]=$row['nuc'];
+		$arreglo[$indice][8]=$row['fecha'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+
+}
+
 
 
 function getLastResolucionHistoricoResoluciones($conn, $carpetaId){
@@ -375,9 +408,11 @@ function getEstatusCMASC($conCMASC, $nuc){
 										      ,ci.Facilitador
 										      ,ci.FechaLibro
 										      ,ci.UsuarioID
+										      ,ci.Prioridad
 											FROM dbo.CarpetasIngresadas ci 
 											LEFT JOIN cat.MotivoRechazo mr ON mr.MotivoID = ci.MotivoRechazo
 											WHERE ci.FechaIngreso IN (SELECT max(FechaIngreso) FROM dbo.CarpetasIngresadas where NUC = '$nuc') AND ci.NUC = '$nuc' order BY ci.CarpetaIngresadaID desc ";
+	
 
 	$indice = 0;
 	$stmt = sqlsrv_query($conCMASC, $query);
@@ -401,6 +436,7 @@ function getEstatusCMASC($conCMASC, $nuc){
 		$arreglo[$indice][15]=$row['Facilitador'];
 		$arreglo[$indice][16]=$row['FechaLibro'];
 		$arreglo[$indice][17]=$row['UsuarioID'];
+		$arreglo[$indice][18]=$row['Prioridad'];
 		$indice++;
 	}
 	if(isset($arreglo)){return $arreglo;}

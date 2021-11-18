@@ -47,7 +47,7 @@
 																										<td> <center><? echo $dataPuestasDia[$h][4]->format('Y-m-d H:i'); ?></center></td>
 																										<td> <center><? echo $dataPuestasDia[$h][5]; ?></center> </td>
 																										<td> <center><? echo $dataPuestasDia[$h][6]; ?></center> </td>
-																										<td> <? echo $validateMonthCap; ?> </td>
+																										<td> <? echo $dataPuestasDia[$h][7]; ?> </td>
 																										<td> <? echo $dataPuestasDia[$h][8]; ?> </td>
 																										<td> <center><? echo $dataPuestasDia[$h][9]; ?></center> </td>
 																										<td> <center><? echo $dataPuestasDia[$h][10]; ?></center> </td>
