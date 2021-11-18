@@ -16,8 +16,8 @@ $involved_people = array(
     ),
     3 => array(
         'elaborated_by' => array(
-            'name' => 'Nicolasa Aparicio Silva',
-            'position' => ''
+            'name' => 'Lic. Cinthya Vianey Larios Bocanegra',
+            'position' => 'Ministerio Público'
         ),
         'validated_by' => array(
             'name' => 'Lic Oscar Miguel Acosta Rosas',
@@ -191,12 +191,17 @@ $involved_people = array(
     ),
     38 => array(
         'elaborated_by' => array(
-            'name' => 'Mtro. en D. Jonathan Angeles Luna',
-            'position' => ''
+            'name' => 'Lic. Jose Eduardo Delgado Estrada ',
+            'position' => 'Agente del Ministerio Público'
         ),
         'validated_by' => array(
             'name' => 'Dr Felix López Rosales',
             'position' => 'Fiscal especializado para el delito de tortura, tratos crueles inhumanos o degradantes'
+        ),
+        'third_person' => array(
+            'name' => 'Lic. Ma. Isabel Garcia Carrillo',
+            'position' => 'Directora de Carpetas de Investigacion y Litigacion de la Fiscalia Especializada para el delito de Tortura, Tratos Crueles, Inhumanos o Degradantes',
+            'function' => ''
         )
     ),
     67 => array(

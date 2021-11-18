@@ -353,6 +353,7 @@ switch ($format) {
 										$tramiteAnte = 0; 
 										$bandHabTramite = 1;
 										$tramiteAnte2 = 0;  
+										
 									}
 
 									//////////////////////////////////// TRAMITE ANTERIOR //////////////////////////////////////
@@ -376,7 +377,7 @@ switch ($format) {
 									$d111 = getCountNucs($conn, 25, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 0);
 									$d121 = getCountNucs($conn, 15, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 0);
 									
-									$totaTrabvajar1 = $tramiteAnte2 + $existNew[0][0] + $d11[0][0] + $existNew[0][1] ;
+									$totaTrabvajar1 = $existNew[0][8] + $existNew[0][0] + $d11[0][0] + $existNew[0][1] ;
 									
 									$totDeterminaciones1 = $d21[0][0] + $d31[0][0] + $d41[0][0] + $d51[0][0] + $d61[0][0] + $d71[0][0] + $d81[0][0] + $d91[0][0] + $d101[0][0] + $d111[0][0] + $d121[0][0];
 									$enviads1 = $existNew[0][2] + $existNew[0][3] + $existNew[0][4];

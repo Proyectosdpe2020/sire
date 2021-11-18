@@ -296,6 +296,51 @@ if ($anio <= 2021 && $mes <= 6) {
 				}
 
 
+				///// SE HARA UN PARCH PARA PODER CERRAR LO QUE QUEDA DE 2021
+
+				if ($mes > 9) {
+
+					$nuevaexistenciaAnt = getDataCarpetasDatosExistenciaAnteriorV2($conn, $mesAnterior, $anioAnte, $idUnidad, $idMp, 0);
+					$tramAnterior =  intval($nuevaexistenciaAnt[0][7]);
+
+					$nuevaexistencia = getDataCarpetasDatosExistenciaAnteriorV2($conn, $mes, $anio, $idUnidad, $idMp, 0);
+					$tramAnterior2 =  intval($nuevaexistencia[0][7]);
+					
+					$de11 = getCountNucs($conn, 1, $mes, $anio, $idUnidad, $idMp, 0);
+
+					$de21 = getCountNucs($conn, 22, $mes, $anio, $idUnidad, $idMp, 1);
+					$de31 = getCountNucs($conn, 22, $mes, $anio, $idUnidad, $idMp, 0);
+
+					$de41 = getCountNucs($conn, 2, $mes, $anio, $idUnidad, $idMp, 0);
+					$de51 = getCountNucs($conn, 5, $mes, $anio, $idUnidad, $idMp, 0);
+					$de61 = getCountNucs($conn, 20, $mes, $anio, $idUnidad, $idMp, 0);
+					$de71 = getCountNucs($conn, 21, $mes, $anio, $idUnidad, $idMp, 0);
+					$de81 = getCountNucs($conn, 3, $mes, $anio, $idUnidad, $idMp, 0);
+					$de91 = getCountNucs($conn, 23, $mes, $anio, $idUnidad, $idMp, 0);
+					$de101 = getCountNucs($conn, 24, $mes, $anio, $idUnidad, $idMp, 0);
+					$de111 = getCountNucs($conn, 25, $mes, $anio, $idUnidad, $idMp, 0);
+					$de121 = getCountNucs($conn, 15, $mes, $anio, $idUnidad, $idMp, 0);
+
+					$iniciadasCd = $nuevaexistencia[0][5];
+					$iniciadasSd = $nuevaexistencia[0][6];
+					$iniciadas = $nuevaexistencia[0][0];
+					$recibidas = $nuevaexistencia[0][1];
+
+		
+					$totalTrabajar = intval($tramAnterior) + intval($iniciadas) + intval($recibidas) + intval($de11[0][0]); 
+
+					$judicializadas = $de21[0][0] + $de31[0][0];
+					$totResoluciones = $de21[0][0] + $de31[0][0] + $de41[0][0] + $de51[0][0] + $de61[0][0] + $de71[0][0] + $de81[0][0] + $de91[0][0] + $de101[0][0] + $de111[0][0] + $de121[0][0];
+
+					$enviUATP = $nuevaexistencia[0][2];
+					$enviUI = $nuevaexistencia[0][3];
+					$enviMp = $nuevaexistencia[0][4];
+
+					$tramiteFinls = 	$totalTrabajar - ($totResoluciones + $enviUATP + $enviUI + $enviMp);
+				}
+
+
+
 
 
 	////////////////// NUEVOS CODIGOS PARA TRAMITES ////////////////////////

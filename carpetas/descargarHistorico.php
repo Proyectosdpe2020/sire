@@ -597,6 +597,57 @@ $Inicio = "11";
 									}						
 
 
+									if($mes > 9){
+
+
+										$nuevaexistenciaAnt = getDataCarpetasDatosExistenciaAnteriorV2($conn, $mesAnterior, $anioAnte, $datazx[$i][7], $datazx[$i][8], 0);
+										$tramAnterior =  intval($nuevaexistenciaAnt[0][7]);
+					
+										$nuevaexistencia = getDataCarpetasDatosExistenciaAnteriorV2($conn, $mes, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+										$tramAnterior2 =  intval($nuevaexistencia[0][7]);
+
+										$ddd1 = getCountNucs($conn, 1, $mes, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+								
+										$ddd2 = getCountNucs($conn, 22, $mes, $anio, $datazx[$i][7], $datazx[$i][8], 1);
+										$ddd3 = getCountNucs($conn, 22, $mes, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+										
+										$ddd4 = getCountNucs($conn, 2, $mes, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+										$ddd5 = getCountNucs($conn, 5, $mes, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+										$ddd6 = getCountNucs($conn, 20, $mes, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+										$ddd7 = getCountNucs($conn, 21, $mes, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+										$ddd8 = getCountNucs($conn, 3, $mes, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+										$ddd9= getCountNucs($conn, 23, $mes, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+										$ddd10 = getCountNucs($conn, 24, $mes, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+										$ddd11 = getCountNucs($conn, 25, $mes, $anio, $datazx[$i][7], $datazx[$i][8], 0);
+										$ddd12 = getCountNucs($conn, 15, $mes, $anio, $datazx[$i][7], $datazx[$i][8], 0);	
+											
+									
+
+				
+												//$tramAnterior =  $totTramiteAgosto;
+												$iniciadas = $nuevaexistencia[0][0];
+												$recibidas = $nuevaexistencia[0][1];
+												$totalTrabajar = $totaTrabSep;
+									
+											
+												$enviUATP = $nuevaexistencia[0][2];
+												$enviUI = $nuevaexistencia[0][3];
+												$enviMp = $nuevaexistencia[0][4];
+
+												$totalTrabajar = intval($tramAnterior) + intval($iniciadas) + intval($recibidas) + intval($ddd1[0][0]); 
+
+												$judicializadas = $ddd2[0][0] + $ddd3[0][0];
+												$totResoluciones = $ddd2[0][0] + $ddd3[0][0] + $ddd4[0][0] + $ddd5[0][0] + $ddd6[0][0] + $ddd7[0][0] + $ddd8[0][0] + $ddd9[0][0] + $ddd10[0][0] + $ddd11[0][0] + $ddd12[0][0];
+		
+												$tramiteFinls = 	$tramAnterior2;  
+
+									}
+
+
+
+
+
+
 				//////////////////////////////// NUEVOS DATOS DE JULIO Y AGOSTO Y SEPTIEMBRE ////////////////////////////////////////
 				//////////////////////////////// NUEVOS DATOS DE JULIO Y AGOSTO Y SEPTIEMBRE ////////////////////////////////////////
 				//////////////////////////////// NUEVOS DATOS DE JULIO Y AGOSTO Y SEPTIEMBRE ////////////////////////////////////////

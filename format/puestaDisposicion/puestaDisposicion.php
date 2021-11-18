@@ -179,9 +179,9 @@
 													<th class=" textCent">Municipio</th>
 													<th class=" textCent">Colonia</th>
 													<th class=" textCent">Calle </th>
-													<th class=" textCent">Numero</th>													
-													<th class=" textCent">Codigo Postal</th>	
-													<th class="textCent">Accion </th>
+													<th class=" textCent">Número</th>													
+													<th class=" textCent">Código Postal</th>	
+													<th class="textCent">Acción </th>
 		
 					</tr>
 				</thead> 

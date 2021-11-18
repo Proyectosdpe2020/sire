@@ -255,11 +255,12 @@
 																				<h5 class="text-on-pannel"><strong> Datos del aseguramiento </strong></h5>
 																				<div class="form-row">
 																					<div class="form-group col-md-3">
-																	      <label for="textInvFlag">Flagrancia / Mandato Judicial<span class="aste">(*)</span></label>
+																	      <label for="textInvFlag">Tipo de detención<span class="aste">(*)</span></label>
 																	      <select id="textInvFlag" name="textInvFlag" tabindex="6" class="form-control redondear selectTranparent" required>
 																	       	<option value="0">Selecciona</option>
 																	       	<option style="color: black; font-weight: bold;" value="1" <?php if($a == 1 && $invFlag == 1){ ?> selected <? }?> >Flagrancia</option>
 																	       	<option style="color: black; font-weight: bold;" value="2" <?php if($a == 1 && $invFlag == 2){ ?> selected <? }?>>Mandato Judicial</option>
+																	       	<option style="color: black; font-weight: bold;" value="3" <?php if($a == 1 && $invFlag == 3){ ?> selected <? }?>>Caso urgente</option>
 																								</select>
 																	    </div>
 																	    

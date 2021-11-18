@@ -10,6 +10,9 @@
 				$m = date("m");
 				$anioActual = date("Y");
 
+				$d = date("d");
+				if($d >= 1 && $d <= 3){ $m = $m-1; }
+
 				if (isset($_POST["tipoModal"])){ $tipoModal = $_POST["tipoModal"]; }
 					if (isset($_POST["idEnlace"])){ $idEnlace = $_POST["idEnlace"]; }
 					if (isset($_POST["typeArch"])){ $typeArch = $_POST["typeArch"]; }
@@ -112,12 +115,22 @@
  				<label for="heard">Nuc :</label>
  				<input class="form-control gehit"  id="nucPuestaDisposi" maxlength="13" oninput="validateNuc(this)"  type="number" value="<? if($a == 1){ echo $nuc; } ?>" <? if($b == 0){ echo "readonly"; } ?>>
  			</div>
+ 			<!--CONDICIONAL PARA HABILITAR A DETERMINADO ENLACE -->
+ 			<?if($idEnlace == 108 || $idEnlace == 333 || $idEnlace == 107){ ?>
+ 				<div class="col-xs-12 col-sm-12  col-md-2">
+	 				<label for="heard">Fecha Evento :</label><span class="aste"> (Requerido)</span>
+	 				<div >
+	 					<input id="fechaevento" type="datetime-local" value="<? if($a == 1){  echo 	$fechaev=str_ireplace(' ','T',$fechaev); } ?>" name="fechaevento" class="fechas form-control gehit" min="<?echo $anioActual; ?>-03-01T00:00:00" max="<?echo $hoy; ?>T23:59:59" onchange="checkDateInforme('<?echo $fecha; ?>');" <? if($b == 0){ echo "readonly"; } ?> />	
+	 				</div>
+ 			 </div>
+ 			<? }else{ ?>
  			<div class="col-xs-12 col-sm-12  col-md-2">
  				<label for="heard">Fecha Evento :</label><span class="aste"> (Requerido)</span>
  				<div >
  					<input id="fechaevento" type="datetime-local" value="<? if($a == 1){  echo 	$fechaev=str_ireplace(' ','T',$fechaev); } ?>" name="fechaevento" class="fechas form-control gehit" min="<?echo $anioActual; ?>-<?echo $m; ?>-01T00:00:00" max="<?echo $hoy; ?>T23:59:59" onchange="checkDateInforme('<?echo $fecha; ?>');" <? if($b == 0){ echo "readonly"; } ?> />	
  				</div>
  			</div>
+ 		 <? } ?>
  			<div class="col-xs-12 col-sm-12  col-md-2">
  				<label for="heard">Fiscalía :</label>	<span class="aste">(Requerido)</span>
  					<select class="dataAutocomplet form-control browser-default custom-select" onchange="getDataMunicip()" locked="locked" id="newBrwoserFisca" name="newBrwoserFisca" type="text" <? if($b == 0){ echo "readonly"; } ?> >
@@ -164,7 +177,7 @@
 
  		<div class="row"><!-- ROOWWWWWW DIRECCION  -->
  			<div class="col-xs-12 col-sm-12  col-md-2">
- 				<label for="heard">Codigo Postal :</label> <span class="aste">(Requerido)</span>
+ 				<label for="heard">Código Postal :</label> <span class="aste">(Requerido)</span>
  				<div id="codepostalid"><input class="form-control"  id="codepostalidPeusta" value="<? if($a == 1){ echo $codigop; } ?>"  type="text" readonly=""></div>
  			</div>
  			<div class="col-xs-12 col-sm-12  col-md-5">
@@ -172,7 +185,7 @@
  				<input class="form-control"  id="calleInputPuesta" value="<? if($a == 1){ echo $calle; } ?>" type="text" <? if($b == 0){ echo "readonly"; } ?>>
  			</div>
  			<div class="col-xs-12 col-sm-12  col-md-1">
- 				<label for="heard">Numero :</label><br>
+ 				<label for="heard">Número :</label><br>
  				<input class="form-control"  id="numberCallePuesta" value="<? if($a == 1){ echo $numero; } ?>" type="number" <? if($b == 0){ echo "readonly"; } ?>>
  			</div>
  			<div class="col-xs-12 col-sm-12  col-md-4">

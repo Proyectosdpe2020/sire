@@ -140,7 +140,7 @@ function getDAtaSIREQuestionValidateQuestion($conn, $mes, $anio, $idUnidad){
 	$query = " SELECT
        ISNULL(sum([iniciadasConDetenido]) +
 	      sum([iniciadasSinDetenido]),0) as 'total'
-  FROM [ESTADISTICAV2].[dbo].[Carpetas] WHERE idUnidad $idUnidad AND idAnio = $anio AND idMes in $mes ";
+  FROM [ESTADISTICAV2].[dbo].[carpetasDatos] WHERE idUnidad $idUnidad AND idAnio = $anio AND idMes in $mes ";
 //echo $query."<br>";
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))

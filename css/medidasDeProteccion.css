@@ -1,0 +1,60 @@
+.cabeceraTablaVictimas{
+  background: rgba(21,47,74,.9);
+  color: white;
+}
+
+.cursorp{
+  cursor: pointer !important;
+}
+
+.fontBold{
+  color: black;
+  font-weight:bold;
+}
+
+#infoGeneralMedida{
+  overflow: scroll;
+}
+
+#resolucion{ display: none; }
+#victima{ display: none; }
+#imputados{ display: none; }
+#constanciaLlamadas{ display: none; }
+
+.tabcontent{
+  padding: 5px;
+}
+
+#agentesMP_id_div{
+  border-radius: 6px;
+}
+
+#idDelito_div{
+  border-radius: 6px;
+}
+
+#idFiscaliaProc_div{
+  border-radius: 6px;
+}
+
+
+.orangecol{  background-color: #eea236; }
+.verdCol{  background-color: #8cb887; }
+.yelloCol{  background-color: #efce0a; }
+.redCol{  background-color: rgba(240,89,91,0.9); }
+
+#circulo{
+
+       margin: 0 auto;
+       width: 25px;
+       height: 25px;
+       -moz-border-radius: 70px;
+       -webkit-border-radius: 70px;
+       border-radius: 70px;
+
+       border: solid 4px white;
+
+       -webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.3);
+       -moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.3);
+       box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.3);
+    }

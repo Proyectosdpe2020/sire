@@ -54,6 +54,8 @@
 	if($_SESSION['idArchivo'] == 11){ $nameFormat = "Trimestral";}
 	if($_SESSION['idArchivo'] == 0){ $nameFormat = "Administrador";}
 	if($_SESSION['idArchivo'] == 15){ $nameFormat = "carpetasJudicializadas";}
+	if($_SESSION['idArchivo'] == 17){ $nameFormat = "ControlProcesos";}
+	if($_SESSION['idArchivo'] == 16){ $nameFormat = "medidasDeProteccion";}
 
 	echo $_SESSION['idArchivo'];
 	if($band)
