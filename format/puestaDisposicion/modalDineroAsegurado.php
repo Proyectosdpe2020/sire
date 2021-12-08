@@ -29,6 +29,7 @@
 		    $m_ext = $arreglo[0][2];
 		    $divisa = $arreglo[0][3];
 		    $observaciones = $arreglo[0][4];
+		    $textDispoDinero = $arreglo[0][5];
 		 }else{ 
 		 	//Si idDinero viene con valor 0 no es actualizacion y entra aqui
 		 	$a = 0;
@@ -102,6 +103,12 @@
 																			<div class="panel panel-default">
 																			<div class="panel-body">  
 																				<h5 class="text-on-pannel"><strong> Otros datos </strong></h5>
+																					<div class="form-row">
+																					<div class="form-group col-md-12">
+																						<label for="textDispoDinero">A disposición de: <span class="aste">(*)</span></label>
+																						<input value="<?php if($a == 1){ echo $textDispoDinero; } ?>" type="text" class="form-control" id="textDispoDinero" name="textDispoDinero">
+																					</div>
+																			 </div>
 																				<div class="form-row">
 																	    <div class="form-group col-md-12">
 																	     <label for="textObservacionesDinero">Observaciones</label>

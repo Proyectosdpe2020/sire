@@ -165,7 +165,7 @@ function getDataTipoArma($conn){
 }
 
 function getDataCausaMuerte($conn){
-	$query = "SELECT * FROM pueDisposi.CatCausaMuertes";
+	$query = "SELECT * FROM pueDisposi.CatCausaMuertes WHERE estatus = 'VI' ";
 
 							 $indice = 0;
 								$stmt = sqlsrv_query($conn, $query);
@@ -419,9 +419,9 @@ if($idForestales == 0){
 
 function get_data_dinero_puesta($conn, $idPuestaDisposicion, $idDineroAsegurado){
 if($idDineroAsegurado == 0){
-			$query = "  SELECT idDineroAsegurado, m_nal, m_ext, divisa, observaciones FROM pueDisposi.DineroAsegurado WHERE idPueDisposicion =  $idPuestaDisposicion ";
+			$query = "  SELECT idDineroAsegurado, m_nal, m_ext, divisa, observaciones, disposicionDe FROM pueDisposi.DineroAsegurado WHERE idPueDisposicion =  $idPuestaDisposicion ";
 		}else{
-			$query = "  SELECT idDineroAsegurado, m_nal, m_ext, divisa, observaciones FROM pueDisposi.DineroAsegurado WHERE idDineroAsegurado =  $idDineroAsegurado ";
+			$query = "  SELECT idDineroAsegurado, m_nal, m_ext, divisa, observaciones, disposicionDe FROM pueDisposi.DineroAsegurado WHERE idDineroAsegurado =  $idDineroAsegurado ";
 		}
 
 
@@ -436,6 +436,7 @@ if($idDineroAsegurado == 0){
 		$arreglo[$indice][3]=$row['divisa'];
 
 		$arreglo[$indice][4]=$row['observaciones'];
+		$arreglo[$indice][5]=$row['disposicionDe'];
 		$indice++;
 	}
 
@@ -445,9 +446,9 @@ if($idDineroAsegurado == 0){
 
 function get_data_objeto_puesta($conn, $idPuestaDisposicion, $idObjeto){
 if($idObjeto == 0){
-			$query = "    SELECT idObjetoAsegurado, nombreObjeto, cantidad, observaciones FROM pueDisposi.objetosAsegurados WHERE idPueDisposicion =  $idPuestaDisposicion ";
+			$query = "    SELECT idObjetoAsegurado, nombreObjeto, cantidad, observaciones, disposicionDe FROM pueDisposi.objetosAsegurados WHERE idPueDisposicion =  $idPuestaDisposicion ";
 	 }else{
-	 	$query = "    SELECT idObjetoAsegurado, nombreObjeto, cantidad, observaciones FROM pueDisposi.objetosAsegurados WHERE idObjetoAsegurado =  $idObjeto ";
+	 	$query = "    SELECT idObjetoAsegurado, nombreObjeto, cantidad, observaciones, disposicionDe FROM pueDisposi.objetosAsegurados WHERE idObjetoAsegurado =  $idObjeto ";
 	 }
 
 
@@ -460,6 +461,7 @@ if($idObjeto == 0){
 		$arreglo[$indice][1]=$row['nombreObjeto'];
 		$arreglo[$indice][2]=$row['cantidad'];
 		$arreglo[$indice][3]=$row['observaciones'];
+		$arreglo[$indice][4]=$row['disposicionDe'];
 		$indice++;
 	}
 
@@ -523,14 +525,14 @@ function get_data_defunciones_puesta($conn, $idPuestaDisposicion, $idDefuncion){
     WHEN d.sexo = 'f' THEN 'Femenino'
     
     ELSE 'Desconocido' 
-END as sexo, cm.nombre as causaMuerte, d.movilMuerte, d.observaciones  FROM pueDisposi.Defunciones d INNER JOIN pueDisposi.CatCausaMuertes cm ON cm.CatCausaMuerteId = d.idCausaMuerte WHERE d.idPueDisposicion = $idPuestaDisposicion  ";
+END as sexo, cm.nombre as causaMuerte, d.movilMuerte, d.observaciones, d.idCausaMuerte  FROM pueDisposi.Defunciones d INNER JOIN pueDisposi.CatCausaMuertes cm ON cm.CatCausaMuerteId = d.idCausaMuerte WHERE d.idPueDisposicion = $idPuestaDisposicion  ";
 }else{
 		$query = "    SELECT d.IdDefuncion, d.nombre, d.ap_paterno, d.ap_materno, d.edad, CASE
 	    WHEN d.sexo = 'm' THEN 'Masculino'
 	    WHEN d.sexo = 'f' THEN 'Femenino'
 	    
 	    ELSE 'Desconocido' 
-	END as sexo, cm.nombre as causaMuerte, d.movilMuerte, d.observaciones  FROM pueDisposi.Defunciones d INNER JOIN pueDisposi.CatCausaMuertes cm ON cm.CatCausaMuerteId = d.idCausaMuerte WHERE d.IdDefuncion = $idDefuncion  ";
+	END as sexo, cm.nombre as causaMuerte, d.movilMuerte, d.observaciones, d.idCausaMuerte FROM pueDisposi.Defunciones d INNER JOIN pueDisposi.CatCausaMuertes cm ON cm.CatCausaMuerteId = d.idCausaMuerte WHERE d.IdDefuncion = $idDefuncion  ";
 }
 
 
@@ -546,9 +548,9 @@ END as sexo, cm.nombre as causaMuerte, d.movilMuerte, d.observaciones  FROM pueD
 		$arreglo[$indice][4]=$row['edad'];
 		$arreglo[$indice][5]=$row['sexo'];
 		$arreglo[$indice][6]=$row['causaMuerte'];
-		$arreglo[$indice][7]=$row['movilMuerte'];
+		//$arreglo[$indice][7]=$row['movilMuerte'];
 		$arreglo[$indice][8]=$row['observaciones'];
-
+		$arreglo[$indice][9]=$row['idCausaMuerte'];
 
 		$indice++;
 	}
@@ -682,7 +684,7 @@ INNER JOIN pueDisposi.tipoDelitos d ON d.idTipoDelito = p.idTipoDelito
 		$arreglo[$indice][3]=$row['edad'];
 
 		$arreglo[$indice][4]=$row['sexo'];
-		$arreglo[$indice][5]=$row['orgCriminalPertenece'];
+		//$arreglo[$indice][5]=$row['orgCriminalPertenece'];
 		$arreglo[$indice][6]=$row['nombre'];
 		$arreglo[$indice][7]=$row['ap_paterno'];
 		$arreglo[$indice][8]=$row['ap_materno'];
@@ -1353,6 +1355,64 @@ function validateMonthCapture($mesSelected, $anioSelected){
 
 }
 
+function get_data_personalApoyo_puesta($conn, $idPuestaDisposicion , $personalApoyo_id){
+	if($personalApoyo_id == 0){
+			$query = "   SELECT pa.personalApoyo_id
+      ,pa.idPueDisposicion
+      ,pa.mando_ID
+	  ,m.nombre+' '+m.paterno+' '+m.materno AS personalApoyo
+	  ,m.idAreaAdscripcion
+	  ,ads.nombre as areaAdscripcion
+	  ,m.idCargo
+	  ,c.nombre AS cargo
+	  ,m.idFuncion
+	  ,fun.nombre as funcion
+  FROM ESTADISTICAV2.pueDisposi.personalApoyo pa
+  INNER JOIN pueDisposi.mando m ON m.idMando = pa.mando_ID
+  INNER JOIN pueDisposi.areaAdscripcion ads ON ads.idAreaAdscripcion = m.idAreaAdscripcion
+  INNER JOIN pueDisposi.cargo c ON c.idCargo = m.idCargo 
+  INNER JOIN pueDisposi.funcion fun ON fun.idFuncion = m.idFuncion WHERE pa.idPueDisposicion = $idPuestaDisposicion ";
+		}else{
+			$query = "  SELECT pa.personalApoyo_id
+      ,pa.idPueDisposicion
+      ,pa.mando_ID
+	  ,m.nombre+' '+m.paterno+' '+m.materno AS personalApoyo
+	  ,m.idAreaAdscripcion
+	  ,ads.nombre as areaAdscripcion
+	  ,m.idCargo
+	  ,c.nombre AS cargo
+	  ,m.idFuncion
+	  ,fun.nombre as funcion
+  FROM ESTADISTICAV2.pueDisposi.personalApoyo pa
+  INNER JOIN pueDisposi.mando m ON m.idMando = pa.mando_ID
+  INNER JOIN pueDisposi.areaAdscripcion ads ON ads.idAreaAdscripcion = m.idAreaAdscripcion
+  INNER JOIN pueDisposi.cargo c ON c.idCargo = m.idCargo 
+  INNER JOIN pueDisposi.funcion fun ON fun.idFuncion = m.idFuncion WHERE pa.personalApoyo_id = $personalApoyo_id ";
+		}
+
+
+ $indice = 0;
+	
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+			$arreglo[$indice][0]=$row['personalApoyo_id'];
+			$arreglo[$indice][1]=$row['idPueDisposicion'];
+			$arreglo[$indice][2]=$row['mando_ID'];
+			$arreglo[$indice][3]=$row['personalApoyo'];
+			$arreglo[$indice][4]=$row['idAreaAdscripcion'];
+			$arreglo[$indice][5]=$row['areaAdscripcion'];
+			$arreglo[$indice][6]=$row['idCargo'];
+   $arreglo[$indice][7]=$row['cargo'];
+   $arreglo[$indice][8]=$row['idFuncion'];
+   $arreglo[$indice][9]=$row['funcion'];
+
+		$indice++;
+	}
+
+		if(isset($arreglo)){return $arreglo;}	
+
+}
 
 
 ?>

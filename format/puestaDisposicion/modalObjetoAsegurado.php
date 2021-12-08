@@ -30,6 +30,7 @@
 		    $nombreObjeto = $arreglo[0][1];
 		    $cantidad = $arreglo[0][2];
 		    $observaciones = $arreglo[0][3];
+		    $textDispoObj = $arreglo[0][4];
 		 }else{ 
 		 	//Si $idDefuncion viene con valor 0 no es actualizacion y entra aqui
 		 	$a = 0;
@@ -98,6 +99,12 @@
 																											<div class="panel panel-default">
 																			<div class="panel-body">  
 																				<h5 class="text-on-pannel"><strong> Otros datos </strong></h5>
+																				<div class="form-row">
+																					<div class="form-group col-md-12">
+																						<label for="textDispoObj">A disposición de: <span class="aste">(*)</span></label>
+																						<input value="<?php if($a == 1){ echo $textDispoObj; } ?>" type="text" class="form-control" id="textDispoObj" name="textDispoObj">
+																					</div>
+																			 </div>
 																				<div class="form-row">
 																	    <div class="form-group col-md-12">
 																	     <label for="textObservacionesObjAsegurados">Observaciones</label>

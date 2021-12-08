@@ -128,7 +128,7 @@
 																	    </div>									
 																	  	<div class="form-group col-md-6">
 																	      <label for="textKilogramos">Gramos<span class="aste">(*)</span></label>
-																	      <input value="<?php if($a == 1){ echo $kilogramos; } ?>" type="text" class="form-control" id="textKilogramos" name="textKilogramos">
+																	      <input value="<?php if($a == 1){ echo $kilogramos; } ?>" type="number" class="form-control" id="textKilogramos" name="textKilogramos">
 																	    </div>	
 																	  </div>
 																			</div>
