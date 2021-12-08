@@ -83,7 +83,7 @@
 
  			<div class="row"><!-- ROOWWWWWW MANDOS  -->
  				<div class="col-xs-12 col-sm-12  col-md-4">
- 					<label for="heard">Selecciona Agente : <span class="aste">(Requerido)</span></label><br>	
+ 					<label for="heard">Agente responsable : <span class="aste">(Requerido)</span></label><br>	
  					<select class="dataAutocomplet form-control browser-default custom-select" onchange="getData()" id="newBrwosers_id" locked="locked" name="newBrwoser" type="text" <? if($b == 0){ echo "readonly"; } ?> >
  						<option></option>
  						<? $mandos = getDataMandos($conn, "VI");
@@ -225,6 +225,9 @@
  					<label for="acepto5"><span></span>Mediante Recorrido</label>
  				</div>
  			</div>
+ 			<div class="col-xs-12 col-sm-2  col-md-2">
+ 				<button class="btnApoyo btn btn-default" onclick="modalPersonalApoyo(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,0,<? echo $b; ?>)" type="submit">Personal de Apoyo</button>
+ 			</div>
  		</div><!-- ROOWWWWWW RELEVANCIAS  -->
 
  		<div class="row"><!-- ROOWWWWWW RELEVANCIAS -->
@@ -247,7 +250,6 @@
 								<td >		<img src="img/iconosPuestaDispo/Cuadrados/Azul-02.png" id="imgPerson" width="100" height="100" alt="Armas" class="poicur"  onclick="showmodalPersonas(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, 0,<? echo $b; ?>);" onmouseover="hoverv(this, 'pe');" onmouseout="unhoverv(this, 'pe')"></br></td>
 								<td >	<img src="img/iconosPuestaDispo/Cuadrados/Azul-03.png" width="100" height="100" alt="Armas" class="poicur" onclick="modalArmasAseguradas(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, 0,<? echo $b; ?>)" onmouseover="hoverv(this, 'ar');" onmouseout="unhoverv(this, 'ar')"></br></td>
 								<td><img src="img/iconosPuestaDispo/Cuadrados/Azul-04.png" onclick="modalDrogas(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,0,<? echo $b; ?>);" width="100" height="100" alt="Armas" class="poicur" onmouseover="hoverv(this, 'dr');" onmouseout="unhoverv(this, 'dr')"></br></td>
-								<!--<td>       <img src="img/iconosPuestaDispo/Cuadrados/Azul-05.png" width="100" height="100" alt="Armas" class="poicur" onmouseover="hoverv(this, 'op');" onmouseout="unhoverv(this, 'op')"></br></td>-->
 								<td><img src="img/iconosPuestaDispo/Cuadrados/Azul-06.png" onclick="modalForestales(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,0,<? echo $b; ?>)" width="100" height="100" alt="Armas" class="poicur" onmouseover="hoverv(this, 'fo');" onmouseout="unhoverv(this, 'fo')"></br></td>
 								<td> <img src="img/iconosPuestaDispo/Cuadrados/Azul-07.png" onclick="modalObjetoAsegurado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,0,<? echo $b; ?>)" width="100" height="100" alt="Armas" class="poicur" onmouseover="hoverv(this, 'he');" onmouseout="unhoverv(this, 'he')"></br></td>
 								<td> <img src="img/iconosPuestaDispo/Cuadrados/Azul-08.png" onclick="modalDineroAsegurado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,0,<? echo $b; ?>);" width="100" height="100" alt="Armas" class="poicur" onmouseover="hoverv(this, 'ma');" onmouseout="unhoverv(this, 'ma')"></br></td>
@@ -265,6 +267,62 @@
 																								
 
 																										<center><div id="involucrado" class="involucrado">
+
+																											<div id="personalApoyo">
+																									  	
+
+																									  				<?  if ($idPuestaDisposicion != 0) {			
+																																											
+																																											$dataPuestaDIne = get_data_personalApoyo_puesta($conn, $idPuestaDisposicion, 0);																																								
+																																											if(sizeof($dataPuestaDIne) > 0){
+																																														?>
+																																																					<center><label style="font-weight: bold; color:#3b2f2f ; font-size: 2rem;">Personal de Apoyo</label>
+																																																							<div class="row" style="padding: 20px;">																														
+																																																									<table class="table table-striped">
+																																																			  <thead>
+																																																			     <tr>
+																																																						      <th scope="col">#</th>
+																																																						      <th scope="col"><center>Nombre</center></th>
+																																																						      <th scope="col"><center>Área de adscripción</center></th>																							      
+																																																						      <th scope="col"><center>Cargo</center></th>
+																																																						      <th scope="col"><center>Función</center></th>
+
+																																																						         <? if($b == 1){ ?>
+																																																						      <th scope="col"><center>Accion</center></th>
+																																																						      <th scope="col"><center>Accion</center></th>
+																																																						      <? } ?>
+																																																						    </tr>
+																																																						</thead>
+																																																			  <tbody>
+																																														<?
+																																																	for ($h=0; $h < sizeof($dataPuestaDIne) ; $h++) { 																																										
+																																																?>
+																																																				<tr>																																																					
+																																																							<td> <? echo ($h+1) ?> </td>
+																																																							<td> <center><? echo $dataPuestaDIne[$h][3]; ?></center> </td>
+																																																							<td> <center><? echo $dataPuestaDIne[$h][5]; ?></center> </td>
+																																																							<td> <center><? echo $dataPuestaDIne[$h][7]; ?></center> </td>
+																																																							<td> <center><? echo $dataPuestaDIne[$h][9]; ?></center> </td>
+
+																																																									<? if($b == 1){ ?>
+																																																							<td> <center><span onclick="deleteItemForm(10, <? echo $dataPuestaDIne[$h][0]; ?>, <? echo $idEnlace; ?>, <? echo $idPuestaDisposicion; ?>)" title="Eliminar" style="cursor: pointer; color: red; font-size: 18px;" class="glyphicon glyphicon-trash"></span> </center></td>
+																																																							<td> <center><span onclick="modalPersonalApoyo(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <? echo $dataPuestaDIne[$h][0]; ?>,<? echo $b; ?>)" title="Editar" style="cursor: pointer; color: orange; font-size: 18px;" class="glyphicon glyphicon-edit"></span></center> </td>
+																																																						<? } ?>
+																																																				</tr>
+																																																<?																																														
+																																														}
+																																														?>
+																																																	 </tbody>
+																																																		</table>
+																																																		</div></center>
+																																														<?
+																																											}																														
+																																					}  
+																																					?>	
+
+
+
+																									  </div>
 
 																																			<div id="personasInvolucradas">
 																																						
@@ -284,7 +342,6 @@
 																																																						      <th scope="col">Alias</th>
 																																																						      <th scope="col">Edad</th>
 																																																						      <th scope="col">Sexo</th>
-																																																						      <th scope="col">Organización Criminal</th>
 																																																						      
 																																																						      <? if($b == 1){ ?>
 																																																						      <th scope="col"><center>Accion</center></th>
@@ -303,7 +360,6 @@
 																																																							<td> <? echo $dataPuestaPersonas[$h][2]; ?> </td>
 																																																							<td> <? echo $dataPuestaPersonas[$h][3]; ?> </td>
 																																																							<td> <? echo $dataPuestaPersonas[$h][4]; ?> </td>
-																																																							<td> <? echo $dataPuestaPersonas[$h][5]; ?> </td>
 
 																																																							<? if($b == 1){ ?>
 																																																							<td> <center><span onclick="deleteItemForm(1, <? echo $dataPuestaPersonas[$h][0]; ?>, <? echo $idEnlace; ?>, <? echo $idPuestaDisposicion; ?>)" title="Eliminar" style="cursor: pointer; color: red; font-size: 18px;" class="glyphicon glyphicon-trash"></span> </center></td>
@@ -461,7 +517,6 @@
 																																																						      <th scope="col"><center>Edad</center></th>
 																																																						      <th scope="col"><center>Sexo</center></th>
 																																																						      <th scope="col"><center>Causa de Muerte</center></th>
-																																																						      <th scope="col"><center>Movil Muerte</center></th>
 																																																						      <th scope="col"><center>Observaciones</center></th>
 
 																																																						         <? if($b == 1){ ?>
@@ -480,7 +535,6 @@
 																																																							<td> <center><? echo $dataPuestaDrogas[$h][4]; ?></center> </td>
 																																																							<td> <center><? echo $dataPuestaDrogas[$h][5]; ?></center> </td>
 																																																							<td> <center><? echo $dataPuestaDrogas[$h][6]; ?></center> </td>
-																																																							<td> <center><? echo $dataPuestaDrogas[$h][7]; ?></center> </td>
 																																																							<td> <center><? echo $dataPuestaDrogas[$h][8]; ?></center> </td>
 
 																																																							<? if($b == 1){ ?>

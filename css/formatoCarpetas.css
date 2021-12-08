@@ -506,3 +506,23 @@ input[type=number].first:focus{
        border-bottom-width: 90% !important;
 
 }
+
+.imgSelloCabezeraPolicia{
+
+  background-image: url('../img/FGE_DGTIPE_ok.png');
+  background-repeat: no-repeat;  
+  background-position: center;
+  background-size: 90%; 
+  background-position-y: 25%;
+
+}
+
+.imgdgtipeCabezeraPolicia{
+
+  background-image: url('../img/Letras_DGTIPE.png'); 
+  background-repeat: no-repeat;  
+  background-position: center; 
+  background-size: 70%; 
+  background-position-y: 25%;
+
+}

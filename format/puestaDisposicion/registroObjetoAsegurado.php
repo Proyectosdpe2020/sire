@@ -46,6 +46,7 @@ if (isset($_POST["idPuestaDisposicion"])){
 if (isset($_POST['herramienta'])){ $herramienta = $_POST['herramienta']; }
 if (isset($_POST['textCant'])){ $textCant = $_POST['textCant']; }
 if (isset($_POST['textObservaciones'])){ $getTextObservaciones = $_POST['textObservaciones']; }
+if (isset($_POST['textDispoObj'])){ $textDispoObj = $_POST['textDispoObj']; }
 if (isset($_POST['idEnlace'])){ $idEnlace = $_POST['idEnlace']; }
 
 
@@ -79,7 +80,7 @@ if (isset($_POST['idObjeto'])){ $idObjeto = $_POST['idObjeto']; }
 
                                               select @insertado = @@IDENTITY
 
-                                             INSERT INTO pueDisposi.objetosAsegurados (idPueDisposicion , nombreObjeto , cantidad , observaciones)  VALUES(@insertado  ,  '$herramienta' , $textCant , '$getTextObservaciones' )
+                                             INSERT INTO pueDisposi.objetosAsegurados (idPueDisposicion , nombreObjeto , cantidad , observaciones, disposicionDe)  VALUES(@insertado  ,  '$herramienta' , $textCant , '$getTextObservaciones', '$textDispoObj' )
 
                                               SELECT MAX(idPuestaDisposicion) AS id FROM pueDisposi.puestaDisposicion   
 
@@ -133,7 +134,7 @@ if (isset($_POST['idObjeto'])){ $idObjeto = $_POST['idObjeto']; }
                             SET NOCOUNT ON    
 
                             
-                             INSERT INTO pueDisposi.objetosAsegurados (idPueDisposicion , nombreObjeto , cantidad , observaciones)  VALUES($idPuestaDisposicion  ,  '$herramienta' , $textCant , '$getTextObservaciones' )
+                             INSERT INTO pueDisposi.objetosAsegurados (idPueDisposicion , nombreObjeto , cantidad , observaciones, disposicionDe)  VALUES($idPuestaDisposicion  ,  '$herramienta' , $textCant , '$getTextObservaciones' , '$textDispoObj')
 
 
 
@@ -153,7 +154,7 @@ if (isset($_POST['idObjeto'])){ $idObjeto = $_POST['idObjeto']; }
                                   SET NOCOUNT ON 
 
                                     UPDATE pueDisposi.objetosAsegurados SET nombreObjeto = '$herramienta' , cantidad = $textCant, 
-                                           observaciones = '$getTextObservaciones'
+                                           observaciones = '$getTextObservaciones', disposicionDe = '$textDispoObj'
                                            WHERE idObjetoAsegurado = $idObjeto
                                               
                                 COMMIT

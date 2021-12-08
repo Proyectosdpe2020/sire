@@ -222,3 +222,27 @@ font-size: 12px;
   width:100%!important;
 }
 
+.panelPersonalApoyo{
+
+    background-image: url('../img/Fondo SIRE4-0450.png'); 
+  background-repeat: repeat;  
+  background-size: cover;
+  background-size: 100%; 
+  background-position-y: 52%;
+
+   overflow-y: scroll;
+  overflow-x:hidden;
+  padding-left:  2% !important;
+  padding-right: 2% !important;
+
+}
+
+.btnApoyo{
+  background: #152F4A;
+  color: white;
+}
+
+.btnApoyo:hover{
+  background: #C09F77;
+  color: white;
+}

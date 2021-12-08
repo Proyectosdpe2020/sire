@@ -58,7 +58,7 @@ if (isset($_POST['seccion'])){ $getSeccion = $_POST['seccion']; }
 //if (isset($_POST['delitoCometido'])){ $getDelitoCometido = $_POST['delitoCometido']; }
 //if (isset($_POST['bandas'])){ $getBandas = $_POST['bandas']; }
 if (isset($_POST['DisposicionDe'])){ $getDisposicion = $_POST['DisposicionDe']; }
-if (isset($_POST['orgCriminal'])){ $getOrgCriminal = $_POST['orgCriminal']; }
+//if (isset($_POST['orgCriminal'])){ $getOrgCriminal = $_POST['orgCriminal']; }
 //if (isset($_POST['agraviado'])){ $getAgraviado = $_POST['agraviado']; }
 if (isset($_POST['inv_flag'])){ $getInv_flag = $_POST['inv_flag']; }
 if (isset($_POST['banda_solitario'])){ $getBanda_solitario = $_POST['banda_solitario']; }
@@ -117,9 +117,9 @@ if($data[8] == ""){ $data[8]=0;}
                                           select @insertado = @@IDENTITY
 
 
-                                            INSERT INTO pueDisposi.personasDetenidas (idPuestaDisposicion, nombre , ap_paterno , ap_materno , alias , edad , sexo , idDelitos , idTipoDelito , orgCriminalPertenece ,  mExt , monedaNal , objAsegurados ,  invFlag , bandaSolit ,  aDispoDe ,  reqOtrasCorpo , oficio , observaciones) 
+                                            INSERT INTO pueDisposi.personasDetenidas (idPuestaDisposicion, nombre , ap_paterno , ap_materno , alias , edad , sexo , idDelitos , idTipoDelito ,   mExt , monedaNal , objAsegurados ,  invFlag , bandaSolit ,  aDispoDe ,  reqOtrasCorpo , oficio , observaciones) 
                                             
-                                            VALUES(@insertado, '$getNombre' , '$getAp_paterno' , '$getAp_materno' , '$getAlias' , $getEdad , '$getSexo' , $getDelitosId , $getTipoDelitoId , '$getOrgCriminal' , '$getmExt' , $getMonedaNal , 
+                                            VALUES(@insertado, '$getNombre' , '$getAp_paterno' , '$getAp_materno' , '$getAlias' , $getEdad , '$getSexo' , $getDelitosId , $getTipoDelitoId , '$getmExt' , $getMonedaNal , 
                                             '$getObjAsegurados' , $getInv_flag , '$getBanda_solitario'  , 
                                             $getDisposicion , '$getRequerido' , '$getOficio' , 
                                                    '$getObservaciones')
@@ -196,10 +196,10 @@ if($data[8] == ""){ $data[8]=0;}
 
                                            declare @insertado int 
                                               
-                                           INSERT INTO pueDisposi.personasDetenidas (idPuestaDisposicion, nombre , ap_paterno , ap_materno , alias , edad , sexo , idDelitos , idTipoDelito , orgCriminalPertenece , mExt , monedaNal , objAsegurados , invFlag , bandaSolit , aDispoDe ,  reqOtrasCorpo , oficio , observaciones) 
+                                           INSERT INTO pueDisposi.personasDetenidas (idPuestaDisposicion, nombre , ap_paterno , ap_materno , alias , edad , sexo , idDelitos , idTipoDelito , mExt , monedaNal , objAsegurados , invFlag , bandaSolit , aDispoDe ,  reqOtrasCorpo , oficio , observaciones) 
                                             
                                             VALUES($idPuestaDisposicion, '$getNombre' , '$getAp_paterno' , 
-                                                  '$getAp_materno' , '$getAlias' , $getEdad , '$getSexo' , $getDelitosId , $getTipoDelitoId , '$getOrgCriminal' , '$getmExt' , $getMonedaNal , '$getObjAsegurados' ,  $getInv_flag , '$getBanda_solitario' , $getDisposicion , '$getRequerido' , '$getOficio' , 
+                                                  '$getAp_materno' , '$getAlias' , $getEdad , '$getSexo' , $getDelitosId , $getTipoDelitoId , '$getmExt' , $getMonedaNal , '$getObjAsegurados' ,  $getInv_flag , '$getBanda_solitario' , $getDisposicion , '$getRequerido' , '$getOficio' , 
                                                    '$getObservaciones')
 
                                               select @insertado = @@IDENTITY 
@@ -260,7 +260,6 @@ if($data[8] == ""){ $data[8]=0;}
                                           sexo = '$getSexo',
                                           idDelitos = $getDelitosId,
                                           idTipoDelito = $getTipoDelitoId,
-                                          orgCriminalPertenece = '$getOrgCriminal',
                                           mExt = '$getmExt',
                                           monedaNal = $getMonedaNal,
                                           objAsegurados = '$getObjAsegurados',

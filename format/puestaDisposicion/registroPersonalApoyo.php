@@ -36,21 +36,12 @@ if (isset($_POST["idPuestaDisposicion"])){
 	$idPuestaDisposicion = $_POST["idPuestaDisposicion"]; 
 }else{ $idPuestaDisposicion = ""; }
 
-
-if (isset($_POST['textNombre'])){ $getTextNombre = $_POST['textNombre']; }
-if (isset($_POST['textAp_paterno'])){ $getTextAp_paterno = $_POST['textAp_paterno']; }
-if (isset($_POST['textAp_materno'])){ $getTextAp_materno = $_POST['textAp_materno']; }
-if (isset($_POST['textEdad'])){ $getTextEdad = $_POST['textEdad']; }
-if (isset($_POST['textSexo'])){ $getTextSexo = $_POST['textSexo']; }
-if (isset($_POST['textCatCausaMuerte_id'])){ $getTextCatCausaMuerte_id = $_POST['textCatCausaMuerte_id']; }
-//if (isset($_POST['textMovilMuerte'])){ $getTextMovilMuerte = $_POST['textMovilMuerte']; }
-if (isset($_POST['textObservaciones'])){ $getTextObservaciones = $_POST['textObservaciones']; }
 if (isset($_POST['idEnlace'])){ $idEnlace = $_POST['idEnlace']; }
-/*
-echo $getTextNombre." ".$getTextAp_paterno." ".$getTextAp_materno." ".$getTextEdad." ".$getTextSexo." ".$getTextCatCausaMuerte_id." ".$getTextMovilMuerte." ".$getTextObservaciones;*/
- ////TIPO DE ACTUALIZACION Y ID DEFUNCIONES////
+if (isset($_POST['mando_ID'])){ $mando_ID = $_POST['mando_ID']; }
+
+ ////TIPO DE ACTUALIZACION Y ID PERSONAL APOYO////
 if (isset($_POST['tipoActualizacion'])){ $tipoActualizacion = $_POST['tipoActualizacion']; }
-if (isset($_POST['idDefuncion'])){ $idDefuncion = $_POST['idDefuncion']; }
+if (isset($_POST['personalApoyo_id'])){ $personalApoyo_id = $_POST['personalApoyo_id']; }
 
     if($data[10] == false){ $data[10] = 0; }else{ $data[10] = 1; }
       if($data[11] == false){ $data[11] = 0; }else{ $data[11] = 1; }
@@ -80,9 +71,8 @@ if (isset($_POST['idDefuncion'])){ $idDefuncion = $_POST['idDefuncion']; }
                                           select @insertado = @@IDENTITY
 
 
-                                            INSERT INTO pueDisposi.Defunciones (idPueDisposicion , nombre , ap_paterno , ap_materno , edad , sexo , idCausaMuerte , observaciones) 
-                                              VALUES(@insertado , '$getTextNombre' , '$getTextAp_paterno' , '$getTextAp_materno' , 
-                                                    $getTextEdad , '$getTextSexo' , $getTextCatCausaMuerte_id , '$getTextObservaciones')
+                                            INSERT INTO pueDisposi.personalApoyo (idPueDisposicion , mando_ID ) 
+                                              VALUES(@insertado , $mando_ID)
 
 
                                              SELECT MAX(idPuestaDisposicion) AS id FROM pueDisposi.puestaDisposicion   
@@ -139,11 +129,8 @@ if (isset($_POST['idDefuncion'])){ $idDefuncion = $_POST['idDefuncion']; }
                                               
                                            select @insertado = @@IDENTITY 
                                               
-                                          INSERT INTO pueDisposi.Defunciones (idPueDisposicion , nombre , ap_paterno , ap_materno ,
-                                             edad , sexo , idCausaMuerte , observaciones) 
-                                              VALUES($idPuestaDisposicion , '$getTextNombre' , '$getTextAp_paterno' , 
-                                              '$getTextAp_materno' ,  $getTextEdad , '$getTextSexo' , $getTextCatCausaMuerte_id , 
-                                              '$getTextObservaciones')
+                                          INSERT INTO pueDisposi.personalApoyo (idPueDisposicion , mando_ID) 
+                                              VALUES($idPuestaDisposicion , $mando_ID)
 
 
                           COMMIT
@@ -161,11 +148,8 @@ if (isset($_POST['idDefuncion'])){ $idDefuncion = $_POST['idDefuncion']; }
                             BEGIN TRANSACTION
                                   SET NOCOUNT ON 
 
-                                    UPDATE pueDisposi.Defunciones SET nombre = '$getTextNombre' , ap_paterno = '$getTextAp_paterno' , 
-                                           ap_materno = '$getTextAp_materno' , edad = $getTextEdad , sexo = '$getTextSexo' , 
-                                           idCausaMuerte = $getTextCatCausaMuerte_id , 
-                                           observaciones = '$getTextObservaciones'
-                                           WHERE IdDefuncion = $idDefuncion
+                                    UPDATE pueDisposi.personalApoyo SET mando_ID = $mando_ID
+                                           WHERE personalApoyo_id = $personalApoyo_id
                                               
                                 COMMIT
                           END TRY

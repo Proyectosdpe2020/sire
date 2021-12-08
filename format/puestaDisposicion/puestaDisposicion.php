@@ -69,7 +69,7 @@
 
 					<table border="0" class="alwidth">						
 							<tr>								
-								<td id="nomostrar" class="imgSelloCabezera" width="5%" height="125"></td>								
+								<td id="nomostrar" class="imgSelloCabezeraPolicia" width="13%" height="125"></td>								
 								<td width="50%">
 											<div class="tituloCentralSegu">
 												<div class="titulosCabe1">
@@ -78,7 +78,7 @@
 												</div>
 											</div>
 								</td>
-								<td id="nomostrar" class="imgdgtipeCabezera" width="10%" height="125"></td>
+								<td id="nomostrar" class="imgdgtipeCabezeraPolicia" width="13%" height="125"></td>
 							</tr>
 					</table>
 
@@ -321,6 +321,15 @@
 										<div id="modalVistaCss" class="modal-dialog modal-sm" style = "width: 45%; margin-top: 2.5%;">
 																	<div class="modal-content" style="">
 																					<div id="contModalArmasAseguradas">																						
+																					</div>
+																	</div>				
+										</div>		
+						</div>
+
+						<div class="modal fade bs-example-modal-sm" id="modalPersonalApoyo" role="dialog" data-backdrop="static" data-keyboard="false">
+										<div id="modalVistaCss" class="modal-dialog modal-sm" style = "width: 45%; margin-top: 2.5%;">
+																	<div class="modal-content" style="">
+																					<div id="contModalPersonalApoyo">																						
 																					</div>
 																	</div>				
 										</div>		

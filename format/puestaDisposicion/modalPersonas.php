@@ -42,7 +42,7 @@
 				if($idPersona!= 0){
 						$a = 1; // Si a = 1 es actualizacion y se mostraran los datos de la siguiente consulta en este mismo modal
 		    $arreglo = get_data_person_puesta($conn, $idPuestaDisposicion , $idPersona);
-		    $orgCriminalPertenece = $arreglo[0][5];
+		   // $orgCriminalPertenece = $arreglo[0][5];
 		    $nombre = $arreglo[0][6];
 		    $ap_paterno = $arreglo[0][7];
 		    $ap_materno = $arreglo[0][8];
@@ -254,20 +254,25 @@
 																			<div class="panel-body">
 																				<h5 class="text-on-pannel"><strong> Datos del aseguramiento </strong></h5>
 																				<div class="form-row">
-																					<div class="form-group col-md-3">
+																					<div class="form-group col-md-4">
 																	      <label for="textInvFlag">Tipo de detención<span class="aste">(*)</span></label>
 																	      <select id="textInvFlag" name="textInvFlag" tabindex="6" class="form-control redondear selectTranparent" required>
 																	       	<option value="0">Selecciona</option>
-																	       	<option style="color: black; font-weight: bold;" value="1" <?php if($a == 1 && $invFlag == 1){ ?> selected <? }?> >Flagrancia</option>
-																	       	<option style="color: black; font-weight: bold;" value="2" <?php if($a == 1 && $invFlag == 2){ ?> selected <? }?>>Mandato Judicial</option>
-																	       	<option style="color: black; font-weight: bold;" value="3" <?php if($a == 1 && $invFlag == 3){ ?> selected <? }?>>Caso urgente</option>
+																	       	<option style="color: black; font-weight: bold;" value="1" <?php if($a == 1 && $invFlag == 1){ ?> selected <? }?> >FLAGRANCIA</option>
+																	       	<!--<option style="color: black; font-weight: bold;" value="2" <?php if($a == 1 && $invFlag == 2){ ?> selected <? }?>>MANDATO JUDICIAL</option>-->
+																	       	<option style="color: black; font-weight: bold;" value="3" <?php if($a == 1 && $invFlag == 3){ ?> selected <? }?>>CASO URGENTE</option>
+																	       	<option style="color: black; font-weight: bold;" value="4" <?php if($a == 1 && $invFlag == 4){ ?> selected <? }?>>APREHENSIÓN</option>
+																	       	<option style="color: black; font-weight: bold;" value="5" <?php if($a == 1 && $invFlag == 5){ ?> selected <? }?>>REAPREHENSIÓN</option>
+																	       	<option style="color: black; font-weight: bold;" value="6" <?php if($a == 1 && $invFlag == 6){ ?> selected <? }?>>COMPARECENCIA</option>
+																	       	<option style="color: black; font-weight: bold;" value="7" <?php if($a == 1 && $invFlag == 7){ ?> selected <? }?>>ARRESTO</option>
+																	       	<option style="color: black; font-weight: bold;" value="8" <?php if($a == 1 && $invFlag == 8){ ?> selected <? }?>>COLABORACIÓN</option>
 																								</select>
 																	    </div>
 																	    
 																	  </div>
 
 																	  	<div class="form-row">
-																	     <div class="form-group col-md-3">
+																	     <div class="form-group col-md-4">
 																	     	<label for="textBandaSolitario">Banda / Solitario</label>
 																	      <select id="textBandaSolitario" name="textBandaSolitario" tabindex="6" class="form-control redondear selectTranparent">
 																	       	<option value="0">Selecciona</option>
@@ -275,14 +280,10 @@
 																	       	<option style="color: black; font-weight: bold;" value="S" <?php if($a == 1 && $bandaSolit == 'S'){ ?> selected <? } ?> >Solitario</option>
 																								</select>
 																	    </div>
-																	     <div class="form-group col-md-3">
-																	      <label for="textOrgCriminal">Org. criminal o banda delictiva</label>
-																	      <input value="<?php if($a == 1){ echo $orgCriminalPertenece; } ?>" type="text" class="form-control" id="textOrgCriminal" name="textOrgCriminal">
-																	    </div>
 																	    </div>
 
 																	    <div class="form-row">
-																	    <div class="form-group col-md-3">
+																	    <div class="form-group col-md-4">
 																	      <label for="textDisposicion">A disposicion de <span class="aste">(*)</span></label>
 																	      	<select class="form-control browser-default custom-select" id="textDisposicionDe" name="textDisposicionDe">																									  
 																																	  	<option value="0">Selecciona</option>																										  
