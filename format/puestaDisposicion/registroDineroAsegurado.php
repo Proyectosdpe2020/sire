@@ -46,6 +46,7 @@ if (isset($_POST['textMon_nal'])){ $getTextMon_nal = $_POST['textMon_nal']; }
 if (isset($_POST['textMon_ext'])){ $getTextMon_ext = $_POST['textMon_ext']; }
 if (isset($_POST['textDivisa'])){ $getTextDivisa = $_POST['textDivisa']; }
 if (isset($_POST['textObservaciones'])){ $getTextObservaciones = $_POST['textObservaciones']; }
+if (isset($_POST['textDispoDinero'])){ $textDispoDinero = $_POST['textDispoDinero']; }
 if (isset($_POST['idEnlace'])){ $idEnlace = $_POST['idEnlace']; }
 
 ////TIPO DE ACTUALIZACION////
@@ -76,8 +77,8 @@ if (isset($_POST['idDineroAsegurado'])){ $idDineroAsegurado = $_POST['idDineroAs
                                              select @insertado = @@IDENTITY
   
 
-                                        INSERT INTO pueDisposi.DineroAsegurado (idPueDisposicion , m_nal , m_ext , divisa , observaciones)
-                                        VALUES (@insertado , $getTextMon_nal , $getTextMon_ext , '$getTextDivisa' , '$getTextObservaciones')
+                                        INSERT INTO pueDisposi.DineroAsegurado (idPueDisposicion , m_nal , m_ext , divisa , observaciones, disposicionDe)
+                                        VALUES (@insertado , $getTextMon_nal , $getTextMon_ext , '$getTextDivisa' , '$getTextObservaciones', '$textDispoDinero')
 
                                          SELECT MAX(idPuestaDisposicion) AS id FROM pueDisposi.puestaDisposicion 
 
@@ -120,8 +121,8 @@ if (isset($_POST['idDineroAsegurado'])){ $idDineroAsegurado = $_POST['idDineroAs
                             BEGIN TRANSACTION
                                   SET NOCOUNT ON 
 
-                                    INSERT INTO pueDisposi.DineroAsegurado (idPueDisposicion , m_nal , m_ext , divisa , observaciones)
-                                              VALUES ($idPuestaDisposicion , $getTextMon_nal , $getTextMon_ext , '$getTextDivisa' , '$getTextObservaciones')
+                                    INSERT INTO pueDisposi.DineroAsegurado (idPueDisposicion , m_nal , m_ext , divisa , observaciones, disposicionDe)
+                                              VALUES ($idPuestaDisposicion , $getTextMon_nal , $getTextMon_ext , '$getTextDivisa' , '$getTextObservaciones', '$textDispoDinero')
 
                                 COMMIT
                           END TRY
@@ -140,7 +141,7 @@ if (isset($_POST['idDineroAsegurado'])){ $idDineroAsegurado = $_POST['idDineroAs
                                   SET NOCOUNT ON 
 
                                     UPDATE pueDisposi.DineroAsegurado SET m_nal = $getTextMon_nal , m_ext = $getTextMon_ext , 
-                                           divisa = '$getTextDivisa' , observaciones = '$getTextObservaciones' 
+                                           divisa = '$getTextDivisa' , observaciones = '$getTextObservaciones' , disposicionDe = '$textDispoDinero'
                                            WHERE idDineroAsegurado = $idDineroAsegurado
                                               
                                 COMMIT

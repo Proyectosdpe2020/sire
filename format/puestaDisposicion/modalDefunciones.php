@@ -32,8 +32,9 @@
 		    $edad = $arreglo[0][4];
 		    $sexo = $arreglo[0][5];
 		    $causaMuerte = $arreglo[0][6];
-		    $movilMuerte = $arreglo[0][7];
+		    //$movilMuerte = $arreglo[0][7];
 		    $observaciones = $arreglo[0][8];
+		    $getCausaMuerte = $arreglo[0][9];
 		 }else{ 
 		 	//Si $idDefuncion viene con valor 0 no es actualizacion y entra aqui
 		 	$a = 0;
@@ -155,30 +156,22 @@
 																				    		<input type="hidden" id="narac" value="<? if($e == 1){ echo $data[16]; } ?>" >	
 
 																				    	<!-- DATOS DE LA PUESTA A DISPOSICION EN CASO DE QUE SEA NUEVA -->  
-																											<h5 class="text-on-pannel"><strong> Causa y movil de la muerte </strong></h5>
+																											<h5 class="text-on-pannel"><strong> Causa de la muerte </strong></h5>
 																
 																	  	<div class="form-row">
-																	  		  
-
-																	  				<div class="form-group col-md-6">
-																	      	<label for="textCatCausaMuerte">Causa de la muerte:<span class="aste">(*)</span></label>	
-																								  <input value="<?php if($a == 1){ echo $causaMuerte; } ?>" class="form-control" onchange="getData()" list="listaCatCausaMuerte" id="textCatCausaMuerte" name="textCatCausaMuerte" type="text">
-																									        
-																	       <datalist id="listaCatCausaMuerte">					       		
-																	       	  <?php
+																	  			<div class="form-group col-md-12">
+																	  		  	<label for="textCatCausaMuerte">Causa de la muerte:<span class="aste">(*)</span></label>	
+																								 <select id="textCatCausaMuerte" class="form-control" name="textCatCausaMuerte">
+																								 	<option value="0" >Seleccione</option>
+																								   <?php
 																	       	  $catCausaMuerte = getDataCausaMuerte($conn);
-
 																	       	  	for ($i = 0; $i < sizeof($catCausaMuerte); $i++){
 																	       	  		$idCatCausaMuerte = $catCausaMuerte[$i][0];	$nombre = $catCausaMuerte[$i][1];	?>
-																	       	  		<option style="color: black; font-weight: bold;" value="<?php echo $nombre; ?>" 
-																	       	  			data-value="<? echo $idCatCausaMuerte; ?>" data-id="<? echo $idCatCausaMuerte; ?>" ></option>	
+																	       	  		<option style="color: black; font-weight: bold;" value="<? echo $idCatCausaMuerte; ?>" <?if($a == 1 && $idCatCausaMuerte == $getCausaMuerte){ ?> selected <? } ?>  ><?echo $nombre ?></option>	
 																	       	  <?php } ?>
-																									 </datalist>
-																	    </div>
-																	     <div class="form-group col-md-6">
-																	      	<label for="textMovilMuerte">Movil de la muerte:</label>	
-																								<input value="<?php if($a == 1){ echo $movilMuerte; } ?>" type="text" class="form-control" id="textMovilMuerte" name="textMovilMuerte">
-																	    </div>
+																	      </select>
+																	     </div>
+																	    
 
 																	  	</div>
 

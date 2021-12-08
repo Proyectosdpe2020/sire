@@ -753,7 +753,7 @@ function registrarPersona(idEnlace, tipoActualizacion, tipoArch, b, idPersona){
 
 
 	//var textBandas = $("#textBandas").val();
-	var textOrgCriminal = $("#textOrgCriminal").val();
+	//var textOrgCriminal = $("#textOrgCriminal").val();
 	//var textAgraviado = $("#textAgraviado").val();
 	var textInvFlag = $("#textInvFlag").val();
 	var textBandaSolitario = $("#textBandaSolitario").val();
@@ -815,7 +815,7 @@ function registrarPersona(idEnlace, tipoActualizacion, tipoArch, b, idPersona){
         dataType: 'html',
         url: "format/puestaDisposicion/registroPersonas.php",
         data: "nombre="+textNombre+"&ap_paterno="+textApPaterno+"&ap_materno="+textApMaterno+"&alias="+textAlias+"&edad="+textEdad+'&sexo='+textSexo+
-              "&orgCriminal="+textOrgCriminal+"&inv_flag="+textInvFlag+"&banda_solitario="+textBandaSolitario+
+              "&inv_flag="+textInvFlag+"&banda_solitario="+textBandaSolitario+
               "&DisposicionDe="+textDisposicionDe+"&requerido="+textRequerido+"&oficio="+textOficio+"&tipoDelitoId="+textTipoDelitoId+
          "&observaciones="+textObservaciones+"&arrayDelitos="+jObjectDelitos+"&jObject="+jObject+"&idEnlace="+idEnlace+"&idPuestaDisposicion="+idPuestaDisposicion+"&tipoActualizacion="+tipoActualizacion+"&idPersona="+idPersona,
         success: function(resp){
@@ -827,7 +827,7 @@ function registrarPersona(idEnlace, tipoActualizacion, tipoArch, b, idPersona){
 														 if (obj.first == "SI") {                    
 															
 														 	var obj = eval("(" + json + ")");
-														 	swal("", "Persona Registrado Exitosamente.", "success");
+														 	swal("", "Persona Registrada Exitosamente.", "success");
 															//// SE DEBE DE ACTUALIZAR LA INFO DE LA PUESTA A DISPOSICION
 															closemodalPersonas();
 															showmodalPueDispo(1, idEnlace, obj.idpuestaultimo, tipoArch, b);
@@ -1478,13 +1478,14 @@ var uno= document.getElementById("uno").value;
 
 
 var herramienta = document.getElementById("herramientas").value;
-var textCant = document.getElementById("textCantidad").value;
-					
+var textCant = document.getElementById("textCantidad").value; 
+var textDispoObj = document.getElementById("textDispoObj").value;
+if(herramienta != "" && textCant != ""  && textDispoObj != ""){
 			$.ajax({
         type: "POST",
         dataType: 'html',
         url: "format/puestaDisposicion/registroObjetoAsegurado.php",
-        data: "textObservaciones="+textObservaciones+"&herramienta="+herramienta+"&textCant="+textCant+"&jObject="+jObject+"&idEnlace="+idEnlace+"&idPuestaDisposicion="+idPuestaDisposicion+"&tipoActualizacion="+tipoActualizacion+"&idObjeto="+idObjeto,
+        data: "textObservaciones="+textObservaciones+"&herramienta="+herramienta+"&textCant="+textCant+"&textDispoObj="+textDispoObj+"&jObject="+jObject+"&idEnlace="+idEnlace+"&idPuestaDisposicion="+idPuestaDisposicion+"&tipoActualizacion="+tipoActualizacion+"&idObjeto="+idObjeto,
         success: function(resp){
             var json = resp;
 															var obj = eval("(" + json + ")");
@@ -1502,6 +1503,10 @@ var textCant = document.getElementById("textCantidad").value;
 															}
         }
     });
+		}else{
+				swal("", "Faltan datos por registrar.", "warning");
+		}
+
 		}
 
 
@@ -1661,13 +1666,14 @@ var tipoActualizacion = tipoActualizacion;
 	var textMon_ext = $("#textMon_ext").val();
 	var textDivisa = $("#textDivisa").val();
 	var textObservaciones = $("#textObservacionesDinero").val();
+	var textDispoDinero = $("#textDispoDinero").val();
 
 //Si los campos de moneda van vacios ponerlos a cero//
 			if(textMon_nal == ""){ textMon_nal = 0; }
 			if(textMon_ext == ""){ textMon_ext = 0; }
 
 ///Validar campos vacios///
-if(textMon_nal > 0 || textMon_ext > 0){
+if((textMon_nal > 0 || textMon_ext > 0) && textDispoDinero != "" ){
 	
  //// DATA DE LA PUESTA A DISPOSICION /////
 	var idPuestaDisposicion= document.getElementById("idPuestaDisposicion").value;
@@ -1710,7 +1716,7 @@ if(textMon_nal > 0 || textMon_ext > 0){
         dataType: 'html',
         url: "format/puestaDisposicion/registroDineroAsegurado.php",
         data: "textMon_nal="+textMon_nal+"&textMon_ext="+textMon_ext+"&textDivisa="+textDivisa+"&textObservaciones="+textObservaciones+
-              "&jObject="+jObject+"&idEnlace="+idEnlace+"&idPuestaDisposicion="+idPuestaDisposicion+"&tipoActualizacion="+tipoActualizacion+
+              "&textDispoDinero="+textDispoDinero+"&jObject="+jObject+"&idEnlace="+idEnlace+"&idPuestaDisposicion="+idPuestaDisposicion+"&tipoActualizacion="+tipoActualizacion+
               "&idDineroAsegurado="+idDineroAsegurado,
         success: function(resp){
             
@@ -1890,20 +1896,13 @@ var tipoActualizacion = tipoActualizacion;
 	var textAp_paterno = $("#textAp_paternoDef").val();
 	var textAp_materno = $("#textAp_maternoDef").val();
 	var textSexo = $("#textSexoDef").val();
- var textCatCausaMuerte = document.getElementById("textCatCausaMuerte").value;
- if(textCatCausaMuerte == ""){ 
-  textCatCausaMuerte_id = 0;
- }else{
- 	var textCatCausaMuerte_id = document.querySelector("#listaCatCausaMuerte"  + " option[value='" +textCatCausaMuerte+ "']").dataset.id;
- }
-
+ var textCatCausaMuerte_id = document.getElementById("textCatCausaMuerte").value;
 
 ///Validar campos vacios///
 if(textSexo != 0 && textCatCausaMuerte_id != 0 && textNombre != "" && textAp_paterno != "" && textAp_materno != ""){
  /*Obtener datos del formulario*/
 	var textEdad = $("#textEdadDef").val(); 
 	if(textEdad == ""){ textEdad = 0;}
-    var textMovilMuerte = $("#textMovilMuerte").val();
 	var textObservaciones = $("#textObservacionesDefun").val();
 	
  //// DATA DE LA PUESTA A DISPOSICION /////
@@ -1951,7 +1950,7 @@ if(textSexo != 0 && textCatCausaMuerte_id != 0 && textNombre != "" && textAp_pat
         dataType: 'html',
         url: "format/puestaDisposicion/registroDefunciones.php",
         data: "textNombre="+textNombre+"&textAp_paterno="+textAp_paterno+"&textAp_materno="+textAp_materno+"&textSexo="+textSexo+"&textEdad="+textEdad+
-              "&textCatCausaMuerte_id="+textCatCausaMuerte_id+"&textMovilMuerte="+textMovilMuerte+"&textObservaciones="+textObservaciones+"&jObject="+jObject+"&idEnlace="+idEnlace+"&idPuestaDisposicion="+idPuestaDisposicion+"&tipoActualizacion="+tipoActualizacion+"&idDefuncion="+idDefuncion,
+              "&textCatCausaMuerte_id="+textCatCausaMuerte_id+"&textObservaciones="+textObservaciones+"&jObject="+jObject+"&idEnlace="+idEnlace+"&idPuestaDisposicion="+idPuestaDisposicion+"&tipoActualizacion="+tipoActualizacion+"&idDefuncion="+idDefuncion,
         success: function(resp){
             			var json = resp;
 															var obj = eval("(" + json + ")");
@@ -3136,3 +3135,217 @@ function checkClasificacion(){
 			}
 	}
 }
+
+////////////////////////////////////// MODAL PERSONAL DE APOYO //////////////////////////////////////
+
+
+function modalPersonalApoyo(tipoMOd, idEnlace, personalApoyo_id, b){
+	/////////////////////////// SI EL TIPO MODAL ES UNA NUEVA PUESTA ENTONCES ES  0 ///////////////////////////////
+	var idPuestaDisposicion= document.getElementById("idPuestaDisposicion").value;
+
+	var validar = validateDataPuesta();	
+
+	if(idPuestaDisposicion == ""  ){
+
+	//////////// VALIDAR CAMPOS QUE SEAN REQUERIDO PARA LA PUESTA A DIPOSICION //////////////////
+	if(validar){
+
+		var newBrwosers_id = document.getElementById("newBrwosers_id").value;
+
+		var newBrwosers_id_fisca=  document.getElementById("newBrwoserFisca").value;
+		var newBrwosers_id_mun= document.getElementById("newBrwoserMun").value;
+		var newBrwosers_id_colo= document.getElementById("newBrwoserColo").value;
+
+		var nucPuestaDisposi= document.getElementById("nucPuestaDisposi").value;
+		var codepostalidPeusta= document.getElementById("codepostalidPeusta").value;
+		var numberCallePuesta= document.getElementById("numberCallePuesta").value;
+		 if(numberCallePuesta == ""){ numberCallePuesta = 0; }
+
+		 var uno = document.getElementById("acepto1").checked;
+			var dos = document.getElementById("acepto2").checked;
+			var tres = document.getElementById("acepto3").checked;
+		 var cuatro = document.getElementById("acepto4").checked;
+			var cinco = document.getElementById("acepto5").checked;
+			var narac= document.getElementById("textNarracion").value;
+
+
+
+
+		var puestaData = Array();
+			    puestaData[0] = newBrwosers_id;   puestaData[1] = "'"+nucPuestaDisposi+"'"; puestaData[2] = "'"+fechaevento+"'"; puestaData[3] =  newBrwosers_id_fisca;
+			    puestaData[4] = newBrwosers_id_mun; puestaData[5] = newBrwosers_id_colo; puestaData[6] = codepostalidPeusta; puestaData[7] = "'"+calleInputPuesta+"'";
+			    puestaData[8] = numberCallePuesta; puestaData[9] = tipoMOd; 
+
+			    puestaData[11] = uno; puestaData[12] = dos; puestaData[13] = tres;
+			    puestaData[14] = cuatro; puestaData[15] = cinco; puestaData[16] = narac;
+
+
+			     var jObject={};  for(i in puestaData){  jObject[i] = puestaData[i];   }
+			     jObject= JSON.stringify(jObject);
+
+	
+	    /*Validamos si ha llenado el formulario*/    
+	    if(idPuestaDisposicion == ""  ){
+	    	cont = document.getElementById('contModalPersonalApoyo');
+			ajax=objetoAjax();
+			ajax.open("POST", "format/puestaDisposicion/modalPersonalApoyo.php");
+
+			ajax.onreadystatechange = function(){
+				if (ajax.readyState == 4 && ajax.status == 200) {
+					cont.innerHTML = ajax.responseText;
+						$('.dataAutocomplet').select2({
+																																	    width: '100%',
+																																	    placeholder: "Seleccione",
+                                     allowClear: false
+																																	});
+					$('#puestdispos').modal('hide'); 
+					$('#modalPersonalApoyo').modal('show');
+				}
+			}
+			ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			ajax.send("&personalApoyo_id="+personalApoyo_id+"&jObject="+jObject+"&idEnlace="+idEnlace+"&b="+b);
+		    }
+		}else{ 
+			swal("", "Faltan datos por registrar.", "warning");
+		}	
+
+	}else{
+
+
+
+					if(idPuestaDisposicion != ""){
+
+
+	 								cont = document.getElementById('contModalPersonalApoyo');
+										ajax=objetoAjax();
+										ajax.open("POST", "format/puestaDisposicion/modalPersonalApoyo.php");
+
+										ajax.onreadystatechange = function(){
+											if (ajax.readyState == 4 && ajax.status == 200) {
+												cont.innerHTML = ajax.responseText;
+													$('.dataAutocomplet').select2({
+																																	    width: '100%',
+																																	    placeholder: "Seleccione",
+                                     allowClear: false
+																																	});
+												$('#puestdispos').modal('hide'); 
+												$('#modalPersonalApoyo').modal('show');
+											}
+										}
+										ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+										ajax.send("&personalApoyo_id="+personalApoyo_id+"&tipoMOd="+tipoMOd+"&idPuestaDisposicion="+idPuestaDisposicion+"&idEnlace="+idEnlace+"&b="+b);
+
+	 						}
+
+
+	}
+}
+
+function closemodalPersonalApoyo(){
+	 $('#puestdispos').modal('show'); 
+	 $('#modalPersonalApoyo').modal('hide');
+}
+
+function getDataPersonalApoyo(){
+		var mando_ID = document.getElementById("mando_ID").value;		
+
+		cont = document.getElementById('contDataPersonalApoyo');
+		ajax=objetoAjax();
+		ajax.open("POST", "format/puestaDisposicion/dataPersonalApoyo.php");
+
+		ajax.onreadystatechange = function(){
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				cont.innerHTML = ajax.responseText;
+			}
+		}
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		ajax.send("&mando_ID="+mando_ID);
+
+}
+
+///////////////// REGISTRO OBJETO ASEGURADO //////////
+
+
+
+function registroPersonalApoyo(idEnlace, typearch, b, tipoActualizacion , personalApoyo_id){
+
+	
+	/// VALIDACIONES ///
+	var idEnlace = idEnlace;
+var tipoActualizacion = tipoActualizacion;
+	var personalApoyo_id = personalApoyo_id;
+	
+
+	var mando_ID = $("#mando_ID").val();
+	var cargoPersonalApoyo = $("#cargoPersonalApoyo").val();
+	var funcionPersonalApoyo = $("#funcionPersonalApoyo").val();
+	var adscPersonalApoyo = $("#adscPersonalApoyo").val();
+
+	if(mando_ID != "" && cargoPersonalApoyo != "" && funcionPersonalApoyo != "" && adscPersonalApoyo != "" ){
+
+	//// DATA DE LA PUESTA A DISPOSICION /////
+	var idPuestaDisposicion= document.getElementById("idPuestaDisposicion").value;
+	var tipoMOd= document.getElementById("tipoMOd").value;
+
+	var idMandoPuesta = document.getElementById("idMandoPuesta").value;
+	var nucPuestaDisposi= document.getElementById("nucPuestaDisposi").value;
+	var fechaevento= document.getElementById("fechaevento").value;
+	var newBrwosers_id_fisca= document.getElementById("newBrwosers_id_fisca").value;
+	var newBrwosers_id_mun= document.getElementById("newBrwosers_id_mun").value;
+	var newBrwosers_id_colo= document.getElementById("newBrwosers_id_colo").value;
+	var codepostalidPeusta= document.getElementById("codepostalidPeusta").value;
+	var calleInputPuesta= document.getElementById("calleInputPuesta").value;
+	var numberCallePuesta= document.getElementById("numberCallePuesta").value;
+	if(numberCallePuesta == ""){ numberCallePuesta = 0; }
+
+var uno= document.getElementById("uno").value;
+				var dos= document.getElementById("dos").value;
+					var tres= document.getElementById("tres").value;
+						var cuatro= document.getElementById("cuatro").value;
+							var cinco= document.getElementById("cinco").value;
+								var narac= document.getElementById("narac").value;
+
+
+
+	var puestaDataPersona = Array();
+			    puestaDataPersona[0] = idMandoPuesta;  puestaDataPersona[1] = "'"+nucPuestaDisposi+"'"; puestaDataPersona[2] = "'"+fechaevento+"'"; puestaDataPersona[3] =  newBrwosers_id_fisca;
+			    puestaDataPersona[4] = newBrwosers_id_mun; puestaDataPersona[5] = newBrwosers_id_colo; puestaDataPersona[6] = codepostalidPeusta; puestaDataPersona[7] = "'"+calleInputPuesta+"'";
+			    puestaDataPersona[8] = numberCallePuesta; puestaDataPersona[9] = tipoMOd; puestaDataPersona[10] = uno; puestaDataPersona[11] = dos; puestaDataPersona[12] = tres;
+			    puestaDataPersona[13] = cuatro; puestaDataPersona[14] = cinco; puestaDataPersona[15] = narac;			   
+
+
+			     var jObject={};  
+			     for(i in puestaDataPersona){  
+			     	jObject[i] = puestaDataPersona[i];   
+			     }
+			     jObject = JSON.stringify(jObject);
+ //// DATA DE LA PUESTA A DISPOSICION /////
+
+					
+			$.ajax({
+        type: "POST",
+        dataType: 'html',
+        url: "format/puestaDisposicion/registroPersonalApoyo.php",
+        data: "mando_ID="+mando_ID+"&jObject="+jObject+"&idEnlace="+idEnlace+"&idPuestaDisposicion="+idPuestaDisposicion+"&tipoActualizacion="+tipoActualizacion+"&personalApoyo_id="+personalApoyo_id,
+        success: function(resp){
+            var json = resp;
+															var obj = eval("(" + json + ")");
+															if (obj.first == "NO") { swal("", "No se registro verifique los datos.", "warning"); }else{
+																 if (obj.first == "SI") {                    
+																	
+																 	var obj = eval("(" + json + ")");
+																 	swal("", "Personal de apoyo registrado exitosamente.", "success");
+																	//// SE DEBE DE ACTUALIZAR LA INFO DE LA PUESTA A DISPOSICION
+																	closemodalPersonalApoyo();
+
+																		showmodalPueDispo(1, idEnlace, obj.idpuestaultimo, typearch, b);
+
+																 }
+															}
+        }
+    });
+		}else{
+			swal("", "Faltan datos por ingresar.", "warning");
+		}
+
+		}
