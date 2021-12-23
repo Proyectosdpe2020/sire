@@ -62,8 +62,8 @@ $mesNom = Mes_Nombre($currentmonth);
 			</div>
 			<?if($rolUser == 1 && $totalPendientes > 0){?>
 			<!--ALERTA CARPETAS PENDIENTES DE ASIGNAR AL MES-->
-   <div class="alert alert-danger" id="msgAlert">
-		  <a href="#" class="alert-link" onclick="modalCheckPendientes(<?echo $rolUser; ?>, <?echo $idEnlace; ?>)">Carpetas pendientes por asignar a Ministerio Publico: </a><label><br><?echo $totalPendientes; ?><br></label>
+	 <div class="alert alert-danger" id="msgAlert">
+			<a href="#" class="alert-link" onclick="modalCheckPendientes(<?echo $rolUser; ?>, <?echo $idEnlace; ?>)">Carpetas pendientes por asignar a Ministerio Publico: </a><label><br><?echo $totalPendientes; ?><br></label>
 		 </div>
 		 <!--ALERTA CARPETAS PENDIENTES DE ASIGNAR AL MES-->
 		<? } ?>
@@ -139,7 +139,7 @@ $mesNom = Mes_Nombre($currentmonth);
 						<th class="">Nuc</th>
 						<th class=" textCent">Victima(s)</th>
 						<th class=" textCent">Delito</th>
-						<th class=" textCent">Fecha del acuerdo</th>
+						<?if($rolUser != 2 ){?><th class=" textCent">Fecha del acuerdo</th><? }else{ ?> <th class=" textCent">Fecha del registro</th> <? } ?>
 						<?if($rolUser == 1){?><th class=" textCent">Capturista</th><? } ?>
 						<?if($rolUser != 3){?><th class="textCent">Carpeta asignada?</th><? } ?>
 						<?if($rolUser == 1 || $rolUser == 3){?><th class=" textCent">ESTADO</th><? } ?>
@@ -149,8 +149,8 @@ $mesNom = Mes_Nombre($currentmonth);
 				<tbody id="contentConsulta">
 					<?$dataMedidasDia = get_data_medidas_dia($connMedidas, $numeroDia, $diames, 2021, $idfisca, $idEnlace, $currentmonth, $rolUser);
 					for ($h=0; $h < sizeof($dataMedidasDia) ; $h++) { 
-						  $getDataVictimas = getDataVictimas($connMedidas, $dataMedidasDia[$h][0]); 
-						  $checkEstatus = checkFechaConclusion($dataMedidasDia[$h][19]);
+							$getDataVictimas = getDataVictimas($connMedidas, $dataMedidasDia[$h][0]); 
+							$checkEstatus = checkFechaConclusion($dataMedidasDia[$h][19]);
 					 ?>
 						<tr>
 							<td><? echo $dataMedidasDia[$h][0]; ?></td>
@@ -158,31 +158,31 @@ $mesNom = Mes_Nombre($currentmonth);
 							<td><? echo $dataMedidasDia[$h][1]; ?></td>
 							<td>
 							<? if(sizeof($getDataVictimas) > 0){ 
-								  for ($j=0; $j < sizeof($getDataVictimas) ; $j++) {
-								  	if(sizeof($getDataVictimas) > 1){
-								  		echo ' - '.$getDataVictimas[$j][7].'<br>';
-								  		}else{
-								  			echo $getDataVictimas[$j][7];
-								  		}
-								  }
-						  }else{
-						  	echo 'SIN VICTIMA, VERIFIQUE';
-						  } ?>
+									for ($j=0; $j < sizeof($getDataVictimas) ; $j++) {
+										if(sizeof($getDataVictimas) > 1){
+											echo ' - '.$getDataVictimas[$j][7].'<br>';
+											}else{
+												echo $getDataVictimas[$j][7];
+											}
+									}
+							}else{
+								echo 'SIN VICTIMA, VERIFIQUE';
+							} ?>
 						 </td>
 							<td><? echo $dataMedidasDia[$h][7]; ?></td>
-							<td><center><? echo $dataMedidasDia[$h][8]; ?><center></td>
+							<?if($rolUser != 2 ){?> <td><center><? echo $dataMedidasDia[$h][8]; ?><center></td> <? }else{ ?> <td><center><? echo $dataMedidasDia[$h][9]; ?><center></td> <? } ?>
 							<?if($rolUser == 1){?><td><center><? echo $dataMedidasDia[$h][18]; ?><center></td><? } ?>
 							<?if($rolUser != 3){?><td><?if($dataMedidasDia[$h][2] != 0){ ?><div class="verdCol" id="circulo"><? }else{ ?> <div class="redCol" id="circulo"> <? } ?></div></td><? } ?>
 						 <?if($rolUser == 1 || $rolUser == 3){ ?>
-						 	<td>
-						 	<?if($checkEstatus == 'CONCLUIDA'){ ?>
-						 		<div class="verdCol" id="circulo"></div><center>Concluida</center>
-						 		<? }elseif($checkEstatus == 'ACTIVA'){ ?> 
-						 			<div class="yelloCol" id="circulo"></div><center>En curso</center>
-						 			<? }elseif($checkEstatus == 'NOTRABAJADA'){ ?>
-						 				<div class="redCol" id="circulo"></div><center>Sin medida aplicada</center>
-						 		<? } ?>
-						 	</td>
+							<td>
+							<?if($checkEstatus == 'CONCLUIDA'){ ?>
+								<div class="verdCol" id="circulo"></div><center>Concluida</center>
+								<? }elseif($checkEstatus == 'ACTIVA'){ ?> 
+									<div class="yelloCol" id="circulo"></div><center>En curso</center>
+									<? }elseif($checkEstatus == 'NOTRABAJADA'){ ?>
+										<div class="redCol" id="circulo"></div><center>Sin medida aplicada</center>
+								<? } ?>
+							</td>
 						 <? } ?>
 							<td><center><label <?if($rolUser == 1){?>class="glyphicon glyphicon-user"<? }else{ ?>class="glyphicon glyphicon-edit" <? } ?> data-toggle="modal" href="#puestdispos" onclick="reloadModalMDP(1, <?echo $idEnlace; ?>, <?echo $dataMedidasDia[$h][0]; ?>, 0, 0)" style="width: 95%; cursor: pointer; font-weight: bold; color: green;"><?if($rolUser == 1){?> Asignar MP <? }else{ ?> Editar <? } ?> </label></center>
 							</td>
@@ -234,10 +234,10 @@ $mesNom = Mes_Nombre($currentmonth);
 			<div class="modal-content" style="">
 				<div id="contModalCargandoInfo">
 					<div class="modal-header">
-        <h4 class="modal-title">Validando NUC...</h4>
-      </div>
-      <div class="modal-body">
-        <div class="row">
+				<h4 class="modal-title">Validando NUC...</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
 									<div class="col-md-12 col-sm-12 col-md-offset-4">
 										<img src="img/cargandoInfoMedidas.gif"  class="cursorp" >
 									</div>
@@ -247,10 +247,10 @@ $mesNom = Mes_Nombre($currentmonth);
 										<label>Cargando información de SIGI</label>
 									</div>
 								</div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-      </div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+			</div>
 				</div>
 			</div>
 		</div>
@@ -263,10 +263,10 @@ $mesNom = Mes_Nombre($currentmonth);
 			<div class="modal-content" style="">
 				<div id="contModalCargandoInfoModal">
 					<div class="modal-header">
-        <h4 class="modal-title"></h4>
-      </div>
-      <div class="modal-body">
-        <div class="row">
+				<h4 class="modal-title"></h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
 									<div class="col-md-12 col-sm-12 col-md-offset-4">
 										<img src="img/cargandoInfoMedidas.gif"  class="cursorp" >
 									</div>
@@ -276,10 +276,10 @@ $mesNom = Mes_Nombre($currentmonth);
 										<label>Cargando información...</label>
 									</div>
 								</div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-      </div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+			</div>
 				</div>
 			</div>
 		</div>

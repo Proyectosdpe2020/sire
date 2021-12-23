@@ -171,6 +171,8 @@ function get_data_medida($connMedidas, $idMedida){
 		$arreglo[$indice][8]=$row['idEnlace'];
 		$arreglo[$indice][9]=$row['idFiscaliaProcedencia'];
 		$arreglo[$indice][11]=$row['estatus'];
+		$arreglo[$indice][12]=$row['fechaAcuerdo']->format('Y-m-d');
+
 		$indice++;
 	}
 	if(isset($arreglo)){return $arreglo;}
@@ -531,7 +533,8 @@ function get_data_medidas_dia($connMedidas, $numeroDia, $diames, $anio, $fiscali
 		}
 	}elseif($rolUser == 2){
 		if($diames != 0){
-				$query = " SELECT m.idMedida
+				$query = "SET DATEFIRST 1  
+				              SELECT m.idMedida
 															      ,m.nuc
 															      ,m.idMP
 																  			,mp.nombre+' '+mp.paterno+' '+mp.materno AS nombreMP
@@ -556,9 +559,10 @@ function get_data_medidas_dia($connMedidas, $numeroDia, $diames, $anio, $fiscali
 															  INNER JOIN PRUEBA.dbo.CatModalidadesEstadisticas d ON d.CatModalidadesEstadisticasID = m.idDelito
 															  INNER JOIN medidas.catFiscalias f ON f.catFiscaliasID = m.idFiscaliaProcedencia 
 															  INNER JOIN ESTADISTICAV2.dbo.enlace e ON e.idEnlace = m.idEnlace
-															  WHERE m.diaSemana = $numeroDia AND m.anio = $anio AND m.diaMes = $diames AND m.mes = $mes AND m.idEnlace = $idenlace order by m.idMedida desc ";
+															  WHERE DATEPART(dw, fechaRegistro) = $numeroDia AND DATEPART(year, fechaRegistro) = $anio AND DATEPART(day, fechaRegistro) = $diames AND DATEPART(month, fechaRegistro) = $mes AND m.idEnlace = $idenlace order by m.idMedida desc ";
 		}else{
-			       $query = " SELECT m.idMedida
+			       $query = " SET DATEFIRST 1
+			                  SELECT m.idMedida
 															      ,m.nuc
 															      ,m.idMP
 																  			,mp.nombre+' '+mp.paterno+' '+mp.materno AS nombreMP
@@ -583,7 +587,7 @@ function get_data_medidas_dia($connMedidas, $numeroDia, $diames, $anio, $fiscali
 															  INNER JOIN PRUEBA.dbo.CatModalidadesEstadisticas d ON d.CatModalidadesEstadisticasID = m.idDelito
 															  INNER JOIN medidas.catFiscalias f ON f.catFiscaliasID = m.idFiscaliaProcedencia 
 															  INNER JOIN ESTADISTICAV2.dbo.enlace e ON e.idEnlace = m.idEnlace
-															  WHERE m.anio = $anio  AND m.mes = $mes AND m.idEnlace = $idenlace order by m.idMedida desc ";
+															  WHERE DATEPART(year, fechaRegistro) = $anio  AND DATEPART(month, fechaRegistro) = $mes AND m.idEnlace = $idenlace order by m.idMedida desc ";
 		}
 	}elseif($rolUser == 3){
 		if($diames != 0){
@@ -968,6 +972,53 @@ function checkFechaConclusion($fechaConclusion){
 		}else{
 			return 'ACTIVA';
 		}
+	}
+}
+
+function modificarMedidasAplicadas($connMedidas, $idMedida){
+	$query = " SELECT ma.idMedidaAplicada
+												      ,ma.idMedida
+																  ,ma.nuc
+																  ,ma.idCatFraccion
+																  ,CASE 
+																		  WHEN ma.idCatFraccion = 1 THEN 'I'
+																			 WHEN ma.idCatFraccion = 2 THEN 'II'
+																			 WHEN ma.idCatFraccion = 3 THEN 'III'
+																			 WHEN ma.idCatFraccion = 4 THEN 'IV'
+																			 WHEN ma.idCatFraccion = 5 THEN 'V'
+																			 WHEN ma.idCatFraccion = 6 THEN 'VI'
+																			 WHEN ma.idCatFraccion = 7 THEN 'VII'
+																			 WHEN ma.idCatFraccion = 8 THEN 'VIII'
+																			 WHEN ma.idCatFraccion = 9 THEN 'XI'
+																			 WHEN ma.idCatFraccion = 10 THEN 'X'
+																			ELSE 'Sin asignar medida'
+																			END as fraccionAsignada
+																  ,cf.nombre
+															FROM medidas.medidasAplicadas ma
+															INNER JOIN medidas.catFracciones cf ON cf.idCatFraccion = ma.idCatFraccion
+															WHERE idMedida = $idMedida ";
+	$indice = 0;
+	$stmt = sqlsrv_query($connMedidas, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['idMedidaAplicada'];
+		$arreglo[$indice][1]=$row['idMedida'];
+		$arreglo[$indice][2]=$row['nuc'];
+		$arreglo[$indice][3]=$row['idCatFraccion'];
+		$arreglo[$indice][4]=$row['nombre'];
+		$arreglo[$indice][5]=$row['fraccionAsignada'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
+
+function checkEdad($edad){
+	if($edad > 0){
+		return "Años";
+	}elseif($edad == 0){
+		return "Desconocida";
+	}elseif($edad < 0){
+		return "Meses";
 	}
 }
 

@@ -78,6 +78,10 @@ if(sizeof($getDataFracciones) > 0) {
   $templateProcessor->setValues( array('fracciones' => mb_strtoupper($resultadoFraccion, "UTF-8")  ) );
 }
 
+$getDataCuaderno = getDataGenerales($connMedidas, $idMedida, 0 , 0);
+
+$templateProcessor->setValues( array('tempo' => $getDataCuaderno[0][2] , 'fechaAcuerdo' => $getDataMedida[0][12] , 'fechaConclu' => $getDataCuaderno[0][3]->format('Y-m-d') ) );
+
 
 /*******PROCESO DE GUARDADO DEL DOCUMENTO*************/
 $file = 'HelloWorld.docx';

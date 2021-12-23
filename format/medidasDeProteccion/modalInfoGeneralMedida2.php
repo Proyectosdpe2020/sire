@@ -37,6 +37,7 @@ if (isset($_POST["idMedida"])){
 <div class="modal-body">
 	
 	<? $getDataGenerales = getDataGenerales($connMedidas, $idMedida,0,0);
+	   $checkExistDataGeneral = $getDataGenerales[0][0];
 	   if(sizeof($getDataGenerales) > 0){ $checkInfoPrevia = 1; }else{ $checkInfoPrevia = 0; } ?>
 	<div class="row">
 		<!--MENU DE OPCIONES ASIGNADO A ROLES-->
@@ -57,11 +58,13 @@ if (isset($_POST["idMedida"])){
 					<div class="panel-body">
 						<h5 class="text-on-pannel"><strong>Datos Generales</strong></h5>
 						<div id="contDataCuadernoAntecedentes">
+						<?if($checkInfoPrevia == 0){ ?>
 						<div class="row">
 								<div class="col-xs-12 col-sm-12  col-md-2">
 								 <button type="button" class="btn btn-primary btn-lg" onclick="saveDatosGenerales(<?php echo $idEnlace; ?> , <?php echo $fraccion; ?>, <?echo $idMedida ?> , <?echo $nuc ?>)">Guardar información </button>
 							 </div>
 					 </div><br>
+					<? } ?>
 						<div class="row">
 							<div class="col-xs-12 col-sm-12  col-md-3">
 								<label for="nuc">NUC: </label>
@@ -224,14 +227,15 @@ if (isset($_POST["idMedida"])){
 									<tbody id="contentTableDataVictimas">
 									<?for ($h=0; $h < sizeof($getDataVictimas) ; $h++) { 
 										$totalV = sizeof($getDataVictimas);
-										$dataCompleted = checkDataContactoCompleted($connMedidas, $getDataVictimas[$h][0]); ?>
+										$dataCompleted = checkDataContactoCompleted($connMedidas, $getDataVictimas[$h][0]); 
+										$checkEdad = checkEdad($getDataVictimas[$h][6]);?>
 										<tr>
 											<td><? echo $h + 1 ?></td>
 											<td><?echo $getDataVictimas[$h][2]; ?></td>
 											<td><?echo $getDataVictimas[$h][3]; ?></td>
 											<td><?echo $getDataVictimas[$h][4]; ?></td>
 											<td><?echo $getDataVictimas[$h][5]; ?></td>
-											<td><?echo $getDataVictimas[$h][6]; ?></td>
+											<td><?echo abs($getDataVictimas[$h][6]).' '.$checkEdad; ?></td>
 											<?if($dataCompleted[0][0] > 0){?>
 											<td style="background: green; color: white;"><center>Completado</center></td><? }else{ ?>
 											<td style="background: #FF9A09; color: white;"><center>Incompleto</center></td><? } ?>
@@ -324,14 +328,15 @@ if (isset($_POST["idMedida"])){
 											</tr>
 										</thead>
 										<tbody>
-										<?for ($h=0; $h < sizeof($getDataImputados) ; $h++) { ?>
+										<?for ($h=0; $h < sizeof($getDataImputados) ; $h++) { 
+											$checkEdad = checkEdad($getDataImputados[$h][6])?>
 											<tr>
 												<td><?echo $h + 1 ?></td>
 												<td><?echo $getDataImputados[$h][2] ?></td>
 												<td><?echo $getDataImputados[$h][3] ?></td>
 												<td><?echo $getDataImputados[$h][4] ?></td>
 												<td><?echo $getDataImputados[$h][7] ?></td>
-												<td><?echo $getDataImputados[$h][6] ?></td>
+												<td><?echo abs($getDataImputados[$h][6]).' '.$checkEdad; ?></td>
 												<td><center><span onclick="editaImputado(<?php echo $idEnlace; ?> , <?php echo $getDataImputados[$h][0]; ?>, <?echo $idMedida ?>, 0)" title="Editar" onclick="" style="cursor: pointer; color: orange; font-size: 18px;" class="glyphicon glyphicon-edit"></span></center></td>
 												<td><center><span onclick="deleteItem(4, <?echo $getDataImputados[$h][0] ?>, <?php echo $idEnlace; ?>,<?echo $idMedida ?>, <?echo $totalImpu ?>)" title="Eliminar" style="cursor: pointer; color: red; font-size: 18px;" class="glyphicon glyphicon-trash"></span> </center></td>
 											</tr>
@@ -401,6 +406,40 @@ if (isset($_POST["idMedida"])){
 				</div>
 			</div>
 			<!--CONSTANCIA DE LLAMADAS-->
+			<!--DATOS FRACCIONES-->
+			<div class="sectionData" id="fracciones">
+				<div class="panel panel-default fd1">
+					<div class="panel-body">
+						<h5 class="text-on-pannel"><strong>Fracciones</strong></h5>
+							<?$getDataFracciones = modificarMedidasAplicadas($connMedidas, $idMedida);
+						  if(sizeof($getDataFracciones) > 0) { 
+						  $totalFraccAplicadas = sizeof($getDataFracciones);?>
+						<div class="row">
+								<div class="col-xs-12 col-sm-12  col-md-12">
+									<table class="table table-bordered">
+										<thead>
+											<tr class="cabeceraTablaVictimas">
+											<th>#</th>
+											<th>Fracción</th>
+											<th>Acciones</th>
+											</tr>
+										</thead>
+										<tbody>
+										<?for ($h=0; $h < sizeof($getDataFracciones) ; $h++) { ?>
+											<tr>
+												<td><?echo $getDataFracciones[$h][5] ?></td>
+												<td><?echo $getDataFracciones[$h][4] ?></td>
+												<td><center><span onclick="deleteItem(6, <?echo $getDataFracciones[$h][0] ?>, <?php echo $idEnlace; ?>,<?echo $idMedida ?>, <?echo $totalFraccAplicadas ?>)" title="Eliminar" style="cursor: pointer; color: red; font-size: 18px;" class="glyphicon glyphicon-trash"></span> </center></td>
+											</tr>
+										<? } ?>
+										</tbody>
+								 </table>
+								</div>
+							</div><? } ?>
+					</div>
+				</div>
+			</div>
+			<!--DATOS FRACCIONES-->
 		</div>
 	</div>
 
