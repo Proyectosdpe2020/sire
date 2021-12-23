@@ -120,7 +120,7 @@ $correo = $data[0][18];
 									<input class="form-control mandda gehit" value="<?echo $telefono2; ?>"  id="telefonoDos"  type="text">
 								</div>
 								<div class="col-xs-12 col-sm-12  col-md-3">
-									<label for="correoElectronico">Correo electrónico: <span class="aste">(*)</span></label>
+									<label for="correoElectronico">Correo electrónico: </label>
 									<input class="form-control mandda gehit" value="<?echo $correo; ?>"  id="correoElectronico"  type="text">
 								</div>
 							</div></br>
