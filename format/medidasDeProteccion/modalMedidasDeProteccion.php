@@ -7,6 +7,7 @@ include("../../funcionesMedidasProteccion.php");
 $fecha_actual=date("d/m/Y");
 $fecha=strftime( "%Y-%m-%d %H:%M:%S", time() );
 $anioActual = date("Y");
+$hoy = date("Y-m-d");//Fecha calendario
 
 if (isset($_POST["idEnlace"])){ $idEnlace = $_POST["idEnlace"]; }
 
@@ -133,7 +134,7 @@ if (isset($_POST["idMedida"])){
  				</div>
 				<div class="col-xs-12 col-sm-12  col-md-2">
 					<label for="fechaAcuerdo">Fecha del acuerdo: <span class="aste">(*)</span></label>
-					<input id="fechaAcuerdo" type="datetime-local" value="<? if($a == 1){ echo $fechaev=str_ireplace(' ','T', $get_fechaAcuerdo); } ?>" onchange="validateMedidaOK(this.id)" name="fechaAcuerdo" class="fechas form-control gehit" <?if($rolUser == 1 || $rolUser == 3){ ?> disabled <? } ?>  />
+					<input id="fechaAcuerdo" type="datetime-local" value="<? if($a == 1){ echo $fechaev=str_ireplace(' ','T', $get_fechaAcuerdo); } ?>" onchange="validateMedidaOK(this.id) , checkDateAcuerdo('<?echo $fecha ?>') " name="fechaAcuerdo" class="fechas form-control gehit" min="<?echo $anioActual; ?>-<?echo $m; ?>-01T00:00:00" max="<?echo $hoy; ?>T23:59:59" <?if($rolUser == 1 || $rolUser == 3){ ?> disabled <? } ?>  />
 				</div>
 				<div class="col-xs-12 col-sm-12  col-md-2">
 						<label for="fechaRegistro">Fecha de registro:</label>
@@ -213,18 +214,19 @@ if (isset($_POST["idMedida"])){
 						<tbody id="contentTableDataVictimas">
 						<?for ($h=0; $h < sizeof($getDataVictimas) ; $h++) {
 							$totalV = sizeof($getDataVictimas);
-							$dataCompleted = checkDataContactoCompleted($connMedidas, $getDataVictimas[$h][0]); ?> 
+							$dataCompleted = checkDataContactoCompleted($connMedidas, $getDataVictimas[$h][0]); 
+							$checkEdad = checkEdad($getDataVictimas[$h][6]);?> 
 							<tr>
 								<td><? echo $h + 1 ?></td>
 								<td><?echo $getDataVictimas[$h][2]; ?></td>
 								<td><?echo $getDataVictimas[$h][3]; ?></td>
 								<td><?echo $getDataVictimas[$h][4]; ?></td>
 								<td><?echo $getDataVictimas[$h][5]; ?></td>
-								<td><?echo $getDataVictimas[$h][6]; ?></td>
+								<td><?echo abs($getDataVictimas[$h][6]).' '.$checkEdad; ?></td>
 								<?if($dataCompleted[0][0] > 0){?>
 								<td style="background: green; color: white;"><center>Completado</center></td><? }else{ ?>
 								<td style="background: #FF9A09; color: white;"><center>Incompleto</center></td><? } ?>
-								<td><center><span onclick="modalDatosMedidaCapturista(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 1, <?echo $idMedida; ?>, 'victima')" title="Editar" style="cursor: pointer; color: orange; font-size: 18px;" class="glyphicon glyphicon-edit"></span></center></td>
+								<td><center><span onclick="modalDatosMedidaCapturista(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 0, <?echo $idMedida; ?>, 'victima')" title="Editar" style="cursor: pointer; color: orange; font-size: 18px;" class="glyphicon glyphicon-edit"></span></center></td>
 								<td><center><span onclick="deleteItemV(3, <?echo $getDataVictimas[$h][0] ?>, <?php echo $idEnlace; ?>,<?echo $idMedida ?>, <?echo $totalV ?>)" title="Eliminar" style="cursor: pointer; color: red; font-size: 18px;" class="glyphicon glyphicon-trash"></span> </center></td>
 							</tr>
 						<? } ?>

@@ -61,7 +61,17 @@ if (isset($_POST["idMedida"])){ $idMedida = $_POST["idMedida"]; }
   $arreglo[4] = "mod5_ISNULL";
  }
 
-  $d = array('first'=>$arreglo[0], 'second'=>$arreglo[1] , 'three'=>$arreglo[2] , 'four'=>$arreglo[3] , 'five'=>$arreglo[4] );
+  $query6 = "SELECT count(idMedidaAplicada) AS total FROM medidas.medidasAplicadas where idMedida = $idMedida ";
+ $stmt6 = sqlsrv_query($connMedidas, $query6);
+ while ($row6 = sqlsrv_fetch_array( $stmt6, SQLSRV_FETCH_ASSOC )){$total6[0][0]=$row6['total'];}
+
+ if ($total6[0][0] > 0) {
+  $arreglo[5] = "mod6_OK"; 
+ }else{
+  $arreglo[5] = "mod6_ISNULL";
+ }
+
+  $d = array('first'=>$arreglo[0], 'second'=>$arreglo[1] , 'three'=>$arreglo[2] , 'four'=>$arreglo[3] , 'five'=>$arreglo[4] , 'six'=>$arreglo[5] );
   echo json_encode($d);
 
 

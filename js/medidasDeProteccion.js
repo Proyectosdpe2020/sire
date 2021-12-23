@@ -140,6 +140,10 @@ function modalDatosMedida(tipoModal, idEnlace, b, fraccion, idMedida, sectionAct
 					document.getElementById("datosGenerales").style.display = "none";
 					document.getElementById("constanciaLlamadas").style.display = "block";
 					break;
+					case 'fracciones':
+					document.getElementById("datosGenerales").style.display = "none";
+					document.getElementById("fracciones").style.display = "block";
+					break;
 				}
 				setTimeout("checkValidaDataModulos("+idMedida+");",100);
 			}
@@ -245,6 +249,10 @@ function modalDatosMedidaCapturista(tipoModal, idEnlace, b, fraccion, idMedida, 
 					case 'constanciaLlamadas':
 					document.getElementById("datosGenerales").style.display = "none";
 					document.getElementById("constanciaLlamadas").style.display = "block";
+					break;
+					case 'fracciones':
+					document.getElementById("datosGenerales").style.display = "none";
+					document.getElementById("fracciones").style.display = "block";
 					break;
 				}
 				setTimeout("checkValidaDataModulos("+idMedida+");",100);
@@ -862,6 +870,11 @@ function checkValidaDataModulos(idMedida){
   				$("#mod5").css({'color':'white','background':'green'});
   		}else{
   			$("#mod5").css({'color':'white','background':'#FF9A09'});
+  		}
+  		if (obj.six == "mod6_OK") { 
+  				$("#mod6").css({'color':'white','background':'green'});
+  		}else{
+  			$("#mod6").css({'color':'white','background':'#FF9A09'});
   		}
   	}
   });
@@ -1662,7 +1675,7 @@ function deleteItem(moduloID, item_ID, idEnlace, idMedida, banderaTotal){
 				 function(isConfirm){
 
 				 	if (isConfirm) {
-				 		if(moduloID != 3 && moduloID != 4){
+				 		if(moduloID != 3 && moduloID != 4 && moduloID != 6){
 				 			$.ajax({
 						  	type: "POST",
 						  	dataType: 'html',
@@ -1685,6 +1698,32 @@ function deleteItem(moduloID, item_ID, idEnlace, idMedida, banderaTotal){
 				 		}else if(moduloID == 3 || moduloID == 4){
 				 			if(banderaTotal == 1){
 				 				alert('Este elemento no se puede eliminar del registro, debe de haber al menos un registro asociado.');
+				 			}else{
+				 				console.log(moduloID+' '+banderaTotal);
+				 						$.ajax({
+								  	type: "POST",
+								  	dataType: 'html',
+								  	url: "format/medidasDeProteccion/inserts/deleteData.php",
+								  	data: "&moduloID="+moduloID+"&item_ID="+item_ID+"&idMedida="+idMedida,
+								  	success: function(resp){
+								  		var json = resp;
+								  		var obj = eval("(" + json + ")");
+								  		if (obj.first == "NO") { 
+								  			swal("", "No se elimino verifique los datos.", "warning"); 
+								  		}else{
+								  			if (obj.first == "SI") {
+								  				var obj = eval("(" + json + ")");
+								  				swal("", "Registro eliminado exitosamente.", "success");
+								  				modalDatosMedida(1, idEnlace, 0 , 0, idMedida, obj.modulo);
+								  			}
+								  		}
+								  	}
+								  });
+				 			}
+				 		}else if(moduloID == 6){
+				 			console.log('aqui entra');
+				 			if(banderaTotal == 1){
+				 				alert('Este elemento no se puede eliminar del registro, debe de haber al menos una fracción asociada al registro, aplique otra fracción antes de eliminar esta.');
 				 			}else{
 				 				console.log(moduloID+' '+banderaTotal);
 				 						$.ajax({
@@ -1760,4 +1799,12 @@ function deleteItemV(moduloID, item_ID, idEnlace, idMedida, banderaTotal){
 							}
 
 				 });			
+}
+
+function checkDateAcuerdo(fecha){
+	var fechaAcuerdo = document.getElementById("fechaAcuerdo").value; 
+	if(Date.parse(fecha) <= Date.parse(fechaAcuerdo)){
+		swal("", "La fecha del acuerdo no puede ser mayor a la fecha del informe.", "warning");	
+		document.getElementById("fechaAcuerdo").value = ''; 
+	}
 }
