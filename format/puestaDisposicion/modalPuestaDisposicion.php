@@ -7,8 +7,10 @@
 				$fecha=strftime( "%Y-%m-%d %H:%M:%S", time() );
 
 				$hoy = date("Y-m-d");//Fecha calendario
-				$m = date("m");
-				$anioActual = date("Y");
+				//$m = date("m"); provisional solo por cambio de año
+				$m = 12;
+				//$anioActual = date("Y"); provisional solo por cambio de año
+				$anioActual = 2021;
 
 				$d = date("d");
 				if($d >= 1 && $d <= 3){ $m = $m-1; }
