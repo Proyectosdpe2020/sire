@@ -1305,6 +1305,7 @@ function getAnioPueDispo($conn){
 function getDataAnio(){
 	$arreglo[0][0]=2020;
 	$arreglo[1][0]=2021;
+	$arreglo[2][0]=2022;
 	return $arreglo;
 }
 

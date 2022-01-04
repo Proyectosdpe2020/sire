@@ -258,10 +258,10 @@
 	$objPHPExcel->getActiveSheet()->SetCellValue("H34", $data[0][88]); //Modificaciones favorables a mp
 	$objPHPExcel->getActiveSheet()->SetCellValue("H35", $data[0][89]); //Confirmaciones favorables a mp
 
-	$objPHPExcel->getActiveSheet()->SetCellValue("H93", $data[0][86]); //Desistimiento del recurso
-	$objPHPExcel->getActiveSheet()->SetCellValue("H94", $data[0][87]); //Por parte del acusado
-	$objPHPExcel->getActiveSheet()->SetCellValue("H95", $data[0][88]); //Por parte del defensor
-	$objPHPExcel->getActiveSheet()->SetCellValue("H96", $data[0][88]); //Por parte del ministerio publico
+	$objPHPExcel->getActiveSheet()->SetCellValue("H93", $data[0][39]); //Desistimiento del recurso
+	$objPHPExcel->getActiveSheet()->SetCellValue("H94", $data[0][40]); //Por parte del acusado
+	$objPHPExcel->getActiveSheet()->SetCellValue("H95", $data[0][41]); //Por parte del defensor
+	$objPHPExcel->getActiveSheet()->SetCellValue("H96", $data[0][42]); //Por parte del ministerio publico
 
 	$objPHPExcel->getActiveSheet()->SetCellValue("H99", $data[0][90]); //Por cambios de situacion juridica declarados sin materia
 	$objPHPExcel->getActiveSheet()->SetCellValue("H101", $data[0][106]); //Canalizados por cese de funciones

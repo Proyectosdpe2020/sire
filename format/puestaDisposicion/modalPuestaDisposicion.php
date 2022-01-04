@@ -8,7 +8,8 @@
 
 				$hoy = date("Y-m-d");//Fecha calendario
 				$m = date("m");
-				$anioActual = date("Y");
+				//$anioActual = date("Y");
+				$anioActual = 2021;
 
 				$d = date("d");
 				if($d >= 1 && $d <= 3){ $m = $m-1; }
