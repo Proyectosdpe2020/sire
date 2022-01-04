@@ -1333,9 +1333,10 @@ function validateMonthCapture($mesSelected, $anioSelected){
 	$diamesActual= date("j");
 	$mesActual = date("m");
 	$anioActual = date("Y");
-	$daysToSendData = array(1,2,3); //Podra 
+	$daysToSendData = array(1,2,3,4); //Podra 
 
 	$diferencia = abs($mesActual - $mesSelected);
+	$diferencia_anio = $anioActual - $anioSelected;
 
 	$valida[0][0] = "NO"; //SIN EDITAR
 	$valida[0][1] = "SI"; //PERMITE EDITAR
@@ -1347,7 +1348,7 @@ function validateMonthCapture($mesSelected, $anioSelected){
 				return $valida[0][1];
 			}
 	}else{
-		if(in_array($diamesActual, $daysToSendData) && $diferencia == 1){
+		if(in_array($diamesActual, $daysToSendData) && $diferencia == 1 || in_array($diamesActual, $daysToSendData) && $diferencia == 11 && $diferencia_anio == 1){
 			return $valida[0][1];
 		}else{
 			return $valida[0][0];
