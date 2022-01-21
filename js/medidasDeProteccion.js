@@ -1336,7 +1336,7 @@ ajax.send("&tipoModal="+tipoModal+"&idEnlace="+idEnlace+"&idMedida="+idMedida+"&
 function reloadDaysMonth(idEnlace){
 
 		var anio = document.getElementById("anio").value; 
-		var mesMedidaSelected = document.getElementById("mesMedidaSelected").value; 
+		var mesMedidaSelected = document.getElementById("mesMedidaSelected").value;
 
 		cont = document.getElementById('contDays');
 		ajax=objetoAjax();
@@ -1354,6 +1354,27 @@ function reloadDaysMonth(idEnlace){
 		}
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 		ajax.send("&mesMedidaSelected="+mesMedidaSelected+"&anio="+anio+"&idEnlace="+idEnlace);
+
+}
+
+function reloadMonth(anio, idEnlace,  messelected){
+ 		
+		cont = document.getElementById('contMonth');
+		ajax=objetoAjax();
+
+		ajax.open("POST", "format/medidasDeProteccion/reloadSelectMonth.php");
+
+		ajax.onreadystatechange = function(){
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				cont.innerHTML = ajax.responseText;
+
+					//// RECARGAR CONSULTA DE PUESTAS EN EL MES SELECCIONADO Y PRIMER DIA DEL MES CORRESPONDIENTE
+				loadDataPuestDay(anio, idEnlace, 1);
+
+			}
+		}
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		ajax.send("&messelected="+messelected+"&anio="+anio+"&idEnlace="+idEnlace);
 
 }
 

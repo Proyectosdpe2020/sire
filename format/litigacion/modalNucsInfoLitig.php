@@ -712,7 +712,7 @@
  <? } ?>
  <!-- En caso de acuerdos reparatorios, ¿tipo de acuerdos reparatorios? :-->
 
- <? if($estatus == 154 || $estatus == 66 ||$estatus == 67 || $estatus == 14){ 
+ <? if($estatus == 154 || $estatus == 66 || $estatus == 14){ 
  	if($estatus == 14){ //Para poder hacer consulta en caso de que el estatus sea 14 ya que esta se recibe en la tabla de resoluciones de la BD Prueba
  	if($idResolMP == 0){
  		$getData = getDataSentencias($conn,  'null', $estatus); 
@@ -728,17 +728,105 @@
  }
 	 	if(sizeof($getData) > 0){ 
 	 		$opcInsert = 1; 
-	 		$fechaDictoSentencia = $getData[0][2] ->format('Y-m-d');
+	 		if($estatus != 66){$fechaDictoSentencia = $getData[0][2] ->format('Y-m-d');}
 	 		$tipoSentencia = $getData[0][3];
 	 		$aniosPrision = $getData[0][4];
 	 		$sentenciaFirme = $getData[0][5];
 	 		$sentDerivaProcAbrv = $getData[0][6];
-	 		$fechaDictoProcAbrv = $getData[0][7]->format('Y-m-d');
-	 	}else{ 	$opcInsert = 0; }
+	 		if($estatus != 66){$fechaDictoProcAbrv = $getData[0][7]->format('Y-m-d');}
+	 		$idModalidadEstadistica = $getData[0][8];
+	 		$reclasificado = $getData[0][9];
+	 		$getName = getDataDelitoNombre($conSic , $idModalidadEstadistica );
+	 		$nombreDelito = $getName[0][1];
+	 	}else{ 	$opcInsert = 0; $reclasificado = 0; }
 	 	?>
 	<div class="row">
 		<div class="col-xs-12 col-sm-12  col-md-12">
-		<!--¿La sentencia fue derivada de un procedimiento abreviado? :-->
+		<!-- TABLA DELITOS POR LA CUAL SE DIO SENTENCIA CONDENATORIA-->
+			<div class="row">
+				<div class="col-xs-12 col-sm-12  col-md-12">
+					<label for="">Delito por el cual se dio la sentencia: </label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12  col-md-12">
+					<div id="tablePuestasDataMando" class="row pad20">	
+									<table class="table table-striped  table-hover">
+										<thead>
+											<tr class="cabezeraTablaForest">
+												<th class="textCent">#</th>
+												<th class="textCent">Delito</th>
+												<th class="textCent">¿Principal?</th>
+											</tr>
+										</thead>
+										<tbody id="">
+										<?
+             $datossicap=get_datos_carpeta_capturado($conSic, $nuc);  
+										   $getDataDelito = getDataDelito($conSic, $datossicap[0][0]);
+										   $k=0;
+										for ($i=0; $i < sizeof($getDataDelito); $i++) {  ?>
+											<tr>
+												<td class="textCent"><? echo $k+=1; ?></td>
+												<td class="textCent"><strong><? echo $getDataDelito[$i][4]; ?></strong>&nbsp&nbsp<input type="radio" name="checkDelito" value="<? echo $getDataDelito[$i][3]; ?>" class="checkDelito" <?if($opcInsert == 1 && $idModalidadEstadistica == $getDataDelito[$i][3]){ ?> checked <? } ?> ><span class="checkmark"></span></td>
+												<td class="textCent"><? echo $getDataDelito[$i][5]; ?></td>
+			        </tr>
+			       <? } ?>
+										</tbody>
+									</table>
+					 </div>
+				 </div>
+			 </div><br>
+			 <div class="row">
+			 	<div class="col-xs-12 col-sm-12  col-md-12">
+			 		<h4><strong>Nota: </strong>Información cargada de SICAP.</h4>
+			 	</div>
+			 </div><br>
+			 <div class="row">
+			 	<div class="col-xs-12 col-sm-12  col-md-12">
+			 		<h4>Si el delito por el cual se dio la sentencia no figura en la tabla anterior, reclasifique el delito en la siguiente opción: </h4>
+			 	</div>
+			 </div><br>
+			 <div class="row">
+			 	<div class="col-xs-12 col-sm-12  col-md-12">
+			 	<label>Reclasificar delito: &nbsp&nbsp<input type="checkbox"class="checkRecla" id="cbox1" value="" onclick="reclasificar()"></label>
+			 	</div>
+			 </div><br>
+			 <div class="row" id="tableReclasificar" <?if($opcInsert == 0 && $reclasificado == 0){ ?> hidden <? } ?> >
+				<div class="col-xs-12 col-sm-12  col-md-12">
+					<div id="tablePuestasDataMando" class="row pad20">	
+									<table class="table table-striped  table-hover">
+										<thead>
+											<tr class="cabezeraTablaForest">
+												<th class="textCent">#</th>
+												<th class="textCent">Delito</th>
+											</tr>
+										</thead>
+										<tbody id="">
+											<tr>
+												<td class="textCent">1</td>
+												<td class="textCent">
+													<datalist id="newBrwosers">
+																<? 
+																																					$delitos = getDataDelitosSica($conSic);
+																																						for ($h=0; $h < sizeof($delitos); $h++) {
+																																							 $idDelito = $delitos[$h][0];	
+																																								$nom = $delitos[$h][1];
+																																									?>
+																																											<option style="color: black; font-weight: bold;" value="<? echo $nom; ?>" data-value="<? echo  $idDelito; ?>" data-id="<? echo $idDelito; ?>"></option>
+																																									<?
+																																						}
+																																			 ?>
+												</datalist>
+												<input class="form-control mandda gehit" value="<? if($opcInsert == 1){ echo $nombreDelito; } ?>" onchange="" onfocus="" list="newBrwosers" id="newBrwoser" name="newBrwoser" type="text" ></td>
+			        </tr>
+										</tbody>
+									</table>
+					 </div>
+				 </div>
+			 </div><br>
+			<input type="hidden" id="tipoSentencia" value="<?if($estatus == 154 || $estatus == 14){echo 2;}elseif($estatus == 66){echo 1; }else{echo 3;} ?>" >
+			 <?if($estatus == 154 || $estatus == 14){ ?>
+			 <!--¿La sentencia fue derivada de un procedimiento abreviado? :-->
 			<div class="row">
 				<div class="col-xs-12 col-sm-12  col-md-12">
 					<label for="fechaDictoSentencia">Fecha en que se dictó la sentencia:</label>
@@ -746,22 +834,9 @@
 				</div>
 			</div><br>
 			<div class="row">
-				<div class="col-xs-12 col-sm-12  col-md-12">
-					<label for="tipoSentencia">Tipo de sentencia: </label>
-					<select id="tipoSentencia" name="tipoSentencia" tabindex="6" class="form-control redondear"  >
-						<option value="0">Selecciona</option>
-						<?$getTipoSentencia = getTipoSentencia($conn);
-						for ($i=0; $i < sizeof($getTipoSentencia); $i++) {
-							$idTipoSentencia = $getTipoSentencia[$i][0];	$nombre = $getTipoSentencia[$i][1];	?>
-						<option style="color: black; font-weight: bold;" value="<? echo $idTipoSentencia; ?>" <?if($opcInsert == 1 && $idTipoSentencia == $tipoSentencia){ ?> selected <? } ?> ><? echo $nombre; ?> </option>
-						<? } ?>
-					</select>
-				</div>
-			</div><br>
-			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12">
 					<label for="aniosPrision">Tiempo en prisión (años): </label>
-					<input id="aniosPrision" type="number" value="<?if($opcInsert == 1){echo $aniosPrision;}?>" name="aniosPrision" class="fechas form-control gehit"  />
+					<input id="aniosPrision" type="number" value="<?if($opcInsert == 1){echo $aniosPrision;}?>" name="aniosPrision" class="fechas form-control gehit"  min="1" pattern="^[0-9]+" />
 				</div>
 			</div><br>
 			<div class="row">
@@ -796,6 +871,7 @@
 					<input id="fechaDictoProcAbrv" type="date" value="<?if($opcInsert == 1){echo $fechaDictoProcAbrv;}?>" name="fechaDictoProcAbrv" class="fechas form-control gehit"  />
 				</div>
 			</div><br>
+		<? } ?>
 	 </div>
 	</div><br><br><br><br>
 	<div class="row">

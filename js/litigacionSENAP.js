@@ -348,20 +348,29 @@ function insertCriteriosOportunidad_db(idEstatusNucs, estatus, nuc, opcInsert){
 
 /****Ingresa a la bd la informacion de SENAP de Criterios de Oportunidad****/
 function insertSentencias_db(idEstatusNucs, estatus, nuc, opcInsert){
-	var fechaDictoSentencia = document.getElementById("fechaDictoSentencia").value;
-	var tipoSentencia = document.getElementById("tipoSentencia").value;
-	var aniosPrision = document.getElementById("aniosPrision").value;
-	var sentenciaFirme = document.getElementById("sentenciaFirme").value;
-	var sentDerivaProcAbrv = document.getElementById("sentDerivaProcAbrv").value;
-	var fechaDictoProcAbrv = document.getElementById("fechaDictoProcAbrv").value;
+	if( $('.checkRecla').prop('checked') ) {
+   var reclasificacion = 1;
+   var newBrwosers_id = $("#newBrwoser").val();
+			var idCatModalidadEst = $("#newBrwosers").find("option[value='" + newBrwosers_id + "']").attr('data-id');
+		}else{
+	  var reclasificacion = 0;
+	  $("input[type=radio]:checked").each(function(){ idCatModalidadEst = $(this).val() });
+	 }
 
-	if(fechaDictoSentencia != "" && tipoSentencia > 0){
+	if(estatus == 66){ var fechaDictoSentencia = "noData"; }else{ var fechaDictoSentencia = document.getElementById("fechaDictoSentencia").value; }
+	var tipoSentencia = document.getElementById("tipoSentencia").value;
+	if(estatus == 66){ var aniosPrision = "noData"; }else{ var aniosPrision = document.getElementById("aniosPrision").value; }
+	if(estatus == 66){ var sentenciaFirme = "noData"; }else{ var sentenciaFirme = document.getElementById("sentenciaFirme").value; }
+	if(estatus == 66){ var sentDerivaProcAbrv = "noData"; }else{ var sentDerivaProcAbrv = document.getElementById("sentDerivaProcAbrv").value; }
+	if(estatus == 66){ var fechaDictoProcAbrv = "noData"; }else{ var fechaDictoProcAbrv = document.getElementById("fechaDictoProcAbrv").value; } 
+
+	if(fechaDictoSentencia != "" && tipoSentencia > 0 && typeof idCatModalidadEst !== 'undefined'){
 		$.ajax({
 			type: "POST",
 		 dataType: "html",
 			url:  "format/litigacion/insertSenap/insert_FormSentencias.php",
 		 data: 'idEstatusNucs='+idEstatusNucs+'&nuc='+nuc+'&opcInsert='+opcInsert+'&estatus='+estatus+'&fechaDictoSentencia='+fechaDictoSentencia+'&tipoSentencia='+tipoSentencia+
-		       '&aniosPrision='+aniosPrision+'&sentenciaFirme='+sentenciaFirme+'&sentDerivaProcAbrv='+sentDerivaProcAbrv+'&fechaDictoProcAbrv='+fechaDictoProcAbrv,
+		       '&aniosPrision='+aniosPrision+'&sentenciaFirme='+sentenciaFirme+'&sentDerivaProcAbrv='+sentDerivaProcAbrv+'&fechaDictoProcAbrv='+fechaDictoProcAbrv+'&idCatModalidadEst='+idCatModalidadEst+'&reclasificacion='+reclasificacion,
 		 success: function(respuesta){
 		 	var json = respuesta;
 		 	var obj = eval("(" + json + ")");
@@ -799,14 +808,23 @@ function sendDataAcuerdoReparatorio(nuc, estatus, idMp, mes, anio, deten, idUnid
 }
 
 function sendDataSentencias(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcInsert){
-	var fechaDictoSentencia = document.getElementById("fechaDictoSentencia").value;
-	var tipoSentencia = document.getElementById("tipoSentencia").value;
-	var aniosPrision = document.getElementById("aniosPrision").value;
-	var sentenciaFirme = document.getElementById("sentenciaFirme").value;
-	var sentDerivaProcAbrv = document.getElementById("sentDerivaProcAbrv").value;
-	var fechaDictoProcAbrv = document.getElementById("fechaDictoProcAbrv").value;
+	if( $('.checkRecla').prop('checked') ) {
+   var reclasificacion = 1;
+   var newBrwosers_id = $("#newBrwoser").val();
+			var idCatModalidadEst = $("#newBrwosers").find("option[value='" + newBrwosers_id + "']").attr('data-id');
+		}else{
+	  var reclasificacion = 0;
+	  $("input[type=radio]:checked").each(function(){ idCatModalidadEst = $(this).val() });
+	 }
 
-	if(fechaDictoSentencia != "" && tipoSentencia > 0){
+	if(estatus == 66){ var fechaDictoSentencia = "noData"; }else{ var fechaDictoSentencia = document.getElementById("fechaDictoSentencia").value; }
+	var tipoSentencia = document.getElementById("tipoSentencia").value;
+	if(estatus == 66){ var aniosPrision = "noData"; }else{ var aniosPrision = document.getElementById("aniosPrision").value; }
+	if(estatus == 66){ var sentenciaFirme = "noData"; }else{ var sentenciaFirme = document.getElementById("sentenciaFirme").value; }
+	if(estatus == 66){ var sentDerivaProcAbrv = "noData"; }else{ var sentDerivaProcAbrv = document.getElementById("sentDerivaProcAbrv").value; }
+	if(estatus == 66){ var fechaDictoProcAbrv = "noData"; }else{ var fechaDictoProcAbrv = document.getElementById("fechaDictoProcAbrv").value; }
+
+	if(fechaDictoSentencia != "" && tipoSentencia > 0 && typeof idCatModalidadEst !== 'undefined'){
 		if(estatus == 14){
    insertarNucLit2(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert);
     $('#modalNucsLitigInfo').modal('hide');

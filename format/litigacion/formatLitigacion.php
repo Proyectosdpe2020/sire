@@ -488,7 +488,7 @@ if($idEnlace == 30 || $idEnlace == 28){
 
 					</div>
 
-					<div class="modal fade bs-example-modal-sm" id="modalNucsLitigInfo" role="dialog" data-backdrop="static" data-keyboard="false">
+					<div class="modal fade bs-example-modal-sm" id="modalNucsLitigInfo" role="dialog" data-backdrop="static" data-keyboard="false" style="overflow: auto">
 
 										<div id="modalVistaCss" class="modal-dialog modal-sm" style = "width: 30%; margin-top: 1%; ">
 

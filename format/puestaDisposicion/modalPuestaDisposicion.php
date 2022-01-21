@@ -7,10 +7,10 @@
 				$fecha=strftime( "%Y-%m-%d %H:%M:%S", time() );
 
 				$hoy = date("Y-m-d");//Fecha calendario
-				//$m = date("m"); provisional solo por cambio de año
-				$m = 12;
-				//$anioActual = date("Y"); provisional solo por cambio de año
-				$anioActual = 2021;
+				$m = date("m"); 
+
+				$anioActual = date("Y"); 
+	
 
 				$d = date("d");
 				if($d >= 1 && $d <= 3){ $m = $m-1; }
@@ -118,11 +118,11 @@
  				<input class="form-control gehit"  id="nucPuestaDisposi" maxlength="13" oninput="validateNuc(this)"  type="number" value="<? if($a == 1){ echo $nuc; } ?>" <? if($b == 0){ echo "readonly"; } ?>>
  			</div>
  			<!--CONDICIONAL PARA HABILITAR A DETERMINADO ENLACE -->
- 			<?if($idEnlace == 108 || $idEnlace == 333 || $idEnlace == 107 || $idEnlace == 130 || $idEnlace == 131 || $idEnlace == 104 || $idEnlace == 103 || $idEnlace == 336){ ?>
+ 			<?if($idEnlace == 108){ ?>
  				<div class="col-xs-12 col-sm-12  col-md-2">
 	 				<label for="heard">Fecha Evento :</label><span class="aste"> (Requerido)</span>
 	 				<div >
-	 					<input id="fechaevento" type="datetime-local" value="<? if($a == 1){  echo 	$fechaev=str_ireplace(' ','T',$fechaev); } ?>" name="fechaevento" class="fechas form-control gehit" min="<?echo $anioActual; ?>-03-01T00:00:00" max="<?echo $hoy; ?>T23:59:59" onchange="checkDateInforme('<?echo $fecha; ?>');" <? if($b == 0){ echo "readonly"; } ?> />	
+	 					<input id="fechaevento" type="datetime-local" value="<? if($a == 1){  echo 	$fechaev=str_ireplace(' ','T',$fechaev); } ?>" name="fechaevento" class="fechas form-control gehit" min="2021-12-01T00:00:00" max="<?echo $hoy; ?>T23:59:59" onchange="checkDateInforme('<?echo $fecha; ?>');" <? if($b == 0){ echo "readonly"; } ?> />	
 	 				</div>
  			 </div>
  			<? }else{ ?>

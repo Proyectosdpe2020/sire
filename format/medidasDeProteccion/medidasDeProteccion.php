@@ -72,11 +72,9 @@ $mesNom = Mes_Nombre($currentmonth);
 					<label for="heard">Año:</label><br>
 					<select id="anio" name="selAnio" tabindex="6" class="form-control redondear selectTranparent" onchange="reloadDaysMonth(<? echo $idEnlace; ?>)" required>
 						<?php
-					//	$dataAnio = getDataAnio();
-							$dataAnio = 1;
-						for ($i = 0; $i < sizeof($dataAnio); $i++){
-							//$anioCaptura = $dataAnio[$i][0];	
-							$anioCaptura = 2021;	?>
+					$dataAnio = getDataAnio();
+							 for ($i = 0; $i < sizeof($dataAnio); $i++){
+							 	$anioCaptura = $dataAnio[$i][0];	?>
 							<option value="<? echo $anioCaptura; ?>" selected><? echo $anioCaptura; ?></option>
 							<? } ?>
 						</select>

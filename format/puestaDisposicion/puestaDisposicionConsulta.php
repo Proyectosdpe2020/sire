@@ -329,7 +329,14 @@
 										</div>		
 						</div>
 
-		
+						<div class="modal fade bs-example-modal-sm" id="modalPersonalApoyo" role="dialog" data-backdrop="static" data-keyboard="false">
+										<div id="modalVistaCss" class="modal-dialog modal-sm" style = "width: 45%; margin-top: 2.5%;">
+																	<div class="modal-content" style="">
+																					<div id="contModalPersonalApoyo">																						
+																					</div>
+																	</div>				
+										</div>		
+						</div>
 
 
 
