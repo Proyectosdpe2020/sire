@@ -12,27 +12,32 @@ if (isset($_POST['estatus'])){ $estatus = $_POST['estatus']; }
 
 
 /*DATOS FORMULARIO SENAP*/
-if (isset($_POST['fechaDictoSentencia'])){ $fechaDictoSentencia = $_POST['fechaDictoSentencia']; }   
-if (isset($_POST['tipoSentencia'])){ $tipoSentencia = $_POST['tipoSentencia']; }  
-if (isset($_POST['aniosPrision'])){ $aniosPrision = $_POST['aniosPrision']; }  
-if (isset($_POST['sentenciaFirme'])){ $sentenciaFirme = $_POST['sentenciaFirme']; }  
-if (isset($_POST['sentDerivaProcAbrv'])){ $sentDerivaProcAbrv = $_POST['sentDerivaProcAbrv']; }  
-if (isset($_POST['fechaDictoProcAbrv'])){ $fechaDictoProcAbrv = $_POST['fechaDictoProcAbrv']; }  
+if (isset($_POST['idCatModalidadEst'])){ $idCatModalidadEst = $_POST['idCatModalidadEst']; }  
+if (isset($_POST['reclasificacion'])){ $reclasificacion = $_POST['reclasificacion']; } 
+if (isset($_POST['tipoSentencia'])){ $tipoSentencia = $_POST['tipoSentencia']; } 
+
+ if (isset($_POST['fechaDictoSentencia'])){ $fechaDictoSentencia = $_POST['fechaDictoSentencia']; }    
+ if (isset($_POST['aniosPrision'])){ $aniosPrision = $_POST['aniosPrision']; }  
+ if (isset($_POST['sentenciaFirme'])){ $sentenciaFirme = $_POST['sentenciaFirme']; }  
+ if (isset($_POST['sentDerivaProcAbrv'])){ $sentDerivaProcAbrv = $_POST['sentDerivaProcAbrv']; }  
+ if (isset($_POST['fechaDictoProcAbrv'])){ $fechaDictoProcAbrv = $_POST['fechaDictoProcAbrv']; }  
+
+
 
 if (isset($_POST['opcInsert'])){ $opcInsert = $_POST['opcInsert']; } 
 
 if($estatus != 14){
  //Si opcInsert == 0 es un nuevo registro, si opcInsert == 1 es una edicion de registro
  if($opcInsert == 0){
-
-   $queryTransaction = " 
+  if($estatus == 66){
+    $queryTransaction = " 
                          BEGIN                     
                                BEGIN TRY 
                                  BEGIN TRANSACTION
                                        SET NOCOUNT ON 
 
-                                         INSERT INTO senap.sentencias (idEstatusNucs, ResolucionID, estatus, fechaDictoSentencia, idTipoSentencia, aniosPrision, sentenciaEncuentraFirme, sentDerivaProcAbrv, fechaDictoProcAbrv) 
-                                         VALUES('$idEstatusNucs', '0', $estatus, '$fechaDictoSentencia',  $tipoSentencia, $aniosPrision, $sentenciaFirme, $sentDerivaProcAbrv, '$fechaDictoProcAbrv')
+                                         INSERT INTO senap.sentencias (idEstatusNucs, ResolucionID, estatus, idTipoSentencia, idModalidadEstadistica, reclasificacion) 
+                                         VALUES('$idEstatusNucs', '0', $estatus,  $tipoSentencia, $idCatModalidadEst, $reclasificacion)
                                                    
                                        COMMIT
                                END TRY
@@ -42,20 +47,39 @@ if($estatus != 14){
                                END CATCH
                                END
                          ";
+  }else{
+    $queryTransaction = " 
+                         BEGIN                     
+                               BEGIN TRY 
+                                 BEGIN TRANSACTION
+                                       SET NOCOUNT ON 
+
+                                         INSERT INTO senap.sentencias (idEstatusNucs, ResolucionID, estatus, fechaDictoSentencia, idTipoSentencia, aniosPrision, sentenciaEncuentraFirme, sentDerivaProcAbrv, fechaDictoProcAbrv, idModalidadEstadistica, reclasificacion) 
+                                         VALUES('$idEstatusNucs', '0', $estatus, '$fechaDictoSentencia',  $tipoSentencia, $aniosPrision, $sentenciaFirme, $sentDerivaProcAbrv, '$fechaDictoProcAbrv', $idCatModalidadEst, $reclasificacion)
+                                                   
+                                       COMMIT
+                               END TRY
+                               BEGIN CATCH 
+                                     ROLLBACK TRANSACTION
+                                     RAISERROR('No se realizo la transaccion',16,1)
+                               END CATCH
+                               END
+                         ";
+  }
+
  }else{
-   $queryTransaction = " 
+
+  if($estatus == 66){
+    $queryTransaction = " 
                          BEGIN                     
                                BEGIN TRY 
                                  BEGIN TRANSACTION
                                        SET NOCOUNT ON 
 
                                          UPDATE senap.sentencias SET 
-                                         fechaDictoSentencia = '$fechaDictoSentencia',
                                          idTipoSentencia = $tipoSentencia,
-                                         aniosPrision = $aniosPrision,
-                                         sentenciaEncuentraFirme = $sentenciaFirme,
-                                         sentDerivaProcAbrv = $sentDerivaProcAbrv,
-                                         fechaDictoProcAbrv = '$fechaDictoProcAbrv'
+                                         idModalidadEstadistica = $idCatModalidadEst,
+                                         reclasificacion = $reclasificacion
                                          WHERE idEstatusNucs = '$idEstatusNucs' ;
                                                    
                                        COMMIT
@@ -66,19 +90,23 @@ if($estatus != 14){
                                END CATCH
                                END
                          ";
- }
-}else{
- //Si opcInsert == 0 es un nuevo registro, si opcInsert == 1 es una edicion de registro
- if($opcInsert == 0){
-
+  }else{
    $queryTransaction = " 
                          BEGIN                     
                                BEGIN TRY 
                                  BEGIN TRANSACTION
                                        SET NOCOUNT ON 
 
-                                         INSERT INTO senap.sentencias (idEstatusNucs, ResolucionID, estatus, fechaDictoSentencia, idTipoSentencia, aniosPrision, sentenciaEncuentraFirme, sentDerivaProcAbrv, fechaDictoProcAbrv) 
-                                         VALUES('0', '$idEstatusNucs', $estatus, '$fechaDictoSentencia',  $tipoSentencia, $aniosPrision, $sentenciaFirme, $sentDerivaProcAbrv, '$fechaDictoProcAbrv')
+                                         UPDATE senap.sentencias SET 
+                                         fechaDictoSentencia = '$fechaDictoSentencia',
+                                         idTipoSentencia = $tipoSentencia,
+                                         aniosPrision = $aniosPrision,
+                                         sentenciaEncuentraFirme = $sentenciaFirme,
+                                         sentDerivaProcAbrv = $sentDerivaProcAbrv,
+                                         fechaDictoProcAbrv = '$fechaDictoProcAbrv',
+                                         idModalidadEstadistica = $idCatModalidadEst,
+                                         reclasificacion = $reclasificacion
+                                         WHERE idEstatusNucs = '$idEstatusNucs' ;
                                                    
                                        COMMIT
                                END TRY
@@ -88,6 +116,49 @@ if($estatus != 14){
                                END CATCH
                                END
                          ";
+    }
+   }
+}else{
+ //Si opcInsert == 0 es un nuevo registro, si opcInsert == 1 es una edicion de registro
+ if($opcInsert == 0){
+  if($estatus == 66){
+   $queryTransaction = " 
+                         BEGIN                     
+                               BEGIN TRY 
+                                 BEGIN TRANSACTION
+                                       SET NOCOUNT ON 
+
+                                         INSERT INTO senap.sentencias (idEstatusNucs, ResolucionID, estatus, idTipoSentencia, idModalidadEstadistica , reclasificacion) 
+                                         VALUES('0', '$idEstatusNucs', $estatus, $tipoSentencia, $idCatModalidadEst, $reclasificacion)
+                                                   
+                                       COMMIT
+                               END TRY
+                               BEGIN CATCH 
+                                     ROLLBACK TRANSACTION
+                                     RAISERROR('No se realizo la transaccion',16,1)
+                               END CATCH
+                               END
+                         ";
+  }else{
+   $queryTransaction = " 
+                         BEGIN                     
+                               BEGIN TRY 
+                                 BEGIN TRANSACTION
+                                       SET NOCOUNT ON 
+
+                                         INSERT INTO senap.sentencias (idEstatusNucs, ResolucionID, estatus, fechaDictoSentencia, idTipoSentencia, aniosPrision, sentenciaEncuentraFirme, sentDerivaProcAbrv, fechaDictoProcAbrv, idModalidadEstadistica , reclasificacion) 
+                                         VALUES('0', '$idEstatusNucs', $estatus, '$fechaDictoSentencia',  $tipoSentencia, $aniosPrision, $sentenciaFirme, $sentDerivaProcAbrv, '$fechaDictoProcAbrv', $idCatModalidadEst, $reclasificacion)
+                                                   
+                                       COMMIT
+                               END TRY
+                               BEGIN CATCH 
+                                     ROLLBACK TRANSACTION
+                                     RAISERROR('No se realizo la transaccion',16,1)
+                               END CATCH
+                               END
+                         ";
+  }
+   
  }else{
    $queryTransaction = " 
                          BEGIN                     
@@ -101,7 +172,9 @@ if($estatus != 14){
                                          aniosPrision = $aniosPrision,
                                          sentenciaEncuentraFirme = $sentenciaFirme,
                                          sentDerivaProcAbrv = $sentDerivaProcAbrv,
-                                         fechaDictoProcAbrv = '$fechaDictoProcAbrv'
+                                         fechaDictoProcAbrv = '$fechaDictoProcAbrv',
+                                         idModalidadEstadistica = $idCatModalidadEst,
+                                         reclasificacion = $reclasificacion
                                          WHERE ResolucionID = '$idEstatusNucs' ;
                                                    
                                        COMMIT

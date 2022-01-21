@@ -209,7 +209,7 @@ WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND 
 }else{
   
  //Consulta para usuarios regionales Y de Homicidios
-	if($idenlace == 192 || $idenlace == 193 || $idenlace == 197 || $idenlace == 198 || $idenlace == 199 || $idenlace == 200 || $idenlace == 201 	|| $idenlace == 202 || $idenlace == 203 || $idenlace == 266 || $idenlace == 233 || $idenlace == 225 || $idenlace == 311 || $idenlace == 335){
+	if($idenlace == 192 || $idenlace == 193 || $idenlace == 197 || $idenlace == 198 || $idenlace == 199 || $idenlace == 200 || $idenlace == 201 	|| $idenlace == 202 || $idenlace == 203 || $idenlace == 266 || $idenlace == 233 || $idenlace == 225 || $idenlace == 311 || $idenlace == 335 || $idenlace == 319 || $idenlace == 314 || $idenlace == 313){
    
 			$valoresEnlaceConsulta ="";
 			$arrFiscEnlaceConsulta = getFiscaliasEnlaceConsulta($conn, $idenlace); 
@@ -1351,7 +1351,7 @@ function validateMonthCapture($mesSelected, $anioSelected){
 		if(in_array($diamesActual, $daysToSendData) && $diferencia == 1 || in_array($diamesActual, $daysToSendData) && $diferencia == 11 && $diferencia_anio == 1){
 			return $valida[0][1];
 		}else{
-			return $valida[0][0];
+			return $valida[0][0]; 
 		}
 	}
 

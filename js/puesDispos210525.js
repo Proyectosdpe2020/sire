@@ -2440,7 +2440,9 @@ function registroArmasAseguradas(idEnlace, tipoArch, b, tipoActualizacion , idAr
 function loadDaysMonth(anio, idEnlace, camMes){
 
 
-		var messelected= document.getElementById("mesPuestaSelected").value; 		
+		var messelected= document.getElementById("mesPuestaSelected").value;
+		var anio= document.getElementById("anioCmasc").value;
+		console.log('año es: '+ anio); 		
 
 		cont = document.getElementById('contDays');
 		ajax=objetoAjax();

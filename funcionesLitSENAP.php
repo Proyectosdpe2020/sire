@@ -415,6 +415,8 @@ function getDataSentencias($conn, $idEstatusNucs, $estatus){
 		$arreglo[$indice][5]=$row['sentenciaEncuentraFirme'];
 		$arreglo[$indice][6]=$row['sentDerivaProcAbrv'];
 		$arreglo[$indice][7]=$row['fechaDictoProcAbrv'];
+		$arreglo[$indice][8]=$row['idModalidadEstadistica'];
+		$arreglo[$indice][9]=$row['reclasificacion'];
 		$indice++;
 	}
 	if(isset($arreglo)){return $arreglo;}
@@ -432,6 +434,8 @@ function getDataSentencias($conn, $idEstatusNucs, $estatus){
 			$arreglo[$indice][5]=$row['sentenciaEncuentraFirme'];
 			$arreglo[$indice][6]=$row['sentDerivaProcAbrv'];
 			$arreglo[$indice][7]=$row['fechaDictoProcAbrv'];
+			$arreglo[$indice][8]=$row['idModalidadEstadistica'];
+		 $arreglo[$indice][9]=$row['reclasificacion'];
 			$indice++;
 		}
 		if(isset($arreglo)){return $arreglo;}
