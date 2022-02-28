@@ -70,8 +70,8 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 						<div class="panel-body">	
 							<div class="row">
 								<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
-									<label for="NOMBRE"><span class="glyphicon glyphicon-user"></span> Nombre del agraviado:</label><br>
-				     <input type="text" id="NOMBRE" class="form-control" placeholder="ESPECIFICA EL NOMBRE DEL AGRAVIADO" maxlength="40" aria-describedby="sizing-addon1" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="return validaInput(event, 'varchar_letras')" value="<?if($a == 1){ echo $NOMBRE; } ?>" >
+									<label for="NOMBRE_AGRAVIADO"><span class="glyphicon glyphicon-user"></span> Nombre del agraviado:</label><br>
+				     <input type="text" id="NOMBRE_AGRAVIADO" class="form-control" placeholder="ESPECIFICA EL NOMBRE DEL AGRAVIADO" maxlength="40" aria-describedby="sizing-addon1" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="return validaInput(event, 'varchar_letras')" value="<?if($a == 1){ echo $NOMBRE; } ?>" >
 								</div>
 								<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
 									<label for="PATERNO">Apellido paterno :</label><br>
