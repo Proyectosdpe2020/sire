@@ -23,9 +23,9 @@
       /// por el largo del nombre del archivo tubo que cambiar para mas corto sea
 
       if($idTipoArch == 11){
-        $nombreReporte = "Trimestral-".$idEnlace."-".$idUnidad."-".$mes."-".$anio;
+        $nombreReporte = "Trimestral-".$idEnlace."-".$idUnidad."-".$mes."-".$anio."-".$idTipoArch;
       } else{
-        $nombreReporte = $nomUnidad.$idEnlace."-".$idUnidad."-".$mes."-".$anio;
+        $nombreReporte = $nomUnidad.$idEnlace."-".$idUnidad."-".$mes."-".$anio."-".$idTipoArch;
       } 
       
 

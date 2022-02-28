@@ -2,6 +2,46 @@
 
 //////// FUCION PROVISIONAL PARA SABER EL TRAMITE DE CADA MP /////////////////
 
+function getTramitesActuales2022($conn, $idUnidad, $idMp, $anio, $mes){
+
+	if ($mes == 1) {
+		$mesAnterior = 12;
+		$anioAnte = ($anio - 1);
+	} else {
+		$anioAnte = $anio;
+		$mesAnterior = ($mes - 1);
+	}
+					
+	$d11 = getCountNucs($conn, 1, $mes, $anio, $idUnidad, $idMp, 0);
+
+				$d21 = getCountNucs($conn, 22, $mes, $anio, $idUnidad, $idMp, 1);
+				$d31 = getCountNucs($conn, 22, $mes, $anio, $idUnidad, $idMp, 0);
+
+				$d41 = getCountNucs($conn, 2, $mes, $anio, $idUnidad, $idMp, 0);
+				$d51 = getCountNucs($conn, 5, $mes, $anio, $idUnidad, $idMp, 0);
+				$d61 = getCountNucs($conn, 20, $mes, $anio, $idUnidad, $idMp, 0);
+				$d71 = getCountNucs($conn, 21, $mes, $anio, $idUnidad, $idMp, 0);
+				$d81 = getCountNucs($conn, 3, $mes, $anio, $idUnidad, $idMp, 0);
+				$d91 = getCountNucs($conn, 23, $mes, $anio, $idUnidad, $idMp, 0);
+				$d101 = getCountNucs($conn, 24, $mes, $anio, $idUnidad, $idMp, 0);
+				$d111 = getCountNucs($conn, 25, $mes, $anio, $idUnidad, $idMp, 0);
+				$d121 = getCountNucs($conn, 15, $mes, $anio, $idUnidad, $idMp, 0);
+
+				$existNewJulio = getDataCarpetasDatosExistenciaAnteriorV2($conn, $mes, $anio, $idUnidad, $idMp);
+
+				$exiAntJulio = getExistenciaAnteriorV2($conn, $mesAnterior, $anioAnte, $idUnidad, $idMp);
+
+				$totaTrabJulio = $exiAntJulio[0][0] + $existNewJulio[0][0] + $d11[0][0] + $existNewJulio[0][1];
+				$totDeterminacionesJulio = $d21[0][0] + $d31[0][0] + $d41[0][0] + $d51[0][0] + $d61[0][0] + $d71[0][0] + $d81[0][0] + $d91[0][0] + $d101[0][0] + $d111[0][0] + $d121[0][0];
+
+				$enviadsJulio = $existNewJulio[0][2] + $existNewJulio[0][3] + $existNewJulio[0][4];
+				$enviaddetermnsJulio = $enviadsJulio + $totDeterminacionesJulio;
+
+				$tramiteFinls = $totaTrabJulio - $enviaddetermnsJulio;
+				return $tramiteFinls;
+
+}
+
 function getTramitesActuales($conn, $idUnidad, $idMp, $anio, $mes){
 				////////////// SI EL MES ES 7 /////////////////////////	
 				////////////// SI EL MES ES 7 /////////////////////////
@@ -1906,7 +1946,7 @@ $row_count = sqlsrv_num_rows( $stmt );
 function getExistenciaAnteriorV2($conn, $mesAnterior, $aniocaptura, $idUnidad, $idMp){
 
 	$query = "  SELECT tramitee FROM carpetasDatos WHERE idMes = $mesAnterior AND idAnio = $aniocaptura AND idUnidad = $idUnidad AND idMp =  $idMp ";
-		echo $query;
+		
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
@@ -1921,9 +1961,6 @@ function getExistenciaAnteriorV2($conn, $mesAnterior, $aniocaptura, $idUnidad, $
 function getExistenciaAnterior($conn, $mesAnterior, $aniocaptura, $idUnidad, $idMp){
 
 	$query = "SELECT tramite FROM Carpetas WHERE idMes = $mesAnterior AND idAnio = $aniocaptura AND idUnidad = $idUnidad AND idMp = $idMp ";
-
-	
-
 	
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
