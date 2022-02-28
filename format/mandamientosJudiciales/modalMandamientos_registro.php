@@ -189,7 +189,7 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 							  <? $estatus = getEstadoMandamiento($connSIMAJ);
 			 					for ($i=0; $i < sizeof($estatus); $i++) { 
 			 						$cv_est_act_man = $estatus[$i][0];	$tipo = $estatus[$i][1]; ?>
-			 					<option class="fontBold" value="<? echo $cv_est_act_man; ?>" <?if($a == 1 && $cv_est_act_man == $EDO_ORDEN ){ ?> selected <? } ?> ><? echo $tipo; ?></option>
+			 					<option class="fontBold" value="<? echo $cv_est_act_man; ?>" <?if($a == 0 && $cv_est_act_man == 6){?> selected <? }elseif($a == 1 && $cv_est_act_man == $EDO_ORDEN ){ ?> selected <? } ?> ><? echo $tipo; ?></option>
 			 					<? } ?>
 					</select>
 				</div>
@@ -289,7 +289,7 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 			<div class="row">
 				<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
 					<label for="NO_CAUSA"># No. causa :</label><br>
-				 <input type="text" class="form-control" id="NO_CAUSA" placeholder="ESPECIFICA EL NO. DE CAUSA *" maxlength="30" aria-describedby="sizing-addon1" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="return validaInput(event, 'varchar')" onchange="validateCampo_OK(this.id)" value="<?if($a == 1){echo $NO_CAUSA; } ?>" >
+				 <input type="text" class="form-control" id="NO_CAUSA" placeholder="ESPECIFICA EL NO. DE CAUSA *" maxlength="30" aria-describedby="sizing-addon1" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="return validaInput(event, 'no_causa')" onchange="validateCampo_OK(this.id)" value="<?if($a == 1){echo $NO_CAUSA; } ?>" >
 				</div>
 				<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
 					<label for="NO_PROCESO"># No. de proceso :</label><br>
@@ -331,11 +331,11 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 					<div class="row">
 						<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
 							<label for="ACUMULADO_PROCESO"># No. de acumulación (proceso) :</label><br>
-				   <input type="text" class="form-control" id="ACUMULADO_PROCESO" placeholder="ESPECIFICA EL NO. DE ACUMULACIÓN (PROCESO)" aria-describedby="sizing-addon1" maxlength="30" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="return validaInput(event, 'varchar')" onchange="validateCampo_OK(this.id)" value="<?if($a == 1){echo $ACUMULADO_PROCESO; } ?>"  >
+				   <input type="text" class="form-control" id="ACUMULADO_PROCESO" placeholder="ESPECIFICA EL NO. DE ACUMULACIÓN (PROCESO)" aria-describedby="sizing-addon1" maxlength="30" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="return validaInput(event, 'acumulados')" onchange="validateCampo_OK(this.id)" value="<?if($a == 1){echo $ACUMULADO_PROCESO; } ?>"  >
 						</div>
 						<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
 							<label for="ACUMULADO_AVERIGUACION"># No. de acumulación (averiguación) :</label><br>
-				   <input type="text" class="form-control" id="ACUMULADO_AVERIGUACION" placeholder="ESPECIFICA EL NO. DE ACUMULACIÓN (AVERIGUACION)" aria-describedby="sizing-addon1" maxlength="30" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="return validaInput(event, 'varchar')" onchange="validateCampo_OK(this.id)" value="<?if($a == 1){echo $ACUMULADO_AVERIGUACION; } ?>" >
+				   <input type="text" class="form-control" id="ACUMULADO_AVERIGUACION" placeholder="ESPECIFICA EL NO. DE ACUMULACIÓN (AVERIGUACION)" aria-describedby="sizing-addon1" maxlength="30" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="return validaInput(event, 'acumulados')" onchange="validateCampo_OK(this.id)" value="<?if($a == 1){echo $ACUMULADO_AVERIGUACION; } ?>" >
 						</div>
 					</div>
 				</div>
