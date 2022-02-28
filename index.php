@@ -59,6 +59,9 @@ if ($format == "medidasDeProteccion") {
 	$format = 16;
 }
 
+if ($format == "mandamientosJudiciales") {
+	$format = 18;
+}
 
 $_SESSION['formatis'] = $format;
 
@@ -133,6 +136,7 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 	<link rel="stylesheet" type="text/css" href="css/forestales.css">
 	<link rel="stylesheet" type="text/css" href="css/litigacionSENAP.css">
 	<link rel="stylesheet" type="text/css" href="css/medidasDeProteccion.css">
+	<link rel="stylesheet" type="text/css" href="css/mandamientos.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
 
@@ -221,7 +225,7 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 		if ($format  == 14) { ?> onload="loadtablaFormat(0, 'forestales.php', 'forestales', <? echo $idEnlace; ?>);" <? }
 		if ($format  == 15) { ?> onload="loadtablaFormat(0, 'carpetasJudicializadas.php', 'carpetasJudicializadas', <? echo $idEnlace; ?>);" <? }
 		if ($format  == 16) { ?> onload="loadtablaFormat(0, 'medidasDeProteccion.php', 'medidasDeProteccion', <? echo $idEnlace; ?>);" <? }
-		
+		if ($format  == 18) { ?> onload="loadtablaFormat(0, 'mandamientosJudiciales.php', 'mandamientosJudiciales', <? echo $idEnlace; ?>);" <? }
 		}
 
 		} else {																																	
@@ -845,6 +849,7 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 <script language="JavaScript" type="text/javascript" src="js/litigacionSENAP.js"></script>
 <script type="text/javascript" src="js/carpetasJudicializadas.js"></script>
 <?if($format == 16){ ?><script type="text/javascript" src="js/medidasDeProteccion.js"></script><? } ?>
+<?if($format == 18){ ?><script type="text/javascript" src="js/mandamientosJudiciales.js"></script><? } ?>
 
 
 	<!--<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>-->

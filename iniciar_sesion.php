@@ -56,6 +56,7 @@
 	if($_SESSION['idArchivo'] == 15){ $nameFormat = "carpetasJudicializadas";}
 	if($_SESSION['idArchivo'] == 17){ $nameFormat = "ControlProcesos";}
 	if($_SESSION['idArchivo'] == 16){ $nameFormat = "medidasDeProteccion";}
+	if($_SESSION['idArchivo'] == 18){ $nameFormat = "mandamientosJudiciales";}
 
 	echo $_SESSION['idArchivo'];
 	if($band)
