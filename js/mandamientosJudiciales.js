@@ -130,7 +130,8 @@ function validaInput(e, tipo) {
     if(tipo == 'varchar'){ var letras = "áéíóúabcdefghijklmnñopqrstuvwxyz1234567890"; }
     if(tipo == 'int'){ var letras = "1234567890"; }
     if(tipo == 'varchar_letras'){ var letras = "áéíóúabcdefghijklmnñopqrstuvwxyz"; }
-    if(tipo == 'mandato' || tipo == 'proceso' || tipo == 'averiguacion'){ var letras = "1234567890/"; }
+    if(tipo == 'mandato' || tipo == 'proceso' || tipo == 'averiguacion' || tipo == 'no_causa'){ var letras = "1234567890/-"; }
+    if(tipo == 'acumulados'){ var letras = "1234567890/"; }
     var especiales = [8, 37, 39, 46, 110, 32];
     var tecla_especial = false;
 
@@ -445,14 +446,15 @@ function validateDataMandamiento(){
  var COLABORACION = $('#colaboracion').prop('checked');
  if(COLABORACION == true) { COLABORACION = 1; ID_JUZGADO = 'no'; }else{ COLABORACION = 0; JUZGADO_COLABORACION = 'no' }
 
+
  //Arreglo de campos para validar con color rojo, si se agrega un nuevo campo, agregar en el arreglo para incluir en la validacion de color
  var arrayCamposValida = [ "FECHA_CAPTURA" , "ID_PAIS" , "ID_ESTADO_EMISOR" , "ID_MUNICIPIO" , "ID_EMISOR" , "FISCALIA" , "ID_TIPO_MANDATO" , "NO_MANDATO" , "ID_TIPO_PROCESO" , "EDO_ORDEN" , "FECHA_RECEPCION" ,
                            "FECHA_OFICIO" , "ID_TIPO_CUANTIA" , "ID_FUERO_PROCESO" , "ID_PROCESO_EXTRADI" , "ID_ESTADO_JUZGADO" , "JUZGADO_COLABORACION" , "ID_JUZGADO" , "OFICIO_JUZGADO" , "FECHA_PRESCRIPCION" , "NO_CAUSA" , 
-                           "NO_PROCESO" , "FECHA_LIBRAMIENTO" , "TIPO_INVESTIGACION" , "nuc" , "NO_AVERIGUACION" ];
+                           "NO_PROCESO" , "FECHA_LIBRAMIENTO" , "TIPO_INVESTIGACION" , "nuc"  ];
  //Arreglo de variables de informacion, donde se verifica si hay informacion en dicha variable
  var arrayCamposData = [ FECHA_CAPTURA , ID_PAIS , ID_ESTADO_EMISOR , ID_MUNICIPIO , ID_EMISOR , FISCALIA , ID_TIPO_MANDATO, NO_MANDATO , ID_TIPO_PROCESO , EDO_ORDEN , FECHA_RECEPCION , FECHA_OFICIO , 
                          ID_TIPO_CUANTIA , ID_FUERO_PROCESO , ID_PROCESO_EXTRADI , ID_ESTADO_JUZGADO , JUZGADO_COLABORACION , ID_JUZGADO , OFICIO_JUZGADO , FECHA_PRESCRIPCION , NO_CAUSA , NO_PROCESO , 
-                         FECHA_LIBRAMIENTO , TIPO_INVESTIGACION , nuc , NO_AVERIGUACION ];
+                         FECHA_LIBRAMIENTO , TIPO_INVESTIGACION , nuc  ];
  //Bucle del tamaño de los campos, se verifica si la variable tiene información, si esta no tiene coloreamos el input de color rojo
  for(x = 0; x < arrayCamposValida.length; x++){
  	if($.trim(arrayCamposData[x]) == ""){
@@ -712,9 +714,9 @@ function validateDataInputado(){
 	var FECHA_OBSERVACION = document.getElementById('FECHA_OBSERVACION').value;
 
 	//Arreglo de campos para validar con color rojo, si se agrega un nuevo campo, agregar en el arreglo para incluir en la validacion de color
- var arrayCamposValida = [ "NOMBRE" , "APATERNO" , "AMATERNO" , "ID_NACIONALIDAD" , "ID_SEXO" , "ID_USO_ANTEOJOS" , "TATUAJES"  ];
+ var arrayCamposValida = [ "NOMBRE" , "APATERNO" , "AMATERNO" , "ID_NACIONALIDAD" , "ID_SEXO" , "ID_USO_ANTEOJOS" , "TATUAJES" ];
  //Arreglo de variables de informacion, donde se verifica si hay informacion en dicha variable
- var arrayCamposData = [ NOMBRE , APATERNO , AMATERNO , ID_NACIONALIDAD , ID_SEXO , ID_USO_ANTEOJOS , TATUAJES   ];
+ var arrayCamposData = [ NOMBRE , APATERNO , AMATERNO , ID_NACIONALIDAD , ID_SEXO , ID_USO_ANTEOJOS , TATUAJES ];
  //Bucle del tamaño de los campos, se verifica si la variable tiene información, si esta no tiene coloreamos el input de color rojo
  for(x = 0; x < arrayCamposValida.length; x++){
  	if($.trim(arrayCamposData[x]) == ""){
@@ -1079,7 +1081,7 @@ function guardar_mandamiento_agraviado(tipoModal, idEnlace, idUnidad, idfisca, I
 
 //FUNCION PARA VALIDAR LOS AGRAVIADOS
 function validateDataAgraviado(){
-	var NOMBRE = document.getElementById('NOMBRE').value;
+	var NOMBRE_AGRAVIADO = document.getElementById('NOMBRE_AGRAVIADO').value;
 	var PATERNO = document.getElementById('PATERNO').value;
 	var MATERNO = document.getElementById('MATERNO').value;
 	var ES_PRINCIPAL_AGRAVIADO = $('input[name="ES_PRINCIPAL_AGRAVIADO"]:checked').val();
@@ -1096,10 +1098,10 @@ function validateDataAgraviado(){
  	}
  }
 
-	if( NOMBRE != "" && PATERNO != "" && MATERNO != "" && ES_PRINCIPAL_AGRAVIADO != ""  ){
+	if( NOMBRE_AGRAVIADO != "" && PATERNO != "" && MATERNO != "" && ES_PRINCIPAL_AGRAVIADO != ""  ){
 
 		var dataAgraviados = Array();
-  dataAgraviados[1] = NOMBRE;
+  dataAgraviados[1] = NOMBRE_AGRAVIADO;
   dataAgraviados[2] = PATERNO;
   dataAgraviados[3] = MATERNO;
   dataAgraviados[4] = ES_PRINCIPAL_AGRAVIADO;
