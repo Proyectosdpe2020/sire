@@ -28,9 +28,9 @@
 						}else{ 	if($arch == 10 ){ $a = 1; } }
 						
 							$enlace = getInfoEnlaceUsuario($conn, $idUsuario);
-	      $idfisca = $enlace[0][1];	
+		  $idfisca = $enlace[0][1];	
 
-	      $validateMonthCap = validateMonthCapture($messelected, $anio);
+		  $validateMonthCap = validateMonthCapture($messelected, $anio);
 
 			?>
 
@@ -53,7 +53,7 @@
 																										<td> <center><? echo $dataPuestasDia[$h][10]; ?></center> </td>
 																										<?if($tiparchiv == 12 && ($idEnlace != 266 && $idEnlace != 233 && $idEnlace != 225) ){ ?>
 																											<td><center><label class="glyphicon glyphicon-search" data-toggle="modal" href="#puestdispos" onclick="showmodalPueDispo(1, <? echo $idEnlace; ?>, <? echo $dataPuestasDia[$h][0]; ?>, <? echo 	$tiparchiv; ?>, 1)" style="width: 95%; cursor: pointer; font-weight: bold; color: green;"> Ver <? /*if($a == 1){echo "Revisar";}else{ echo "Editar"; }*/ ?></label></center></td>
-																										<? }else{ if($validateMonthCap == "SI"){ ?>
+																										<? }else{ if($validateMonthCap == "SI" ||  $idEnlace == 348 || $idEnlace == 109 || $idEnlace == 118 || $idEnlace == 349 || $idEnlace == 350){ ?>
 																										<td><center><label class="glyphicon glyphicon-edit" data-toggle="modal" href="#puestdispos" onclick="showmodalPueDispo(1, <? echo $idEnlace; ?>, <? echo $dataPuestasDia[$h][0]; ?>, <? echo 	$tiparchiv; ?>, 1)" style="width: 95%; cursor: pointer; font-weight: bold; color: green;">Editar<? /*if($a == 1){echo "Revisar";}else{ echo "Editar"; }*/ ?></label></center></td><? }elseif($validateMonthCap == "NO"){ ?>
 																											<td><center><label class="glyphicon glyphicon-edit" data-toggle="modal" href="#puestdispos" onclick="showmodalPueDispo(1, <? echo $idEnlace; ?>, <? echo $dataPuestasDia[$h][0]; ?>, <? echo 	$tiparchiv; ?>, 0)" style="width: 95%; cursor: pointer; font-weight: bold; color: green;">Ver<? /*if($a == 1){echo "Revisar";}else{ echo "Editar"; }*/ ?></label></center></td>
 																									<? } 

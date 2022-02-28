@@ -350,6 +350,8 @@ function getDatosCarpetasV2AllUnidad($conn, $mes, $anio, $idUnidad){
       ,[enviadasUATP]
       ,[enviadasUI]
       ,[enviImpDes]
+	  ,[tramitee]
+      ,[tramiteAnterior]
   FROM [ESTADISTICAV2].[dbo].[carpetasDatos] INNER JOIN mp ON mp.idMp = carpetasDatos.idMp WHERE idAnio = $anio AND idMes = $mes AND carpetasDatos.idUnidad $idUnidad	";
 
 	$indice = 0;
@@ -366,6 +368,8 @@ function getDatosCarpetasV2AllUnidad($conn, $mes, $anio, $idUnidad){
 		$arreglo[$indice][7]=$row['idUnidad'];
 		$arreglo[$indice][8]=$row['idMp'];
 		$arreglo[$indice][9]=$row['ministerio'];
+		$arreglo[$indice][10]=$row['tramitee'];
+		$arreglo[$indice][11]=$row['tramiteAnterior'];
 
 		$indice++;
 	}

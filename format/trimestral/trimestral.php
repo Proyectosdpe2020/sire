@@ -170,7 +170,7 @@
 						</tr>
 						<tr>
 							<th scope="row">1.2</th>
-							<td style="text-align: left;">Querellas u otros requisistos equivalentes</td>
+							<td style="text-align: left;">Querellas u otros requisitos equivalentes</td>
 							<td><input type="number" value="<? echo $data2[0][0]; ?>" id="p2m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data2[0][1]; ?>" id="p2m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data2[0][2]; ?>" id="p2m3" <? if($envt == 1){ echo "readonly"; } ?>></td>

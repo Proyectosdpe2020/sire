@@ -28,17 +28,26 @@
 						<label for="anio">Año:</label><br>
 						<select id="anio" name="anio" tabindex="6" class="form-control redondear selectTranparent" onchange="reloadTableConsulta()" >
 							<option value="2021">2021</option>
+							<option value="2022">2022</option>
 						</select>
 					</div>
 					<div class="col-xs-12 col-sm-3  col-md-3">
 						<label for="mes">Mes:</label><br>
 						<select id="mes" name="mes" tabindex="6" class="form-control redondear selectTranparent" onchange="reloadTableConsulta()" >
 							<option value="0">Seleccione</option>
-							<? $getDataMonth = getDataMonth( $conn, date("Y") ); 
-							    for ($i=0; $i < sizeof($getDataMonth); $i++) { ?>
-							    	<option value="<? echo $getDataMonth[$i][0]; ?>"><? echo $getDataMonth[$i][1]; ?></option>
-							    <? } ?>
-							 <option value="1,2,3,4,5,6,7,8,9,10,11,12">Todo</option>
+							<option value="1">Enero</option>
+							<option value="2">Febrero</option>
+							<option value="3">Marzo</option>
+							<option value="4">Abril</option>
+							<option value="5">Mayo</option>
+							<option value="6">Junio</option>
+							<option value="7">Julio</option>
+							<option value="8">Agosto</option>
+							<option value="9">Septiembre</option>
+							<option value="10">Octubre</option>
+							<option value="11">Noviembre</option>
+							<option value="12">Diciembre</option>
+							<option value="1,2,3,4,5,6,7,8,9,10,11,12">Todo</option>
 						</select>
 					</div>
 						<div class="col-xs-12 col-sm-3  col-md-3">

@@ -31,7 +31,7 @@ include("../funciones.php");
 												$mesCapturar = $mescapen;
 
 
-	$anioCaptura = 2020;
+	$anioCaptura = $anioactualdate;
 	
 	 $mesNom = Mes_Nombre($mesCapturar);
 
