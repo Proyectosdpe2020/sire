@@ -123,9 +123,9 @@ $mesNom = Mes_Nombre($currentmonth);
 						<th class="textCent10">Estado</th>
 						<th class="">Tipo Mandamiento</th>
 						<th class="">Proceso</th>
-						<th class="">Nombre del inculpado</th>
-						<th class="">Fiscalia</th>
-						<th class="">Distrito</th>
+						<!--<th class="">Nombre del inculpado</th>-->
+						<th class="">Fiscalía</th>
+						<th class="">Municipio</th>
 						<th class="">Acciones</th>
 					</tr>
 				</thead>
@@ -138,7 +138,7 @@ $mesNom = Mes_Nombre($currentmonth);
 							<td><? echo $data[$h][3]; ?></td>
 							<td><? echo $data[$h][4]; ?></td>
 							<td><? echo $data[$h][5]; ?></td>
-							<td>sin dato</td>
+						<!--	<td>sin dato</td>-->
 							<td><? echo $data[$h][6]; ?></td>
 							<td><? echo $data[$h][7]; ?></td>
 							<td><center><img src="img/editarMandamiento2.png" data-toggle="modal" href="#mandamientos"  onclick="modalMandamientos_registro(0, <? echo $idEnlace; ?>,<? echo $data[$h][1]; ?>,<? echo $tiparchiv; ?>, 1, <?echo $idfisca; ?>, <?echo $idUnidad; ?>);"><!--<img src="img/resumenMandamiento.png"></center>-->
