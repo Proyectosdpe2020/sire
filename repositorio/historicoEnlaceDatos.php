@@ -77,7 +77,7 @@ switch ($format) {
 						<select id="anioHistorique" name="selMes" onchange="getDataHistoricaBD(<? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" tabindex="6" class="form-control redondear selectTranparent" required>
 
 							<?
-							$arrayANios = array(2020,2021);
+							$arrayANios = array(2020,2021,2022);
 
 							for ($p=0; $p < sizeof($arrayANios) ; $p++) { 
 
@@ -317,188 +317,164 @@ switch ($format) {
 
 
 
-
-								for(  $k=0; $k<sizeof($datazx); $k++  ){
-
-									$idUnidadese = $datazx[$k][7];
-									$naun = getNunidad($conn, $idUnidadese);
-
-									$nombre = $datazx[$k][9];		
-
-												/////////////////TRAMITES
-
-									if($mescapen == 1){ 
-										$mesAnterior = 12; 
-										$anioAnte = ($anioCaptura-1); 
-									}else{ 
-										$anioAnte = $anioCaptura; 
-										$mesAntAnterior = ($mescapen - 2);
-										$mesAnterior = ($mescapen - 1); 	
-									}
-
-									/// OBTENER LA UNIDAD A LA QUE REALMENTE CORRESPONDE EL MP 
-
-									
-									$existenciaAnt = getExistenciaAnterior($conn, $mesAnterior, $anioAnte, $idUnidadese, $datazx[$k][8]);
-
-									$existenciaAnt2 = getExistenciaAnterior($conn, $mesAntAnterior, $anioAnte, $idUnidadese, $datazx[$k][8]);
-
-									if($existenciaAnt2){ 
-
-										$tramiteAnte = $existenciaAnt[0][0];  
-										$tramiteAnte2 = $existenciaAnt2[0][0];  
-										$bandHabTramite = 0;
-									}else{ 
-
-										$tramiteAnte = 0; 
-										$bandHabTramite = 1;
-										$tramiteAnte2 = 0;  
-										
-									}
-
-									//////////////////////////////////// TRAMITE ANTERIOR //////////////////////////////////////
- 
-									$existNew = getDataCarpetasDatosExistenciaAnteriorV2($conn, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8]);
-									//$existNew2 = getDataCarpetasDatosExistenciaAnteriorV2($conn, $mes, $anio, $idUnidad, $idMp);
-									
-									
-									$d11 = getCountNucs($conn, 1, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 0);
-									
-									$d21 = getCountNucs($conn, 22, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 1);
-									$d31 = getCountNucs($conn, 22, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 0);
-									
-									$d41 = getCountNucs($conn, 2, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 0);
-									$d51 = getCountNucs($conn, 5, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 0);
-									$d61 = getCountNucs($conn, 20, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 0);
-									$d71 = getCountNucs($conn, 21, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 0);
-									$d81 = getCountNucs($conn, 3, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 0);
-									$d91= getCountNucs($conn, 23, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 0);
-									$d101 = getCountNucs($conn, 24, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 0);
-									$d111 = getCountNucs($conn, 25, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 0);
-									$d121 = getCountNucs($conn, 15, $mesAnterior, $anioAnte, $datazx[$k][7], $datazx[$k][8], 0);
-									
-									$totaTrabvajar1 = $existNew[0][8] + $existNew[0][0] + $d11[0][0] + $existNew[0][1] ;
-									
-									$totDeterminaciones1 = $d21[0][0] + $d31[0][0] + $d41[0][0] + $d51[0][0] + $d61[0][0] + $d71[0][0] + $d81[0][0] + $d91[0][0] + $d101[0][0] + $d111[0][0] + $d121[0][0];
-									$enviads1 = $existNew[0][2] + $existNew[0][3] + $existNew[0][4];
-									$enviaddetermns = $enviads1 + $totDeterminaciones1;
-									
-									$totTramitss1 = $totaTrabvajar1 - $totDeterminaciones1;
-									
-									//////////////////////////////////// TRAMITE ANTERIOR //////////////////////////////////////
-
-
-									////// TRAMITES ///////////
-
-									$d1 = getCountNucs($conn, 1, $mescapen, $aniocapen, $datazx[$k][7], $datazx[$k][8], 0);
-
-									$d2 = getCountNucs($conn, 22, $mescapen, $aniocapen, $datazx[$k][7], $datazx[$k][8], 1); 
-									$d3 = getCountNucs($conn, 22, $mescapen, $aniocapen, $datazx[$k][7], $datazx[$k][8], 0); 
-
-									$d4 = getCountNucs($conn, 2, $mescapen, $aniocapen, $datazx[$k][7], $datazx[$k][8], 0); 
-									$d5 = getCountNucs($conn, 5, $mescapen, $aniocapen, $datazx[$k][7], $datazx[$k][8], 0); 
-									$d6 = getCountNucs($conn, 20, $mescapen, $aniocapen, $datazx[$k][7], $datazx[$k][8], 0); 
-									$d7 = getCountNucs($conn, 21, $mescapen, $aniocapen, $datazx[$k][7], $datazx[$k][8], 0); 
-									$d8 = getCountNucs($conn, 3, $mescapen, $aniocapen, $datazx[$k][7], $datazx[$k][8], 0); 
-									$d9 = getCountNucs($conn, 23, $mescapen, $aniocapen, $datazx[$k][7], $datazx[$k][8], 0); 
-									$d10 = getCountNucs($conn, 24, $mescapen, $aniocapen, $datazx[$k][7], $datazx[$k][8], 0); 
-									$d11 = getCountNucs($conn, 25, $mescapen, $aniocapen, $datazx[$k][7], $datazx[$k][8], 0); 
-									$d12 = getCountNucs($conn, 15, $mescapen, $aniocapen, $datazx[$k][7], $datazx[$k][8], 0); 
-
-
-									$totaTrabvajar = $totTramitss1 + $datazx[$k][6] + $d1[0][0] + $datazx[$k][2] ;
-									$totjud = $d3[0][0] + $d2[0][0];
-
-									$totDeterminaciones = $d2[0][0] + $d3[0][0] + $d4[0][0] + $d5[0][0] + $d6[0][0] + $d7[0][0] + $d8[0][0] + $d9[0][0] + $d10[0][0] + $d11[0][0] + $d12[0][0];
-
-									$enviads = $datazx[$k][3] + $datazx[$k][4] + $datazx[$k][5];
-
-									$enviaddetermns = $enviads + $totDeterminaciones;
-
-									$totTramitss = $totaTrabvajar - $enviaddetermns;
-
-									/////////////////////////////////////
-
-									$dos2 = $dos2 + $totTramitss1; $dos3 = $dos3 + $datazx[$k][0]; 	$dos4 = $dos4 + $datazx[$k][1]; 	$dos5 = $dos5 + $datazx[$k][6]; 	$dos6 = $dos6 + number_format($d1[0][0]); 
-
-									$dos7 = $dos7 + $datazx[$k][2]; $dos8 = $dos8 + number_format($totaTrabvajar); 	$dos9 = $dos9 + number_format($d2[0][0]); 	$dos10 = $dos10 + number_format($d3[0][0]); 	$dos11 = $dos11 + number_format($totjud); 
-
-									$dos12 = $dos12 + number_format($d4[0][0]); $dos13 = $dos13 + number_format($d5[0][0]); $dos14 = $dos14 + number_format($d6[0][0]); 	$dos15 = $dos15 + number_format($d9[0][0]); $dos16 = $dos16 + number_format($d10[0][0]); 
-
-									$dos17 = $dos17 + number_format($d11[0][0]); $dos18 = $dos18 + number_format($d12[0][0]); $dos19 = $dos19 + number_format($d7[0][0]);	$dos20 = $dos20 + number_format($d8[0][0]); 	$dos21 = $dos21 + number_format($totDeterminaciones);
-
-									$dos22 = $dos22 + $datazx[$k][3]; $dos23 = $dos23 + $datazx[$k][4]; $dos24 = $dos24 + $datazx[$k][5]; 	$dos25 = $dos25 + number_format($totTramitss);
-
-
-
-									?>
-
-									<tr style="background-color:rgba(255,255,255,0.8); border: solid 1px #E4E4E4 !important; ">																															
-										<td style="width: 300px !important;  padding: 10px !important;  border: solid 1px #E4E4E4 !important;">	<? echo "<label style='font-weight: bold;'>".$nombre."</label><br>".$naun[0][0]; ?></td>
-										<td style="font-weight: bold;  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo $totTramitss1; ?></td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo $datazx[$k][0]; ?></td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo $datazx[$k][1]; ?></td>
-										<td style="font-weight: bold;  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo $datazx[$k][6]; ?></td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($d1[0][0]); ?></td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo $datazx[$k][2]; ?></td>
-										<td style=" font-weight: bold; border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($totaTrabvajar); ?></td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($d2[0][0]); ?></td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;">	<? echo number_format($d3[0][0]); ?></td>
-										<td style=" font-weight: bold; border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo number_format($totjud); ?>	</td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo number_format($d4[0][0]); ?>	</td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;">	<? echo number_format($d5[0][0]); ?></td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($d6[0][0]); ?>	</td>
-
-
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($d9[0][0]); ?></td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($d10[0][0]); ?>	</td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($d11[0][0]); ?></td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;">	<? echo number_format($d12[0][0]); ?></td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($d7[0][0]); ?>	</td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;">	<? echo number_format($d8[0][0]); ?></td>
-										<td style=" font-weight: bold; border: solid 1px #E4E4E4 !important; text-align: center;"><? echo number_format($totDeterminaciones); ?></td>
-										<td style=" border: solid 1px #E4E4E4 !important; text-align: center;">	<? echo $datazx[$k][3]; ?></td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"><? echo $datazx[$k][4]; ?>	</td>
-										<td style="  border: solid 1px #E4E4E4 !important; text-align: center;">	<? echo $datazx[$k][5]; ?></td>
-										<td style=" font-weight: bold; border: solid 1px #E4E4E4 !important; text-align: center;">	<? echo number_format($totTramitss); ?></td>
-									</tr>			
-
-									<?
-
+								if ($mescapen == 1) {
+									$mesAnterior = 12;
+									$anioAnte = ($aniocapen - 1);
+								} else {
+									$anioAnte = $aniocapen;
+									$mesAnterior = ($mescapen - 1);
 								}
+					
+					
+								for ($i = 0; $i < sizeof($datazx); $i++) {
+						
+									$idUnidadese = $datazx[$i][7];
+									$naun = getNunidad($conn, $idUnidadese);
+									$nombre = $datazx[$i][9];
+					
+					
+									$nuevaexistenciaAnt = getDataCarpetasDatosExistenciaAnteriorV2($conn, $mesAnterior, $anioAnte, $datazx[$i][7], $datazx[$i][8]);
+											$tramAnterior =  intval($nuevaexistenciaAnt[0][7]);
+						
+											$nuevaexistencia = getDataCarpetasDatosExistenciaAnteriorV2($conn, $mescapen, $aniocapen, $datazx[$i][7], $datazx[$i][8], 0);
+											$tramAnterior2 =  intval($nuevaexistencia[0][7]);
+											
+											$de11 = getCountNucs($conn, 1, $mescapen, $aniocapen, $datazx[$i][7], $datazx[$i][8], 0);
+						
+											$de21 = getCountNucs($conn, 22, $mescapen, $aniocapen, $datazx[$i][7], $datazx[$i][8], 1);
+											$de31 = getCountNucs($conn, 22, $mescapen, $aniocapen, $datazx[$i][7], $datazx[$i][8], 0);
+						
+											$de41 = getCountNucs($conn, 2, $mescapen, $aniocapen, $datazx[$i][7], $datazx[$i][8], 0);
+											$de51 = getCountNucs($conn, 5, $mescapen, $aniocapen, $datazx[$i][7], $datazx[$i][8], 0);
+											$de61 = getCountNucs($conn, 20, $mescapen, $aniocapen, $datazx[$i][7], $datazx[$i][8], 0);
+											$de71 = getCountNucs($conn, 21, $mescapen, $aniocapen, $datazx[$i][7], $datazx[$i][8], 0);
+											$de81 = getCountNucs($conn, 3, $mescapen, $aniocapen, $datazx[$i][7], $datazx[$i][8], 0);
+											$de91 = getCountNucs($conn, 23, $mescapen, $aniocapen, $datazx[$i][7], $datazx[$i][8], 0);
+											$de101 = getCountNucs($conn, 24, $mescapen, $aniocapen, $datazx[$i][7], $datazx[$i][8], 0);
+											$de111 = getCountNucs($conn, 25, $mescapen, $aniocapen, $datazx[$i][7], $datazx[$i][8], 0);
+											$de121 = getCountNucs($conn, 15, $mescapen, $aniocapen, $datazx[$i][7], $datazx[$i][8], 0);
+						
+											$iniciadasCd = $nuevaexistencia[0][5];
+											$iniciadasSd = $nuevaexistencia[0][6];
+											$iniciadas = $nuevaexistencia[0][0];
+											$recibidas = $nuevaexistencia[0][1];
+						
+								
+											$totalTrabajar = intval($tramAnterior) + intval($iniciadas) + intval($recibidas) + intval($de11[0][0]); 
+						
+											$judicializadas = $de21[0][0] + $de31[0][0];
+											$totResoluciones = $de21[0][0] + $de31[0][0] + $de41[0][0] + $de51[0][0] + $de61[0][0] + $de71[0][0] + $de81[0][0] + $de91[0][0] + $de101[0][0] + $de111[0][0] + $de121[0][0];
+						
+											$enviUATP = $nuevaexistencia[0][2];
+											$enviUI = $nuevaexistencia[0][3];
+											$enviMp = $nuevaexistencia[0][4];
+						
+											$tramiteFinls = 	$totalTrabajar - ($totResoluciones + $enviUATP + $enviUI + $enviMp);
+					
+					
+									?>
+																<tr style="background-color:rgba(255,255,255,0.8); border: solid 1px #E4E4E4 !important; ">
+																	<td style="width: 300px !important;  padding: 10px !important;  border: solid 1px #E4E4E4 !important;"> <? echo "<label style='font-weight: bold;'>" . $nombre . "</label><br>" . $naun[0][0]; ?></td>
+																	<td style="font-weight: bold;  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo $tramAnterior; ?></td>
+																	<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo $iniciadasCd; ?></td>
+																	<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo $iniciadasSd; ?></td>
+																	<td style="font-weight: bold;  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo $iniciadas; ?></td>
+																	<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo number_format($de11[0][0]); ?></td>
+																	<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo $recibidas; ?></td>
+																	<td style=" font-weight: bold; border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo $totalTrabajar; ?></td>
+					
+																	<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo number_format($de21[0][0]); ?></td>
+																	<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo number_format($de31[0][0]); ?></td>
+																	<td style=" font-weight: bold; border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo $judicializadas; ?></td>
+																	<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo number_format($de41[0][0]); ?></td>												
+																	<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo number_format($de51[0][0]); ?></td>												
+																	<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo number_format($de61[0][0]); ?></td>												
+																	<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo number_format($de91[0][0]); ?></td>												
+																	<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo number_format($de101[0][0]); ?></td>												
+																	<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo number_format($de111[0][0]); ?></td>
+																	<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo number_format($de121[0][0]); ?></td>
+																	<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo number_format($de71[0][0]); ?></td>
+																	<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo number_format($de81[0][0]); ?></td>
+																	
+																	<td style=" font-weight: bold; border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo $totResoluciones; ?></td>
+																	<td style=" border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo $enviUATP; ?></td>
+																	<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo $enviUI; ?></td>
+																	<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo $enviMp; ?></td>
+																	<td style=" font-weight: bold; border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo $tramiteFinls; ?></td>
+																</tr>
+						
+															<?
+					
+					
+									////// LO FINAL //////
+									$dos2 = $dos2 + $tramAnterior;
+									$dos3 = $dos3 + $iniciadasCd;
+									$dos4 = $dos4 + $iniciadasSd;
+									$dos5 = $dos5 + $iniciadas;
+									$dos6 = $dos6 + number_format($de11[0][0]);
+					
+									$dos7 = $dos7 + $recibidas;
+									$dos8 = $dos8 + $totalTrabajar;
+									$dos9 = $dos9 + number_format($de21[0][0]);
+									$dos10 = $dos10 + number_format($de31[0][0]);
+									$dos11 = $dos11 + number_format($judicializadas);
+					
+									$dos12 = $dos12 + number_format($de41[0][0]);
+									$dos13 = $dos13 + number_format($de51[0][0]);
+									$dos14 = $dos14 + number_format($de61[0][0]);
+									$dos15 = $dos15 + number_format($de91[0][0]);
+									$dos16 = $dos16 + number_format($de101[0][0]);
+					
+									$dos17 = $dos17 + number_format($de111[0][0]);
+									$dos18 = $dos18 + number_format($de121[0][0]);
+									$dos19 = $dos19 + number_format($de71[0][0]);
+									$dos20 = $dos20 + number_format($de81[0][0]);
+									$dos21 = $dos21 + number_format($totResoluciones);
+					
+									$dos22 = $dos22 + $enviUATP;
+									$dos23 = $dos23 + $enviUI;
+									$dos24 = $dos24 + $enviMp;
+									$dos25 = $dos25 + $tramiteFinls;
+									//// LO FINAL /////
+					
+								}
+					
+			
 
 								?>
 
-								<tr style="background-color: white !important; border: solid 1px #E4E4E4 !important; ">
 
-									<td style="background-color: #ccffff;  border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;">	TOTAL </td>
-									<td style="background-color: #ccffff; padding: 15px !important;  border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;">	<? echo $dos2; ?> </td>
-									<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;">	<? echo $dos3; ?> </td>
-									<td style="background-color: #ccffff;  border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;">	<? echo $dos4; ?> </td>
-									<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;">	<? echo $dos5; ?> </td>
-									<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;">	<? echo $dos6; ?> </td>
-									<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;">	<? echo $dos7; ?> </td>
-									<td style="background-color: #ccffff;  border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;">	<? echo $dos8; ?> </td>
-									<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;">	<? echo $dos9; ?> </td>
-									<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;">	<? echo $dos10; ?> </td>
-									<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;">	<? echo $dos11; ?> </td>
-									<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;">	<? echo $dos12; ?> </td>
-									<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;">	<? echo $dos13; ?> </td>
-									<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;">	<? echo $dos14; ?> </td>
-									<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;">	<? echo $dos15; ?> </td>
-									<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;">	<? echo $dos16; ?> </td>
-									<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;">	<? echo $dos17; ?> </td>
-									<td style="background-color: #ccffff; border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;">	<? echo $dos18; ?> </td>
-									<td style="background-color: #ccffff;  border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;">	<? echo $dos19; ?> </td>
-									<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;">	<? echo $dos20; ?> </td>
-									<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;">	<? echo $dos21; ?> </td>
-									<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;">	<? echo $dos22; ?> </td>
-									<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;">	<? echo $dos23; ?> </td>
-									<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;">	<? echo $dos24; ?> </td>
-									<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;">	<? echo $dos25; ?> </td>
+<tr style="background-color: white !important; border: solid 1px #E4E4E4 !important; ">
+	
+	<td style="background-color: #ccffff;  border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> TOTAL </td>
+	<td style="background-color: #ccffff; padding: 15px !important;  border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos2; ?> </td>
+	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos3; ?> </td>
+	<td style="background-color: #ccffff;  border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos4; ?> </td>
+	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos5; ?> </td>
+	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos6; ?> </td>
+	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos7; ?> </td>
+	<td style="background-color: #ccffff;  border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo number_format($dos8); ?> </td>
+	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos9; ?> </td>
+	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos10; ?> </td>
+	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos11; ?> </td>
+	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos12; ?> </td>
+	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos13; ?> </td>
+	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos14; ?> </td>
+	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos15; ?> </td>
+	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos16; ?> </td>
+	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos17; ?> </td>
+	<td style="background-color: #ccffff; border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos18; ?> </td>
+	<td style="background-color: #ccffff;  border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos19; ?> </td>
+	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos20; ?> </td>
+	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos21; ?> </td>
+	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos22; ?> </td>
+	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos23; ?> </td>
+	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos24; ?> </td>
+	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos25; ?> </td>
 
 
-								</tr>
+				</tr>
+
 
 								<?
 

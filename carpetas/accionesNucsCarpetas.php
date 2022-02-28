@@ -1177,8 +1177,8 @@ $tramitefinal = $totaTrabvajar2 - ($totDeterminaciones1 + $enviads1);
 
 
         //// IR ACTUALIZANDO CADA UNO DE LOS TRAMITES POR MP
-        $tramis = getTramitesActuales($conn, $mpsList[$j][3], $mpsList[$j][4], $anio, $mes);
-        $tramisAnte = getTramitesActuales($conn, $mpsList[$j][3], $mpsList[$j][4], $anioAnte, $mesAnterior);
+        $tramis = getTramitesActuales2022($conn, $mpsList[$j][3], $mpsList[$j][4], $anio, $mes);
+        $tramisAnte = getTramitesActuales2022($conn, $mpsList[$j][3], $mpsList[$j][4], $anioAnte, $mesAnterior);
     
         $queryTransaction = "  
         BEGIN                     
