@@ -13,5 +13,5 @@ if (isset($_POST["ID_MUNICIPIO"])){ $cv_municipio = $_POST["ID_MUNICIPIO"]; }
    		<option class="fontBold" value="<? echo $id; ?>" ><? echo $nom_fis; ?></option>
  <? } 
   }else{ ?>
-   	<option class="fontBold" value="0" >NO ESPECIFICADO</option>
+   	<option class="fontBold" value="999" >NO ESPECIFICADO</option>
 <?} ?>

@@ -710,7 +710,7 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 			<button type="button" class="btn btn-primary btn-lg" style="width: 100%;" onclick="guardar_mandamiento(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?>)"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar información</button>
 		</div>
 		<div class="col-xs-12 col-sm-12  col-md-3">
-			<button type="button" class="btn btn-default btn-lg" data-dismiss="modal" onclick="closeModalMDP(<?echo $anioActual; ?>, <?echo $idEnlace; ?>, 0)" >Cerrar</button>
+			<button type="button" class="btn btn-default btn-lg" data-dismiss="modal" onclick="closeModal_mandamientos(<? echo $idEnlace; ?>,<?echo $idfisca; ?>, <?echo $idUnidad; ?>)" >Cerrar</button>
 		</div>
 	</div>
 </div>
