@@ -411,7 +411,7 @@ function get_data_delitos($conn, $ID_MANDAMIENTO_INTERNO){
 															  FROM mandamientos.dbo.E_DELITOS d
 															  INNER JOIN mandamientos.dbo.B_DATOS_INCULPADO i ON i.ID_INCULPADO_INTERNO = d.ID_INCULPADO_INTERNO
 															  INNER JOIN mandamientos.catalogos.delitos catDel ON catDel.cv_delito = d.ID_DELITO 
-															WHERE d.ID_MANDAMIENTO_INTERNO = $ID_MANDAMIENTO_INTERNO ";
+															WHERE d.ID_MANDAMIENTO_INTERNO = $ID_MANDAMIENTO_INTERNO AND catDel.fuero = 1  ";
 
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
@@ -498,6 +498,56 @@ function get_data_agraviados_editar($conn, $ID_DATOS_AGRAVIADO_INTERNO){
 		$arreglo[$indice][7]=$row['MATERNO'];
 		$arreglo[$indice][8]=$row['ES_PRINCIPAL'];
 		$arreglo[$indice][9]=$row['ES_PRINCIPAL_TEXT'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
+
+function getData_delitos_editar($conn, $ID_DELITOS_INTERNO){
+	$query = " SELECT d.ID_DELITOS_INTERNO
+	                 ,d.ID_MANDAMIENTO_INTERNO
+												      ,d.ID_INCULPADO_INTERNO
+												      ,i.NOMBRE+' '+i.APATERNO+' '+i.AMATERNO AS nombre
+												      ,d.ID_DELITOS
+												      ,d.ID_MANDAMIENTO
+												      ,d.ID_DATOS_INCULPADO
+												      ,d.ID_DELITO
+													  			,catDel.descrip_delito
+												      ,d.ID_MODALIDAD
+												      ,CASE
+														     WHEN d.ID_MODALIDAD = 9999 THEN 'SIN INFORMACION'
+														    END as MODALIDAD_TEXT
+												      ,d.ES_PRINCIPAL
+																  ,CASE  
+																   WHEN d.ES_PRINCIPAL = 1 THEN 'SI'
+																   WHEN d.ES_PRINCIPAL = 0 THEN 'NO'
+																   END as ES_PRINCIPAL_TEXT
+															   ,d.ID_COLABORACION
+															   ,d.DELITO_COL
+															  FROM mandamientos.dbo.E_DELITOS d
+															  INNER JOIN mandamientos.dbo.B_DATOS_INCULPADO i ON i.ID_INCULPADO_INTERNO = d.ID_INCULPADO_INTERNO
+															  INNER JOIN mandamientos.catalogos.delitos catDel ON catDel.cv_delito = d.ID_DELITO 
+															WHERE d.ID_DELITOS_INTERNO = $ID_DELITOS_INTERNO ";
+
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][1]=$row['ID_DELITOS_INTERNO'];
+		$arreglo[$indice][2]=$row['ID_MANDAMIENTO_INTERNO'];
+		$arreglo[$indice][3]=$row['ID_INCULPADO_INTERNO'];
+		$arreglo[$indice][4]=$row['nombre'];
+		$arreglo[$indice][5]=$row['ID_DELITOS'];
+		$arreglo[$indice][6]=$row['ID_MANDAMIENTO'];
+		$arreglo[$indice][7]=$row['ID_DATOS_INCULPADO'];
+		$arreglo[$indice][8]=$row['ID_DELITO'];
+		$arreglo[$indice][9]=$row['descrip_delito'];
+		$arreglo[$indice][10]=$row['ID_MODALIDAD'];
+		$arreglo[$indice][11]=$row['MODALIDAD_TEXT'];
+		$arreglo[$indice][12]=$row['ES_PRINCIPAL'];
+		$arreglo[$indice][13]=$row['ES_PRINCIPAL_TEXT'];
+		$arreglo[$indice][14]=$row['ID_COLABORACION'];
+		$arreglo[$indice][15]=$row['DELITO_COL'];
 		$indice++;
 	}
 	if(isset($arreglo)){return $arreglo;}
