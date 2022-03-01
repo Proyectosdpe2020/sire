@@ -577,7 +577,7 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 													<th><center><?echo $getData_Delitos[$h][9]; ?></center></th>
 													<th><center><?echo $getData_Delitos[$h][11]; ?></center></th>
 													<th><center><?echo $getData_Delitos[$h][13]; ?></center></th>
-													<th><center><center><img src="img/editarMandamiento2.png" data-toggle="modal" href="#mandamientos"  onclick="showEditar_mandamiento_inculpado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Delitos[$h][2]; ?>);"><img src="img/eliminar.png"  onclick="elimiar_delito(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Delitos[$h][1]; ?> , <?echo $getData_Delitos[$h][2]; ?>);"></center></th>
+													<th><center><center><img src="img/editarMandamiento2.png" data-toggle="modal" href="#mandamientos"  onclick="editar_delito(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Delitos[$h][1]; ?> , <?echo $getData_Delitos[$h][2]; ?>);"><img src="img/eliminar.png"  onclick="elimiar_delito(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Delitos[$h][1]; ?> , <?echo $getData_Delitos[$h][2]; ?>);"></center></th>
 													</tr>
 													<? } ?>
 												</tbody>

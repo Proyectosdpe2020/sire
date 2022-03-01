@@ -1235,3 +1235,91 @@ function closeModal_mandamientos(idEnlace, idfisca, idUnidad){
  });
 
 }
+
+//MUESTRA MODAL DELITOS PARA EDITAR
+function editar_delito(tipoModal, idEnlace, idUnidad, idfisca, ID_DELITOS_INTERNO, ID_MANDAMIENTO_INTERNO){
+	cont = document.getElementById('contModalMandamientos_delitos');
+	ajax=objetoAjax();
+	ajax.open("POST", "format/mandamientosJudiciales/modalDelitos.php");
+
+	ajax.onreadystatechange = function(){
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			cont.innerHTML = ajax.responseText;
+			$('#mandamientos').modal('hide');
+			$('#delitos').modal('show'); 
+		}
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send("&tipoModal="+tipoModal+"&idEnlace="+idEnlace+"&idUnidad="+idUnidad+"&idfisca="+idfisca+"&ID_DELITOS_INTERNO="+ID_DELITOS_INTERNO+"&ID_MANDAMIENTO_INTERNO="+ID_MANDAMIENTO_INTERNO);
+}
+
+//FUNCION PARA ACTUALIZAR DELITOS
+function actualizar_delito(tipoModal, idEnlace, idUnidad, idfisca, ID_MANDAMIENTO_INTERNO, ID_DELITOS_INTERNO){
+ var dataValidate_delito = validateDataDelito_actualizar(); //Validamos que la información del delito se halla llenado
+ if(dataValidate_delito[0] == 'true'){
+ 	var contentArrayData_Delito = JSON.parse(dataValidate_delito[1]); //Obtenemos la informacion del arreglo del delito
+		var dataDelitoArray = {};
+		for(j in contentArrayData_Delito){  dataDelitoArray[j] = contentArrayData_Delito[j];   }
+		dataDelitoArray = JSON.stringify(dataDelitoArray);
+		console.log("INFORMACION DEL DELITO: "+ dataDelitoArray);
+ 	$.ajax({
+ 		type: "POST",
+ 		dataType: 'html',
+ 		url: "format/mandamientosJudiciales/inserts/actualizar_delito.php",
+			data: "&dataDelitoArray="+dataDelitoArray+"&tipoModal="+tipoModal+"&idEnlace="+idEnlace+"&idUnidad="+idUnidad+"&idfisca="+idfisca+"&ID_MANDAMIENTO_INTERNO="+ID_MANDAMIENTO_INTERNO+"&ID_DELITOS_INTERNO="+ID_DELITOS_INTERNO,
+			success: function(resp){
+				var json = resp;
+				var obj = eval("(" + json + ")");
+				console.log(obj);
+				if (obj.first == "NO") { 
+					//alert("No se pudo actualizar, verifique los datos.");
+					swal("", "No se pudo actualizar, verifique los datos.", "warning"); 
+				}else{
+					if (obj.first == "SI") {
+						var obj = eval("(" + json + ")");
+						//alert("Agregado exitosmente");
+						swal("", "Datos del delito actualizados", "success");
+						reload_modalMandamientos_registro(1, idEnlace, obj.ID_MANDAMIENTO_INTERNO, 0, 0, idfisca, idUnidad);
+					}
+				}
+			}
+		});
+	}else{
+		swal("", "Faltan datos del delito por ingresar, verifique los campos en rojo", "warning");
+	}	
+}
+
+function validateDataDelito_actualizar(){
+	var ID_DELITO_actualizar = document.getElementById('ID_DELITO_actualizar').value;
+	var ID_MODALIDAD_actualizar = document.getElementById('ID_MODALIDAD_actualizar').value;
+	var ES_PRINCIPAL_actualizar = $('input[name="ES_PRINCIPAL_actualizar"]:checked').val();
+
+	//Arreglo de campos para validar con color rojo, si se agrega un nuevo campo, agregar en el arreglo para incluir en la validacion de color
+ var arrayCamposValida = [ "ID_DELITO_actualizar" , "ID_MODALIDAD_actualizar" , "ES_PRINCIPAL_actualizar" ];
+ //Arreglo de variables de informacion, donde se verifica si hay informacion en dicha variable
+ var arrayCamposData = [ ID_DELITO_actualizar , ID_MODALIDAD_actualizar , ES_PRINCIPAL_actualizar ];
+ //Bucle del tamaño de los campos, se verifica si la variable tiene información, si esta no tiene coloreamos el input de color rojo
+ for(x = 0; x < arrayCamposValida.length; x++){
+ 	if($.trim(arrayCamposData[x]) == ""){
+ 		cont = document.getElementById(arrayCamposValida[x]); 
+ 		cont.style.border = "1px solid red";
+ 	}
+ }
+
+	if( ID_DELITO_actualizar != "" && ID_MODALIDAD_actualizar != "" && ES_PRINCIPAL_actualizar != ""  ){
+
+		var dataDelitos = Array();
+  dataDelitos[1] = ID_DELITO_actualizar;
+  dataDelitos[2] = ID_MODALIDAD_actualizar;
+  dataDelitos[3] = ES_PRINCIPAL_actualizar;
+
+  var dataDelitosArray = {};  
+  for(i in dataDelitos){
+  	dataDelitosArray[i] = dataDelitos[i];
+  }
+  dataDelitosArray = JSON.stringify(dataDelitosArray);
+		return ['true' , dataDelitosArray];
+	}else{
+		return ['false', 0];
+	}
+}
