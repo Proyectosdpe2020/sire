@@ -66,7 +66,7 @@ $data_inputado = json_decode($_POST['dataAgraviadoArray'], true);
  }
 
 
-if($ID_MANDAMIENTO_INTERNO == 0 && $tipoActualizacion == "NO_EXISTE_DATA_AGRAVIADO"){
+if($ID_MANDAMIENTO_INTERNO == 0){
  $queryTransaction = "
   BEGIN
    BEGIN TRY 
@@ -106,7 +106,7 @@ if($ID_MANDAMIENTO_INTERNO == 0 && $tipoActualizacion == "NO_EXISTE_DATA_AGRAVIA
   echo json_encode(array('first'=>$arreglo[0]));
  }
 
-}elseif($ID_MANDAMIENTO_INTERNO != 0 && $tipoActualizacion == "NO_EXISTE_DATA_AGRAVIADO"){
+}elseif($ID_MANDAMIENTO_INTERNO != 0 && $tipoActualizacion == 0){
  $queryTransaction = "
   BEGIN
    BEGIN TRY 

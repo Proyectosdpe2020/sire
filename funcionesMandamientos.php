@@ -437,8 +437,23 @@ function get_data_delitos($conn, $ID_MANDAMIENTO_INTERNO){
 	if(isset($arreglo)){return $arreglo;}
 }
 
-function get_data_agraviados($conn, $ID_MANDAMIENTO_INTERNO){
-	$query = " SELECT ID_DATOS_AGRAVIADO_INTERNO
+function get_data_agraviados($conn, $ID_MANDAMIENTO_INTERNO, $ID_DATOS_AGRAVIADO_INTERNO){
+	if($ID_DATOS_AGRAVIADO_INTERNO != 0){
+$query = " SELECT ID_DATOS_AGRAVIADO_INTERNO
+												      ,ID_MANDAMIENTO_INTERNO
+												      ,ID_DATOS_AGRAVIADO
+												      ,ID_MANDAMIENTO
+												      ,NOMBRE
+												      ,PATERNO
+												      ,MATERNO
+												      ,ES_PRINCIPAL
+												      ,CASE  
+																   WHEN ES_PRINCIPAL = 1 THEN 'SI'
+																   WHEN ES_PRINCIPAL = 0 THEN 'NO'
+																   END as ES_PRINCIPAL_TEXT
+												  FROM mandamientos.dbo.L_DATOS_AGRAVIADO WHERE ID_DATOS_AGRAVIADO_INTERNO = $ID_DATOS_AGRAVIADO_INTERNO ";
+	}else{
+		$query = " SELECT ID_DATOS_AGRAVIADO_INTERNO
 												      ,ID_MANDAMIENTO_INTERNO
 												      ,ID_DATOS_AGRAVIADO
 												      ,ID_MANDAMIENTO
@@ -451,6 +466,8 @@ function get_data_agraviados($conn, $ID_MANDAMIENTO_INTERNO){
 																   WHEN ES_PRINCIPAL = 0 THEN 'NO'
 																   END as ES_PRINCIPAL_TEXT
 												  FROM mandamientos.dbo.L_DATOS_AGRAVIADO WHERE ID_MANDAMIENTO_INTERNO = $ID_MANDAMIENTO_INTERNO ";
+	}
+	
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
 
