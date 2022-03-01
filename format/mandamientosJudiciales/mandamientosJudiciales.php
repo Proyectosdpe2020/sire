@@ -256,6 +256,18 @@ $mesNom = Mes_Nombre($currentmonth);
 	</div>
 	<!-- MODAL CARGANDO INFORMACION SIGI -->
 
+	<!-- MODAL EDITAR DELITOS  -->
+	<div class="modal fade bs-example-modal-sm" id="delitos" role="dialog" data-backdrop="static" data-keyboard="false" style="overflow-y: scroll;">
+		<div id="modalVistaCss" class="modal-dialog modal-sm" style = "width: 50%; margin-top: 0.5%;">
+			<div class="modal-content" style="">
+				<div id="contModalMandamientos_delitos">
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- MODAL EDITAR DELITOS  -->
+
 	
 
 </html>
