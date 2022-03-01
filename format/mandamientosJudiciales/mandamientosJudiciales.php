@@ -123,7 +123,7 @@ $mesNom = Mes_Nombre($currentmonth);
 						<th class="textCent10">Estado</th>
 						<th class="">Tipo Mandamiento</th>
 						<th class="">Proceso</th>
-						<!--<th class="">Nombre del inculpado</th>-->
+						<<th class="">Nombre del inculpado</th>
 						<th class="">Fiscalía</th>
 						<th class="">Municipio</th>
 						<th class="">Acciones</th>
@@ -132,13 +132,14 @@ $mesNom = Mes_Nombre($currentmonth);
 				<tbody id="contentConsulta">
 					<?$data = get_data_mandamientos_dia($conn, $idEnlace);
 					for ($h=0; $h < sizeof($data) ; $h++) { 
+							$inculpado = get_data_inculpado($conn, $data[$h][1]);
 					 ?>
 						<tr>
 							<td><? echo $h+1; ?></td>
 							<td><? echo $data[$h][3]; ?></td>
 							<td><? echo $data[$h][4]; ?></td>
 							<td><? echo $data[$h][5]; ?></td>
-						<!--	<td>sin dato</td>-->
+						 <td><? echo $inculpado[0][5].' '.$inculpado[0][6].' '.$inculpado[0][7]; ?></td>
 							<td><? echo $data[$h][6]; ?></td>
 							<td><? echo $data[$h][7]; ?></td>
 							<td><center><img src="img/editarMandamiento2.png" data-toggle="modal" href="#mandamientos"  onclick="modalMandamientos_registro(0, <? echo $idEnlace; ?>,<? echo $data[$h][1]; ?>,<? echo $tiparchiv; ?>, 1, <?echo $idfisca; ?>, <?echo $idUnidad; ?>);"><!--<img src="img/resumenMandamiento.png"></center>-->

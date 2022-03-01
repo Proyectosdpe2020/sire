@@ -597,7 +597,7 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 			<hr>
 			<div class="row">
 				<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
-			 <? $existen_agraviados = get_data_agraviados($conn, $ID_MANDAMIENTO_INTERNO); ?>
+			 <? $existen_agraviados = get_data_agraviados($conn, $ID_MANDAMIENTO_INTERNO, 0); ?>
 					<div class="checkbox" >
 			    <h4><label data-toggle="collapse" data-target="#collapseDataAgraviados" ><input type="checkbox" <?if($a == 1 && sizeof($existen_agraviados) > 0  ){ ?> checked <? } ?>  ><a>Existen los datos del agraviado (s)</a></label></h4>
 			  </div>
@@ -614,7 +614,7 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 								<div class="panel-body">
 									<div class="row">
 										<div class="col-xs-12 col-sm-12  col-md-3">
-											<button type="button" href="#agraviados" class="btn btn-primary btn-lg" style="width: 100%;" onclick="showModal_agraviados(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?>)"><span class="glyphicon glyphicon-plus"></span> Agregar agraviado</button>
+											<button type="button" href="#agraviados" class="btn btn-primary btn-lg" style="width: 100%;" onclick="showModal_agraviados(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , 0 , 0)"><span class="glyphicon glyphicon-plus"></span> Agregar agraviado</button>
 										</div>
 									</div><br>
 									<div class="row">
@@ -631,7 +631,7 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 														<th>Acciones</th>
 													</tr>
 												</thead>
-													<? $getData_Agraviados = get_data_agraviados($conn, $ID_MANDAMIENTO_INTERNO); 
+													<? $getData_Agraviados = get_data_agraviados($conn, $ID_MANDAMIENTO_INTERNO, 0); 
 						       if(sizeof($getData_Agraviados) > 0 ) { ?>
 												<tbody>
 												<?for ($h=0; $h < sizeof($getData_Agraviados) ; $h++) { ?>
@@ -641,7 +641,7 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 													<th><center><?echo $getData_Agraviados[$h][6]; ?></center></th>
 													<th><center><?echo $getData_Agraviados[$h][7]; ?></center></th>
 													<th><center><?echo $getData_Agraviados[$h][9]; ?></center></th>
-													<td><center><!--<img src="img/editarMandamiento2.png" data-toggle="modal" href="#mandamientos"  onclick="showEditar_mandamiento_agraviado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Agraviados[$h][1]; ?>);">--><img src="img/eliminar.png"  onclick="elimiar_agraviado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Agraviados[$h][1]; ?> , <?echo $getData_Agraviados[$h][2]; ?>);"></center></td>
+													<td><center><img src="img/editarMandamiento2.png" data-toggle="modal" href="#mandamientos"  onclick="showEditar_mandamiento_agraviado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Agraviados[$h][1]; ?> , <? echo $ID_MANDAMIENTO_INTERNO; ?> , 1);"><img src="img/eliminar.png"  onclick="elimiar_agraviado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Agraviados[$h][1]; ?> , <?echo $getData_Agraviados[$h][2]; ?>);"></center></td>
 													</tr>
 													<? } ?>
 												</tbody>

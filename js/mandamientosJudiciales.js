@@ -46,7 +46,7 @@ function showModal_inculpados(tipoModal, idEnlace, idUnidad, idfisca, ID_MANDAMI
 	 }
 }
 //MUESTRA MODAL REGISTRO DEAGRAVIADO
-function showModal_agraviados(tipoModal, idEnlace, idUnidad, idfisca, ID_MANDAMIENTO_INTERNO){
+function showModal_agraviados(tipoModal, idEnlace, idUnidad, idfisca, ID_MANDAMIENTO_INTERNO, ID_DATOS_AGRAVIADO_INTERNO, tipoActualizacion){
 	var dataValidate = validateDataMandamiento(); //Validamos que la información principal halla sido llenada previamente	 
 	if(dataValidate[0] == 'true'){
 		var contentArrayData = JSON.parse(dataValidate[1]); //Obtenemos la informacion del arreglo
@@ -70,7 +70,7 @@ function showModal_agraviados(tipoModal, idEnlace, idUnidad, idfisca, ID_MANDAMI
 			}
 		}
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-		ajax.send("&tipoModal="+tipoModal+"&idEnlace="+idEnlace+"&idUnidad="+idUnidad+"&idfisca="+idfisca+"&ID_MANDAMIENTO_INTERNO="+ID_MANDAMIENTO_INTERNO+"&dataPrincipalArray="+dataPrincipalArray);
+		ajax.send("&tipoModal="+tipoModal+"&idEnlace="+idEnlace+"&idUnidad="+idUnidad+"&idfisca="+idfisca+"&ID_MANDAMIENTO_INTERNO="+ID_MANDAMIENTO_INTERNO+"&ID_DATOS_AGRAVIADO_INTERNO="+ID_DATOS_AGRAVIADO_INTERNO+"&dataPrincipalArray="+dataPrincipalArray+"&tipoActualizacion="+tipoActualizacion);
 		}else{
 	 	swal("", "Faltan datos generales por ingresar antes de añadir un agraviado, verifique los campos en rojo.", "warning");
 	 }
@@ -703,7 +703,7 @@ function validateDataInputado(){
 	var APATERNO = document.getElementById('APATERNO').value;
 	var AMATERNO = document.getElementById('AMATERNO').value;
 	var ID_NACIONALIDAD = document.getElementById('ID_NACIONALIDAD').value;
-	var ID_SEXO = document.getElementById('ID_SEXO').value;
+	var ID_SEXO = $('input[name="ID_SEXO"]:checked').val();
 	var ID_USO_ANTEOJOS = $('input[name="ID_USO_ANTEOJOS"]:checked').val();
 	var TATUAJES = $('input[name="TATUAJES"]:checked').val();
 	var EDAD = document.getElementById('EDAD').value;
@@ -1022,7 +1022,7 @@ function guardar_mandamiento_agraviado(tipoModal, idEnlace, idUnidad, idfisca, I
 				for(j in contentArrayData_agraviado){  dataAgraviadoArray[j] = contentArrayData_agraviado[j];   }
 				dataAgraviadoArray = JSON.stringify(dataAgraviadoArray);
 				console.log("INFORMACION GENERAL DEL AGRAVIADO: "+ dataAgraviadoArray);
-				if(tipoActualizacion == "NO_EXISTE_DATA_AGRAVIADO"){
+				if(tipoActualizacion == 0){
 						/********INSERTAR*******/
 							$.ajax({
 						  	type: "POST",
@@ -1047,7 +1047,7 @@ function guardar_mandamiento_agraviado(tipoModal, idEnlace, idUnidad, idfisca, I
 						  	}
 						  });
 					/********INSERTAR*******/
-				}else if(tipoActualizacion == "EXISTE_DATA_AGRAVIADO"){
+				}else if(tipoActualizacion == 1){
 						/********ACTUALIZACION*******/
 							$.ajax({
 						  	type: "POST",
@@ -1087,9 +1087,9 @@ function validateDataAgraviado(){
 	var ES_PRINCIPAL_AGRAVIADO = $('input[name="ES_PRINCIPAL_AGRAVIADO"]:checked').val();
 
 	//Arreglo de campos para validar con color rojo, si se agrega un nuevo campo, agregar en el arreglo para incluir en la validacion de color
- var arrayCamposValida = [ "NOMBRE" , "PATERNO" , "MATERNO" , "ES_PRINCIPAL_AGRAVIADO" ];
+ var arrayCamposValida = [ "NOMBRE_AGRAVIADO" , "PATERNO" , "MATERNO" , "ES_PRINCIPAL_AGRAVIADO" ];
  //Arreglo de variables de informacion, donde se verifica si hay informacion en dicha variable
- var arrayCamposData = [ NOMBRE , PATERNO , MATERNO , ES_PRINCIPAL_AGRAVIADO ];
+ var arrayCamposData = [ NOMBRE_AGRAVIADO , PATERNO , MATERNO , ES_PRINCIPAL_AGRAVIADO ];
  //Bucle del tamaño de los campos, se verifica si la variable tiene información, si esta no tiene coloreamos el input de color rojo
  for(x = 0; x < arrayCamposValida.length; x++){
  	if($.trim(arrayCamposData[x]) == ""){
@@ -1117,7 +1117,7 @@ function validateDataAgraviado(){
 	}
 }
 
-function showEditar_mandamiento_agraviado(tipoModal, idEnlace, idUnidad, idfisca,  ID_DATOS_AGRAVIADO_INTERNO){
+function showEditar_mandamiento_agraviado(tipoModal, idEnlace, idUnidad, idfisca,  ID_DATOS_AGRAVIADO_INTERNO, ID_MANDAMIENTO_INTERNO, tipoActualizacion ){
 
 	cont = document.getElementById('contModalInculpados_registro');
 			ajax=objetoAjax();
@@ -1132,7 +1132,7 @@ function showEditar_mandamiento_agraviado(tipoModal, idEnlace, idUnidad, idfisca
 				}
 			}
 			ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-			ajax.send("&tipoModal="+tipoModal+"&idEnlace="+idEnlace+"&idUnidad="+idUnidad+"&idfisca="+idfisca+"&ID_DATOS_AGRAVIADO_INTERNO="+ID_DATOS_AGRAVIADO_INTERNO);
+			ajax.send("&tipoModal="+tipoModal+"&idEnlace="+idEnlace+"&idUnidad="+idUnidad+"&idfisca="+idfisca+"&ID_DATOS_AGRAVIADO_INTERNO="+ID_DATOS_AGRAVIADO_INTERNO+"&ID_MANDAMIENTO_INTERNO="+ID_MANDAMIENTO_INTERNO+"&tipoActualizacion="+tipoActualizacion);
 
 }
 
