@@ -410,7 +410,7 @@ function get_data_delitos($conn, $ID_MANDAMIENTO_INTERNO){
 															   ,d.DELITO_COL
 															  FROM mandamientos.dbo.E_DELITOS d
 															  INNER JOIN mandamientos.dbo.B_DATOS_INCULPADO i ON i.ID_INCULPADO_INTERNO = d.ID_INCULPADO_INTERNO
-															  INNER JOIN mandamientos.catalogos.delitos catDel ON catDel.cv_delito = d.ID_DELITO 
+															  INNER JOIN mandamientos.catalogos.delitos catDel ON catDel.id_delito = d.ID_DELITO 
 															WHERE d.ID_MANDAMIENTO_INTERNO = $ID_MANDAMIENTO_INTERNO AND catDel.fuero = 1  ";
 
 	$indice = 0;
@@ -543,10 +543,11 @@ function getData_delitos_editar($conn, $ID_DELITOS_INTERNO){
 															   ,d.DELITO_COL
 															  FROM mandamientos.dbo.E_DELITOS d
 															  INNER JOIN mandamientos.dbo.B_DATOS_INCULPADO i ON i.ID_INCULPADO_INTERNO = d.ID_INCULPADO_INTERNO
-															  INNER JOIN mandamientos.catalogos.delitos catDel ON catDel.cv_delito = d.ID_DELITO 
+															  INNER JOIN mandamientos.catalogos.delitos catDel ON catDel.id_delito = d.ID_DELITO 
 															WHERE d.ID_DELITOS_INTERNO = $ID_DELITOS_INTERNO ";
 
 	$indice = 0;
+	//echo $query;
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
 	{
@@ -569,6 +570,33 @@ function getData_delitos_editar($conn, $ID_DELITOS_INTERNO){
 	}
 	if(isset($arreglo)){return $arreglo;}
 }
+
+function get_data_Mandamiento($conn, $ID_MANDAMIENTO_INTERNO){
+	$query = " SELECT ID_MANDAMIENTO FROM mandamientos.dbo.A_MANDAMIENTOS where ID_MANDAMIENTO_INTERNO = $ID_MANDAMIENTO_INTERNO";
+
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][1]=$row['ID_MANDAMIENTO'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
+
+function get_data_Inculpado_id($conn, $ID_MANDAMIENTO_INTERNO){
+	$query = " SELECT ID_DATOS_INCULPADO FROM mandamientos.dbo.B_DATOS_INCULPADO where ID_MANDAMIENTO_INTERNO = $ID_MANDAMIENTO_INTERNO";
+
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][1]=$row['ID_DATOS_INCULPADO'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
+
 
 
 

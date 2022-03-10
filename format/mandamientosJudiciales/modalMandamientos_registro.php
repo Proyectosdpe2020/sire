@@ -23,7 +23,22 @@ $rolUser = $getRolUser[0][0];*/
 if($typeCheck == 0){ $b = 0; }else{ if($typeCheck == 1){ $b = 1; } }
 
 if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
+
 	$ID_MANDAMIENTO_INTERNO = $_POST["ID_MANDAMIENTO_INTERNO"]; 
+
+
+/********CONSULTAS PARA TRAER LOS ID DE LAS INSERSIONES EN LA BASE DE SIMAJ*******/
+$get_data_Mandamiento = get_data_Mandamiento($conn, $ID_MANDAMIENTO_INTERNO);
+if(sizeof($get_data_Mandamiento) > 0 ){
+	$GET_ID_MANDAMIENTO_INTERNO  = $get_data_Mandamiento[0][1];
+}else{ $GET_ID_MANDAMIENTO_INTERNO = 0; }
+
+$get_data_inculpado = get_data_Inculpado_id($conn, $ID_MANDAMIENTO_INTERNO);
+if(sizeof($get_data_inculpado) > 0 ){
+	$GET_ID_DATOS_INCULPADO  = $get_data_inculpado[0][1];
+}else{$GET_ID_DATOS_INCULPADO  = 0;}
+	/********CONSULTAS PARA TRAER LOS ID DE LAS INSERSIONES EN LA BASE DE SIMAJ*******/
+
 	if ($ID_MANDAMIENTO_INTERNO != 0) {
 		$mandamientoData = getData_Mandamiento($conn, $ID_MANDAMIENTO_INTERNO);
 		$ID_MANDAMIENTO_INTERNO = $mandamientoData[0][1];
@@ -417,7 +432,7 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 													<th><center><?echo $getData_inculpado[$h][16]; ?></center></th>
 													<th><center><?echo $getData_inculpado[$h][17]; ?></center></th>
 													<th><center><?echo $getData_inculpado[$h][18]->format('Y-m-d'); ?></center></th>
-													<td><center><center><img src="img/editarMandamiento2.png" data-toggle="modal" href="#mandamientos"  onclick="showEditar_mandamiento_inculpado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?>);"><img src="img/eliminar.png"  onclick="elimiar_inculpado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_inculpado[$h][1]; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?>);"></center></center></td>
+													<td><center><center><img src="img/editarMandamiento2.png" data-toggle="modal" href="#mandamientos"  onclick="showEditar_mandamiento_inculpado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?>);"></center></td>
 													</tr>
 													<? } ?>
 												</tbody>
@@ -498,7 +513,7 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 				<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
 					<? $existen_delitos = get_data_delitos($conn, $ID_MANDAMIENTO_INTERNO); ?>
 					<div class="checkbox" >
-			    <h4><label data-toggle="collapse" data-target="#collapseDataDelitos" ><input type="checkbox" <?if($a == 1 && sizeof($existen_delitos) > 0  ){ ?> checked <? } ?>  ><a>Existen delitos </a></label></h4>
+			    <h4><label data-toggle="collapse" data-target="#collapseDataDelitos" ><input type="checkbox" <?if($a == 1 && sizeof($existen_delitos) > 0  ){ ?> checked <? } ?>  ><a>Existen delitos <?echo sizeof($existen_delitos); ?></a></label></h4>
 			  </div>
 				</div>	
 			</div><br>
@@ -518,7 +533,7 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 													<option class="fontBold" value="">Seleccione un delito</option>
 														  <? $delitos = getCatDelitos($connSIMAJ);
 										 					for ($i=0; $i < sizeof($delitos); $i++) { 
-										 						$cv_delito = $delitos[$i][1];	$descrip_delito = $delitos[$i][2]; ?>
+										 						$cv_delito = $delitos[$i][0];	$descrip_delito = $delitos[$i][2]; ?>
 										 					<option class="fontBold" value="<? echo $cv_delito; ?>" ><? echo $descrip_delito; ?></option>
 										 					<? } ?>
 												</select>
@@ -545,13 +560,13 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 										</div>
 										<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
 											<label  for="ES_PRINCIPAL">Es principal</label><br>
-											 <input type="radio" id="ES_PRINCIPAL" name="ES_PRINCIPAL" value="1" checked style="height:25px; width:25px;">
+											 <input type="radio" id="ES_PRINCIPAL" name="ES_PRINCIPAL" value="1"  style="height:25px; width:25px;">
 						      <label for="ES_PRINCIPAL" style="font-size: 20px;">Si</label>&nbsp;&nbsp;&nbsp;&nbsp;
-						      <input type="radio" id="ES_PRINCIPAL" name="ES_PRINCIPAL" value="0" style="height:25px; width:25px;">
+						      <input type="radio" id="ES_PRINCIPAL" name="ES_PRINCIPAL" value="0" checked style="height:25px; width:25px;">
 						      <label for="ES_PRINCIPAL" style="font-size: 20px;">No</label>
 										</div>
 										<div class="col-xs-12 col-sm-12  col-md-3">
-											<button type="button" id="btn_Agregar_Delito" class="btn btn-primary btn-lg" style="width: 100%;" onclick="agregar_delito(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?>)"><span class="glyphicon glyphicon-plus"></span> Agregar delito</button>
+											<button type="button" id="btn_Agregar_Delito" class="btn btn-primary btn-lg" style="width: 100%;" onclick="agregar_delito(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , <? echo $GET_ID_MANDAMIENTO_INTERNO; ?>, <? echo $GET_ID_DATOS_INCULPADO; ?>)"><span class="glyphicon glyphicon-plus"></span> Agregar delito</button>
 										</div>
 									</div><br>
 									<div class="row">
@@ -577,7 +592,7 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 													<th><center><?echo $getData_Delitos[$h][9]; ?></center></th>
 													<th><center><?echo $getData_Delitos[$h][11]; ?></center></th>
 													<th><center><?echo $getData_Delitos[$h][13]; ?></center></th>
-													<th><center><center><img src="img/editarMandamiento2.png" data-toggle="modal" href="#mandamientos"  onclick="editar_delito(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Delitos[$h][1]; ?> , <?echo $getData_Delitos[$h][2]; ?>);"><img src="img/eliminar.png"  onclick="elimiar_delito(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Delitos[$h][1]; ?> , <?echo $getData_Delitos[$h][2]; ?>);"></center></th>
+													<th><center><center><img src="img/editarMandamiento2.png" data-toggle="modal" href="#mandamientos"  onclick="editar_delito(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Delitos[$h][1]; ?> , <?echo $getData_Delitos[$h][2]; ?>);"><img src="img/eliminar.png"  onclick="elimiar_delito(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Delitos[$h][1]; ?> , <?echo $getData_Delitos[$h][2]; ?> , <?echo sizeof($existen_delitos); ?>);"></center></th>
 													</tr>
 													<? } ?>
 												</tbody>
@@ -641,7 +656,7 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 													<th><center><?echo $getData_Agraviados[$h][6]; ?></center></th>
 													<th><center><?echo $getData_Agraviados[$h][7]; ?></center></th>
 													<th><center><?echo $getData_Agraviados[$h][9]; ?></center></th>
-													<td><center><img src="img/editarMandamiento2.png" data-toggle="modal" href="#mandamientos"  onclick="showEditar_mandamiento_agraviado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Agraviados[$h][1]; ?> , <? echo $ID_MANDAMIENTO_INTERNO; ?> , 1);"><img src="img/eliminar.png"  onclick="elimiar_agraviado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Agraviados[$h][1]; ?> , <?echo $getData_Agraviados[$h][2]; ?>);"></center></td>
+													<td><center><img src="img/editarMandamiento2.png" data-toggle="modal" href="#mandamientos"  onclick="showEditar_mandamiento_agraviado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Agraviados[$h][1]; ?> , <? echo $ID_MANDAMIENTO_INTERNO; ?> , 1);"><img src="img/eliminar.png"  onclick="elimiar_agraviado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Agraviados[$h][1]; ?> , <?echo $getData_Agraviados[$h][2]; ?>, , <?echo sizeof($existe_inculpado);  ?>);"></center></td>
 													</tr>
 													<? } ?>
 												</tbody>
@@ -707,7 +722,7 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 <div class="modal-footer">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12  col-md-6 col-md-offset-3">
-			<button type="button" class="btn btn-primary btn-lg" style="width: 100%;" onclick="guardar_mandamiento(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?>)"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar información</button>
+			<button type="button" class="btn btn-primary btn-lg" style="width: 100%;" onclick="guardar_mandamiento(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , <?echo sizeof($existe_inculpado);  ?>)"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar información</button>
 		</div>
 		<div class="col-xs-12 col-sm-12  col-md-3">
 			<button type="button" class="btn btn-default btn-lg" data-dismiss="modal" onclick="closeModal_mandamientos(<? echo $idEnlace; ?>,<?echo $idfisca; ?>, <?echo $idUnidad; ?>)" >Cerrar</button>
