@@ -277,7 +277,16 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 								<li style="background-color: #C8C8C8;  border: solid 2px #C8C8C8;"><a style="color:#152F4A !important;" onclick="loadBiEstadisticsLiti(<? echo $idEnlace; ?>)" href="#">BI Estadistícas de Evaluación de Desempeño</a></li>
 							<?
 							}
+         //CARGAR BI POLICIA
+								if ($tipoUser == 1 and $format == 12) {
 							?>
+								<li style="background-color: #C8C8C8;  border: solid 2px #C8C8C8;"><a style="color:#152F4A !important;" onclick="loadBiEstadisticsPolicia(<? echo $idEnlace; ?>)" href="#">BI Estadistícas de Evaluación de Desempeño</a></li>
+							<?
+							}
+
+							?>
+
+
 
 
 
