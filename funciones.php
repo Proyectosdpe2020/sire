@@ -349,14 +349,14 @@ $indice = 0;
 }
 	
 
-function getEnlacesLitiArchivs($conn, $idEnlace){
+function getEnlacesLitiArchivs($conn, $idEnlace, $idFormato){
 
 	$query = "   SELECT [idEnlaceFormato]
       ,[idEnlace]
       ,[idFormtato]
       ,[idEnlaceLiti]
       ,[idEnlaceLiti2]
-  FROM [ESTADISTICAV2].[dbo].[enlaceFormato] WHERE idEnlace = $idEnlace ";
+  FROM [ESTADISTICAV2].[dbo].[enlaceFormato] WHERE idEnlace = $idEnlace AND idFormtato = $idFormato ";
 
 $indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
@@ -856,8 +856,6 @@ $indice = 0;
 function getCapturadoMesAnioMPLitig($conn, $mesCapturar, $anioCaptura, $idMp, $idFiscalia, $idUnidad){
 
 	$query = " SELECT idLitigacion FROM Litigacion WHERE idMes = $mesCapturar AND idAnio = $anioCaptura AND idMp = $idMp AND idFiscalia = $idFiscalia AND idUnidad = $idUnidad";
-
-	//echo $query;
 
 
 $stmt = sqlsrv_query(  $conn, $query,array(), array("Scrollable" => SQLSRV_CURSOR_STATIC));
@@ -2178,7 +2176,6 @@ function getMpsEnlaceUnidadFormato($conn, $idEnlace, $idFormato){
 
 FROM mp INNER JOIN mpUnidad mpu ON mpu.idMp = mp.idMp INNER JOIN CatUnidad cu ON cu.idUnidad = mpu.idUnidad WHERE mpu.idEnlace = $idEnlace AND mp.estatus = 'VI' AND idFormato = $idFormato  ORDER BY cu.nUnidad ASC";
 
-//echo $query;
 	$indice = 0;
 
 	$stmt = sqlsrv_query($conn, $query);

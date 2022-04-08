@@ -304,7 +304,27 @@ function getData_Mandamiento($conn, $ID_MANDAMIENTO_INTERNO){
 }
 
 function get_data_mandamientos_dia($conn, $idEnlace){
-	$query = " SELECT m.ID_MANDAMIENTO_INTERNO
+	if($idEnlace == 500){
+		$query = " SELECT m.ID_MANDAMIENTO_INTERNO
+												      ,m.ID_MANDAMIENTO
+													  			,m.EDO_ORDEN
+													  			,cat_Estatus.tipo as estado
+												      ,m.ID_TIPO_MANDATO
+													  			,cat_Mandato.tipo as tipo
+												      ,m.NO_PROCESO
+												      ,m.FISCALIA
+													 			 ,cat_fisca.nom_fis as nombreFiscalia
+												      ,m.ID_MUNICIPIO
+													 			 ,cat_muni.municipio 
+												  FROM mandamientos.dbo.A_MANDAMIENTOS m
+												  INNER JOIN mandamientos.catalogos.estado_actual_mandamiento cat_Estatus ON cat_Estatus.cv_est_act_man = m.EDO_ORDEN
+												  INNER JOIN mandamientos.catalogos.tipo_mandato cat_Mandato ON cat_Mandato.cv_mandato = m.ID_TIPO_MANDATO
+												  INNER JOIN mandamientos.catalogos_int.fiscalias cat_fisca ON cat_fisca.id = m.FISCALIA
+												  INNER JOIN mandamientos.catalogos.municipios cat_muni ON cat_muni.cv_municipio = m.ID_MUNICIPIO 
+												   WHERE NOT idEnlace = 347
+												  ORDER BY  m.ID_MANDAMIENTO_INTERNO DESC ";
+	}else{
+		$query = " SELECT m.ID_MANDAMIENTO_INTERNO
 												      ,m.ID_MANDAMIENTO
 													  			,m.EDO_ORDEN
 													  			,cat_Estatus.tipo as estado
@@ -322,6 +342,7 @@ function get_data_mandamientos_dia($conn, $idEnlace){
 												  INNER JOIN mandamientos.catalogos.municipios cat_muni ON cat_muni.cv_municipio = m.ID_MUNICIPIO 
 												  WHERE idEnlace = $idEnlace
 												  ORDER BY  m.ID_MANDAMIENTO_INTERNO DESC ";
+	}
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))

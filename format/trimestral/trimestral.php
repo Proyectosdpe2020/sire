@@ -214,7 +214,7 @@
 								  							$arrQue7 = array(18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33); $validaQuest7 = validaQuest($conn, $arrQue7, $per, $anioGlobal, $idUnidad);
 								  							$arrQue8 = array(34,35,36,37,38,39,40,41,42,43,44,45,46,47); $validaQuest8 = validaQuest($conn, $arrQue8, $per, $anioGlobal, $idUnidad);
 								  							$arrQue9 = array(48,49,50,51); $validaQuest9 = validaQuest($conn, $arrQue9, $per, $anioGlobal, $idUnidad);
-								  							$arrQue10 = array(52,53,54,55); $validaQuest10 = validaQuest($conn, $arrQue10, $per, $anioGlobal, $idUnidad);
+								  							$arrQue10 = array(52,53,54,55); $validaQuest10 = validaQuest($conn, $arrQue10, $per, $anioGlobal, $idUnidad); 
 
 								  					 ?>
 								    				<table class="tablecircles">

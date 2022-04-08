@@ -81,6 +81,11 @@
 						<tr>
 							<th scope="col">No.</th>
 							<th scope="col">Estatus de las Vinculaciones a Proceso derivadas de las CII en <?php echo "$anio";?></th>
+							<th scope="col">2017</th>
+							<th scope="col">2018</th>
+							<th scope="col">2019</th>
+							<th scope="col">2020</th>
+							<th scope="col">2021</th>
 							<th scope="col"><? echo $m1; ?></th>
 							<th scope="col"><? echo $m2; ?></th>
 							<th scope="col"><? echo $m3; ?></th>
@@ -88,9 +93,32 @@
 						</tr>
 					</thead>
 					<tbody>
+					<? 
+						
+						$dataQuestAn34 = getDataAnteriores($conn, 34, $idEnlace, $idUnidad, $anio, $per);
+						$dataQuestAn35 = getDataAnteriores($conn, 35, $idEnlace, $idUnidad, $anio, $per);
+						$dataQuestAn36 = getDataAnteriores($conn, 36, $idEnlace, $idUnidad, $anio, $per);
+						$dataQuestAn37 = getDataAnteriores($conn, 37, $idEnlace, $idUnidad, $anio, $per);
+						$dataQuestAn38 = getDataAnteriores($conn, 38, $idEnlace, $idUnidad, $anio, $per);
+						$dataQuestAn39 = getDataAnteriores($conn, 39, $idEnlace, $idUnidad, $anio, $per);
+						$dataQuestAn40 = getDataAnteriores($conn, 40, $idEnlace, $idUnidad, $anio, $per);
+						$dataQuestAn41 = getDataAnteriores($conn, 41, $idEnlace, $idUnidad, $anio, $per);
+						$dataQuestAn42 = getDataAnteriores($conn, 42, $idEnlace, $idUnidad, $anio, $per);
+						$dataQuestAn43 = getDataAnteriores($conn, 43, $idEnlace, $idUnidad, $anio, $per);
+						$dataQuestAn44 = getDataAnteriores($conn, 44, $idEnlace, $idUnidad, $anio, $per);
+						$dataQuestAn45 = getDataAnteriores($conn, 45, $idEnlace, $idUnidad, $anio, $per);
+						$dataQuestAn46 = getDataAnteriores($conn, 46, $idEnlace, $idUnidad, $anio, $per);
+						$dataQuestAn47 = getDataAnteriores($conn, 47, $idEnlace, $idUnidad, $anio, $per);
+						
+						?>
 						<tr>
 							<th scope="row">8.1</th>
 							<td style="text-align: left;">En tramite ante el Juez de Control (sin incluir los que se encuentran en trámite por suspensión condicional, por acuerdos reparatorios o por procedimiento abreviado)</td>
+							<td><input type="number" value="<? echo $dataQuestAn34[0][0]; ?>" id="1val2017"></td>
+							<td><input type="number" value="<? echo $dataQuestAn34[0][1]; ?>" id="1val2018"></td>
+							<td><input type="number" value="<? echo $dataQuestAn34[0][2]; ?>" id="1val2019"></td>
+							<td><input type="number" value="<? echo $dataQuestAn34[0][3]; ?>" id="1val2020"></td>
+							<td><input type="number" value="<? echo $dataQuestAn34[0][4]; ?>" id="1val2021"></td>
 							<td><input type="number" value="<? echo $data[0][0]; ?>" id="p34m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data[0][1]; ?>" id="p34m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data[0][2]; ?>" id="p34m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
@@ -99,6 +127,11 @@
 						<tr>
 							<th scope="row">8.2</th>
 							<td style="text-align: left;">Determinado por criterio de oportunidad</td>
+							<td><input type="number" value="<? echo $dataQuestAn35[0][0]; ?>" id="2val2017"></td>
+							<td><input type="number" value="<? echo $dataQuestAn35[0][1]; ?>" id="2val2018"></td>
+							<td><input type="number" value="<? echo $dataQuestAn35[0][2]; ?>" id="2val2019"></td>
+							<td><input type="number" value="<? echo $dataQuestAn35[0][3]; ?>" id="2val2020"></td>
+							<td><input type="number" value="<? echo $dataQuestAn35[0][4]; ?>" id="2val2021"></td>
 							<?
 									$tota = 0; $tota1 = 0;
 
@@ -173,6 +206,11 @@
 						<tr>
 							<th scope="row">8.3</th>
 							<td style="text-align: left;">En trámite por suspensión condicional del proceso aprobada por el Juez de Control (en proceso de cumplimiento)</td>
+							<td><input type="number" value="<? echo $dataQuestAn36[0][0]; ?>" id="3val2017"></td>
+							<td><input type="number" value="<? echo $dataQuestAn36[0][1]; ?>" id="3val2018"></td>
+							<td><input type="number" value="<? echo $dataQuestAn36[0][2]; ?>" id="3val2019"></td>
+							<td><input type="number" value="<? echo $dataQuestAn36[0][3]; ?>" id="3val2020"></td>
+							<td><input type="number" value="<? echo $dataQuestAn36[0][4]; ?>" id="3val2021"></td>
 							<td><input type="number" value="<? echo $data3[0][0]; ?>" id="p36m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data3[0][1]; ?>" id="p36m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data3[0][2]; ?>" id="p36m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
@@ -180,7 +218,14 @@
 						</tr>
 						<tr>
 							<th scope="row">8.4</th>
+							
 							<td style="text-align: left;">Cumplida la suspensión condicional del proceso</td>
+							<td><input type="number" value="<? echo $dataQuestAn37[0][0]; ?>" id="4val2017"></td>
+							<td><input type="number" value="<? echo $dataQuestAn37[0][1]; ?>" id="4val2018"></td>
+							<td><input type="number" value="<? echo $dataQuestAn37[0][2]; ?>" id="4val2019"></td>
+							<td><input type="number" value="<? echo $dataQuestAn37[0][3]; ?>" id="4val2020"></td>
+							<td><input type="number" value="<? echo $dataQuestAn37[0][4]; ?>" id="4val2021"></td>
+							
 							<?
 									$tota = 0; $tota1 = 0;
 
@@ -255,6 +300,11 @@
 						<tr>
 							<th scope="row">8.5</th>
 							<td style="text-align: left;">Resueltos por otras causas de sobreseimiento (sin incluir criterio de oportunidad ni los cumplidos por suspension condicional o por acuerdo reparatorio)</td>
+							<td><input type="number" value="<? echo $dataQuestAn38[0][0]; ?>" id="5val2017"></td>
+							<td><input type="number" value="<? echo $dataQuestAn38[0][1]; ?>" id="5val2018"></td>
+							<td><input type="number" value="<? echo $dataQuestAn38[0][2]; ?>" id="5val2019"></td>
+							<td><input type="number" value="<? echo $dataQuestAn38[0][3]; ?>" id="5val2020"></td>
+							<td><input type="number" value="<? echo $dataQuestAn38[0][4]; ?>" id="5val2021"></td>
 							<td><input type="number" value="<? echo $data5[0][0]; ?>" id="p38m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data5[0][1]; ?>" id="p38m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data5[0][2]; ?>" id="p38m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
@@ -263,6 +313,11 @@
 						<tr>
 							<th scope="row">8.6</th>
 							<td style="text-align: left;">En tramite de procedimiento abreviado</td>
+							<td><input type="number" value="<? echo $dataQuestAn39[0][0]; ?>" id="6val2017"></td>
+							<td><input type="number" value="<? echo $dataQuestAn39[0][1]; ?>" id="6val2018"></td>
+							<td><input type="number" value="<? echo $dataQuestAn39[0][2]; ?>" id="6val2019"></td>
+							<td><input type="number" value="<? echo $dataQuestAn39[0][3]; ?>" id="6val2020"></td>
+							<td><input type="number" value="<? echo $dataQuestAn39[0][4]; ?>" id="6val2021"></td>
 							<td><input type="number" value="<? echo $data6[0][0]; ?>" id="p39m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data6[0][1]; ?>" id="p39m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data6[0][2]; ?>" id="p39m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
@@ -271,6 +326,11 @@
 						<tr>
 							<th scope="row">8.7</th>
 							<td style="text-align: left;">Resueltos por procedimiento abreviado</td>
+							<td><input type="number" value="<? echo $dataQuestAn40[0][0]; ?>" id="7val2017"></td>
+							<td><input type="number" value="<? echo $dataQuestAn40[0][1]; ?>" id="7val2018"></td>
+							<td><input type="number" value="<? echo $dataQuestAn40[0][2]; ?>" id="7val2019"></td>
+							<td><input type="number" value="<? echo $dataQuestAn40[0][3]; ?>" id="7val2020"></td>
+							<td><input type="number" value="<? echo $dataQuestAn40[0][4]; ?>" id="7val2021"></td>
 							<?
 									$tota = 0; $tota1 = 0;
 
@@ -345,6 +405,11 @@
 						<tr>
 							<th scope="row">8.8</th>
 							<td style="text-align: left;">En trámite ante el Tribunal de Enjuiciamiento (en juicio)</td>
+							<td><input type="number" value="<? echo $dataQuestAn41[0][0]; ?>" id="8val2017"></td>
+							<td><input type="number" value="<? echo $dataQuestAn41[0][1]; ?>" id="8val2018"></td>
+							<td><input type="number" value="<? echo $dataQuestAn41[0][2]; ?>" id="8val2019"></td>
+							<td><input type="number" value="<? echo $dataQuestAn41[0][3]; ?>" id="8val2020"></td>
+							<td><input type="number" value="<? echo $dataQuestAn41[0][4]; ?>" id="8val2021"></td>
 							<td><input type="number" value="<? echo $data8[0][0]; ?>" id="p41m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data8[0][1]; ?>" id="p41m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data8[0][2]; ?>" id="p41m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
@@ -353,17 +418,27 @@
 						<tr>
 							<th scope="row">8.9</th>
 							<td style="text-align: left;">Resueltos por juicio oral</td>
+							<td><input type="number" value="<? echo $dataQuestAn42[0][0]; ?>" id="9val2017"></td>
+							<td><input type="number" value="<? echo $dataQuestAn42[0][1]; ?>" id="9val2018"></td>
+							<td><input type="number" value="<? echo $dataQuestAn42[0][2]; ?>" id="9val2019"></td>
+							<td><input type="number" value="<? echo $dataQuestAn42[0][3]; ?>" id="9val2020"></td>
+							<td><input type="number" value="<? echo $dataQuestAn42[0][4]; ?>" id="9val2021"></td>
 							<td><input type="number" value="<? echo $data9[0][0]; ?>" id="p42m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data9[0][1]; ?>" id="p42m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data9[0][2]; ?>" id="p42m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data9[0][3]; ?>" id="p42tot" readonly></td>
 						</tr>
 						<tr>
-							<td colspan="6" style="background-color: #7C8B9E; font-size: 20px;"><strong>DERIVADOS A MECANISMOS ALTERNATIVOS (DESPUES DE LA VINCULACIÓN A PROCESO)</strong></td>
+							<td colspan="11" style="background-color: #7C8B9E; font-size: 20px;"><strong>DERIVADOS A MECANISMOS ALTERNATIVOS (DESPUES DE LA VINCULACIÓN A PROCESO)</strong></td>
 						</tr>
 						<tr>
 							<th scope="row">8.10</th>
 							<td style="text-align: left;">En trámite en el OEMASC sin acuerdo reparatorio</td>
+							<td><input type="number" value="<? echo $dataQuestAn43[0][0]; ?>" id="10val2017"></td>
+							<td><input type="number" value="<? echo $dataQuestAn43[0][1]; ?>" id="10val2018"></td>
+							<td><input type="number" value="<? echo $dataQuestAn43[0][2]; ?>" id="10val2019"></td>
+							<td><input type="number" value="<? echo $dataQuestAn43[0][3]; ?>" id="10val2020"></td>
+							<td><input type="number" value="<? echo $dataQuestAn43[0][4]; ?>" id="10val2021"></td>
 							<td><input type="number" value="<? echo $data10[0][0]; ?>" id="p43m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data10[0][1]; ?>" id="p43m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data10[0][2]; ?>" id="p43m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
@@ -372,6 +447,11 @@
 						<tr>
 							<th scope="row">8.11</th>
 							<td style="text-align: left;">En trámite en el OEMASC con acuerdo reparatorio firmado (en proceso de cumplimiento)</td>
+							<td><input type="number" value="<? echo $dataQuestAn44[0][0]; ?>" id="11val2017"></td>
+							<td><input type="number" value="<? echo $dataQuestAn44[0][1]; ?>" id="11val2018"></td>
+							<td><input type="number" value="<? echo $dataQuestAn44[0][2]; ?>" id="11val2019"></td>
+							<td><input type="number" value="<? echo $dataQuestAn44[0][3]; ?>" id="11val2020"></td>
+							<td><input type="number" value="<? echo $dataQuestAn44[0][4]; ?>" id="11val2021"></td>
 							<td><input type="number" value="<? echo $data11[0][0]; ?>" id="p44m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data11[0][1]; ?>" id="p44m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data11[0][2]; ?>" id="p44m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
@@ -380,6 +460,11 @@
 						<tr>
 							<th scope="row">8.12</th>
 							<td style="text-align: left;">Resueltos (cumplidos) en OEMASC por mediación</td>
+							<td><input type="number" value="<? echo $dataQuestAn45[0][0]; ?>" id="12val2017"></td>
+							<td><input type="number" value="<? echo $dataQuestAn45[0][1]; ?>" id="12val2018"></td>
+							<td><input type="number" value="<? echo $dataQuestAn45[0][2]; ?>" id="12val2019"></td>
+							<td><input type="number" value="<? echo $dataQuestAn45[0][3]; ?>" id="12val2020"></td>
+							<td><input type="number" value="<? echo $dataQuestAn45[0][4]; ?>" id="12val2021"></td>
 							<td><input type="number" value="<? echo $data12[0][0]; ?>" id="p45m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data12[0][1]; ?>" id="p45m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data12[0][2]; ?>" id="p45m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
@@ -388,6 +473,11 @@
 						<tr>
 							<th scope="row">8.13</th>
 							<td style="text-align: left;">Resueltos (cumplidos) en OEMASC por conciliación</td>
+							<td><input type="number" value="<? echo $dataQuestAn46[0][0]; ?>" id="13val2017"></td>
+							<td><input type="number" value="<? echo $dataQuestAn46[0][1]; ?>" id="13val2018"></td>
+							<td><input type="number" value="<? echo $dataQuestAn46[0][2]; ?>" id="13val2019"></td>
+							<td><input type="number" value="<? echo $dataQuestAn46[0][3]; ?>" id="13val2020"></td>
+							<td><input type="number" value="<? echo $dataQuestAn46[0][4]; ?>" id="13val2021"></td>
 							<td><input type="number" value="<? echo $data13[0][0]; ?>" id="p46m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data13[0][1]; ?>" id="p46m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data13[0][2]; ?>" id="p46m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
@@ -396,12 +486,22 @@
 							<tr>
 							<th scope="row">8.14</th>
 							<td style="text-align: left;">Resueltos (cumplidos) en el OEMASC por acuerdo reparatorio por junta restaurativa</td>
+							<td><input type="number" value="<? echo $dataQuestAn47[0][0]; ?>" id="14val2017"></td>
+							<td><input type="number" value="<? echo $dataQuestAn47[0][1]; ?>" id="14val2018"></td>
+							<td><input type="number" value="<? echo $dataQuestAn47[0][2]; ?>" id="14val2019"></td>
+							<td><input type="number" value="<? echo $dataQuestAn47[0][3]; ?>" id="14val2020"></td>
+							<td><input type="number" value="<? echo $dataQuestAn47[0][4]; ?>" id="14val2021"></td>
 							<td><input type="number" value="<? echo $data14[0][0]; ?>" id="p47m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data14[0][1]; ?>" id="p47m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data14[0][2]; ?>" id="p47m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data14[0][3]; ?>" id="p47tot" readonly></td>
 						</tr>
 						<th style=" border: inset 0pt" scope="row"></th>
+							<td style=" border: inset 0pt"></td>
+							<td style=" border: inset 0pt"></td>
+							<td style=" border: inset 0pt"></td>
+							<td style=" border: inset 0pt"></td>
+							<td style=" border: inset 0pt"></td>
 							<td style=" border: inset 0pt"></td>
 							<td style=" border: inset 0pt"></td>
 							<td style=" border: inset 0pt"></td>

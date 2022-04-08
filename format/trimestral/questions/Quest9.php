@@ -76,6 +76,11 @@
 						<tr>
 							<th scope="col">No.</th>
 							<th scope="col">Imputados Vinculados a Proceso o en Espera</th>
+							<th scope="col">2017</th>
+							<th scope="col">2018</th>
+							<th scope="col">2019</th>
+							<th scope="col">2020</th>
+							<th scope="col">2021</th>
 							<th scope="col"><? echo $m1; ?></th>
 							<th scope="col"><? echo $m2; ?></th>
 							<th scope="col"><? echo $m3; ?></th>
@@ -83,9 +88,22 @@
 						</tr>
 					</thead>
 					<tbody>
+					<? 
+						
+						$dataQuestAn48 = getDataAnteriores($conn, 48, $idEnlace, $idUnidad, $anio, $per);
+						$dataQuestAn49 = getDataAnteriores($conn, 49, $idEnlace, $idUnidad, $anio, $per);
+						$dataQuestAn50 = getDataAnteriores($conn, 50, $idEnlace, $idUnidad, $anio, $per);
+						$dataQuestAn51 = getDataAnteriores($conn, 51, $idEnlace, $idUnidad, $anio, $per);
+
+					?>
 						<tr>
 							<th scope="row">9.1</th>
 							<td style="text-align: left;">Número de inputados a los que se les impuso prisión preventiva oficiosa</td>
+							<td><input type="number" value="<? echo $dataQuestAn48[0][0]; ?>" id="1val2017"></td>
+							<td><input type="number" value="<? echo $dataQuestAn48[0][1]; ?>" id="1val2018"></td>
+							<td><input type="number" value="<? echo $dataQuestAn48[0][2]; ?>" id="1val2019"></td>
+							<td><input type="number" value="<? echo $dataQuestAn48[0][3]; ?>" id="1val2020"></td>
+							<td><input type="number" value="<? echo $dataQuestAn48[0][4]; ?>" id="1val2021"></td>
 							<?
 									$tota = 0; $tota1 = 0;
 
@@ -159,6 +177,11 @@
 						<tr>
 							<th scope="row">9.2</th>
 							<td style="text-align: left;">Número de imputados a los que se les impuso a prisión preventiva no oficiosa</td>
+							<td><input type="number" value="<? echo $dataQuestAn49[0][0]; ?>" id="2val2017"></td>
+							<td><input type="number" value="<? echo $dataQuestAn49[0][1]; ?>" id="2val2018"></td>
+							<td><input type="number" value="<? echo $dataQuestAn49[0][2]; ?>" id="2val2019"></td>
+							<td><input type="number" value="<? echo $dataQuestAn49[0][3]; ?>" id="2val2020"></td>
+							<td><input type="number" value="<? echo $dataQuestAn49[0][4]; ?>" id="2val2021"></td>
 							<?
 									$tota = 0; $tota1 = 0;
 
@@ -234,6 +257,11 @@
 						<tr>
 							<th scope="row">9.3</th>
 							<td style="text-align: left;">Número de imputados a los que se les impuso otra medida cautelar</td>
+							<td><input type="number" value="<? echo $dataQuestAn50[0][0]; ?>" id="3val2017"></td>
+							<td><input type="number" value="<? echo $dataQuestAn50[0][1]; ?>" id="3val2018"></td>
+							<td><input type="number" value="<? echo $dataQuestAn50[0][2]; ?>" id="3val2019"></td>
+							<td><input type="number" value="<? echo $dataQuestAn50[0][3]; ?>" id="3val2020"></td>
+							<td><input type="number" value="<? echo $dataQuestAn50[0][4]; ?>" id="3val2021"></td>
 							<td><input type="number" value="<? echo $data3[0][0]; ?>" id="p50m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data3[0][1]; ?>" id="p50m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data3[0][2]; ?>" id="p50m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
@@ -242,6 +270,11 @@
 						<tr>
 							<th scope="row">9.4</th>
 							<td style="text-align: left;">Número de imputados a los que se les impuso medida cautelar</td>
+							<td><input type="number" value="<? echo $dataQuestAn51[0][0]; ?>" id="4val2017"></td>
+							<td><input type="number" value="<? echo $dataQuestAn51[0][1]; ?>" id="4val2018"></td>
+							<td><input type="number" value="<? echo $dataQuestAn51[0][2]; ?>" id="4val2019"></td>
+							<td><input type="number" value="<? echo $dataQuestAn51[0][3]; ?>" id="4val2020"></td>
+							<td><input type="number" value="<? echo $dataQuestAn51[0][4]; ?>" id="4val2021"></td>
 							<td><input type="number" value="<? echo $data4[0][0]; ?>" id="p51m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data4[0][1]; ?>" id="p51m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data4[0][2]; ?>" id="p51m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
@@ -249,6 +282,11 @@
 						</tr>
 						<tr>
 						 <th style=" border: inset 0pt" scope="row"></th>
+							<td style=" border: inset 0pt"></td>
+							<td style=" border: inset 0pt"></td>
+							<td style=" border: inset 0pt"></td>
+							<td style=" border: inset 0pt"></td>
+							<td style=" border: inset 0pt"></td>
 							<td style=" border: inset 0pt"></td>
 							<td style=" border: inset 0pt"></td>
 							<td style=" border: inset 0pt"></td>

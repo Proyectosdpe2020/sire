@@ -45,7 +45,7 @@ switch($quest){
      }
   break;
   case 4:
-     $query = " SELECT SUM(total) as total FROM trimestral.seguimiento WHERE idEnlace = $idEnlace and idPeriodo = $per and anio = 2021 and idPregunta in (1,2) ";
+     $query = " SELECT SUM(total) as total FROM trimestral.seguimiento WHERE idEnlace = $idEnlace and idPeriodo = $per and anio = $anio and idPregunta in (1,2) ";
      $stmt = sqlsrv_query($conn, $query);
      while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
      {
