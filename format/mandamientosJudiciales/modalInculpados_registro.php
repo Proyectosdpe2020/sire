@@ -24,6 +24,13 @@ if (isset($_POST["dataPrincipalArray"])){
 
 if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 	$ID_MANDAMIENTO_INTERNO = $_POST["ID_MANDAMIENTO_INTERNO"]; 
+ $get_data_Mandamiento = get_data_Mandamiento($conn, $ID_MANDAMIENTO_INTERNO);
+ if(sizeof($get_data_Mandamiento) > 0 ){
+			$GET_ID_MANDAMIENTO_INTERNO  = $get_data_Mandamiento[0][1];
+		}else{
+			$GET_ID_MANDAMIENTO_INTERNO = 0;
+		}
+
 	if ($ID_MANDAMIENTO_INTERNO != 0) {
 		$inculpadoData = get_data_inculpado($conn, $ID_MANDAMIENTO_INTERNO);
 		//Se comprueba si existen datos del inculpado en la tabla de inputados para extraer la informacion
@@ -143,6 +150,23 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 				     <input type="text" class="form-control" id="CURP" placeholder="ESPECIFICA EL CURP" aria-describedby="sizing-addon1" maxlength="18" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); " onkeypress="return validaInput(event, 'varchar')" value="<?if($a == 1){ echo $CURP; } ?>" >
 								</div>
 							</div><br>
+							<?if($a == 0){ ?>
+							<div class="row">
+										<div class="col-xs-12 col-sm-12  col-md-4 input-group-lg">
+											<label for="ID_DELITO_PRINCIPAL"><span class="glyphicon glyphicon-list-alt"></span> Delito principal</label><br>
+											<select class="form-control" id="ID_DELITO_PRINCIPAL" onchange="validateCampo_OK(this.id)">
+													<option class="fontBold" value="">Seleccione un delito</option>
+														  <? $delitos = getCatDelitos($connSIMAJ);
+										 					for ($i=0; $i < sizeof($delitos); $i++) { 
+										 						$cv_delito = $delitos[$i][0];	$descrip_delito = $delitos[$i][2]; ?>
+										 					<option class="fontBold" value="<? echo $cv_delito; ?>" ><? echo $descrip_delito; ?></option>
+										 					<? } ?>
+												</select>
+										</div>
+									</div><br>
+								<? }else{ ?>
+									<input type="hidden" name="ID_DELITO_PRINCIPAL" id="ID_DELITO_PRINCIPAL" value="NO_APLICA_DELITO_EN_EDICION">
+								<? } ?>
 							<div class="row">
 								<div class="col-xs-12 col-sm-12  col-md-12 ">
 									<label for="OBSERVACIONES_inculpado">Observaciones:</label>
@@ -171,7 +195,7 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 <div class="modal-footer">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12  col-md-6 col-md-offset-3">
-			<button type="button" class="btn btn-primary btn-lg" style="width: 100%;" onclick="guardar_mandamiento_inculpado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , '<?echo $tipoActualizacion; ?>')"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar información</button>
+			<button type="button" class="btn btn-primary btn-lg" style="width: 100%;" onclick="guardar_mandamiento_inculpado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , '<?echo $tipoActualizacion; ?>' , <?echo $GET_ID_MANDAMIENTO_INTERNO; ?>)"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar información</button>
 		</div>
 		<div class="col-xs-12 col-sm-12  col-md-3">
 			<button type="button" class="btn btn-default btn-lg" data-dismiss="modal" onclick="closeModal_inculpados()" >Cerrar</button>
