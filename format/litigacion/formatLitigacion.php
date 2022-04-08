@@ -16,7 +16,7 @@
 
 	if (isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }
 
-	
+
 
 	$enlace = getInfoEnlaceUsuario($conn, $idUsuario);
 	$idEnlace = $enlace[0][0]; 
@@ -163,7 +163,7 @@ if($idEnlace == 30 || $idEnlace == 28){
 
 
 									$mpsList = getMpsEnlaceUnidadFormato($conn, $idEnlace, 4);
-
+						
 
 								}else{
 
@@ -173,10 +173,10 @@ if($idEnlace == 30 || $idEnlace == 28){
 
 									
 										if($idfisca == 4){  $mpsList = getMpsEnlaceUnidad($conn, $idEnlace, 4); }else{ $mpsList = getMpsEnlaceUnidad($conn, $idEnlace, 4); }
-							
+				
 
 											}else{
-								
+												
 
 												//	$mpsList = getEnlMpUnidad($conn, $idUnidad, $idEnlace);
 												if($idfisca == 4){ $mpsList = getEnlMpUnidad($conn, $idUnidad, $idEnlace);; }else{ $mpsList = getEnlMpUnidad2($conn, $idUnidad, $idEnlace); }

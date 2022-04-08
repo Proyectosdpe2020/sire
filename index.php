@@ -69,7 +69,10 @@ $enlace = getInfoEnlaceUsuario($conn, $idUsuario);
 $idEnlace = $enlace[0][0];
 $idfisca = $enlace[0][1];
 
-if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || $idEnlace == 17 || $idEnlace == 18 || $idEnlace == 16 || $idEnlace == 19 || $idEnlace == 58) {
+////// SI HAY UN ENLACE QUE LLEVE MAS DE UN MODULO DE CAPTURA SE AGREGA AQUI Y SE MODIFICA LA TABLA EN SQL ENLACEFORMATO
+////// EN LA TABLA ENLACE FORMATO SE PONEN LOS FORMATOS Y EL idEnlaceLiti DEL ENLACE DE LITIGACION EN SU CASO
+
+if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || $idEnlace == 17 || $idEnlace == 18 || $idEnlace == 16 || $idEnlace == 19 || $idEnlace == 58 || $idEnlace == 337 || $idEnlace == 26) {
 
 	$unienlaenla = getIdUnidEnlaceFormat($conn, $idEnlace, $format);
 	$idEnlaces = $unienlaenla[0][0];
@@ -277,7 +280,8 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 								<li style="background-color: #C8C8C8;  border: solid 2px #C8C8C8;"><a style="color:#152F4A !important;" onclick="loadBiEstadisticsLiti(<? echo $idEnlace; ?>)" href="#">BI Estadistícas de Evaluación de Desempeño</a></li>
 							<?
 							}
-         //CARGAR BI POLICIA
+
+							 //CARGAR BI POLICIA
 								if ($tipoUser == 1 and $format == 12) {
 							?>
 								<li style="background-color: #C8C8C8;  border: solid 2px #C8C8C8;"><a style="color:#152F4A !important;" onclick="loadBiEstadisticsPolicia(<? echo $idEnlace; ?>)" href="#">BI Estadistícas de Evaluación de Desempeño</a></li>
@@ -286,9 +290,7 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 
 							?>
 
-
-
-
+							?>
 
 
 

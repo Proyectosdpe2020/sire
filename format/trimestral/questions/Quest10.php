@@ -63,6 +63,11 @@
 						<tr>
 							<th scope="col">No.</th>
 							<th scope="col">Imputados con sentencia</th>
+							<th scope="col">2017</th>
+							<th scope="col">2018</th>
+							<th scope="col">2019</th>
+							<th scope="col">2020</th>
+							<th scope="col">2021</th>
 							<th scope="col"><? echo $m1; ?></th>
 							<th scope="col"><? echo $m2; ?></th>
 							<th scope="col"><? echo $m3; ?></th>
@@ -70,9 +75,22 @@
 						</tr>
 					</thead>
 					<tbody>
+					<? 
+						
+						$dataQuestAn52 = getDataAnteriores($conn, 52, $idEnlace, $idUnidad, $anio, $per);
+						$dataQuestAn53 = getDataAnteriores($conn, 53, $idEnlace, $idUnidad, $anio, $per);
+						$dataQuestAn54 = getDataAnteriores($conn, 54, $idEnlace, $idUnidad, $anio, $per);
+						$dataQuestAn55 = getDataAnteriores($conn, 55, $idEnlace, $idUnidad, $anio, $per);
+
+					?>
 						<tr>
 							<th scope="row">10.1</th>
 							<td style="text-align: left;">Número de imputados con sentencia condenatoria por procedimiento abreviado</td>
+							<td><input type="number" value="<? echo $dataQuestAn52[0][0]; ?>" id="1val2017"></td>
+							<td><input type="number" value="<? echo $dataQuestAn52[0][1]; ?>" id="1val2018"></td>
+							<td><input type="number" value="<? echo $dataQuestAn52[0][2]; ?>" id="1val2019"></td>
+							<td><input type="number" value="<? echo $dataQuestAn52[0][3]; ?>" id="1val2020"></td>
+							<td><input type="number" value="<? echo $dataQuestAn52[0][4]; ?>" id="1val2021"></td>
 							<td><input type="number" value="<? echo $data[0][0]; ?>" id="p52m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data[0][1]; ?>" id="p52m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data[0][2]; ?>" id="p52m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
@@ -81,6 +99,11 @@
 						<tr>
 							<th scope="row">10.2</th>
 							<td style="text-align: left;">Número de imputados con sentencia absolutoria por procedimiento abreviado</td>
+							<td><input type="number" value="<? echo $dataQuestAn53[0][0]; ?>" id="2val2017"></td>
+							<td><input type="number" value="<? echo $dataQuestAn53[0][1]; ?>" id="2val2018"></td>
+							<td><input type="number" value="<? echo $dataQuestAn53[0][2]; ?>" id="2val2019"></td>
+							<td><input type="number" value="<? echo $dataQuestAn53[0][3]; ?>" id="2val2020"></td>
+							<td><input type="number" value="<? echo $dataQuestAn53[0][4]; ?>" id="2val2021"></td>
 							<td><input type="number" value="<? echo $data2[0][0]; ?>" id="p53m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data2[0][1]; ?>" id="p53m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data2[0][2]; ?>" id="p53m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
@@ -89,6 +112,11 @@
 						<tr>
 							<th scope="row">10.3</th>
 							<td style="text-align: left;">Número de imputados con sentencia condenatoria por juicio oral</td>
+							<td><input type="number" value="<? echo $dataQuestAn54[0][0]; ?>" id="3val2017"></td>
+							<td><input type="number" value="<? echo $dataQuestAn54[0][1]; ?>" id="3val2018"></td>
+							<td><input type="number" value="<? echo $dataQuestAn54[0][2]; ?>" id="3val2019"></td>
+							<td><input type="number" value="<? echo $dataQuestAn54[0][3]; ?>" id="3val2020"></td>
+							<td><input type="number" value="<? echo $dataQuestAn54[0][4]; ?>" id="3val2021"></td>
 							<td><input type="number" value="<? echo $data3[0][0]; ?>" id="p54m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data3[0][1]; ?>" id="p54m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data3[0][2]; ?>" id="p54m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
@@ -97,6 +125,11 @@
 						<tr>
 							<th scope="row">10.4</th>
 							<td style="text-align: left;">Número de imputados con sentencia absolutoria por juicio oral</td>
+							<td><input type="number" value="<? echo $dataQuestAn55[0][0]; ?>" id="4val2017"></td>
+							<td><input type="number" value="<? echo $dataQuestAn55[0][1]; ?>" id="4val2018"></td>
+							<td><input type="number" value="<? echo $dataQuestAn55[0][2]; ?>" id="4val2019"></td>
+							<td><input type="number" value="<? echo $dataQuestAn55[0][3]; ?>" id="4val2020"></td>
+							<td><input type="number" value="<? echo $dataQuestAn55[0][4]; ?>" id="4val2021"></td>
 							<td><input type="number" value="<? echo $data4[0][0]; ?>" id="p55m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data4[0][1]; ?>" id="p55m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data4[0][2]; ?>" id="p55m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
@@ -104,6 +137,11 @@
 						</tr>
 						<tr>
 						 <th style=" border: inset 0pt" scope="row"></th>
+						 <td style=" border: inset 0pt"></td>
+							<td style=" border: inset 0pt"></td>
+							<td style=" border: inset 0pt"></td>
+							<td style=" border: inset 0pt"></td>
+							<td style=" border: inset 0pt"></td>
 							<td style=" border: inset 0pt"></td>
 							<td style=" border: inset 0pt"></td>
 							<td style=" border: inset 0pt"></td>

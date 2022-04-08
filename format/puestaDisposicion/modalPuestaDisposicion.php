@@ -13,7 +13,7 @@
 	
 
 				$d = date("d");
-				if($d >= 1 && $d <= 3){ $m = $m-1; }
+				if($d >= 1 && $d <= 5){ $m = $m-1; }
 
 				if (isset($_POST["tipoModal"])){ $tipoModal = $_POST["tipoModal"]; }
 					if (isset($_POST["idEnlace"])){ $idEnlace = $_POST["idEnlace"]; }
@@ -118,11 +118,11 @@
  				<input class="form-control gehit"  id="nucPuestaDisposi" maxlength="13" oninput="validateNuc(this)"  type="number" value="<? if($a == 1){ echo $nuc; } ?>" <? if($b == 0){ echo "readonly"; } ?>>
  			</div>
  			<!--CONDICIONAL PARA HABILITAR A DETERMINADO ENLACE -->
- 			<?if($idEnlace == 348 || $idEnlace == 109 || $idEnlace == 118 || $idEnlace == 349 || $idEnlace == 350){ ?>
+ 			<?if($idEnlace == 108 || $idEnlace == 232 ){ ?>
  				<div class="col-xs-12 col-sm-12  col-md-2">
 	 				<label for="heard">Fecha Evento :</label><span class="aste"> (Requerido)</span>
 	 				<div >
-	 					<input id="fechaevento" type="datetime-local" value="<? if($a == 1){  echo 	$fechaev=str_ireplace(' ','T',$fechaev); } ?>" name="fechaevento" class="fechas form-control gehit" min="2021-10-01T00:00:00" max="<?echo $hoy; ?>T23:59:59" onchange="checkDateInforme('<?echo $fecha; ?>');" <? if($b == 0){ echo "readonly"; } ?> />	
+	 					<input id="fechaevento" type="datetime-local" value="<? if($a == 1){  echo 	$fechaev=str_ireplace(' ','T',$fechaev); } ?>" name="fechaevento" class="fechas form-control gehit" min="2022-03-01T00:00:00" max="<?echo $hoy; ?>T23:59:59" onchange="checkDateInforme('<?echo $fecha; ?>');" <? if($b == 0){ echo "readonly"; } ?> />	
 	 				</div>
  			 </div>
  			<? }else{ ?>
@@ -875,7 +875,7 @@
 
 										<div class="row">
 
-									<?if($typeArch == 12 && ($idEnlace != 266 && $idEnlace != 233 && $idEnlace != 225) ){ ?>
+									<?if($typeArch == 12 && ($idEnlace != 266 && $idEnlace != 233 && $idEnlace != 225  && $idEnlace != 203) ){ ?>
 										<div class="col-xs-12 col-sm-12 col-md-12"><center><button  style="width: 95%; background-color: #38537e; font-weight: bolder; color: white;" onclick="closeModalPueDispo()" type="button" class="btn redondear" data-dismiss="modal">Salir</button></center></div>
 									<? }else{ if($b == 0){?>
 												<div class="col-xs-12 col-sm-12 col-md-12"><center><button  style="width: 95%; background-color: #38537e; font-weight: bolder; color: white;" onclick="closeModalPueDispo()" type="button" class="btn redondear" data-dismiss="modal">Salir</button></center></div>

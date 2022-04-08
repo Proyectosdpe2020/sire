@@ -66,7 +66,7 @@ $mesNom = Mes_Nombre($currentmonth);
 					<div id="contMonth">
 						<select id="mesMedidaSelected" name="selMes" tabindex="6"class="form-control redondear selectTranparent" required>
 
-									<option value="2" selected>Febrero</option>
+									<option value="4" selected>Abril</option>
 					
 
 					</select>

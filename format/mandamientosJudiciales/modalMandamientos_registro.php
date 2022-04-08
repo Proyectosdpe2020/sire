@@ -316,7 +316,24 @@ if(sizeof($get_data_inculpado) > 0 ){
 				</div>
 			</div><br>
 			<div class="row">
+				<?if($idEnlace == 347 || $idEnlace == 353 ){ ?>
 				<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
+					<label for="TIPO_INVESTIGACION"><span class="glyphicon glyphicon-book"></span> Tipo de investigación * :</label><br>
+					<select class="form-control" id="TIPO_INVESTIGACION" aria-describedby="sizing-addon1" id="tipo_investigacion" onchange="reloadTipoInvestigacion()">
+						<option class="fontBold" value="1" <?if($a == 1 && $TIPO_INVESTIGACION == 1){ ?> selected <? } ?> >Averiguación Previa</option>
+					</select>
+				</div>
+				<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg" id="div_nuc_averiguacion">
+				 <label for="NO_AVERIGUACION"><span class="glyphicon glyphicon-certificate"></span> No. de averiguación :</label><br>
+ 				<input type="text" id="NO_AVERIGUACION" class="form-control" placeholder="ESPECIFICA EL NO. DE AVERIGUACIÓN PREVIA*" aria-describedby="sizing-addon1" maxlength="15" oninput="validateNucs(this)"  type="number" onchange="validateCampo_OK(this.id)"  value="<?if($a == 1){echo $NO_AVERIGUACION; } ?>" >
+				</div>
+				<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg" id="div_nuc" hidden>
+				 <label for="nuc"><span class="glyphicon glyphicon-certificate"></span> NUC :</label><br>
+				 <div class="preloaderSelect_NUC" hidden >Validando NUC, espere un momento...<img width="50px"  src="img/loaderData.gif"></div>
+				 <input type="number" id="nuc" class="form-control" placeholder="ESPECIFICA EL NUC*" aria-describedby="sizing-addon1" maxlength="13" oninput="validateNucs(this)"  type="number" onchange="validateCampo_OK(this.id)" value="<?if($a == 1){echo $CARPETA_INV; } ?>" >
+				</div>
+			<? }else{ ?>
+					<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
 					<label for="TIPO_INVESTIGACION"><span class="glyphicon glyphicon-book"></span> Tipo de investigación * :</label><br>
 					<select class="form-control" id="TIPO_INVESTIGACION" aria-describedby="sizing-addon1" id="tipo_investigacion" onchange="reloadTipoInvestigacion()">
 						<option class="fontBold" value="1" <?if($a == 1 && $TIPO_INVESTIGACION == 1){ ?> selected <? } ?> >Averiguación Previa</option>
@@ -325,13 +342,14 @@ if(sizeof($get_data_inculpado) > 0 ){
 				</div>
 				<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg" id="div_nuc_averiguacion" hidden>
 				 <label for="NO_AVERIGUACION"><span class="glyphicon glyphicon-certificate"></span> No. de averiguación :</label><br>
- 				<input type="text" id="NO_AVERIGUACION" class="form-control" placeholder="ESPECIFICA EL NO. DE AVERIGUACIÓN PREVIA*" aria-describedby="sizing-addon1" maxlength="13" onkeypress="return validaInput(event, 'averiguacion')" oninput="validateNucs(this)"  type="number" onchange="validateCampo_OK(this.id)"  value="<?if($a == 1){echo $NO_AVERIGUACION; } ?>" >
+ 				<input type="text" id="NO_AVERIGUACION" class="form-control" placeholder="ESPECIFICA EL NO. DE AVERIGUACIÓN PREVIA*" aria-describedby="sizing-addon1" maxlength="15" oninput="validateNucs(this)"  type="number" onchange="validateCampo_OK(this.id)"  value="<?if($a == 1){echo $NO_AVERIGUACION; } ?>" >
 				</div>
 				<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg" id="div_nuc">
 				 <label for="nuc"><span class="glyphicon glyphicon-certificate"></span> NUC :</label><br>
 				 <div class="preloaderSelect_NUC" hidden >Validando NUC, espere un momento...<img width="50px"  src="img/loaderData.gif"></div>
 				 <input type="number" id="nuc" class="form-control" placeholder="ESPECIFICA EL NUC*" aria-describedby="sizing-addon1" maxlength="13" oninput="validateNucs(this)"  type="number" onchange="validateCampo_OK(this.id)" value="<?if($a == 1){echo $CARPETA_INV; } ?>" >
 				</div>
+			<? } ?>
 			</div><br>
 			<div class="row">
 				<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">

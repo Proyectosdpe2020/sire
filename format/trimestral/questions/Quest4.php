@@ -8,6 +8,8 @@
 					if (isset($_GET["idUnidad"])){ $idUnidad = $_GET["idUnidad"]; }
 					if (isset($_GET["idEnlace"])){ $idEnlace = $_GET["idEnlace"]; }
 
+
+
 					if($per == 1){ $m1 = "Enero"; $m2 = "Febrero"; $m3 = "Marzo"; $nme = "Enero - Marzo"; $arr = array(1,2,3); }
 					if($per == 2){ $m1 = "Abril"; $m2 = "Mayo"; $m3 = "Junio"; $nme = "Abril - Junio"; $arr = array(4,5,6);}
 					if($per == 3){ $m1 = "Julio"; $m2 = "Agosto"; $m3 = "Septiembre"; $nme = "Julio - Septiembre"; $arr = array(7,8,9);}
@@ -15,8 +17,7 @@
 					$getEnv = getInfOCarpetasEnv($conn, $idEnlace, 11);
 					$envt = $getEnv[0][0]; 
 					$fisid = getIdFiscaliaEnlace($conn, $idEnlace);
-					
-					
+										
 					if($fisid[0][0]  == 4){
 						$idUn = "IN(".$idUnidad.")";
 					}else{
@@ -69,6 +70,7 @@
 						<tr>
 							<th scope="col">No.</th>
 							<th scope="col">Número de Carpetas de Investigación Iniciadas</th>
+							
 							<th scope="col"><? echo $m1; ?></th>
 							<th scope="col"><? echo $m2; ?></th>
 							<th scope="col"><? echo $m3; ?></th>
