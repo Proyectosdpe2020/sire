@@ -49,7 +49,7 @@ if( sizeof($getData_Delitos > 0) ){
 													<option class="fontBold" value="">Seleccione un delito</option>
 														  <? $delitos = getCatDelitos($connSIMAJ);
 										 					for ($i=0; $i < sizeof($delitos); $i++) { 
-										 						$cv_delito = $delitos[$i][1];	$descrip_delito = $delitos[$i][2]; ?>
+										 						$cv_delito = $delitos[$i][0];	$descrip_delito = $delitos[$i][2]; ?>
 										 					<option class="fontBold" value="<? echo $cv_delito; ?>" <?if($cv_delito == $ID_DELITO) { ?> selected <? } ?> ><? echo $descrip_delito; ?></option>
 										 					<? } ?>
 												</select>

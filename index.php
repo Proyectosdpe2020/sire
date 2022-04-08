@@ -288,10 +288,9 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 							<?
 							}
 
-
 							?>
 
-
+							?>
 
 
 
