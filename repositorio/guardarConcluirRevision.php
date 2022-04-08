@@ -123,7 +123,7 @@
 
 								$myString  = "";
 
-								$enlacese = getEnlacesLitiArchivs($conn, $idEnlace);
+								$enlacese = getEnlacesLitiArchivs($conn, $idEnlace, 4);
 								$uno = $enlacese[0][0];
 								$dos = $enlacese[0][1];
 					

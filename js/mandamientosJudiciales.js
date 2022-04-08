@@ -319,93 +319,162 @@ function guardar_mandamiento(tipoModal, idEnlace, idUnidad, idfisca, ID_MANDAMIE
 		/////////////////////////// SI EL TIPO MODAL ES UNA NUEVA MEDIDA ENTONCES ES  0 ///////////////////////////////
 		var dataValidate = validateDataMandamiento(); //Validamos que la información principal halla sido llenada previamente	 
 		if(dataValidate[0] == 'true'){
-	 	$('#cargandoInfo').modal('show');
 	 	var contentArrayData = JSON.parse(dataValidate[1]); //Obtenemos la informacion del arreglo
 			console.log("info: "+contentArrayData[1]); //NUC
 			var nuc = contentArrayData[26];
+			var tipo_investigacion = contentArrayData[24];
 			var existeNuc; 
 			var dataPrincipalArray = {};  
 			for(i in contentArrayData){  dataPrincipalArray[i] = contentArrayData[i];   }
 			dataPrincipalArray = JSON.stringify(dataPrincipalArray);
-		console.log("aqui esta: "+dataPrincipalArray);
-	  //Invocamos a la funcion que valida si existe el NUC en sigi realizando un callback a la funcion succes de ajax para retornar el valor
-			validaNucSIGI_Mandamientos(nuc, function(resp, arrayData){
-				existeNuc = resp;
-				getArrayData = arrayData;
-				console.log("Respuesta funcion valida nuc: "+existeNuc);
-				console.log("Información obtenida: "+getArrayData);	
-				if(existeNuc == "NUC_OKSIGI"){
-					swal({
-				 title: "¿Guardar información de mandamiento del NUC: "+nuc+"?",
-	    html: true,
-	    text: "<hr><span>Agente del Ministerio Público: <b>"+getArrayData[0][5]+"</b><br>Expediente: <b>"+getArrayData[0][1]+"</b><br>Apertura: <b>"+getArrayData[0][2]+"</b><br>Unidad de investigación: <b>"+getArrayData[0][3]+"</b><br><br><b> * </b>Información del NUC validada en SIGI.<hr> </span>",  
-	    type: "success",
-	    showCancelButton: true,
-	    confirmButtonColor: 'rgba(21,47,74,.9)',
-	    confirmButtonText: 'Si. Enviar información',
-	    cancelButtonText: "No, Cancelar"
-					
-				 },
-				 function(isConfirm){
-				 	if (isConfirm) {
-				 		/********INSERCION*******/
-				 		if(ID_MANDAMIENTO_INTERNO == 0){
-				 			$.ajax({
-						  	type: "POST",
-						  	dataType: 'html',
-						  	url: "format/mandamientosJudiciales/inserts/guardar_mandamiento.php",
-						  	data: "&tipoModal="+tipoModal+"&idEnlace="+idEnlace+"&idUnidad="+idUnidad+"&idfisca="+idfisca+"&ID_MANDAMIENTO_INTERNO="+ID_MANDAMIENTO_INTERNO+"&dataPrincipalArray="+dataPrincipalArray,
-						  	success: function(resp){
-						  		var json = resp;
-						  		var obj = eval("(" + json + ")");
-						  		console.log(obj);
-						  		if (obj.first == "NO") { 
-						  			alert("No se registro verifique los datos.");
-						  			swal("", "No se registro verifique los datos.", "warning"); 
-						  		}else{
-						  			if (obj.first == "SI") {
-						  				var obj = eval("(" + json + ")");
-						  				//alert("Agregado exitosmente");
-						  				reload_modalMandamientos_registro(1, idEnlace, obj.ID_MANDAMIENTO_INTERNO, 0, 0, idfisca, idUnidad);
-						  				swal("", "Registro agregado exitosamente.", "success");
-						  			}
-						  		}
-						  	}
-						  });/********INSERCION*******/
-				 		}else if(ID_MANDAMIENTO_INTERNO != 0){
-				 			/********ACTUALIZACION*******/
-							$.ajax({
-						  	type: "POST",
-						  	dataType: 'html',
-						  	url: "format/mandamientosJudiciales/inserts/actualizar_mandamiento.php",
-						  	data: "&tipoModal="+tipoModal+"&idEnlace="+idEnlace+"&idUnidad="+idUnidad+"&idfisca="+idfisca+"&ID_MANDAMIENTO_INTERNO="+ID_MANDAMIENTO_INTERNO+"&dataPrincipalArray="+dataPrincipalArray,
-						  	success: function(resp){
-						  		var json = resp;
-						  		var obj = eval("(" + json + ")");
-						  		console.log(obj);
-						  		if (obj.first == "NO") { 
-						  			alert("No se pudo actualizar, verifique los datos.");
-						  			swal("", "No se pudo actualizar, verifique los datos.", "warning"); 
-						  		}else{
-						  			if (obj.first == "SI") {
-						  				var obj = eval("(" + json + ")");
-						  				//alert("Agregado exitosmente");
-						  				swal("", "Registro actualizado exitosamente.", "success");
-						  				reload_modalMandamientos_registro(1, idEnlace, obj.ID_MANDAMIENTO_INTERNO, 0, 0, idfisca, idUnidad);
-						  			}
-						  		}
-						  	}
-						  });
-							/********ACTUALIZACION*******/
-				 		}		
-						}
-				 });
-				}else if(existeNuc == "NUC_NOEXISTESIGI"){
-					swal("", "El NUC no se encuentra iniciado en SIGI, favor de verificar con la unidad correspondiente", "warning");
-				}else if(existeNuc == "NUC_INVALIDO"){
-					swal("", "Longitud de NUC invalida, favor de verificar.", "warning");
-				}
-		 }); //Termina función callback a funcion ajac verificadora del nuc
+		 console.log("aqui esta: "+dataPrincipalArray);
+		 if(tipo_investigacion == 2){
+		 	$('#cargandoInfo').modal('show');
+		 	//Invocamos a la funcion que valida si existe el NUC en sigi realizando un callback a la funcion succes de ajax para retornar el valor
+				validaNucSIGI_Mandamientos(nuc, function(resp, arrayData){
+					existeNuc = resp;
+					getArrayData = arrayData;
+					console.log("Respuesta funcion valida nuc: "+existeNuc);
+					console.log("Información obtenida: "+getArrayData);	
+					if(existeNuc == "NUC_OKSIGI"){
+						swal({
+					 title: "¿Guardar información de mandamiento del NUC: "+nuc+"?",
+		    html: true,
+		    text: "<hr><span>Agente del Ministerio Público: <b>"+getArrayData[0][5]+"</b><br>Expediente: <b>"+getArrayData[0][1]+"</b><br>Apertura: <b>"+getArrayData[0][2]+"</b><br>Unidad de investigación: <b>"+getArrayData[0][3]+"</b><br><br><b> * </b>Información del NUC validada en SIGI.<hr> </span>",  
+		    type: "success",
+		    showCancelButton: true,
+		    confirmButtonColor: 'rgba(21,47,74,.9)',
+		    confirmButtonText: 'Si. Enviar información',
+		    cancelButtonText: "No, Cancelar"
+						
+					 },
+					 function(isConfirm){
+					 	if (isConfirm) {
+					 		/********INSERCION*******/
+					 		if(ID_MANDAMIENTO_INTERNO == 0){
+					 			$.ajax({
+							  	type: "POST",
+							  	dataType: 'html',
+							  	url: "format/mandamientosJudiciales/inserts/guardar_mandamiento.php",
+							  	data: "&tipoModal="+tipoModal+"&idEnlace="+idEnlace+"&idUnidad="+idUnidad+"&idfisca="+idfisca+"&ID_MANDAMIENTO_INTERNO="+ID_MANDAMIENTO_INTERNO+"&dataPrincipalArray="+dataPrincipalArray,
+							  	success: function(resp){
+							  		var json = resp;
+							  		var obj = eval("(" + json + ")");
+							  		console.log(obj);
+							  		if (obj.first == "NO") { 
+							  			alert("No se registro verifique los datos.");
+							  			swal("", "No se registro verifique los datos.", "warning"); 
+							  		}else{
+							  			if (obj.first == "SI") {
+							  				var obj = eval("(" + json + ")");
+							  				//alert("Agregado exitosmente");
+							  				reload_modalMandamientos_registro(1, idEnlace, obj.ID_MANDAMIENTO_INTERNO, 0, 0, idfisca, idUnidad);
+							  				swal("", "Registro agregado exitosamente.", "success");
+							  			}
+							  		}
+							  	}
+							  });/********INSERCION*******/
+					 		}else if(ID_MANDAMIENTO_INTERNO != 0){
+					 			/********ACTUALIZACION*******/
+								$.ajax({
+							  	type: "POST",
+							  	dataType: 'html',
+							  	url: "format/mandamientosJudiciales/inserts/actualizar_mandamiento.php",
+							  	data: "&tipoModal="+tipoModal+"&idEnlace="+idEnlace+"&idUnidad="+idUnidad+"&idfisca="+idfisca+"&ID_MANDAMIENTO_INTERNO="+ID_MANDAMIENTO_INTERNO+"&dataPrincipalArray="+dataPrincipalArray,
+							  	success: function(resp){
+							  		var json = resp;
+							  		var obj = eval("(" + json + ")");
+							  		console.log(obj);
+							  		if (obj.first == "NO") { 
+							  			alert("No se pudo actualizar, verifique los datos.");
+							  			swal("", "No se pudo actualizar, verifique los datos.", "warning"); 
+							  		}else{
+							  			if (obj.first == "SI") {
+							  				var obj = eval("(" + json + ")");
+							  				//alert("Agregado exitosmente");
+							  				swal("", "Registro actualizado exitosamente.", "success");
+							  				reload_modalMandamientos_registro(1, idEnlace, obj.ID_MANDAMIENTO_INTERNO, 0, 0, idfisca, idUnidad);
+							  			}
+							  		}
+							  	}
+							  });
+								/********ACTUALIZACION*******/
+					 		}		
+							}
+					 });
+					}else if(existeNuc == "NUC_NOEXISTESIGI"){
+						swal("", "El NUC no se encuentra iniciado en SIGI, favor de verificar con la unidad correspondiente", "warning");
+					}else if(existeNuc == "NUC_INVALIDO"){
+						swal("", "Longitud de NUC invalida, favor de verificar.", "warning");
+					}
+			 }); //Termina función callback a funcion ajac verificadora del nuc
+		 }else{
+		 	swal({
+					 title: "¿Guardar información de la averiguación previa?",
+		    html: true,
+		    text: "<hr><span></span>",  
+		    type: "success",
+		    showCancelButton: true,
+		    confirmButtonColor: 'rgba(21,47,74,.9)',
+		    confirmButtonText: 'Si. Enviar información',
+		    cancelButtonText: "No, Cancelar"
+						
+					 },
+					 function(isConfirm){
+					 	if (isConfirm) {
+					 		/********INSERCION*******/
+					 		if(ID_MANDAMIENTO_INTERNO == 0){
+					 			$.ajax({
+							  	type: "POST",
+							  	dataType: 'html',
+							  	url: "format/mandamientosJudiciales/inserts/guardar_mandamiento.php",
+							  	data: "&tipoModal="+tipoModal+"&idEnlace="+idEnlace+"&idUnidad="+idUnidad+"&idfisca="+idfisca+"&ID_MANDAMIENTO_INTERNO="+ID_MANDAMIENTO_INTERNO+"&dataPrincipalArray="+dataPrincipalArray,
+							  	success: function(resp){
+							  		var json = resp;
+							  		var obj = eval("(" + json + ")");
+							  		console.log(obj);
+							  		if (obj.first == "NO") { 
+							  			alert("No se registro verifique los datos.");
+							  			swal("", "No se registro verifique los datos.", "warning"); 
+							  		}else{
+							  			if (obj.first == "SI") {
+							  				var obj = eval("(" + json + ")");
+							  				//alert("Agregado exitosmente");
+							  				reload_modalMandamientos_registro(1, idEnlace, obj.ID_MANDAMIENTO_INTERNO, 0, 0, idfisca, idUnidad);
+							  				swal("", "Registro agregado exitosamente.", "success");
+							  			}
+							  		}
+							  	}
+							  });/********INSERCION*******/
+					 		}else if(ID_MANDAMIENTO_INTERNO != 0){
+					 			/********ACTUALIZACION*******/
+								$.ajax({
+							  	type: "POST",
+							  	dataType: 'html',
+							  	url: "format/mandamientosJudiciales/inserts/actualizar_mandamiento.php",
+							  	data: "&tipoModal="+tipoModal+"&idEnlace="+idEnlace+"&idUnidad="+idUnidad+"&idfisca="+idfisca+"&ID_MANDAMIENTO_INTERNO="+ID_MANDAMIENTO_INTERNO+"&dataPrincipalArray="+dataPrincipalArray,
+							  	success: function(resp){
+							  		var json = resp;
+							  		var obj = eval("(" + json + ")");
+							  		console.log(obj);
+							  		if (obj.first == "NO") { 
+							  			alert("No se pudo actualizar, verifique los datos.");
+							  			swal("", "No se pudo actualizar, verifique los datos.", "warning"); 
+							  		}else{
+							  			if (obj.first == "SI") {
+							  				var obj = eval("(" + json + ")");
+							  				//alert("Agregado exitosmente");
+							  				swal("", "Registro actualizado exitosamente.", "success");
+							  				reload_modalMandamientos_registro(1, idEnlace, obj.ID_MANDAMIENTO_INTERNO, 0, 0, idfisca, idUnidad);
+							  			}
+							  		}
+							  	}
+							  });
+								/********ACTUALIZACION*******/
+					 		}		
+							}
+					 });
+		 }
 	 }else{
 	 	swal("", "Faltan datos por ingresar, verifique los campos en rojo.", "warning");
 	 }
@@ -437,24 +506,24 @@ function validateDataMandamiento(){
  var NO_PROCESO = document.getElementById("NO_PROCESO").value;
  var FECHA_LIBRAMIENTO = document.getElementById("FECHA_LIBRAMIENTO").value;
  var TIPO_INVESTIGACION = document.getElementById("TIPO_INVESTIGACION").value;
- var NO_AVERIGUACION = document.getElementById("NO_AVERIGUACION").value; 
-	var nuc = document.getElementById("nuc").value; 
+ var NO_AVERIGUACION = document.getElementById("NO_AVERIGUACION").value;  
  var ACUMULADO_PROCESO = document.getElementById("ACUMULADO_PROCESO").value;
  var ACUMULADO_AVERIGUACION = document.getElementById("ACUMULADO_AVERIGUACION").value;
  var OBSERVACIONES = document.getElementById("OBSERVACIONES").value;
  var OBSERVACIONES_INT = document.getElementById("OBSERVACIONES_INT").value;
  var COLABORACION = $('#colaboracion').prop('checked');
  if(COLABORACION == true) { COLABORACION = 1; ID_JUZGADO = 'no'; }else{ COLABORACION = 0; JUZGADO_COLABORACION = 'no' }
+ if(TIPO_INVESTIGACION == 1){ var nuc = 0;}else{ var nuc = document.getElementById("nuc").value; }
 
 
  //Arreglo de campos para validar con color rojo, si se agrega un nuevo campo, agregar en el arreglo para incluir en la validacion de color
  var arrayCamposValida = [ "FECHA_CAPTURA" , "ID_PAIS" , "ID_ESTADO_EMISOR" , "ID_MUNICIPIO" , "ID_EMISOR" , "FISCALIA" , "ID_TIPO_MANDATO" , "NO_MANDATO" , "ID_TIPO_PROCESO" , "EDO_ORDEN" , "FECHA_RECEPCION" ,
-                           "FECHA_OFICIO" , "ID_TIPO_CUANTIA" , "ID_FUERO_PROCESO" , "ID_PROCESO_EXTRADI" , "ID_ESTADO_JUZGADO" , "JUZGADO_COLABORACION" , "ID_JUZGADO" , "OFICIO_JUZGADO" , "FECHA_PRESCRIPCION" , "NO_CAUSA" , 
-                           "NO_PROCESO" , "FECHA_LIBRAMIENTO" , "TIPO_INVESTIGACION" , "nuc"  ];
+                           "FECHA_OFICIO" , "ID_TIPO_CUANTIA" , "ID_FUERO_PROCESO" , "ID_PROCESO_EXTRADI" , "ID_ESTADO_JUZGADO" , "JUZGADO_COLABORACION" , "ID_JUZGADO" , "OFICIO_JUZGADO" ,  "NO_CAUSA" , 
+                           "NO_PROCESO" , "FECHA_LIBRAMIENTO" , "TIPO_INVESTIGACION"   ];
  //Arreglo de variables de informacion, donde se verifica si hay informacion en dicha variable
  var arrayCamposData = [ FECHA_CAPTURA , ID_PAIS , ID_ESTADO_EMISOR , ID_MUNICIPIO , ID_EMISOR , FISCALIA , ID_TIPO_MANDATO, NO_MANDATO , ID_TIPO_PROCESO , EDO_ORDEN , FECHA_RECEPCION , FECHA_OFICIO , 
-                         ID_TIPO_CUANTIA , ID_FUERO_PROCESO , ID_PROCESO_EXTRADI , ID_ESTADO_JUZGADO , JUZGADO_COLABORACION , ID_JUZGADO , OFICIO_JUZGADO , FECHA_PRESCRIPCION , NO_CAUSA , NO_PROCESO , 
-                         FECHA_LIBRAMIENTO , TIPO_INVESTIGACION , nuc  ];
+                         ID_TIPO_CUANTIA , ID_FUERO_PROCESO , ID_PROCESO_EXTRADI , ID_ESTADO_JUZGADO , JUZGADO_COLABORACION , ID_JUZGADO , OFICIO_JUZGADO ,  NO_CAUSA , NO_PROCESO , 
+                         FECHA_LIBRAMIENTO , TIPO_INVESTIGACION ];
  //Bucle del tamaño de los campos, se verifica si la variable tiene información, si esta no tiene coloreamos el input de color rojo
  for(x = 0; x < arrayCamposValida.length; x++){
  	if($.trim(arrayCamposData[x]) == ""){
@@ -465,8 +534,8 @@ function validateDataMandamiento(){
 
 	if( FECHA_CAPTURA != "" && ID_PAIS != "" && ID_ESTADO_EMISOR != "" && ID_MUNICIPIO != "" && ID_EMISOR != "" && FISCALIA != "" && ID_TIPO_MANDATO != "" &&
 		   NO_MANDATO != "" && ID_TIPO_PROCESO != "" && EDO_ORDEN  != "" && FECHA_RECEPCION != "" && FECHA_OFICIO != "" && ID_TIPO_CUANTIA != "" && ID_FUERO_PROCESO != "" &&
-		   ID_PROCESO_EXTRADI != "" && ID_ESTADO_JUZGADO != "" && JUZGADO_COLABORACION != "" && ID_JUZGADO != ""  && OFICIO_JUZGADO != "" && FECHA_PRESCRIPCION != "" &&
-		   NO_CAUSA != "" && NO_PROCESO != "" && FECHA_LIBRAMIENTO != "" && TIPO_INVESTIGACION != "" &&  nuc != ""  ){
+		   ID_PROCESO_EXTRADI != "" && ID_ESTADO_JUZGADO != "" && JUZGADO_COLABORACION != "" && ID_JUZGADO != ""  && OFICIO_JUZGADO != ""  &&
+		   NO_CAUSA != "" && NO_PROCESO != "" && FECHA_LIBRAMIENTO != "" && TIPO_INVESTIGACION != ""  ){
 
 		if(ID_JUZGADO == 'no') ID_JUZGADO = 0;
 	if(JUZGADO_COLABORACION == 'no') JUZGADO_COLABORACION = '';

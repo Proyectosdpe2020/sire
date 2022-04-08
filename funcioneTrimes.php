@@ -1,6 +1,53 @@
 <? 
 
+function getDataAnteriores($conn, $quest, $idEnlace, $idUnidad, $anio, $periodo){
 
+	$query = "   SELECT val2017, val2018, val2019, val2020, val2021 FROM trimestral.datosAnteriorTrimestral WHERE idPregunta = $quest AND idEnlace = $idEnlace AND idUnidad = $idUnidad AND anio = $anio AND periodo = $periodo ";
+
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['val2017'];
+		$arreglo[$indice][1]=$row['val2018'];
+		$arreglo[$indice][2]=$row['val2019'];
+		$arreglo[$indice][3]=$row['val2020'];
+		$arreglo[$indice][4]=$row['val2021'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+	
+	}
+
+function getDAtaSIREQuestionEstatusResto($conn, $anio, $idUnidad, $estatus, $per, $numPeriodo){
+
+	if($numPeriodo == 1){ $periodo1 = "01-01-".$anio; $periodo2 = "31-03-".$anio; }
+	if($numPeriodo == 2){ $periodo1 = "01-04-".$anio; $periodo2 = "30-06-".$anio; }
+	if($numPeriodo == 3){ $periodo1 = "01-07-".$anio; $periodo2 = "30-09-".$anio; }
+	if($numPeriodo == 4){ $periodo1 = "01-10-".$anio; $periodo2 = "31-12-".$anio; }
+
+	$query = " SELECT COUNT(estNucCarpe.idEstatusNucsCarpetas) AS valor
+	FROM ESTADISTICAV2.dbo.estatusNucsCarpetas estNucCarpe 
+	INNER JOIN PRUEBA.dbo.Carpeta c ON c.CarpetaID = estNucCarpe.idCarpeta 
+	WHERE estNucCarpe.idUnidad $idUnidad
+	AND estNucCarpe.idEstatus = $estatus
+	AND estNucCarpe.idEstatusNucsCarpetas NOT IN (SELECT estNucCarpe.idEstatusNucsCarpetas
+	FROM ESTADISTICAV2.dbo.estatusNucsCarpetas estNucCarpe 
+	INNER JOIN PRUEBA.dbo.Carpeta c ON c.CarpetaID = estNucCarpe.idCarpeta 
+	WHERE estNucCarpe.idUnidad $idUnidad 
+	AND estNucCarpe.idEstatus = $estatus
+	AND FechaInicio  Between '$periodo1' AND '$periodo2'
+	AND estNucCarpe.mes  $per)";
+	
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['valor'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+	}
 
 function getDataQ($conn, $quest, $per, $anio, $idUnidad){
 
@@ -55,7 +102,8 @@ function getDataQ($conn, $quest, $per, $anio, $idUnidad){
 
 	$query = " SELECT COUNT(estNucCarpe.idCarpeta) as m
   FROM ESTADISTICAV2.dbo.estatusNucsCarpetas estNucCarpe INNER JOIN PRUEBA.dbo.Carpeta c ON c.CarpetaID = estNucCarpe.idCarpeta 
-  WHERE estNucCarpe.idUnidad $idUnidad AND estNucCarpe.mes IN($mes) AND estNucCarpe.idEstatus = $estatus AND estNucCarpe.anio = $anio AND YEAR(c.FechaInicio) = $anio AND MONTH(c.FechaInicio) $per ";
+  WHERE estNucCarpe.idUnidad $idUnidad AND estNucCarpe.mes IN($mes) AND estNucCarpe.idEstatus = $estatus AND estNucCarpe.anio = $anio 
+		AND YEAR(c.FechaInicio) = $anio AND MONTH(c.FechaInicio) $per ";
 
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
