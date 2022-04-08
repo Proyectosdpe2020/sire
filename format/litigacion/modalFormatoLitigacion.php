@@ -12,7 +12,6 @@ if (isset($_POST["mes"])){ $mes = $_POST["mes"]; }
 if (isset($_POST["anio"])){ $anio = $_POST["anio"]; }
 if (isset($_POST["idEnlace"])){ $idEnlace = $_POST["idEnlace"]; }
 
-
 $datosenlace = getIdFiscaliaEnlace($conn, $idEnlace);
 $idFiscalia = $datosenlace[0][0];		
 $idUsuario = $_SESSION['useridIE'];
@@ -536,7 +535,7 @@ if($datalit){  $a = 1;  }else{ 	$a = 0;  }
 									</div>
 								</div>
 								<div class="col-xs-12 col-sm-12 col-md-3">
-									<label class="colorLetras" for="inputlg">Obtención de datos conservados :</label>
+									<label class="colorLetras" for="inputlg">Obtención de datos reservados :</label>
 									<div class="iconiput">
 										<input type="number" placeholder="cantidad" class="first" id="obDatosReservados" onblur="sumActInvConJud(event)" value="<? if($a == 1 ){ echo $datalit[0][111]; } ?>"/>
 										<span onclick="sendDataModalLitigacion('obDatosReservados',117,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checkObDatosReservados"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>

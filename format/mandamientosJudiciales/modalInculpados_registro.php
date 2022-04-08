@@ -143,7 +143,7 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 								</div>
 								<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
 									<label for="PESO"><span class="glyphicon glyphicon-scale"></span> Peso (en kg):</label><br>
-				     <input type="text" class="form-control" id="PESO" placeholder="ESPECIFICA EL PESO (EN KG)" aria-describedby="sizing-addon1" onkeypress="return validaInput(event, 'int')" value="<?if($a == 1){ echo $PESO; } ?>" >
+				     <input type="number" class="form-control" id="PESO" placeholder="ESPECIFICA EL PESO (EN KG)" aria-describedby="sizing-addon1" onkeypress="return validaInput(event, 'int')" value="<?if($a == 1){ echo $PESO; } ?>" >
 								</div>
 								<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
 									<label for="CURP"><span class="glyphicon glyphicon-list-alt"></span> CURP:</label><br>
