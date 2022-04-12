@@ -119,6 +119,7 @@
 									if( $dataEnlaces[0][1] != 0){  //check if it has litigation
 										$validaEnlace = $dataEnlaces[0][1];
 										$has_litigation = true; 
+											if($idUn == 'IN(34)'){ $idUn = 'IN(167)'; }
 									}	
 									else{ 
 										$validaEnlace = $dataEnlaces[0][0];
