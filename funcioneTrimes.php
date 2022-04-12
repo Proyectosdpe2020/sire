@@ -64,7 +64,7 @@ function getDataQ($conn, $quest, $per, $anio, $idUnidad){
 	function getDAtaQuestion($conn, $quest, $per, $anio, $idUnidad){
 
 	$query = " SELECT m1, m2, m3, total FROM trimestral.seguimiento WHERE idPregunta = $quest AND idPeriodo = $per AND anio = $anio AND idUnidad = $idUnidad ";
-
+ //echo $query;
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
@@ -120,7 +120,7 @@ function getDataQ($conn, $quest, $per, $anio, $idUnidad){
  $query = " SELECT COUNT(idEstatusNucs) as mes FROM [ESTADISTICAV2].[dbo].[estatusNucs] INNER JOIN PRUEBA.dbo.Carpeta c ON c.CarpetaID = estatusNucs.idCarpeta
   WHERE idUnidad $idUnidad AND mes IN($mes) 
   AND idEstatus = $estatus AND anio = $anio AND YEAR(c.FechaInicio) = $anio AND MONTH(c.FechaInicio) $per ";
-//echo $query;
+echo $query.'<br>';
 
 
 
@@ -171,7 +171,7 @@ function getDataEnlaceMesValidaEnviado($conn, $mes, $anio, $idEnlace, $idFormato
 
 function getDataEnlacesByIdUnidad($conn, $idUnidad, $idEnlace){	
 	$query = " SELECT * FROM trimestral.enlaceUnidades where idUniCarp $idUnidad OR idUniLiti $idUnidad OR idEnlacTrimes = $idEnlace";
-	
+	//echo $query;
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
