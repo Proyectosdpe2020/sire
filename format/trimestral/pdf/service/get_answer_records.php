@@ -64,14 +64,17 @@ $sql = "SELECT s.idPregunta as 'number', p.nombre as 'question', s.anio as 'year
             WHEN 54 THEN 10
             WHEN 55 THEN 10
             ELSE 0 
-            END AS 'section' 
+            END AS 'section', 
+            SUM(dat.val2017+dat.val2018+dat.val2019+dat.val2020+dat.val2021) AS 'previous_years'
             FROM [ESTADISTICAV2].[trimestral].[seguimiento] s 
             INNER JOIN [ESTADISTICAV2].[trimestral].[pregunta] p 
             ON s.idPregunta = p.idPregunta
             INNER JOIN [ESTADISTICAV2].[trimestral].[periodo] pe 
             ON s.idPeriodo = pe.idPeriodo 
+            LEFT JOIN [ESTADISTICAV2].[trimestral].[datosAnteriorTrimestral] dat
+            ON s.idEnlace = dat.idEnlace AND s.idPeriodo = dat.periodo AND s.idPregunta = dat.idPregunta
             WHERE s.idEnlace = $link and pe.idPeriodo = $period and s.anio = $year
-            ORDER BY p.idPregunta";	
+            GROUP BY s.idPregunta,p.nombre,s.anio,pe.nombre,s.m1,s.m2,s.m3,pe.idPeriodo ORDER BY s.idPregunta";	
 
 
 $params = array();
@@ -91,6 +94,7 @@ if($row_count > 0){
                 'year' => $row['year'],
                 'period' => $row['period'],
                 'count' => array($row['m1'], $row['m2'], $row['m3']),
+                'previous_years' => $row['previous_years'],
                 'section' => $row['section'],
                 'period_id' => $row['period_id'],
                 'year' => $_POST['year'],
