@@ -2413,7 +2413,9 @@ function getTrimestralPeriodsAvailable($conn){
 					WHEN '3' THEN 'Julio - Septiembre'
 					WHEN '4' THEN 'Octubre - Diciembre'
 					END AS 'nPeriodo'
-				,e.estatus
+				,CASE
+					WHEN e.estatus = 'Activo' AND e.idAnio = anio THEN 'Activo'
+					END AS 'estatus'
 				FROM [ESTADISTICAV2].[trimestral].[seguimiento] s
 				FULL OUTER JOIN (
 					SELECT TOP 1
