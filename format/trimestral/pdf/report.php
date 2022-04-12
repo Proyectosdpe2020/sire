@@ -64,12 +64,18 @@ $pdf2->SetFont('Arial','',10);
 /*$pdf2->AliasNbPages();
 $pdf2->Cell(380, 2, 'Pagina ' . $pdf2->PageNo() . '/{nb}', 0, 0, 'C');
 */
+
+
+/*____________________________________________________________________________________Titulo______________________________________________________________________________*/
+
 $pdf2->Ln();
 $pdf2->SetFont('Arial','B',26);
 $pdf2->Cell(190, 10, iconv('UTF-8', 'windows-1252', 'INFORME TRIMESTRAL'), "", "", 'C');
 
 $pdf2->SetFont('Arial','B',14);
 $pdf2->Ln(15);
+
+/*____________________________________________________________________________________Subtitulo______________________________________________________________________________*/
 
 $pdf2->Cell(190, 7, iconv('UTF-8', 'windows-1252', 'INDICADORES ESTRATÉGICOS DEL MODELO DE EVALUACIÓN'), "", "", 'C');
 
@@ -85,6 +91,8 @@ $pdf2->Ln();
 $pdf2->SetFont('Arial','',10);
 
 $pdf2->Ln(10);
+
+/*____________________________________________________________________________________Info por unidad______________________________________________________________________________*/
 
 $pdf2->SetFont('','B','');
 $pdf2->Cell(20, 7, iconv('UTF-8', 'windows-1252', 'Trimestre:'), "", "", 'L');
@@ -133,11 +141,13 @@ $pdf2->Cell(17, 7, iconv('UTF-8', 'windows-1252', 'Unidad:'), "", "", 'L');
 $pdf2->SetFont('','','');
 $pdf2->MultiCell(150,7,iconv('UTF-8', 'windows-1252', $ur), 'J');
 
+/*_______________________________________________________________________________________________________________________________________________________________________*/
+
 $pdf2->Ln(1);
 
 $pdf2->SetFont('', '', 12);
 
-$w = array(
+/*$w = array(
     array(10, 90, 20, 20, 20, 30),
     array(10, 90, 20, 20, 20, 30),
     array(10, 90, 20, 20, 20, 30),
@@ -148,6 +158,22 @@ $w = array(
     array(10, 90, 20, 20, 20, 30),
     array(10, 90, 20, 20, 20, 30),
     array(10, 90, 20, 20, 20, 30)
+);*/
+
+
+/*____________________________________________________________________________________Tamaño columnas ______________________________________________________________________________*/
+
+$w = array(
+    array(8, 86, 19, 20, 20, 20, 16),
+    array(8, 86, 19, 20, 20, 20, 16),
+    array(8, 86, 19, 20, 20, 20, 16),
+    array(8, 86, 19, 20, 20, 20, 16),
+    array(8, 86, 19, 20, 20, 20, 16),
+    array(8, 86, 19, 20, 20, 20, 16),
+    array(8, 86, 19, 20, 20, 20, 16),
+    array(8, 86, 19, 20, 20, 20, 16),
+    array(8, 86, 19, 20, 20, 20, 16),
+    array(8, 86, 19, 20, 20, 20, 16)
 );
 
 for($i = 0; $i < 10; $i++){
@@ -173,13 +199,14 @@ function set_table_header($pdf2, $records, $periods, $header, $w){
     $pdf2->SetTextColor(0);
     $pdf2->SetFont('','');
 
-    $pdf2->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C'));
+    $pdf2->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C'));
     
     $pdf2->SetWidths($w);
 
     
 
     $pdf2->SetFillColors(array(
+        array(124, 139, 158),
         array(124, 139, 158),
         array(124, 139, 158),
         array(124, 139, 158),
@@ -192,6 +219,7 @@ function set_table_header($pdf2, $records, $periods, $header, $w){
     $pdf2->Row(array(
         iconv('UTF-8', 'windows-1252', 'N°'),
         iconv('UTF-8', 'windows-1252', $header),
+        iconv('UTF-8', 'windows-1252', 'Años anteriores'),
         $periods[$records[0]['period_id']][0],
         $periods[$records[0]['period_id']][1],
         $periods[$records[0]['period_id']][2],
@@ -211,7 +239,7 @@ function set_table_content($pdf2, $records, $section, $w){
     $pdf2->SetTextColor(0);
     $pdf2->SetFont('');
 
-    $pdf2->SetAligns(array('C', 'L', 'C', 'C', 'C', 'C'));
+    $pdf2->SetAligns(array('C', 'L', 'C', 'C', 'C', 'C', 'C'));
 
     $pdf2->SetWidths($w);
 
@@ -220,6 +248,7 @@ function set_table_content($pdf2, $records, $section, $w){
         if($records[$i]['section'] == $section){
 
             $pdf2->SetFillColors(array(
+                array(255, 255, 255),
                 array(255, 255, 255),
                 array(255, 255, 255),
                 array(255, 255, 255),
@@ -254,17 +283,18 @@ function set_table_content($pdf2, $records, $section, $w){
             $pdf2->Row(array(
                 iconv('UTF-8', 'windows-1252', $section.'.'.$n),
                 iconv('UTF-8', 'windows-1252', $records[$i]['question']),
+                $records[$i]['previous_years'],
                 $records[$i]['count'][0],
                 $records[$i]['count'][1],
                 $records[$i]['count'][2],
-                $records[$i]['count'][0]+$records[$i]['count'][1]+$records[$i]['count'][2]
+                $records[$i]['count'][0]+$records[$i]['count'][1]+$records[$i]['count'][2]+$records[$i]['previous_years']
             ),'c');
             
             $ind = true;
 
             $n++;
 
-            $total+=$records[$i]['count'][0]+$records[$i]['count'][1]+$records[$i]['count'][2];
+            $total+=$records[$i]['count'][0]+$records[$i]['count'][1]+$records[$i]['count'][2]+$records[$i]['previous_years'];
 
         }
 
@@ -352,8 +382,8 @@ function set_table_total($pdf2, $records, $section, $w, $total){
     $pdf2->SetFont('','B');
 
     $pdf2->Cell($w[0],6,iconv('UTF-8', 'windows-1252', ""),1,0,'C',0);
-    $pdf2->Cell($w[1]+$w[2]+$w[3]+$w[4],6,iconv('UTF-8', 'windows-1252', "Total"),1,0,'L',0);
-    $pdf2->Cell($w[5],6,iconv('UTF-8', 'windows-1252', $total),1,0,'C',0);
+    $pdf2->Cell($w[1]+$w[2]+$w[3]+$w[4]+$w[5],6,iconv('UTF-8', 'windows-1252', "Total"),1,0,'L',0);
+    $pdf2->Cell($w[6],6,iconv('UTF-8', 'windows-1252', $total),1,0,'C',0);
     $pdf2->Ln();
     
 }
@@ -490,8 +520,8 @@ function set_sign_field($pdf2, $user, $position, $involved_people){
     
     $pdf2->Ln(5);
 
-    $pdf2->Cell(70, 70, iconv('UTF-8', 'windows-1252', 'Elaboró'), "", "", 'C');
-    $pdf2->Cell(170, 70, iconv('UTF-8', 'windows-1252', 'Validó'), "", "", 'C');
+    $pdf2->Cell(70, 70, iconv('UTF-8', 'windows-1252', $involved_people['elaborated_by']['function']), "", "", 'C');
+    $pdf2->Cell(170, 70, iconv('UTF-8', 'windows-1252', $involved_people['validated_by']['function']), "", "", 'C');
     $pdf2->Ln(15);
     $pdf2->Cell(70, 70, iconv('UTF-8', 'windows-1252', $involved_people['elaborated_by']['name']), "", "", 'C');
     $pdf2->Cell(170, 70, iconv('UTF-8', 'windows-1252',  $involved_people['validated_by']['name']), "", "", 'C');
