@@ -414,6 +414,7 @@
 									if( $dataEnlaces[0][1] != 0){  //check if it has litigation
 										$validaEnlace = $dataEnlaces[0][1];
 										$has_litigation = true; 
+										if($idUn == 'IN(34)'){ $idUn = 'IN(167)'; }
 									}	
 									else{ 
 										$validaEnlace = $dataEnlaces[0][0];
@@ -438,17 +439,20 @@
 									}
 
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
-
+           echo 'for';
 										if($has_captured){ //set value if has captured or not
 
 											$quest_value =  $data[0][$o]; 
 											$tota += $data[0][$o];
-										}
-										else{
-											if($has_litigation){ 
-												
-												$data = getDAtaSIREQuestionEstatus($conn , $arr[$o] , $anio, $idUn, 19, $per1);
 
+										}
+
+										else{
+
+											if($has_litigation){ 
+					
+												$data = getDAtaSIREQuestionEstatusLiti($conn , $arr[$o] , $anio, $idUn, 151, $per1);
+       
 												if($data_sended){ //all trimester sended
 													$quest_value = $data[0][0];
 													$tota += $data[0][0];
