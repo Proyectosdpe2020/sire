@@ -3,7 +3,8 @@ include ("../../Conexiones/Conexion.php");
 include("../../Conexiones/conexionSIMAJ.php");	
 include("../../funcionesMandamientos.php");	
 
-$fecha_actual=date("d/m/Y");
+$fecha_actual=date("Y-m-d");
+//$fecha_actual=date("d/m/Y");
 $fecha=strftime( "%Y-%m-%d %H:%M:%S", time() );
 $anioActual = date("Y");
 $hoy = date("Y-m-d");//Fecha calendario
@@ -276,14 +277,14 @@ if(sizeof($get_data_inculpado) > 0 ){
 						<option class="fontBold" value="">Seleccione la entidad del juzgado</option>
 							  <? $juzgado = getJuzgado($connSIMAJ, $id_juzgado = 16);
 			 					for ($i=0; $i < sizeof($juzgado); $i++) { 
-			 						$cv_juzgado = $juzgado [$i][1];	$descrip_juzgado = $juzgado[$i][2]; ?>
+			 						$cv_juzgado = $juzgado [$i][0];	$descrip_juzgado = $juzgado[$i][2]; ?>
 			 					<option class="fontBold" value="<? echo $cv_juzgado; ?>" <?if($cv_juzgado == 1036){ ?> selected <? } ?> ><? echo $descrip_juzgado; ?></option>
 			 					<? } 
 			 				}elseif($a == 1){?>
 										<? $juzgado  = getJuzgado($connSIMAJ, $ID_ESTADO_JUZGADO);
 										   if(sizeof($juzgado ) > 0 ){
 										   	for ($i=0; $i < sizeof($juzgado); $i++) { 
-										   		$cv_juzgado = $juzgado[$i][1];	$descrip_juzgado = $juzgado [$i][2]; ?>
+										   		$cv_juzgado = $juzgado[$i][0];	$descrip_juzgado = $juzgado [$i][2]; ?>
 										   		<option class="fontBold" value="<? echo $cv_juzgado; ?>" <?if($cv_juzgado == $ID_JUZGADO){ ?> selected <? } ?> ><? echo $descrip_juzgado; ?></option>
 										 <? } 
 										  }else{ ?>

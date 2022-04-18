@@ -52,7 +52,7 @@ function showModal_agraviados(tipoModal, idEnlace, idUnidad, idfisca, ID_MANDAMI
 		var contentArrayData = JSON.parse(dataValidate[1]); //Obtenemos la informacion del arreglo
 		console.log("info: "+contentArrayData[1]); //NUC
 		var nuc = contentArrayData[26];
-		var existeNuc; 
+		var existeNuc;  
 		var dataPrincipalArray = {};  
 		for(i in contentArrayData){  dataPrincipalArray[i] = contentArrayData[i];   }
 		dataPrincipalArray = JSON.stringify(dataPrincipalArray);
