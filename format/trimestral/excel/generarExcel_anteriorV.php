@@ -176,38 +176,9 @@ $sheet->mergeCells('A66:A69');
 $sheet->mergeCells('A70:A72');
 
 /*****TERMINA COMBINAR CELDAS*******/
-if($getAnio >= 2022){
-$sheet->setCellValue('C14', "CII 2017"); 
-$sheet->setCellValue('D14', "CII 2018"); 
-$sheet->setCellValue('E14', "CII 2019"); 
-$sheet->setCellValue('F14', "CII 2020"); 
-$sheet->setCellValue('G14', "CII 2021"); 
 
 
-$query = "SELECT p.nombre
-      ,s.idPregunta
-   ,SUM(CASE WHEN (s.periodo = 1 AND s.anio = $getAnio) then s.val2017 end) as VAL2017
-   ,SUM(CASE WHEN (s.periodo = 1 AND s.anio = $getAnio) then s.val2018 end) as VAL2018
-   ,SUM(CASE WHEN (s.periodo = 1 AND s.anio = $getAnio) then s.val2019 end) as VAL2019
-   ,SUM(CASE WHEN (s.periodo = 1 AND s.anio = $getAnio) then s.val2020 end) as VAL2020
-   ,SUM(CASE WHEN (s.periodo = 1 AND s.anio = $getAnio) then s.val2021 end) as VAL2021
-  FROM [ESTADISTICAV2].[trimestral].[datosAnteriorTrimestral] s
-LEFT JOIN trimestral.pregunta p ON p.idPregunta = s.idPregunta
-GROUP BY p.nombre , s.idPregunta
-ORDER BY s.idPregunta ASC";
- $stmt = sqlsrv_query($conn, $query);
- $cont1 = 24; 
- while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC )) {
-  $sheet->setCellValue('C'.(string)($cont1), $row['VAL2017']);
-  $sheet->setCellValue('D'.(string)($cont1), $row['VAL2018']);
-  $sheet->setCellValue('E'.(string)($cont1), $row['VAL2019']);
-  $sheet->setCellValue('F'.(string)($cont1), $row['VAL2020']);
-  $sheet->setCellValue('G'.(string)($cont1), $row['VAL2021']);
-  $cont1+=1;
- } 
-}
-
-if($getAnio >= 2022){ $col = 'H'; }else{ $col = 'C'; }
+$col = 'C';
 $contTrimestre = 1;
 $trimestre = 'trimestre'.$contTrimestre;
 $ultimaColumna = "";
@@ -273,9 +244,8 @@ for($i=14; $i<$cont; $i++){
 }
 
 /*AQUI SE COLOREAN LOS ENCABEZADOS DE CADA TRIMESTRE*/
-if($getAnio >= 2022){ $totalEncabezados = 9; }else{ $totalEncabezados = 4; }
 $indiceEncabezado = 'C';
-for($j = 1; $j <= $totalEncabezados; $j++){
+for($j = 1; $j <= count($getPeriodo); $j++){
   if(($j)%2 == 0){
    $sheet->getStyle($indiceEncabezado.'14')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('996633');
    $sheet->getColumnDimension($indiceEncabezado)->setWidth(20);
