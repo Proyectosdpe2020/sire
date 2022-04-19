@@ -170,7 +170,7 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 							<div class="row">
 								<div class="col-xs-12 col-sm-12  col-md-12 ">
 									<label for="OBSERVACIONES_inculpado">Observaciones:</label>
-									<textarea class="form-control" id="OBSERVACIONES_inculpado" rows="4" aria-describedby="sizing-addon1" placeholder="ESPECIFICA LA OBSERVACION MANDAMIENTOS" maxlength="100" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); " onkeypress="return validaInput(event, 'varchar')"><?if($a == 1){ echo $OBSERVACIONES_inculpado; } ?></textarea>
+									<textarea class="form-control" id="OBSERVACIONES_inculpado" rows="4" aria-describedby="sizing-addon1" placeholder="ESPECIFICA LA OBSERVACION MANDAMIENTOS" maxlength="3500" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); " onkeypress="return validaInput(event, 'varchar')"><?if($a == 1){ echo $OBSERVACIONES_inculpado; } ?></textarea>
 								</div>	
 							</div><br>
 							<div class="row">

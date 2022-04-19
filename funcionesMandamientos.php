@@ -83,7 +83,7 @@ function getFiscaliaRegional($connSIMAJ, $cv_municipio){
 }
 //CATALOGO DE MANDAMIENTOS
 function getMandamiento($connSIMAJ){
-	$query = " SELECT cv_mandato, tipo FROM SIMAJ.catalogos.tipo_mandato";
+	$query = " SELECT cv_mandato, tipo FROM SIMAJ.catalogos.tipo_mandato WHERE cv_mandato in (1,5,7)";
 	$indice = 0;
 	$stmt = sqlsrv_query($connSIMAJ, $query);
 	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC )){
