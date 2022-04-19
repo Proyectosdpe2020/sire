@@ -406,8 +406,12 @@ if(sizeof($get_data_inculpado) > 0 ){
 								<div class="panel-body">
 									<div class="row">
 										<div class="col-xs-12 col-sm-12  col-md-4">
-											<?if(sizeof($existe_inculpado) == 0  ){ ?>
-											<button type="button" class="btn btn-primary btn-lg" href="#inculpados" onclick="showModal_inculpados(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?>)"><span class="glyphicon glyphicon-plus"></span> Agregar inculpado</button><? } ?>
+											<?if(sizeof($existe_inculpado) == 0  ){ 
+												if($idEnlace == 353){?>
+											<button type="button" class="btn btn-primary btn-lg" href="#inculpados" onclick="showModal_inculpados_av(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?>)"><span class="glyphicon glyphicon-plus"></span> Agregar inculpado</button>
+										<? }else{ ?>
+												<button type="button" class="btn btn-primary btn-lg" href="#inculpados" onclick="showModal_inculpados(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?>)"><span class="glyphicon glyphicon-plus"></span> Agregar inculpado</button>
+										 <? } }?>
 										</div>
 								 </div><br>
 									<div class="row">
@@ -648,7 +652,10 @@ if(sizeof($get_data_inculpado) > 0 ){
 								<div class="panel-body">
 									<div class="row">
 										<div class="col-xs-12 col-sm-12  col-md-3">
-											<button type="button" href="#agraviados" class="btn btn-primary btn-lg" style="width: 100%;" onclick="showModal_agraviados(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , 0 , 0)"><span class="glyphicon glyphicon-plus"></span> Agregar agraviado</button>
+											<?if($idEnlace == 353){?>
+											<button type="button" href="#agraviados" class="btn btn-primary btn-lg" style="width: 100%;" onclick="showModal_agraviados_av(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , 0 , 0)"><span class="glyphicon glyphicon-plus"></span> Agregar agraviado</button><? }else{ ?>
+												<button type="button" href="#agraviados" class="btn btn-primary btn-lg" style="width: 100%;" onclick="showModal_agraviados(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , 0 , 0)"><span class="glyphicon glyphicon-plus"></span> Agregar agraviado</button>
+											<? } ?>
 										</div>
 									</div><br>
 									<div class="row">
@@ -740,9 +747,15 @@ if(sizeof($get_data_inculpado) > 0 ){
 	
 <div class="modal-footer">
 	<div class="row">
+	<?if($idEnlace == 353 || $idEnlace == 347){ ?>
 		<div class="col-xs-12 col-sm-12  col-md-6 col-md-offset-3">
+			<button type="button" class="btn btn-primary btn-lg" style="width: 100%;" onclick="guardar_mandamiento_av(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , <?echo sizeof($existe_inculpado);  ?>)"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar información</button>
+		</div>
+	 <? }else{ ?>
+	 	<div class="col-xs-12 col-sm-12  col-md-6 col-md-offset-3">
 			<button type="button" class="btn btn-primary btn-lg" style="width: 100%;" onclick="guardar_mandamiento(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , <?echo sizeof($existe_inculpado);  ?>)"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar información</button>
 		</div>
+	 <? } ?>
 		<div class="col-xs-12 col-sm-12  col-md-3">
 			<button type="button" class="btn btn-default btn-lg" data-dismiss="modal" onclick="closeModal_mandamientos(<? echo $idEnlace; ?>,<?echo $idfisca; ?>, <?echo $idUnidad; ?>)" >Cerrar</button>
 		</div>
