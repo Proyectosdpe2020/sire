@@ -94,7 +94,7 @@ if(sizeof($get_data_inculpado) > 0 ){
 	<div class="panel panel-default fd1">
 		<div class="panel-body">
 			<h5 class="text-on-pannel"><strong>Datos generales</strong></h5>
-   <div class="row">
+   <div class="row" hidden>
    	<div class="col-xs-12 col-sm-12  col-md-3 col-md-offset-10 input-group-lg">
 					<div class="checkbox" >
 			    <h4><label><input type="checkbox" id="colaboracion" onchange="reload_juzgados()" <?if($a == 1 && $COLABORACION == 1){ ?> checked <? } ?> ><a>Es una colaboración</a></label></h4>
@@ -201,7 +201,7 @@ if(sizeof($get_data_inculpado) > 0 ){
 				</div>
 				<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
 					<label for="EDO_ORDEN">Estado del mandamiento:</label><br>
-					<select class="form-control" id="EDO_ORDEN">
+					<select class="form-control" id="EDO_ORDEN" disabled>
 							  <? $estatus = getEstadoMandamiento($connSIMAJ);
 			 					for ($i=0; $i < sizeof($estatus); $i++) { 
 			 						$cv_est_act_man = $estatus[$i][0];	$tipo = $estatus[$i][1]; ?>
@@ -221,7 +221,7 @@ if(sizeof($get_data_inculpado) > 0 ){
 				</div>
 				<div class="col-xs-12 col-sm-12  col-md-2 input-group-lg">
 					<label for="ID_TIPO_CUANTIA"><span class="glyphicon glyphicon-exclamation-sign"></span> Tipo cuantia *:</label><br>
-					<select class="form-control" id="ID_TIPO_CUANTIA" onchange="validateCampo_OK(this.id)">
+					<select class="form-control" id="ID_TIPO_CUANTIA" onchange="validateCampo_OK(this.id)" disabled>
 							<option class="fontBold" value="">Seleccione el tipo</option>
 							  <? $cuantia = getTipoCuantia($connSIMAJ);
 			 					for ($i=0; $i < sizeof($cuantia); $i++) { 
@@ -232,7 +232,7 @@ if(sizeof($get_data_inculpado) > 0 ){
 				</div>
 				<div class="col-xs-12 col-sm-12  col-md-2 input-group-lg">
 					<label for="ID_FUERO_PROCESO">Fuero:</label><br>
-					<select class="form-control" id="ID_FUERO_PROCESO" onchange="validateCampo_OK(this.id)">
+					<select class="form-control" id="ID_FUERO_PROCESO" onchange="validateCampo_OK(this.id)" disabled>
 						<option class="fontBold" value="">Seleccione el fuero</option>
 							  <? $fuero = getFuero($connSIMAJ);
 			 					for ($i=0; $i < sizeof($fuero); $i++) { 
@@ -243,7 +243,7 @@ if(sizeof($get_data_inculpado) > 0 ){
 				</div>
 				<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
 					<label for="ID_PROCESO_EXTRADI"><span class="glyphicon glyphicon-plane"></span> Proceso de extradición *:</label><br>
-					<select class="form-control" id="ID_PROCESO_EXTRADI" onchange="validateCampo_OK(this.id)">
+					<select class="form-control" id="ID_PROCESO_EXTRADI" onchange="validateCampo_OK(this.id)" disabled>
 						<option class="fontBold" value="">Seleccione si hubo proceso</option>
 							  <? $extradicion = getProcesoExtradicion($connSIMAJ);
 			 					for ($i=0; $i < sizeof($extradicion); $i++) { 
@@ -256,7 +256,7 @@ if(sizeof($get_data_inculpado) > 0 ){
 			<div class="row">
 				<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
 					<label for="ID_ESTADO_JUZGADO"><span class="glyphicon glyphicon-map-marker"></span> Entidad de la información *:</label><br>
-					<select class="form-control" id="ID_ESTADO_JUZGADO" onchange="reload_juzgados(),validateCampo_OK(this.id)">
+					<select class="form-control" id="ID_ESTADO_JUZGADO" onchange="reload_juzgados(),validateCampo_OK(this.id)" disabled>
 						<option class="fontBold" value="">Seleccione la entidad</option>
 							  <? $entidades_juzgado = getEntidades($connSIMAJ);
 			 					for ($i=0; $i < sizeof($entidades_juzgado); $i++) { 
@@ -352,9 +352,9 @@ if(sizeof($get_data_inculpado) > 0 ){
 				</div>
 			<? } ?>
 			</div><br>
-			<div class="row">
+			<div class="row" hidden>
 				<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
-					<div class="checkbox" id="acumulacion" onchange="exist_acum(<?echo $a; ?>)" >
+					<div class="checkbox" id="acumulacion" onchange="exist_acum(<?echo $a; ?>)">
 			    <h3><label data-toggle="collapse" data-target="#collapseExample" ><input type="checkbox" <?if( $a == 1 && ($ACUMULADO_PROCESO != '' ||
 			    $ACUMULADO_AVERIGUACION != '' ) ){ ?> checked <? } ?> ><a>Hay acumulación</a></label></h3>
 			  </div>
