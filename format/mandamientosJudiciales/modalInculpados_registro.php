@@ -195,7 +195,11 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 <div class="modal-footer">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12  col-md-6 col-md-offset-3">
+			<?if($idEnlace == 353){ ?>
+			<button type="button" class="btn btn-primary btn-lg" style="width: 100%;" onclick="guardar_mandamiento_inculpado_av(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , '<?echo $tipoActualizacion; ?>' , <?echo $GET_ID_MANDAMIENTO_INTERNO; ?>)"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar información</button>
+		<? }else {?>
 			<button type="button" class="btn btn-primary btn-lg" style="width: 100%;" onclick="guardar_mandamiento_inculpado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , '<?echo $tipoActualizacion; ?>' , <?echo $GET_ID_MANDAMIENTO_INTERNO; ?>)"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar información</button>
+		<? } ?>
 		</div>
 		<div class="col-xs-12 col-sm-12  col-md-3">
 			<button type="button" class="btn btn-default btn-lg" data-dismiss="modal" onclick="closeModal_inculpados()" >Cerrar</button>
