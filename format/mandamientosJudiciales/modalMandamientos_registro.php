@@ -65,7 +65,7 @@ if(sizeof($get_data_inculpado) > 0 ){
 		$CARPETA_INV = $mandamientoData[0][21];
 		$FECHA_CAPTURA = $mandamientoData[0][22]->format('Y-m-d');
 		$FECHA_RECEPCION = $mandamientoData[0][23]->format('Y-m-d');
-		$FECHA_PRESCRIPCION = $mandamientoData[0][24]->format('Y-m-d');
+		//$FECHA_PRESCRIPCION = $mandamientoData[0][24]->format('Y-m-d');
 		$OBSERVACIONES = $mandamientoData[0][25];
 		$ID_PROCESO_EXTRADI = $mandamientoData[0][26];
 		$ID_TIPO_PROCESO = $mandamientoData[0][27];
@@ -299,7 +299,7 @@ if(sizeof($get_data_inculpado) > 0 ){
 				</div>
 				<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
 					<label for="FECHA_PRESCRIPCION"><span class="glyphicon glyphicon-calendar"></span> Fecha de prescripción:</label><br>
-					<input type="date" class="form-control" id="FECHA_PRESCRIPCION" aria-describedby="sizing-addon1" onchange="validateCampo_OK(this.id)" value="<?if($a == 1){echo $FECHA_PRESCRIPCION; } ?>" >
+					<input type="date" class="form-control" id="FECHA_PRESCRIPCION" aria-describedby="sizing-addon1" onchange="validateCampo_OK(this.id)" value="<?if($a == 1){echo $FECHA_PRESCRIPCION; } ?>" disabled >
 				</div>
 			</div><br>
 			<div class="row">

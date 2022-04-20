@@ -288,7 +288,7 @@ function getData_Mandamiento($conn, $ID_MANDAMIENTO_INTERNO){
 		$arreglo[$indice][21]=$row['CARPETA_INV'];
 		$arreglo[$indice][22]=$row['FECHA_CAPTURA'];
 		$arreglo[$indice][23]=$row['FECHA_RECEPCION'];
-		$arreglo[$indice][24]=$row['FECHA_PRESCRIPCION'];
+		//$arreglo[$indice][24]=$row['FECHA_PRESCRIPCION'];
 		$arreglo[$indice][25]=$row['OBSERVACIONES'];
 		$arreglo[$indice][26]=$row['ID_PROCESO_EXTRADI'];
 		$arreglo[$indice][27]=$row['ID_TIPO_PROCESO'];
