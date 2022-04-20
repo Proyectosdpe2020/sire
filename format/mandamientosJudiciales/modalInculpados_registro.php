@@ -139,7 +139,7 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 								</div>
 								<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
 									<label for="ESTATURA"><span class="glyphicon glyphicon-align-justify"></span> Estatura (en cm) :</label><br>
-				 				<input type="int" class="form-control" id="ESTATURA" placeholder="ESPECIFICA LA ESTATURA EN CM" aria-describedby="sizing-addon1" onkeypress="return validaInput(event, 'int')" value="<?if($a == 1){ echo $ESTATURA; } ?>" >
+				 				<input type="text" class="form-control" id="ESTATURA" placeholder="ESPECIFICA LA ESTATURA EN CM" aria-describedby="sizing-addon1"  onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" value="<?if($a == 1){ echo $ESTATURA; } ?>" >
 								</div>
 								<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
 									<label for="PESO"><span class="glyphicon glyphicon-scale"></span> Peso (en kg):</label><br>
