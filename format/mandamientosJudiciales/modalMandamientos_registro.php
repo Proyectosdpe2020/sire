@@ -747,7 +747,7 @@ if(sizeof($get_data_inculpado) > 0 ){
 	
 <div class="modal-footer">
 	<div class="row">
-	<?if($idEnlace == 353 || $idEnlace == 347){ ?>
+	<?if($idEnlace == 353 ){ ?>
 		<div class="col-xs-12 col-sm-12  col-md-6 col-md-offset-3">
 			<button type="button" class="btn btn-primary btn-lg" style="width: 100%;" onclick="guardar_mandamiento_av(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , <?echo sizeof($existe_inculpado);  ?>)"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar información</button>
 		</div>
