@@ -436,7 +436,7 @@ function validateDataMandamiento(){
  var JUZGADO_COLABORACION = document.getElementById("JUZGADO_COLABORACION").value;
  var ID_JUZGADO = document.getElementById("ID_JUZGADO").value;
  var OFICIO_JUZGADO = document.getElementById("OFICIO_JUZGADO").value;
- var FECHA_PRESCRIPCION = document.getElementById("FECHA_PRESCRIPCION").value;
+ //var FECHA_PRESCRIPCION = document.getElementById("FECHA_PRESCRIPCION").value;
  var NO_CAUSA = document.getElementById("NO_CAUSA").value;
  var NO_PROCESO = document.getElementById("NO_PROCESO").value;
  var FECHA_LIBRAMIENTO = document.getElementById("FECHA_LIBRAMIENTO").value;
@@ -453,11 +453,11 @@ function validateDataMandamiento(){
 
  //Arreglo de campos para validar con color rojo, si se agrega un nuevo campo, agregar en el arreglo para incluir en la validacion de color
  var arrayCamposValida = [ "FECHA_CAPTURA" , "ID_PAIS" , "ID_ESTADO_EMISOR" , "ID_MUNICIPIO" , "ID_EMISOR" , "FISCALIA" , "ID_TIPO_MANDATO" , "NO_MANDATO" , "ID_TIPO_PROCESO" , "EDO_ORDEN" , "FECHA_RECEPCION" ,
-                           "FECHA_OFICIO" , "ID_TIPO_CUANTIA" , "ID_FUERO_PROCESO" , "ID_PROCESO_EXTRADI" , "ID_ESTADO_JUZGADO" , "JUZGADO_COLABORACION" , "ID_JUZGADO" , "OFICIO_JUZGADO" , "FECHA_PRESCRIPCION" , "NO_CAUSA" , 
+                           "FECHA_OFICIO" , "ID_TIPO_CUANTIA" , "ID_FUERO_PROCESO" , "ID_PROCESO_EXTRADI" , "ID_ESTADO_JUZGADO" , "JUZGADO_COLABORACION" , "ID_JUZGADO" , "OFICIO_JUZGADO" , "NO_CAUSA" , 
                            "NO_PROCESO" , "FECHA_LIBRAMIENTO" , "TIPO_INVESTIGACION" , "nuc"  ];
  //Arreglo de variables de informacion, donde se verifica si hay informacion en dicha variable
  var arrayCamposData = [ FECHA_CAPTURA , ID_PAIS , ID_ESTADO_EMISOR , ID_MUNICIPIO , ID_EMISOR , FISCALIA , ID_TIPO_MANDATO, NO_MANDATO , ID_TIPO_PROCESO , EDO_ORDEN , FECHA_RECEPCION , FECHA_OFICIO , 
-                         ID_TIPO_CUANTIA , ID_FUERO_PROCESO , ID_PROCESO_EXTRADI , ID_ESTADO_JUZGADO , JUZGADO_COLABORACION , ID_JUZGADO , OFICIO_JUZGADO , FECHA_PRESCRIPCION , NO_CAUSA , NO_PROCESO , 
+                         ID_TIPO_CUANTIA , ID_FUERO_PROCESO , ID_PROCESO_EXTRADI , ID_ESTADO_JUZGADO , JUZGADO_COLABORACION , ID_JUZGADO , OFICIO_JUZGADO , NO_CAUSA , NO_PROCESO , 
                          FECHA_LIBRAMIENTO , TIPO_INVESTIGACION , nuc  ];
  //Bucle del tamaño de los campos, se verifica si la variable tiene información, si esta no tiene coloreamos el input de color rojo
  for(x = 0; x < arrayCamposValida.length; x++){
@@ -469,7 +469,7 @@ function validateDataMandamiento(){
 
 	if( FECHA_CAPTURA != "" && ID_PAIS != "" && ID_ESTADO_EMISOR != "" && ID_MUNICIPIO != "" && ID_EMISOR != "" && FISCALIA != "" && ID_TIPO_MANDATO != "" &&
 		   NO_MANDATO != "" && ID_TIPO_PROCESO != "" && EDO_ORDEN  != "" && FECHA_RECEPCION != "" && FECHA_OFICIO != "" && ID_TIPO_CUANTIA != "" && ID_FUERO_PROCESO != "" &&
-		   ID_PROCESO_EXTRADI != "" && ID_ESTADO_JUZGADO != "" && JUZGADO_COLABORACION != "" && ID_JUZGADO != ""  && OFICIO_JUZGADO != "" && FECHA_PRESCRIPCION != "" &&
+		   ID_PROCESO_EXTRADI != "" && ID_ESTADO_JUZGADO != "" && JUZGADO_COLABORACION != "" && ID_JUZGADO != ""  && OFICIO_JUZGADO != ""  &&
 		   NO_CAUSA != "" && NO_PROCESO != "" && FECHA_LIBRAMIENTO != "" && TIPO_INVESTIGACION != "" &&  nuc != ""  ){
 
 		if(ID_JUZGADO == 'no') ID_JUZGADO = 0;
@@ -495,7 +495,7 @@ function validateDataMandamiento(){
   dataGenerales[17] = JUZGADO_COLABORACION;
   dataGenerales[18] = ID_JUZGADO;
   dataGenerales[19] = OFICIO_JUZGADO.trim();
-  dataGenerales[20] = FECHA_PRESCRIPCION;
+  //dataGenerales[20] = FECHA_PRESCRIPCION;
   dataGenerales[21] = NO_CAUSA.trim();
   dataGenerales[22] = NO_PROCESO.trim();
   dataGenerales[23] = FECHA_LIBRAMIENTO;
@@ -1453,7 +1453,7 @@ function validateDataMandamiento_av(){
  var JUZGADO_COLABORACION = document.getElementById("JUZGADO_COLABORACION").value;
  var ID_JUZGADO = document.getElementById("ID_JUZGADO").value;
  var OFICIO_JUZGADO = document.getElementById("OFICIO_JUZGADO").value;
- var FECHA_PRESCRIPCION = document.getElementById("FECHA_PRESCRIPCION").value;
+ //var FECHA_PRESCRIPCION = document.getElementById("FECHA_PRESCRIPCION").value;
  var NO_CAUSA = document.getElementById("NO_CAUSA").value;
  var NO_PROCESO = document.getElementById("NO_PROCESO").value;
  var FECHA_LIBRAMIENTO = document.getElementById("FECHA_LIBRAMIENTO").value;
@@ -1470,11 +1470,11 @@ function validateDataMandamiento_av(){
 
  //Arreglo de campos para validar con color rojo, si se agrega un nuevo campo, agregar en el arreglo para incluir en la validacion de color
  var arrayCamposValida = [ "FECHA_CAPTURA" , "ID_PAIS" , "ID_ESTADO_EMISOR" , "ID_MUNICIPIO" , "ID_EMISOR" , "FISCALIA" , "ID_TIPO_MANDATO" , "NO_MANDATO" , "ID_TIPO_PROCESO" , "EDO_ORDEN" , "FECHA_RECEPCION" ,
-                           "FECHA_OFICIO" , "ID_TIPO_CUANTIA" , "ID_FUERO_PROCESO" , "ID_PROCESO_EXTRADI" , "ID_ESTADO_JUZGADO" , "JUZGADO_COLABORACION" , "ID_JUZGADO" , "OFICIO_JUZGADO" , "FECHA_PRESCRIPCION" , "NO_CAUSA" , 
+                           "FECHA_OFICIO" , "ID_TIPO_CUANTIA" , "ID_FUERO_PROCESO" , "ID_PROCESO_EXTRADI" , "ID_ESTADO_JUZGADO" , "JUZGADO_COLABORACION" , "ID_JUZGADO" , "OFICIO_JUZGADO" , "NO_CAUSA" , 
                            "NO_PROCESO" , "FECHA_LIBRAMIENTO" , "TIPO_INVESTIGACION" ];
  //Arreglo de variables de informacion, donde se verifica si hay informacion en dicha variable
  var arrayCamposData = [ FECHA_CAPTURA , ID_PAIS , ID_ESTADO_EMISOR , ID_MUNICIPIO , ID_EMISOR , FISCALIA , ID_TIPO_MANDATO, NO_MANDATO , ID_TIPO_PROCESO , EDO_ORDEN , FECHA_RECEPCION , FECHA_OFICIO , 
-                         ID_TIPO_CUANTIA , ID_FUERO_PROCESO , ID_PROCESO_EXTRADI , ID_ESTADO_JUZGADO , JUZGADO_COLABORACION , ID_JUZGADO , OFICIO_JUZGADO , FECHA_PRESCRIPCION , NO_CAUSA , NO_PROCESO , 
+                         ID_TIPO_CUANTIA , ID_FUERO_PROCESO , ID_PROCESO_EXTRADI , ID_ESTADO_JUZGADO , JUZGADO_COLABORACION , ID_JUZGADO , OFICIO_JUZGADO , NO_CAUSA , NO_PROCESO , 
                          FECHA_LIBRAMIENTO , TIPO_INVESTIGACION ];
  //Bucle del tamaño de los campos, se verifica si la variable tiene información, si esta no tiene coloreamos el input de color rojo
  for(x = 0; x < arrayCamposValida.length; x++){
@@ -1486,7 +1486,7 @@ function validateDataMandamiento_av(){
 
 	if( FECHA_CAPTURA != "" && ID_PAIS != "" && ID_ESTADO_EMISOR != "" && ID_MUNICIPIO != "" && ID_EMISOR != "" && FISCALIA != "" && ID_TIPO_MANDATO != "" &&
 		   NO_MANDATO != "" && ID_TIPO_PROCESO != "" && EDO_ORDEN  != "" && FECHA_RECEPCION != "" && FECHA_OFICIO != "" && ID_TIPO_CUANTIA != "" && ID_FUERO_PROCESO != "" &&
-		   ID_PROCESO_EXTRADI != "" && ID_ESTADO_JUZGADO != "" && JUZGADO_COLABORACION != "" && ID_JUZGADO != ""  && OFICIO_JUZGADO != "" && FECHA_PRESCRIPCION != "" &&
+		   ID_PROCESO_EXTRADI != "" && ID_ESTADO_JUZGADO != "" && JUZGADO_COLABORACION != "" && ID_JUZGADO != ""  && OFICIO_JUZGADO != "" &&
 		   NO_CAUSA != "" && NO_PROCESO != "" && FECHA_LIBRAMIENTO != "" && TIPO_INVESTIGACION != "" ){
 
 		if(ID_JUZGADO == 'no') ID_JUZGADO = 0;
@@ -1512,7 +1512,7 @@ function validateDataMandamiento_av(){
   dataGenerales[17] = JUZGADO_COLABORACION;
   dataGenerales[18] = ID_JUZGADO;
   dataGenerales[19] = OFICIO_JUZGADO.trim();
-  dataGenerales[20] = FECHA_PRESCRIPCION;
+  //dataGenerales[20] = FECHA_PRESCRIPCION;
   dataGenerales[21] = NO_CAUSA.trim();
   dataGenerales[22] = NO_PROCESO.trim();
   dataGenerales[23] = FECHA_LIBRAMIENTO;
