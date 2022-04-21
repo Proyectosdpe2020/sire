@@ -132,6 +132,7 @@ function validaInput(e, tipo) {
     if(tipo == 'varchar_letras'){ var letras = "abcdefghijklmnopqrstuvwxyz"; }
     if(tipo == 'mandato' || tipo == 'proceso' || tipo == 'averiguacion' || tipo == 'no_causa'){ var letras = "1234567890/-"; }
     if(tipo == 'acumulados'){ var letras = "1234567890/"; }
+    if(tipo == 'varchar_observaciones'){ var letras = "abcdefghijklmnopqrstuvwxyz1234567890/-"; }
     var especiales = [8, 37, 39, 46, 110, 32];
     var tecla_especial = false;
 
