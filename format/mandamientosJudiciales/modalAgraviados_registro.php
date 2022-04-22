@@ -17,6 +17,12 @@ if (isset($_POST["tipoModal"])){ $tipoModal = $_POST["tipoModal"]; }
 if (isset($_POST["typeArch"])){ $typeArch = $_POST["typeArch"]; }
 
 if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){ $ID_MANDAMIENTO_INTERNO = $_POST["ID_MANDAMIENTO_INTERNO"]; }
+ $get_data_Mandamiento = get_data_Mandamiento($conn, $ID_MANDAMIENTO_INTERNO);
+ if(sizeof($get_data_Mandamiento) > 0 ){
+			$GET_ID_MANDAMIENTO_INTERNO  = $get_data_Mandamiento[0][1];
+		}else{
+			$GET_ID_MANDAMIENTO_INTERNO = 0;
+		}
 
 /// SE RECIBE LA INFORMACION DE LA PUESTA A DISPOSICION ///
 if (isset($_POST["dataPrincipalArray"])){
@@ -47,42 +53,6 @@ if (isset($_POST["dataPrincipalArray"])){
 		 }
 		}
 
-
-/*
-//SE RECIBE OBJETO ARRAY CON LOS DATOS PRINCIPALES
-if (isset($_POST["dataPrincipalArray"])){ 
- $data = json_decode($_POST['dataPrincipalArray'], true); 
-}
-
-
-if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
-	$ID_MANDAMIENTO_INTERNO = $_POST["ID_MANDAMIENTO_INTERNO"]; 
-	if ($ID_MANDAMIENTO_INTERNO != 0) {
-		$agraviadosData = get_data_agraviados($conn, $ID_MANDAMIENTO_INTERNO);
-		//Se comprueba si existen datos del agraviado en la tabla de inputados para extraer la informacion
-		if(sizeof(	$agraviadosData) > 0 ){
-			$ID_DATOS_AGRAVIADO_INTERNO = $agraviadosData[0][1];
-			$ID_MANDAMIENTO_INTERNO = $agraviadosData[0][2];
-			$ID_DATOS_AGRAVIADO = $agraviadosData[0][3];
-			$ID_MANDAMIENTO = $agraviadosData[0][4];
-			$NOMBRE = $agraviadosData[0][5];
-			$PATERNO = $agraviadosData[0][6];
-			$MATERNO = $agraviadosData[0][7];
-			$ES_PRINCIPAL = $agraviadosData[0][8];
-			$a = 1;
-			$tipoActualizacion = "EXISTE_DATA_AGRAVIADO";
-		}else{
-			$a = 0; //Si no hay datos del agraviado cambiamos bandera a cero para no mostrar las variables de actualizacion
-			$tipoActualizacion = "NO_EXISTE_DATA_AGRAVIADO";
-		}
-	}else{  
-		$a = 0;  
-		$ID_MANDAMIENTO_INTERNO = 0;
-		$COLABORACION = 0;
-		$tipoActualizacion = "NO_EXISTE_DATA_AGRAVIADO";
-	}
-}	
-*/
 ?>
 
 
@@ -138,7 +108,7 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 <div class="modal-footer">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12  col-md-6 col-md-offset-3">
-			<button type="button" class="btn btn-primary btn-lg" style="width: 100%;" onclick="guardar_mandamiento_agraviado(<? echo $tipoModal; ?> , <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <? echo $ID_MANDAMIENTO_INTERNO; ?> , <? echo $tipoActualizacion; ?>, <?echo $ID_DATOS_AGRAVIADO_INTERNO; ?>) " ><span class="glyphicon glyphicon-floppy-disk"></span> Guardar información</button>
+			<button type="button" class="btn btn-primary btn-lg" style="width: 100%;" onclick="guardar_mandamiento_agraviado(<? echo $tipoModal; ?> , <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <? echo $ID_MANDAMIENTO_INTERNO; ?> , <? echo $tipoActualizacion; ?>, <?echo $ID_DATOS_AGRAVIADO_INTERNO; ?> , <? echo $GET_ID_MANDAMIENTO_INTERNO; ?>) " ><span class="glyphicon glyphicon-floppy-disk"></span> Guardar información</button>
 		</div>
 		<div class="col-xs-12 col-sm-12  col-md-3">
 			<button type="button" class="btn btn-default btn-lg" data-dismiss="modal" onclick="closeModal_agraviados()" >Cerrar</button>
