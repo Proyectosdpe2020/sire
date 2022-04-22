@@ -536,7 +536,7 @@ if(sizeof($get_data_inculpado) > 0 ){
 				<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
 					<? $existen_delitos = get_data_delitos($conn, $ID_MANDAMIENTO_INTERNO); ?>
 					<div class="checkbox" >
-			    <h4><label data-toggle="collapse" data-target="#collapseDataDelitos" ><input type="checkbox" <?if($a == 1 && sizeof($existen_delitos) > 0  ){ ?> checked <? } ?>  ><a>Existen delitos <?echo sizeof($existen_delitos); ?></a></label></h4>
+			    <h4><label data-toggle="collapse" data-target="#collapseDataDelitos" ><input type="checkbox" <?if($a == 1 && sizeof($existen_delitos) > 0  ){ ?> checked <? } ?>  ><a>Existen delitos</a></label></h4>
 			  </div>
 				</div>	
 			</div><br>
@@ -682,7 +682,7 @@ if(sizeof($get_data_inculpado) > 0 ){
 													<th><center><?echo $getData_Agraviados[$h][6]; ?></center></th>
 													<th><center><?echo $getData_Agraviados[$h][7]; ?></center></th>
 													<th><center><?echo $getData_Agraviados[$h][9]; ?></center></th>
-													<td><center><img src="img/editarMandamiento2.png" data-toggle="modal" href="#mandamientos"  onclick="showEditar_mandamiento_agraviado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Agraviados[$h][1]; ?> , <? echo $ID_MANDAMIENTO_INTERNO; ?> , 1);"><img src="img/eliminar.png"  onclick="elimiar_agraviado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Agraviados[$h][1]; ?> , <?echo $getData_Agraviados[$h][2]; ?>, , <?echo sizeof($existe_inculpado);  ?>);"></center></td>
+													<td><center><img src="img/editarMandamiento2.png" data-toggle="modal" href="#mandamientos"  onclick="showEditar_mandamiento_agraviado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Agraviados[$h][1]; ?> , <? echo $ID_MANDAMIENTO_INTERNO; ?> , 1);"><img src="img/eliminar.png"  onclick="elimiar_agraviado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Agraviados[$h][1]; ?> , <?echo $getData_Agraviados[$h][2]; ?>);"></center></td>
 													</tr>
 													<? } ?>
 												</tbody>

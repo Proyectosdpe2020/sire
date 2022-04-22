@@ -304,7 +304,7 @@ function getData_Mandamiento($conn, $ID_MANDAMIENTO_INTERNO){
 }
 
 function get_data_mandamientos_dia($conn, $idEnlace){
-	if($idEnlace == 347){
+	if($idEnlace == 500){
 		$query = " SELECT m.ID_MANDAMIENTO_INTERNO
 												      ,m.ID_MANDAMIENTO
 													  			,m.EDO_ORDEN

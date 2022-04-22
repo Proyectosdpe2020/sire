@@ -20,6 +20,11 @@ if (isset($_POST['tipoActualizacion'])){ $tipoActualizacion = $_POST['tipoActual
 if (isset($_POST['idUnidad'])){ $idUnidad = $_POST['idUnidad']; }
 if (isset($_POST['idfisca'])){ $idfisca = $_POST['idfisca']; }
 
+$PRUEBAS = true; //VARIABLE PARA REALIZAR PRUEBAS EN EL SISTEMA SIN REPLICAR EN TIEMPO REAL AL SIMAJ, CAMBIAR A false PARA GUARDAR INTERNAMENTE
+
+/*se recibe el ID_MANDAMIENTO DEL SIMAJ*/
+if (isset($_POST['ID_MANDAMIENTO'])){ $ID_MANDAMIENTO = $_POST['ID_MANDAMIENTO']; }
+
 //SE RECIBE OBJETO ARRAY CON LOS DATOS PRINCIPALES
 if (isset($_POST["dataPrincipalArray"]) && $ID_MANDAMIENTO_INTERNO == 0){ 
   $data = json_decode($_POST['dataPrincipalArray'], true); 
@@ -65,78 +70,99 @@ $data_inputado = json_decode($_POST['dataAgraviadoArray'], true);
   $ES_PRINCIPAL_AGRAVIADO = $data_inputado[4];
  }
 
+if($PRUEBAS == true){
+  $queryTransaction = "
+    BEGIN
+     BEGIN TRY 
+      BEGIN TRANSACTION
+       SET NOCOUNT ON
 
-if($ID_MANDAMIENTO_INTERNO == 0){
- $queryTransaction = "
-  BEGIN
-   BEGIN TRY 
-    BEGIN TRANSACTION
-     SET NOCOUNT ON
-       declare @insertado int
-     
-       INSERT INTO mandamientos.dbo.A_MANDAMIENTOS (ID_PAIS , ID_ESTADO_EMISOR , ID_MUNICIPIO , FISCALIA , ID_EMISOR , NO_MANDATO, ID_ESTADO_JUZGADO , ID_JUZGADO , NO_CAUSA , OFICIO_JUZGADO , FECHA_OFICIO , ID_TIPO_CUANTIA , FECHA_LIBRAMIENTO , ID_FUERO_PROCESO , ID_TIPO_MANDATO , NO_PROCESO , TIPO_INVESTIGACION , NO_AVERIGUACION , CARPETA_INV , FECHA_CAPTURA , FECHA_RECEPCION , OBSERVACIONES , ID_PROCESO_EXTRADI , ID_TIPO_PROCESO , ACUMULADO_PROCESO , ACUMULADO_AVERIGUACION , EDO_ORDEN , COLABORACION , JUZGADO_COLABORACION , OBSERVACIONES_INT , idEnlace , idUnidad , idFiscalia) VALUES( $ID_PAIS , $ID_ESTADO_EMISOR , $ID_MUNICIPIO , $FISCALIA , $ID_EMISOR , '$NO_MANDATO' , $ID_ESTADO_JUZGADO , $ID_JUZGADO , '$NO_CAUSA' , '$OFICIO_JUZGADO' , '$FECHA_OFICIO' , $ID_TIPO_CUANTIA , '$FECHA_LIBRAMIENTO' , $ID_FUERO_PROCESO , $ID_TIPO_MANDATO , '$NO_PROCESO' , $TIPO_INVESTIGACION , '$NO_AVERIGUACION' , '$nuc' , '$FECHA_CAPTURA' , '$FECHA_RECEPCION' , '$OBSERVACIONES' , $ID_PROCESO_EXTRADI , $ID_TIPO_PROCESO , '$ACUMULADO_PROCESO' , '$ACUMULADO_AVERIGUACION' , $EDO_ORDEN , $COLABORACION , '$JUZGADO_COLABORACION' , '$OBSERVACIONES_INT' , $idEnlace ,  $idUnidad , $idfisca )
+          INSERT INTO SIMAJ.dbo.L_DATOS_AGRAVIADO (ID_MANDAMIENTO, NOMBRE , PATERNO , MATERNO , ES_PRINCIPAL) 
+         VALUES($ID_MANDAMIENTO, '$NOMBRE' , '$PATERNO' , '$MATERNO' , $ES_PRINCIPAL_AGRAVIADO )
 
-       select @insertado = @@IDENTITY
+         SELECT MAX(ID_DATOS_AGRAVIADO) AS ID_DATOS_AGRAVIADO FROM SIMAJ.dbo.L_DATOS_AGRAVIADO
 
-       INSERT INTO mandamientos.dbo.L_DATOS_AGRAVIADO (ID_MANDAMIENTO_INTERNO , NOMBRE , PATERNO , MATERNO , ES_PRINCIPAL) 
-       VALUES(@insertado, '$NOMBRE' , '$PATERNO' , '$MATERNO' , $ES_PRINCIPAL_AGRAVIADO )
+         COMMIT
+        END TRY
+       BEGIN CATCH
+      ROLLBACK TRANSACTION
+     RAISERROR('No se realizo la transaccion',16,1)
+    END CATCH
+   END";
 
-       SELECT MAX(ID_MANDAMIENTO_INTERNO) AS id FROM mandamientos.dbo.A_MANDAMIENTOS
+  $result = sqlsrv_query($connSIMAJ,$queryTransaction, array(), array( "Scrollable" => 'static' )); 
+  //echo $queryTransaction;
+   $indice = 0;
+   while ($row = sqlsrv_fetch_array( $result, SQLSRV_FETCH_ASSOC )){
+    $arreglo[$indice][0]=$row['ID_DATOS_AGRAVIADO'];
+     $indice++;
+   }
+    $ID_DATOS_AGRAVIADO = $arreglo[0][0];
 
-       COMMIT
-      END TRY
-     BEGIN CATCH
-    ROLLBACK TRANSACTION
-   RAISERROR('No se realizo la transaccion',16,1)
-  END CATCH
- END";
+   $queryTransaction = "
+    BEGIN
+     BEGIN TRY 
+      BEGIN TRANSACTION
+       SET NOCOUNT ON
+         declare @insertado int
 
- $result = sqlsrv_query($conn,$queryTransaction, array(), array( "Scrollable" => 'static' )); 
- $arreglo[0] = "NO";
- $arreglo[1] = "SI";
- //echo $queryTransaction;
- if ($result) {
-  while ($row = sqlsrv_fetch_array( $result, SQLSRV_FETCH_ASSOC )){  
-   $id=$row['id'];  
+          INSERT INTO mandamientos.dbo.L_DATOS_AGRAVIADO (ID_MANDAMIENTO_INTERNO , ID_DATOS_AGRAVIADO , ID_MANDAMIENTO , NOMBRE , PATERNO , MATERNO , ES_PRINCIPAL) 
+         VALUES($ID_MANDAMIENTO_INTERNO, $ID_DATOS_AGRAVIADO, $ID_MANDAMIENTO , '$NOMBRE' , '$PATERNO' , '$MATERNO' , $ES_PRINCIPAL_AGRAVIADO )
+
+         COMMIT
+        END TRY
+       BEGIN CATCH
+      ROLLBACK TRANSACTION
+     RAISERROR('No se realizo la transaccion',16,1)
+    END CATCH
+   END";
+
+   $result = sqlsrv_query($conn,$queryTransaction, array(), array( "Scrollable" => 'static' )); 
+   $arreglo[0] = "NO";
+   $arreglo[1] = "SI";
+   //echo $queryTransaction;
+   if ($result) {
+    $arreglo[2] = $ID_MANDAMIENTO_INTERNO;
+    $d = array('first' => $arreglo[1] , 'ID_MANDAMIENTO_INTERNO' => $arreglo[2] );
+    echo json_encode($d);
+   }else{
+    echo json_encode(array('first'=>$arreglo[0]));
+   }
+}else{ /*INICIA CAPTURA EN MODO PRUEBA*/
+  if($ID_MANDAMIENTO_INTERNO != 0 && $tipoActualizacion == 0){
+   $queryTransaction = "
+    BEGIN
+     BEGIN TRY 
+      BEGIN TRANSACTION
+       SET NOCOUNT ON
+         declare @insertado int
+
+          INSERT INTO mandamientos.dbo.L_DATOS_AGRAVIADO (ID_MANDAMIENTO_INTERNO , NOMBRE , PATERNO , MATERNO , ES_PRINCIPAL) 
+         VALUES($ID_MANDAMIENTO_INTERNO, '$NOMBRE' , '$PATERNO' , '$MATERNO' , $ES_PRINCIPAL_AGRAVIADO )
+
+         COMMIT
+        END TRY
+       BEGIN CATCH
+      ROLLBACK TRANSACTION
+     RAISERROR('No se realizo la transaccion',16,1)
+    END CATCH
+   END";
+
+   $result = sqlsrv_query($conn,$queryTransaction, array(), array( "Scrollable" => 'static' )); 
+   $arreglo[0] = "NO";
+   $arreglo[1] = "SI";
+   //echo $queryTransaction;
+   if ($result) {
+    $arreglo[2] = $ID_MANDAMIENTO_INTERNO;
+    $d = array('first' => $arreglo[1] , 'ID_MANDAMIENTO_INTERNO' => $arreglo[2] );
+    echo json_encode($d);
+   }else{
+    echo json_encode(array('first'=>$arreglo[0]));
+   }
   }
-  $arreglo[2] = $id;
-  $d = array('first' => $arreglo[1] , 'ID_MANDAMIENTO_INTERNO' => $arreglo[2] );
-  echo json_encode($d);
- }else{
-  echo json_encode(array('first'=>$arreglo[0]));
- }
+}/*TERMINA CAPTURA EN MODO PRUEBA*/
 
-}elseif($ID_MANDAMIENTO_INTERNO != 0 && $tipoActualizacion == 0){
- $queryTransaction = "
-  BEGIN
-   BEGIN TRY 
-    BEGIN TRANSACTION
-     SET NOCOUNT ON
-       declare @insertado int
 
-        INSERT INTO mandamientos.dbo.L_DATOS_AGRAVIADO (ID_MANDAMIENTO_INTERNO , NOMBRE , PATERNO , MATERNO , ES_PRINCIPAL) 
-       VALUES($ID_MANDAMIENTO_INTERNO, '$NOMBRE' , '$PATERNO' , '$MATERNO' , $ES_PRINCIPAL_AGRAVIADO )
-
-       COMMIT
-      END TRY
-     BEGIN CATCH
-    ROLLBACK TRANSACTION
-   RAISERROR('No se realizo la transaccion',16,1)
-  END CATCH
- END";
-
- $result = sqlsrv_query($conn,$queryTransaction, array(), array( "Scrollable" => 'static' )); 
- $arreglo[0] = "NO";
- $arreglo[1] = "SI";
- //echo $queryTransaction;
- if ($result) {
-  $arreglo[2] = $ID_MANDAMIENTO_INTERNO;
-  $d = array('first' => $arreglo[1] , 'ID_MANDAMIENTO_INTERNO' => $arreglo[2] );
-  echo json_encode($d);
- }else{
-  echo json_encode(array('first'=>$arreglo[0]));
- }
-}
 
 
 ?>

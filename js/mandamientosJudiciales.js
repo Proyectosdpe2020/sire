@@ -938,7 +938,7 @@ function elimiar_inculpado(tipoModal, idEnlace, idUnidad, idfisca, ID_INCULPADO_
 			});	
 }
 
-function guardar_mandamiento_agraviado(tipoModal, idEnlace, idUnidad, idfisca, ID_MANDAMIENTO_INTERNO , tipoActualizacion, ID_DATOS_AGRAVIADO_INTERNO){
+function guardar_mandamiento_agraviado(tipoModal, idEnlace, idUnidad, idfisca, ID_MANDAMIENTO_INTERNO , tipoActualizacion, ID_DATOS_AGRAVIADO_INTERNO, ID_MANDAMIENTO){
 	/////////////////////////// SI EL TIPO MODAL ES UN NUEVO MANDAMIENTO ENTONCES ES  0 ///////////////////////////////
 	/*ENTRARA AQUI CUANDO SE AGREGEN LOS DATOS GENERALES Y DATOS DEL AGRAVIADO AL MISMO TIEMPO*/
 	if(ID_MANDAMIENTO_INTERNO == 0){
@@ -987,7 +987,7 @@ function guardar_mandamiento_agraviado(tipoModal, idEnlace, idUnidad, idfisca, I
 							  	dataType: 'html',
 							  	url: "format/mandamientosJudiciales/inserts/guardar_mandamiento_agraviado.php",
 							  	data: "&dataAgraviadoArray="+dataAgraviadoArray+"&tipoModal="+tipoModal+"&idEnlace="+idEnlace+"&idUnidad="+idUnidad+"&idfisca="+idfisca+"&ID_MANDAMIENTO_INTERNO="+ID_MANDAMIENTO_INTERNO+"&dataPrincipalArray="+dataPrincipalArray+
-							  	      "&tipoActualizacion="+tipoActualizacion,
+							  	      "&tipoActualizacion="+tipoActualizacion+"&ID_MANDAMIENTO="+ID_MANDAMIENTO,
 							  	success: function(resp){
 							  		var json = resp;
 							  		var obj = eval("(" + json + ")");
@@ -1041,7 +1041,7 @@ function guardar_mandamiento_agraviado(tipoModal, idEnlace, idUnidad, idfisca, I
 						  	dataType: 'html',
 						  	url: "format/mandamientosJudiciales/inserts/guardar_mandamiento_agraviado.php",
 						  	data: "&dataAgraviadoArray="+dataAgraviadoArray+"&tipoModal="+tipoModal+"&idEnlace="+idEnlace+"&idUnidad="+idUnidad+"&idfisca="+idfisca+"&ID_MANDAMIENTO_INTERNO="+ID_MANDAMIENTO_INTERNO+
-						  	      "&tipoActualizacion="+tipoActualizacion,
+						  	      "&tipoActualizacion="+tipoActualizacion+"&ID_MANDAMIENTO="+ID_MANDAMIENTO,
 						  	success: function(resp){
 						  		var json = resp;
 						  		var obj = eval("(" + json + ")");
@@ -1065,7 +1065,7 @@ function guardar_mandamiento_agraviado(tipoModal, idEnlace, idUnidad, idfisca, I
 						  	type: "POST",
 						  	dataType: 'html',
 						  	url: "format/mandamientosJudiciales/inserts/actualizar_mandamiento_agraviado.php",
-						  	data: "&dataAgraviadoArray="+dataAgraviadoArray+"&tipoModal="+tipoModal+"&idEnlace="+idEnlace+"&idUnidad="+idUnidad+"&idfisca="+idfisca+"&ID_DATOS_AGRAVIADO_INTERNO="+ID_DATOS_AGRAVIADO_INTERNO+"&ID_MANDAMIENTO_INTERNO="+ID_MANDAMIENTO_INTERNO,
+						  	data: "&dataAgraviadoArray="+dataAgraviadoArray+"&tipoModal="+tipoModal+"&idEnlace="+idEnlace+"&idUnidad="+idUnidad+"&idfisca="+idfisca+"&ID_DATOS_AGRAVIADO_INTERNO="+ID_DATOS_AGRAVIADO_INTERNO+"&ID_MANDAMIENTO_INTERNO="+ID_MANDAMIENTO_INTERNO+"&ID_MANDAMIENTO="+ID_MANDAMIENTO,
 						  	success: function(resp){
 						  		var json = resp;
 						  		var obj = eval("(" + json + ")");
