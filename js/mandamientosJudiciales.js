@@ -316,7 +316,7 @@ function reloadJuzgadoColaboracion(){
 	ajax.send("colaboracion="+colaboracion);
 }
 //FUNCION MUESTRA MODAL REGISTRO DE INFORMACION GENERAL DE MEDIDA
-function guardar_mandamiento(tipoModal, idEnlace, idUnidad, idfisca, ID_MANDAMIENTO_INTERNO , existe_inculpado){
+function guardar_mandamiento(tipoModal, idEnlace, idUnidad, idfisca, ID_MANDAMIENTO_INTERNO , existe_inculpado , ID_MANDAMIENTO){
 		/////////////////////////// SI EL TIPO MODAL ES UNA NUEVA MEDIDA ENTONCES ES  0 ///////////////////////////////
 		var dataValidate = validateDataMandamiento(); //Validamos que la información principal halla sido llenada previamente	 
 		if(dataValidate[0] == 'true'){
@@ -376,28 +376,40 @@ function guardar_mandamiento(tipoModal, idEnlace, idUnidad, idfisca, ID_MANDAMIE
 							  });/********INSERCION*******/
 					 		}else if(ID_MANDAMIENTO_INTERNO != 0){
 					 			/********ACTUALIZACION*******/
-								$.ajax({
-							  	type: "POST",
-							  	dataType: 'html',
-							  	url: "format/mandamientosJudiciales/inserts/actualizar_mandamiento.php",
-							  	data: "&tipoModal="+tipoModal+"&idEnlace="+idEnlace+"&idUnidad="+idUnidad+"&idfisca="+idfisca+"&ID_MANDAMIENTO_INTERNO="+ID_MANDAMIENTO_INTERNO+"&dataPrincipalArray="+dataPrincipalArray,
-							  	success: function(resp){
-							  		var json = resp;
-							  		var obj = eval("(" + json + ")");
-							  		console.log(obj);
-							  		if (obj.first == "NO") { 
-							  			alert("No se pudo actualizar, verifique los datos.");
-							  			swal("", "No se pudo actualizar, verifique los datos.", "warning"); 
-							  		}else{
-							  			if (obj.first == "SI") {
-							  				var obj = eval("(" + json + ")");
-							  				//alert("Agregado exitosmente");
-							  				swal("", "Registro actualizado exitosamente.", "success");
-							  				reload_modalMandamientos_registro(1, idEnlace, obj.ID_MANDAMIENTO_INTERNO, 0, 0, idfisca, idUnidad);
-							  			}
-							  		}
-							  	}
-							  });
+					 			//Llamamos a la función para comprobar se es posible editar registro siempre y cuando en la plataforma SIMAJ aun no se hallan autorizado
+				     checkStatus_mandamiento(ID_MANDAMIENTO, function(resp){
+				     	var status = resp;
+				     	console.log('Estatus: '+ status);
+				     	if(status == 'MANDAMIENTO_SIN_APROBAR'){
+				     		$.ajax({
+									  	type: "POST",
+									  	dataType: 'html',
+									  	url: "format/mandamientosJudiciales/inserts/actualizar_mandamiento.php",
+									  	data: "&tipoModal="+tipoModal+"&idEnlace="+idEnlace+"&idUnidad="+idUnidad+"&idfisca="+idfisca+"&ID_MANDAMIENTO_INTERNO="+ID_MANDAMIENTO_INTERNO+"&dataPrincipalArray="+dataPrincipalArray+"&ID_MANDAMIENTO="+ID_MANDAMIENTO,
+									  	success: function(resp){
+									  		var json = resp;
+									  		var obj = eval("(" + json + ")");
+									  		console.log(obj);
+									  		if (obj.first == "NO") { 
+									  			alert("No se pudo actualizar, verifique los datos.");
+									  			swal("", "No se pudo actualizar, verifique los datos.", "warning"); 
+									  		}else{
+									  			if (obj.first == "SI") {
+									  				var obj = eval("(" + json + ")");
+									  				//alert("Agregado exitosmente");
+									  				swal("", "Registro actualizado exitosamente.", "success");
+									  				reload_modalMandamientos_registro(1, idEnlace, obj.ID_MANDAMIENTO_INTERNO, 0, 0, idfisca, idUnidad);
+									  			}
+									  		}
+									  	}
+									  });
+				     	}else{
+				     		 alert('Este registro no puede ser modificado debido a que ya ha sido autorizado por la Dirección de Mandamientos');
+				     			//Ocultamos GIF de cargando y mostramos campo de nuc
+				     			$('.preloaderSelect_NUC').hide(); //GIF carga de información
+            $('#nuc').show();
+				     	}
+				     }); //termina checkStatus
 								/********ACTUALIZACION*******/
 					 		}		
 							}
@@ -409,7 +421,7 @@ function guardar_mandamiento(tipoModal, idEnlace, idUnidad, idfisca, ID_MANDAMIE
 					}
 			 }); //Termina función callback a funcion ajac verificadora del nuc
 			}else{
-				swal("", "No existe información del inculpado, agrege la información del inculpado para poder enviar su registro completo .", "warning");
+				swal("", "No existe información del inculpado, agregue la información del inculpado para poder enviar su registro completo.", "warning");
 			}
 	 }else{
 	 	swal("", "Faltan datos por ingresar, verifique los campos en rojo.", "warning");
@@ -1752,4 +1764,40 @@ function showModal_agraviados_av(tipoModal, idEnlace, idUnidad, idfisca, ID_MAND
 		}else{
 	 	swal("", "Faltan datos generales por ingresar antes de añadir un agraviado, verifique los campos en rojo.", "warning");
 	 }
+}
+//Función para verificar en que estatus se encuentra el registro de mandamiento en SIMAJ, si este ya fue aceptado o aun no.
+function checkStatus_mandamiento(ID_MANDAMIENTO, my_callback){
+	var resp = Array();
+	//CONDICIONALES
+	resp[0] = "MANDAMIENTO_APROBADO"; //Estatus que indica que el mandamiento ya ha sido aprobado, por lo tanto ya no se puede modificar la información
+	resp[1] = "MANDAMIENTO_SIN_APROBAR"; //Estatus que indica que el mandamiento aun no se ha aprobado, por lo tanto aun se puede modificar
+	resp[2] = "REGISTRO_SIN_ID_MANDAMIENTO";
+	$.ajax({
+		type: "POST",
+	 dataType: 'html',
+		contentType: "application/x-www-form-urlencoded",
+		processData: true,
+		url: "format/mandamientosJudiciales/inserts/checkStatus_mandamiento.php",
+		data: "ID_MANDAMIENTO="+ID_MANDAMIENTO,
+		success: function(getData){
+			var json = getData;
+			var obj = eval("(" + json + ")");
+			console.log('valor de consulta ' + obj.ESTATUS_AUTORIZACION);
+			if (obj.first == "NO"){ 
+				console.log("EL REGISTRO NO CUENTA CON ID_MANDAMIENTO");
+				my_callback(resp[2]); 
+				return resp[2];
+			}else{
+				if (obj.ESTATUS_AUTORIZACION == 1){
+					//Estatus que indica que el mandamiento ya ha sido aprobado, por lo tanto ya no se puede modificar la información
+				 my_callback(resp[0] ); 
+				 return [ resp[0] ];
+				}else if(obj.ESTATUS_AUTORIZACION == 0){
+					//Estatus que indica que el mandamiento aun no se ha aprobado, por lo tanto aun se puede modificar
+					my_callback(resp[1] ); 
+				 return [ resp[1] ];
+				}
+			}
+		}
+	});
 }

@@ -594,7 +594,6 @@ function getData_delitos_editar($conn, $ID_DELITOS_INTERNO){
 
 function get_data_Mandamiento($conn, $ID_MANDAMIENTO_INTERNO){
 	$query = " SELECT ID_MANDAMIENTO FROM mandamientos.dbo.A_MANDAMIENTOS where ID_MANDAMIENTO_INTERNO = $ID_MANDAMIENTO_INTERNO";
-
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
