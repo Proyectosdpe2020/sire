@@ -299,7 +299,7 @@ if(sizeof($get_data_inculpado) > 0 ){
 				</div>
 				<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
 					<label for="FECHA_PRESCRIPCION"><span class="glyphicon glyphicon-calendar"></span> Fecha de prescripción:</label><br>
-					<input type="date" class="form-control" id="FECHA_PRESCRIPCION" aria-describedby="sizing-addon1" onchange="validateCampo_OK(this.id)" value="<?if($a == 1){echo $FECHA_PRESCRIPCION; } ?>" disabled >
+					<input type="date" class="form-control" id="FECHA_PRESCRIPCION" aria-describedby="sizing-addon1" onchange="validateCampo_OK(this.id)" value="" disabled >
 				</div>
 			</div><br>
 			<div class="row">
@@ -383,7 +383,7 @@ if(sizeof($get_data_inculpado) > 0 ){
 			<div class="row">
 				<div class="col-xs-12 col-sm-12  col-md-12 ">
 					<label for="OBSERVACIONES_INT">Observaciones Mandamientos:</label>
-					<textarea class="form-control"id="OBSERVACIONES_INT" rows="3" aria-describedby="sizing-addon1" placeholder="ESPECIFICA LA OBSERVACION MANDAMIENTOS"  maxlength="100" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="return validaInput(event, 'varchar')" > <?if($a == 1){ echo $OBSERVACIONES_INT; } ?> </textarea>
+					<textarea class="form-control"id="OBSERVACIONES_INT" rows="3" aria-describedby="sizing-addon1" placeholder="ESPECIFICA LA OBSERVACION MANDAMIENTOS"  maxlength="4000" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="return validaInput(event, 'varchar')" > <?if($a == 1){ echo $OBSERVACIONES_INT; } ?> </textarea>
 				</div>	
 			</div><br>
 			<hr>
@@ -753,7 +753,7 @@ if(sizeof($get_data_inculpado) > 0 ){
 		</div>
 	 <? }else{ ?>
 	 	<div class="col-xs-12 col-sm-12  col-md-6 col-md-offset-3">
-			<button type="button" class="btn btn-primary btn-lg" style="width: 100%;" onclick="guardar_mandamiento(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , <?echo sizeof($existe_inculpado);  ?>)"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar información</button>
+			<button type="button" class="btn btn-primary btn-lg" style="width: 100%;" onclick="guardar_mandamiento(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , <?echo sizeof($existe_inculpado);  ?>, <?echo 	$GET_ID_MANDAMIENTO_INTERNO; ?>)"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar información</button>
 		</div>
 	 <? } ?>
 		<div class="col-xs-12 col-sm-12  col-md-3">
