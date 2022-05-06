@@ -118,11 +118,11 @@
  				<input class="form-control gehit"  id="nucPuestaDisposi" maxlength="13" oninput="validateNuc(this)"  type="number" value="<? if($a == 1){ echo $nuc; } ?>" <? if($b == 0){ echo "readonly"; } ?>>
  			</div>
  			<!--CONDICIONAL PARA HABILITAR A DETERMINADO ENLACE -->
- 			<?if($idEnlace == 108 || $idEnlace == 232 || $idEnlace == 275 ){ ?>
+ 			<?if($idEnlace == 108 || $idEnlace == 247 ){ ?>
  				<div class="col-xs-12 col-sm-12  col-md-2">
 	 				<label for="heard">Fecha Evento :</label><span class="aste"> (Requerido)</span>
 	 				<div >
-	 					<input id="fechaevento" type="datetime-local" value="<? if($a == 1){  echo 	$fechaev=str_ireplace(' ','T',$fechaev); } ?>" name="fechaevento" class="fechas form-control gehit" min="2022-03-01T00:00:00" max="<?echo $hoy; ?>T23:59:59" onchange="checkDateInforme('<?echo $fecha; ?>');" <? if($b == 0){ echo "readonly"; } ?> />	
+	 					<input id="fechaevento" type="datetime-local" value="<? if($a == 1){  echo 	$fechaev=str_ireplace(' ','T',$fechaev); } ?>" name="fechaevento" class="fechas form-control gehit" min="2022-04-01T00:00:00" max="<?echo $hoy; ?>T23:59:59" onchange="checkDateInforme('<?echo $fecha; ?>');" <? if($b == 0){ echo "readonly"; } ?> />	
 	 				</div>
  			 </div>
  			<? }else{ ?>
