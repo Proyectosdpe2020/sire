@@ -1,18 +1,35 @@
 //Muestra modal para ingresar información adicional del NUC solicitado por SENAP
 function showModalNucLitInfo(idEstatusNucs, estatus, nuc, idCarpeta, idMp, mes, anio){
-	ajax=objetoAjax();
-	ajax.open("POST", "format/litigacion/modalNucsInfoLitig.php");
+	if(estatus != 50 && estatus != 53 && estatus != 58){
+		ajax=objetoAjax();
+			ajax.open("POST", "format/litigacion/modalNucsInfoLitig.php");
 
-	cont = document.getElementById('contmodalnucsLitigInfo');
-	ajax.onreadystatechange = function(){
-		if (ajax.readyState == 4 && ajax.status == 200) {
-			cont.innerHTML = ajax.responseText; 
-		 $('#modalNucsLitigInfo').modal('show');
-		 $('#modalNucsLitig').modal('hide'); 
-		}
+			cont = document.getElementById('contmodalnucsLitigInfo');
+			ajax.onreadystatechange = function(){
+				if (ajax.readyState == 4 && ajax.status == 200) {
+					cont.innerHTML = ajax.responseText; 
+				 $('#modalNucsLitigInfo').modal('show');
+				 $('#modalNucsLitig').modal('hide'); 
+				}
+			}
+			ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			ajax.send('&idEstatusNucs='+idEstatusNucs+'&estatus='+estatus+'&nuc='+nuc+'&idCarpeta='+idCarpeta+'&idMp='+idMp+'&mes='+mes+'&anio='+anio);
+	}else{
+		ajax=objetoAjax();
+		ajax.open("POST", "format/litigacion/modal_Imputados.php");
+
+			cont = document.getElementById('contmodal_imputados');
+			ajax.onreadystatechange = function(){
+				if (ajax.readyState == 4 && ajax.status == 200) {
+					cont.innerHTML = ajax.responseText; 
+				 $('#modalNucs_imputados').modal('show');
+				 $('#modalNucsLitig').modal('hide'); 
+				}
+			}
+			ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			ajax.send('&idEstatusNucs='+idEstatusNucs+'&estatus='+estatus+'&nuc='+nuc+'&idCarpeta='+idCarpeta+'&idMp='+idMp+'&mes='+mes+'&anio='+anio);
 	}
-	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	ajax.send('&idEstatusNucs='+idEstatusNucs+'&estatus='+estatus+'&nuc='+nuc+'&idCarpeta='+idCarpeta+'&idMp='+idMp+'&mes='+mes+'&anio='+anio);
+
 }
 
 //Muestra modal para ingresar información adicional del NUC solicitado por SENAP
@@ -929,6 +946,191 @@ function sendDataFormAutoVincuProc(nuc, estatus, idMp, mes, anio, deten, idUnida
 	}else{
 		swal("", "Faltan datos por registrar.", "warning");
 	}
+}
+
+//Muestra modal para ingresar información del imputado
+function showModalAgregarImputados(estatus, nuc, idMp, mes, anio, deten, idUnidad){
+	ajax=objetoAjax();
+	ajax.open("POST", "format/litigacion/modal_Imputados.php");
+
+	cont = document.getElementById('contmodal_imputados');
+	ajax.onreadystatechange = function(){
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			cont.innerHTML = ajax.responseText; 
+		 $('#modalNucs_imputados').modal('show');
+		 $('#modalNucsLitig').modal('hide'); 
+		}
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send('&estatus='+estatus+'&nuc='+nuc+'&idMp='+idMp+'&mes='+mes+'&anio='+anio+'&deten='+deten+'&idUnidad='+idUnidad);
+}
+
+function sendDataFormImputados(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcInsert){
+	var nombre_imputado = document.getElementById("nombre_imputado").value;
+	var apellido_paterno = document.getElementById("apellido_paterno").value;
+	var apellido_materno = document.getElementById("apellido_materno").value;
+	var edad = document.getElementById("edad").value;
+	var id_sexo = $('input[name="id_sexo"]:checked').val();
+
+	if(nombre_imputado != "" && apellido_paterno != "" && apellido_materno != "" && edad != "" && id_sexo != ""){
+		 insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert);
+	  $('#modalNucsLitigInfo').modal('hide');
+			$('#modalNucsLitig').modal('show');
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+/****Ingresa a la bd la informacion de SENAP de Criterios de Oportunidad****/
+function insertInputados_db(idEstatusNucs, estatus, nuc, opcInsert){
+	var nombre_imputado = document.getElementById("nombre_imputado").value;
+	var apellido_paterno = document.getElementById("apellido_paterno").value;
+	var apellido_materno = document.getElementById("apellido_materno").value;
+	var edad = document.getElementById("edad").value;
+	var id_sexo = $('input[name="id_sexo"]:checked').val();
+
+	if(nombre_imputado != "" && apellido_paterno != "" && apellido_materno != "" && edad != "" && id_sexo != ""){
+		$.ajax({
+			type: "POST",
+		 dataType: "html",
+			url:  "format/litigacion/insertSenap/insert_FormInculpados.php",
+		 data: 'idEstatusNucs='+idEstatusNucs+'&nuc='+nuc+'&opcInsert='+opcInsert+'&nombre_imputado='+nombre_imputado+'&apellido_paterno='+apellido_paterno
+		      +'&apellido_materno='+apellido_materno+'&edad='+edad+'&id_sexo='+id_sexo,
+		 success: function(respuesta){
+		 	var json = respuesta;
+		 	var obj = eval("(" + json + ")");
+		 	if (obj.first == "NO") { 
+		 		swal("", "No se registro verifique los datos.", "warning"); 
+		 	}else{
+		 		if (obj.first == "SI") {
+		 			var obj = eval("(" + json + ")");
+		 			swal("", "Registro exitosamente.", "success");
+		 			//reloadOpcInsertButton(idEstatusNucs, estatus, nuc,  1);
+		 			$('#modalNucs_imputados').modal('hide');
+		 			$('#modalNucsLitig').modal('show');
+		 		}
+		 	}
+		 }
+		});
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+//Funcion para EDITAR informacion de la pestaña: IMPUTADOS
+function edita_imputado(imputado_id){
+
+ 		cont = document.getElementById('contDataImputados');
+			ajax=objetoAjax();
+			ajax.open("POST", "format/litigacion/template_imputados.php");
+
+			ajax.onreadystatechange = function(){
+				if (ajax.readyState == 4 && ajax.status == 200) {
+					cont.innerHTML = ajax.responseText;
+				}
+			}
+			ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			ajax.send("&imputado_id="+imputado_id);
+
+}
+
+function actualizar_imputado(imputado_id, idEstatusNucs){
+	var nombre_imputado = document.getElementById("nombre_imputado").value;
+	var apellido_paterno = document.getElementById("apellido_paterno").value;
+	var apellido_materno = document.getElementById("apellido_materno").value;
+	var edad = document.getElementById("edad").value;
+	var id_sexo = $('input[name="id_sexo"]:checked').val();
+	var opcInsert = 1;
+
+	if(nombre_imputado != "" && apellido_paterno != "" && apellido_materno != "" && edad != "" && id_sexo != ""){
+		$.ajax({
+			type: "POST",
+		 dataType: "html",
+			url:  "format/litigacion/insertSenap/insert_FormInculpados.php",
+		 data: 'idEstatusNucs='+idEstatusNucs+'&nuc='+nuc+'&opcInsert='+opcInsert+'&nombre_imputado='+nombre_imputado+'&apellido_paterno='+apellido_paterno
+		      +'&apellido_materno='+apellido_materno+'&edad='+edad+'&id_sexo='+id_sexo+'&imputado_id='+imputado_id+'&opcInsert='+opcInsert,
+		 success: function(respuesta){
+		 	var json = respuesta;
+		 	var obj = eval("(" + json + ")");
+		 	if (obj.first == "NO") { 
+		 		swal("", "No se actualizo verifique los datos.", "warning"); 
+		 	}else{
+		 		if (obj.first == "SI") {
+		 			var obj = eval("(" + json + ")");
+		 			swal("", "Registro actualizado.", "success");
+		 			//reloadOpcInsertButton(idEstatusNucs, estatus, nuc,  1);
+		 			$('#modalNucs_imputados').modal('hide');
+		 			$('#modalNucsLitig').modal('show');
+		 		}
+		 	}
+		 }
+		});
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+function insertImputados_nuevo_db(idEstatusNucs, estatus, nuc, opcInsert){
+	var nombre_imputado = document.getElementById("nombre_imputado").value;
+	var apellido_paterno = document.getElementById("apellido_paterno").value;
+	var apellido_materno = document.getElementById("apellido_materno").value;
+	var edad = document.getElementById("edad").value;
+	var id_sexo = $('input[name="id_sexo"]:checked').val();
+
+	if(nombre_imputado != "" && apellido_paterno != "" && apellido_materno != "" && edad != "" && id_sexo != ""){
+		$.ajax({
+			type: "POST",
+		 dataType: "html",
+			url:  "format/litigacion/insertSenap/insert_nuevo_imputado.php",
+		 data: 'idEstatusNucs='+idEstatusNucs+'&nuc='+nuc+'&opcInsert='+opcInsert+'&nombre_imputado='+nombre_imputado+'&apellido_paterno='+apellido_paterno
+		      +'&apellido_materno='+apellido_materno+'&edad='+edad+'&id_sexo='+id_sexo,
+		 success: function(respuesta){
+		 	var json = respuesta;
+		 	var obj = eval("(" + json + ")");
+		 	if (obj.first == "NO") { 
+		 		swal("", "No se registro verifique los datos.", "warning"); 
+		 	}else{
+		 		if (obj.first == "SI") {
+		 			var obj = eval("(" + json + ")");
+		 			swal("", "Imputado agregado exitosamente.", "success");
+		 			//reloadOpcInsertButton(idEstatusNucs, estatus, nuc,  1);
+		 			$('#modalNucs_imputados').modal('hide');
+		 			$('#modalNucsLitig').modal('show');
+		 		}
+		 	}
+		 }
+		});
+	}else{
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+function elimiar_imputado(idEstatusNucs, imputado_id, total_imputados){
+  if(total_imputados > 1){
+	  	$.ajax({
+				type: "POST",
+			 dataType: "html",
+				url:  "format/litigacion/insertSenap/delete_imputado.php",
+			 data: 'idEstatusNucs='+idEstatusNucs+'&imputado_id='+imputado_id,
+			 success: function(respuesta){
+			 	var json = respuesta;
+			 	var obj = eval("(" + json + ")");
+			 	if (obj.first == "NO") { 
+			 		swal("", "No se elimino, intente nuevamente.", "warning"); 
+			 	}else{
+			 		if (obj.first == "SI") {
+			 			var obj = eval("(" + json + ")");
+			 			swal("", "Imputado eliminado exitosamente.", "success");
+			 			//reloadOpcInsertButton(idEstatusNucs, estatus, nuc,  1);
+			 			$('#modalNucs_imputados').modal('hide');
+			 			$('#modalNucsLitig').modal('show');
+			 		}
+			 	}
+			 }
+			});
+  }else{
+  	swal("", "No se puede eliminar el imputado, debe de haber al menos un imputado por carpeta.", "warning");
+  }
 }
 
 
