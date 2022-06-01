@@ -764,6 +764,8 @@ function existenuclitigacion(nuc, idMp, estatResolucion, mes, anio, idUnidad, de
 															   estatResolucion == 90 ||  estatResolucion == 68 || 
 															   estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151 || estatResolucion == 154 || estatResolucion == 66){
 																showModalNucLitInfo2(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad);
+															}else if(estatResolucion == 50 || estatResolucion == 53  || estatResolucion == 58){
+																showModalAgregarImputados(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad);
 															}else{
 																	setTimeout("insertarNucLit("+idMp+","+estatResolucion+","+mes+","+anio+","+nuc+","+deten+","+idUnidad+");",100);
 															}
@@ -926,6 +928,9 @@ function insertarNucLit(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad, 
 														 	break;
 														 		case 154:
 														 								setTimeout("insertSentencias_db("+objDatos.idEstatusNucs+","+estatResolucion+","+nuc+", "+opcInsert+","+idMp+", "+mes+", "+anio+");",100);
+														 	break;
+														 	case 50: case 53: case 58:
+														 								setTimeout("insertInputados_db("+objDatos.idEstatusNucs+","+estatResolucion+","+nuc+", "+opcInsert+","+idMp+", "+mes+", "+anio+");",100);
 														 	break;
 														 default:
 														  break;
@@ -1146,7 +1151,8 @@ function validarEstatusShowInfoSica(estatResolucion){
 		|| estatResolucion == 106 || estatResolucion == 89 || estatResolucion == 107 || estatResolucion == 108 || estatResolucion == 109
 		 || estatResolucion == 110 || estatResolucion == 111 || estatResolucion == 64 || estatResolucion == 60 || estatResolucion == 14 
 		 || estatResolucion == 65 || estatResolucion == 66 || estatResolucion == 67 || estatResolucion == 68 || estatResolucion == 90 
-		 || estatResolucion == 91 || estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151 || estatResolucion == 154){
+		 || estatResolucion == 91 || estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151 || estatResolucion == 154 
+		 || estatResolucion == 50 || estatResolucion == 53 || estatResolucion == 58){
 		return true;
 	}
 	else{
