@@ -51,7 +51,7 @@ $getData = getDataImputados($conn, $idEstatusNucs);
 			<input id="nombre_imputado" type="text" value="" name="nombre_imputado" placeholder="NOMBRE" maxlength="40" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="return validaInput_litigacion(event, 'varchar')" class="fechas form-control gehit"  />
 		</div>
 		<div class="col-xs-12 col-sm-4  col-md-4">
-			<label for="apellido_paterno">Apellido Paterno: </label>
+			<label for="apellido_paterno">Apellido Paterno:  </label>
 			<input id="apellido_paterno" type="text" value="" name="apellido_paterno" placeholder="APELLIDO PATERNO" maxlength="50" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="return validaInput_litigacion(event, 'varchar')" class="fechas form-control gehit"  />
 		</div>
 		<div class="col-xs-12 col-sm-4  col-md-4">
