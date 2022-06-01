@@ -501,5 +501,18 @@ if($idEnlace == 30 || $idEnlace == 28){
 
 					</div>
 
+					<div class="modal fade bs-example-modal-sm" id="modalNucs_imputados" role="dialog" data-backdrop="static" data-keyboard="false" style="overflow: auto">
+
+										<div id="modalVistaCss" class="modal-dialog modal-sm" style = "width: 50%; margin-top: 1%; ">
+
+																	<div class="modal-content">
+
+																					<div id="contmodal_imputados"></div>
+
+																	</div>				
+										</div>												
+
+					</div>
+
 
 	</html>

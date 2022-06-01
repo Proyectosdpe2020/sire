@@ -560,4 +560,40 @@ function getMotivosAudienciaInicial($conSic){
 	if(isset($arreglo)){return $arreglo;}	
 }
 
+function getDataImputados($conn, $idEstatusNucs){
+	 $query = "SELECT * FROM senap.imputados WHERE idEstatusNucs = '$idEstatusNucs' "; 
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['imputado_id'];
+		$arreglo[$indice][1]=$row['idEstatusNucs'];
+		$arreglo[$indice][2]=$row['nombre'];
+		$arreglo[$indice][3]=$row['apellido_paterno'];
+		$arreglo[$indice][4]=$row['apellido_materno'];
+		$arreglo[$indice][5]=$row['edad'];
+		$arreglo[$indice][6]=$row['sexo'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
+
+function getDataImputados_editar($conn, $imputado_id){
+	 $query = "SELECT * FROM senap.imputados WHERE imputado_id = $imputado_id "; 
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['imputado_id'];
+		$arreglo[$indice][1]=$row['idEstatusNucs'];
+		$arreglo[$indice][2]=$row['nombre'];
+		$arreglo[$indice][3]=$row['apellido_paterno'];
+		$arreglo[$indice][4]=$row['apellido_materno'];
+		$arreglo[$indice][5]=$row['edad'];
+		$arreglo[$indice][6]=$row['sexo'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
+
 ?>
