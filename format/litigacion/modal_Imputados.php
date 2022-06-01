@@ -48,21 +48,21 @@ $getData = getDataImputados($conn, $idEstatusNucs);
 	<div class="row">
 		<div class="col-xs-12 col-sm-4  col-md-4">
 			<label for="nombre_imputado">Nombre: </label>
-			<input id="nombre_imputado" type="text" value="" name="nombre_imputado" placeholder="NOMBRE" class="fechas form-control gehit"  />
+			<input id="nombre_imputado" type="text" value="" name="nombre_imputado" placeholder="NOMBRE" maxlength="40" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="return validaInput_litigacion(event, 'varchar')" class="fechas form-control gehit"  />
 		</div>
 		<div class="col-xs-12 col-sm-4  col-md-4">
-			<label for="apellido_paterno">Apellido Paterno: </label>
-			<input id="apellido_paterno" type="text" value="" name="apellido_paterno" placeholder="APELLIDO PATERNO" class="fechas form-control gehit"  />
+			<label for="apellido_paterno">Apellido Paterno:  </label>
+			<input id="apellido_paterno" type="text" value="" name="apellido_paterno" placeholder="APELLIDO PATERNO" maxlength="50" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="return validaInput_litigacion(event, 'varchar')" class="fechas form-control gehit"  />
 		</div>
 		<div class="col-xs-12 col-sm-4  col-md-4">
 			<label for="apellido_materno">Apellido Materno: </label>
-			<input id="apellido_materno" type="text" value="" name="apellido_materno" placeholder="APELLIDO MATERNO" class="fechas form-control gehit"  />
+			<input id="apellido_materno" type="text" value="" name="apellido_materno" placeholder="APELLIDO MATERNO" maxlength="50" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="return validaInput_litigacion(event, 'varchar')" class="fechas form-control gehit"  />
 		</div>
 	</div><br>
 	<div class="row">
 		<div class="col-xs-12 col-sm-12  col-md-3">
 			<label for="edad">Edad:</label>
-			<input type="text" class="form-control" value="" id="edad" placeholder="ESPECIFICA LA EDAD" >
+			<input type="number" class="form-control" value="" id="edad" placeholder="ESPECIFICA LA EDAD" >
 		</div>
 		<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
 			<label for="id_sexo">Sexo</label><br>
