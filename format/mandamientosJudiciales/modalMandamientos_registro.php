@@ -377,13 +377,13 @@ if(sizeof($get_data_inculpado) > 0 ){
 			<div class="row">
 				<div class="col-xs-12 col-sm-12  col-md-12 ">
 					<label for="OBSERVACIONES">Observaciones Plataforma:</label>
-					<textarea class="form-control" id="OBSERVACIONES" rows="3" aria-describedby="sizing-addon1" placeholder="ESPECIFICA LA OBSERVACION PLATAFORMA"  maxlength="100" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="return validaInput(event, 'varchar')" > <?if($a == 1){ echo $OBSERVACIONES; } ?> </textarea>
+					<textarea class="form-control" id="OBSERVACIONES" rows="3" aria-describedby="sizing-addon1" placeholder="ESPECIFICA LA OBSERVACION PLATAFORMA"  maxlength="100" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  > <?if($a == 1){ echo $OBSERVACIONES; } ?> </textarea>
 				</div>	
 			</div><br>
 			<div class="row">
 				<div class="col-xs-12 col-sm-12  col-md-12 ">
 					<label for="OBSERVACIONES_INT">Observaciones Mandamientos:</label>
-					<textarea class="form-control"id="OBSERVACIONES_INT" rows="3" aria-describedby="sizing-addon1" placeholder="ESPECIFICA LA OBSERVACION MANDAMIENTOS"  maxlength="4000" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="return validaInput(event, 'varchar')" > <?if($a == 1){ echo $OBSERVACIONES_INT; } ?> </textarea>
+					<textarea class="form-control"id="OBSERVACIONES_INT" rows="3" aria-describedby="sizing-addon1" placeholder="ESPECIFICA LA OBSERVACION MANDAMIENTOS"  maxlength="4000" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); " > <?if($a == 1){ echo $OBSERVACIONES_INT; } ?> </textarea>
 				</div>	
 			</div><br>
 			<hr>
