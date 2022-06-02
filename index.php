@@ -845,6 +845,8 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 		<script language="JavaScript" type="text/javascript" src="js/script.js"></script>
 			<script language="JavaScript" type="text/javascript" src="js/scriptCarpetas.js"></script>
 		<script language="JavaScript" type="text/javascript" src="js/cmasc.js"></script>
+		<!--<script language="JavaScript" type="text/javascript" src="js/litigacion.js"></script>-->
+		<script language="JavaScript" type="text/javascript" src="js/litigacion_220602.js"></script>
 		<script language="JavaScript" type="text/javascript" src="js/litigacion.js"></script>
 		<script language="JavaScript" type="text/javascript" src="js/trimestral.js"></script>
 			<script language="JavaScript" type="text/javascript" src="js/desapar.js"></script>
@@ -857,7 +859,8 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 <script language="JavaScript" type="text/javascript" src="dist/sweetalert.min.js"></script>
 <script language="JavaScript" type="text/javascript" src="format/trimestral/pdf/js/function.js"></script>
 <script language="JavaScript" type="text/javascript" src="js/forestales.js"></script>
-<script language="JavaScript" type="text/javascript" src="js/litigacionSENAP.js"></script>
+<!--<script language="JavaScript" type="text/javascript" src="js/litigacionSENAP.js"></script>-->
+<script language="JavaScript" type="text/javascript" src="js/litigacionSENAP_220602.js"></script>
 <script type="text/javascript" src="js/carpetasJudicializadas.js"></script>
 <?if($format == 16){ ?><script type="text/javascript" src="js/medidasDeProteccion.js"></script><? } ?>
 <?if($format == 18){ ?><script type="text/javascript" src="js/mandamientosJudiciales.js"></script><? } ?>
