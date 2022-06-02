@@ -336,7 +336,7 @@ function guardar_mandamiento(tipoModal, idEnlace, idUnidad, idfisca, ID_MANDAMIE
 					getArrayData = arrayData;
 					console.log("Respuesta funcion valida nuc: "+existeNuc);
 					console.log("Información obtenida: "+getArrayData);	
-					if(existeNuc == "NUC_OKSIGI"){
+					if(existeNuc == "NUC_OKSIGI" || idEnlace == 354){
 						swal({
 					 title: "¿Guardar información de mandamiento del NUC: "+nuc+"?",
 		    html: true,
@@ -584,7 +584,7 @@ function guardar_mandamiento_inculpado(tipoModal, idEnlace, idUnidad, idfisca, I
 					getArrayData = arrayData;
 					console.log("Respuesta funcion valida nuc: "+existeNuc);
 					console.log("Información obtenida: "+getArrayData);	
-					if(existeNuc == "NUC_OKSIGI"){
+					if(existeNuc == "NUC_OKSIGI" || idEnlace == 354){
 						swal({
 					 title: "¿Guardar información de mandamiento del NUC: "+nuc+"?",
 		    html: true,
