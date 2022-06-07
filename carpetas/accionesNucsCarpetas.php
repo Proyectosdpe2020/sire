@@ -860,15 +860,15 @@ $tramitefinal = $totaTrabvajar2 - ($totDeterminaciones1 + $enviads1);
         $carpetaRecibida = $checkCMASC[0][7];
       $motivoRechazo = $checkCMASC[0][9];
       $fechaIngreso = $checkCMASC[0][2]->format('Y-n-d');
-      $anioCapturaSire = 2021;
+      $anioCapturaSire = 2022;
       $mesCapturaSire = $mes;
       $diaInicialCapturaSire = 26;
       $diaLimiteCapturaSire = 25;
       $fechaCapturaSire = $anioCapturaSire.'-'.$mesCapturaSire.'-'.$diaInicialCapturaSire; //Periodo de captura inician 26 de cada mes anterior
       $periodoIngresoSire = strtotime('- 1 month', strtotime($fechaCapturaSire)); //Se resta un mes al mes de captura actual
       $fechaInicialCaptura = date('d-m-Y',  $periodoIngresoSire);
-      //$fechaLimiteCaptura = $diaLimiteCapturaSire.'-'.$mesCapturaSire.'-'.$anioCapturaSire;
-      $fechaLimiteCaptura = $diaLimiteCapturaSire.'-12-'.date("Y");
+      $fechaLimiteCaptura = $diaLimiteCapturaSire.'-'.$mesCapturaSire.'-'.$anioCapturaSire;
+      //$fechaLimiteCaptura = $diaLimiteCapturaSire.'-12-'.date("Y");
       $prioridad = $checkCMASC[0][18]; //para saber si es con detenido debe ser = 1
          ////// SI EXISTE EL NUC SE VALIDA SI LA CARPETA RECIBIDA SE ENCUENTRA RECHAZADA, DE SER ASI OBTENER EL MOTIVO DE RECHAZO Y NO DEJAR GUARDAR
            if($carpetaRecibida == 0){
@@ -925,15 +925,15 @@ $tramitefinal = $totaTrabvajar2 - ($totDeterminaciones1 + $enviads1);
         $carpetaRecibida = $checkCMASC[0][7];
       $motivoRechazo = $checkCMASC[0][9];
       $fechaIngreso = $checkCMASC[0][2]->format('Y-n-d');
-      $anioCapturaSire = 2021;
+      $anioCapturaSire = 2022;
       $mesCapturaSire = $mes;
       $diaInicialCapturaSire = 26;
       $diaLimiteCapturaSire = 25;
       $fechaCapturaSire = $anioCapturaSire.'-'.$mesCapturaSire.'-'.$diaInicialCapturaSire; //Periodo de captura inician 26 de cada mes anterior
       $periodoIngresoSire = strtotime('- 1 month', strtotime($fechaCapturaSire)); //Se resta un mes al mes de captura actual
       $fechaInicialCaptura = date('d-m-Y',  $periodoIngresoSire);
-      //$fechaLimiteCaptura = $diaLimiteCapturaSire.'-'.$mesCapturaSire.'-'.$anioCapturaSire;
-      $fechaLimiteCaptura = $diaLimiteCapturaSire.'-12-'.date("Y");
+      $fechaLimiteCaptura = $diaLimiteCapturaSire.'-'.$mesCapturaSire.'-'.$anioCapturaSire;
+      //$fechaLimiteCaptura = $diaLimiteCapturaSire.'-12-'.date("Y");
       $prioridad = $checkCMASC[0][18]; //para saber si es con detenido debe ser = 1
          ////// SI EXISTE EL NUC SE VALIDA SI LA CARPETA RECIBIDA SE ENCUENTRA RECHAZADA, DE SER ASI OBTENER EL MOTIVO DE RECHAZO Y NO DEJAR GUARDAR
            if($carpetaRecibida == 0){
@@ -984,15 +984,15 @@ $tramitefinal = $totaTrabvajar2 - ($totDeterminaciones1 + $enviads1);
         $carpetaRecibida = $checkCMASC[0][7];
         $motivoRechazo = $checkCMASC[0][9];
         $fechaIngreso = $checkCMASC[0][2]->format('Y-n-d');
-        $anioCapturaSire = 2021;
+        $anioCapturaSire = 2022;
         $mesCapturaSire = $mes;
         $diaInicialCapturaSire = 26;
         $diaLimiteCapturaSire = 25;
         $fechaCapturaSire = $anioCapturaSire.'-'.$mesCapturaSire.'-'.$diaInicialCapturaSire; //Periodo de captura inician 26 de cada mes anterior
         $periodoIngresoSire = strtotime('- 1 month', strtotime($fechaCapturaSire)); //Se resta un mes al mes de captura actual
         $fechaInicialCaptura = date('d-m-Y',  $periodoIngresoSire);
-        //$fechaLimiteCaptura = $diaLimiteCapturaSire.'-'.$mesCapturaSire.'-'.$anioCapturaSire;
-        $fechaLimiteCaptura = $diaLimiteCapturaSire.'-12-'.date("Y");
+        $fechaLimiteCaptura = $diaLimiteCapturaSire.'-'.$mesCapturaSire.'-'.$anioCapturaSire;
+        //$fechaLimiteCaptura = $diaLimiteCapturaSire.'-12-'.date("Y");
         $prioridad = $checkCMASC[0][18]; //para saber si es con detenido debe ser = 1
 
          ////// SI EXISTE EL NUC SE VALIDA SI LA CARPETA RECIBIDA SE ENCUENTRA RECHAZADA, DE SER ASI OBTENER EL MOTIVO DE RECHAZO Y NO DEJAR GUARDAR
