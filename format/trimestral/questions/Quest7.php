@@ -439,7 +439,7 @@
 									}
 
 									for ($o=0; $o < sizeof($arr) ; $o++) { 
-           echo 'for';
+          
 										if($has_captured){ //set value if has captured or not
 
 											$quest_value =  $data[0][$o]; 
