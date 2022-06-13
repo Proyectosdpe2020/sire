@@ -106,13 +106,13 @@
 																					<div class="form-row">
 																					<div class="form-group col-md-12">
 																						<label for="textDispoDinero">A disposición de: <span class="aste">(*)</span></label>
-																						<input value="<?php if($a == 1){ echo $textDispoDinero; } ?>" type="text" class="form-control" id="textDispoDinero" name="textDispoDinero">
+																						<input value="<?php if($a == 1){ echo $textDispoDinero; } ?>" type="text" maxlength="350" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras')" class="form-control" id="textDispoDinero" name="textDispoDinero">
 																					</div>
 																			 </div>
 																				<div class="form-row">
 																	    <div class="form-group col-md-12">
 																	     <label for="textObservacionesDinero">Observaciones</label>
-																	     <textarea id="textObservacionesDinero" style="resize: none; height: 20vh; " class="form-control rounded-0" id="textObservacionesDinero" rows="3"><?php if($a == 1){echo $observaciones;} ?></textarea>
+																	     <textarea id="textObservacionesDinero" style="resize: none; height: 20vh; " maxlength="350" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras_numeros')" class="form-control rounded-0" id="textObservacionesDinero" rows="3"><?php if($a == 1){echo $observaciones;} ?></textarea>
 																				 </div>
 																	   </div>
 																	  </div>
