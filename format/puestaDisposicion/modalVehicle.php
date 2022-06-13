@@ -272,18 +272,18 @@
 																				      					</div>
 																				      						<div class="col-xs-12 col-sm-12  col-md-4">
 																				      								<label class="" for="inputlg">Placa :</label>
-			    																											<input value="<?php if($a == 1){ echo $placa; } ?>" class="form-control input-md redondear " id="placaVehi" type="text"  >
+			    																											<input value="<?php if($a == 1){ echo $placa; } ?>"  maxlength="45" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras_numeros')" class="form-control input-md redondear " id="placaVehi" type="text"  >
 																				      					</div>
 																				      </div>
 																				       <div class="row" style="margin-top: 10px;">
 																				      	
 																				      					<div class="col-xs-12 col-sm-12  col-md-6">
 																				      							<label class="" for="inputlg">Serie :</label>
-			    																								<input value="<?php if($a == 1){ echo $serie; } ?>" class="form-control input-md redondear " id="serieVehi" type="text"  >
+			    																								<input value="<?php if($a == 1){ echo $serie; } ?>"  maxlength="45" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras_numeros')" class="form-control input-md redondear " id="serieVehi" type="text"  >
 																				      					</div>
 																				      					<div class="col-xs-12 col-sm-12  col-md-6">
 																				      								<label class="" for="inputlg">Serie Alterada :</label>
-			    																												<input value="<?php if($a == 1){ echo $serieAlterada; } ?>" class="form-control input-md redondear " id="serieAlVehi" type="text"  >
+			    																												<input value="<?php if($a == 1){ echo $serieAlterada; } ?>"  maxlength="45" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras_numeros')" class="form-control input-md redondear " id="serieAlVehi" type="text"  >
 																				      					</div>
 																				      </div>
 																				       								
@@ -291,11 +291,11 @@
 																				      	
 																				      					<div class="col-xs-12 col-sm-12  col-md-6">
 																				      							<label class="" for="inputlg">Motor :</label>
-			    																								<input value="<?php if($a == 1){ echo $motor; } ?>" class="form-control input-md redondear " id="motorVehi" type="text"  >
+			    																								<input value="<?php if($a == 1){ echo $motor; } ?>"  maxlength="45" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras_numeros')" class="form-control input-md redondear " id="motorVehi" type="text"  >
 																				      					</div>
 																				      					<div class="col-xs-12 col-sm-12  col-md-6">
 																				      								<label class="" for="inputlg">Motor Alterado :</label>
-			    																												<input value="<?php if($a == 1){ echo $motorAlterado; } ?>" class="form-control input-md redondear " id="motorAlVehi" type="text"  >
+			    																												<input value="<?php if($a == 1){ echo $motorAlterado; } ?>"  maxlength="45" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras_numeros')" class="form-control input-md redondear " id="motorAlVehi" type="text"  >
 																				      					</div>
 																				      </div>
 																				       								
@@ -312,11 +312,11 @@
 																				      <div class="row">																				      	
 																				      					<div class="col-xs-12 col-sm-12  col-md-6">
 																				      							<label class="" for="inputlg">Requerido por Otras Corporaciones :</label>
-			    																								<input value="<?php if($a == 1){ echo $requeridoOtrasCorpor; } ?>" class="form-control input-md redondear " id="requeOtroCopro" type="text"  >
+			    																								<input value="<?php if($a == 1){ echo $requeridoOtrasCorpor; } ?>" maxlength="150" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras')" class="form-control input-md redondear " id="requeOtroCopro" type="text"  >
 																				      					</div>
 																				      					<div class="col-xs-12 col-sm-12  col-md-6">
 																				      								<label class="" for="inputlg">Oficio :</label>
-			    																											<input value="<?php if($a == 1){ echo $oficio; } ?>" class="form-control input-md redondear " id="oficioVehi" type="text"  >
+			    																											<input value="<?php if($a == 1){ echo $oficio; } ?>" maxlength="45" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras_numeros')" class="form-control input-md redondear " id="oficioVehi" type="text"  >
 																				      					</div>
 																				      </div>
 																				        <div class="row" style="margin-top: 10px;">
@@ -324,7 +324,7 @@
 																				      					<div class="col-xs-12 col-sm-12  col-md-12">
 																				      							<label class="" for="inputlg">Observaciones :</label>
 			    																										<div class="form-group">
-																																  <textarea class="form-control rounded-0" id="observaVehi" rows="3"><?php if($a == 1){ echo $observaciones; } ?></textarea>
+																																  <textarea class="form-control rounded-0" id="observaVehi" rows="3" maxlength="350" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras_numeros')" ><?php if($a == 1){ echo $observaciones; } ?></textarea>
 																																</div>		
 																				      					</div>
 
