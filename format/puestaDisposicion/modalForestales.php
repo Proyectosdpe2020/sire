@@ -100,7 +100,7 @@
 																	    </div>
 																	    <div class="form-group col-md-6">
 																	      <label for="textVolumen">Volúmen M3<span class="aste">(*)</span></label>
-																	      <input value="<?php if($a == 1){ echo $volumen; } ?>"  type="text" class="form-control" id="textVolumen" name="textVolumen">
+																	      <input value="<?php if($a == 1){ echo $volumen; } ?>" type="text" maxlength="10" onkeypress="return validaInput_puestaDispo(event, 'int')" class="form-control" id="textVolumen" name="textVolumen">
 																	    </div>
 																	  </div>
 																			</div>
@@ -113,7 +113,7 @@
 																				<div class="form-row">
 																	    <div class="form-group col-md-12">
 																	     <label for="textObservacionesForest">Observaciones</label>
-																	     <textarea id="textObservacionesForest" class="form-control  rounded-0" style="resize: none; height: 30vh;" id="textObservacionesForest" rows="3"><?php if($a == 1){ echo $observaciones; } ?></textarea>
+																	     <textarea id="textObservacionesForest" class="form-control  rounded-0" style="resize: none; height: 30vh;" maxlength="350" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras_numeros')" id="textObservacionesForest" rows="3"><?php if($a == 1){ echo $observaciones; } ?></textarea>
 																				 </div>
 																	   </div>
 																	  </div>

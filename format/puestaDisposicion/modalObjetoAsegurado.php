@@ -83,11 +83,11 @@
 																						<div>
 																			    <div class="form-group col-md-6">
 																			      <label for="textHerramienta">Herramienta asegurada<span class="aste">(*)</span></label>
-																			       <input value="<?php if($a == 1){ echo $nombreObjeto; } ?>" type="text" class="form-control" id="herramientas" name="">
+																			       <input value="<?php if($a == 1){ echo $nombreObjeto; } ?>" type="text" maxlength="150" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras_numeros')" class="form-control" id="herramientas" name="">
 																			     </div>
 																			    <div class="form-group col-md-6">
 																			      <label for="textCantidad">Cantidad<span class="aste">(*)</span></label>
-																			      <input value="<?php if($a == 1){ echo $cantidad; } ?>" type="number" class="form-control" id="textCantidad" name="">
+																			      <input value="<?php if($a == 1){ echo $cantidad; } ?>" type="number" maxlength="4" onkeypress="return validaInput_puestaDispo(event, 'int')" class="form-control" id="textCantidad" name="">
 																			    </div>
 																			   
 																	   </div>
@@ -102,13 +102,13 @@
 																				<div class="form-row">
 																					<div class="form-group col-md-12">
 																						<label for="textDispoObj">A disposición de: <span class="aste">(*)</span></label>
-																						<input value="<?php if($a == 1){ echo $textDispoObj; } ?>" type="text" class="form-control" id="textDispoObj" name="textDispoObj">
+																						<input value="<?php if($a == 1){ echo $textDispoObj; } ?>" type="text" maxlength="350" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras')" class="form-control" id="textDispoObj" name="textDispoObj">
 																					</div>
 																			 </div>
 																				<div class="form-row">
 																	    <div class="form-group col-md-12">
 																	     <label for="textObservacionesObjAsegurados">Observaciones</label>
-																	     <textarea id="textObservacionesObjAsegurados" class="form-control rounded-0" style="resize: none; height: 30vh;" id="textObservacionesObjAsegurados" rows="3"><?php if($a == 1){ echo $observaciones; } ?></textarea>
+																	     <textarea id="textObservacionesObjAsegurados" class="form-control rounded-0" style="resize: none; height: 30vh;" id="textObservacionesObjAsegurados" maxlength="350" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras_numeros')" rows="3"><?php if($a == 1){ echo $observaciones; } ?></textarea>
 																				 </div>
 																	   </div>
 																	  </div>

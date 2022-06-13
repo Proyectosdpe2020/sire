@@ -152,7 +152,7 @@
 																				<div class="form-row">
 																					<div class="form-group col-md-12">
 																								<label for="textObservacionesTrabCampo">Observaciones:</label>	
-																								<textarea id="textObservacionesTrabCampo" style="resize: none; height: 20vh; " class="form-control rounded-0" 
+																								<textarea id="textObservacionesTrabCampo" style="resize: none; height: 20vh; " maxlength="500" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras_numeros')" class="form-control rounded-0" 
 																																		name="textObservacionesTrabCampo" rows="3"><?php if($a == 1){ echo  $observaciones; } ?></textarea>
 																					</div>
 																				</div>
