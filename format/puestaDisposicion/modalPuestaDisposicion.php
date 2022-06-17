@@ -184,7 +184,7 @@
  			</div>
  			<div class="col-xs-12 col-sm-12  col-md-5">
  				<label for="heard">Calle / Carretera / Brecha :</label><span class="aste"> (Requerido)</span><br>
- 				<input class="form-control"  id="calleInputPuesta" maxlength="150" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras')" value="<? if($a == 1){ echo $calle; } ?>" type="text" <? if($b == 0){ echo "readonly"; } ?>>
+ 				<input class="form-control"  id="calleInputPuesta" maxlength="150" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras_numeros)" value="<? if($a == 1){ echo $calle; } ?>" type="text" <? if($b == 0){ echo "readonly"; } ?>>
  			</div>
  			<div class="col-xs-12 col-sm-12  col-md-1">
  				<label for="heard">Número :</label><br>
