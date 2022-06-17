@@ -3357,8 +3357,9 @@ function validaInput_puestaDispo(e, tipo) {
     var key = e.keyCode || e.which;
     var tecla = String.fromCharCode(key).toLowerCase();
     if(tipo == 'varchar_letras'){ var letras = "abcdefghijklmnopqrstuvwxyz"; }
-    if(tipo == 'varchar_letras_numeros'){ var letras = "abcdefghijklmnopqrstuvwxyz1234567890"; }
-   
+    if(tipo == 'varchar_letras_numeros'){ var letras = "abcdefghijklmnopqrstuvwxyz1234567890.,/"; }
+    if(tipo == 'int'){ var letras = "1234567890"; }
+
     var especiales = [8, 37, 39, 46, 110, 32];
     var tecla_especial = false;
 
