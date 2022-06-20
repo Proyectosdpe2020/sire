@@ -21,6 +21,8 @@ if (isset($_POST["dataPrincipalArray"])){
  $data = json_decode($_POST['dataPrincipalArray'], true); 
 }
 
+if (isset($_POST["tipo_av_nuc"])){ $tipo_av_nuc = $_POST["tipo_av_nuc"]; }
+
 
 if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 	$ID_MANDAMIENTO_INTERNO = $_POST["ID_MANDAMIENTO_INTERNO"]; 
@@ -54,6 +56,7 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 	  $FECHA_OBSERVACION = $inculpadoData[0][18]->format('Y-m-d');
 			$a = 1;
 			$tipoActualizacion = "EXISTE_DATA_INPUTADO";
+			$tipo_av_nuc = 2; 
 		}else{
 			$a = 0; //Si no hay datos del inculpado cambiamos bandera a cero para no mostrar las variables de actualizacion
 			$tipoActualizacion = "NO_EXISTE_DATA_INPUTADO";
@@ -170,7 +173,7 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 							<div class="row">
 								<div class="col-xs-12 col-sm-12  col-md-12 ">
 									<label for="OBSERVACIONES_inculpado">Observaciones:</label>
-									<textarea class="form-control" id="OBSERVACIONES_inculpado" rows="4" aria-describedby="sizing-addon1" placeholder="ESPECIFICA LA OBSERVACION MANDAMIENTOS" maxlength="3500" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); " onkeypress="return validaInput(event, 'varchar_observaciones')"><?if($a == 1){ echo $OBSERVACIONES_inculpado; } ?></textarea>
+									<textarea class="form-control" id="OBSERVACIONES_inculpado" rows="4" aria-describedby="sizing-addon1" placeholder="ESPECIFICA LA OBSERVACION MANDAMIENTOS" maxlength="3500" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); " ><?if($a == 1){ echo $OBSERVACIONES_inculpado; } ?></textarea>
 								</div>	
 							</div><br>
 							<div class="row">
@@ -195,8 +198,8 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 <div class="modal-footer">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12  col-md-6 col-md-offset-3">
-			<?if($idEnlace == 353){ ?>
-			<button type="button" class="btn btn-primary btn-lg" style="width: 100%;" onclick="guardar_mandamiento_inculpado_av(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , '<?echo $tipoActualizacion; ?>' , <?echo $GET_ID_MANDAMIENTO_INTERNO; ?>)"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar información</button>
+			<?if($tipo_av_nuc == 1){ ?>
+			<button type="button" class="btn btn-primary btn-lg" style="width: 100%;" onclick="guardar_mandamiento_inculpado_av(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , '<?echo $tipoActualizacion; ?>' , <?echo $GET_ID_MANDAMIENTO_INTERNO; ?>)"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar información </button>
 		<? }else {?>
 			<button type="button" class="btn btn-primary btn-lg" style="width: 100%;" onclick="guardar_mandamiento_inculpado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , '<?echo $tipoActualizacion; ?>' , <?echo $GET_ID_MANDAMIENTO_INTERNO; ?>)"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar información</button>
 		<? } ?>

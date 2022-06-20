@@ -863,7 +863,7 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 <script language="JavaScript" type="text/javascript" src="js/litigacionSENAP_220602.js"></script>
 <script type="text/javascript" src="js/carpetasJudicializadas.js"></script>
 <?if($format == 16){ ?><script type="text/javascript" src="js/medidasDeProteccion.js"></script><? } ?>
-<?if($format == 18){ ?><script type="text/javascript" src="js/mandamientosJudiciales.js"></script><? } ?>
+<?if($format == 18){ ?><script type="text/javascript" src="js/mandamientosJudiciales_20062022.js"></script><? } ?>
 
 
 	<!--<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>-->
