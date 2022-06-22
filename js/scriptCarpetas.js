@@ -466,7 +466,6 @@ function validarReglasNUC(nuc, estatus, mes, anio, nuc, idUnidad, idMp, deten, e
 						/// OBTENER DATOS DEL NUC DONDE Y QUE ESTATUS TIENE Y QUIEN LO REALIZO Y LA FECHA
 
 						
-
 						swal("", "El NUC debe ser reiniciado para poder ser utilizado. \n\n ULTIMA DETERMINACIÓN \n Ministerio Público: "+objDatos.nombre+'\n Unidad: '+objDatos.unidad+' - '+objDatos.fiscalia+'\n Estatus: '+objDatos.estatus+'\n Fecha: '+objDatos.mes+' - '+objDatos.anio, "warning");
 						clearModalNUcsCarpe();
 					}
@@ -504,7 +503,7 @@ function validarReglasNUC(nuc, estatus, mes, anio, nuc, idUnidad, idMp, deten, e
 					}
 
 					if (objDatos.first == "RECHAZOCMASC") {
-
+                 
 						/// OBTENER DATOS DEL NUC DONDE Y QUIEN LO REINICIO Y LA FECHA
 						swal("", "El NUC fue rechazado por el CMASC por el siguiente motivo:\n\n "+objDatos.motivoRechazo+'.'+'\n\n Favor de comunicarse al CMASC.', "warning");
 						clearModalNUcsCarpe();
@@ -512,7 +511,7 @@ function validarReglasNUC(nuc, estatus, mes, anio, nuc, idUnidad, idMp, deten, e
 					if (objDatos.first == "NOCONTABILIZA") {
 
 						/// OBTENER DATOS DEL NUC DONDE Y QUIEN LO REINICIO Y LA FECHA
-						swal("", "El NUC fue recibido por CMASC pero fue recibido despues de la fecha limite (día 25 de cada mes), favor de ingresarlo el siguiente mes de captura", "warning");
+						swal("", 'El NUC fue recibido por CMASC pero fue recibido despues de la fecha limite (día 25 de cada mes, fecha de ingreso: '+objDatos.second+'), favor de ingresarlo el siguiente mes de captura', "warning");
 						clearModalNUcsCarpe();
 					}
 

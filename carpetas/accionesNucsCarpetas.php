@@ -866,19 +866,19 @@ $tramitefinal = $totaTrabvajar2 - ($totDeterminaciones1 + $enviads1);
       $diaLimiteCapturaSire = 25;
       $fechaCapturaSire = $anioCapturaSire.'-'.$mesCapturaSire.'-'.$diaInicialCapturaSire; //Periodo de captura inician 26 de cada mes anterior
       $periodoIngresoSire = strtotime('- 1 month', strtotime($fechaCapturaSire)); //Se resta un mes al mes de captura actual
-      $fechaInicialCaptura = date('d-m-Y',  $periodoIngresoSire);
-      $fechaLimiteCaptura = $diaLimiteCapturaSire.'-'.$mesCapturaSire.'-'.$anioCapturaSire;
+      $fechaInicialCaptura = date('Y-m-d',  $periodoIngresoSire);
+      $fechaLimiteCaptura = $anioCapturaSire.'-'.$mesCapturaSire.'-'.$diaLimiteCapturaSire;
       //$fechaLimiteCaptura = $diaLimiteCapturaSire.'-12-'.date("Y");
       $prioridad = $checkCMASC[0][18]; //para saber si es con detenido debe ser = 1
          ////// SI EXISTE EL NUC SE VALIDA SI LA CARPETA RECIBIDA SE ENCUENTRA RECHAZADA, DE SER ASI OBTENER EL MOTIVO DE RECHAZO Y NO DEJAR GUARDAR
            if($carpetaRecibida == 0){
             echo json_encode(   array(  'first'=>$arreglo[7], 'motivoRechazo'=>$motivoRechazo  )   );
            }else{
-           if (check_in_range($fechaInicialCaptura, $fechaLimiteCaptura, $fechaIngreso) || $prioridad == 1){
+           if ( check_in_range($fechaInicialCaptura, $fechaLimiteCaptura, $fechaIngreso) || $prioridad == 1 || $fechaIngreso < $fechaLimiteCaptura ){
               //SI EL NUC SE HA RECIBIDO POR EL CMASC Y ESTA EN EL RAGO DEJAR GUARDAR
-              echo json_encode(   array(  'first'=>$arreglo[0]   )   ); 
+              echo json_encode(   array(  'first'=>$arreglo[0] , 'second' => $fechaIngreso  )   ); 
             }else{
-              echo json_encode(   array(  'first'=>$arreglo[8]  )   );
+              echo json_encode(   array(  'first'=>$arreglo[8] , 'second' => $fechaIngreso )   );
             }
            }
       } else{
@@ -931,19 +931,19 @@ $tramitefinal = $totaTrabvajar2 - ($totDeterminaciones1 + $enviads1);
       $diaLimiteCapturaSire = 25;
       $fechaCapturaSire = $anioCapturaSire.'-'.$mesCapturaSire.'-'.$diaInicialCapturaSire; //Periodo de captura inician 26 de cada mes anterior
       $periodoIngresoSire = strtotime('- 1 month', strtotime($fechaCapturaSire)); //Se resta un mes al mes de captura actual
-      $fechaInicialCaptura = date('d-m-Y',  $periodoIngresoSire);
-      $fechaLimiteCaptura = $diaLimiteCapturaSire.'-'.$mesCapturaSire.'-'.$anioCapturaSire;
+      $fechaInicialCaptura = date('Y-m-d',  $periodoIngresoSire);
+      $fechaLimiteCaptura = $anioCapturaSire.'-'.$mesCapturaSire.'-'.$diaLimiteCapturaSire;
       //$fechaLimiteCaptura = $diaLimiteCapturaSire.'-12-'.date("Y");
       $prioridad = $checkCMASC[0][18]; //para saber si es con detenido debe ser = 1
          ////// SI EXISTE EL NUC SE VALIDA SI LA CARPETA RECIBIDA SE ENCUENTRA RECHAZADA, DE SER ASI OBTENER EL MOTIVO DE RECHAZO Y NO DEJAR GUARDAR
            if($carpetaRecibida == 0){
             echo json_encode(   array(  'first'=>$arreglo[7], 'motivoRechazo'=>$motivoRechazo  )   );
            }else{
-            if (check_in_range($fechaInicialCaptura, $fechaLimiteCaptura, $fechaIngreso) || $prioridad == 1 ){
+            if ( check_in_range($fechaInicialCaptura, $fechaLimiteCaptura, $fechaIngreso) || $prioridad == 1 ||  $fechaIngreso < $fechaLimiteCaptura){
               //SI EL NUC SE HA RECIBIDO POR EL CMASC Y ESTA EN EL RAGO DEJAR GUARDAR
-              echo json_encode(   array(  'first'=>$arreglo[0]   )   ); 
+              echo json_encode(   array(  'first'=>$arreglo[0] ,  'second' => $fechaIngreso )   ); 
             }else{
-              echo json_encode(   array(  'first'=>$arreglo[8]  )   );
+              echo json_encode(   array(  'first'=>$arreglo[8] , 'second' => $fechaIngreso )   );
             }
            }
       } else{
@@ -990,8 +990,8 @@ $tramitefinal = $totaTrabvajar2 - ($totDeterminaciones1 + $enviads1);
         $diaLimiteCapturaSire = 25;
         $fechaCapturaSire = $anioCapturaSire.'-'.$mesCapturaSire.'-'.$diaInicialCapturaSire; //Periodo de captura inician 26 de cada mes anterior
         $periodoIngresoSire = strtotime('- 1 month', strtotime($fechaCapturaSire)); //Se resta un mes al mes de captura actual
-        $fechaInicialCaptura = date('d-m-Y',  $periodoIngresoSire);
-        $fechaLimiteCaptura = $diaLimiteCapturaSire.'-'.$mesCapturaSire.'-'.$anioCapturaSire;
+        $fechaInicialCaptura = date('Y-m-d',  $periodoIngresoSire);
+        $fechaLimiteCaptura = $anioCapturaSire.'-'.$mesCapturaSire.'-'.$diaLimiteCapturaSire;
         //$fechaLimiteCaptura = $diaLimiteCapturaSire.'-12-'.date("Y");
         $prioridad = $checkCMASC[0][18]; //para saber si es con detenido debe ser = 1
 
@@ -999,11 +999,11 @@ $tramitefinal = $totaTrabvajar2 - ($totDeterminaciones1 + $enviads1);
            if($carpetaRecibida == 0){
             echo json_encode(   array(  'first'=>$arreglo[7], 'motivoRechazo'=>$motivoRechazo  )   );
            }else{
-            if (check_in_range($fechaInicialCaptura, $fechaLimiteCaptura, $fechaIngreso) || $prioridad == 1 ){
+            if ( check_in_range($fechaInicialCaptura, $fechaLimiteCaptura, $fechaIngreso) || $prioridad == 1 || $fechaIngreso < $fechaLimiteCaptura ){
               //SI EL NUC SE HA RECIBIDO POR EL CMASC Y ESTA EN EL RAGO DEJAR GUARDAR
-              echo json_encode(   array(  'first'=>$arreglo[0]   )   ); 
+              echo json_encode(   array(  'first'=>$arreglo[0]  , 'second' => $fechaIngreso )   ); 
             }else{
-              echo json_encode(   array(  'first'=>$arreglo[8]  )   );
+              echo json_encode(   array(  'first'=>$arreglo[8] , 'second' => $fechaIngreso  )   );
             }
            }
       } else{
