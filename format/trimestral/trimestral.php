@@ -267,6 +267,28 @@
 
 		</div>
 
+
+
+		<div class="modal fade" id="modalNucsTrimes" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+     					
+						<div id="contentMod"></div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalNucsTrimeShow" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+     					
+						<div id="contentModShow"></div>
+
+    </div>
+  </div>
+</div>
+
 		
 
 
