@@ -123,21 +123,21 @@
 																				<div class="form-row">
 																	    <div class="form-group col-md-4">
 																	      <label for="textNombre">Nombre<span class="aste">(*)</span></label>
-																	      <input value="<?php if($a == 1){ echo $nombre; } ?>" type="text" class="form-control" id="textNombre" name="txtNombre">
+																	      <input value="<?php if($a == 1){ echo $nombre; } ?>" type="text" maxlength="50" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras')" class="form-control" id="textNombre" name="txtNombre">
 																	    </div>
 																	    <div class="form-group col-md-4">
 																	      <label for="textApPaterno">Apellido paterno<span class="aste">(*)</span></label>
-																	      <input value="<?php if($a == 1){ echo $ap_paterno; } ?>" type="text" class="form-control" id="textApPaterno" name="textApPaterno">
+																	      <input value="<?php if($a == 1){ echo $ap_paterno; } ?>" type="text" maxlength="50" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras')" class="form-control" id="textApPaterno" name="textApPaterno">
 																	    </div>
 																	    <div class="form-group col-md-4">
 																	      <label for="textApMaterno">Apellido materno<span class="aste">(*)</span></label>
-																	      <input value="<?php if($a == 1){ echo $ap_materno; } ?>" type="text" class="form-control" id="textApMaterno" name="textApMaterno">
+																	      <input value="<?php if($a == 1){ echo $ap_materno; } ?>" maxlength="50" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras')" type="text" class="form-control" id="textApMaterno" name="textApMaterno">
 																	    </div>
 																	  </div>
 																	  <div class="form-row">
 																	    <div class="form-group col-md-4">
 																	      <label for="textAlias">Alias</label>
-																	      <input value="<?php if($a == 1){ echo $alias; } ?>" type="text" class="form-control" id="textAlias" name="textAlias" >
+																	      <input value="<?php if($a == 1){ echo $alias; } ?>" type="text" maxlength="50" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras_numeros')" class="form-control" id="textAlias" name="textAlias" >
 																	    </div>
 																	    <div class="form-group col-md-4">
 																	      <label for="textEdad">Edad<span class="aste">(*)</span></label>
@@ -309,17 +309,17 @@
 																				<div class="form-row">
 																				<div class="form-group col-md-6">
 																					<label for="textRequerido">Requerido por otra corporación</label>
-																					<input value="<?php if($a == 1){ echo $reqOtrasCorpo; } ?>" type="text" class="form-control" id="textRequerido" name="textRequerido">
+																					<input value="<?php if($a == 1){ echo $reqOtrasCorpo; } ?>" maxlength="45" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras')" type="text" class="form-control" id="textRequerido" name="textRequerido">
 																				</div>
 																	    <div class="form-group col-md-6">
 																	      <label for="textOficio">Oficio</label>
-																	      <input value="<?php if($a == 1){ echo $oficio; } ?>" type="text" class="form-control" id="textOficio" name="textOficio">
+																	      <input value="<?php if($a == 1){ echo $oficio; } ?>" type="text" maxlength="45" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras_numeros')" class="form-control" id="textOficio" name="textOficio">
 																	    </div>
 																	   </div>
 																	   	<div class="form-row">
 																	   		<div class="form-group col-md-12">
 																	   		<label for="textOficio">Observaciones</label>
-																	     <textarea id="textObservaciones" style="resize: none;" class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3"><?php if($a == 1){ echo $observaciones; } ?></textarea>
+																	     <textarea id="textObservaciones" style="resize: none;" maxlength="350" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras_numeros')" class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3"><?php if($a == 1){ echo $observaciones; } ?></textarea>
 																	     </div>
 																	   	</div>
 																	  </div>

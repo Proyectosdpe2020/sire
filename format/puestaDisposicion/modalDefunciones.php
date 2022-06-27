@@ -84,15 +84,15 @@
 																				<div class="form-row">
 																			  	  <div class="form-group col-md-4">
 																	      	<label for="textNombreDef">Nombre:<span class="aste">(*)</span></label>	
-																								<input value="<?php if($a == 1){ echo $nombre; } ?>" type="text" class="form-control" id="textNombreDef" name="textNombreDef">
+																								<input value="<?php if($a == 1){ echo $nombre; } ?>" type="text" maxlength="150" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras')" class="form-control" id="textNombreDef" name="textNombreDef">
 																	    </div>
 																	    <div class="form-group col-md-4">
 																	    	<label for="textAp_paternoDef">Apellido paterno:<span class="aste">(*)</span></label>	
-																	    	<input value="<?php if($a == 1){ echo $ap_paterno; } ?>" type="text" class="form-control" id="textAp_paternoDef" name="textAp_paternoDef">
+																	    	<input value="<?php if($a == 1){ echo $ap_paterno; } ?>" type="text" maxlength="150" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras')" class="form-control" id="textAp_paternoDef" name="textAp_paternoDef">
 																	    </div>
 																	    <div class="form-group col-md-4">
 																	      	<label for="textAp_maternoDef">Apellido materno:<span class="aste">(*)</span></label>	
-																								<input value="<?php if($a == 1){ echo $ap_materno; } ?>" type="text" class="form-control" id="textAp_maternoDef" name="textAp_maternoDef">
+																								<input value="<?php if($a == 1){ echo $ap_materno; } ?>" type="text" maxlength="150" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras')" class="form-control" id="textAp_maternoDef" name="textAp_maternoDef">
 																	    </div>
 																	  </div>
 																	  	<div class="form-row">
@@ -199,7 +199,7 @@
 																				<div class="form-row">
 																	    <div class="form-group col-md-12">
 																	       <label for="textObservacionesDefun">Observaciones:</label>	
-																								<textarea id="textObservacionesDefun" style="resize: none; height: 20vh; " class="form-control rounded-0" rows="3"><?php if($a == 1){echo $observaciones;} ?></textarea>
+																								<textarea id="textObservacionesDefun" style="resize: none; height: 20vh; " maxlength="350" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras_numeros')" class="form-control rounded-0" rows="3"><?php if($a == 1){echo $observaciones;} ?></textarea>
 																	    </div>
 																	   </div>
 																	  </div>

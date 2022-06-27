@@ -178,13 +178,13 @@
  		</div><!-- ROOWWWWWW LOCALIDADES  -->
 
  		<div class="row"><!-- ROOWWWWWW DIRECCION  -->
- 			<div class="col-xs-12 col-sm-12  col-md-2">
+ 			<div class="col-xs-12 col-sm-12  col-md-2">  
  				<label for="heard">Código Postal :</label> <span class="aste">(Requerido)</span>
  				<div id="codepostalid"><input class="form-control"  id="codepostalidPeusta" value="<? if($a == 1){ echo $codigop; } ?>"  type="text" readonly=""></div>
  			</div>
  			<div class="col-xs-12 col-sm-12  col-md-5">
  				<label for="heard">Calle / Carretera / Brecha :</label><span class="aste"> (Requerido)</span><br>
- 				<input class="form-control"  id="calleInputPuesta" value="<? if($a == 1){ echo $calle; } ?>" type="text" <? if($b == 0){ echo "readonly"; } ?>>
+ 				<input class="form-control"  id="calleInputPuesta" maxlength="150" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras_numeros)" value="<? if($a == 1){ echo $calle; } ?>" type="text" <? if($b == 0){ echo "readonly"; } ?>>
  			</div>
  			<div class="col-xs-12 col-sm-12  col-md-1">
  				<label for="heard">Número :</label><br>

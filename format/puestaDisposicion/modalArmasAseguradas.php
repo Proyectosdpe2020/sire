@@ -123,7 +123,7 @@
 																	  	<div class="form-row">
 																	  		 <div class="form-group col-md-4">
 																	      <label for="textMatricula">Matricula<span class="aste">(*)</span></label>
-																	      <input value="<?php if($a == 1){ echo $matricula; } ?>" type="text" class="form-control" id="textMatricula" name="textMatricula">
+																	      <input value="<?php if($a == 1){ echo $matricula; } ?>" type="text" maxlength="30" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras_numeros')" class="form-control" id="textMatricula" name="textMatricula">
 																	    </div>
 																	  		<div class="form-group col-md-4">
 																	      	<label for="textCatAccesorioArma">Accesorios asegurados:</label>
@@ -160,7 +160,7 @@
 																				<div class="form-row">
 																	    <div class="form-group col-md-12">
 																	       <label for="textObservacionesArmas">Observaciones:</label>	
-																								<textarea id="textObservacionesArmas" style="resize: none; height: 20vh; " class="form-control rounded-0" rows="3"><?php if($a == 1){ echo  $observaciones; } ?></textarea>
+																								<textarea id="textObservacionesArmas" style="resize: none; height: 20vh; " maxlength="350" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras_numeros')" class="form-control rounded-0" rows="3"><?php if($a == 1){ echo  $observaciones; } ?></textarea>
 																	    </div>
 																	   </div>
 																	  </div>
