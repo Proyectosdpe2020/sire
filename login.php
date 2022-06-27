@@ -88,6 +88,7 @@
     
     $navegador = getBrowser($user_agent);
 
+    echo "el navegador es: ".$navegador;
 
   ?>
   <div class="overlay">
