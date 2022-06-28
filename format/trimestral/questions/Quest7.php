@@ -613,18 +613,7 @@
 							if($has_litigation){ 
 					
 												$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 151, $per1, 2017);
-       
-												if($data_sended){ //all trimester sended
-													$quest_value = $data[0][0];
-													$tota += $data[0][0];
-												}
-												else if($o != 2){ //last month not sended
-													$quest_value = $data[0][0];
-													$tota += $data[0][0];
-												}
-												else{ //put blak if its the last month and has no data sended
-													$quest_value = "";
-												}
+												$quest_value = $data[0][0];
 
 											} 
 							?>
@@ -635,20 +624,9 @@
 							if($has_litigation){ 
 					
 												$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 151, $per1, 2018);
-       
-												if($data_sended){ //all trimester sended
-													$quest_value = $data[0][0];
-													$tota += $data[0][0];
-												}
-												else if($o != 2){ //last month not sended
-													$quest_value = $data[0][0];
-													$tota += $data[0][0];
-												}
-												else{ //put blak if its the last month and has no data sended
-													$quest_value = "";
-												}
+												$quest_value = $data[0][0];
 
-											} 
+											}  
 							?>
 							<td class="<?php echo $quest_class; ?>" >
 								<input type="number" value="<? echo $data[0][0]; ?>" id="11val2018" <? echo $quest_readonly; ?> >
@@ -657,18 +635,7 @@
 							if($has_litigation){ 
 					
 												$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 151, $per1, 2019);
-       
-												if($data_sended){ //all trimester sended
-													$quest_value = $data[0][0];
-													$tota += $data[0][0];
-												}
-												else if($o != 2){ //last month not sended
-													$quest_value = $data[0][0];
-													$tota += $data[0][0];
-												}
-												else{ //put blak if its the last month and has no data sended
-													$quest_value = "";
-												}
+												$quest_value = $data[0][0];
 
 											} 
 							?>
@@ -679,18 +646,7 @@
 							if($has_litigation){ 
 					
 												$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 151, $per1, 2020);
-       
-												if($data_sended){ //all trimester sended
-													$quest_value = $data[0][0];
-													$tota += $data[0][0];
-												}
-												else if($o != 2){ //last month not sended
-													$quest_value = $data[0][0];
-													$tota += $data[0][0];
-												}
-												else{ //put blak if its the last month and has no data sended
-													$quest_value = "";
-												}
+												$quest_value = $data[0][0];
 
 											} 
 							?>
@@ -701,18 +657,7 @@
 							if($has_litigation){ 
 					
 												$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 151, $per1, 2021);
-       
-												if($data_sended){ //all trimester sended
-													$quest_value = $data[0][0];
-													$tota += $data[0][0];
-												}
-												else if($o != 2){ //last month not sended
-													$quest_value = $data[0][0];
-													$tota += $data[0][0];
-												}
-												else{ //put blak if its the last month and has no data sended
-													$quest_value = "";
-												}
+												$quest_value = $data[0][0];
 
 											} 
 							?>
