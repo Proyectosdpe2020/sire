@@ -127,11 +127,85 @@
 						<tr>
 							<th scope="row">8.2</th>
 							<td style="text-align: left;">Determinado por criterio de oportunidad</td>
-							<td><input type="number" value="<? echo $dataQuestAn35[0][0]; ?>" id="2val2017"></td>
-							<td><input type="number" value="<? echo $dataQuestAn35[0][1]; ?>" id="2val2018"></td>
-							<td><input type="number" value="<? echo $dataQuestAn35[0][2]; ?>" id="2val2019"></td>
-							<td><input type="number" value="<? echo $dataQuestAn35[0][3]; ?>" id="2val2020"></td>
-							<td><input type="number" value="<? echo $dataQuestAn35[0][4]; ?>" id="2val2021"></td>
+							<?
+							  $has_litigation = false;
+									$has_captured = false;
+									$validaEnlace = $idEnlace;
+									$data_sended = false;
+									$quest_class = "";
+									$quest_value = "";
+									$quest_readonly = "";
+
+								if( $dataEnlaces[0][1] != 0){  //check if it has litigation
+										$validaEnlace = $dataEnlaces[0][1];
+										$has_litigation = true; 
+										if($idUn == 'IN(34)'){ $idUn = 'IN(167)'; }
+										$idUn = 'IN('.$dataEnlaces[0][2].')'; //Para obtener unidad correcta de litigacion NUEVO***
+									}	
+									else{ 
+										$validaEnlace = $dataEnlaces[0][0];
+										$has_litigation = false; 
+									}  
+
+									if($has_litigation && $idUnidad != 1001){ //write exclusions
+										$quest_class =  "blockInp"; 
+										$quest_readonly = "readonly"; 
+									} 
+									else if($idUnidad == 1001){
+										$quest_readonly = "";
+									}
+							?>
+
+							<?
+							if($has_litigation){ 
+					
+												$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 91, $per1, 2017);
+													$quest_value = $data[0][0];
+											} 
+							?>
+							<td class="<?php echo $quest_class; ?>" >
+								<input type="number" value="<? echo $data[0][0]; ?>" id="2val2017" <? echo $quest_readonly; ?> >
+							</td>
+							<?
+							if($has_litigation){ 
+					
+												$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 91, $per1, 2018);
+													$quest_value = $data[0][0];
+											} 
+							?>
+							<td class="<?php echo $quest_class; ?>" >
+								<input type="number" value="<? echo $data[0][0]; ?>" id="2val2018" <? echo $quest_readonly; ?> >
+							</td>
+							<?
+								if($has_litigation){ 
+					
+												$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 91, $per1, 2019);
+													$quest_value = $data[0][0];
+											} 
+							?>
+							<td class="<?php echo $quest_class; ?>" >
+								<input type="number" value="<? echo $data[0][0]; ?>" id="2val2019" <? echo $quest_readonly; ?> >
+							</td>
+							<?
+								if($has_litigation){ 
+					
+												$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 91, $per1, 2020);
+													$quest_value = $data[0][0];
+											} 
+							?>
+							<td class="<?php echo $quest_class; ?>" >
+								<input type="number" value="<? echo $data[0][0]; ?>" id="2val2020" <? echo $quest_readonly; ?> >
+							</td>
+							<?
+							if($has_litigation){ 
+					
+												$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 91, $per1, 2021);
+													$quest_value = $data[0][0];
+											} 
+							?>
+							<td class="<?php echo $quest_class; ?>" >
+								<input type="number" value="<? echo $data[0][0]; ?>" id="2val2021" <? echo $quest_readonly; ?> >
+							</td>
 							<?
 									$tota = 0; $tota1 = 0;
 
@@ -217,14 +291,87 @@
 							<td class="blockInp"><input type="number" value="<? echo $data3[0][3]; ?>" id="p36tot" readonly></td>
 						</tr>
 						<tr>
-							<th scope="row">8.4</th>
-							
+							<th scope="row">8.4</th>					
 							<td style="text-align: left;">Cumplida la suspensión condicional del proceso</td>
-							<td><input type="number" value="<? echo $dataQuestAn37[0][0]; ?>" id="4val2017"></td>
-							<td><input type="number" value="<? echo $dataQuestAn37[0][1]; ?>" id="4val2018"></td>
-							<td><input type="number" value="<? echo $dataQuestAn37[0][2]; ?>" id="4val2019"></td>
-							<td><input type="number" value="<? echo $dataQuestAn37[0][3]; ?>" id="4val2020"></td>
-							<td><input type="number" value="<? echo $dataQuestAn37[0][4]; ?>" id="4val2021"></td>
+								<?
+							  $has_litigation = false;
+									$has_captured = false;
+									$validaEnlace = $idEnlace;
+									$data_sended = false;
+									$quest_class = "";
+									$quest_value = "";
+									$quest_readonly = "";
+
+								if( $dataEnlaces[0][1] != 0){  //check if it has litigation
+										$validaEnlace = $dataEnlaces[0][1];
+										$has_litigation = true; 
+										if($idUn == 'IN(34)'){ $idUn = 'IN(167)'; }
+										$idUn = 'IN('.$dataEnlaces[0][2].')'; //Para obtener unidad correcta de litigacion NUEVO***
+									}	
+									else{ 
+										$validaEnlace = $dataEnlaces[0][0];
+										$has_litigation = false; 
+									}  
+
+									if($has_litigation && $idUnidad != 1001){ //write exclusions
+										$quest_class =  "blockInp"; 
+										$quest_readonly = "readonly"; 
+									} 
+									else if($idUnidad == 1001){
+										$quest_readonly = "";
+									}
+							?>
+
+							<?
+							if($has_litigation){ 
+					
+												$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 15, $per1, 2017);
+													$quest_value = $data[0][0];
+											} 
+							?>
+							<td class="<?php echo $quest_class; ?>" >
+								<input type="number" value="<? echo $data[0][0]; ?>" id="4val2017" <? echo $quest_readonly; ?> >
+							</td>
+								<?
+							if($has_litigation){ 
+					
+												$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 15, $per1, 2018);
+													$quest_value = $data[0][0];
+											} 
+							?>
+							<td class="<?php echo $quest_class; ?>" >
+								<input type="number" value="<? echo $data[0][0]; ?>" id="4val2018" <? echo $quest_readonly; ?> >
+							</td>
+								<?
+							if($has_litigation){ 
+					
+												$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 15, $per1, 2019);
+													$quest_value = $data[0][0];
+											} 
+							?>
+							<td class="<?php echo $quest_class; ?>" >
+								<input type="number" value="<? echo $data[0][0]; ?>" id="4val2019" <? echo $quest_readonly; ?> >
+							</td>
+								<?
+							if($has_litigation){ 
+					
+												$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 15, $per1, 2020);
+													$quest_value = $data[0][0];
+											} 
+							?>
+							<td class="<?php echo $quest_class; ?>" >
+								<input type="number" value="<? echo $data[0][0]; ?>" id="4val2020" <? echo $quest_readonly; ?> >
+							</td>
+								<?
+							if($has_litigation){ 
+					
+												$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 15, $per1, 2021);
+													$quest_value = $data[0][0];
+											} 
+							?>
+							<td class="<?php echo $quest_class; ?>" >
+								<input type="number" value="<? echo $data[0][0]; ?>" id="4val2021" <? echo $quest_readonly; ?> >
+							</td>
 							
 							<?
 									$tota = 0; $tota1 = 0;
@@ -326,11 +473,85 @@
 						<tr>
 							<th scope="row">8.7</th>
 							<td style="text-align: left;">Resueltos por procedimiento abreviado</td>
-							<td><input type="number" value="<? echo $dataQuestAn40[0][0]; ?>" id="7val2017"></td>
-							<td><input type="number" value="<? echo $dataQuestAn40[0][1]; ?>" id="7val2018"></td>
-							<td><input type="number" value="<? echo $dataQuestAn40[0][2]; ?>" id="7val2019"></td>
-							<td><input type="number" value="<? echo $dataQuestAn40[0][3]; ?>" id="7val2020"></td>
-							<td><input type="number" value="<? echo $dataQuestAn40[0][4]; ?>" id="7val2021"></td>
+								<?
+							  $has_litigation = false;
+									$has_captured = false;
+									$validaEnlace = $idEnlace;
+									$data_sended = false;
+									$quest_class = "";
+									$quest_value = "";
+									$quest_readonly = "";
+
+								if( $dataEnlaces[0][1] != 0){  //check if it has litigation
+										$validaEnlace = $dataEnlaces[0][1];
+										$has_litigation = true; 
+										if($idUn == 'IN(34)'){ $idUn = 'IN(167)'; }
+										$idUn = 'IN('.$dataEnlaces[0][2].')'; //Para obtener unidad correcta de litigacion NUEVO***
+									}	
+									else{ 
+										$validaEnlace = $dataEnlaces[0][0];
+										$has_litigation = false; 
+									}  
+
+									if($has_litigation && $idUnidad != 1001){ //write exclusions
+										$quest_class =  "blockInp"; 
+										$quest_readonly = "readonly"; 
+									} 
+									else if($idUnidad == 1001){
+										$quest_readonly = "";
+									}
+							?>
+
+							<?
+							if($has_litigation){ 
+					
+												$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 153, $per1, 2017);
+													$quest_value = $data[0][0];
+											} 
+							?>
+							<td class="<?php echo $quest_class; ?>" >
+								<input type="number" value="<? echo $data[0][0]; ?>" id="7val2017" <? echo $quest_readonly; ?> >
+							</td>
+								<?
+							if($has_litigation){ 
+					
+												$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 153, $per1, 2018);
+													$quest_value = $data[0][0];
+											} 
+							?>
+							<td class="<?php echo $quest_class; ?>" >
+								<input type="number" value="<? echo $data[0][0]; ?>" id="7val2018" <? echo $quest_readonly; ?> >
+							</td>
+							<?
+							if($has_litigation){ 
+					
+												$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 153, $per1, 2019);
+													$quest_value = $data[0][0];
+											} 
+							?>
+							<td class="<?php echo $quest_class; ?>" >
+								<input type="number" value="<? echo $data[0][0]; ?>" id="7val2019" <? echo $quest_readonly; ?> >
+							</td>
+								<?
+							if($has_litigation){ 
+					
+												$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 153, $per1, 2020);
+													$quest_value = $data[0][0];
+											} 
+							?>
+							<td class="<?php echo $quest_class; ?>" >
+								<input type="number" value="<? echo $data[0][0]; ?>" id="7val2020" <? echo $quest_readonly; ?> >
+							</td>
+								<?
+							if($has_litigation){ 
+					
+												$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 153, $per1, 2021);
+													$quest_value = $data[0][0];
+											} 
+							?>
+							<td class="<?php echo $quest_class; ?>" >
+								<input type="number" value="<? echo $data[0][0]; ?>" id="7val2021" <? echo $quest_readonly; ?> >
+							</td>
 							<?
 									$tota = 0; $tota1 = 0;
 
