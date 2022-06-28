@@ -99,11 +99,11 @@
 						<tr>
 							<th scope="row">9.1</th>
 							<td style="text-align: left;">Número de inputados a los que se les impuso prisión preventiva oficiosa</td>
-							<td><input type="number" value="<? echo $dataQuestAn48[0][0]; ?>" id="1val2017"></td>
-							<td><input type="number" value="<? echo $dataQuestAn48[0][1]; ?>" id="1val2018"></td>
-							<td><input type="number" value="<? echo $dataQuestAn48[0][2]; ?>" id="1val2019"></td>
-							<td><input type="number" value="<? echo $dataQuestAn48[0][3]; ?>" id="1val2020"></td>
-							<td><input type="number" value="<? echo $dataQuestAn48[0][4]; ?>" id="1val2021"></td>
+							<td class="blockInp"><input type="number" value="<? echo $dataQuestAn48[0][0]; ?>" id="1val2017" readonly></td>
+							<td class="blockInp"><input type="number" value="<? echo $dataQuestAn48[0][1]; ?>" id="1val2018" readonly></td>
+							<td class="blockInp"><input type="number" value="<? echo $dataQuestAn48[0][2]; ?>" id="1val2019" readonly></td>
+							<td class="blockInp"><input type="number" value="<? echo $dataQuestAn48[0][3]; ?>" id="1val2020" readonly></td>
+							<td class="blockInp"><input type="number" value="<? echo $dataQuestAn48[0][4]; ?>" id="1val2021" readonly></td>
 							<?
 									$tota = 0; $tota1 = 0;
 
@@ -178,11 +178,11 @@
 						<tr>
 							<th scope="row">9.2</th>
 							<td style="text-align: left;">Número de imputados a los que se les impuso a prisión preventiva no oficiosa</td>
-							<td><input type="number" value="<? echo $dataQuestAn49[0][0]; ?>" id="2val2017"></td>
-							<td><input type="number" value="<? echo $dataQuestAn49[0][1]; ?>" id="2val2018"></td>
-							<td><input type="number" value="<? echo $dataQuestAn49[0][2]; ?>" id="2val2019"></td>
-							<td><input type="number" value="<? echo $dataQuestAn49[0][3]; ?>" id="2val2020"></td>
-							<td><input type="number" value="<? echo $dataQuestAn49[0][4]; ?>" id="2val2021"></td>
+							<td class="blockInp"><input type="number" value="<? echo $dataQuestAn49[0][0]; ?>" id="2val2017" readonly></td>
+							<td class="blockInp"><input type="number" value="<? echo $dataQuestAn49[0][1]; ?>" id="2val2018" readonly></td>
+							<td class="blockInp"><input type="number" value="<? echo $dataQuestAn49[0][2]; ?>" id="2val2019" readonly></td>
+							<td class="blockInp"><input type="number" value="<? echo $dataQuestAn49[0][3]; ?>" id="2val2020" readonly></td>
+							<td class="blockInp"><input type="number" value="<? echo $dataQuestAn49[0][4]; ?>" id="2val2021" readonly></td>
 							<?
 									$tota = 0; $tota1 = 0;
 

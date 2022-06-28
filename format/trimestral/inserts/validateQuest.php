@@ -11,6 +11,9 @@
    if (isset($_GET["sumQuest3"])){ $sumQuest3 = $_GET["sumQuest3"]; }
    if (isset($_GET["sumQuest4"])){ $sumQuest4 = $_GET["sumQuest4"]; }
    if (isset($_GET["totalValidateQuest4"])){ $totalValidateQuest4 = $_GET["totalValidateQuest4"]; }
+   if (isset($_GET["sumQuest_6_1"])){ $sumQuest_6_1 = $_GET["sumQuest_6_1"]; }
+   if (isset($_GET["totalValidateQuest_4_1"])){ $totalValidateQuest_4_1 = $_GET["totalValidateQuest_4_1"]; }
+
    if (isset($_GET["quest"])){ $quest = $_GET["quest"]; }
 
 switch($quest){
@@ -56,6 +59,15 @@ switch($quest){
      $arreglo[1] = "SI";
 
      if ($sumQuest4 == $sumQuest1){
+      echo json_encode(array('first'=>$arreglo[1]));
+     }else{
+      echo json_encode(array('first'=>$arreglo[0]));
+     }
+  break;
+  case 6:
+     $arreglo[0] = "NO";
+     $arreglo[1] = "SI";
+     if($sumQuest_6_1 >= $totalValidateQuest_4_1){
       echo json_encode(array('first'=>$arreglo[1]));
      }else{
       echo json_encode(array('first'=>$arreglo[0]));

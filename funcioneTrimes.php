@@ -104,7 +104,7 @@ function getDataQ($conn, $quest, $per, $anio, $idUnidad){
   FROM ESTADISTICAV2.dbo.estatusNucsCarpetas estNucCarpe INNER JOIN PRUEBA.dbo.Carpeta c ON c.CarpetaID = estNucCarpe.idCarpeta 
   WHERE estNucCarpe.idUnidad $idUnidad AND estNucCarpe.mes IN($mes) AND estNucCarpe.idEstatus = $estatus AND estNucCarpe.anio = $anio 
 		AND YEAR(c.FechaInicio) = $anio AND MONTH(c.FechaInicio) $per ";
-
+//echo $query.'<br>';
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
@@ -178,6 +178,7 @@ function getDataEnlacesByIdUnidad($conn, $idUnidad, $idEnlace){
 	{
 		$arreglo[$indice][0]=$row['idEnlaceCarp'];
 		$arreglo[$indice][1]=$row['idEnlaceLiti'];
+		$arreglo[$indice][2]=$row['idUniLiti'];
 		$indice++;
 	}
 	if(isset($arreglo)){return $arreglo;}
@@ -212,5 +213,59 @@ function getDAtaSIREQuestionValidateQuestion($conn, $mes, $anio, $idUnidad){
 	}
 	if(isset($arreglo)){return $arreglo;}
 }
+
+
+//Funcion para validar la pregunta 4.1
+function getDAtaSIREQuestionValidateQuestion_4_1($conn, $mes, $anio, $idUnidad){
+
+	$query = " SELECT
+       ISNULL( sum([iniciadasConDetenido]) , 0) as 'total'
+  FROM [ESTADISTICAV2].[dbo].[carpetasDatos] WHERE idUnidad $idUnidad AND idAnio = $anio AND idMes in $mes ";
+//echo $query."<br>";
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[0][0]=$row['total'];
+	}
+	if(isset($arreglo)){return $arreglo;}
+	
+	}
+
+	function getDAtaSIREQuestionEstatusHitorico($conn, $anio, $idUnidad, $estatus, $per, $anioHistorico){
+
+	$query = " SELECT COUNT(estNucCarpe.idCarpeta) as m
+  FROM ESTADISTICAV2.dbo.estatusNucsCarpetas estNucCarpe INNER JOIN PRUEBA.dbo.Carpeta c ON c.CarpetaID = estNucCarpe.idCarpeta 
+  WHERE estNucCarpe.idUnidad $idUnidad AND estNucCarpe.mes $per AND estNucCarpe.idEstatus = $estatus AND estNucCarpe.anio = $anio 
+		AND SUBSTRING ( c.NUC ,5 , 4 ) = $anioHistorico ";
+//echo $query.'<br>';
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['m'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+	}
+
+	function getDAtaSIREQuestionEstatusLitiHistorico($conSic, $anio, $idUnidad, $estatus, $per,  $anioHistorico){
+
+ $query = " SELECT COUNT(idEstatusNucs) as mes FROM [ESTADISTICAV2].[dbo].[estatusNucs] INNER JOIN PRUEBA.dbo.Carpeta c ON c.CarpetaID = estatusNucs.idCarpeta
+  WHERE idUnidad $idUnidad AND idEstatus = $estatus AND anio = $anio AND SUBSTRING ( c.NUC ,5 , 4 ) = $anioHistorico ";
+//echo $query.'<br>';
+
+
+
+	$indice = 0;
+	$stmt = sqlsrv_query($conSic, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['mes'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+	
+	}
+
 
 ?>

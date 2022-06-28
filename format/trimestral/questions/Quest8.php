@@ -127,11 +127,11 @@
 						<tr>
 							<th scope="row">8.2</th>
 							<td style="text-align: left;">Determinado por criterio de oportunidad</td>
-							<td><input type="number" value="<? echo $dataQuestAn35[0][0]; ?>" id="2val2017"></td>
-							<td><input type="number" value="<? echo $dataQuestAn35[0][1]; ?>" id="2val2018"></td>
-							<td><input type="number" value="<? echo $dataQuestAn35[0][2]; ?>" id="2val2019"></td>
-							<td><input type="number" value="<? echo $dataQuestAn35[0][3]; ?>" id="2val2020"></td>
-							<td><input type="number" value="<? echo $dataQuestAn35[0][4]; ?>" id="2val2021"></td>
+							<td class="blockInp"><input type="number" value="<? echo $dataQuestAn35[0][0]; ?>" id="2val2017" readonly></td>
+							<td class="blockInp"><input type="number" value="<? echo $dataQuestAn35[0][1]; ?>" id="2val2018" readonly></td>
+							<td class="blockInp"><input type="number" value="<? echo $dataQuestAn35[0][2]; ?>" id="2val2019" readonly></td>
+							<td class="blockInp"><input type="number" value="<? echo $dataQuestAn35[0][3]; ?>" id="2val2020" readonly></td>
+							<td class="blockInp"><input type="number" value="<? echo $dataQuestAn35[0][4]; ?>" id="2val2021" readonly></td>
 							<?
 									$tota = 0; $tota1 = 0;
 
@@ -220,11 +220,11 @@
 							<th scope="row">8.4</th>
 							
 							<td style="text-align: left;">Cumplida la suspensión condicional del proceso</td>
-							<td><input type="number" value="<? echo $dataQuestAn37[0][0]; ?>" id="4val2017"></td>
-							<td><input type="number" value="<? echo $dataQuestAn37[0][1]; ?>" id="4val2018"></td>
-							<td><input type="number" value="<? echo $dataQuestAn37[0][2]; ?>" id="4val2019"></td>
-							<td><input type="number" value="<? echo $dataQuestAn37[0][3]; ?>" id="4val2020"></td>
-							<td><input type="number" value="<? echo $dataQuestAn37[0][4]; ?>" id="4val2021"></td>
+							<td class="blockInp"><input type="number" value="<? echo $dataQuestAn37[0][0]; ?>" id="4val2017" readonly></td>
+							<td class="blockInp"><input type="number" value="<? echo $dataQuestAn37[0][1]; ?>" id="4val2018" readonly></td>
+							<td class="blockInp"><input type="number" value="<? echo $dataQuestAn37[0][2]; ?>" id="4val2019" readonly></td>
+							<td class="blockInp"><input type="number" value="<? echo $dataQuestAn37[0][3]; ?>" id="4val2020" readonly></td>
+							<td class="blockInp"><input type="number" value="<? echo $dataQuestAn37[0][4]; ?>" id="4val2021" readonly></td>
 							
 							<?
 									$tota = 0; $tota1 = 0;
@@ -326,11 +326,11 @@
 						<tr>
 							<th scope="row">8.7</th>
 							<td style="text-align: left;">Resueltos por procedimiento abreviado</td>
-							<td><input type="number" value="<? echo $dataQuestAn40[0][0]; ?>" id="7val2017"></td>
-							<td><input type="number" value="<? echo $dataQuestAn40[0][1]; ?>" id="7val2018"></td>
-							<td><input type="number" value="<? echo $dataQuestAn40[0][2]; ?>" id="7val2019"></td>
-							<td><input type="number" value="<? echo $dataQuestAn40[0][3]; ?>" id="7val2020"></td>
-							<td><input type="number" value="<? echo $dataQuestAn40[0][4]; ?>" id="7val2021"></td>
+							<td class="blockInp"><input type="number" value="<? echo $dataQuestAn40[0][0]; ?>" id="7val2017" readonly></td>
+							<td class="blockInp"><input type="number" value="<? echo $dataQuestAn40[0][1]; ?>" id="7val2018" readonly></td>
+							<td class="blockInp"><input type="number" value="<? echo $dataQuestAn40[0][2]; ?>" id="7val2019" readonly></td>
+							<td class="blockInp"><input type="number" value="<? echo $dataQuestAn40[0][3]; ?>" id="7val2020" readonly></td>
+							<td class="blockInp"><input type="number" value="<? echo $dataQuestAn40[0][4]; ?>" id="7val2021" readonly></td>
 							<?
 									$tota = 0; $tota1 = 0;
 
