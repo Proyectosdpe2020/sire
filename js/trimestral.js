@@ -1,6 +1,6 @@
 function uploadFileExcelNucs(){
 
-	alert("here wee");
+	
 	var quest = $("#quest").val()
 	var per = $("#per").val()
 	var anio = $("#anio").val()
@@ -11,6 +11,7 @@ function uploadFileExcelNucs(){
 
 	var Form = new FormData($('#filesForm')[0]);
 	$("#btnUpload").attr("disabled", true)
+	document.getElementById('laodimgmain').style.display = "block";
 	$.ajax({
 		//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
 		url: 'format/trimestral/questions/importNucs.php?quest=' + quest + '&per=' + per + '&anio=' + anio + '&idUnidad=' + idUnidad + '&idEnlace=' + idEnlace+ '&mes=' + mes+ '&anioActual=' + anioActual,
@@ -23,7 +24,8 @@ function uploadFileExcelNucs(){
 		//$("#contTableNucs2").html(respuesta);
 		console.log(respuesta)
 		swal("", "Guardado Exitosamente.", "success")
-		cargarTablaNucsTrim()
+		cargarTablaNucsTrim(quest, per, anio, idUnidad, idEnlace, mes, anioActual)
+		document.getElementById('laodimgmain').style.display = "none";
 		$("#btnUpload").attr("disabled", false)
 	});
 
@@ -135,7 +137,7 @@ function insertNUCStrimestral(mes, quest, per, anio, idUnidad, idEnlace, anioAct
 
 	var anioNuc = texto.substr(4,4)///// SE OBTIENE AQUI EL VALOR DEL ANIO DE INICIO DEL NUC
 
-	
+
 
 if(anio == 0){
 
@@ -164,7 +166,7 @@ if(anio == 0){
 
 											
 							swal("", "Guardado Exitosamente.", "success");
-							cargarTablaNucsTrim()
+							cargarTablaNucsTrim(quest, per, anio, idUnidad, idEnlace, mes, anioActual)
 							$("#btnSaveNUCStrimes").attr("disabled", false);
 				
 							
@@ -218,7 +220,7 @@ if(anio == 0){
 			
 														
 										swal("", "Guardado Exitosamente.", "success");
-										cargarTablaNucsTrim(quest, per, anio, idUnidad, idEnlace, mes)
+										cargarTablaNucsTrim(quest, per, anio, idUnidad, idEnlace, mes, anioActual)
 										$("#btnSaveNUCStrimes").attr("disabled", false);
 							
 										
