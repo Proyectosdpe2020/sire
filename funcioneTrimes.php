@@ -1,5 +1,86 @@
 <? 
 
+function getArrayCounts($conn, $quest, $idEnlace, $idUnidad, $per, $mes){
+
+	$anios = array( 2017, 2018, 2019, 2020, 2021 );
+	$valores =  array();
+	
+	for ($i=0; $i < sizeof($anios) ; $i++) { 
+				$datas = getCountNucsTrim($conn, $anios[$i], $quest, $idEnlace, $idUnidad, $per, $mes);
+		  $valores[$i] =  $datas[0][0];
+	}
+
+	if(isset($valores)){return $valores;}
+
+}
+
+function getCountNucsTrim($conn, $anio, $quest, $idEn, $idUn, $per, $mes){
+
+	$query = "  SELECT count(NUC) as 'total'
+	FROM trimestral.nucsTrimestral 
+	WHERE SUBSTRING(NUC, 5,4) = $anio 
+				  AND idPregunta = $quest 
+				  AND idEnlace = $idEn 
+				  AND idUnidad = $idUn
+				  AND periodo = $per
+				  AND mes = $mes
+				  ";
+				  $indice = 0;
+				  $stmt = sqlsrv_query($conn, $query);
+				  while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+				  {
+					  $arreglo[$indice][0]=$row['total'];
+					  $indice++;
+				  }
+				  if(isset($arreglo)){return $arreglo;}
+}
+
+
+function getNucsTrim($conn, $anio, $quest, $idEn, $idUn, $per, $mes, $anioactual){
+
+if($anio == 0 AND $mes == 0){
+
+	$query = "SELECT NUC, idNucsTrimestral FROM trimestral.nucsTrimestral 
+	WHERE SUBSTRING(NUC, 5,4) < $anioactual  AND idEnlace = $idEn AND idUnidad = $idUn AND periodo = $per AND idPregunta = $quest";
+
+}else{
+	$query = "  SELECT NUC, idNucsTrimestral
+	FROM trimestral.nucsTrimestral 
+	WHERE SUBSTRING(NUC, 5,4) = $anio 
+				  AND idPregunta = $quest 
+				  AND idEnlace = $idEn 
+				  AND idUnidad = $idUn
+				  AND periodo = $per
+				  AND mes = $mes
+				  ";
+}
+
+				  $indice = 0;
+				  $stmt = sqlsrv_query($conn, $query);
+				  while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+				  {
+					  $arreglo[$indice][0]=$row['NUC'];
+							$arreglo[$indice][1]=$row['idNucsTrimestral'];
+					  $indice++;
+				  }
+				  if(isset($arreglo)){return $arreglo;}
+}
+
+function getNamePregunta($conn, $quest){
+
+	$query = "   SELECT  nombre FROM trimestral.pregunta WHERE idPregunta = $quest ";
+
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['nombre'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+	
+	}
+
 function getDataAnteriores($conn, $quest, $idEnlace, $idUnidad, $anio, $periodo){
 
 	$query = "   SELECT val2017, val2018, val2019, val2020, val2021 FROM trimestral.datosAnteriorTrimestral WHERE idPregunta = $quest AND idEnlace = $idEnlace AND idUnidad = $idUnidad AND anio = $anio AND periodo = $periodo ";

@@ -1,3 +1,308 @@
+function uploadFileExcelNucs(){
+
+	alert("here wee");
+	var quest = $("#quest").val()
+	var per = $("#per").val()
+	var anio = $("#anio").val()
+	var idUnidad = $("#idUnidad").val()
+	var idEnlace = $("#idEnlace").val()
+	var mes = $("#mes").val()
+	var anioActual = $("#anioActual").val()
+
+	var Form = new FormData($('#filesForm')[0]);
+	$("#btnUpload").attr("disabled", true)
+	$.ajax({
+		//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
+		url: 'format/trimestral/questions/importNucs.php?quest=' + quest + '&per=' + per + '&anio=' + anio + '&idUnidad=' + idUnidad + '&idEnlace=' + idEnlace+ '&mes=' + mes+ '&anioActual=' + anioActual,
+		type: 'POST',
+		contentType: false,
+		data : Form,
+		processData: false,
+		cache: false
+	}).done(function (respuesta) {
+		//$("#contTableNucs2").html(respuesta);
+		console.log(respuesta)
+		swal("", "Guardado Exitosamente.", "success")
+		cargarTablaNucsTrim()
+		$("#btnUpload").attr("disabled", false)
+	});
+
+}
+
+
+
+
+function showContenCheckExcel(checkbox) {
+    if(checkbox.checked){
+        $("#contNUcsManual").hide();
+		$("#contNUcsExcel").show();
+    }
+    else{
+		$("#contNUcsManual").show();
+		$("#contNUcsExcel").hide();
+    }
+} 
+
+
+function deleteNucTrimes(id, modal){
+
+	var quest = $("#quest").val()
+	var per = $("#per").val()
+	var anio = $("#anio").val()
+	var idUnidad = $("#idUnidad").val()
+	var idEnlace = $("#idEnlace").val()
+	var mes = $("#mes").val()
+	var anioActual = $("#anioActual").val()
+
+	swal({
+		title: "",
+		text: "¿Esta seguro de Eliminar el NUC?",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "Eliminar",
+		cancelButtonText: "Cancelar",
+		closeOnConfirm: true,
+		closeOnCancel: true
+	},
+		function (isConfirm) {
+			if (isConfirm) {
+
+				$.ajax({
+					//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
+					url: 'format/trimestral/questions/deletetNucTable.php?id=' + id,
+					type: 'POST',
+					contentType: false,
+					processData: false,
+					cache: false
+				}).done(function (respuesta) {
+					//$("#contentTableNucsTrim").html(respuesta);
+					var data = JSON.parse(respuesta);
+					if(data.first == "SI"){
+						if(modal == 1){
+							cargarTablaNucsTrim(quest, per, anio, idUnidad, idEnlace, mes, anioActual)	
+						}else{
+							cargarTablaNucsTrim2(quest, per, anio, idUnidad, idEnlace, mes, anioActual)	
+						}
+						
+				}else{
+							if(data.first == "NO"){ swal("", "No se pudo eliminar el NUC.", "warning"); }
+				}
+
+
+				});
+
+			}
+		});
+
+} 
+
+function cargarTablaNucsTrim2(quest, per, anio, idUnidad, idEnlace, mes, anioActual){
+
+	$.ajax({
+		//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
+		url: 'format/trimestral/questions/getNucsTable.php?quest=' + quest + '&per=' + per + '&anio=' + anio + '&idUnidad=' + idUnidad + '&idEnlace=' + idEnlace+ '&mes=' + mes+ '&anioActual=' + anioActual,
+		type: 'POST',
+		contentType: false,
+		processData: false,
+		cache: false
+	}).done(function (respuesta) {
+		$("#contTableNucs2").html(respuesta);
+	});
+
+}
+
+
+function recortaNucTrimes(){
+
+
+	cantidadinicio = document.getElementById("nucTrimes").value.length;
+	texto = document.getElementById("nucTrimes").value;
+
+	if (cantidadinicio > 13) {
+		var slice2 = texto.slice(0, -1);
+		document.getElementById("nucTrimes").value = slice2;
+	}
+
+}
+
+function insertNUCStrimestral(mes, quest, per, anio, idUnidad, idEnlace, anioActual) {
+
+	var nuc = $('#nucTrimes').val()
+
+	cantidadinicio = document.getElementById("nucTrimes").value.length;
+	texto = document.getElementById("nucTrimes").value;
+
+	var anioNuc = texto.substr(4,4)///// SE OBTIENE AQUI EL VALOR DEL ANIO DE INICIO DEL NUC
+
+	
+
+if(anio == 0){
+
+	if(anioNuc == anioActual){
+					swal("", "El Número de Caso debe ser ingresado en el periodo actual.", "warning");
+	}else{
+
+		if (cantidadinicio < 13) { swal("", "El Número de Caso no Existe.", "warning"); } else {
+
+			if (cantidadinicio == 13) {
+
+				$("#btnSaveNUCStrimes").attr("disabled", true)
+
+				$.ajax({
+					url: 'format/trimestral/inserts/insertsNUCS.php?quest=' + quest + '&per=' + per + '&anio=' + anio + '&idUnidad=' + idUnidad + '&idEnlace=' + idEnlace+ '&mes=' + mes+ '&nuc=' + nuc,
+					type: 'POST',
+					contentType: false,
+					processData: false,
+					cache: false
+				}).done(function (respuesta) {
+			
+			
+					var data = JSON.parse(respuesta);
+
+					if(data.first == "existe"){
+
+											
+							swal("", "Guardado Exitosamente.", "success");
+							cargarTablaNucsTrim()
+							$("#btnSaveNUCStrimes").attr("disabled", false);
+				
+							
+
+					}else{
+
+								if(data.first == "noexiste"){ swal("", "El Número de Caso no Existe.", "warning"); }
+								$("#btnSaveNUCStrimes").attr("disabled", false);
+
+					}
+
+					
+				
+			
+			
+				});
+
+			}
+
+		}
+
+
+	}
+
+}else{
+
+	if(anio != 0){
+
+				if(anioNuc != anioActual){
+					swal("", "El Número de Caso debe ir en años anteriores.", "warning");
+				}else{
+
+					if (cantidadinicio < 13) { swal("", "El Número de Caso no Existe.", "warning"); } else {
+
+						if (cantidadinicio == 13) {
+			
+							$("#btnSaveNUCStrimes").attr("disabled", true)
+			
+							$.ajax({
+								url: 'format/trimestral/inserts/insertsNUCS.php?quest=' + quest + '&per=' + per + '&anio=' + anio + '&idUnidad=' + idUnidad + '&idEnlace=' + idEnlace+ '&mes=' + mes+ '&nuc=' + nuc,
+								type: 'POST',
+								contentType: false,
+								processData: false,
+								cache: false
+							}).done(function (respuesta) {
+						
+						
+								var data = JSON.parse(respuesta);
+			
+								if(data.first == "existe"){
+			
+														
+										swal("", "Guardado Exitosamente.", "success");
+										cargarTablaNucsTrim(quest, per, anio, idUnidad, idEnlace, mes)
+										$("#btnSaveNUCStrimes").attr("disabled", false);
+							
+										
+			
+								}else{
+			
+											if(data.first == "noexiste"){ swal("", "El Número de Caso no Existe.", "warning"); }
+											$("#btnSaveNUCStrimes").attr("disabled", false);
+			
+								}
+			
+								
+							
+						
+						
+							});
+			
+						}
+			
+					}
+
+				}
+
+	}
+
+}
+
+}
+
+function cargarTablaNucsTrim(quest, per, anio, idUnidad, idEnlace, mes, anioActual){
+
+	$.ajax({
+		//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
+		url: 'format/trimestral/questions/getNucsTable.php?quest=' + quest + '&per=' + per + '&anio=' + anio + '&idUnidad=' + idUnidad + '&idEnlace=' + idEnlace+ '&mes=' + mes+ '&anioActual=' + anioActual,
+		type: 'POST',
+		contentType: false,
+		processData: false,
+		cache: false
+	}).done(function (respuesta) {
+		$("#contentTableNucsTrim").html(respuesta);
+	});
+
+}
+
+
+function loaNucTrimeShow(mes, anio, trimestre, quest, idEnlace, idUnidad, anioActual){
+
+	$('#modalNucsTrimeShow').modal({
+        show: 'true'
+    }); 
+	//swal("", "Estas selecionando la pregunta "+quest, "success");
+	$.ajax({
+		//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
+		url: 'format/trimestral/questions/modalNucsTrimShow.php?quest=' + quest + '&per=' + trimestre + '&anio=' + anio + '&idUnidad=' + idUnidad + '&idEnlace=' + idEnlace+ '&mes=' + mes+ '&anioActual=' + anioActual,
+		type: 'POST',
+		contentType: false,
+		processData: false,
+		cache: false
+	}).done(function (respuesta) {
+		$("#contentModShow").html(respuesta);
+	});
+
+}
+
+
+function loaNucTrimes(mes, anio, trimestre, quest, idEnlace, idUnidad, anioActual){
+
+	$('#modalNucsTrimes').modal({
+        show: 'true'
+    }); 
+	//swal("", "Estas selecionando la pregunta "+quest, "success");
+	$.ajax({
+		//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
+		url: 'format/trimestral/questions/modalNucsTrim.php?quest=' + quest + '&per=' + trimestre + '&anio=' + anio + '&idUnidad=' + idUnidad + '&idEnlace=' + idEnlace+ '&mes=' + mes+ '&anioActual=' + anioActual,
+		type: 'POST',
+		contentType: false,
+		processData: false,
+		cache: false
+	}).done(function (respuesta) {
+		$("#contentMod").html(respuesta);
+	});
+
+}
+
 
 function enviarDataAnteriores(anio, idenlace, idUnidad, per, quest) {
 
@@ -85,6 +390,7 @@ function enviarDPEtrim(idEnlace, anio, format, per, idUnidad) {
 
 function getQUestionAjax(quest, per, anio, idUnidad, idEnlace) {
 
+	
 	getHelp(quest);
 
 	//swal("", "Estas selecionando la pregunta "+quest, "success");
