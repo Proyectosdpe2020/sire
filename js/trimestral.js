@@ -734,6 +734,12 @@ function saveQuest5(quest, per, anio, idUnidad, idEnlace) {
 
 function saveQuest6(quest, per, anio, idUnidad, idEnlace) {
 
+	val2017 = document.getElementById("1val2017").value;
+	val2018 = document.getElementById("1val2018").value;
+	val2019 = document.getElementById("1val2019").value;
+	val2020 = document.getElementById("1val2020").value;
+	val2021 = document.getElementById("1val2021").value;
+
 	p15m1 = document.getElementById("p15m1").value;
 	p15m2 = document.getElementById("p15m2").value;
 	p15m3 = document.getElementById("p15m3").value;
@@ -746,26 +752,55 @@ function saveQuest6(quest, per, anio, idUnidad, idEnlace) {
 	p17m2 = document.getElementById("p17m2").value;
 	p17m3 = document.getElementById("p17m3").value;
 
+	totalValidateQuest_4_1 = document.getElementById("totalValidateQuest_4_1").value;
+	var validateQuest = false;
+	var sumQuest_6_1 = parseInt(p15m1) + parseInt(p15m2) + parseInt(p15m3)
+	//console.log('suma: '+totalValidateQuest_4_1);
+
 	if (p15m1 == "" || p15m2 == "" || p15m3 == "" || p16m1 == "" || p16m2 == "" || p16m3 == "" || p17m1 == "" || p17m2 == "" || p17m3 == "") {
 		swal("", "Faltan campos por completar. ", "warning");
 	} else {
+
 		$.ajax({
 			//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
-			url: 'format/trimestral/inserts/save' + quest + '.php?quest=' + quest + '&per=' + per + '&anio=' + anio + '&idUnidad=' + idUnidad + '&idEnlace=' + idEnlace + '&p15m1=' + p15m1
-				+ '&p15m2=' + p15m2 + '&p15m3=' + p15m3 + '&p16m1=' + p16m1 + '&p16m2=' + p16m2 + '&p16m3=' + p16m3 + '&p17m1=' + p17m1 + '&p17m2=' + p17m2 + '&p17m3=' + p17m3,
+			url: 'format/trimestral/inserts/validateQuest.php?quest=' + quest + '&per=' + per + '&anio=' + anio + '&idUnidad=' + idUnidad + '&idEnlace=' + idEnlace + '&sumQuest_6_1=' + sumQuest_6_1 + '&	totalValidateQuest_4_1=' + totalValidateQuest_4_1,
 			type: 'POST',
 			contentType: false,
 			processData: false,
+			async: false,
 			cache: false
-		}).done(function (respuesta) {
-			var data = JSON.parse(respuesta);
-			if (data.first == "SI") {
-				swal("", "Información capturada exitosamente.", "success");
-				enviarDataAnteriores(anio, idEnlace, idUnidad, per, 6);
-				//getQUestionAjax(quest, per, anio, idUnidad, idEnlace);
-				//getCircles(quest, per, anio, idUnidad, idEnlace);
-			} else { swal("", "Hubo un error favor de revisar.", "warning"); }
+		}).done(function (respuestaDataValida) {
+
+			var dataValidate = JSON.parse(respuestaDataValida);
+
+			if (dataValidate.first == "SI") {
+
+				validateQuest = true;
+
+			} else { swal("", "Los datos proporcionados en el reactivo 6.1 (número de detenidos en flagrancia) deberán ser cuando menos iguales o superiores al reactivo 4.1 (carpetas de investigación iniciadas con detendido en flagrancia) de la pregunta número 4.\nVerifique su información.", "warning"); }
+
 		});
+
+		if (validateQuest == true) {
+				$.ajax({
+				//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
+				url: 'format/trimestral/inserts/save' + quest + '.php?quest=' + quest + '&per=' + per + '&anio=' + anio + '&idUnidad=' + idUnidad + '&idEnlace=' + idEnlace + '&p15m1=' + p15m1
+					+ '&p15m2=' + p15m2 + '&p15m3=' + p15m3 + '&p16m1=' + p16m1 + '&p16m2=' + p16m2 + '&p16m3=' + p16m3 + '&p17m1=' + p17m1 + '&p17m2=' + p17m2 + '&p17m3=' + p17m3,
+				type: 'POST',
+				contentType: false,
+				processData: false,
+				cache: false
+			}).done(function (respuesta) {
+				var data = JSON.parse(respuesta);
+				if (data.first == "SI") {
+					swal("", "Información capturada exitosamente.", "success");
+					enviarDataAnteriores(anio, idEnlace, idUnidad, per, 6);
+					//getQUestionAjax(quest, per, anio, idUnidad, idEnlace);
+					//getCircles(quest, per, anio, idUnidad, idEnlace);
+				} else { swal("", "Hubo un error favor de revisar.", "warning"); }
+			});
+		}
+
 	}
 }
 
