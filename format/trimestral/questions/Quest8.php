@@ -8,10 +8,50 @@
 					if (isset($_GET["anio"])){ $anio = $_GET["anio"]; }
 					if (isset($_GET["idUnidad"])){ $idUnidad = $_GET["idUnidad"]; }
 					if (isset($_GET["idEnlace"])){ $idEnlace = $_GET["idEnlace"]; }
-					if($per == 1){ $m1 = "Enero"; $m2 = "Febrero"; $m3 = "Marzo"; $nme = "Enero - Marzo"; $arr = array(1,2,3); $per1 = "IN(1,2,3)"; } 
-					if($per == 2){ $m1 = "Abril"; $m2 = "Mayo"; $m3 = "Junio"; $nme = "Abril - Junio"; $arr = array(4,5,6); $per1 = "IN(4,5,6)"; }
-					if($per == 3){ $m1 = "Julio"; $m2 = "Agosto"; $m3 = "Septiembre"; $nme = "Julio - Septiembre"; $arr = array(7,8,9); $per1 = "IN(7,8,9)"; }
-					if($per == 4){ $m1 = "Octubre"; $m2 = "Noviembre"; $m3 = "Diciembre"; $nme = "Octubre - Diciembre"; $arr = array(10,11,12); $per1 = "IN(10,11,12)"; }
+					
+
+					if ($per == 1) {
+						$m1 = "Enero";
+						$mes1 = 1;
+						$m2 = "Febrero";
+						$mes2 = 2;
+						$m3 = "Marzo";
+						$mes3 = 3;
+						$nme = "Enero - Marzo";
+						$arr = array(1,2,3); $per1 = "IN(1,2,3)";
+					}
+					if ($per == 2) {
+						$mes1 = 4;
+						$m1 = "Abril";
+						$mes2 = 5;
+						$m2 = "Mayo";
+						$mes3 = 6;
+						$m3 = "Junio";
+						$nme = "Abril - Junio";
+						$arr = array(4,5,6); $per1 = "IN(4,5,6)";
+					}
+					if ($per == 3) {
+						$mes1 = 7;
+						$m1 = "Julio";
+						$mes2 = 8;
+						$m2 = "Agosto";
+						$mes3 = 9;
+						$m3 = "Septiembre";
+						$nme = "Julio - Septiembre";
+						$arr = array(7,8,9); $per1 = "IN(7,8,9)";
+					}
+					if ($per == 4) {
+						$mes1 = 10;
+						$m1 = "Octubre";
+						$mes2 = 11;
+						$m2 = "Noviembre";
+						$mes3 = 12;
+						$m3 = "Diciembre";
+						$nme = "Octubre - Diciembre";
+						$arr = array(10,11,12); $per1 = "IN(10,11,12)";
+					}
+					
+
 
 					$data = getDAtaQuestion($conn, 34, $per, $anio, $idUnidad);
 					$data2 = getDAtaQuestion($conn, 35, $per, $anio, $idUnidad);
@@ -30,8 +70,7 @@
 					$getEnv = getInfOCarpetasEnv($conn, $idEnlace, 11);
 					$envt = $getEnv[0][0]; 
 
-					$sumTotal = $data[0][3] + $data2[0][3] + $data3[0][3] + $data4[0][3] + $data5[0][3] + $data6[0][3] + $data7[0][3] + $data8[0][3] + $data9[0][3] +
-					            $data10[0][3] + $data11[0][3] + $data12[0][3] + $data13[0][3] + $data14[0][3];
+					
 					$fisid = getIdFiscaliaEnlace($conn, $idEnlace);
 
 					if($fisid[0][0]  == 4){
@@ -86,6 +125,7 @@
 							<th scope="col">2019</th>
 							<th scope="col">2020</th>
 							<th scope="col">2021</th>
+							<th scope="col">Años Anteriores</th>
 							<th scope="col"><? echo $m1; ?></th>
 							<th scope="col"><? echo $m2; ?></th>
 							<th scope="col"><? echo $m3; ?></th>
@@ -109,20 +149,63 @@
 						$dataQuestAn45 = getDataAnteriores($conn, 45, $idEnlace, $idUnidad, $anio, $per);
 						$dataQuestAn46 = getDataAnteriores($conn, 46, $idEnlace, $idUnidad, $anio, $per);
 						$dataQuestAn47 = getDataAnteriores($conn, 47, $idEnlace, $idUnidad, $anio, $per);
+
+						$d10 = getArrayCounts($conn, 34, $idEnlace, $idUnidad, $per, 0);
+						$d11 = getArrayCounts($conn, 36, $idEnlace, $idUnidad, $per, 0);
+						$d12 = getArrayCounts($conn, 38, $idEnlace, $idUnidad, $per, 0);
+						$d13 = getArrayCounts($conn, 39, $idEnlace, $idUnidad, $per, 0);
+						$d14 = getArrayCounts($conn, 41, $idEnlace, $idUnidad, $per, 0);
+						$d15 = getArrayCounts($conn, 42, $idEnlace, $idUnidad, $per, 0);
+
+						$d101 = getCountNucsTrim($conn, $anio, 34, $idEnlace, $idUnidad, $per, $mes1);
+						$d102 = getCountNucsTrim($conn, $anio, 34, $idEnlace, $idUnidad, $per, $mes2);
+						$d103 = getCountNucsTrim($conn, $anio, 34, $idEnlace, $idUnidad, $per, $mes3);
+						$totd10 = $d101[0][0] + $d102[0][0] + $d103[0][0];
+
+						$d111 = getCountNucsTrim($conn, $anio, 36, $idEnlace, $idUnidad, $per, $mes1);
+						$d112 = getCountNucsTrim($conn, $anio, 36, $idEnlace, $idUnidad, $per, $mes2);
+						$d113 = getCountNucsTrim($conn, $anio, 36, $idEnlace, $idUnidad, $per, $mes3);
+						$totd11 = $d111[0][0] + $d112[0][0] + $d113[0][0];
+
+						$d121 = getCountNucsTrim($conn, $anio, 38, $idEnlace, $idUnidad, $per, $mes1);
+						$d122 = getCountNucsTrim($conn, $anio, 38, $idEnlace, $idUnidad, $per, $mes2);
+						$d123 = getCountNucsTrim($conn, $anio, 38, $idEnlace, $idUnidad, $per, $mes3);
+						$totd20 = $d121[0][0] + $d122[0][0] + $d123[0][0];
+
+						$d131 = getCountNucsTrim($conn, $anio, 39, $idEnlace, $idUnidad, $per, $mes1);
+						$d132 = getCountNucsTrim($conn, $anio, 39, $idEnlace, $idUnidad, $per, $mes2);
+						$d133 = getCountNucsTrim($conn, $anio, 39, $idEnlace, $idUnidad, $per, $mes3);
+						$totd31 = $d131[0][0] + $d132[0][0] + $d133[0][0];
+
+						$d141 = getCountNucsTrim($conn, $anio, 41, $idEnlace, $idUnidad, $per, $mes1);
+						$d142 = getCountNucsTrim($conn, $anio, 41, $idEnlace, $idUnidad, $per, $mes2);
+						$d143 = getCountNucsTrim($conn, $anio, 41, $idEnlace, $idUnidad, $per, $mes3);
+						$totd40 = $d141[0][0] + $d142[0][0] + $d143[0][0];
+
+						$d151 = getCountNucsTrim($conn, $anio, 42, $idEnlace, $idUnidad, $per, $mes1);
+						$d152 = getCountNucsTrim($conn, $anio, 42, $idEnlace, $idUnidad, $per, $mes2);
+						$d153 = getCountNucsTrim($conn, $anio, 42, $idEnlace, $idUnidad, $per, $mes3);
+						$totd51 = $d151[0][0] + $d152[0][0] + $d153[0][0];
+
+						$sumTotal = $data[0][3] + $data2[0][3] + $data3[0][3] + $data4[0][3] + $data5[0][3] + $data6[0][3] + $data7[0][3] + $data8[0][3] + $data9[0][3] +
+					            $data10[0][3] + $data11[0][3] + $data12[0][3] + $data13[0][3] + $data14[0][3] + $totd10+ $totd11+ $totd20+ $totd31+ $totd40+ $totd51;
 						
 						?>
 						<tr>
 							<th scope="row">8.1</th>
 							<td style="text-align: left;">En tramite ante el Juez de Control (sin incluir los que se encuentran en trámite por suspensión condicional, por acuerdos reparatorios o por procedimiento abreviado)</td>
-							<td><input type="number" value="<? echo $dataQuestAn34[0][0]; ?>" id="1val2017"></td>
-							<td><input type="number" value="<? echo $dataQuestAn34[0][1]; ?>" id="1val2018"></td>
-							<td><input type="number" value="<? echo $dataQuestAn34[0][2]; ?>" id="1val2019"></td>
-							<td><input type="number" value="<? echo $dataQuestAn34[0][3]; ?>" id="1val2020"></td>
-							<td><input type="number" value="<? echo $dataQuestAn34[0][4]; ?>" id="1val2021"></td>
-							<td><input type="number" value="<? echo $data[0][0]; ?>" id="p34m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data[0][1]; ?>" id="p34m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data[0][2]; ?>" id="p34m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td class="blockInp"><input type="number" value="<? echo $data[0][3]; ?>" id="p34tot" readonly></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 34, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[0]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 34, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[1]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 34, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[2]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 34, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[3]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 34, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[4]; ?></td>
+
+							<td class="cPo" onclick="loaNucTrimes(0,0, <? echo $per; ?>, 34, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)">Capturar</td>
+
+							<td class="cPo" onclick="loaNucTrimes(<? echo $mes1; ?>,<? echo $anio; ?>, <? echo $per; ?>, 34, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d101[0][0]; ?></td>
+							<td class="cPo" onclick="loaNucTrimes(<? echo $mes2; ?>,<? echo $anio; ?>, <? echo $per; ?>, 34, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d102[0][0]; ?></td>
+							<td class="cPo" onclick="loaNucTrimes(<? echo $mes3; ?>,<? echo $anio; ?>, <? echo $per; ?>, 34, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d103[0][0]; ?></td>
+							<td class="blockInp"><input type="number" value="<? echo $totd10; ?>" id="p10tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">8.2</th>
@@ -206,6 +289,7 @@
 							<td class="<?php echo $quest_class; ?>" >
 								<input type="number" value="<? echo $data[0][0]; ?>" id="2val2021" <? echo $quest_readonly; ?> >
 							</td>
+							<td class="blockInp">Capturar</td>
 							<?
 									$tota = 0; $tota1 = 0;
 
@@ -280,15 +364,18 @@
 						<tr>
 							<th scope="row">8.3</th>
 							<td style="text-align: left;">En trámite por suspensión condicional del proceso aprobada por el Juez de Control (en proceso de cumplimiento)</td>
-							<td><input type="number" value="<? echo $dataQuestAn36[0][0]; ?>" id="3val2017"></td>
-							<td><input type="number" value="<? echo $dataQuestAn36[0][1]; ?>" id="3val2018"></td>
-							<td><input type="number" value="<? echo $dataQuestAn36[0][2]; ?>" id="3val2019"></td>
-							<td><input type="number" value="<? echo $dataQuestAn36[0][3]; ?>" id="3val2020"></td>
-							<td><input type="number" value="<? echo $dataQuestAn36[0][4]; ?>" id="3val2021"></td>
-							<td><input type="number" value="<? echo $data3[0][0]; ?>" id="p36m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data3[0][1]; ?>" id="p36m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data3[0][2]; ?>" id="p36m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td class="blockInp"><input type="number" value="<? echo $data3[0][3]; ?>" id="p36tot" readonly></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 36, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[0]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 36, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[1]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 36, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[2]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 36, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[3]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 36, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[4]; ?></td>
+
+							<td class="cPo" onclick="loaNucTrimes(0,0, <? echo $per; ?>, 36, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)">Capturar</td>
+
+							<td class="cPo" onclick="loaNucTrimes(<? echo $mes1; ?>,<? echo $anio; ?>, <? echo $per; ?>, 36, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d111[0][0]; ?></td>
+							<td class="cPo" onclick="loaNucTrimes(<? echo $mes2; ?>,<? echo $anio; ?>, <? echo $per; ?>, 36, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d112[0][0]; ?></td>
+							<td class="cPo" onclick="loaNucTrimes(<? echo $mes3; ?>,<? echo $anio; ?>, <? echo $per; ?>, 36, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d113[0][0]; ?></td>
+							<td class="blockInp"><input type="number" value="<? echo $totd11; ?>" id="p10tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">8.4</th>					
@@ -372,7 +459,7 @@
 							<td class="<?php echo $quest_class; ?>" >
 								<input type="number" value="<? echo $data[0][0]; ?>" id="4val2021" <? echo $quest_readonly; ?> >
 							</td>
-							
+							<td class="blockInp">Capturar</td>
 							<?
 									$tota = 0; $tota1 = 0;
 
@@ -447,28 +534,34 @@
 						<tr>
 							<th scope="row">8.5</th>
 							<td style="text-align: left;">Resueltos por otras causas de sobreseimiento (sin incluir criterio de oportunidad ni los cumplidos por suspension condicional o por acuerdo reparatorio)</td>
-							<td><input type="number" value="<? echo $dataQuestAn38[0][0]; ?>" id="5val2017"></td>
-							<td><input type="number" value="<? echo $dataQuestAn38[0][1]; ?>" id="5val2018"></td>
-							<td><input type="number" value="<? echo $dataQuestAn38[0][2]; ?>" id="5val2019"></td>
-							<td><input type="number" value="<? echo $dataQuestAn38[0][3]; ?>" id="5val2020"></td>
-							<td><input type="number" value="<? echo $dataQuestAn38[0][4]; ?>" id="5val2021"></td>
-							<td><input type="number" value="<? echo $data5[0][0]; ?>" id="p38m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data5[0][1]; ?>" id="p38m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data5[0][2]; ?>" id="p38m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td class="blockInp"><input type="number" value="<? echo $data5[0][3]; ?>" id="p38tot" readonly></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 38, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d12[0]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 38, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d12[1]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 38, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d12[2]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 38, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d12[3]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 38, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d12[4]; ?></td>
+
+							<td class="cPo" onclick="loaNucTrimes(0,0, <? echo $per; ?>, 38, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)">Capturar</td>
+
+							<td class="cPo" onclick="loaNucTrimes(<? echo $mes1; ?>,<? echo $anio; ?>, <? echo $per; ?>, 38, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d121[0][0]; ?></td>
+							<td class="cPo" onclick="loaNucTrimes(<? echo $mes2; ?>,<? echo $anio; ?>, <? echo $per; ?>, 38, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d122[0][0]; ?></td>
+							<td class="cPo" onclick="loaNucTrimes(<? echo $mes3; ?>,<? echo $anio; ?>, <? echo $per; ?>, 38, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d123[0][0]; ?></td>
+							<td class="blockInp"><input type="number" value="<? echo $totd20; ?>" id="p10tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">8.6</th>
 							<td style="text-align: left;">En tramite de procedimiento abreviado</td>
-							<td><input type="number" value="<? echo $dataQuestAn39[0][0]; ?>" id="6val2017"></td>
-							<td><input type="number" value="<? echo $dataQuestAn39[0][1]; ?>" id="6val2018"></td>
-							<td><input type="number" value="<? echo $dataQuestAn39[0][2]; ?>" id="6val2019"></td>
-							<td><input type="number" value="<? echo $dataQuestAn39[0][3]; ?>" id="6val2020"></td>
-							<td><input type="number" value="<? echo $dataQuestAn39[0][4]; ?>" id="6val2021"></td>
-							<td><input type="number" value="<? echo $data6[0][0]; ?>" id="p39m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data6[0][1]; ?>" id="p39m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data6[0][2]; ?>" id="p39m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td class="blockInp"><input type="number" value="<? echo $data6[0][3]; ?>" id="p39tot" readonly></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 39, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d13[0]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 39, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d13[1]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 39, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d13[2]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 39, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d13[3]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 39, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d13[4]; ?></td>
+
+							<td class="cPo" onclick="loaNucTrimes(0,0, <? echo $per; ?>, 39, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)">Capturar</td>
+
+							<td class="cPo" onclick="loaNucTrimes(<? echo $mes1; ?>,<? echo $anio; ?>, <? echo $per; ?>, 39, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d131[0][0]; ?></td>
+							<td class="cPo" onclick="loaNucTrimes(<? echo $mes2; ?>,<? echo $anio; ?>, <? echo $per; ?>, 39, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d132[0][0]; ?></td>
+							<td class="cPo" onclick="loaNucTrimes(<? echo $mes3; ?>,<? echo $anio; ?>, <? echo $per; ?>, 39, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d133[0][0]; ?></td>
+							<td class="blockInp"><input type="number" value="<? echo $totd31; ?>" id="p10tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">8.7</th>
@@ -552,6 +645,7 @@
 							<td class="<?php echo $quest_class; ?>" >
 								<input type="number" value="<? echo $data[0][0]; ?>" id="7val2021" <? echo $quest_readonly; ?> >
 							</td>
+							<td class="blockInp">Capturar</td>
 							<?
 									$tota = 0; $tota1 = 0;
 
@@ -626,31 +720,37 @@
 						<tr>
 							<th scope="row">8.8</th>
 							<td style="text-align: left;">En trámite ante el Tribunal de Enjuiciamiento (en juicio)</td>
-							<td><input type="number" value="<? echo $dataQuestAn41[0][0]; ?>" id="8val2017"></td>
-							<td><input type="number" value="<? echo $dataQuestAn41[0][1]; ?>" id="8val2018"></td>
-							<td><input type="number" value="<? echo $dataQuestAn41[0][2]; ?>" id="8val2019"></td>
-							<td><input type="number" value="<? echo $dataQuestAn41[0][3]; ?>" id="8val2020"></td>
-							<td><input type="number" value="<? echo $dataQuestAn41[0][4]; ?>" id="8val2021"></td>
-							<td><input type="number" value="<? echo $data8[0][0]; ?>" id="p41m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data8[0][1]; ?>" id="p41m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data8[0][2]; ?>" id="p41m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td class="blockInp"><input type="number" value="<? echo $data8[0][3]; ?>" id="p41tot" readonly></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 41, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d14[0]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 41, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d14[1]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 41, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d14[2]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 41, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d14[3]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 41, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d14[4]; ?></td>
+
+							<td class="cPo" onclick="loaNucTrimes(0,0, <? echo $per; ?>, 41, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)">Capturar</td>
+
+							<td class="cPo" onclick="loaNucTrimes(<? echo $mes1; ?>,<? echo $anio; ?>, <? echo $per; ?>, 41, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d141[0][0]; ?></td>
+							<td class="cPo" onclick="loaNucTrimes(<? echo $mes2; ?>,<? echo $anio; ?>, <? echo $per; ?>, 41, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d142[0][0]; ?></td>
+							<td class="cPo" onclick="loaNucTrimes(<? echo $mes3; ?>,<? echo $anio; ?>, <? echo $per; ?>, 41, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d143[0][0]; ?></td>
+							<td class="blockInp"><input type="number" value="<? echo $totd40; ?>" id="p10tot" readonly></td>
 						</tr>
 						<tr>
 							<th scope="row">8.9</th>
 							<td style="text-align: left;">Resueltos por juicio oral</td>
-							<td><input type="number" value="<? echo $dataQuestAn42[0][0]; ?>" id="9val2017"></td>
-							<td><input type="number" value="<? echo $dataQuestAn42[0][1]; ?>" id="9val2018"></td>
-							<td><input type="number" value="<? echo $dataQuestAn42[0][2]; ?>" id="9val2019"></td>
-							<td><input type="number" value="<? echo $dataQuestAn42[0][3]; ?>" id="9val2020"></td>
-							<td><input type="number" value="<? echo $dataQuestAn42[0][4]; ?>" id="9val2021"></td>
-							<td><input type="number" value="<? echo $data9[0][0]; ?>" id="p42m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data9[0][1]; ?>" id="p42m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data9[0][2]; ?>" id="p42m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td class="blockInp"><input type="number" value="<? echo $data9[0][3]; ?>" id="p42tot" readonly></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 42, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d15[0]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 42, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d15[1]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 42, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d15[2]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 42, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d15[3]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 42, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d15[4]; ?></td>
+
+							<td class="cPo" onclick="loaNucTrimes(0,0, <? echo $per; ?>, 42, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)">Capturar</td>
+
+							<td class="cPo" onclick="loaNucTrimes(<? echo $mes1; ?>,<? echo $anio; ?>, <? echo $per; ?>, 42, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d151[0][0]; ?></td>
+							<td class="cPo" onclick="loaNucTrimes(<? echo $mes2; ?>,<? echo $anio; ?>, <? echo $per; ?>, 42, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d152[0][0]; ?></td>
+							<td class="cPo" onclick="loaNucTrimes(<? echo $mes3; ?>,<? echo $anio; ?>, <? echo $per; ?>, 42, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d153[0][0]; ?></td>
+							<td class="blockInp"><input type="number" value="<? echo $totd51; ?>" id="p10tot" readonly></td>
 						</tr>
 						<tr>
-							<td colspan="11" style="background-color: #7C8B9E; font-size: 20px;"><strong>DERIVADOS A MECANISMOS ALTERNATIVOS (DESPUES DE LA VINCULACIÓN A PROCESO)</strong></td>
+							<td colspan="12" style="background-color: #7C8B9E; font-size: 20px;"><strong>DERIVADOS A MECANISMOS ALTERNATIVOS (DESPUES DE LA VINCULACIÓN A PROCESO)</strong></td>
 						</tr>
 						<tr>
 							<th scope="row">8.10</th>
@@ -660,6 +760,7 @@
 							<td><input type="number" value="<? echo $dataQuestAn43[0][2]; ?>" id="10val2019"></td>
 							<td><input type="number" value="<? echo $dataQuestAn43[0][3]; ?>" id="10val2020"></td>
 							<td><input type="number" value="<? echo $dataQuestAn43[0][4]; ?>" id="10val2021"></td>
+							<td class="blockInp">Capturar</td>
 							<td><input type="number" value="<? echo $data10[0][0]; ?>" id="p43m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data10[0][1]; ?>" id="p43m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data10[0][2]; ?>" id="p43m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
@@ -673,6 +774,7 @@
 							<td><input type="number" value="<? echo $dataQuestAn44[0][2]; ?>" id="11val2019"></td>
 							<td><input type="number" value="<? echo $dataQuestAn44[0][3]; ?>" id="11val2020"></td>
 							<td><input type="number" value="<? echo $dataQuestAn44[0][4]; ?>" id="11val2021"></td>
+							<td class="blockInp">Capturar</td>
 							<td><input type="number" value="<? echo $data11[0][0]; ?>" id="p44m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data11[0][1]; ?>" id="p44m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data11[0][2]; ?>" id="p44m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
@@ -686,6 +788,7 @@
 							<td><input type="number" value="<? echo $dataQuestAn45[0][2]; ?>" id="12val2019"></td>
 							<td><input type="number" value="<? echo $dataQuestAn45[0][3]; ?>" id="12val2020"></td>
 							<td><input type="number" value="<? echo $dataQuestAn45[0][4]; ?>" id="12val2021"></td>
+							<td class="blockInp">Capturar</td>
 							<td><input type="number" value="<? echo $data12[0][0]; ?>" id="p45m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data12[0][1]; ?>" id="p45m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data12[0][2]; ?>" id="p45m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
@@ -699,6 +802,7 @@
 							<td><input type="number" value="<? echo $dataQuestAn46[0][2]; ?>" id="13val2019"></td>
 							<td><input type="number" value="<? echo $dataQuestAn46[0][3]; ?>" id="13val2020"></td>
 							<td><input type="number" value="<? echo $dataQuestAn46[0][4]; ?>" id="13val2021"></td>
+							<td class="blockInp">Capturar</td>
 							<td><input type="number" value="<? echo $data13[0][0]; ?>" id="p46m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data13[0][1]; ?>" id="p46m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data13[0][2]; ?>" id="p46m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
@@ -712,12 +816,14 @@
 							<td><input type="number" value="<? echo $dataQuestAn47[0][2]; ?>" id="14val2019"></td>
 							<td><input type="number" value="<? echo $dataQuestAn47[0][3]; ?>" id="14val2020"></td>
 							<td><input type="number" value="<? echo $dataQuestAn47[0][4]; ?>" id="14val2021"></td>
+							<td class="blockInp">Capturar</td>
 							<td><input type="number" value="<? echo $data14[0][0]; ?>" id="p47m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data14[0][1]; ?>" id="p47m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td><input type="number" value="<? echo $data14[0][2]; ?>" id="p47m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="<? echo $data14[0][3]; ?>" id="p47tot" readonly></td>
 						</tr>
 						<th style=" border: inset 0pt" scope="row"></th>
+							<td style=" border: inset 0pt"></td>
 							<td style=" border: inset 0pt"></td>
 							<td style=" border: inset 0pt"></td>
 							<td style=" border: inset 0pt"></td>
