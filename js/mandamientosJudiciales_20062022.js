@@ -1807,12 +1807,16 @@ function saveAvButton(){
 	if(TIPO_INVESTIGACION == 1){
 		$('#div_button_nuc').hide();
 		$('#div_button_nuc_imputado').hide();
+		$('#div_button_nuc_agraviados').hide();
 		$('#div_button_averiguacion').show();
 		$('#div_button_averiguacion_imputado').show();
+		$('#div_button_averiguacion_agraviados').show();
 	}else{
 		$('#div_button_averiguacion').hide();
 		$('#div_button_averiguacion_imputado').hide();
+		$('#div_button_averiguacion_agraviados').hide();
 		$('#div_button_nuc').show();
 		$('#div_button_nuc_imputado').show();
+		$('#div_button_nuc_agraviados').show();
 	}
 }

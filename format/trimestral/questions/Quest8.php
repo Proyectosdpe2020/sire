@@ -157,11 +157,10 @@
 							?>
 
 							<?
-							if($has_litigation){ 
-					
-												$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 91, $per1, 2017);
-													$quest_value = $data[0][0];
-											} 
+							if($has_litigation){
+								$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 91, $per1, 2017);
+								$quest_value = $data[0][0];
+							}
 							?>
 							<td class="<?php echo $quest_class; ?>" >
 								<input type="number" value="<? echo $data[0][0]; ?>" id="2val2017" <? echo $quest_readonly; ?> >
