@@ -131,35 +131,35 @@
 							<?
 							if($has_litigation){
 								$dataLit = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 17, $per1, 2017);
-								$quest_value = $data[0][0];
+								$quest_value = $dataLit[0][0];
 							}else{ $quest_value = $dataQuestAn48[0][0]; }?>
 							<td class="<?php echo $quest_class; ?>" >
 								<input type="number" value="<? echo $quest_value; ?>" id="1val2017" <? echo $quest_readonly; ?> >
 							</td>
 							<?if($has_litigation){ 
 								$dataLit = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 17, $per1, 2018);
-								$quest_value = $data[0][0];
+								$quest_value = $dataLit[0][0];
 							}else{ $quest_value = $dataQuestAn48[0][1]; } ?>
 							<td class="<?php echo $quest_class; ?>" >
 								<input type="number" value="<? echo $quest_value; ?>" id="1val2018" <? echo $quest_readonly; ?> >
 							</td>
 							<?if($has_litigation){
 								$dataLit = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 17, $per1, 2019);
-								$quest_value = $data[0][0];
+								$quest_value = $dataLit[0][0];
 							}else{ $quest_value = $dataQuestAn48[0][2]; } ?>
 							<td class="<?php echo $quest_class; ?>" >
 								<input type="number" value="<? echo $quest_value; ?>" id="1val2019" <? echo $quest_readonly; ?> >
 							</td>
 							<?if($has_litigation){
 								$dataLit = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 17, $per1, 2020);
-								$quest_value = $data[0][0];
+								$quest_value = $dataLit[0][0];
 							}else{ $quest_value = $dataQuestAn48[0][3]; } ?>
 							<td class="<?php echo $quest_class; ?>" >
 								<input type="number" value="<? echo $quest_value; ?>" id="1val2020" <? echo $quest_readonly; ?> >
 							</td>
 							<?if($has_litigation){
 								$dataLit = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 17, $per1, 2021);
-								$quest_value = $data[0][0];
+								$quest_value = $dataLit[0][0];
 							}else{ $quest_value = $dataQuestAn48[0][4]; } ?>
 							<td class="<?php echo $quest_class; ?>" >
 								<input type="number" value="<? echo $quest_value; ?>" id="1val2021" <? echo $quest_readonly; ?> >
@@ -271,35 +271,35 @@
 							<?
 							if($has_litigation){
 								$dataLit = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 18, $per1, 2017);
-								$quest_value = $data[0][0];
+								$quest_value = $dataLit[0][0];
 							}else{ $quest_value = $dataQuestAn49[0][0]; } ?>
 							<td class="<?php echo $quest_class; ?>" >
 								<input type="number" value="<? echo $quest_value; ?>" id="2val2017" <? echo $quest_readonly; ?> >
 							</td>
 							<?if($has_litigation){
 								$dataLit = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 18, $per1, 2018);
-								$quest_value = $data[0][0];
+								$quest_value = $dataLit[0][0];
 							}else{ $quest_value = $dataQuestAn49[0][1]; } ?>
 							<td class="<?php echo $quest_class; ?>" >
 								<input type="number" value="<? echo $quest_value; ?>" id="2val2018" <? echo $quest_readonly; ?> >
 							</td>
 							<?if($has_litigation){
 								$dataLit = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 18, $per1, 2019);
-								$quest_value = $data[0][0];
+								$quest_value = $dataLit[0][0];
 							}else{ $quest_value = $dataQuestAn49[0][2]; } ?>
 							<td class="<?php echo $quest_class; ?>" >
 								<input type="number" value="<? echo $quest_value; ?>" id="2val2019" <? echo $quest_readonly; ?> >
 							</td>
 							<?if($has_litigation){
 								$dataLit = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 18, $per1, 2020);
-								$quest_value = $data[0][0];
+								$quest_value = $dataLit[0][0];
 						 }else{ $quest_value = $dataQuestAn49[0][3]; } ?>
 							<td class="<?php echo $quest_class; ?>" >
 								<input type="number" value="<? echo $quest_value; ?>" id="2val2020" <? echo $quest_readonly; ?> >
 							</td>
 							<?if($has_litigation){
 								$dataLit = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 18, $per1, 2021);
-								$quest_value = $data[0][0];
+								$quest_value = $dataLit[0][0];
 							}else{ $quest_value = $dataQuestAn49[0][4]; } ?>
 							<td class="<?php echo $quest_class; ?>" >
 								<input type="number" value="<? echo $quest_value; ?>" id="2val2021" <? echo $quest_readonly; ?> >
