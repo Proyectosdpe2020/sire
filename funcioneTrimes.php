@@ -332,7 +332,7 @@ function getDAtaSIREQuestionValidateQuestion_4_1($conn, $mes, $anio, $idUnidad){
 	function getDAtaSIREQuestionEstatusLitiHistorico($conSic, $anio, $idUnidad, $estatus, $per,  $anioHistorico){
 
  $query = " SELECT COUNT(idEstatusNucs) as mes FROM [ESTADISTICAV2].[dbo].[estatusNucs] INNER JOIN PRUEBA.dbo.Carpeta c ON c.CarpetaID = estatusNucs.idCarpeta WHERE idUnidad $idUnidad AND mes $per  AND idEstatus = $estatus AND anio = $anio AND SUBSTRING ( c.NUC ,5 , 4 ) = $anioHistorico ";
-//echo $query.'<br>';
+echo $query.'<br>';
 
 
 
