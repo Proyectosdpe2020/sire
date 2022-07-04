@@ -8,10 +8,47 @@
 					if (isset($_GET["anio"])){ $anio = $_GET["anio"]; }
 					if (isset($_GET["idUnidad"])){ $idUnidad = $_GET["idUnidad"]; }
 					if (isset($_GET["idEnlace"])){ $idEnlace = $_GET["idEnlace"]; }
-					if($per == 1){ $m1 = "Enero"; $m2 = "Febrero"; $m3 = "Marzo"; $nme = "Enero - Marzo"; $arr = array(1,2,3); } 
-					if($per == 2){ $m1 = "Abril"; $m2 = "Mayo"; $m3 = "Junio"; $nme = "Abril - Junio"; $arr = array(4,5,6);}
-					if($per == 3){ $m1 = "Julio"; $m2 = "Agosto"; $m3 = "Septiembre"; $nme = "Julio - Septiembre"; $arr = array(7,8,9);}
-					if($per == 4){ $m1 = "Octubre"; $m2 = "Noviembre"; $m3 = "Diciembre"; $nme = "Octubre - Diciembre"; $arr = array(10,11,12);}
+					
+					if ($per == 1) {
+						$m1 = "Enero";
+						$mes1 = 1;
+						$m2 = "Febrero";
+						$mes2 = 2;
+						$m3 = "Marzo";
+						$mes3 = 3;
+						$nme = "Enero - Marzo";
+						$arr = array(1,2,3); $per1 = "IN(1,2,3)";
+					}
+					if ($per == 2) {
+						$mes1 = 4;
+						$m1 = "Abril";
+						$mes2 = 5;
+						$m2 = "Mayo";
+						$mes3 = 6;
+						$m3 = "Junio";
+						$nme = "Abril - Junio";
+						$arr = array(4,5,6); $per1 = "IN(4,5,6)";
+					}
+					if ($per == 3) {
+						$mes1 = 7;
+						$m1 = "Julio";
+						$mes2 = 8;
+						$m2 = "Agosto";
+						$mes3 = 9;
+						$m3 = "Septiembre";
+						$nme = "Julio - Septiembre";
+						$arr = array(7,8,9); $per1 = "IN(7,8,9)";
+					}
+					if ($per == 4) {
+						$mes1 = 10;
+						$m1 = "Octubre";
+						$mes2 = 11;
+						$m2 = "Noviembre";
+						$mes3 = 12;
+						$m3 = "Diciembre";
+						$nme = "Octubre - Diciembre";
+						$arr = array(10,11,12); $per1 = "IN(10,11,12)";
+					}
 
 					$data = getDAtaQuestion($conn, 15, $per, $anio, $idUnidad);
 					$data2 = getDAtaQuestion($conn, 16, $per, $anio, $idUnidad);
