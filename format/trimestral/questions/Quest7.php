@@ -550,7 +550,7 @@
 							<td class="blockInp"><input type="number" value="0" id="9val2021" readonly></td>
 							<td class="blockInp"><input type="number" value="0" id="p26m1" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="0" id="p26m2" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
-							<td class="blockInp"><input type="number" value="" id="p26m3" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
+							<td class="blockInp"><input type="number" value="0" id="p26m3" <? if($envt == 1 && $idUnidad =! 1001){ echo "readonly"; } ?>></td>
 							<td class="blockInp"><input type="number" value="0" id="p26tot" readonly></td>
 							<!--
 							<td><input type="number" value="<? echo $dataQuestAn26[0][0]; ?>" id="9val2017"></td>
