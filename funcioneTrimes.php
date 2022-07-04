@@ -345,8 +345,45 @@ function getDAtaSIREQuestionValidateQuestion_4_1($conn, $mes, $anio, $idUnidad){
 
 	function getDAtaSIREQuestionEstatusLitiHistorico($conSic, $anio, $idUnidad, $estatus, $per,  $anioHistorico){
 
+ $query = " SELECT COUNT(idEstatusNucs) as mes FROM [ESTADISTICAV2].[dbo].[estatusNucs] INNER JOIN PRUEBA.dbo.Carpeta c ON c.CarpetaID = estatusNucs.idCarpeta WHERE idUnidad $idUnidad AND mes $per  AND idEstatus = $estatus AND anio = $anio AND SUBSTRING ( c.NUC ,5 , 4 ) = $anioHistorico ";
+//echo $query.'<br>';
+
+
+
+	$indice = 0;
+	$stmt = sqlsrv_query($conSic, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['mes'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+	
+	}
+
+	function getDAtaSIREQuestionEstatusLiti_Quest_9_3($conSic, $mes, $anio, $idUnidad, $per){
+ $estatus = 'IN(95,20,21,22,23,24,25,26,27,28,29,30,31)';
  $query = " SELECT COUNT(idEstatusNucs) as mes FROM [ESTADISTICAV2].[dbo].[estatusNucs] INNER JOIN PRUEBA.dbo.Carpeta c ON c.CarpetaID = estatusNucs.idCarpeta
-  WHERE idUnidad $idUnidad AND idEstatus = $estatus AND anio = $anio AND SUBSTRING ( c.NUC ,5 , 4 ) = $anioHistorico ";
+  WHERE idUnidad $idUnidad AND mes IN($mes) 
+  AND idEstatus $estatus AND anio = $anio AND YEAR(c.FechaInicio) = $anio AND MONTH(c.FechaInicio) $per ";
+//echo $query.'<br>';
+
+
+
+	$indice = 0;
+	$stmt = sqlsrv_query($conSic, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['mes'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+	
+	}
+
+		function getDAtaSIREQuestionEstatusLitiHistorico_Quest_9_3($conSic, $per, $anio, $idUnidad,  $anioHistorico){
+ $estatus = 'IN(95,20,21,22,23,24,25,26,27,28,29,30,31)';
+ $query = " SELECT COUNT(idEstatusNucs) as mes FROM [ESTADISTICAV2].[dbo].[estatusNucs] INNER JOIN PRUEBA.dbo.Carpeta c ON c.CarpetaID = estatusNucs.idCarpeta WHERE idUnidad $idUnidad AND mes $per  AND idEstatus $estatus AND anio = $anio AND SUBSTRING ( c.NUC ,5 , 4 ) = $anioHistorico ";
 //echo $query.'<br>';
 
 

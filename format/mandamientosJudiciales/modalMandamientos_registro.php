@@ -340,12 +340,12 @@ if(sizeof($get_data_inculpado) > 0 ){
 						<option class="fontBold" value="1" <?if($a == 1 && $TIPO_INVESTIGACION == 1){ ?> selected <? } ?> >Averiguación Previa</option>
 						<option class="fontBold" value="2" <?if($a == 0){ ?> selected <? }elseif($a == 1 && $TIPO_INVESTIGACION == 2){ ?> selected <? } ?>  >Número Unico de Caso</option>
 					</select>
-				</div>
-				<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg" id="div_nuc_averiguacion" hidden>
+				</div><?$hide_show_av = 'hidden'; $hide_show_nuc = ''; if($a == 1 && $TIPO_INVESTIGACION == 1){ $hide_show_av = '';  $hide_show_nuc = 'hidden'; } ?>
+				<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg" id="div_nuc_averiguacion" <? echo $hide_show_av; ?> >
 				 <label for="NO_AVERIGUACION"><span class="glyphicon glyphicon-certificate"></span> No. de averiguación :</label><br>
  				<input type="text" id="NO_AVERIGUACION" class="form-control" placeholder="ESPECIFICA EL NO. DE AVERIGUACIÓN PREVIA*" aria-describedby="sizing-addon1" maxlength="15" oninput="validateNucs(this)"  type="number" onchange="validateCampo_OK(this.id)"  value="<?if($a == 1){echo $NO_AVERIGUACION; } ?>" >
-				</div>
-				<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg" id="div_nuc">
+				</div><?if($a == 1 && $TIPO_INVESTIGACION == 2){ $hide_show_nuc = ''; } ?>
+				<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg" id="div_nuc" <? echo $hide_show_nuc; ?> >
 				 <label for="nuc"><span class="glyphicon glyphicon-certificate"></span> NUC :</label><br>
 				 <div class="preloaderSelect_NUC" hidden >Validando NUC, espere un momento...<img width="50px"  src="img/loaderData.gif"></div>
 				 <input type="number" id="nuc" class="form-control" placeholder="ESPECIFICA EL NUC*" aria-describedby="sizing-addon1" maxlength="13" oninput="validateNucs(this)" type="number" onchange="validateCampo_OK(this.id)" value="<?if($a == 1){echo $CARPETA_INV; } ?>" >
@@ -655,10 +655,12 @@ if(sizeof($get_data_inculpado) > 0 ){
 								<div class="panel-body">
 									<div class="row">
 										<div class="col-xs-12 col-sm-12  col-md-3">
-											<?if($idEnlace == 353){?>
-											<button type="button" href="#agraviados" class="btn btn-primary btn-lg" style="width: 100%;" onclick="showModal_agraviados_av(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , 0 , 0)"><span class="glyphicon glyphicon-plus"></span> Agregar agraviado</button><? }else{ ?>
+							   <div id="div_button_averiguacion_agraviados"  <? echo $hide_show_av; ?> >
+											<button type="button" href="#agraviados" class="btn btn-primary btn-lg" style="width: 100%;" onclick="showModal_agraviados_av(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , 0 , 0)"><span class="glyphicon glyphicon-plus"></span> Agregar agraviado</button>
+          </div>
+          <div id="div_button_nuc_agraviados"  <? echo $hide_show_nuc; ?> >
 												<button type="button" href="#agraviados" class="btn btn-primary btn-lg" style="width: 100%;" onclick="showModal_agraviados(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , 0 , 0)"><span class="glyphicon glyphicon-plus"></span> Agregar agraviado</button>
-											<? } ?>
+									 </div>
 										</div>
 									</div><br>
 									<div class="row">
@@ -751,12 +753,12 @@ if(sizeof($get_data_inculpado) > 0 ){
 <div class="modal-footer">
 	<div class="row">
 
-		<div class="col-xs-12 col-sm-12  col-md-6 col-md-offset-3" id="div_button_averiguacion" hidden>
+		<div class="col-xs-12 col-sm-12  col-md-6 col-md-offset-3" id="div_button_averiguacion"  <? echo $hide_show_av; ?> >
 			<div class="col-xs-12 col-sm-12  col-md-6 col-md-offset-3">
 				<button type="button" class="btn btn-primary btn-lg" style="width: 100%;" onclick="guardar_mandamiento_av(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , <?echo sizeof($existe_inculpado);  ?>)"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar información </button>
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-12  col-md-6 col-md-offset-3" id="div_button_nuc" >
+		<div class="col-xs-12 col-sm-12  col-md-6 col-md-offset-3" id="div_button_nuc"  <? echo $hide_show_nuc; ?> >
 			<div class="col-xs-12 col-sm-12  col-md-6 col-md-offset-3">
 				<button type="button" class="btn btn-primary btn-lg" style="width: 100%;" onclick="guardar_mandamiento(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , <?echo sizeof($existe_inculpado);  ?>, <?echo 	$GET_ID_MANDAMIENTO_INTERNO; ?>)"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar información</button>
 			</div>
