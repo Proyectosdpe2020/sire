@@ -17,6 +17,9 @@ if (isset($_GET["idEnlace"])) {
 	$idEnlace = $_GET["idEnlace"];
 }
 
+$hasNucs7 = getHasCapturaNucs($conn, $idEnlace);
+
+
 if ($per == 1) {
 	$m1 = "Enero";
 	$mes1 = 1;
@@ -1030,7 +1033,7 @@ if ($dataEnlaces[0][0] == 0 && $dataEnlaces[0][1] == 0) {  //check if link dont 
 		<tr>
 			<th scope="row">7.7</th>
 			<td style="text-align: left;">Por sobreseimiento ordenado por el Juez de Control antes de la vinculación a proceso</td>
-			<td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[0]; ?></td>
+		    	<td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[0]; ?></td>
 							<td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[1]; ?></td>
 							<td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[2]; ?></td>
 							<td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[3]; ?></td>
@@ -1045,7 +1048,7 @@ if ($dataEnlaces[0][0] == 0 && $dataEnlaces[0][1] == 0) {  //check if link dont 
 		</tr>
 		<tr>
 			<th scope="row">7.8</th>
-			<td style="text-align: left;">Por otra causa que extinga la acción penal</td>
+			<td style="text-align: left;">Por otra causa que extinga la acción penal </td>
 			<td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[0]; ?></td>
 							<td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[1]; ?></td>
 							<td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[2]; ?></td>
@@ -1061,60 +1064,64 @@ if ($dataEnlaces[0][0] == 0 && $dataEnlaces[0][1] == 0) {  //check if link dont 
 		</tr>
 		<tr>
 			<th scope="row">7.9</th>
-			<td style="text-align: left;">Otra decisión/terminación que establezca el código penal de la entidad federativa</td>
+			<td style="text-align: left;">Otra decisión/terminación que establezca el código penal de la entidad federativa </td>
 			<td class="blockInp"><input type="number" value="0" id="9val2017" readonly></td>
 			<td class="blockInp"><input type="number" value="0" id="9val2018" readonly></td>
 			<td class="blockInp"><input type="number" value="0" id="9val2019" readonly></td>
 			<td class="blockInp"><input type="number" value="0" id="9val2020" readonly></td>
 			<td class="blockInp"><input type="number" value="0" id="9val2021" readonly></td>
 			<td class="blockInp">- - -</td>
-			<td class="blockInp"><input type="number" value="0" id="p26m1" <? if ($envt == 1 && $idUnidad = !1001) {
-																																																																			echo "readonly";
-																																																																		} ?>></td>
-			<td class="blockInp"><input type="number" value="0" id="p26m2" <? if ($envt == 1 && $idUnidad = !1001) {
-																																																																			echo "readonly";
-																																																																		} ?>></td>
-			<td class="blockInp"><input type="number" value="0" id="p26m3" <? if ($envt == 1 && $idUnidad = !1001) {
-																																																																			echo "readonly";
-																																																																		} ?>></td>
+			<td class="blockInp"><input type="number" value="0" id="p26m1" <? if ($envt == 1 && $idUnidad != 1001) {echo "readonly";} ?>></td>
+			<td class="blockInp"><input type="number" value="0" id="p26m2" <? if ($envt == 1 && $idUnidad != 1001) {echo "readonly";} ?>></td>
+			<td class="blockInp"><input type="number" value="0" id="p26m3" <? if ($envt == 1 && $idUnidad != 1001) {echo "readonly";} ?>></td>
 			<td class="blockInp"><input type="number" value="0" id="p26tot" readonly></td>
-			<!--
-							<td><input type="number" value="<? echo $dataQuestAn26[0][0]; ?>" id="9val2017"></td>
-							<td><input type="number" value="<? echo $dataQuestAn26[0][1]; ?>" id="9val2018"></td>
-							<td><input type="number" value="<? echo $dataQuestAn26[0][2]; ?>" id="9val2019"></td>
-							<td><input type="number" value="<? echo $dataQuestAn26[0][3]; ?>" id="9val2020"></td>
-							<td><input type="number" value="<? echo $dataQuestAn26[0][4]; ?>" id="9val2021"></td>
-							<td><input type="number" value="<? echo $data9[0][0]; ?>" id="p26m1" <? if ($envt == 1 && $idUnidad = !1001) {
-																																																																													echo "readonly";
-																																																																												} ?>></td>
-							<td><input type="number" value="<? echo $data9[0][1]; ?>" id="p26m2" <? if ($envt == 1 && $idUnidad = !1001) {
-																																																																													echo "readonly";
-																																																																												} ?>></td>
-							<td><input type="number" value="<? echo $data9[0][2]; ?>" id="p26m3" <? if ($envt == 1 && $idUnidad = !1001) {
-																																																																													echo "readonly";
-																																																																												} ?>></td>
-							<td class="blockInp"><input type="number" value="<? echo $data9[0][3]; ?>" id="p26tot" readonly></td>-->
+
 		</tr>
 		<tr>
 			<th scope="row">7.10</th>
-			<td style="text-align: left;">En trámite en la etapa de investigación (antes del auto de vinculación a proceso).</td>
-			<td><input type="number" value="<? echo $dataQuestAn27[0][0]; ?>" id="10val2017"></td>
-			<td><input type="number" value="<? echo $dataQuestAn27[0][1]; ?>" id="10val2018"></td>
-			<td><input type="number" value="<? echo $dataQuestAn27[0][2]; ?>" id="10val2019"></td>
-			<td><input type="number" value="<? echo $dataQuestAn27[0][3]; ?>" id="10val2020"></td>
-			<td><input type="number" value="<? echo $dataQuestAn27[0][4]; ?>" id="10val2021"></td>
-			<!--<td class="">--</td>-->
-			<td class="">Capturar</td>
-			<td><input type="number" value="<? echo $data10[0][0]; ?>" id="p27m1" <? if ($envt == 1 && $idUnidad = !1001) {
-																																																																										echo "readonly";
-																																																																									} ?>></td>
-			<td><input type="number" value="<? echo $data10[0][1]; ?>" id="p27m2" <? if ($envt == 1 && $idUnidad = !1001) {
-																																																																										echo "readonly";
-																																																																									} ?>></td>
-			<td><input type="number" value="<? echo $data10[0][2]; ?>" id="p27m3" <? if ($envt == 1 && $idUnidad = !1001) {
-																																																																										echo "readonly";
-																																																																									} ?>></td>
-			<td class="blockInp"><input type="number" value="<? echo $data10[0][3]; ?>" id="p27tot" readonly></td>
+
+
+			<?php 				if($hasNucs7[0][0] == 0){							?>																																																														
+                <td style="text-align: left;">En trámite en la etapa de investigación (antes del auto de vinculación a proceso).</td>
+                <td><input type="number" value="<? echo $dataQuestAn27[0][0]; ?>" id="10val2017"></td>
+                <td><input type="number" value="<? echo $dataQuestAn27[0][1]; ?>" id="10val2018"></td>
+                <td><input type="number" value="<? echo $dataQuestAn27[0][2]; ?>" id="10val2019"></td>
+                <td><input type="number" value="<? echo $dataQuestAn27[0][3]; ?>" id="10val2020"></td>
+                <td><input type="number" value="<? echo $dataQuestAn27[0][4]; ?>" id="10val2021"></td>
+                <!--<td class="">--</td>-->
+                <td class="">Capturar</td>
+                <td><input type="number" value="<? echo $data10[0][0]; ?>" id="p27m1" <? if ($envt == 1 && $idUnidad = !1001) {
+                                                                                                                                                                                                                                                                                                            echo "readonly";
+                                                                                                                                                                                                                                                                                                        } ?>></td>
+                <td><input type="number" value="<? echo $data10[0][1]; ?>" id="p27m2" <? if ($envt == 1 && $idUnidad = !1001) {
+                                                                                                                                                                                                                                                                                                            echo "readonly";
+                                                                                                                                                                                                                                                                                                        } ?>></td>
+                <td><input type="number" value="<? echo $data10[0][2]; ?>" id="p27m3" <? if ($envt == 1 && $idUnidad = !1001) {
+                                                                                                                                                                                                                                                                                                            echo "readonly";
+                                                                                                                                                                                                                                                                                                        } ?>></td>
+                <td class="blockInp"><input type="number" value="<? echo $data10[0][3]; ?>" id="p27tot" readonly></td>
+    
+                <?php } 
+    
+                                if($hasNucs7[0][0] == 1){							?>																																																														
+                <td style="text-align: left;">En trámite en la etapa de investigación (antes del auto de vinculación a proceso).</td>
+                <td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 27, <? echo $idEnlace; ?>, <? echo $idUnidad; ?>, <? echo $anio; ?>)"><? echo $d12[0]; ?></td>
+                                <td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 27, <? echo $idEnlace; ?>, <? echo $idUnidad; ?>, <? echo $anio; ?>)"><? echo $d12[1]; ?></td>
+                                <td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 27, <? echo $idEnlace; ?>, <? echo $idUnidad; ?>, <? echo $anio; ?>)"><? echo $d12[2]; ?></td>
+                                <td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 27, <? echo $idEnlace; ?>, <? echo $idUnidad; ?>, <? echo $anio; ?>)"><? echo $d12[3]; ?></td>
+                                <td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 27, <? echo $idEnlace; ?>, <? echo $idUnidad; ?>, <? echo $anio; ?>)"><? echo $d12[4]; ?></td>
+    
+                                <td class="cPo" onclick="loaNucTrimes(0,0, <? echo $per; ?>, 27, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)">Capturar</td>
+    
+                                <td class="cPo" onclick="loaNucTrimes(<? echo $mes1; ?>,<? echo $anio; ?>, <? echo $per; ?>, 27, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d121[0][0]; ?></td>
+                                <td class="cPo" onclick="loaNucTrimes(<? echo $mes2; ?>,<? echo $anio; ?>, <? echo $per; ?>, 27, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d122[0][0]; ?></td>
+                                <td class="cPo" onclick="loaNucTrimes(<? echo $mes3; ?>,<? echo $anio; ?>, <? echo $per; ?>, 27, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d123[0][0]; ?></td>
+                                <td class="blockInp"><input type="number" value="<? echo $totd12; ?>" id="p10tot" readonly></td>
+    
+                <?php } ?>
+    
+
+
 		</tr>
 		<tr>
 			<th scope="row">7.11</th>
