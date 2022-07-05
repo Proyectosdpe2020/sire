@@ -28,7 +28,7 @@ if ($quest == 5) {
 if ($quest == 6) {   $tam = 3;  $arPregnts = array(15, 16, 17);  } 
 if ($quest == 7) {   $tam = 16;  $arPregnts = array(18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33);  } 
 if ($quest == 8) {   $tam = 14;  $arPregnts = array(34,35,36,37,38,39,40,41,42,43,44,45,46,47);  } 
-if ($quest == 9) {   $tam = 4;  $arPregnts = array(48, 49, 50, 51);  } 
+if ($quest == 9) {   $tam = 3;  $arPregnts = array(48, 49, 50, 51);  } 
 if ($quest == 10) {   $tam = 4;  $arPregnts = array(52, 53, 54, 55);  } 
 
 ////FOR PARA CONCATENAR  LAS PREGUNTAS

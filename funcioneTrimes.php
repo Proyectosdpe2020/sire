@@ -1,5 +1,19 @@
 <? 
 
+function getHasCapturaNucs($conn, $idEnlace){
+
+	$query = "  SELECT distinct(capturaNucsTrimes) as 'captura' FROM enlaceFormato WHERE idEnlace IN($idEnlace)  ";
+				  $indice = 0;
+				  $stmt = sqlsrv_query($conn, $query);
+				  while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+				  {
+					  $arreglo[$indice][0]=$row['captura'];
+					  $indice++;
+				  }
+				  if(isset($arreglo)){return $arreglo;}
+}
+
+
 function getArrayCounts($conn, $quest, $idEnlace, $idUnidad, $per, $mes){
 
 	$anios = array( 2017, 2018, 2019, 2020, 2021 );

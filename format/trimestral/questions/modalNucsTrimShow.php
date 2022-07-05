@@ -19,6 +19,14 @@
 
 				$nameQuest = getNamePregunta($conn, $quest);
 				$nucs = getNucsTrim($conn, $anio, $quest, $idEnlace, $idUnidad, $per, $mes, $anioActual);
+
+					if($quest >= 10 AND $quest <= 14){ $preg = 5; }
+					if($quest >= 15 AND $quest <= 17){ $preg = 6; }
+					if($quest >= 52 AND $quest <= 55){ $preg = 10; }
+					if($quest >= 50 AND $quest <= 51){ $preg = 9; }
+					if($quest >= 34 AND $quest <= 47){ $preg = 8; }
+					if($quest >= 18 AND $quest <= 33){ $preg = 7; }
+
 				?>  
 
 <input type="hidden" id="quest" VALUE="<? echo $quest; ?>"/> 
@@ -31,7 +39,7 @@
 
 <div class="modal-header">
         <center><h4 class="modal-title text-center" style="font-weight: bold !important;" id="exampleModalLongTitle"><? echo $nameQuest[0][0]." De ".$anio ?></h4></center>
-        <button type="button" class="close" onclick="getQUestionAjax(5,<? echo $per; ?>,<? echo $anioActual; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" onclick="getQUestionAjax(<? echo $preg; ?>,<? echo $per; ?>,<? echo $anioActual; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>

@@ -320,7 +320,7 @@ function enviarDataAnteriores(anio, idenlace, idUnidad, per, quest) {
 	if (quest == 6) { tam = 3; }	
 	if (quest == 7) { tam = 16; }	
 	if (quest == 8) { tam = 14; }	
-	if (quest == 9) { tam = 4; }	
+	if (quest == 9) { tam = 3; }	
 	if (quest == 10) { tam = 4; }	
 
 		var nuevoArray = new Array(tam);
