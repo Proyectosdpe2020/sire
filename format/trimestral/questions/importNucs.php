@@ -26,6 +26,9 @@ if (isset($_GET["idUnidad"])) {
 if (isset($_GET["idEnlace"])) {
 	$idEnlace = $_GET["idEnlace"];
 }
+if (isset($_GET["anioGlobalMain"])) {
+	$anioGlobalMain = $_GET["anioGlobalMain"];
+}
 
 $aniosAnteriores = array();
 $indc = 0;
@@ -77,9 +80,10 @@ for ($i = 0; $i < sizeof($nucsFile); $i++) {
 														,[mes]
 														,[anio]
 														,[periodo]
-														,[NUC])
+														,[NUC]
+														,[anioCaptura])
 								VALUES
-														($quest,$idEnlace,$idUnidad,$mes,$anio,$per,'$nuci')
+														($quest,$idEnlace,$idUnidad,$mes,$anio,$per,'$nuci',$anioGlobalMain)
 														COMMIT
 								END TRY
 								BEGIN CATCH 
@@ -114,9 +118,10 @@ for ($i = 0; $i < sizeof($nucsFile); $i++) {
 														,[mes]
 														,[anio]
 														,[periodo]
-														,[NUC])
+														,[NUC]
+														,[anioCaptura])
 								VALUES
-														($quest,$idEnlace,$idUnidad,$mes,$anio,$per,'$nuci')
+														($quest,$idEnlace,$idUnidad,$mes,$anio,$per,'$nuci',$anioGlobalMain)
 														COMMIT
 								END TRY
 								BEGIN CATCH 

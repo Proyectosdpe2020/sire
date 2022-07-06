@@ -99,13 +99,16 @@
 
 						<tr class="">
 							<th scope="row">5.1</th>
+							<input style="display: none !important;" type="number" value="0" id="p10m1">
+							<input style="display: none !important;" type="number" value="0" id="p10m2">
+							<input style="display: none !important;" type="number" value="0" id="p10m3">
 							<td style="text-align: left;">Número de órdenes de aprehensión solicitadas por imputado</td>
 
-							<td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 10, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[0]; ?></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 10, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[1]; ?></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 10, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[2]; ?></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 10, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[3]; ?></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 10, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[4]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 10, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[0]; ?><input type="hidden" value="<? echo $d10[0]; ?>" id="1val2017"></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 10, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[1]; ?><input type="hidden" value="<? echo $d10[1]; ?>" id="1val2018"></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 10, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[2]; ?><input type="hidden" value="<? echo $d10[2]; ?>" id="1val2019"></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 10, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[3]; ?><input type="hidden" value="<? echo $d10[3]; ?>" id="1val2020"></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 10, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[4]; ?><input type="hidden" value="<? echo $d10[4]; ?>" id="1val2021"></td>
 
 							<td class="cPo" onclick="loaNucTrimes(0,0, <? echo $per; ?>, 10, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)">Capturar</td>
 
@@ -117,13 +120,16 @@
 						</tr>
 						<tr class="">
 							<th scope="row">5.2</th>
+							<input style="display: none !important;" type="number" value="0" id="p11m1">
+							<input style="display: none !important;" type="number" value="0" id="p11m2">
+							<input style="display: none !important;" type="number" value="0" id="p11m3">
 							<td style="text-align: left;">Número de órdenes de aprehensión ordenadas por el Juez de Control por imputado</td>
 
-							<td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 11, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[0]; ?></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 11, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[1]; ?></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 11, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[2]; ?></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 11, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[3]; ?></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 11, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[4]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 11, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[0]; ?><input type="hidden" value="<? echo $d11[0]; ?>" id="2val2017"></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 11, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[1]; ?><input type="hidden" value="<? echo $d11[1]; ?>" id="2val2018"></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 11, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[2]; ?><input type="hidden" value="<? echo $d11[2]; ?>" id="2val2019"></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 11, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[3]; ?><input type="hidden" value="<? echo $d11[3]; ?>" id="2val2020"></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 11, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[4]; ?><input type="hidden" value="<? echo $d11[4]; ?>" id="2val2021"></td>
 
 							<td class="cPo" onclick="loaNucTrimes(0,0, <? echo $per; ?>, 11, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)">Capturar</td>
 
@@ -134,13 +140,16 @@
 						</tr>
 						<tr class="">
 							<th scope="row">5.3</th>
+							<input style="display: none !important;" type="number" value="0" id="p12m1">
+							<input style="display: none !important;" type="number" value="0" id="p12m2">
+							<input style="display: none !important;" type="number" value="0" id="p12m3">
 							<td style="text-align: left;">Número de órdenes de aprehensión cumplimentadas por la Policía por imputado</td>
 					
-							<td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 12, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d12[0]; ?></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 12, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d12[1]; ?></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 12, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d12[2]; ?></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 12, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d12[3]; ?></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 12, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d12[4]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 12, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d12[0]; ?><input type="hidden" value="<? echo $d12[0]; ?>" id="3val2017"></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 12, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d12[1]; ?><input type="hidden" value="<? echo $d12[1]; ?>" id="3val2018"></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 12, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d12[2]; ?><input type="hidden" value="<? echo $d12[2]; ?>" id="3val2019"></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 12, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d12[3]; ?><input type="hidden" value="<? echo $d12[3]; ?>" id="3val2020"></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 12, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d12[4]; ?><input type="hidden" value="<? echo $d12[4]; ?>" id="3val2021"></td>
 							
 							<td class="cPo" onclick="loaNucTrimes(0,0, <? echo $per; ?>, 12, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)">Capturar</td>
 
@@ -151,6 +160,9 @@
 						</tr>
 						<tr>
 							<th scope="row">5.4</th>
+							<input style="display: none !important;" type="number" value="0" id="p13m1">
+							<input style="display: none !important;" type="number" value="0" id="p13m2">
+							<input style="display: none !important;" type="number" value="0" id="p13m3">
 							<td style="text-align: left;">Número de órdenes de detención por caso urgente emitidas por el 	Ministerio Público por imputado</td>
 
 							<? 
@@ -170,11 +182,11 @@
 										$totGene = $totd10+$totd11+$totd12+$totd13+$totd14;
 							?>
 
-							<td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 13, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d13[0]; ?></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 13, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d13[1];; ?></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 13, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d13[2]; ?></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 13, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d13[3]; ?></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 13, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d13[4]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 13, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d13[0]; ?><input type="hidden" value="<? echo $d13[0]; ?>" id="4val2017"></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 13, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d13[1];; ?><input type="hidden" value="<? echo $d13[1]; ?>" id="4val2018"></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 13, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d13[2]; ?><input type="hidden" value="<? echo $d13[2]; ?>" id="4val2019"></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 13, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d13[3]; ?><input type="hidden" value="<? echo $d13[3]; ?>" id="4val2020"></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 13, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d13[4]; ?><input type="hidden" value="<? echo $d13[4]; ?>" id="4val2021"></td>
 
 							<td class="cPo" onclick="loaNucTrimes(0,0, <? echo $per; ?>, 13, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)">Capturar</td>
 
@@ -185,12 +197,15 @@
 						</tr>
 						<tr>
 							<th scope="row">5.5</th>
+							<input style="display: none !important;" type="number" value="0" id="p14m1">
+							<input style="display: none !important;" type="number" value="0" id="p14m2">
+							<input style="display: none !important;" type="number" value="0" id="p14m3">
 							<td style="text-align: left;">Número de órdenes de detención por caso urgente cumplimentadas por la Policía por imputado</td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 14, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d14[0]; ?></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 14, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d14[1]; ?></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 14, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d14[2]; ?></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 14, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d14[3]; ?></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 14, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d14[4]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 14, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d14[0]; ?><input type="hidden" value="<? echo $d14[0]; ?>" id="5val2017"></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 14, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d14[1]; ?><input type="hidden" value="<? echo $d14[1]; ?>" id="5val2018"></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 14, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d14[2]; ?><input type="hidden" value="<? echo $d14[2]; ?>" id="5val2019"></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 14, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d14[3]; ?><input type="hidden" value="<? echo $d14[3]; ?>" id="5val2020"></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 14, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d14[4]; ?><input type="hidden" value="<? echo $d14[4]; ?>" id="5val2021"></td>
 
 							<td class="cPo" onclick="loaNucTrimes(0,0, <? echo $per; ?>, 14, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)">Capturar</td>
 							
@@ -215,6 +230,7 @@
 						</tr>
 					</tbody>
 				</table><br><br>
+
 				<div class="textoNota" >
 					<ul>
 						<li style="list-style-type: circle !important" >

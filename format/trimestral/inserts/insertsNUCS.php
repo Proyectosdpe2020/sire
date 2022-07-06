@@ -12,6 +12,7 @@
    if (isset($_GET["idUnidad"])){ $idUnidad = $_GET["idUnidad"]; }
 			if (isset($_GET["anio"])){ $anio = $_GET["anio"]; }
 			if (isset($_GET["nuc"])){ $nuc = $_GET["nuc"]; }
+			if (isset($_GET["anioGlobalMain"])){ $anioGlobalMain = $_GET["anioGlobalMain"]; }
 
 
 			$arreglo[0] = "existe";
@@ -38,7 +39,8 @@
 																										,[mes]
 																										,[anio]
 																										,[periodo]
-																										,[NUC])
+																										,[NUC]
+																										,[anioCaptura])
 																				VALUES
 																										($quest
 																										,$idEnlace
@@ -46,7 +48,8 @@
 																										,$mes 
 																										,$anio
 																										,$per
-																										,'$nuc')
+																										,'$nuc'
+																										,$anioGlobalMain)
                           COMMIT
                     END TRY
 
