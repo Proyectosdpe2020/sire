@@ -8,13 +8,14 @@ function uploadFileExcelNucs(){
 	var idEnlace = $("#idEnlace").val()
 	var mes = $("#mes").val()
 	var anioActual = $("#anioActual").val()
+	var anioGlobalMain = $('#anioGlobalMain').val()
 
 	var Form = new FormData($('#filesForm')[0]);
 	$("#btnUpload").attr("disabled", true)
 	document.getElementById('laodimgmain').style.display = "block";
 	$.ajax({
 		//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
-		url: 'format/trimestral/questions/importNucs.php?quest=' + quest + '&per=' + per + '&anio=' + anio + '&idUnidad=' + idUnidad + '&idEnlace=' + idEnlace+ '&mes=' + mes+ '&anioActual=' + anioActual,
+		url: 'format/trimestral/questions/importNucs.php?quest=' + quest + '&per=' + per + '&anio=' + anio + '&idUnidad=' + idUnidad + '&idEnlace=' + idEnlace+ '&mes=' + mes+ '&anioActual=' + anioActual+ '&anioGlobalMain=' + anioGlobalMain,
 		type: 'POST',
 		contentType: false,
 		data : Form,
@@ -35,14 +36,14 @@ function uploadFileExcelNucs(){
 
 
 function showContenCheckExcel(checkbox) {
-    if(checkbox.checked){
-        $("#contNUcsManual").hide();
+	if(checkbox.checked){
+		$("#contNUcsManual").hide();
 		$("#contNUcsExcel").show();
-    }
-    else{
+	}
+	else{
 		$("#contNUcsManual").show();
 		$("#contNUcsExcel").hide();
-    }
+	}
 } 
 
 
@@ -131,6 +132,7 @@ function recortaNucTrimes(){
 function insertNUCStrimestral(mes, quest, per, anio, idUnidad, idEnlace, anioActual) {
 
 	var nuc = $('#nucTrimes').val()
+	var anioGlobalMain = $('#anioGlobalMain').val()
 
 	cantidadinicio = document.getElementById("nucTrimes").value.length;
 	texto = document.getElementById("nucTrimes").value;
@@ -152,7 +154,7 @@ if(anio == 0){
 				$("#btnSaveNUCStrimes").attr("disabled", true)
 
 				$.ajax({
-					url: 'format/trimestral/inserts/insertsNUCS.php?quest=' + quest + '&per=' + per + '&anio=' + anio + '&idUnidad=' + idUnidad + '&idEnlace=' + idEnlace+ '&mes=' + mes+ '&nuc=' + nuc,
+					url: 'format/trimestral/inserts/insertsNUCS.php?quest=' + quest + '&per=' + per + '&anio=' + anio + '&idUnidad=' + idUnidad + '&idEnlace=' + idEnlace+ '&mes=' + mes+ '&nuc=' + nuc+ '&anioGlobalMain=' + anioGlobalMain,
 					type: 'POST',
 					contentType: false,
 					processData: false,
@@ -206,7 +208,7 @@ if(anio == 0){
 							$("#btnSaveNUCStrimes").attr("disabled", true)
 			
 							$.ajax({
-								url: 'format/trimestral/inserts/insertsNUCS.php?quest=' + quest + '&per=' + per + '&anio=' + anio + '&idUnidad=' + idUnidad + '&idEnlace=' + idEnlace+ '&mes=' + mes+ '&nuc=' + nuc,
+								url: 'format/trimestral/inserts/insertsNUCS.php?quest=' + quest + '&per=' + per + '&anio=' + anio + '&idUnidad=' + idUnidad + '&idEnlace=' + idEnlace+ '&mes=' + mes+ '&nuc=' + nuc+ '&anioGlobalMain=' + anioGlobalMain,
 								type: 'POST',
 								contentType: false,
 								processData: false,
@@ -269,8 +271,8 @@ function cargarTablaNucsTrim(quest, per, anio, idUnidad, idEnlace, mes, anioActu
 function loaNucTrimeShow(mes, anio, trimestre, quest, idEnlace, idUnidad, anioActual){
 
 	$('#modalNucsTrimeShow').modal({
-        show: 'true'
-    }); 
+		show: 'true'
+	}); 
 	//swal("", "Estas selecionando la pregunta "+quest, "success");
 	$.ajax({
 		//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
@@ -289,8 +291,8 @@ function loaNucTrimeShow(mes, anio, trimestre, quest, idEnlace, idUnidad, anioAc
 function loaNucTrimes(mes, anio, trimestre, quest, idEnlace, idUnidad, anioActual){
 
 	$('#modalNucsTrimes').modal({
-        show: 'true'
-    }); 
+		show: 'true'
+	}); 
 	//swal("", "Estas selecionando la pregunta "+quest, "success");
 	$.ajax({
 		//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
@@ -756,7 +758,7 @@ function saveQuest6(quest, per, anio, idUnidad, idEnlace) {
 
 	totalValidateQuest_4_1 = document.getElementById("totalValidateQuest_4_1").value;
 	var validateQuest = false;
-	var sumQuest_6_1 = parseInt(p15m1) + parseInt(p15m2) + parseInt(p15m3)
+	var sumQuest_6_1 = totalValidateQuest_6_1;
 	//console.log('suma: '+totalValidateQuest_4_1);
 
 	if (p15m1 == "" || p15m2 == "" || p15m3 == "" || p16m1 == "" || p16m2 == "" || p16m3 == "" || p17m1 == "" || p17m2 == "" || p17m3 == "") {
