@@ -857,7 +857,7 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 <!-- Custom Theme Scripts -->
 <script src="build/js/custom.min.js"></script>
 <script language="JavaScript" type="text/javascript" src="dist/sweetalert.min.js"></script>
-<script language="JavaScript" type="text/javascript" src="format/trimestral/pdf/js/function.js"></script>
+<script language="JavaScript" type="text/javascript" src="format/trimestral/pdf/js/function_220708150000.js"></script>
 <script language="JavaScript" type="text/javascript" src="js/forestales.js"></script>
 <!--<script language="JavaScript" type="text/javascript" src="js/litigacionSENAP.js"></script>-->
 <script language="JavaScript" type="text/javascript" src="js/litigacionSENAP_220602.js"></script>

@@ -163,7 +163,7 @@
 							<input style="display: none !important;" type="number" value="0" id="p15m2">
 							<input style="display: none !important;" type="number" value="0" id="p15m3">
 							<input id="totalValidateQuest_4_1" name="totalValidateQuest_4_1" type="hidden" value="<?php echo $totalValidateQuest_4_1[0][0]; ?>">
-							<td style="text-align: left;">Número de detenidos en flagrancia <? echo $totd10; ?></td>
+							<td style="text-align: left;">Número de detenidos en flagrancia </td>
 							<td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 15, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d1[0]; ?><input type="hidden" value="<? echo $d1[0]; ?>" id="1val2017"></td>
 							<td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 15, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d1[1]; ?><input type="hidden" value="<? echo $d1[1]; ?>" id="1val2018"></td>
 							<td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 15, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d1[2]; ?><input type="hidden" value="<? echo $d1[2]; ?>" id="1val2019"></td>
