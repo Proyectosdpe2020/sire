@@ -634,9 +634,7 @@
 						</tr>
 						<tr>
 							<th scope="row">7.10</th>
-							<input style="display: none !important;" type="number" value="0" id="p27m1">
-							<input style="display: none !important;" type="number" value="0" id="p27m2">
-							<input style="display: none !important;" type="number" value="0" id="p27m3">
+							
 							<?php 				if($hasNucs7[0][0] == 0){							?>																																																														
                 <td style="text-align: left;">En trámite en la etapa de investigación (antes del auto de vinculación a proceso).</td>
                 <td><input type="number" value="<? echo $dataQuestAn27[0][0]; ?>" id="10val2017"></td>
@@ -659,7 +657,10 @@
     
                 <?php } 
     
-                                if($hasNucs7[0][0] == 1){							?>																																																														
+                                if($hasNucs7[0][0] == 1){							?>			
+																																<input style="display: none !important;" type="number" value="0" id="p27m1">
+							<input style="display: none !important;" type="number" value="0" id="p27m2">
+							<input style="display: none !important;" type="number" value="0" id="p27m3">																																																											
                 <td style="text-align: left;">En trámite en la etapa de investigación (antes del auto de vinculación a proceso).</td>
 																<input type="hidden" value="<? echo $d12[0]; ?>" id="10val2017">
                 <input type="hidden" value="<? echo $d12[1]; ?>" id="10val2018">
