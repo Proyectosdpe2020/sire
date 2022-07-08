@@ -594,7 +594,7 @@
 						</tr>
 						<tr>
 							<th scope="row">9.4</th>
-							<td style="text-align: left;">Número de imputados a los que se les impuso medida cautelar</td>
+							<td style="text-align: left;">Número de imputados a los que no se les impuso medida cautelar</td>
 							<td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 51, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[0]; ?></td>
 							<td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 51, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[1]; ?></td>
 							<td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 51, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[2]; ?></td>
