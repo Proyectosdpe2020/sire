@@ -220,7 +220,8 @@ $getNombreEnlace = array('EnlaceSexualesTrimestral',
                          'EnlaceSecuestrosTrimestral', 
                          'EnlaceApatzingan',  
                          'EnlacedeCJIM',
-                         'LiliaJacoboDimas'); 
+                         'LiliaJacoboDimas',
+                         'EnlacedeGrupos Vulnerables'); 
 
 $getNombreUnidad = array('Unidad de Atención a Delitos Sexuales', 
                          'Unidad contra el Robo al Transporte', 
@@ -253,7 +254,8 @@ $getNombreUnidad = array('Unidad de Atención a Delitos Sexuales',
                          'Unidad Especializada de Combate al Secuestro', 
                          'Unidad de Investigación Apatzingán',  
                          'Centro de Justicia Integral para las Mujeres',
-                         'Centro de Justicia Integral para las Mujeres Uruapan'
+                         'Centro de Justicia Integral para las Mujeres Uruapan',
+                         'Grupos Vulnerables'
                         ); 
 
 $j = 0;
@@ -264,27 +266,54 @@ foreach ($getNombreEnlace as $enlace) {
  
   $query = "
             DECLARE @columnas varchar(max)
-            set @columnas=''
-            select @columnas = coalesce(@columnas +'[' + CONCAT(e.nombre, e.apellidoPaterno, e.apellidoMarterno) +'],', '')
-            FROM (select distinct trimes.idEnlace from trimestral.seguimiento as trimes) as trim
-            INNER JOIN dbo.enlace e ON e.idEnlace = trim.idEnlace
-            set @columnas = left (@columnas,LEN(@columnas)-1)
-            declare @SQLString nvarchar(4000);
-            set @SQLString =
-            'SELECT * 
-            FROM (
-              SELECT  pre.nombre, seg.idPregunta, seg.anio, seg.idPeriodo, seg.total, CONCAT(ex.nombre, ex.apellidoPaterno, ex.apellidoMarterno) as nom FROM trimestral.seguimiento seg
-              INNER JOIN trimestral.pregunta pre ON pre.idPregunta = seg.idPregunta 
-              INNER JOIN dbo.enlace ex ON ex.idEnlace = seg.idEnlace
-              WHERE seg.anio = $getAnio  AND idPeriodo = $getPeriodo 
-            ) S
-            pivot (
-            max(total)
-            for [nom] in (' +@columnas+ ')
-            ) P
-            ORDER BY P.idPregunta ASC '
-              
-             execute sp_executesql @SQLString  ";
+set @columnas=''
+select @columnas = coalesce(@columnas +'[' + CONCAT(e.nombre, e.apellidoPaterno, e.apellidoMarterno) +'],', '')
+FROM (select distinct trimes.idEnlace from trimestral.seguimiento as trimes) as trim
+INNER JOIN dbo.enlace e ON e.idEnlace = trim.idEnlace
+set @columnas = left (@columnas,LEN(@columnas)-1)
+declare @SQLString NVARCHAR(MAX);
+set @SQLString =
+'SELECT * 
+FROM (
+  SELECT  pre.nombre, 
+          seg.idPregunta, 
+    seg.anio, 
+    seg.idPeriodo 
+    ,CASE 
+      WHEN seg.idPregunta = 10 AND $getAnio >= 2022 AND $getPeriodo >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 10 and anio = $getAnio and periodo = $getPeriodo and idEnlace = seg.idEnlace)
+      WHEN seg.idPregunta = 11 AND $getAnio >= 2022 AND $getPeriodo >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 11 and anio = $getAnio and periodo = $getPeriodo and idEnlace = seg.idEnlace)
+      WHEN seg.idPregunta = 12 AND $getAnio >= 2022 AND $getPeriodo >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 12 and anio = $getAnio and periodo = $getPeriodo and idEnlace = seg.idEnlace)
+      WHEN seg.idPregunta = 13 AND $getAnio >= 2022 AND $getPeriodo >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 13 and anio = $getAnio and periodo = $getPeriodo and idEnlace = seg.idEnlace)
+      WHEN seg.idPregunta = 14 AND $getAnio >= 2022 AND $getPeriodo >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 14 and anio = $getAnio and periodo = $getPeriodo and idEnlace = seg.idEnlace)
+      WHEN seg.idPregunta = 15 AND $getAnio >= 2022 AND $getPeriodo >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 15 and anio = $getAnio and periodo = $getPeriodo and idEnlace = seg.idEnlace)
+      WHEN seg.idPregunta = 16 AND $getAnio >= 2022 AND $getPeriodo >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 16 and anio = $getAnio and periodo = $getPeriodo and idEnlace = seg.idEnlace)
+      WHEN seg.idPregunta = 17 AND $getAnio >= 2022 AND $getPeriodo >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 17 and anio = $getAnio and periodo = $getPeriodo and idEnlace = seg.idEnlace)
+      WHEN seg.idPregunta = 24 AND $getAnio >= 2022 AND $getPeriodo >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 24 and anio = $getAnio and periodo = $getPeriodo and idEnlace = seg.idEnlace)
+      WHEN seg.idPregunta = 25 AND $getAnio >= 2022 AND $getPeriodo >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 25 and anio = $getAnio and periodo = $getPeriodo and idEnlace = seg.idEnlace)
+      WHEN seg.idPregunta = 27 AND $getAnio  >= 2022 AND $getPeriodo >= 2 AND seg.idEnlace IN (9,72,26,6,38,5,2,28) THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 27 and anio = $getAnio and periodo = 2 and idEnlace = seg.idEnlace) 
+      WHEN seg.idPregunta = 34 AND $getAnio >= 2022 AND $getPeriodo >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 34 and anio = $getAnio and periodo = $getPeriodo and idEnlace = seg.idEnlace)
+      WHEN seg.idPregunta = 36 AND $getAnio >= 2022 AND $getPeriodo >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 36 and anio = $getAnio and periodo = $getPeriodo and idEnlace = seg.idEnlace)
+      WHEN seg.idPregunta = 38 AND $getAnio >= 2022 AND $getPeriodo >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 38 and anio = $getAnio and periodo = $getPeriodo and idEnlace = seg.idEnlace)
+      WHEN seg.idPregunta = 39 AND $getAnio >= 2022 AND $getPeriodo >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 39 and anio = $getAnio and periodo = $getPeriodo and idEnlace = seg.idEnlace)
+      WHEN seg.idPregunta = 41 AND $getAnio >= 2022 AND $getPeriodo >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 41 and anio = $getAnio and periodo = $getPeriodo and idEnlace = seg.idEnlace)
+      WHEN seg.idPregunta = 42 AND $getAnio >= 2022 AND $getPeriodo >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 42 and anio = $getAnio and periodo = $getPeriodo and idEnlace = seg.idEnlace)
+      WHEN seg.idPregunta = 51 AND $getAnio >= 2022 AND $getPeriodo >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 51 and anio = $getAnio and periodo = $getPeriodo and idEnlace = seg.idEnlace)
+      WHEN seg.idPregunta = 52 AND $getAnio >= 2022 AND $getPeriodo >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 52 and anio = $getAnio and periodo = $getPeriodo and idEnlace = seg.idEnlace)
+      WHEN seg.idPregunta = 53 AND $getAnio >= 2022 AND $getPeriodo >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 53 and anio = $getAnio and periodo = $getPeriodo and idEnlace = seg.idEnlace)
+      WHEN seg.idPregunta = 54 AND $getAnio >= 2022 AND $getPeriodo >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 54 and anio = $getAnio and periodo = $getPeriodo and idEnlace = seg.idEnlace)
+      WHEN seg.idPregunta = 55 AND $getAnio >= 2022 AND $getPeriodo >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 55 and anio = $getAnio and periodo = $getPeriodo and idEnlace = seg.idEnlace)
+      ELSE seg.total END as total,
+    CONCAT(ex.nombre, ex.apellidoPaterno, ex.apellidoMarterno) as nom FROM trimestral.seguimiento seg
+        INNER JOIN trimestral.pregunta pre ON pre.idPregunta = seg.idPregunta 
+        INNER JOIN dbo.enlace ex ON ex.idEnlace = seg.idEnlace
+        WHERE seg.anio = $getAnio AND idPeriodo = $getPeriodo
+      ) S
+pivot (
+  max(total)
+        for [nom] in (' +@columnas+ ')
+      ) P
+ORDER BY P.idPregunta ASC '
+execute sp_executesql @SQLString ";
  $stmt = sqlsrv_query($conn, $query);
  $cont = 15; 
  while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC )) {
