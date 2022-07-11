@@ -595,11 +595,11 @@
 						<tr>
 							<th scope="row">9.4</th>
 							<td style="text-align: left;">Número de imputados a los que no se les impuso medida cautelar</td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 51, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[0]; ?></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 51, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[1]; ?></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 51, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[2]; ?></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 51, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[3]; ?></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 51, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[4]; ?></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 51, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[0]; ?><input type="hidden" value="<? echo $d11[0]; ?>" id="4val2017"></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 51, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[1]; ?><input type="hidden" value="<? echo $d11[1]; ?>" id="4val2018"></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 51, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[2]; ?><input type="hidden" value="<? echo $d11[2]; ?>" id="4val2019"></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 51, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[3]; ?><input type="hidden" value="<? echo $d11[3]; ?>" id="4val2020"></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 51, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[4]; ?><input type="hidden" value="<? echo $d11[4]; ?>" id="4val2021"></td>
 
 							<td class="cPo" onclick="loaNucTrimes(0,0, <? echo $per; ?>, 51, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)">Capturar</td>
 
