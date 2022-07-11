@@ -188,11 +188,11 @@ $sheet->setCellValue('G14', "CII 2021");
 
 $query = "SELECT p.nombre
       ,s.idPregunta
-   ,SUM(CASE WHEN (s.periodo = $periodoSeleccionado AND s.anio = $getAnio) then s.val2017 end) as VAL2017
-   ,SUM(CASE WHEN (s.periodo = $periodoSeleccionado AND s.anio = $getAnio) then s.val2018 end) as VAL2018
-   ,SUM(CASE WHEN (s.periodo = $periodoSeleccionado AND s.anio = $getAnio) then s.val2019 end) as VAL2019
-   ,SUM(CASE WHEN (s.periodo = $periodoSeleccionado AND s.anio = $getAnio) then s.val2020 end) as VAL2020
-   ,SUM(CASE WHEN (s.periodo = $periodoSeleccionado AND s.anio = $getAnio) then s.val2021 end) as VAL2021
+   ,ISNULL(SUM(CASE WHEN (s.periodo = $periodoSeleccionado AND s.anio = $getAnio) then s.val2017 end),0) as VAL2017
+   ,ISNULL(SUM(CASE WHEN (s.periodo = $periodoSeleccionado AND s.anio = $getAnio) then s.val2018 end),0) as VAL2018
+   ,ISNULL(SUM(CASE WHEN (s.periodo = $periodoSeleccionado AND s.anio = $getAnio) then s.val2019 end),0) as VAL2019
+   ,ISNULL(SUM(CASE WHEN (s.periodo = $periodoSeleccionado AND s.anio = $getAnio) then s.val2020 end),0) as VAL2020
+   ,ISNULL(SUM(CASE WHEN (s.periodo = $periodoSeleccionado AND s.anio = $getAnio) then s.val2021 end),0) as VAL2021
   FROM [ESTADISTICAV2].[trimestral].[datosAnteriorTrimestral] s
 LEFT JOIN trimestral.pregunta p ON p.idPregunta = s.idPregunta
 GROUP BY p.nombre , s.idPregunta
