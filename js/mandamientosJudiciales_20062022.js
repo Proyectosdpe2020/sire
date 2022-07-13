@@ -1065,6 +1065,8 @@ function guardar_mandamiento_agraviado(tipoModal, idEnlace, idUnidad, idfisca, I
 						  				var obj = eval("(" + json + ")");
 						  				//alert("Agregado exitosmente");
 						  				swal("", "Datos del agraviado agregados exitosamente.", "success");
+						  					$('#agraviados').modal('hide');
+							  				$('#mandamientos').modal('show');
 						  				reload_modalMandamientos_registro(1, idEnlace, obj.ID_MANDAMIENTO_INTERNO, 0, 0, idfisca, idUnidad);
 						  			}
 						  		}
