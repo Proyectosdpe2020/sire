@@ -1090,8 +1090,10 @@ function guardar_mandamiento_agraviado(tipoModal, idEnlace, idUnidad, idfisca, I
 						  		}else{
 						  			if (obj.first == "SI") {
 						  				var obj = eval("(" + json + ")");
-						  				//alert("Agregado exitosmente");
+						  				$('#agraviados').modal('hide'); 
+             $('#mandamientos').modal('show');
 						  				swal("", "Registro actualizado exitosamente.", "success");
+						  			
 						  				reload_modalMandamientos_registro(1, idEnlace, obj.ID_MANDAMIENTO_INTERNO, 0, 0, idfisca, idUnidad);
 						  			}
 						  		}
@@ -1145,7 +1147,7 @@ function validateDataAgraviado(){
 
 function showEditar_mandamiento_agraviado(tipoModal, idEnlace, idUnidad, idfisca,  ID_DATOS_AGRAVIADO_INTERNO, ID_MANDAMIENTO_INTERNO, tipoActualizacion ){
 
-	cont = document.getElementById('contModalInculpados_registro');
+	cont = document.getElementById('contModalAgraviados_registro');
 			ajax=objetoAjax();
 			ajax.open("POST", "format/mandamientosJudiciales/modalAgraviados_registro.php");
   
@@ -1154,7 +1156,7 @@ function showEditar_mandamiento_agraviado(tipoModal, idEnlace, idUnidad, idfisca
 					cont.innerHTML = ajax.responseText;
 					$('.dataAutocomplet').select2({width: '100%',placeholder: "Seleccione",allowClear: false});	
 					$('#mandamientos').modal('hide');
-			  $('#inculpados').modal('show'); 
+			  $('#agraviados').modal('show'); 
 				}
 			}
 			ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
