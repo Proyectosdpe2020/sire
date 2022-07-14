@@ -129,9 +129,9 @@ if (isset($_POST["ID_MANDAMIENTO_INTERNO"])){
 								</div>
 								<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
 									<label for="TATUAJES">Tiene tatuajes</label><br>
-									<input type="radio" id="TATUAJES" name="TATUAJES" value="1" <?if($a == 0){ ?> checked <? }elseif($a == 1 && $TATUAJES == 1){ ?> checked <? } ?> style="height:25px; width:25px;">
+									<input type="radio" id="TATUAJES" name="TATUAJES" value="Si" <?if($a == 0){ ?> checked <? }elseif($a == 1 && $TATUAJES == 'Si'){ ?> checked <? } ?> style="height:25px; width:25px;">
 									<label for="tatuajes" style="font-size: 20px;">Si</label>&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" id="TATUAJES" name="TATUAJES" value="0" <?if($a == 1 && $TATUAJES == 0){ ?> checked <? } ?> style="height:25px; width:25px;">
+									<input type="radio" id="TATUAJES" name="TATUAJES" value="No" <?if($a == 1 && $TATUAJES == 'No'){ ?> checked <? } ?> style="height:25px; width:25px;">
 									<label for="tatuajes" style="font-size: 20px;">No</label>
 								</div>
 							</div><br>
