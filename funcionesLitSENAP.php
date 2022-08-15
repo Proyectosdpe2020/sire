@@ -596,4 +596,27 @@ function getDataImputados_editar($conn, $imputado_id){
 	if(isset($arreglo)){return $arreglo;}
 }
 
+//Función para obtener la información de SENAP sobre sentencias
+function getDataSentenciasAveriguaciones($conn, $idEstatusNucs, $estatus){
+	
+		$query = "SELECT * FROM senap.sentencias WHERE idEstatusAveriguacion = '$idEstatusNucs' "; 
+		$indice = 0;
+		$stmt = sqlsrv_query($conn, $query);
+		while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+		{
+			$arreglo[$indice][0]=$row['idSentencia'];
+			$arreglo[$indice][1]=$row['idEstatusNucs'];
+			$arreglo[$indice][2]=$row['fechaDictoSentencia'];
+			$arreglo[$indice][3]=$row['idTipoSentencia'];
+			$arreglo[$indice][4]=$row['aniosPrision'];
+			$arreglo[$indice][5]=$row['sentenciaEncuentraFirme'];
+			$arreglo[$indice][6]=$row['sentDerivaProcAbrv'];
+			$arreglo[$indice][7]=$row['fechaDictoProcAbrv'];
+			$arreglo[$indice][8]=$row['idModalidadEstadistica'];
+		 $arreglo[$indice][9]=$row['reclasificacion'];
+			$indice++;
+		}
+		if(isset($arreglo)){return $arreglo;}
+
+}
 ?>

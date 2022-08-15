@@ -12,14 +12,21 @@
 	if (isset($_POST["nuc"])){ $nuc = $_POST["nuc"]; }
 	if (isset($_POST["idCarpeta"])){ $idCarpeta = $_POST["idCarpeta"]; }
 
-		if (isset($_POST["idMp"])){ $idMp = $_POST["idMp"]; }
+	if (isset($_POST["idMp"])){ $idMp = $_POST["idMp"]; }
 	if (isset($_POST["mes"])){ $mes = $_POST["mes"]; }
 	if (isset($_POST["anio"])){ $anio = $_POST["anio"]; }
 	if (isset($_POST["deten"])){ $deten = $_POST["deten"]; }
-		if (isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }
+	if (isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }
 
+		if (isset($_POST["tipo_investigacion"])){ $tipo_investigacion = $_POST["tipo_investigacion"]; }
+
+
+//Sí tipo de investigación es un NUC se buscara su expediente en SICAP
+if($tipo_investigacion == 1){
 	$getNucExpedienteSicap = getNucExpedienteSicap($conSic, $nuc);
 	$expediente = $getNucExpedienteSicap[0][0];
+}else{ $nuc = "'".$nuc."'"; }
+	
 
 	if($estatus == 19 || $estatus == 14){ if (isset($_POST["idResolMP"])){ $idResolMP = $_POST["idResolMP"]; }else{ $idResolMP = 0; } }
 	
@@ -32,7 +39,7 @@
 <div class="modal-body ">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12">
-			<h4>Registro estadístico del NUC: <strong><? echo $nuc; ?></strong></h4>
+			<? if($tipo_investigacion == 0){ ?> <h4>Registro estadístico del NUC: <strong><? echo $nuc; ?></strong></h4> <? }else{ ?> <h4>Registro estadístico de la averiguación previa: <strong><? echo $nuc; ?></strong></h4> <? } ?>
 		</div>
 	</div><br>
 
@@ -723,7 +730,11 @@
  	if($idEstatusNucs == 0){
  		$getData = getDataSentencias($conn, 'null' , $estatus);
  	}else{
- 		$getData = getDataSentencias($conn,  $idEstatusNucs, $estatus);
+ 		if($tipo_investigacion != 2){
+ 			$getData = getDataSentencias($conn,  $idEstatusNucs, $estatus);
+ 		}else{
+ 			$getData = getDataSentenciasAveriguaciones($conn,  $idEstatusNucs, $estatus);
+ 		}
  	}
  }
 	 	if(sizeof($getData) > 0){ 
@@ -743,6 +754,7 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-12  col-md-12">
 		<!-- TABLA DELITOS POR LA CUAL SE DIO SENTENCIA CONDENATORIA-->
+		<?if($tipo_investigacion == 1){ ?>
 			<div class="row">
 				<div class="col-xs-12 col-sm-12  col-md-12">
 					<label for="">Delito por el cual se dio la sentencia: </label>
@@ -823,9 +835,42 @@
 									</table>
 					 </div>
 				 </div>
-			 </div><br>
+			 </div><? }else{ ?>
+			 	<!--ENTRA AQUI SI ES UNA AVERIGUACION PREVIA-->
+			 	<div class="row" id="tableReclasificar" >
+				<div class="col-xs-12 col-sm-12  col-md-12">
+					<div id="tablePuestasDataMando" class="row pad20">	
+									<table class="table table-striped  table-hover">
+										<thead>
+											<tr class="cabezeraTablaForest">
+												<th class="textCent">#</th>
+												<th class="textCent">Delito <?echo $tipo_investigacion; ?></th>
+											</tr>
+										</thead>
+										<tbody id="">
+											<tr>
+												<td class="textCent">1</td>
+												<td class="textCent">
+													<datalist id="newBrwosers">
+													<?$delitos = getDataDelitosSica($conSic);
+														for ($h=0; $h < sizeof($delitos); $h++) {
+															$idDelito = $delitos[$h][0];	
+															$nom = $delitos[$h][1];
+														?>
+														<option style="color: black; font-weight: bold;" value="<? echo $nom; ?>" data-value="<? echo  $idDelito; ?>" data-id="<? echo $idDelito; ?>"></option>
+													<?	} ?>
+												</datalist>
+												<input class="form-control mandda gehit" value="<? if($opcInsert == 1){ echo $nombreDelito; } ?>" onchange="" onfocus="" list="newBrwosers" id="newBrwoser" name="newBrwoser" type="text" ></td>
+			        </tr>
+										</tbody>
+									</table>
+					 </div>
+				 </div>
+			 </div>
+    <? } ?>
+			<br>
 			<input type="hidden" id="tipoSentencia" value="<?if($estatus == 154 || $estatus == 14){echo 2;}elseif($estatus == 66){echo 1; }else{echo 3;} ?>" >
-			 <?if($estatus == 154 || $estatus == 14){ ?>
+			 <?if($estatus == 154 || $estatus == 14 || $estatus == 66 || $estatus == 67){ ?>
 			 <!--¿La sentencia fue derivada de un procedimiento abreviado? :-->
 			<div class="row">
 				<div class="col-xs-12 col-sm-12  col-md-12">
@@ -881,12 +926,12 @@
 		<div class="col-xs-12 col-sm-6  col-md-6 ">
 			<?if(	$opcInsert == 0){ 
 				if($estatus == 14){?>
-			<button style="width: 88%;" onclick="insertSentencias_db(<?if($estatus == 14){ echo $idResolMP; }else{ echo $idEstatusNucs; } ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
+			<button style="width: 88%;" onclick="insertSentencias_db(<?if($estatus == 14){ echo $idResolMP; }else{ echo $idEstatusNucs; } ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>, <? echo $tipo_investigacion ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
 		<? } else{?>
-			<button style="width: 88%;" onclick="sendDataSentencias(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> ,  <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
+			<button style="width: 88%;" onclick="sendDataSentencias(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> ,  <? echo $opcInsert; ?> , <? echo $tipo_investigacion ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
 		<? } ?>
 				<?}elseif(	$opcInsert == 1 ){?>
-			<button style="width: 88%;" onclick="insertSentencias_db(<?if($estatus == 14){ echo $idResolMP; }else{ echo $idEstatusNucs; } ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
+			<button style="width: 88%;" onclick="insertSentencias_db(<?if($estatus == 14){ echo $idResolMP; }else{ echo $idEstatusNucs; } ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?> , <? echo $idMp ?> , <? echo $mes ?> , <? echo $anio ?> , <? echo $tipo_investigacion ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
 		 <? } ?>
 		</div>
 	</div>

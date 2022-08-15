@@ -134,9 +134,13 @@ switch ($acc) {
         if (isset($_POST["anio"])){ $anio = $_POST["anio"]; }
         if (isset($_POST["deten"])){ $deten = $_POST["deten"]; }  
         if (isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }
+        if (isset($_POST["tipo_investigacion"])){ $tipo_investigacion = $_POST["tipo_investigacion"]; } //Para identificar si se recibe NUC o Averiguacion
 
           
            if( $estatResolucion != 19 ){
+
+            //Si tipo_investigacion = 1 se registra NUC
+            if($tipo_investigacion != 2){
 
               //////// Ver la determinacion si ya existe en tabla estatusNucs ///////////////////
               $datossicap=get_datos_carpeta_capturadoLiti($conSic, $nuc);
@@ -184,11 +188,48 @@ switch ($acc) {
                           }else{
                             echo json_encode(array('first'=>$arreglo[1]));
                           }
-            
 
-                    
+            }else{
 
+             //INGRESAR AVERIGUACIONES PREVIAS
 
+             $queryTransaction = "  
+                            
+                            BEGIN                     
+                            BEGIN TRY 
+                              BEGIN TRANSACTION
+                                  SET NOCOUNT ON    
+                               
+                                              INSERT INTO estatusAveriguaciones (no_averiguacion, idEstatus, idmp, idUnidad, fecha, anio, mes) VALUES ($nuc, $estatResolucion, $idMp, $idUnidad, GETDATE(), $anio, $mes)   
+
+                                              SELECT MAX(idEstatusAveriguacion) AS idEstatusAveriguacion FROM estatusAveriguaciones        
+
+                                  COMMIT
+                            END TRY
+                            BEGIN CATCH 
+                                  ROLLBACK TRANSACTION
+                                  RAISERROR('No se realizo la transaccion',16,1)
+                            END CATCH
+                            END
+
+                          ";           
+
+                          $result = sqlsrv_query($conn,$queryTransaction, array(), array( "Scrollable" => 'static' ));  
+                  
+                          //echo $queryTransaction;
+
+                        if ($result) {
+                             while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC )){
+                             $idEstatusNucs = $row['idEstatusAveriguacion']; //Obtenemos el idEstatusNucs para guardar datos de senap
+                            }
+                            $arreglo[2] = $idEstatusNucs;
+                            echo json_encode(array('first'=>$arreglo[0] , 'idEstatusNucs' => $arreglo[2]));
+                          }else{
+                            echo json_encode(array('first'=>$arreglo[1]));
+                          }
+
+            }
+ 
 
             }else{
 
@@ -298,7 +339,7 @@ switch ($acc) {
                                               <td class="tdRowMain negr"><? echo $nuc; ?></td>
                                               <td class="tdRowMain negr"><? echo $exp; ?></td>
                                               <? if($validaInfo){?>
-                                              <td class="tdRowMain"><center><div class="buttonInfo"><button type="button" onclick="showModalNucLitInfo(<? echo $idEstatusNucsThisNUC; ?>, <? echo $estatResolucion; ?>, <? echo $nuc; ?>, <? echo $idCarpeta; ?>)" class="btn btn-success btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-pencil"></span> Agregar </button></div></center></td>
+                                              <td class="tdRowMain"><center><div class="buttonInfo"><button type="button" onclick="showModalNucLitInfo(<? echo $idEstatusNucsThisNUC; ?>, <? echo $estatResolucion; ?>, <? echo $nuc; ?>, <? echo $idCarpeta; ?>,0,0,0, 1)" class="btn btn-success btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-pencil"></span> Agregar </button></div></center></td>
                                               <? } ?>
                                               <td class="tdRowMain"><center><button type="button" onclick="deleteResolLit(<? echo $idEstatusNucsThisNUC; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatResolucion ?>, <? echo $nuc; ?>, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
 
@@ -316,6 +357,63 @@ switch ($acc) {
                                    ?>
                                     </tbody>
                                 </table>
+
+                               <? if($estatResolucion == 154 || $estatResolucion == 66 || $estatResolucion == 67){ 
+
+                                     //// Obtener las carpetas del Mp 
+                                  $sumador = 0; 
+                                  $carpeAgente = getDistincAveriguacionesAgenteLitigacion($conn, $idMp, $estatResolucion, $mes, $anio, $idUnidad);
+
+                                  if(sizeof($carpeAgente) >= 0){
+                                  ?>
+
+                                    <table class="table table-striped tblTransparente">
+                                        <thead>
+                                           <tr class="cabezeraTabla">
+                                                      <th class="col-xs-1 col-sm-1 col-md-1 textCent">No</th>
+                                                      <th class="col-xs-4 col-sm-4 col-md-4 textCent">Numero de averiguación </th>
+                                                      <th class="col-xs-1 col-sm-1 col-md-1 textCent">Acción</th>
+                                 <? if($validaInfo){?><th class="col-xs-1 col-sm-1 col-md-1 textCent">Acción</th><? } ?>
+                                           </tr>
+                                    </thead>
+                                    <tbody>
+                          
+                                        
+                                         
+
+                                   <?                   
+
+                                    
+                                    //// Por cada Carpeta Obtener la Ultima Determinacion que se realizo
+                                       $lastDetermin = getDistincAveriguacionesAgenteLitigacion($conn, $idMp, $estatResolucion, $mes, $anio, $idUnidad);
+                                       
+                                       for ($k=0; $k < sizeof($lastDetermin); $k++) { 
+
+                                          $idEstatusNucs = $lastDetermin[$k][1];
+                                          $nuc = $lastDetermin[$k][0]; 
+
+                                           ?>
+                                           <tr>
+                                            
+                                              <td class="tdRowMain negr"><? echo ($sumador+1); ?></td>
+                                              <td class="tdRowMain negr"><? echo $nuc; ?></td>
+                                              <? if($validaInfo){?>
+                                              <td class="tdRowMain"><center><div class="buttonInfo"><button type="button" onclick="showModalNucLitInfo(<? echo $idEstatusNucs; ?>, <? echo $estatResolucion; ?>, '<? echo $nuc; ?>', 0,0,0,0, 2)" class="btn btn-success btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-pencil"></span> Agregar </button></div></center></td>
+                                              <? } ?>
+                                              <td class="tdRowMain"><center><button type="button" onclick="deleteResolLit_ave(<? echo $idEstatusNucs; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatResolucion ?>, '<? echo $nuc; ?>', <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
+
+                                           </tr>
+                                           <?  
+                                           $sumador++;
+
+                                          }
+
+                                   ?>
+                                    </tbody>
+                                </table>
+                <?           }
+                    } ?>
+             
                 
              
               <?
@@ -408,8 +506,9 @@ switch ($acc) {
           if (isset($_POST["estatResolucion"])){ $estatResolucion = $_POST["estatResolucion"]; }
           if (isset($_POST["nuc"])){ $nuc = $_POST["nuc"]; }
           if (isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }
+          if (isset($_POST["tipo_investigacion"])){ $tipo_investigacion = $_POST["tipo_investigacion"]; }
 
-             
+             if($tipo_investigacion != 2){
 
               $queryTransaction = "                    BEGIN                     
                     BEGIN TRY 
@@ -426,7 +525,29 @@ switch ($acc) {
                     END CATCH
                     END
                   ";
-       
+
+             }else{
+
+               $queryTransaction = "                    BEGIN                     
+                    BEGIN TRY 
+                      BEGIN TRANSACTION
+                          SET NOCOUNT ON
+                                   
+                             DELETE FROM estatusAveriguaciones WHERE idEstatusAveriguacion = $idEstatusNucs AND idMp = $idMp AND anio = $anio AND mes = $mes AND idUnidad = $idUnidad
+
+                          COMMIT
+                    END TRY
+                    BEGIN CATCH 
+                          ROLLBACK TRANSACTION
+                          RAISERROR('No se realizo la transaccion',16,1)
+                    END CATCH
+                    END
+                  ";
+
+             }
+
+        
+      
 
                  // echo $queryTransaction;
                   $result = sqlsrv_query($conn,$queryTransaction, array(), array( "Scrollable" => 'static' ));  
