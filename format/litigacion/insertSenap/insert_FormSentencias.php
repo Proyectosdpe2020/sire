@@ -150,8 +150,8 @@ if($tipo_investigacion != 2){
                                   BEGIN TRANSACTION
                                         SET NOCOUNT ON 
 
-                                          INSERT INTO senap.sentencias (idEstatusNucs, ResolucionID, estatus, fechaDictoSentencia, idTipoSentencia, aniosPrision, sentenciaEncuentraFirme, sentDerivaProcAbrv, fechaDictoProcAbrv, idModalidadEstadistica, reclasificacion, idEstatusAveriguacion) 
-                                          VALUES('0', '0', $estatus, '$fechaDictoSentencia',  $tipoSentencia, $aniosPrision, $sentenciaFirme, $sentDerivaProcAbrv, '$fechaDictoProcAbrv', $idCatModalidadEst, 0, '$idEstatusNucs')
+                                          INSERT INTO senap.sentencias (idEstatusNucs, ResolucionID, estatus,  idModalidadEstadistica, reclasificacion, idEstatusAveriguacion) 
+                                          VALUES('0', '0', $estatus,  $idCatModalidadEst, 0, '$idEstatusNucs')
                                                     
                                         COMMIT
                                 END TRY
