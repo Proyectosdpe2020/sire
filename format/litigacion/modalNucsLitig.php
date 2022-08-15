@@ -54,6 +54,18 @@
 														<div>
 											
 																								<div class="panel-body panelunoLitigacion">
+																									<!--Solo en los estatus señalados en la siguiente condicional se permitira ingresar NUC o número de averiguación-->
+																									<?if($estatus == 154 || $estatus == 66 || $estatus == 67){?>
+																										<div class="row">
+																											<div class="col-xs-12 col-sm-12  col-md-6 input-group-lg">
+																												<label for="TIPO_INVESTIGACION"><span class="glyphicon glyphicon-book"></span> Tipo de investigación * :</label><br>
+																												<select class="form-control" id="TIPO_INVESTIGACION" aria-describedby="sizing-addon1"  onchange="tipo_investigacion()">
+																													<option class="fontBold" value="1"  selected >Número Unico de Caso</option>
+																													<option class="fontBold" value="2" >Averiguación Previa</option>
+																												</select>
+																											</div>
+																										</div><br>																			
+																									<? } ?>
 																										<div class="row">
 																										<div class="col-xs-6">	
 																										<label>Cantidad de Casos :</label>
@@ -67,21 +79,34 @@
 
 																													<div id="contDataNucDeterm"></div>
 																													
-																																																			
+																						<div id="div_nuc">
 																							<div class="row">
-																										<div class="col-xs-6">
-																												
-																												<label style="font-weight:bold">Número de Caso *</label>
-																															<input id="nuc"  type="number"   name="nuc" value="" tabindex="0" onkeyup="<? if($sicaBand == 1){ ?>  nucFunctionsLit('nuc', <? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $estatus; ?>, 0, <? echo $idUnidad; ?>); <?  }else{  ?>  nucInserts('nuc', <? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $estatus; ?>, 0, <? echo $idUnidad; ?>); <? } ?>"  placeholder="Ingresa Número de Caso" style="height:38px; font-weight: bold;"  class="fechas form-control redondear" autofocus/>	
-
-																										</div>
-																										<div class="col-xs-6">
-																												
-																												<label style="font-weight:bold">Expediente *</label>
-																															<div id="expedCont"><input id="expediente"  type=""   name="expediente" value="Expediente"  tabindex="0"  placeholder="" style="height:38px;"  class="fechas form-control redondear"  disabled/></div>		
-
-																										</div>
+																								<div class="col-xs-6">
+																									<label style="font-weight:bold">Número de Caso *</label>
+																									<input id="nuc"  type="number"   name="nuc" value="" tabindex="0" onkeyup="<? if($sicaBand == 1){ ?>  nucFunctionsLit('nuc', <? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $estatus; ?>, 0, <? echo $idUnidad; ?>); <?  }else{  ?>  nucInserts('nuc', <? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $estatus; ?>, 0, <? echo $idUnidad; ?>); <? } ?>"  placeholder="Ingresa Número de Caso" style="height:38px; font-weight: bold;"  class="fechas form-control redondear" autofocus/>
+																								</div>
+																								<div class="col-xs-6">
+																									<label style="font-weight:bold">Expediente *</label>
+																									<div id="expedCont">
+																										<input id="expediente"  type=""   name="expediente" value="Expediente"  tabindex="0"  placeholder="" style="height:38px;"  class="fechas form-control redondear"  disabled/>
+																									</div>
+																								</div>
 																							</div>
+																						</div>		
+
+																						<div id="div_averiguacion" hidden>
+																							<div class="row">
+																								<div class="col-xs-6">
+																									<label style="font-weight:bold">Número de averiguación *</label>
+																									<input id="NO_AVERIGUACION"  type="text"   name="NO_AVERIGUACION" value="" tabindex="0" placeholder="Ingresa Número de Averiguación" style="height:38px; font-weight: bold;"  class="fechas form-control redondear" autofocus/>
+																								</div>
+																								<div class="col-xs-6">
+																									<label style="font-weight:bold">.</label><br>
+																									<button style="width: 97%;" type="button" class="btn btn-primary redondear" onclick="averiguacionInserts('nuc', <? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $estatus; ?>, 0, <? echo $idUnidad; ?>);">Agregar</button>  
+																								</div>
+																							</div>
+																						</div>																															
+																						
 
 																							<div class="row">	
 																									<br>
@@ -180,7 +205,7 @@
 																						<thead>
 																						   <tr class="cabezeraTabla">
 																									  <th class="col-xs-1 col-sm-1 col-md-1 textCent">No</th>
-																									  <th class="col-xs-4 col-sm-4 col-md-4 textCent">Numero Caso </th>
+																									  <th class="col-xs-4 col-sm-4 col-md-4 textCent">Número Caso </th>
 																									  <th class="col-xs-6 col-sm-6 col-md-6 textCent">Expediente</th>  
 																									  <? if($validaInfo){?><th class="col-xs-1 col-sm-1 col-md-1 textCent">Acción</th><? } ?>          
 																									  <th class="col-xs-1 col-sm-1 col-md-1 textCent">Acción</th>
@@ -225,7 +250,7 @@
 																										  <td class="tdRowMain negr"><? echo $exp; ?></td>
                             <!--SE AGREGO EL BOTON PARA ABRIR EL NUEVO MODAL-->
                             <? if($validaInfo){?>
-                            <td class="tdRowMain"><center><div class="buttonInfo"><button type="button" onclick="showModalNucLitInfo(<? echo $idEstatusNucsThisNUC; ?>, <? echo $estatus; ?>, <? echo $nuc; ?>, <? echo $idCarpeta; ?>, <? echo $idMp; ?>, <? echo $mes; ?> , <? echo $anio; ?> )" class="btn btn-success btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-pencil"></span> Agregar </button></div></center></td>
+                            <td class="tdRowMain"><center><div class="buttonInfo"><button type="button" onclick="showModalNucLitInfo(<? echo $idEstatusNucsThisNUC; ?>, <? echo $estatus; ?>, <? echo $nuc; ?>, <? echo $idCarpeta; ?>, <? echo $idMp; ?>, <? echo $mes; ?> , <? echo $anio; ?>, 1 )" class="btn btn-success btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-pencil"></span> Agregar </button></div></center></td>
                             <? } ?>
 																										  <td class="tdRowMain"><center><button type="button" onclick="deleteResolLit(<? echo $idEstatusNucsThisNUC; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatus ?>, <? echo $nuc; ?>, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center></td>
 
@@ -243,6 +268,65 @@
 																				  ?>
 																										   </tbody>
 																				</table>
+
+																				<? if($estatus == 154 || $estatus == 66 || $estatus == 67){ 
+
+																					                 //TABLA PARA LAS SENTENCIAS
+                                     //// Obtener las carpetas del Mp 
+                                  $sumador = 0; 
+                                  $carpeAgente = getDistincAveriguacionesAgenteLitigacion($conn, $idMp, $estatus, $mes, $anio, $idUnidad);
+
+                                  if(sizeof($carpeAgente) >= 0){
+                                  ?>
+
+                                    <table class="table table-striped tblTransparente">
+                                        <thead>
+                                           <tr class="cabezeraTabla">
+                                                      <th class="col-xs-1 col-sm-1 col-md-1 textCent">No</th>
+                                                      <th class="col-xs-4 col-sm-4 col-md-4 textCent">Número de averiguación </th>
+                                                      <th class="col-xs-1 col-sm-1 col-md-1 textCent">Acción</th>
+                                 <? if($validaInfo){?><th class="col-xs-1 col-sm-1 col-md-1 textCent">Acción</th><? } ?>
+                                           </tr>
+                                    </thead>
+                                    <tbody>
+                          
+                                        
+                                         
+
+                                   <?                   
+
+                                    
+                                    //// Por cada Carpeta Obtener la Ultima Determinacion que se realizo
+                                       $lastDetermin = getDistincAveriguacionesAgenteLitigacion($conn, $idMp, $estatus, $mes, $anio, $idUnidad);
+                                       
+                                       for ($k=0; $k < sizeof($lastDetermin); $k++) { 
+
+                                          $idEstatusNucs = $lastDetermin[$k][1];
+                                          $nuc = $lastDetermin[$k][0]; 
+
+                                           ?>
+                                           <tr>
+                                            
+                                              <td class="tdRowMain negr"><? echo ($sumador+1); ?></td>
+                                              <td class="tdRowMain negr"><? echo $nuc; ?></td>
+                                              <? if($validaInfo){?>
+                                              <td class="tdRowMain"><center><div class="buttonInfo"><button type="button" onclick="showModalNucLitInfo(<? echo $idEstatusNucs; ?>, <? echo $estatus; ?>, '<? echo $nuc; ?>', 0,0,0,0, 2)" class="btn btn-success btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-pencil"></span> Agregar </button></div></center></td>
+                                              <? } ?>
+                                              <td class="tdRowMain"><center><button type="button" onclick="deleteResolLit_ave(<? echo $idEstatusNucs; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatus ?>, '<? echo $nuc; ?>', <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar inicio </button></center></td>
+
+                                           </tr>
+                                           <?  
+                                           $sumador++;
+
+                                          }
+
+                                   ?>
+                                    </tbody>
+                                </table>
+                <?           }
+                    } ?>
+
+
 																				</div>
 																				</div>
 																				</div>

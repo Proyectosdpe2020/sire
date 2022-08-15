@@ -763,7 +763,7 @@ function existenuclitigacion(nuc, idMp, estatResolucion, mes, anio, idUnidad, de
 															   estatResolucion == 64 || estatResolucion == 60 || estatResolucion == 91 || estatResolucion == 65 ||
 															   estatResolucion == 90 ||  estatResolucion == 68 || 
 															   estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151 || estatResolucion == 154 || estatResolucion == 66){
-																showModalNucLitInfo2(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad);
+																showModalNucLitInfo2(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad, 1);
 															}else if(estatResolucion == 50 || estatResolucion == 53  || estatResolucion == 58){
 																showModalAgregarImputados(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad);
 															}else{
@@ -860,11 +860,12 @@ function caninsertlit(nuc, idMp, estatResolucion, mes, anio, deten, idUnidad){
 
 ///////////////////////////////
 
-function insertarNucLit(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad, opcInsert){
-
+function insertarNucLit(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad, opcInsert, tipo_investigacion){
+	if(tipo_investigacion == 2){ nuc = "'"+nuc+"'"; }
 				acc = "insertNuc";
 					ajax=objetoAjax();
 					ajax.open("POST", "format/litigacion/accionesNucsLit.php");
+
 
 					ajax.onreadystatechange = function(){
 						if (ajax.readyState == 4 && ajax.status == 200) {       
@@ -912,7 +913,7 @@ function insertarNucLit(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad, 
 														 	       setTimeout("insertAcuerdoReparatorio_db("+objDatos.idEstatusNucs+","+estatResolucion+","+nuc+", "+opcInsert+");",100);
 														 	break;
 														 	case 66: case 67: 
-														 	       setTimeout("insertSentencias_db("+objDatos.idEstatusNucs+","+estatResolucion+","+nuc+", "+opcInsert+");",100);
+														 	       setTimeout("insertSentencias_db("+objDatos.idEstatusNucs+","+estatResolucion+","+nuc+", "+opcInsert+","+idMp+", "+mes+", "+anio+","+tipo_investigacion+");",100);
 														 	break;
 														 	case 68: 
 														 	       setTimeout("insertReparacionDanios_db("+objDatos.idEstatusNucs+","+estatResolucion+","+nuc+", "+opcInsert+");",100);
@@ -927,7 +928,7 @@ function insertarNucLit(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad, 
 														 								setTimeout("insertFormAutoVincuProc_db("+objDatos.idEstatusNucs+","+estatResolucion+","+nuc+", "+opcInsert+","+idMp+", "+mes+", "+anio+");",100);
 														 	break;
 														 		case 154:
-														 								setTimeout("insertSentencias_db("+objDatos.idEstatusNucs+","+estatResolucion+","+nuc+", "+opcInsert+","+idMp+", "+mes+", "+anio+");",100);
+														 								setTimeout("insertSentencias_db("+objDatos.idEstatusNucs+","+estatResolucion+","+nuc+", "+opcInsert+","+idMp+", "+mes+", "+anio+" , "+tipo_investigacion+");",100);
 														 	break;
 														 	case 50: case 53: case 58:
 														 								setTimeout("insertInputados_db("+objDatos.idEstatusNucs+","+estatResolucion+","+nuc+", "+opcInsert+","+idMp+", "+mes+", "+anio+");",100);
@@ -941,7 +942,7 @@ function insertarNucLit(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad, 
 						}
 					}
 					ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-					ajax.send("&nuc="+nuc+"&acc="+acc+"&idMp="+idMp+"&estatResolucion="+estatResolucion+"&mes="+mes+"&anio="+anio+"&deten="+deten+"&idUnidad="+idUnidad);
+					ajax.send("&nuc="+nuc+"&acc="+acc+"&idMp="+idMp+"&estatResolucion="+estatResolucion+"&mes="+mes+"&anio="+anio+"&deten="+deten+"&idUnidad="+idUnidad+"&tipo_investigacion="+tipo_investigacion);
 
 }
 
@@ -969,7 +970,6 @@ function getExpedienteLit(input, nuc){
 
 
 function updateTableNucsLiti(idMp, anio, mes, estatResolucion, nuc, deten, idUnidad){
-
 				//alert("LLEga el contable nucs");
 
 			acc = "showtable";
@@ -1124,7 +1124,7 @@ function descargarLit(idUnidad, mes, anio, idEnlace){
 }
 
 //Funcion para eliminar informacion adicional de SENAP al eliminar el nuc
-function removeDataSenap(idEstatusNucs,estatResolucion, idMp, mes, anio){
+function removeDataSenap(idEstatusNucs,estatResolucion, idMp, mes, anio, tipo_investigacion){
 	validaDataSenap = validarEstatusShowInfoSica(estatResolucion); //Si el estatusResolucion es de SENAP pocedemos a efectuar la llamada
 	if(validaDataSenap){
 								ajax=objetoAjax();
@@ -1136,7 +1136,7 @@ function removeDataSenap(idEstatusNucs,estatResolucion, idMp, mes, anio){
 						}
 					}
 					ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-					ajax.send("&idEstatusNucs="+idEstatusNucs+"&estatResolucion="+estatResolucion);
+					ajax.send("&idEstatusNucs="+idEstatusNucs+"&estatResolucion="+estatResolucion+"&tipo_investigacion="+tipo_investigacion);
 			}	
 }
 
@@ -1217,4 +1217,88 @@ function refreshMedProtec(idMp, mes, anio){
 		 	$('#MPV').val(obj.victimas); //actualizamos el numero de victimas
 		 }
 		});
+}
+
+//PRECARGAR TIPO INFORMACION
+function tipo_investigacion(){
+	var TIPO_INVESTIGACION = document.getElementById('TIPO_INVESTIGACION').value;
+	if(TIPO_INVESTIGACION == 1){
+		$('#div_averiguacion').hide();
+		$('#div_nuc').show();
+		$('#NO_AVERIGUACION').val('');
+	}else{
+	 $('#div_nuc').hide();
+		$('#div_averiguacion').show();
+		$('#nuc').val('');
+	}
+}
+
+function averiguacionInserts(idinput, idMp, mes, anio, estatResolucion, deten, idUnidad){
+		NO_AVERIGUACION = document.getElementById('NO_AVERIGUACION').value;  
+
+		if(estatResolucion == 1  || estatResolucion == 2  || estatResolucion == 3  || estatResolucion == 4  ||
+					estatResolucion == 17 || estatResolucion == 18 || estatResolucion == 20 || estatResolucion == 21 ||
+					estatResolucion == 22 || estatResolucion == 23 || estatResolucion == 24 || estatResolucion == 25 ||
+					estatResolucion == 26 || estatResolucion == 27 || estatResolucion == 28 || estatResolucion == 29 ||
+					estatResolucion == 30 || estatResolucion == 31 || estatResolucion == 95 || estatResolucion == 61 ||
+					estatResolucion == 63 || estatResolucion == 89 || estatResolucion == 99 || estatResolucion == 101 ||
+					estatResolucion == 103 || estatResolucion == 105 || estatResolucion == 106 || estatResolucion == 107 ||
+					estatResolucion == 108 || estatResolucion == 109 || estatResolucion == 110 || estatResolucion == 111 ||
+					estatResolucion == 64 || estatResolucion == 60 || estatResolucion == 91 || estatResolucion == 65 ||
+					estatResolucion == 90 ||  estatResolucion == 68 || 
+					estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151 || estatResolucion == 154 || estatResolucion == 66){
+			showModalNucLitInfo2(estatResolucion, NO_AVERIGUACION, idMp, mes, anio, deten, idUnidad, 2);
+		}else if(estatResolucion == 50 || estatResolucion == 53  || estatResolucion == 58){
+			showModalAgregarImputados(estatResolucion, 'NO_AVERIGUACION', idMp, mes, anio, deten, idUnidad);
+		}else{
+			setTimeout("insertarNucLit("+idMp+","+estatResolucion+","+mes+","+anio+",'"+NO_AVERIGUACION+"',"+deten+","+idUnidad+");",100);
+		}
+}
+
+function deleteResolLit_ave(idEstatusNucs, idMp, anio, mes, estatResolucion, nuc, idUnidad){
+
+
+	//	alert("la idEstatusNucs a elimin es : "+idEstatusNucs);
+		swal({
+				title: "",
+				text: "¿Esta seguro de Eliminar?",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "Eliminar",
+				cancelButtonText: "Cancelar",
+				closeOnConfirm: true,
+				closeOnCancel: true
+			},
+			function(isConfirm){
+				if (isConfirm) {
+
+								acc = "deleteResol";
+								ajax=objetoAjax();
+								ajax.open("POST", "format/litigacion/accionesNucsLit.php");
+
+								ajax.onreadystatechange = function(){
+								if (ajax.readyState == 4 && ajax.status == 200) {
+
+											var cadCodificadaJSON = ajax.responseText;
+											var objDatos = eval("(" + cadCodificadaJSON + ")");
+
+											if (objDatos.first == "NO") { swal("", "Hubo un problema favor de revisar.", "Warning"); }else{
+
+											if (objDatos.first == "SI") {               
+
+															//updateTableNucs2(idMp, anio, mes, estatResolucion, nuc, deten);               
+																updateTableNucsLiti(idMp, anio, mes, estatResolucion, nuc, 0, idUnidad);
+																setTimeout("removeDataSenap("+idEstatusNucs+","+estatResolucion+","+idMp+","+mes+","+anio+",2);",100);              
+											}
+									}
+								
+						}
+					}
+					ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+					ajax.send("&acc="+acc+"&idEstatusNucs="+idEstatusNucs+"&idMp="+idMp+"&anio="+anio+"&mes="+mes+"&nuc="+nuc+"&idUnidad="+idUnidad+"&estatResolucion="+estatResolucion+"&tipo_investigacion=2");
+					
+				}
+			});    
+
 }
