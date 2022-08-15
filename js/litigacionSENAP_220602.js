@@ -35,7 +35,7 @@ function showModalNucLitInfo(idEstatusNucs, estatus, nuc, idCarpeta, idMp, mes, 
 
 //Muestra modal para ingresar información adicional del NUC solicitado por SENAP
 function showModalNucLitInfo2(estatus, nuc, idMp, mes, anio, deten, idUnidad , tipo_investigacion){
-	alert(tipo_investigacion);
+
 	ajax=objetoAjax();
 	ajax.open("POST", "format/litigacion/modalNucsInfoLitig.php");
 
@@ -390,7 +390,7 @@ function insertSentencias_db(idEstatusNucs, estatus, nuc, opcInsert, idMp ,  mes
 	if(estatus == 66){ var sentDerivaProcAbrv = "noData"; }else{ var sentDerivaProcAbrv = document.getElementById("sentDerivaProcAbrv").value; }
 	if(estatus == 66){ var fechaDictoProcAbrv = "noData"; }else{ var fechaDictoProcAbrv = document.getElementById("fechaDictoProcAbrv").value; } 
 
-	if(fechaDictoSentencia != "" && tipoSentencia > 0 && typeof idCatModalidadEst !== 'undefined'){
+	if( typeof idCatModalidadEst !== 'undefined'){
 		$.ajax({
 			type: "POST",
 		 dataType: "html",
@@ -856,7 +856,7 @@ function sendDataSentencias(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcI
 	if(estatus == 66){ var sentDerivaProcAbrv = "noData"; }else{ var sentDerivaProcAbrv = document.getElementById("sentDerivaProcAbrv").value; }
 	if(estatus == 66){ var fechaDictoProcAbrv = "noData"; }else{ var fechaDictoProcAbrv = document.getElementById("fechaDictoProcAbrv").value; }
 
-	if(fechaDictoSentencia != "" && tipoSentencia > 0 && typeof idCatModalidadEst !== 'undefined'){
+	if(typeof idCatModalidadEst !== 'undefined'){
 		if(estatus == 14){
    insertarNucLit2(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert);
     $('#modalNucsLitigInfo').modal('hide');

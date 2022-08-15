@@ -312,7 +312,7 @@
                                               <? if($validaInfo){?>
                                               <td class="tdRowMain"><center><div class="buttonInfo"><button type="button" onclick="showModalNucLitInfo(<? echo $idEstatusNucs; ?>, <? echo $estatus; ?>, '<? echo $nuc; ?>', 0,0,0,0, 2)" class="btn btn-success btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-pencil"></span> Agregar </button></div></center></td>
                                               <? } ?>
-                                              <td class="tdRowMain"><center><button type="button" onclick="deleteResolLit_ave(<? echo $idEstatusNucs; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatus ?>, '<? echo $nuc; ?>', <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar inicio </button></center></td>
+                                              <td class="tdRowMain"><center><button type="button" onclick="deleteResolLit_ave(<? echo $idEstatusNucs; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatus ?>, '<? echo $nuc; ?>', <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar</button></center></td>
 
                                            </tr>
                                            <?  
