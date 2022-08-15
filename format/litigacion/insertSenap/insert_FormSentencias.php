@@ -22,171 +22,202 @@ if (isset($_POST['tipoSentencia'])){ $tipoSentencia = $_POST['tipoSentencia']; }
  if (isset($_POST['sentDerivaProcAbrv'])){ $sentDerivaProcAbrv = $_POST['sentDerivaProcAbrv']; }  
  if (isset($_POST['fechaDictoProcAbrv'])){ $fechaDictoProcAbrv = $_POST['fechaDictoProcAbrv']; }  
 
+ if (isset($_POST['tipo_investigacion'])){ $tipo_investigacion = $_POST['tipo_investigacion']; }  
+ //if (isset($_POST['idEstatusAveriguacion'])){ $idEstatusAveriguacion = $_POST['idEstatusAveriguacion']; }
+
 
 
 if (isset($_POST['opcInsert'])){ $opcInsert = $_POST['opcInsert']; } 
 
-if($estatus != 14){
- //Si opcInsert == 0 es un nuevo registro, si opcInsert == 1 es una edicion de registro
- if($opcInsert == 0){
-  if($estatus == 66){
-    $queryTransaction = " 
-                         BEGIN                     
-                               BEGIN TRY 
-                                 BEGIN TRANSACTION
-                                       SET NOCOUNT ON 
+if($tipo_investigacion != 2){
+   //Si opcInsert == 0 es un nuevo registro, si opcInsert == 1 es una edicion de registro
+  if($opcInsert == 0){
+   if($estatus == 66){
+     $queryTransaction = " 
+                          BEGIN                     
+                                BEGIN TRY 
+                                  BEGIN TRANSACTION
+                                        SET NOCOUNT ON 
 
-                                         INSERT INTO senap.sentencias (idEstatusNucs, ResolucionID, estatus, idTipoSentencia, idModalidadEstadistica, reclasificacion) 
-                                         VALUES('$idEstatusNucs', '0', $estatus,  $tipoSentencia, $idCatModalidadEst, $reclasificacion)
-                                                   
-                                       COMMIT
-                               END TRY
-                               BEGIN CATCH 
-                                     ROLLBACK TRANSACTION
-                                     RAISERROR('No se realizo la transaccion',16,1)
-                               END CATCH
-                               END
-                         ";
-  }else{
-    $queryTransaction = " 
-                         BEGIN                     
-                               BEGIN TRY 
-                                 BEGIN TRANSACTION
-                                       SET NOCOUNT ON 
+                                          INSERT INTO senap.sentencias (idEstatusNucs, ResolucionID, estatus, idTipoSentencia, idModalidadEstadistica, reclasificacion) 
+                                          VALUES('$idEstatusNucs', '0', $estatus,  $tipoSentencia, $idCatModalidadEst, $reclasificacion)
+                                                    
+                                        COMMIT
+                                END TRY
+                                BEGIN CATCH 
+                                      ROLLBACK TRANSACTION
+                                      RAISERROR('No se realizo la transaccion',16,1)
+                                END CATCH
+                                END
+                          ";
+   }else{
+     $queryTransaction = " 
+                          BEGIN                     
+                                BEGIN TRY 
+                                  BEGIN TRANSACTION
+                                        SET NOCOUNT ON 
 
-                                         INSERT INTO senap.sentencias (idEstatusNucs, ResolucionID, estatus, fechaDictoSentencia, idTipoSentencia, aniosPrision, sentenciaEncuentraFirme, sentDerivaProcAbrv, fechaDictoProcAbrv, idModalidadEstadistica, reclasificacion) 
-                                         VALUES('$idEstatusNucs', '0', $estatus, '$fechaDictoSentencia',  $tipoSentencia, $aniosPrision, $sentenciaFirme, $sentDerivaProcAbrv, '$fechaDictoProcAbrv', $idCatModalidadEst, $reclasificacion)
-                                                   
-                                       COMMIT
-                               END TRY
-                               BEGIN CATCH 
-                                     ROLLBACK TRANSACTION
-                                     RAISERROR('No se realizo la transaccion',16,1)
-                               END CATCH
-                               END
-                         ";
-  }
-
- }else{
-
-  if($estatus == 66){
-    $queryTransaction = " 
-                         BEGIN                     
-                               BEGIN TRY 
-                                 BEGIN TRANSACTION
-                                       SET NOCOUNT ON 
-
-                                         UPDATE senap.sentencias SET 
-                                         idTipoSentencia = $tipoSentencia,
-                                         idModalidadEstadistica = $idCatModalidadEst,
-                                         reclasificacion = $reclasificacion
-                                         WHERE idEstatusNucs = '$idEstatusNucs' ;
-                                                   
-                                       COMMIT
-                               END TRY
-                               BEGIN CATCH 
-                                     ROLLBACK TRANSACTION
-                                     RAISERROR('No se realizo la transaccion',16,1)
-                               END CATCH
-                               END
-                         ";
-  }else{
-   $queryTransaction = " 
-                         BEGIN                     
-                               BEGIN TRY 
-                                 BEGIN TRANSACTION
-                                       SET NOCOUNT ON 
-
-                                         UPDATE senap.sentencias SET 
-                                         fechaDictoSentencia = '$fechaDictoSentencia',
-                                         idTipoSentencia = $tipoSentencia,
-                                         aniosPrision = $aniosPrision,
-                                         sentenciaEncuentraFirme = $sentenciaFirme,
-                                         sentDerivaProcAbrv = $sentDerivaProcAbrv,
-                                         fechaDictoProcAbrv = '$fechaDictoProcAbrv',
-                                         idModalidadEstadistica = $idCatModalidadEst,
-                                         reclasificacion = $reclasificacion
-                                         WHERE idEstatusNucs = '$idEstatusNucs' ;
-                                                   
-                                       COMMIT
-                               END TRY
-                               BEGIN CATCH 
-                                     ROLLBACK TRANSACTION
-                                     RAISERROR('No se realizo la transaccion',16,1)
-                               END CATCH
-                               END
-                         ";
-    }
+                                          INSERT INTO senap.sentencias (idEstatusNucs, ResolucionID, estatus, fechaDictoSentencia, idTipoSentencia, aniosPrision, sentenciaEncuentraFirme, sentDerivaProcAbrv, fechaDictoProcAbrv, idModalidadEstadistica, reclasificacion) 
+                                          VALUES('$idEstatusNucs', '0', $estatus, '$fechaDictoSentencia',  $tipoSentencia, $aniosPrision, $sentenciaFirme, $sentDerivaProcAbrv, '$fechaDictoProcAbrv', $idCatModalidadEst, $reclasificacion)
+                                                    
+                                        COMMIT
+                                END TRY
+                                BEGIN CATCH 
+                                      ROLLBACK TRANSACTION
+                                      RAISERROR('No se realizo la transaccion',16,1)
+                                END CATCH
+                                END
+                          ";
    }
-}else{
- //Si opcInsert == 0 es un nuevo registro, si opcInsert == 1 es una edicion de registro
- if($opcInsert == 0){
-  if($estatus == 66){
-   $queryTransaction = " 
-                         BEGIN                     
-                               BEGIN TRY 
-                                 BEGIN TRANSACTION
-                                       SET NOCOUNT ON 
 
-                                         INSERT INTO senap.sentencias (idEstatusNucs, ResolucionID, estatus, idTipoSentencia, idModalidadEstadistica , reclasificacion) 
-                                         VALUES('0', '$idEstatusNucs', $estatus, $tipoSentencia, $idCatModalidadEst, $reclasificacion)
-                                                   
-                                       COMMIT
-                               END TRY
-                               BEGIN CATCH 
-                                     ROLLBACK TRANSACTION
-                                     RAISERROR('No se realizo la transaccion',16,1)
-                               END CATCH
-                               END
-                         ";
   }else{
-   $queryTransaction = " 
-                         BEGIN                     
-                               BEGIN TRY 
-                                 BEGIN TRANSACTION
-                                       SET NOCOUNT ON 
 
-                                         INSERT INTO senap.sentencias (idEstatusNucs, ResolucionID, estatus, fechaDictoSentencia, idTipoSentencia, aniosPrision, sentenciaEncuentraFirme, sentDerivaProcAbrv, fechaDictoProcAbrv, idModalidadEstadistica , reclasificacion) 
-                                         VALUES('0', '$idEstatusNucs', $estatus, '$fechaDictoSentencia',  $tipoSentencia, $aniosPrision, $sentenciaFirme, $sentDerivaProcAbrv, '$fechaDictoProcAbrv', $idCatModalidadEst, $reclasificacion)
-                                                   
-                                       COMMIT
-                               END TRY
-                               BEGIN CATCH 
-                                     ROLLBACK TRANSACTION
-                                     RAISERROR('No se realizo la transaccion',16,1)
-                               END CATCH
-                               END
-                         ";
-  }
-   
- }else{
-   $queryTransaction = " 
-                         BEGIN                     
-                               BEGIN TRY 
-                                 BEGIN TRANSACTION
-                                       SET NOCOUNT ON 
+   if($estatus == 66){
+     $queryTransaction = " 
+                          BEGIN                     
+                                BEGIN TRY 
+                                  BEGIN TRANSACTION
+                                        SET NOCOUNT ON 
 
-                                         UPDATE senap.sentencias SET 
-                                         fechaDictoSentencia = '$fechaDictoSentencia',
-                                         idTipoSentencia = $tipoSentencia,
-                                         aniosPrision = $aniosPrision,
-                                         sentenciaEncuentraFirme = $sentenciaFirme,
-                                         sentDerivaProcAbrv = $sentDerivaProcAbrv,
-                                         fechaDictoProcAbrv = '$fechaDictoProcAbrv',
-                                         idModalidadEstadistica = $idCatModalidadEst,
-                                         reclasificacion = $reclasificacion
-                                         WHERE ResolucionID = '$idEstatusNucs' ;
-                                                   
-                                       COMMIT
-                               END TRY
-                               BEGIN CATCH 
-                                     ROLLBACK TRANSACTION
-                                     RAISERROR('No se realizo la transaccion',16,1)
-                               END CATCH
-                               END
-                         ";
- }
+                                          UPDATE senap.sentencias SET 
+                                          idTipoSentencia = $tipoSentencia,
+                                          idModalidadEstadistica = $idCatModalidadEst,
+                                          reclasificacion = $reclasificacion
+                                          WHERE idEstatusNucs = '$idEstatusNucs' ;
+                                                    
+                                        COMMIT
+                                END TRY
+                                BEGIN CATCH 
+                                      ROLLBACK TRANSACTION
+                                      RAISERROR('No se realizo la transaccion',16,1)
+                                END CATCH
+                                END
+                          ";
+   }else{
+    $queryTransaction = " 
+                          BEGIN                     
+                                BEGIN TRY 
+                                  BEGIN TRANSACTION
+                                        SET NOCOUNT ON 
+
+                                          UPDATE senap.sentencias SET 
+                                          fechaDictoSentencia = '$fechaDictoSentencia',
+                                          idTipoSentencia = $tipoSentencia,
+                                          aniosPrision = $aniosPrision,
+                                          sentenciaEncuentraFirme = $sentenciaFirme,
+                                          sentDerivaProcAbrv = $sentDerivaProcAbrv,
+                                          fechaDictoProcAbrv = '$fechaDictoProcAbrv',
+                                          idModalidadEstadistica = $idCatModalidadEst,
+                                          reclasificacion = $reclasificacion
+                                          WHERE idEstatusNucs = '$idEstatusNucs' ;
+                                                    
+                                        COMMIT
+                                END TRY
+                                BEGIN CATCH 
+                                      ROLLBACK TRANSACTION
+                                      RAISERROR('No se realizo la transaccion',16,1)
+                                END CATCH
+                                END
+                          ";
+     }
+    }
+}else{
+  //Aqui entran las averiguaciones
+   //Si opcInsert == 0 es un nuevo registro, si opcInsert == 1 es una edicion de registro
+  if($opcInsert == 0){
+   if($estatus == 66){
+     $queryTransaction = " 
+                          BEGIN                     
+                                BEGIN TRY 
+                                  BEGIN TRANSACTION
+                                        SET NOCOUNT ON 
+
+                                          INSERT INTO senap.sentencias (idEstatusNucs, ResolucionID, estatus, idTipoSentencia, idModalidadEstadistica, reclasificacion, idEstatusAveriguacion) 
+                                          VALUES('0', '0', $estatus,  $tipoSentencia, $idCatModalidadEst, 0, '$idEstatusNucs')
+                                                    
+                                        COMMIT
+                                END TRY
+                                BEGIN CATCH 
+                                      ROLLBACK TRANSACTION
+                                      RAISERROR('No se realizo la transaccion',16,1)
+                                END CATCH
+                                END
+                          ";
+   }else{
+     $queryTransaction = " 
+                          BEGIN                     
+                                BEGIN TRY 
+                                  BEGIN TRANSACTION
+                                        SET NOCOUNT ON 
+
+                                          INSERT INTO senap.sentencias (idEstatusNucs, ResolucionID, estatus, fechaDictoSentencia, idTipoSentencia, aniosPrision, sentenciaEncuentraFirme, sentDerivaProcAbrv, fechaDictoProcAbrv, idModalidadEstadistica, reclasificacion, idEstatusAveriguacion) 
+                                          VALUES('0', '0', $estatus, '$fechaDictoSentencia',  $tipoSentencia, $aniosPrision, $sentenciaFirme, $sentDerivaProcAbrv, '$fechaDictoProcAbrv', $idCatModalidadEst, 0, '$idEstatusNucs')
+                                                    
+                                        COMMIT
+                                END TRY
+                                BEGIN CATCH 
+                                      ROLLBACK TRANSACTION
+                                      RAISERROR('No se realizo la transaccion',16,1)
+                                END CATCH
+                                END
+                          ";
+   }
+
+  }else{
+
+   if($estatus == 66){
+     $queryTransaction = " 
+                          BEGIN                     
+                                BEGIN TRY 
+                                  BEGIN TRANSACTION
+                                        SET NOCOUNT ON 
+
+                                          UPDATE senap.sentencias SET 
+                                          idTipoSentencia = $tipoSentencia,
+                                          idModalidadEstadistica = $idCatModalidadEst,
+                                          reclasificacion = 0,
+                                          WHERE idEstatusAveriguacion = '$idEstatusNucs' ;
+                                                    
+                                        COMMIT
+                                END TRY
+                                BEGIN CATCH 
+                                      ROLLBACK TRANSACTION
+                                      RAISERROR('No se realizo la transaccion',16,1)
+                                END CATCH
+                                END
+                          ";
+   }else{
+    $queryTransaction = " 
+                          BEGIN                     
+                                BEGIN TRY 
+                                  BEGIN TRANSACTION
+                                        SET NOCOUNT ON 
+
+                                          UPDATE senap.sentencias SET 
+                                          fechaDictoSentencia = '$fechaDictoSentencia',
+                                          idTipoSentencia = $tipoSentencia,
+                                          aniosPrision = $aniosPrision,
+                                          sentenciaEncuentraFirme = $sentenciaFirme,
+                                          sentDerivaProcAbrv = $sentDerivaProcAbrv,
+                                          fechaDictoProcAbrv = '$fechaDictoProcAbrv',
+                                          idModalidadEstadistica = $idCatModalidadEst,
+                                          reclasificacion = 0
+                                          WHERE idEstatusAveriguacion = '$idEstatusNucs' ;
+                                                    
+                                        COMMIT
+                                END TRY
+                                BEGIN CATCH 
+                                      ROLLBACK TRANSACTION
+                                      RAISERROR('No se realizo la transaccion',16,1)
+                                END CATCH
+                                END
+                          ";
+     }
+    }
 }
+
+ 
+
 
  $result = sqlsrv_query($conn,$queryTransaction, array(), array( "Scrollable" => 'static' ));
  $arreglo[0] = "NO";

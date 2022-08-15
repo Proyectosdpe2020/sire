@@ -3,6 +3,7 @@
 include ("../../../Conexiones/Conexion.php");
 if (isset($_POST["idEstatusNucs"])){ $idEstatusNucs = $_POST["idEstatusNucs"]; }
 if (isset($_POST["estatResolucion"])){ $estatResolucion = $_POST["estatResolucion"]; }
+if (isset($_POST["tipo_investigacion"])){ $tipo_investigacion = $_POST["tipo_investigacion"]; }else{ $tipo_investigacion = 1; }
 
 
 	switch ($estatResolucion) {
@@ -200,7 +201,8 @@ if (isset($_POST["estatResolucion"])){ $estatResolucion = $_POST["estatResolucio
 		case 66:
 		case 67:
 		case 154:
-  	$queryTransaction = "BEGIN                     
+		if($tipo_investigacion != 2){
+			$queryTransaction = "BEGIN                     
 										                    BEGIN TRY 
 										                      BEGIN TRANSACTION
 										                          SET NOCOUNT ON
@@ -215,6 +217,23 @@ if (isset($_POST["estatResolucion"])){ $estatResolucion = $_POST["estatResolucio
 										                    END CATCH
 										                    END
 										                  "; 
+		}else{
+			$queryTransaction = "BEGIN                     
+										                    BEGIN TRY 
+										                      BEGIN TRANSACTION
+										                          SET NOCOUNT ON
+										                                   
+										                             DELETE FROM senap.sentencias WHERE idEstatusAveriguacion = $idEstatusNucs 
+
+										                          COMMIT
+										                    END TRY
+										                    BEGIN CATCH 
+										                          ROLLBACK TRANSACTION
+										                          RAISERROR('No se realizo la transaccion',16,1)
+										                    END CATCH
+										                    END
+										                  "; 
+		}
 		break;
 		case 68:
   	$queryTransaction = "BEGIN                     

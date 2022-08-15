@@ -824,7 +824,7 @@ function sendDataAcuerdoReparatorio(nuc, estatus, idMp, mes, anio, deten, idUnid
 	}
 }
 
-function sendDataSentencias(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcInsert){
+function sendDataSentencias(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcInsert , tipo_investigacion){
 	if( $('.checkRecla').prop('checked') ) {
    var reclasificacion = 1;
    var newBrwosers_id = $("#newBrwoser").val();
@@ -847,7 +847,7 @@ function sendDataSentencias(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcI
     $('#modalNucsLitigInfo').modal('hide');
 			 $('#modalNucsLitig').modal('show');
 		}else{
-			insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert);
+			insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert, tipo_investigacion);
 	  $('#modalNucsLitigInfo').modal('hide');
 			$('#modalNucsLitig').modal('show');
 		}

@@ -847,7 +847,6 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 		<script language="JavaScript" type="text/javascript" src="js/cmasc.js"></script>
 		<!--<script language="JavaScript" type="text/javascript" src="js/litigacion.js"></script>-->
 		<script language="JavaScript" type="text/javascript" src="js/litigacion_220602.js"></script>
-		<script language="JavaScript" type="text/javascript" src="js/litigacion.js"></script>
 		<script language="JavaScript" type="text/javascript" src="js/trimestral.js"></script>
 			<script language="JavaScript" type="text/javascript" src="js/desapar.js"></script>
 				<script language="JavaScript" type="text/javascript" src="js/puesDispos210525.js"></script>

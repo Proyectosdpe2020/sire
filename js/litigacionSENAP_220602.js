@@ -1,5 +1,6 @@
 //Muestra modal para ingresar información adicional del NUC solicitado por SENAP
-function showModalNucLitInfo(idEstatusNucs, estatus, nuc, idCarpeta, idMp, mes, anio){
+function showModalNucLitInfo(idEstatusNucs, estatus, nuc, idCarpeta, idMp, mes, anio, tipo_investigacion){
+
 	if(estatus != 50 && estatus != 53 && estatus != 58){
 		ajax=objetoAjax();
 			ajax.open("POST", "format/litigacion/modalNucsInfoLitig.php");
@@ -13,7 +14,7 @@ function showModalNucLitInfo(idEstatusNucs, estatus, nuc, idCarpeta, idMp, mes, 
 				}
 			}
 			ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-			ajax.send('&idEstatusNucs='+idEstatusNucs+'&estatus='+estatus+'&nuc='+nuc+'&idCarpeta='+idCarpeta+'&idMp='+idMp+'&mes='+mes+'&anio='+anio);
+			ajax.send('&idEstatusNucs='+idEstatusNucs+'&estatus='+estatus+'&nuc='+nuc+'&idCarpeta='+idCarpeta+'&idMp='+idMp+'&mes='+mes+'&anio='+anio+'&tipo_investigacion='+tipo_investigacion);
 	}else{
 		ajax=objetoAjax();
 		ajax.open("POST", "format/litigacion/modal_Imputados.php");
@@ -33,7 +34,8 @@ function showModalNucLitInfo(idEstatusNucs, estatus, nuc, idCarpeta, idMp, mes, 
 }
 
 //Muestra modal para ingresar información adicional del NUC solicitado por SENAP
-function showModalNucLitInfo2(estatus, nuc, idMp, mes, anio, deten, idUnidad){
+function showModalNucLitInfo2(estatus, nuc, idMp, mes, anio, deten, idUnidad , tipo_investigacion){
+	alert(tipo_investigacion);
 	ajax=objetoAjax();
 	ajax.open("POST", "format/litigacion/modalNucsInfoLitig.php");
 
@@ -46,7 +48,7 @@ function showModalNucLitInfo2(estatus, nuc, idMp, mes, anio, deten, idUnidad){
 		}
 	}
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	ajax.send('&estatus='+estatus+'&nuc='+nuc+'&idMp='+idMp+'&mes='+mes+'&anio='+anio+'&deten='+deten+'&idUnidad='+idUnidad);
+	ajax.send('&estatus='+estatus+'&nuc='+nuc+'&idMp='+idMp+'&mes='+mes+'&anio='+anio+'&deten='+deten+'&idUnidad='+idUnidad+'&tipo_investigacion='+tipo_investigacion);
 }
 
 function showModalNucLitSicaInfo(idResolMP, estatus, nuc){
@@ -364,7 +366,7 @@ function insertCriteriosOportunidad_db(idEstatusNucs, estatus, nuc, opcInsert){
 }
 
 /****Ingresa a la bd la informacion de SENAP de Criterios de Oportunidad****/
-function insertSentencias_db(idEstatusNucs, estatus, nuc, opcInsert){
+function insertSentencias_db(idEstatusNucs, estatus, nuc, opcInsert, idMp ,  mes , anio , tipo_investigacion){
 	if( $('.checkRecla').prop('checked') ) {
    var reclasificacion = 1;
    var newBrwosers_id = $("#newBrwoser").val();
@@ -373,6 +375,13 @@ function insertSentencias_db(idEstatusNucs, estatus, nuc, opcInsert){
 	  var reclasificacion = 0;
 	  $("input[type=radio]:checked").each(function(){ idCatModalidadEst = $(this).val() });
 	 }
+ 
+ if(tipo_investigacion == 2){
+ 	var newBrwosers_id = $("#newBrwoser").val();
+			var idCatModalidadEst = $("#newBrwosers").find("option[value='" + newBrwosers_id + "']").attr('data-id');
+ }
+ 
+ console.log(nuc);
 
 	if(estatus == 66){ var fechaDictoSentencia = "noData"; }else{ var fechaDictoSentencia = document.getElementById("fechaDictoSentencia").value; }
 	var tipoSentencia = document.getElementById("tipoSentencia").value;
@@ -387,7 +396,8 @@ function insertSentencias_db(idEstatusNucs, estatus, nuc, opcInsert){
 		 dataType: "html",
 			url:  "format/litigacion/insertSenap/insert_FormSentencias.php",
 		 data: 'idEstatusNucs='+idEstatusNucs+'&nuc='+nuc+'&opcInsert='+opcInsert+'&estatus='+estatus+'&fechaDictoSentencia='+fechaDictoSentencia+'&tipoSentencia='+tipoSentencia+
-		       '&aniosPrision='+aniosPrision+'&sentenciaFirme='+sentenciaFirme+'&sentDerivaProcAbrv='+sentDerivaProcAbrv+'&fechaDictoProcAbrv='+fechaDictoProcAbrv+'&idCatModalidadEst='+idCatModalidadEst+'&reclasificacion='+reclasificacion,
+		       '&aniosPrision='+aniosPrision+'&sentenciaFirme='+sentenciaFirme+'&sentDerivaProcAbrv='+sentDerivaProcAbrv+'&fechaDictoProcAbrv='+fechaDictoProcAbrv+'&idCatModalidadEst='+idCatModalidadEst+'&reclasificacion='+reclasificacion
+		       +'&tipo_investigacion='+tipo_investigacion,
 		 success: function(respuesta){
 		 	var json = respuesta;
 		 	var obj = eval("(" + json + ")");
@@ -824,7 +834,7 @@ function sendDataAcuerdoReparatorio(nuc, estatus, idMp, mes, anio, deten, idUnid
 	}
 }
 
-function sendDataSentencias(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcInsert){
+function sendDataSentencias(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcInsert, tipo_investigacion){
 	if( $('.checkRecla').prop('checked') ) {
    var reclasificacion = 1;
    var newBrwosers_id = $("#newBrwoser").val();
@@ -833,9 +843,14 @@ function sendDataSentencias(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcI
 	  var reclasificacion = 0;
 	  $("input[type=radio]:checked").each(function(){ idCatModalidadEst = $(this).val() });
 	 }
+ 
+	 if(tipo_investigacion == 2){
+	 	var newBrwosers_id = $("#newBrwoser").val();
+			var idCatModalidadEst = $("#newBrwosers").find("option[value='" + newBrwosers_id + "']").attr('data-id');
+	 }
 
 	if(estatus == 66){ var fechaDictoSentencia = "noData"; }else{ var fechaDictoSentencia = document.getElementById("fechaDictoSentencia").value; }
-	var tipoSentencia = document.getElementById("tipoSentencia").value;
+	var tipoSentencia = document.getElementById("tipoSentencia").value; 
 	if(estatus == 66){ var aniosPrision = "noData"; }else{ var aniosPrision = document.getElementById("aniosPrision").value; }
 	if(estatus == 66){ var sentenciaFirme = "noData"; }else{ var sentenciaFirme = document.getElementById("sentenciaFirme").value; }
 	if(estatus == 66){ var sentDerivaProcAbrv = "noData"; }else{ var sentDerivaProcAbrv = document.getElementById("sentDerivaProcAbrv").value; }
@@ -847,7 +862,7 @@ function sendDataSentencias(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcI
     $('#modalNucsLitigInfo').modal('hide');
 			 $('#modalNucsLitig').modal('show');
 		}else{
-			insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert);
+			insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert, tipo_investigacion);
 	  $('#modalNucsLitigInfo').modal('hide');
 			$('#modalNucsLitig').modal('show');
 		}
