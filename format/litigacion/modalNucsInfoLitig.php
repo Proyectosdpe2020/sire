@@ -739,12 +739,12 @@ if($tipo_investigacion == 1){
  }
 	 	if(sizeof($getData) > 0){ 
 	 		$opcInsert = 1; 
-	 		if($estatus != 66){$fechaDictoSentencia = $getData[0][2] ->format('Y-m-d');}
+	 		if($estatus != 66 && $tipo_investigacion != 2){$fechaDictoSentencia = $getData[0][2] ->format('Y-m-d');}
 	 		$tipoSentencia = $getData[0][3];
 	 		$aniosPrision = $getData[0][4];
 	 		$sentenciaFirme = $getData[0][5];
 	 		$sentDerivaProcAbrv = $getData[0][6];
-	 		if($estatus != 66){$fechaDictoProcAbrv = $getData[0][7]->format('Y-m-d');}
+	 		if($estatus != 66 && $tipo_investigacion != 2){$fechaDictoProcAbrv = $getData[0][7]->format('Y-m-d');}
 	 		$idModalidadEstadistica = $getData[0][8];
 	 		$reclasificado = $getData[0][9];
 	 		$getName = getDataDelitoNombre($conSic , $idModalidadEstadistica );
@@ -844,7 +844,7 @@ if($tipo_investigacion == 1){
 										<thead>
 											<tr class="cabezeraTablaForest">
 												<th class="textCent">#</th>
-												<th class="textCent">Delito <?echo $tipo_investigacion; ?></th>
+												<th class="textCent">Delito</th>
 											</tr>
 										</thead>
 										<tbody id="">
