@@ -13,8 +13,6 @@
 
 	$data = getDatosLitigacionMpUnidad2($conn, $mes,$anio, $idUnidad);
 
-
-
 ?>
 
 	<div class="row" id="contDataUpdLitigacionUnidad">
