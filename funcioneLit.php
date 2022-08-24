@@ -270,7 +270,13 @@ function getDistincCarpetasAgenteLitigacion($conn, $idMp, $estatus, $mes, $anio,
 			$query = " SELECT nuc, idEstatusNucs FROM estatusNucs WHERE idMp = $idMp AND idEstatus = $estatus AND mes = $mes AND anio = $anio AND idUnidad = $idUnidad";
 
 		}else{
-		$query = " SELECT DISTINCT nuc, idEstatusNucs FROM estatusNucs WHERE idMp = $idMp AND idEstatus = $estatus AND mes = $mes AND anio = $anio AND idUnidad = $idUnidad Group BY nuc , idEstatusNucs";
+			 if($estatus == 154 || $estatus == 66 || $estatus == 67){
+			 	 	$query = " SELECT DISTINCT nuc, idEstatusNucs FROM estatusNucs WHERE idMp = $idMp AND idEstatus = $estatus AND mes = $mes AND anio = $anio AND idUnidad = $idUnidad Group BY nuc , idEstatusNucs union all
+																SELECT no_averiguacion , idEstatusAveriguacion FROM estatusAveriguaciones 
+					WHERE idMp = $idMp AND mes = $mes AND anio = $anio AND  idEstatus = $estatus AND idUnidad = $idUnidad  ";
+			 }else{
+			 	$query = " SELECT DISTINCT nuc, idEstatusNucs FROM estatusNucs WHERE idMp = $idMp AND idEstatus = $estatus AND mes = $mes AND anio = $anio AND idUnidad = $idUnidad Group BY nuc , idEstatusNucs";
+			 }
 		}
 		//echo $query."<br>";
 
@@ -445,7 +451,7 @@ function validarCarpetaCapturadaLiti($conn, $anioCaptura, $mesCapturar, $idMp){
 function validarCarpetaCapturadaLitiUnidad($conn, $anioCaptura, $mesCapturar, $idMp, $idUnidad){
 
 	$query = "  SELECT idLitigacion FROM Litigacion WHERE idMes = $mesCapturar AND idAnio = $anioCaptura AND idMp = $idMp AND idUnidad = $idUnidad";
-
+ //echo $query;
 
 	$stmt = sqlsrv_query(  $conn, $query,array(), array("Scrollable" => SQLSRV_CURSOR_STATIC));
 	$row_count = sqlsrv_num_rows( $stmt );
@@ -519,8 +525,6 @@ function getLastDeterminacionCarpetaLitigAveriguacion($conn, $nuc){
 		if(isset($arreglo)){return $arreglo;}
 
 }
-
-
 
 
 ?>
