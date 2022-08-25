@@ -265,13 +265,13 @@ function getLastDeterminacionCarpetaLitig($conn, $nuc){
 function getDistincCarpetasAgenteLitigacion($conn, $idMp, $estatus, $mes, $anio, $idUnidad){
 
 
-		if($estatus == 60 || $estatus == 61 || $estatus == 63 ){
+		if($estatus == 60 || $estatus == 61 || $estatus == 63 || $estatus == 139 ){
 
 			$query = " SELECT nuc, idEstatusNucs FROM estatusNucs WHERE idMp = $idMp AND idEstatus = $estatus AND mes = $mes AND anio = $anio AND idUnidad = $idUnidad";
 
 		}else{
 			 if($estatus == 154 || $estatus == 66 || $estatus == 67){
-			 	 	$query = " SELECT DISTINCT nuc, idEstatusNucs FROM estatusNucs WHERE idMp = $idMp AND idEstatus = $estatus AND mes = $mes AND anio = $anio AND idUnidad = $idUnidad Group BY nuc , idEstatusNucs union all
+			 	 	$query = " SELECT nuc, idEstatusNucs FROM estatusNucs WHERE idMp = $idMp AND idEstatus = $estatus AND mes = $mes AND anio = $anio AND idUnidad = $idUnidad  union all
 																SELECT no_averiguacion , idEstatusAveriguacion FROM estatusAveriguaciones 
 					WHERE idMp = $idMp AND mes = $mes AND anio = $anio AND  idEstatus = $estatus AND idUnidad = $idUnidad  ";
 			 }else{
@@ -369,7 +369,7 @@ function getLastDeterminacionCarpetalit($conn, $idCarp){
 function getDistincCarpetasAgenteDetemrn20Lit($conn, $idMp, $mes, $anio,  $deten ,  $estatus, $idUnidad){
 		
 
-		if($estatus == 60 || $estatus == 61 || $estatus == 63 || $estatus == 114 || $estatus == 115 || $estatus == 116 || $estatus == 117 || $estatus == 119 || $estatus == 120 || $estatus == 121 || $estatus == 122 || $estatus == 123 || $estatus == 124 || $estatus == 125 || $estatus == 126 || $estatus == 127 || $estatus == 128 || $estatus == 140 || $estatus == 3 || $estatus == 4 || $estatus == 5  || $estatus == 6 || $estatus == 7 || $estatus == 151 || $estatus == 10 || $estatus == 12 || $estatus == 98 || $estatus == 97  || $estatus == 96 || $estatus == 17 || $estatus == 18 || $estatus == 95 || $estatus == 20 || $estatus == 21 || $estatus == 22 || $estatus == 23 || $estatus == 24 || $estatus == 25 || $estatus == 26 || $estatus == 27 || $estatus == 28 || $estatus == 29 || $estatus == 30 || $estatus == 31 || $estatus == 33 || $estatus == 34 || $estatus == 35 || $estatus == 36 || $estatus == 38 || $estatus == 112 || $estatus == 113 || $estatus == 3 || $estatus == 50 || $estatus == 53 || $estatus == 57 || $estatus == 58 || $estatus == 129  ){
+		if($estatus == 60 || $estatus == 61 || $estatus == 63 || $estatus == 114 || $estatus == 115 || $estatus == 116 || $estatus == 117 || $estatus == 119 || $estatus == 120 || $estatus == 121 || $estatus == 122 || $estatus == 123 || $estatus == 124 || $estatus == 125 || $estatus == 126 || $estatus == 127 || $estatus == 128 || $estatus == 140 || $estatus == 3 || $estatus == 4 || $estatus == 5  || $estatus == 6 || $estatus == 7 || $estatus == 151 || $estatus == 10 || $estatus == 12 || $estatus == 98 || $estatus == 97  || $estatus == 96 || $estatus == 17 || $estatus == 18 || $estatus == 95 || $estatus == 20 || $estatus == 21 || $estatus == 22 || $estatus == 23 || $estatus == 24 || $estatus == 25 || $estatus == 26 || $estatus == 27 || $estatus == 28 || $estatus == 29 || $estatus == 30 || $estatus == 31 || $estatus == 33 || $estatus == 34 || $estatus == 35 || $estatus == 36 || $estatus == 38 || $estatus == 112 || $estatus == 113 || $estatus == 3 || $estatus == 50 || $estatus == 53 || $estatus == 57 || $estatus == 58 || $estatus == 129 || $estatus == 139 ){
 
 
 				$query = "  SELECT nuc FROM estatusNucs 
@@ -379,8 +379,8 @@ function getDistincCarpetasAgenteDetemrn20Lit($conn, $idMp, $mes, $anio,  $deten
 		}else{
 
 			if($estatus == 154 || $estatus == 66 || $estatus == 67){
-				$query = "  SELECT DISTINCT nuc FROM estatusNucs 
-			  WHERE idMp = $idMp AND mes = $mes AND anio = $anio AND  idEstatus = $estatus AND idUnidad = $idUnidad  Group BY nuc, idEstatus 
+				$query = "  SELECT nuc FROM estatusNucs 
+			  WHERE idMp = $idMp AND mes = $mes AND anio = $anio AND  idEstatus = $estatus AND idUnidad = $idUnidad 
 			  union all
 																SELECT no_averiguacion FROM estatusAveriguaciones 
 					WHERE idMp = $idMp AND mes = $mes AND anio = $anio AND  idEstatus = $estatus AND idUnidad = $idUnidad  ";
