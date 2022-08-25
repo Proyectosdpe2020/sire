@@ -749,6 +749,8 @@ function getDatosLitigacionMpUnidad($conn, $idMp, $mes, $anio, $idFiscalia, $idU
   $arreglo[$indice][132]=$row['amparos'];
   $arreglo[$indice][133]=$row['amparoDirecto'];
   $arreglo[$indice][134]=$row['amparoIndirecto'];
+
+  $arreglo[$indice][135]=$row['audienciaFallo'];
 		$indice++;
 	}
 	if(isset($arreglo)){return $arreglo;}
