@@ -5,17 +5,34 @@
 
 				if (isset($_POST["idEnlace"])){ $idEnlace = $_POST["idEnlace"]; }	
 				if (isset($_POST["f"])){ $f = $_POST["f"]; }		
-
+		
 				$infoUni = dataUnidadEnlaceFormat2($conn, $idEnlace, $f);	
+				
 
-					if($idEnlace != 14 AND $idEnlace != 15 AND $idEnlace != 16 AND $idEnlace != 17 AND $idEnlace != 18 AND $idEnlace != 19 AND $idEnlace != 21 AND $idEnlace != 22 AND $idEnlace != 23  ){
+					if($idEnlace != 14 AND $idEnlace != 15 AND $idEnlace != 16 AND $idEnlace != 17 AND $idEnlace != 18 AND $idEnlace != 19 
+					AND $idEnlace != 21 AND $idEnlace != 22 AND $idEnlace != 23  ){
+							
+						///// SE AGREGA HARDCODEADA PARA LOS ENLACES QUE TIENEN MAS DE UNA UNIDAD Y QUE SON LAS ESPECIALIZADAS
+						if($idEnlace == 26){
+							$forms = getFormatsFromEnlacs($conn, $idEnlace); /// SE OBTIENEN LOS FORMATOS QUE LLENA EL ENLACE							
+							for ($w=0; $w < sizeof($forms) ; $w++) { 								
+									/// OBNTENER ID DE UNIDAD Y NOMBRE DEL ENLACE
+								$datas = getUnidadEnlaceName($conn, $forms[$w][2]);
+								$dataUnidsFis[$w][0] = $datas[0][0];
+								$dataUnidsFis[$w][1] = $datas[0][1];
+							}
+						}else{
 							$dataUnidsFis[0][0] = $infoUni[0][1];
 							$dataUnidsFis[0][1] = $infoUni[0][4];
+						}
+						
 					}else{
 								if($f != 4 ){
 												$dataUnidsFis = getUnidadesFiscalias($conn, $infoUni[0][2]);
+												
 								}else{
 												$dataUnidsFis = getUnidadesFiscaliasLiti($conn, $infoUni[0][2]);
+												
 								}
 					}
 

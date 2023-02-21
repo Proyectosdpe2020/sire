@@ -9,9 +9,14 @@
 	if (isset($_POST["anio"])){ $anio = $_POST["anio"]; }
 
 	if (isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }
+	if (isset($_POST["idMp"])){ $idMp = $_POST["idMp"]; }
 
 
-	$data = getDatosLitigacionMpUnidad2($conn, $mes,$anio, $idUnidad);
+
+	$data = getDatosLitigacionMpUnidad2($conn, $mes,$anio, $idUnidad, $idMp);
+
+
+	
 
 ?>
 

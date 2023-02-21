@@ -43,8 +43,8 @@
 	$mediacion = $carpeta[0][12]; 	
 	$conciliacion = $carpeta[0][13];
 	$criteriosOportunidad = $carpeta[0][14]; 	
-	$suspensionCondicional = $carpeta[0][15]; 		$enviadasUI = $carpeta[0][20];
-
+	$suspensionCondicional = $carpeta[0][15]; 		
+	$enviadasUI = $carpeta[0][20];
 	$incompetencia = $carpeta[0][16]; 	
 	$acumulacion = $carpeta[0][17]; 	
 	$totalResoluciones = $carpeta[0][18]; 	

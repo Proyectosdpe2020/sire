@@ -46,7 +46,7 @@ if ($format == "Trimestral") {
 if ($format == "Administrador") {
 	$format = 0;
 }
-if ($format == "AdmonPolicias") {
+if ($format == "estadoDeFuerza") {
 	$format = 13;
 }
 if ($format == "Forestales") {
@@ -61,6 +61,9 @@ if ($format == "medidasDeProteccion") {
 
 if ($format == "mandamientosJudiciales") {
 	$format = 18;
+}
+if ($format == "procesosPenales") {
+	$format = 21;
 }
 
 $_SESSION['formatis'] = $format;
@@ -83,12 +86,17 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 
 	if ($idEnlace != 0) {
 		//VALIDAR PRIMERO A LOS ENLACES QUE CAPTURAN SIRE CARPETAS Y LITIGACION CON LOS MISMOS MP 
-		if( ($idEnlace == 30 || $idEnlace == 28 )&& $format == 4){
+		if( ($idEnlace == 30 || $idEnlace == 28 || $idEnlace == 27 )&& $format == 4){
+
 			$unienla = getIdUnidEnlaceMPunidad($conn, $idEnlace);
 		 $idUnidEnlac = $unienla[0][0];
+
+			
 		}else{
+
 				$unienla = getIdUnidEnlace($conn, $idEnlace);
 		  $idUnidEnlac = $unienla[0][0];
+
 		}
 	} else {
 		$idUnidEnlac = 0;
@@ -130,6 +138,7 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 	<link rel="stylesheet" type="text/css" href="css/trimestral.css">
 	<link rel="stylesheet" type="text/css" href="css/carpetasJudicializadas.css">
 
+
 	<link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
 
 	<link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -137,9 +146,11 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 	<link rel="stylesheet" type="text/css" href="css/estilosPrincipal.css">
 	<link rel="stylesheet" type="text/css" href="css/litigacion.css">
 	<link rel="stylesheet" type="text/css" href="css/forestales.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" type="text/css" href="css/litigacionSENAP.css">
 	<link rel="stylesheet" type="text/css" href="css/medidasDeProteccion.css">
 	<link rel="stylesheet" type="text/css" href="css/mandamientos.css">
+	<link rel="stylesheet" type="text/css" href="css/estadoDeFuerza.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
 
@@ -224,11 +235,12 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 		if ($format  == 9) { ?> onload="loadtablaFormat(0, 'puestaDisposicion.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" <? }
 		if ($format  == 10) { ?> onload="loadtablaFormat(0, 'puestaDisposicionSuper.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" <? }
 		if ($format  == 12) { ?> onload="loadtablaFormat(0, 'puestaDisposicionConsulta.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" <? }
-		if ($format  == 13) { ?> onload="loadtablaFormat(0, 'cambioAdscripcionPueDispo.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" <? }
+		if ($format  == 13) { ?> onload="loadtablaFormat(0, 'estadoDeFuerza.php', 'estadoDeFuerza', <? echo $idEnlace; ?>);" <? }
 		if ($format  == 14) { ?> onload="loadtablaFormat(0, 'forestales.php', 'forestales', <? echo $idEnlace; ?>);" <? }
 		if ($format  == 15) { ?> onload="loadtablaFormat(0, 'carpetasJudicializadas.php', 'carpetasJudicializadas', <? echo $idEnlace; ?>);" <? }
 		if ($format  == 16) { ?> onload="loadtablaFormat(0, 'medidasDeProteccion.php', 'medidasDeProteccion', <? echo $idEnlace; ?>);" <? }
 		if ($format  == 18) { ?> onload="loadtablaFormat(0, 'mandamientosJudiciales.php', 'mandamientosJudiciales', <? echo $idEnlace; ?>);" <? }
+		if ($format  == 21) { ?> onload="loadtablaFormat(0, 'procesosPenales.php', 'procesosPenales', <? echo $idEnlace; ?>);" <? }
 		}
 
 		} else {																																	
@@ -849,7 +861,8 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 		<script language="JavaScript" type="text/javascript" src="js/litigacion_220602.js"></script>
 		<script language="JavaScript" type="text/javascript" src="js/trimestral.js"></script>
 			<script language="JavaScript" type="text/javascript" src="js/desapar.js"></script>
-				<script language="JavaScript" type="text/javascript" src="js/puesDispos210525.js"></script>
+			<script language="JavaScript" type="text/javascript" src="js/procesosPenales.js"></script>
+				<script language="JavaScript" type="text/javascript" src="js/puesDispos230217.js"></script>
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <!--<script src="vendors/jquery/dist/jquery.min.js"></script>-->
 <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -863,6 +876,7 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 <script type="text/javascript" src="js/carpetasJudicializadas.js"></script>
 <?if($format == 16){ ?><script type="text/javascript" src="js/medidasDeProteccion.js"></script><? } ?>
 <?if($format == 18){ ?><script type="text/javascript" src="js/mandamientosJudiciales_20062022.js"></script><? } ?>
+<script language="JavaScript" type="text/javascript" src="js/estadoDeFuerza.js"></script>
 
 
 	<!--<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>-->

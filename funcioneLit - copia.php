@@ -99,9 +99,6 @@ function get_datos_carpeta_capturadoLiti($conn,$nuc)
 
 function get_existeCarpetaNucsLiti($conn, $nuc, $anio, $mes, $idMp, $idUnidad, $idEstatus)
 		{
-
-
-
 			$indice=0;
 			$consulta="SELECT DISTINCT idCarpeta from estatusNucs where nuc = $nuc AND anio = $anio AND mes = $mes AND idMp = $idMp AND idUnidad = $idUnidad AND idEstatus = $idEstatus";
 

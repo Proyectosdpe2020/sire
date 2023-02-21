@@ -48,6 +48,10 @@ if (isset($_POST['recPersonas'])){ $recPersonas = $_POST['recPersonas']; }
 if (isset($_POST['recObjetos'])){ $recObjetos = $_POST['recObjetos']; }
 if (isset($_POST['recFotografias'])){ $recFotografias = $_POST['recFotografias']; }
 
+if (isset($_POST['cadena_custodia'])){ $cadena_custodia = $_POST['cadena_custodia']; }
+if (isset($_POST['traslados'])){ $traslados = $_POST['traslados']; }
+if (isset($_POST['actos_vigentes'])){ $actos_vigentes = $_POST['actos_vigentes']; }
+
 if (isset($_POST['textObservaciones'])){ $getTextObservaciones = $_POST['textObservaciones']; }
 if (isset($_POST['idEnlace'])){ $idEnlace = $_POST['idEnlace']; }
 
@@ -84,10 +88,10 @@ if (isset($_POST['idTrabajoCampo'])){ $idTrabajoCampo = $_POST['idTrabajoCampo']
 
 
                                           INSERT INTO pueDisposi.TrabajoDeCampo (idPueDisposicion , entrevistas , visitasDomiciliarias , investigacionesCumplidas , investigacionesInformadas, individuaciones , solicitudVideos, planimetrias,
-                                           recPersonas, recObjetos, recFotografias, observaciones) 
+                                           recPersonas, recObjetos, recFotografias, cadena_custodia, traslados, actos_vigentes, observaciones) 
                                               VALUES(@insertado , $getTextEntrevistas , $getTextVisitasDomiciliarias , 
                                                     $getTextInvestigacionesCumplidas , $getTextInvestigacionesInformadas, $getTextIndividuaciones ,
-                                                    $solicitudVideos, $planimetrias, $recPersonas, $recObjetos, $recFotografias, 
+                                                    $solicitudVideos, $planimetrias, $recPersonas, $recObjetos, $recFotografias, $cadena_custodia, $traslados, $actos_vigentes,
                                                     '$getTextObservaciones')
 
 
@@ -141,10 +145,10 @@ if (isset($_POST['idTrabajoCampo'])){ $idTrabajoCampo = $_POST['idTrabajoCampo']
                             SET NOCOUNT ON    
                                               
                                           INSERT INTO pueDisposi.TrabajoDeCampo (idPueDisposicion , entrevistas , visitasDomiciliarias , investigacionesCumplidas , investigacionesInformadas,  individuaciones , solicitudVideos, planimetrias,
-                                           recPersonas, recObjetos, recFotografias,  observaciones) 
+                                           recPersonas, recObjetos, recFotografias, cadena_custodia, traslados, actos_vigentes,  observaciones) 
                                           VALUES($idPuestaDisposicion , $getTextEntrevistas , $getTextVisitasDomiciliarias , 
                                                 $getTextInvestigacionesCumplidas , $getTextInvestigacionesInformadas , $getTextIndividuaciones , 
-                                                 $solicitudVideos, $planimetrias, $recPersonas, $recObjetos, $recFotografias,'$getTextObservaciones')
+                                                 $solicitudVideos, $planimetrias, $recPersonas, $recObjetos, $recFotografias, $cadena_custodia, $traslados, $actos_vigentes, '$getTextObservaciones')
 
 
                           COMMIT
@@ -172,6 +176,9 @@ if (isset($_POST['idTrabajoCampo'])){ $idTrabajoCampo = $_POST['idTrabajoCampo']
                                            recPersonas = $recPersonas, 
                                            recObjetos = $recObjetos,
                                            recFotografias = $recFotografias,
+                                           cadena_custodia = $cadena_custodia,
+                                           traslados = $traslados,
+                                           actos_vigentes = $actos_vigentes,
                                            observaciones = '$getTextObservaciones'
                                            WHERE idTrabajoCampo = $idTrabajoCampo
                                               

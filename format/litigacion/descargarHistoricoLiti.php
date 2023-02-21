@@ -13,6 +13,7 @@
 	if (isset($_POST["mes"])){ $mes = $_POST["mes"]; }
 	if (isset($_POST["anio"])){ $anio = $_POST["anio"]; }
 	if (isset($_POST["idEnlace"])){ $idEnlace = $_POST["idEnlace"]; }
+	if (isset($_POST["idMp"])){ $idMp = $_POST["idMp"]; }
 
 
 	$idUsuario = $_SESSION['useridIE'];
@@ -86,14 +87,22 @@
 	  )
 	);
 
+	if($idMp == 0){
+		$nameMp = "Todos";
+	}else{
+		$dataMp = getDataDelMp($conn, $idMp);
+		$nameMp = $dataMp[0][0];
+	}
+	
 
 	$objPHPExcel->getActiveSheet()->SetCellValue("D7", $fisname);
 	$objPHPExcel->getActiveSheet()->SetCellValue("D8", $nomuni);
 	$objPHPExcel->getActiveSheet()->SetCellValue("D9", $mesNom);
+	$objPHPExcel->getActiveSheet()->SetCellValue("D10", $nameMp);
 	$objPHPExcel->getActiveSheet()->SetCellValue("F9", $anio);
 
 
-     $data = getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad);
+     $data = getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad, $idMp);
 
 
 	$objPHPExcel->getActiveSheet()->SetCellValue("D12", $data[0][0]); //Existencia anterior

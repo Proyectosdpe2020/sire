@@ -1,9 +1,49 @@
 <?
 
-function getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad){
+function existeJudicializadaFromNuc($conn, $nuc){
+
+	$query = "  SELECT top 1 idEstatusNucs, nuc, mp.nombre+' '+mp.paterno+' '+mp.materno AS nombreCompleto, u.nUnidad as unidad, f.nFiscalia as fiscalia
+	FROM estatusNucs 
+	INNER JOIN mp ON mp.idMp = estatusNucs.idMp
+	INNER JOIN catUnidad u ON u.idUnidad = estatusNucs.idUnidad
+	INNER JOIN CatFiscalia f ON f.idFiscalia = u.idFiscalia
+	WHERE nuc = '$nuc' AND idEstatus IN(1,2)";
+	
+	$indice = 0;
+
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['idEstatusNucs'];
+		$arreglo[$indice][1]=$row['nuc'];
+		$arreglo[$indice][2]=$row['nombreCompleto'];
+		$arreglo[$indice][3]=$row['unidad'];
+		$arreglo[$indice][4]=$row['fiscalia'];
+
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
+
+function getDataDelMp($conn, $idMp){
+
+	$query = "Select nombre+' '+paterno+' '+materno AS ministerioPublico FROM mp WHERE idMp = $idMp";
+	$indice = 0;
+
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['ministerioPublico'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
+
+function getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad, $idMp){
 
 
-	$query = "  SELECT sum([existenciaAnterior]) as 'existenciaAnterior', sum([carpetasJudicializadas]) as 'carpetasJudicializadas', sum([judicializadasConDetenido]) as 'judicializadasConDetenido', sum([judicializadasSinDetenido]) as 'judicializadasSinDetenido', sum([autoDeVinculacion]) as 'autoDeVinculacion', sum([autoDeNoVinculacion]) as 'autoDeNoVinculacion', sum([Mixtos]) as 'Mixtos', sum([imposicionMedidasCautelares]) as 'imposicionMedidasCautelares',
+	if($idMp == 0){
+		$query = "  SELECT sum([existenciaAnterior]) as 'existenciaAnterior', sum([carpetasJudicializadas]) as 'carpetasJudicializadas', sum([judicializadasConDetenido]) as 'judicializadasConDetenido', sum([judicializadasSinDetenido]) as 'judicializadasSinDetenido', sum([autoDeVinculacion]) as 'autoDeVinculacion', sum([autoDeNoVinculacion]) as 'autoDeNoVinculacion', sum([Mixtos]) as 'Mixtos', sum([imposicionMedidasCautelares]) as 'imposicionMedidasCautelares',
   sum([prisionPreventivaOficiosa]) as 'prisionPreventivaOficiosa', sum([prisionPreventivaJustificada]) as 'prisionPreventivaJustificada', sum([presentacionPeriodicaAnteElJuez]) as 'presentacionPeriodicaAnteElJuez', sum([exhibicionGarantiaEconomica]) as 'exhibicionGarantiaEconomica', sum([embargoDeBienes]) as 'embargoDeBienes', sum([inmovilizacionDeCuentasValores]) as 'inmovilizacionDeCuentasValores',
   sum([prohibicionSalirSinAutorizacionDelJuez]) as 'prohibicionSalirSinAutorizacionDelJuez', sum([sometimientoCuidadoVigilanciaInstitucion]) as 'sometimientoCuidadoVigilanciaInstitucion', sum([prohibicionConcurrirDeterminadasReunionesLugares]) as 'prohibicionConcurrirDeterminadasReunionesLugares', sum([prohibicionConvivirComunicarseDeterminadasPersonas]) as 'prohibicionConvivirComunicarseDeterminadasPersonas',
   sum([separacionInmediataDelDomicilio]) as 'separacionInmediataDelDomicilio', sum([suspensionTemporalEjercicioDelCargo]) as 'suspensionTemporalEjercicioDelCargo', sum([suspensionTemporalActividadProfesionalLaboral]) as 'suspensionTemporalActividadProfesionalLaboral', sum([colocacionLocalizadoresElectronicos]) as 'colocacionLocalizadoresElectronicos', sum([resguardoPropioDomicilioModalidades]) as 'resguardoPropioDomicilioModalidades',
@@ -21,6 +61,149 @@ function getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad){
   sum([deLasSentenciasDictadas]) as 'deLasSentenciasDictadas', sum([revocacionesFavorablesAlMP]) as 'revocacionesFavorablesAlMP', sum([modificacionesFavorablesAlMP]) as 'modificacionesFavorablesAlMP', sum([confirmacionesFavorablesAlMP]) as 'confirmacionesFavorablesAlMP', sum([porCambioDeclaradosSituacionJuridicaDeclaradaSinMateria]) as 'porCambioDeclaradosSituacionJuridicaDeclaradaSinMateria', sum([FormulaImputacion_Soli]) as 'FormulaImputacion_Soli',
   sum([FormulaImputacion_Otorga]) as 'FormulaImputacion_Otorga', sum([FormulaImputacion_Negadas]) as 'FormulaImputacion_Negadas', sum([LegalDetencion]) as 'LegalDetencion', sum([IlegalDetencion]) as 'IlegalDetencion', sum([Med_CautelresSolicitadas]) as 'Med_CautelresSolicitadas',sum([Med_CautelaresNegadas]) as 'Med_CautelaresNegadas', sum([Med_CautelaresOtorgadas]) as 'Med_CautelaresOtorgadas', sum([recibiOtmp]) as 'recibiOtmp', sum([cesefunciones]) as 'cesefunciones', sum([recibiOtmp]) as 'recibiOtmp' , sum([ordenesSolicitadas]) as 'ordenesSolicitadas', sum([ordenesSolicitadasAprehension]) as 'ordenesSolicitadasAprehension', sum([ordenesSolicitadasComparecencia]) as 'ordenesSolicitadasComparecencia', sum([medidasProteccion]) as 'medidasProteccion', sum([totalVictProt]) as 'totalVictProt', sum([actosInvestigacionControlJudicial]) as 'actosInvestigacionControlJudicial', sum([controlJudicialIntervencionTR]) as 'controlJudicialIntervencionTR', sum([controlJudicialTomaMuestras]) as 'controlJudicialTomaMuestras' , sum([controlJudicialExhumacion]) as 'controlJudicialExhumacion', sum([controlJudicialObDatosReservados]) as 'controlJudicialObDatosReservados', sum([controlJudicialIntervencionCME]) as 'controlJudicialIntervencionCME', sum([controlJudicialProvPrecautoria]) as 'controlJudicialProvPrecautoria', sum([actosInvestigacionSinControlJudicial]) as 'actosInvestigacionSinControlJudicial', sum([sinControlJudicialCadCustodia]) as 'sinControlJudicialCadCustodia', sum([sinControlJudicialInspLugDis]) as 'sinControlJudicialInspLugDis', sum([sinControlJudicialInspInmuebles]) as 'sinControlJudicialInspInmuebles', sum([sinControlJudicialEntrevistasTestigos]) as 'sinControlJudicialEntrevistasTestigos', sum([sinControlJudicialReconocimientoPer]) as 'sinControlJudicialReconocimientoPer', sum([sinControlJudicialSolInfoPericiales]) as 'sinControlJudicialSolInfoPericiales', sum([sinControlJudicialInfInstiSeg]) as 'sinControlJudicialInfInstiSeg', sum([sinControlJudicialexamenFisPersona]) as 'sinControlJudicialexamenFisPersona', sum([resolucionesJuicioOral]) as 'resolucionesJuicioOral', sum([audienciaJuicioOral]) as 'audienciaJuicioOral', sum([audienciaFallo]) as 'audienciaFallo', sum([absolutorio]) as 'absolutorio', sum([audienciaIndiviSancion]) as 'audienciaIndiviSancion', sum([procedimientoEspecial]) as 'procedimientoEspecial', sum([audienciaCondenatorio]) as 'audienciaCondenatorio', sum([mecanismosAceleracion]) as 'mecanismosAceleracion', sum([apelacionesAmparo]) as 'apelacionesAmparo', sum([amparos]) as 'amparos', sum([amparoDirecto]) as 'amparoDirecto', sum([amparoIndirecto]) as 'amparoIndirecto'
    FROM Litigacion WHERE idMes = $mes AND idAnio = $anio AND idUnidad = $idUnidad";
+	}else{
+
+		$query = "SELECT [existenciaAnterior]
+		,[carpetasJudicializadas]
+		,[judicializadasConDetenido]
+		,[judicializadasSinDetenido]
+		,[autoDeVinculacion]
+		,[autoDeNoVinculacion]
+		,[Mixtos]
+		,[imposicionMedidasCautelares]
+		,[prisionPreventivaOficiosa]
+		,[prisionPreventivaJustificada]
+		,[presentacionPeriodicaAnteElJuez]
+		,[exhibicionGarantiaEconomica]
+		,[embargoDeBienes]
+		,[inmovilizacionDeCuentasValores]
+		,[prohibicionSalirSinAutorizacionDelJuez]
+		,[sometimientoCuidadoVigilanciaInstitucion]
+		,[prohibicionConcurrirDeterminadasReunionesLugares]
+		,[prohibicionConvivirComunicarseDeterminadasPersonas]
+		,[separacionInmediataDelDomicilio]
+		,[suspensionTemporalEjercicioDelCargo]
+		,[suspensionTemporalActividadProfesionalLaboral]
+		,[colocacionLocalizadoresElectronicos]
+		,[resguardoPropioDomicilioModalidades]
+		,[sobreseimientosDecretados]
+		,[sobreseimientosPrescripcionAccionPenal]
+		,[SobreseimientosMuerteImputado]
+		,[sobreseimientosMecanismosAlternativos]
+		,[sobreseimientosAcuerdoReparatorio]
+		,[sobreseimientosSuspensionCondicionalProceso]
+		,[sobreseimientosCriterioOportunidad]
+		,[terminacionAnticipada]
+		,[procedimientosAbreviados]
+		,[acumulacion]
+		,[citaciones]
+		,[cateosSolilcitados]
+		,[cateosConcedidos]
+		,[cateosNegados]
+		,[ordenesNegadas]
+		,[ordenesNegadasAprehension]
+		,[ordenesNegadasComparecencia]
+		,[desistimientoDelRecurso]
+		,[desistimientoDelRecursoParterAcusado]
+		,[desistimientoDelRecursoParteDefensor]
+		,[desistimientoDelRecursoMP]
+		,[apelacionesNoAdmitidas]
+		,[sentenciasDictadas]
+		,[sentenciasDictadasRevoca]
+		,[sentenciasDictadasModifica]
+		,[sentenciasDictadasConfirma]
+		,[reposicionProcedimiento]
+		,[totalJudicializadasTramite]
+		,[mandamientosJudicialesGirados]
+		,[MandamientosJudicialesGiradosOrdenesAprehension]
+		,[MandamientosJudicialesGiradosOrdenesComparecencia]
+		,[mandamientosJudicialesCumplidos]
+		,[MandamientosJudicialesCumplidosOrdenesAprehension]
+		,[MandamientosJudicialesCumplidosOrdenesComparecencia]
+		,[totalAudiencias]
+		,[acusacionesPresentadas]
+		,[audienciaIntermediaEscrita]
+		,[audienciaIntermediaOral]
+		,[solucionesAlternas]
+		,[solucionesAlternasSuspensionCondicionalProceso]
+		,[solucionesAlternasAcuerdoReparatorio]
+		,[sentencias]
+		,[sentenciasCondenatorias]
+		,[sentenciasAbsolutorias]
+		,[sentenciasMixtas]
+		,[sentenciasCondenaReparacionDanos]
+		,[sentenciasNoCondenaReparacionDanos]
+		,[incompetencias]
+		,[incompetenciasDecretadas]
+		,[incompetenciasAdmitidas]
+		,[apelacionesContraResolucionJuezControl]
+		,[apelacionesNegarAnticipoPrueba]
+		,[apelacionesNegarAcuerdoReparatorio]
+		,[apelacionesNegarCancelarOrdenAprehension]
+		,[apelacionesNegarOrdenCateo]
+		,[apelacionesProvidenciasPrecautoriasMedidaCautelar]
+		,[apelacionesQuePonganTerminoAlProcedimiento]
+		,[apelacionesAutoQueResuelveVinculacionAProceso]
+		,[apelacionesQueConcedanRevoquenNieguenSuspension]
+		,[apelacionesNegativaAbrirProcedimientoAbreviado]
+		,[apelacionesSetenciaDefinitivaProcedimientoAbreviado]
+		,[apelacionesExcluirMedioPrueba]
+		,[apelacionesContraResolucionesTribunalEnjuiciamiento]
+		,[apelacionesDesistimientoAccionPenal]
+		,[apelacionesSentenciaDefinitiva]
+		,[deLasSentenciasDictadas]
+		,[revocacionesFavorablesAlMP]
+		,[modificacionesFavorablesAlMP]
+		,[confirmacionesFavorablesAlMP]
+		,[porCambioDeclaradosSituacionJuridicaDeclaradaSinMateria]
+		,[FormulaImputacion_Soli]
+		,[FormulaImputacion_Otorga]
+		,[FormulaImputacion_Negadas]
+		,[LegalDetencion]
+		,[IlegalDetencion]
+		,[Med_CautelresSolicitadas]
+		,[Med_CautelaresNegadas]
+		,[Med_CautelaresOtorgadas]
+		,[idMp]
+		,[cambio]
+		,[recibiOtmp]
+		,[cesefunciones]
+		,[ordenesSolicitadas]
+		,[ordenesSolicitadasAprehension]
+		,[ordenesSolicitadasComparecencia]
+		,[medidasProteccion]
+		,[totalVictProt]
+		,[actosInvestigacionControlJudicial]
+		,[controlJudicialIntervencionTR]
+		,[controlJudicialTomaMuestras]
+		,[controlJudicialExhumacion]
+		,[controlJudicialObDatosReservados]
+		,[controlJudicialIntervencionCME]
+		,[controlJudicialProvPrecautoria]
+		,[actosInvestigacionSinControlJudicial]
+		,[sinControlJudicialCadCustodia]
+		,[sinControlJudicialInspLugDis]
+		,[sinControlJudicialInspInmuebles]
+		,[sinControlJudicialEntrevistasTestigos]
+		,[sinControlJudicialReconocimientoPer]
+		,[sinControlJudicialSolInfoPericiales]
+		,[sinControlJudicialInfInstiSeg]
+		,[sinControlJudicialexamenFisPersona]
+		,[resolucionesJuicioOral]
+		,[audienciaJuicioOral]
+		,[audienciaFallo]
+		,[absolutorio]
+		,[audienciaIndiviSancion]
+		,[procedimientoEspecial]
+		,[audienciaCondenatorio]
+		,[mecanismosAceleracion]
+		,[apelacionesAmparo]
+		,[amparos]
+		,[amparoDirecto]
+		,[amparoIndirecto]
+FROM [ESTADISTICAV2].[dbo].[Litigacion] WHERE idMes = $mes AND idAnio = $anio AND idUnidad = $idUnidad AND idMp = $idMp";
+	}
+
 
 
 
@@ -466,7 +649,7 @@ function validarCarpetaCapturadaLitiUnidad($conn, $anioCaptura, $mesCapturar, $i
 
 function validarEstatusShowInfo($estatResolucion){
 
-	if( $estatResolucion == 1 || $estatResolucion == 2 || $estatResolucion == 3 || $estatResolucion == 4 || $estatResolucion == 19 || $estatResolucion == 17 || $estatResolucion == 18 || $estatResolucion == 20  || $estatResolucion == 21 || $estatResolucion== 22 || $estatResolucion == 23  || $estatResolucion == 24 || $estatResolucion == 25 || $estatResolucion == 26 || $estatResolucion == 27 || $estatResolucion == 28 || $estatResolucion == 29  || $estatResolucion == 30 || $estatResolucion == 31 || $estatResolucion == 95 || $estatResolucion == 61 || $estatResolucion == 63 || $estatResolucion == 99 || $estatResolucion == 89 || $estatResolucion == 101 || $estatResolucion == 103 || $estatResolucion == 105 || $estatResolucion == 106 || $estatResolucion == 89 || $estatResolucion == 107 || $estatResolucion == 108 || $estatResolucion == 109 || $estatResolucion == 110 || $estatResolucion == 111 || $estatResolucion == 64 || $estatResolucion == 60 || $estatResolucion == 14 || $estatResolucion == 65  || $estatResolucion == 68 || $estatResolucion == 90 || $estatResolucion == 91 || $estatResolucion == 129 ||  $estatResolucion == 57 || $estatResolucion == 151 || $estatResolucion == 154 || $estatResolucion == 66 || $estatResolucion == 50 || $estatResolucion == 53 | $estatResolucion == 58){
+	if( $estatResolucion == 1 || $estatResolucion == 2 || $estatResolucion == 3 || $estatResolucion == 4 || $estatResolucion == 19 || $estatResolucion == 17 || $estatResolucion == 18 || $estatResolucion == 20  || $estatResolucion == 21 || $estatResolucion== 22 || $estatResolucion == 23  || $estatResolucion == 24 || $estatResolucion == 25 || $estatResolucion == 26 || $estatResolucion == 27 || $estatResolucion == 28 || $estatResolucion == 29  || $estatResolucion == 30 || $estatResolucion == 31 || $estatResolucion == 95 || $estatResolucion == 61 || $estatResolucion == 63 || $estatResolucion == 99 || $estatResolucion == 89 || $estatResolucion == 101 || $estatResolucion == 103 || $estatResolucion == 105 || $estatResolucion == 106 || $estatResolucion == 89 || $estatResolucion == 107 || $estatResolucion == 108 || $estatResolucion == 109 || $estatResolucion == 110 || $estatResolucion == 111 || $estatResolucion == 64 || $estatResolucion == 60 || $estatResolucion == 14 || $estatResolucion == 65  || $estatResolucion == 68 || $estatResolucion == 90 || $estatResolucion == 91 || $estatResolucion == 129 ||  $estatResolucion == 57 || $estatResolucion == 151 || $estatResolucion == 154 || $estatResolucion == 66 || $estatResolucion == 50 || $estatResolucion == 53 | $estatResolucion == 58 || $estatResolucion == 153){
 		return True;
 	}
 	else{

@@ -690,7 +690,7 @@
 										$t3 = $tota;
 
 										$sumTotal = $Cdata[0][3] + $Cdata2[0][3] + $Cdata3[0][3] + $Cdata4[0][3] + $Cdata5[0][3] + $Cdata6[0][3] + $Cdata7[0][3] + $Cdata8[0][3] + $Cdata9[0][3] +
-					            $Cdata10[0][3] + $Cdata11[0][3] + $Cdata12[0][3] + $Cdata13[0][3] + $Cdata14[0][3] + $totd10+ $totd11+ $totd20+ $totd31+ $totd40+ $totd51 +$t1+$t2+$t3;
+					            $Cdata10[0][3] + $Cdata11[0][3] + $Cdata12[0][3] + $Cdata13[0][3] + $Cdata14[0][3] + $totd10+ $totd11+ $totd20+ $totd31+ $totd40+ $totd51;
 
 										?>
 											<td class="<?php echo $quest_class; ?>">

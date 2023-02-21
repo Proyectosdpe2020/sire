@@ -209,6 +209,8 @@ if (isset($_POST["tipo_investigacion"])){ $tipo_investigacion = $_POST["tipo_inv
 										                                   
 										                             DELETE FROM senap.sentencias WHERE idEstatusNucs = '$idEstatusNucs' 
 
+										                             DELETE FROM senap.imputados WHERE idEstatusNucs = '$idEstatusNucs' 
+
 										                          COMMIT
 										                    END TRY
 										                    BEGIN CATCH 
@@ -311,6 +313,24 @@ if (isset($_POST["tipo_investigacion"])){ $tipo_investigacion = $_POST["tipo_inv
 										                      BEGIN TRANSACTION
 										                          SET NOCOUNT ON
 										                                   
+										                             DELETE FROM senap.imputados WHERE idEstatusNucs = '$idEstatusNucs' 
+
+										                          COMMIT
+										                    END TRY
+										                    BEGIN CATCH 
+										                          ROLLBACK TRANSACTION
+										                          RAISERROR('No se realizo la transaccion',16,1)
+										                    END CATCH
+										                    END
+										                  "; 
+		break;
+		case 153:
+			$queryTransaction = "BEGIN                     
+										                    BEGIN TRY 
+										                      BEGIN TRANSACTION
+										                          SET NOCOUNT ON
+										                   
+
 										                             DELETE FROM senap.imputados WHERE idEstatusNucs = '$idEstatusNucs' 
 
 										                          COMMIT

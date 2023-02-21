@@ -7,6 +7,7 @@
 	include("../../funcionesLitSENAP.php");
 
 	if (isset($_POST["imputado_id"])){ $imputado_id = $_POST["imputado_id"]; }
+	if (isset($_POST["sentencias"])){ $sentencias = $_POST["sentencias"]; }
 
 
 $getData = getDataImputados_editar($conn, $imputado_id);
@@ -21,7 +22,7 @@ $sexo = $getData[0][6];
 
 <div class="row">
 	<div class="col-xs-12 col-sm-4  col-md-4 ">
-		<button style="width: 88%;" onclick="actualizar_imputado(<? echo $imputado_id; ?> , <? echo $idEstatusNucs; ?>)" type="button" class="btn btn-primary redondear" >Actualizar</button>
+		<button style="width: 88%;" onclick="actualizar_imputado(<? echo $imputado_id; ?> , <? echo $idEstatusNucs; ?> , '<? echo $sentencias; ?>' )" type="button" class="btn btn-primary redondear" >Actualizar</button>
 	</div>
 </div><br>
 

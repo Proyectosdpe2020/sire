@@ -236,13 +236,13 @@ $mesNom = Mes_Nombre($mesCapturar);
 
 
 
- 
+
 
 					?>
 
 					<button type="button" onclick="enviarDPEvalidatesV2(<? echo $anioCaptura; ?>,<? echo $mesCapturar; ?>,0 ,<? echo $idEnlace; ?>, 1 );" class="btn btn-primary btn-sm redondear btnEnvDPE" <? if ($env == 1) {
-																																																																																																																																																																																															echo "disabled";
-																																																																																																																																																																																														} ?>><span class="glyphicon glyphicon-ok"></span> Enviar a DPE</button>
+																																																					echo "disabled";
+																																																				} ?>><span class="glyphicon glyphicon-ok"></span> Enviar a DPE</button>
 
 
 
@@ -251,26 +251,26 @@ $mesNom = Mes_Nombre($mesCapturar);
 				<!--<div class="col-xs-6 col-sm-4  col-md-1">
 								<label class="transparente">.</label>		
 								<center><button type="button"  onclick="descargar(<? echo $idunienlace; ?>, <? echo $mesCapturar; ?>, <? echo $anioCaptura; ?> , <? echo $idEnlace; ?>);" class="btn btn-success btn-sm redondear btnCapturarTbl" <? if ($env == 1) {
-																																																																																																																																																																																																																										} else {
-																																																																																																																																																																																																																											echo "disabled";
-																																																																																																																																																																																																																										} ?> ><span class="glyphicon glyphicon-cloud-download"></span> Descargar </button></center>
+																																																													} else {
+																																																														echo "disabled";
+																																																													} ?> ><span class="glyphicon glyphicon-cloud-download"></span> Descargar </button></center>
 							</div>-->
 
 				<div class="col-xs-6 col-sm-4  col-md-2">
 					<label class="transparente">.</label>
 					<center><button type="button" data-toggle="modal" href="#myModaSubirArchivoUser" onclick="subirArchivoEnlace(<? echo $idUnidad; ?>, <? echo $mesCapturar; ?>, <? echo $anioCaptura; ?> , <? echo $idEnlace; ?>,1);" class="btn btn-danger btn-sm redondear btnCapturarTbl" <? if ($env == 1) {
-																																																																																																																																																																																																																																																																																	if ($envArch == 1) {
-																																																																																																																																																																																																																																																																																		echo "disabled";
-																																																																																																																																																																																																																																																																																	}
-																																																																																																																																																																																																																																																																																} else {
-																																																																																																																																																																																																																																																																																	echo "disabled";
-																																																																																																																																																																																																																																																																																} ?>><span class="glyphicon glyphicon-cloud-upload"></span> Subir Archivo </button></center>
+																																																																									if ($envArch == 1) {
+																																																																										echo "disabled";
+																																																																									}
+																																																																								} else {
+																																																																									echo "disabled";
+																																																																								} ?>><span class="glyphicon glyphicon-cloud-upload"></span> Subir Archivo </button></center>
 
 				</div>
 
 				<div class="col-xs-6 col-sm-4  col-md-2">
 					<label class="transparente">.</label>
-					<center><button type="button" data-toggle="modal" href="#myModaVistaPrevia"  onclick="getDataVistaPrevia(<? echo $idUnidad; ?>, <? echo $mesCapturar; ?>, <? echo $anioCaptura; ?>, <? echo $idEnlace; ?>);" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span class="glyphicon glyphicon-eye-open"></span> Vista Previa </button></center>
+					<center><button type="button" data-toggle="modal" href="#myModaVistaPrevia" onclick="getDataVistaPrevia(<? echo $idUnidad; ?>, <? echo $mesCapturar; ?>, <? echo $anioCaptura; ?>, <? echo $idEnlace; ?>);" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span class="glyphicon glyphicon-eye-open"></span> Vista Previa </button></center>
 
 				</div>
 
@@ -289,7 +289,7 @@ $mesNom = Mes_Nombre($mesCapturar);
 							<table id="" style="background-color:rgba(255,255,255,0.4);" class="table table-striped ">
 								<thead>
 									<tr class="cabezeraTabla">
-										<th class="col-xs-1 col-sm-1 col-md-1 textCent">Capturado? </th>
+										<th class="col-xs-1 col-sm-1 col-md-1 textCent">Capturado?</th>
 										<th class="col-xs-1 col-sm-1 col-md-1 textCent">No</th>
 										<th class="col-xs-4 col-sm-4 col-md-3 ">Nombre Ministerio Público</th>
 										<th class="col-xs-4 col-sm-4 col-md-4 textCent">Unidad</th>
@@ -361,15 +361,15 @@ $mesNom = Mes_Nombre($mesCapturar);
 												</td>
 
 												<!--<td class="tdRowMain"><center> <button type="button" data-toggle="modal" href="#myModaFormatoEditar"  onclick="cargarMOdalFormatoEditar('<? echo $nomCompleto; ?>',<? echo $idMp; ?>, <? echo $idUnidad; ?>, <? echo $mesCapturar; ?>, <? echo $anioCaptura; ?>);" class="btn btn-warning btn-sm redondear btnCapturarTbl" <? if ($capturado == 1) {
-																																																																																																																																																																																																																																																																																																																																											} else {
-																																																																																																																																																																																																																																																																																																																																												echo "disabled";
-																																																																																																																																																																																																																																																																																																																																											} ?>><span class="glyphicon glyphicon-edit"></span> Editar </button></center></td>-->
+																																																																																												} else {
+																																																																																													echo "disabled";
+																																																																																												} ?>><span class="glyphicon glyphicon-edit"></span> Editar </button></center></td>-->
 											<? } ?>
 
 											<!--<td class="tdRowMain"><center><button type="button" data-toggle="modal" href="#myModaFormatoVer"  onclick="cargarMOdalFormatoVer('<? echo $nomCompleto; ?>',<? echo $idMp; ?>, <? echo $idUnidad; ?>, <? echo $mesCapturar; ?>, <? echo $anioCaptura; ?>);" class="btn btn-info btn-sm redondear btnCapturarTbl" <? if ($captu1 == 1) {
-																																																																																																																																																																																																																																																																																																																																} else {
-																																																																																																																																																																																																																																																																																																																																	echo "disabled";
-																																																																																																																																																																																																																																																																																																																																} ?>><span class="glyphicon glyphicon-search"></span> Ver Formato </button></center></td>-->
+																																																																																									} else {
+																																																																																										echo "disabled";
+																																																																																									} ?>><span class="glyphicon glyphicon-search"></span> Ver Formato </button></center></td>-->
 
 
 										</tr>

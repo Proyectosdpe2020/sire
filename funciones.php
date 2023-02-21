@@ -1946,7 +1946,7 @@ $row_count = sqlsrv_num_rows( $stmt );
 function getExistenciaAnteriorV2($conn, $mesAnterior, $aniocaptura, $idUnidad, $idMp){
 
 	$query = "  SELECT tramitee FROM carpetasDatos WHERE idMes = $mesAnterior AND idAnio = $aniocaptura AND idUnidad = $idUnidad AND idMp =  $idMp ";
-		
+	
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
@@ -1961,7 +1961,7 @@ function getExistenciaAnteriorV2($conn, $mesAnterior, $aniocaptura, $idUnidad, $
 function getExistenciaAnterior($conn, $mesAnterior, $aniocaptura, $idUnidad, $idMp){
 
 	$query = "SELECT tramite FROM Carpetas WHERE idMes = $mesAnterior AND idAnio = $aniocaptura AND idUnidad = $idUnidad AND idMp = $idMp ";
-	
+	//echo "<br><br>".$query;
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
@@ -2168,6 +2168,26 @@ FROM mp INNER JOIN mpUnidad mpu ON mpu.idMp = mp.idMp INNER JOIN CatUnidad cu ON
 		$indice++;
 	}
 	if(isset($arreglo)){return $arreglo;}
+
+}
+
+function getMpsCapturedLitigacion($conn, $idunidad, $anio, $mes){
+
+$query = "SELECT  distinct Litigacion.idMp, mp.nombre+' '+mp.paterno+' '+mp.materno as 'ministerioPublico'
+FROM [ESTADISTICAV2].[dbo].[Litigacion] 
+INNER JOIN mp ON mp.idMp = Litigacion.idMp
+WHERE Litigacion.idUnidad = $idunidad AND idAnio = $anio AND idMes = $mes";
+$indice = 0;
+
+$stmt = sqlsrv_query($conn, $query);
+while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+{
+
+	$arreglo[$indice][0]=$row['idMp'];
+	$arreglo[$indice][1]=$row['ministerioPublico'];
+	$indice++;
+}
+if(isset($arreglo)){return $arreglo;}
 
 }
 
@@ -2751,6 +2771,7 @@ function getDataMedidasProteccionMP($conn, $idMp, $mes, $anio, $idUnidad){
 function getIdUnidEnlaceMPunidad($conn, $idEnlace){
 
 	$query = "    SELECT idUnidad FROM mpUnidad WHERE idEnlace = $idEnlace AND idFormato = 4 ";
+
 
 $indice = 0;
 	$stmt = sqlsrv_query($conn, $query);

@@ -637,6 +637,7 @@ function saveQuest3(quest, per, anio, idUnidad, idEnlace) {
 	p7m3 = document.getElementById("p7m3").value;
 
 	totalValidateQuest4 = document.getElementById("totalValidateQuest4").value;
+	console.log(totalValidateQuest4);
 
 	var validateQuest = false;
 	var sumQuest3 = parseInt(p5m1) + parseInt(p5m2) + parseInt(p5m3) + parseInt(p6m1) + parseInt(p6m2) + parseInt(p6m3) + parseInt(p7m1) + parseInt(p7m2) + parseInt(p7m3);

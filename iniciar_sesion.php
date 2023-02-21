@@ -45,7 +45,7 @@
 		$band=true;
 	}
 	if($_SESSION['idArchivo'] == 14){ $nameFormat = "Forestales";}
-	if($_SESSION['idArchivo'] == 13){ $nameFormat = "AdmonPolicias";}
+	if($_SESSION['idArchivo'] == 13){ $nameFormat = "estadoDeFuerza";}
 	if($_SESSION['idArchivo'] == 12){ $nameFormat = "PoliciaConsulta";}
 	if($_SESSION['idArchivo'] == 10){ $nameFormat = "PoliciaAdmin";}
 	if($_SESSION['idArchivo'] == 9){ $nameFormat = "Policia";}
@@ -57,6 +57,7 @@
 	if($_SESSION['idArchivo'] == 17){ $nameFormat = "ControlProcesos";}
 	if($_SESSION['idArchivo'] == 16){ $nameFormat = "medidasDeProteccion";}
 	if($_SESSION['idArchivo'] == 18){ $nameFormat = "mandamientosJudiciales";}
+	if($_SESSION['idArchivo'] == 21){ $nameFormat = "procesosPenales";}
 
 	echo $_SESSION['idArchivo'];
 	if($band)
