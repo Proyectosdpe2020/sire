@@ -755,6 +755,89 @@ if($tipo_investigacion == 1){
 		<div class="col-xs-12 col-sm-12  col-md-12">
 		<!-- TABLA DELITOS POR LA CUAL SE DIO SENTENCIA CONDENATORIA-->
 		<?if($tipo_investigacion == 1){ ?>
+
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12">
+					<h4>Ingrese los datos generales del imputado</strong></h4>
+				</div>
+			</div><br>
+
+		<?
+		/*
+		$getData = getDataImputados($conn, $idEstatusNucs);
+			 	if(sizeof($getData) > 0){ 
+			 		$opcInsert = 1; 
+			 	}else{
+			 		$opcInsert = 0; 
+			 	}*/
+		?>
+		<div id="contDataImputados">
+			<div class="row">
+				<div class="col-xs-12 col-sm-4  col-md-4">
+					<label for="nombre_imputado">Nombre: </label>
+					<input id="nombre_imputado" type="text" value="" name="nombre_imputado" placeholder="NOMBRE" maxlength="40" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="return validaInput_litigacion(event, 'varchar')" class="fechas form-control gehit"  />
+				</div>
+				<div class="col-xs-12 col-sm-4  col-md-4">
+					<label for="apellido_paterno">Apellido Paterno:  </label>
+					<input id="apellido_paterno" type="text" value="" name="apellido_paterno" placeholder="APELLIDO PATERNO" maxlength="50" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="return validaInput_litigacion(event, 'varchar')" class="fechas form-control gehit"  />
+				</div>
+				<div class="col-xs-12 col-sm-4  col-md-4">
+					<label for="apellido_materno">Apellido Materno: </label>
+					<input id="apellido_materno" type="text" value="" name="apellido_materno" placeholder="APELLIDO MATERNO" maxlength="50" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="return validaInput_litigacion(event, 'varchar')" class="fechas form-control gehit"  />
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12  col-md-3">
+					<label for="edad">Edad:</label>
+					<input type="number" class="form-control" value="" id="edad" placeholder="ESPECIFICA LA EDAD" >
+				</div>
+				<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
+					<label for="id_sexo">Sexo</label><br>
+						<input type="radio" id="id_sexo" name="id_sexo"  value="M"  >
+						<label for="cv_sexo" >Masculino</label>&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" id="id_sexo" name="id_sexo"  value="F"  >
+						<label for="cv_sexo" >Femenino</label>
+					</div>
+			</div>
+		</div>
+			<hr>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12  col-md-12">
+					<table class="table table-bordered">
+						<thead>
+							<tr class="cabeceraTablaVictimas">
+								<th>#</th>
+								<th>Nombre</th>
+								<th>Apellido Paterno</th>
+								<th>Apellido Materno</th>
+								<th>Edad</th>
+								<th>Sexo</th>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+				<?$getData = getDataImputados($conn, $idEstatusNucs);
+				  $total_imputados = sizeof($getData);
+			 	if(sizeof($getData) > 0){ ?>
+						<tbody>
+						<?for ($h=0; $h < sizeof($getData) ; $h++) { ?>
+							<tr>
+								<th><center><?echo $h+1; ?></center></th>
+								<th><center><?echo $getData[$h][2]; ?></center></th>
+								<th><center><?echo $getData[$h][3]; ?></center></th>
+								<th><center><?echo $getData[$h][4]; ?></center></th>
+								<th><center><?echo $getData[$h][5]; ?></center></th>
+								<th><center><?echo $getData[$h][6]; ?></center></th>
+								<td><center><center><img src="img/editarMandamiento2.png" data-toggle="modal" href="#mandamientos"  onclick="edita_imputado(<? echo $getData[$h][0]; ?> , 'SENTENCIAS' )"><img src="img/eliminar.png"  onclick="elimiar_imputado(<?echo $idEstatusNucs ?> , <? echo $getData[$h][0]; ?> , <? echo $total_imputados; ?>);"></center></td>
+															</tr>
+							</tr>
+							<? } ?>
+						</tbody>
+						<? } ?>
+					</table>
+				</div>
+			</div>
+			<br><br><br><br>
+
 			<div class="row">
 				<div class="col-xs-12 col-sm-12  col-md-12">
 					<label for="">Delito por el cual se dio la sentencia: </label>

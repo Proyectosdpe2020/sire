@@ -678,6 +678,7 @@ function get_data_medidas_dia($connMedidas, $numeroDia, $diames, $anio, $fiscali
 function getDataAnio(){
 	$arreglo[0][0]=2021;
 	$arreglo[1][0]=2022;
+	$arreglo[2][0]=2023;
 	return $arreglo;
 }
 

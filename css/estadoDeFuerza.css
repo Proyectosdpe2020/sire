@@ -1,0 +1,130 @@
+.padre{
+  counter-reset: my-sec-counter;
+}
+
+.delOpc::before {
+  counter-increment: my-sec-counter;
+  content: counter(my-sec-counter);
+}
+
+#tableEstadoFuerza{
+  counter-reset: contadorMando;
+}
+
+.numMando::before {
+  counter-increment: contadorMando;
+  content: counter(contadorMando);
+}
+
+.tablaEstadoFuerza th{
+	background: rgba(21,47,74,.9);
+	color: white;
+}
+
+.tablaEstadoFuerza tr:hover{
+  background: #dff0d8;
+}
+
+#imgMando{
+  width: 200px;
+  height: 200px;
+  margin-top: 25px;
+  border-radius: 5px;
+}
+
+.centerUploadImg{
+  display: flex;
+  justify-content: center;	
+}
+
+.btn-file{
+  position: relative;
+  overflow: hidden;
+  background: #337ab7;
+  color: white;
+  height: 40px;
+ }
+
+.btn-file:hover {
+  background: #5cb85c;
+  color: white;
+ }
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.textCent{ text-align: center; }
+
+/* CHECKBOX COMISIONADO*/
+.chekCom input[type="checkbox"] {
+  display: none;
+}
+.chekCom input[type="checkbox"] + label span {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: -1px 4px 0 0;
+  vertical-align: middle;
+  background: url(../img/iconosPuestaDispo/checkbox-uncheck.png);
+  background-size: cover;
+  cursor: pointer;
+}
+.chekCom input[type="checkbox"]:checked + label span {
+  background: url(../img/iconosPuestaDispo/checkbox-check.png);
+  background-size: cover;
+}
+/* CHECKBOX COMISIONADO*/
+
+progress::-webkit-progress-bar { 
+ background-color: #CFCFCF; 
+ border-radius: 9px;
+}
+progress::-webkit-progress-value { 
+ background: #05B705; 
+ border-radius: 9px;
+}
+.btnModal{
+  margin-bottom: 5px;
+}
+
+.cabeceraConsulta{
+  background: rgba(21,47,74,.9);
+  color: white;
+}
+/*
+#contentConsulta tr:hover{
+  background: #FFEC33;
+}
+*/
+
+button.dt-button,
+div.dt-button,
+a.dt-button {
+  width: 90px;
+  margin-bottom: 15px;
+  background: rgba(21,47,74,.9);
+  color: white;
+}
+
+.reporte{
+  background: rgba(21,47,74,.9);
+  color: white;
+}
+
+.reporte:hover{
+  background: #068525;
+  color: white;
+}

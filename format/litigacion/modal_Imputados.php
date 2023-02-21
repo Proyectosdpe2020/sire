@@ -32,7 +32,7 @@
 <div class="modal-body ">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12">
-			<h4>Ingrese datos generales de los imputados del NUC: <strong><? echo $nuc; ?></strong></h4>
+			<h4>Ingrese los datos generales del imputado del NUC: <strong><? echo $nuc; ?></strong></h4>
 		</div>
 	</div><br>
 
@@ -117,7 +117,7 @@ $getData = getDataImputados($conn, $idEstatusNucs);
 		<div class="col-xs-12 col-sm-6  col-md-6 ">
 			<?if(	$opcInsert == 0 ){ ?>
 			<button style="width: 88%;" onclick="sendDataFormImputados(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> ,  <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
-			<?}elseif(	$opcInsert == 1 ){?>
+			<?}elseif(	$opcInsert == 1 && $estatus != 153){?>
 			<button style="width: 88%;" onclick="insertImputados_nuevo_db(<? echo $idEstatusNucs; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Agregar nuevo imputado</button>
 			<? } ?>
 		</div>

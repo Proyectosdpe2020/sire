@@ -317,7 +317,7 @@ if(sizeof($get_data_inculpado) > 0 ){
 				</div>
 			</div><br>
 			<div class="row">
-				<?if($idEnlace == 353 ){ ?>
+				<?if($idEnlace == 3530 ){ ?>
 				<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg">
 					<label for="TIPO_INVESTIGACION"><span class="glyphicon glyphicon-book"></span> Tipo de investigación * :</label><br>
 					<select class="form-control" id="TIPO_INVESTIGACION" aria-describedby="sizing-addon1" id="tipo_investigacion" onchange="reloadTipoInvestigacion()">

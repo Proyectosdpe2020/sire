@@ -25,6 +25,15 @@ if (isset($_POST['tipoSentencia'])){ $tipoSentencia = $_POST['tipoSentencia']; }
  if (isset($_POST['tipo_investigacion'])){ $tipo_investigacion = $_POST['tipo_investigacion']; }  
  //if (isset($_POST['idEstatusAveriguacion'])){ $idEstatusAveriguacion = $_POST['idEstatusAveriguacion']; }
 
+  //DATA IMPUTADO
+ if (isset($_POST['nombre_imputado'])){ $nombre_imputado = $_POST['nombre_imputado']; }   
+if (isset($_POST['apellido_paterno'])){ $apellido_paterno = $_POST['apellido_paterno']; } 
+if (isset($_POST['apellido_materno'])){ $apellido_materno = $_POST['apellido_materno']; } 
+if (isset($_POST['edad'])){ $edad = $_POST['edad']; }   
+if (isset($_POST['id_sexo'])){ $id_sexo = $_POST['id_sexo']; } 
+if (isset($_POST['imputado_id'])){ $imputado_id = $_POST['imputado_id']; } 
+ //DATA IMPUTADO
+
 
 
 if (isset($_POST['opcInsert'])){ $opcInsert = $_POST['opcInsert']; } 
@@ -41,6 +50,9 @@ if($tipo_investigacion != 2){
 
                                           INSERT INTO senap.sentencias (idEstatusNucs, ResolucionID, estatus, idTipoSentencia, idModalidadEstadistica, reclasificacion) 
                                           VALUES('$idEstatusNucs', '0', $estatus,  $tipoSentencia, $idCatModalidadEst, $reclasificacion)
+
+                                          INSERT INTO senap.imputados (idEstatusNucs, nombre, apellido_paterno, apellido_materno, edad, sexo) 
+                                        VALUES('$idEstatusNucs', '$nombre_imputado' , '$apellido_paterno' , '$apellido_materno' , $edad, '$id_sexo')
                                                     
                                         COMMIT
                                 END TRY
@@ -59,6 +71,9 @@ if($tipo_investigacion != 2){
 
                                           INSERT INTO senap.sentencias (idEstatusNucs, ResolucionID, estatus, fechaDictoSentencia, idTipoSentencia, aniosPrision, sentenciaEncuentraFirme, sentDerivaProcAbrv, fechaDictoProcAbrv, idModalidadEstadistica, reclasificacion) 
                                           VALUES('$idEstatusNucs', '0', $estatus, '$fechaDictoSentencia',  $tipoSentencia, $aniosPrision, $sentenciaFirme, $sentDerivaProcAbrv, '$fechaDictoProcAbrv', $idCatModalidadEst, $reclasificacion)
+
+                                          INSERT INTO senap.imputados (idEstatusNucs, nombre, apellido_paterno, apellido_materno, edad, sexo) 
+                                        VALUES('$idEstatusNucs', '$nombre_imputado' , '$apellido_paterno' , '$apellido_materno' , $edad, '$id_sexo')
                                                     
                                         COMMIT
                                 END TRY

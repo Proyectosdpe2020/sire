@@ -209,7 +209,7 @@ WHERE pd.diaSemana = $numeroDia AND pd.anio = $anio AND pd.diaMes = $diames AND 
 }else{
   
  //Consulta para usuarios regionales Y de Homicidios
-	if($idenlace == 192 || $idenlace == 193 || $idenlace == 197 || $idenlace == 198 || $idenlace == 199 || $idenlace == 200 || $idenlace == 201 	|| $idenlace == 202 || $idenlace == 203 || $idenlace == 266 || $idenlace == 233 || $idenlace == 225 || $idenlace == 311 || $idenlace == 335 || $idenlace == 319 || $idenlace == 314 || $idenlace == 313 || $idenlace == 310 || $idenlace == 317){
+	if($idenlace == 192 || $idenlace == 193 || $idenlace == 197 || $idenlace == 198 || $idenlace == 199 || $idenlace == 200 || $idenlace == 201 	|| $idenlace == 202 || $idenlace == 203 || $idenlace == 266 || $idenlace == 233 || $idenlace == 225 || $idenlace == 311 || $idenlace == 335 || $idenlace == 319 || $idenlace == 314 || $idenlace == 313 || $idenlace == 310 || $idenlace == 317 || $idenlace == 322){
    
 			$valoresEnlaceConsulta ="";
 			$arrFiscEnlaceConsulta = getFiscaliasEnlaceConsulta($conn, $idenlace); 
@@ -478,6 +478,9 @@ function get_data_trabajoCampo_puesta($conn, $idPuestaDisposicion , $idTrabajoCa
 			 CASE WHEN pueDisposi.TrabajoDeCampo.recPersonas IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.recPersonas  END as recPersonas,
 			 CASE WHEN pueDisposi.TrabajoDeCampo.recObjetos IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.recObjetos END as recObjetos,
 			 CASE WHEN pueDisposi.TrabajoDeCampo.recFotografias IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.recFotografias END as recFotografias,
+			 CASE WHEN pueDisposi.TrabajoDeCampo.cadena_custodia IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.cadena_custodia END as cadena_custodia,
+			 CASE WHEN pueDisposi.TrabajoDeCampo.traslados IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.traslados END as traslados,
+			 CASE WHEN pueDisposi.TrabajoDeCampo.actos_vigentes IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.actos_vigentes END as actos_vigentes,
 			  pueDisposi.TrabajoDeCampo.observaciones 
 			  FROM pueDisposi.TrabajoDeCampo WHERE  pueDisposi.TrabajoDeCampo.idPueDisposicion = $idPuestaDisposicion ";
 		}else{
@@ -487,6 +490,9 @@ function get_data_trabajoCampo_puesta($conn, $idPuestaDisposicion , $idTrabajoCa
 			 CASE WHEN pueDisposi.TrabajoDeCampo.recPersonas IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.recPersonas END as recPersonas,
 			 CASE WHEN pueDisposi.TrabajoDeCampo.recObjetos IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.recObjetos END as recObjetos,
 			 CASE WHEN pueDisposi.TrabajoDeCampo.recFotografias IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.recFotografias END as recFotografias,
+			 CASE WHEN pueDisposi.TrabajoDeCampo.cadena_custodia IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.cadena_custodia END as cadena_custodia,
+			 CASE WHEN pueDisposi.TrabajoDeCampo.traslados IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.traslados END as traslados,
+			 CASE WHEN pueDisposi.TrabajoDeCampo.actos_vigentes IS NULL THEN 0 ELSE pueDisposi.TrabajoDeCampo.actos_vigentes END as actos_vigentes,
 			 pueDisposi.TrabajoDeCampo.observaciones 
 			 FROM pueDisposi.TrabajoDeCampo WHERE  pueDisposi.TrabajoDeCampo.idTrabajoCampo = $idTrabajoCampo ";
 		}
@@ -509,6 +515,9 @@ function get_data_trabajoCampo_puesta($conn, $idPuestaDisposicion , $idTrabajoCa
 		$arreglo[$indice][9]=$row['recPersonas'];
 		$arreglo[$indice][10]=$row['recObjetos'];
 		$arreglo[$indice][11]=$row['recFotografias'];
+		$arreglo[$indice][12]=$row['cadena_custodia'];
+		$arreglo[$indice][13]=$row['traslados'];
+		$arreglo[$indice][14]=$row['actos_vigentes'];
 		$indice++;
 	}
 
@@ -1306,6 +1315,7 @@ function getDataAnio(){
 	$arreglo[0][0]=2020;
 	$arreglo[1][0]=2021;
 	$arreglo[2][0]=2022;
+	$arreglo[3][0]=2023;
 	return $arreglo;
 }
 

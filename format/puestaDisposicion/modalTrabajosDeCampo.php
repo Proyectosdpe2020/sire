@@ -35,6 +35,9 @@
 		    $recPersonas = $arreglo[0][9];
 		    $recObjetos = $arreglo[0][10];
 		    $recFotografias = $arreglo[0][11];
+		    $cadena_custodia = $arreglo[0][12];
+		    $traslados = $arreglo[0][13];
+		    $actos_vigentes = $arreglo[0][14];
 		 }else{ 
 		 	//Si $idTrabajoCampo viene con valor 0 no es actualizacion y entra aqui
 		 	$a = 0;
@@ -142,6 +145,24 @@
 																								<input value="<?php if($a == 1){ echo  $recFotografias; } ?>" type="number" class="form-control" id="recFotografias" name="recFotografias">
 																					</div>
 																			 </div>
+																			 <div class="form-row">
+																						<div class="form-group col-md-12">
+																								<label for="cadena_custodia">Cadena de custodia:</label>	
+																								<input value="<?php if($a == 1){ echo  $cadena_custodia; } ?>" type="number" class="form-control" id="cadena_custodia" name="cadena_custodia">
+																					</div>
+																			 </div>
+																			 <div class="form-row">
+																						<div class="form-group col-md-12">
+																								<label for="traslados">Traslados:</label>	
+																								<input value="<?php if($a == 1){ echo  $traslados; } ?>" type="number" class="form-control" id="traslados" name="traslados">
+																					</div>
+																			 </div>
+																			 <div class="form-row">
+																						<div class="form-group col-md-12">
+																								<label for="actos_vigentes">Actos vigentes:</label>	
+																								<input value="<?php if($a == 1){ echo  $actos_vigentes; } ?>" type="number" class="form-control" id="actos_vigentes" name="actos_vigentes">
+																					</div>
+																			 </div>
 																			</div>
 																	</div> 
 																
@@ -152,7 +173,7 @@
 																				<div class="form-row">
 																					<div class="form-group col-md-12">
 																								<label for="textObservacionesTrabCampo">Observaciones:</label>	
-																								<textarea id="textObservacionesTrabCampo" style="resize: none; height: 20vh; " maxlength="500" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras_numeros')" class="form-control rounded-0" 
+																								<textarea id="textObservacionesTrabCampo" style="resize: none; height: 20vh; " maxlength="3500" onkeypress="return validaInput_puestaDispo(event, 'varchar_letras_numeros')" class="form-control rounded-0" 
 																																		name="textObservacionesTrabCampo" rows="3"><?php if($a == 1){ echo  $observaciones; } ?></textarea>
 																					</div>
 																				</div>

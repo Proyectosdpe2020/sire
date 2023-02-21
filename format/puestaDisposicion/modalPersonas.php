@@ -266,6 +266,9 @@
 																	       	<option style="color: black; font-weight: bold;" value="6" <?php if($a == 1 && $invFlag == 6){ ?> selected <? }?>>COMPARECENCIA</option>
 																	       	<option style="color: black; font-weight: bold;" value="7" <?php if($a == 1 && $invFlag == 7){ ?> selected <? }?>>ARRESTO</option>
 																	       	<option style="color: black; font-weight: bold;" value="8" <?php if($a == 1 && $invFlag == 8){ ?> selected <? }?>>COLABORACIÓN</option>
+																	       		<option style="color: black; font-weight: bold;" value="9" <?php if($a == 1 && $invFlag == 9){ ?> selected <? }?>>PERSONA ASEGURADA</option>
+																	       			<option style="color: black; font-weight: bold;" value="10" <?php if($a == 1 && $invFlag == 10){ ?> selected <? }?>>PERSONA LOCALIZADA CON VIDA</option>
+																	       				<option style="color: black; font-weight: bold;" value="11" <?php if($a == 1 && $invFlag == 11){ ?> selected <? }?>>PERSONA LOCALIZADA SIN VIDA</option>
 																								</select>
 																	    </div>
 																	    

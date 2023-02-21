@@ -95,7 +95,7 @@ if($datalit){  $a = 1;  }else{ 	$a = 0;  }
 											<span onclick="sendDataModalLitigacion('cdete',1,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)"><div id="checCdeten"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div></span>
 										</div>
 									</div>
-									<div class="col-xs-6">
+									<div class="col-xs-6"> 
 										<label class="colorLetras" for="inputlg">Sin Detenido :</label>
 										<div class="iconiput">
 											<input type="number" placeholder="cantidad" value="<? if($a == 1 ){ echo  $datalit[0][3]; } ?>" class="first" onblur="sumJudicialized(event)" id="sdete"/>

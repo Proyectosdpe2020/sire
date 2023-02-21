@@ -93,7 +93,7 @@
 	$objPHPExcel->getActiveSheet()->SetCellValue("F9", $anio);
 
 
-     $data = getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad);
+     $data = getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad, 0);
 
 
 	$objPHPExcel->getActiveSheet()->SetCellValue("D12", $data[0][0]); //Existencia anterior

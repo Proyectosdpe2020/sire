@@ -118,11 +118,11 @@
  				<input class="form-control gehit"  id="nucPuestaDisposi" maxlength="13" oninput="validateNuc(this)"  type="number" value="<? if($a == 1){ echo $nuc; } ?>" <? if($b == 0){ echo "readonly"; } ?>>
  			</div>
  			<!--CONDICIONAL PARA HABILITAR A DETERMINADO ENLACE -->
- 			<?if($idEnlace == 232 || $idEnlace == 95 || $idEnlace == 279 || $idEnlace == 108){ ?>
+ 			<?if($idEnlace == 433 || $idEnlace == 124 || $idEnlace == 95 || $idEnlace == 108 || $idEnlace == 127 ){ ?>
  				<div class="col-xs-12 col-sm-12  col-md-2">
 	 				<label for="heard">Fecha Evento :</label><span class="aste"> (Requerido)</span>
 	 				<div >
-	 					<input id="fechaevento" type="datetime-local" value="<? if($a == 1){  echo 	$fechaev=str_ireplace(' ','T',$fechaev); } ?>" name="fechaevento" class="fechas form-control gehit" min="2022-06-01T00:00:00" max="<?echo $hoy; ?>T23:59:59" onchange="checkDateInforme('<?echo $fecha; ?>');" <? if($b == 0){ echo "readonly"; } ?> />	
+	 					<input id="fechaevento" type="datetime-local" value="<? if($a == 1){  echo 	$fechaev=str_ireplace(' ','T',$fechaev); } ?>" name="fechaevento" class="fechas form-control gehit" min="2022-01-01T00:00:00" max="<?echo $hoy; ?>T23:59:59" onchange="checkDateInforme('<?echo $fecha; ?>');" <? if($b == 0){ echo "readonly"; } ?> />	
 	 				</div>
  			 </div>
  			<? }else{ ?>
@@ -791,6 +791,9 @@
 																																																						      <th scope="col"><center>Reconocimiento en fila de persona</center></th>
 																																																						      <th scope="col"><center>Reconocimiento de objetos</center></th>
 																																																						      <th scope="col"><center>Reconocimiento de fotografías</center></th>
+																																																						      <th scope="col"><center>Cadena de custodia</center></th>
+																																																						      <th scope="col"><center>Traslados</center></th>
+																																																						      <th scope="col"><center>Actos vigentes</center></th>
 																																																						      <th scope="col"><center>Observaciones</center></th>
 
 																																																						         <? if($b == 1){ ?>
@@ -815,6 +818,9 @@
 																																																							<td> <center><? echo $dataPuestaDIne[$h][9]; ?></center> </td>
 																																																							<td> <center><? echo $dataPuestaDIne[$h][10]; ?></center> </td>
 																																																							<td> <center><? echo $dataPuestaDIne[$h][11]; ?></center> </td>
+																																																							<td> <center><? echo $dataPuestaDIne[$h][12]; ?></center> </td>
+																																																							<td> <center><? echo $dataPuestaDIne[$h][13]; ?></center> </td>
+																																																							<td> <center><? echo $dataPuestaDIne[$h][14]; ?></center> </td>
 																																																							<td> <center><? echo $dataPuestaDIne[$h][4]; ?></center> </td>
 
 																																																									<? if($b == 1){ ?>

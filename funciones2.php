@@ -46,7 +46,10 @@ function getUnidadesFiscaliasLiti($conn, $idFiscalia){
 function dataUnidadEnlaceFormat2($conn, $idEnlace){
 
 		$query = " SELECT distinct usuario.idEnlace,[areaNombre], e.idUnidad, cu.nUnidad ,f.idFiscalia, usuario.idTipoArchivo
-FROM [ESTADISTICAV2].[dbo].[usuario] INNER JOIN enlace e ON e.idEnlace = usuario.idEnlace INNER JOIN CatFiscalia f ON f.idFiscalia = e.idFiscalia INNER JOIN CatUnidad cu ON cu.idUnidad = e.idUnidad 
+FROM [ESTADISTICAV2].[dbo].[usuario] 
+INNER JOIN enlace e ON e.idEnlace = usuario.idEnlace 
+INNER JOIN CatFiscalia f ON f.idFiscalia = e.idFiscalia 
+INNER JOIN CatUnidad cu ON cu.idUnidad = e.idUnidad 
 WHERE usuario.idEnlace = $idEnlace AND usuario.estatus = 'VI' AND idUsuario NOT IN(206,215,230) ORDER BY  areaNombre,idFiscalia  ";
 
 
@@ -129,19 +132,38 @@ function getDataMpsSearch($conn, $names, $paterns, $materns){
 		if(isset($arreglo)){return $arreglo;}
 }
 
+function getUnidadEnlaceName($conn, $idEnlace){
+		$query = "SELECT enlace.idUnidad, u.nUnidad
+	From enlace 
+	INNER JOIN CatUnidad u ON u.idUnidad = enlace.idUnidad
+	WHERE idEnlace = $idEnlace";
+		$indice = 0;
+		$stmt = sqlsrv_query($conn, $query);
+		while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+		{
+			$arreglo[$indice][0]=$row['idUnidad'];
+			$arreglo[$indice][1]=$row['nUnidad'];
+			$indice++;
+		}
+		if(isset($arreglo)){return $arreglo;}
+}
+
+
 
 function getFormatsFromEnlacs($conn, $idEnlace){
-		$query = "SELECT idEnlace, idFormtato FROM [ESTADISTICAV2].[dbo].[enlaceFormato] WHERE idEnlace IN($idEnlace) AND idFormtato IN(1,4) ORDER BY idEnlace";
+		$query = "SELECT idEnlace, idFormtato,idEnlaceLiti FROM [ESTADISTICAV2].[dbo].[enlaceFormato] WHERE idEnlace IN($idEnlace) AND idFormtato IN(1,4) ORDER BY idEnlace";
 		$indice = 0;
 		$stmt = sqlsrv_query($conn, $query);
 		while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
 		{
 			$arreglo[$indice][0]=$row['idEnlace'];
 			$arreglo[$indice][1]=$row['idFormtato'];
+			$arreglo[$indice][2]=$row['idEnlaceLiti'];
 			$indice++;
 		}
 		if(isset($arreglo)){return $arreglo;}
 }
+
 
 
 function getInfoEnlacesCarpetas($conn, $formato){

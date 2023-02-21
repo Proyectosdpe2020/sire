@@ -77,7 +77,7 @@ switch ($format) {
 						<select id="anioHistorique" name="selMes" onchange="getDataHistoricaBD(<? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" tabindex="6" class="form-control redondear selectTranparent" required>
 
 							<?
-							$arrayANios = array(2020,2021,2022);
+							$arrayANios = array(2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030);
 
 							for ($p=0; $p < sizeof($arrayANios) ; $p++) { 
 

@@ -45,7 +45,7 @@ $headers = array(
     'Denuncias / Querellas / Otros Requisitos Equivalentes',
     'Número de Carpetas de Investigación iniciadas',
     'Víctimas u Ofendidos',
-    'Número de Carpetas Investigacióniniciadas',
+    'Número de Carpetas Investigación iniciadas',
     'Órdenes de Aprehensión o Detención de CII en '.$year,
     'Detenidos de CII en '.$year,
     'Estatus de los Procedimientos Derivados de las CII en '.$year,
