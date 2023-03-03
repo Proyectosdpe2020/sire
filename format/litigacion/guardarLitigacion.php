@@ -160,6 +160,19 @@
        if (isset($_POST["amparoDirecto"])){ $amparoDirecto = $_POST["amparoDirecto"]; }
        if (isset($_POST["amparoIndirecto"])){ $amparoIndirecto = $_POST["amparoIndirecto"]; }
 
+       if (isset($_POST["SDuno"])){ $SDuno = $_POST["SDuno"]; }
+       if (isset($_POST["SDdos"])){ $SDdos = $_POST["SDdos"]; }
+       if (isset($_POST["SDtres"])){ $SDtres = $_POST["SDtres"]; }
+       if (isset($_POST["SDcuatro"])){ $SDcuatro = $_POST["SDcuatro"]; }
+       if (isset($_POST["SDcinco"])){ $SDcinco = $_POST["SDcinco"]; }
+       if (isset($_POST["SDseis"])){ $SDseis = $_POST["SDseis"]; }
+       if (isset($_POST["SDsiete"])){ $SDsiete = $_POST["SDsiete"]; }
+       if (isset($_POST["SDocho"])){ $SDocho = $_POST["SDocho"]; }
+       if (isset($_POST["SDnueve"])){ $SDnueve = $_POST["SDnueve"]; }
+       if (isset($_POST["SDdiez"])){ $SDdiez = $_POST["SDdiez"]; }
+
+
+
   ////// HACER CONSULTA PARA SABER SI YA EXISTE ////////  
 
       $query = "SELECT idLitigacion, idMes, idAnio, fecha, idMp  FROM Litigacion WHERE idMes = $mes AND idAnio = $anio AND idFiscalia = $idFiscalia AND idMp = $idMp AND idUnidad = $idUnidad";
@@ -195,7 +208,8 @@
                              apelacionesQueConcedanRevoquenNieguenSuspension = $ARJrnscp, apelacionesNegativaAbrirProcedimientoAbreviado = $ARJnapa, apelacionesSetenciaDefinitivaProcedimientoAbreviado = $ARJsdpa, apelacionesExcluirMedioPrueba = $ARJemp,                      apelacionesDesistimientoAccionPenal = $ARTEdap, apelacionesSentenciaDefinitiva = $ARTEsd, revocacionesFavorablesAlMP = $DSEDrfmp, modificacionesFavorablesAlMP = $DSEDmfmp, confirmacionesFavorablesAlMP = $DSEDcfmp,     porCambioDeclaradosSituacionJuridicaDeclaradaSinMateria = $csjdsm, FormulaImputacion_Soli = $FIsolic, FormulaImputacion_Otorga = $FIotor, FormulaImputacion_Negadas = $FInega, Med_CautelresSolicitadas = $MCsol, Med_CautelaresNegadas = $MCnega,
                               Med_CautelaresOtorgadas = $MCotor, LegalDetencion = $legal, IlegalDetencion = $ilegal, recibiOtmp = $recibiOtmp, cesefunciones = $cesefunciones, ordenesSolicitadasAprehension = $OSapre, ordenesSolicitadasComparecencia = $OScomp, medidasProteccion = $medidasProteccion, totalVictProt = $MPV, controlJudicialIntervencionTR = $intervencionTR, controlJudicialTomaMuestras = $tomaMuestras, controlJudicialExhumacion = $exhumacion, controlJudicialObDatosReservados = $obDatosReservados, controlJudicialIntervencionCME = $intervencionCME, controlJudicialProvPrecautoria = $provPrecautoria, sinControlJudicialCadCustodia = $cadCustodia, sinControlJudicialInspLugDis = $InspLugDis, sinControlJudicialInspInmuebles = $InspInmuebles, sinControlJudicialEntrevistasTestigos = $entrevistasTestigos, sinControlJudicialReconocimientoPer = $reconocimientoPer, sinControlJudicialSolInfoPericiales = $solInfoPericiales, sinControlJudicialInfInstiSeg = $InfInstiSeg,
                                sinControlJudicialexamenFisPersona = $examenFisPersona, audienciaJuicioOral = $audJuiOral,
-                               audienciaFallo = $audFallo, absolutorio = $absolutorio, audienciaIndiviSancion = $AudIndiSan, procedimientoEspecial = $procEspecial, audienciaCondenatorio = $audCondenatorio, mecanismosAceleracion = $mecanismosAceleracion, apelacionesAmparo = $apeamparo, amparoDirecto = $amparoDirecto, amparoIndirecto = $amparoIndirecto WHERE idLitigacion = $idLitigacion       
+                               audienciaFallo = $audFallo, absolutorio = $absolutorio, audienciaIndiviSancion = $AudIndiSan, procedimientoEspecial = $procEspecial, audienciaCondenatorio = $audCondenatorio, mecanismosAceleracion = $mecanismosAceleracion, apelacionesAmparo = $apeamparo, amparoDirecto = $amparoDirecto, amparoIndirecto = $amparoIndirecto 
+                               ,SDuno = $SDuno, SDdos = $SDdos, SDtres = $SDtres   , SDcuatro = $SDcuatro   , SDcinco = $SDcinco   , SDseis = $SDseis   , SDsiete = $SDsiete   , SDocho = $SDocho   , SDnueve = $SDnueve   , SDdiez = $SDdiez      WHERE idLitigacion = $idLitigacion    
 
                               COMMIT
                     END TRY
@@ -227,7 +241,7 @@
                       BEGIN TRANSACTION
                           SET NOCOUNT ON    
 
-                            INSERT INTO Litigacion VALUES($idUnidad, GETDATE(), $mes, $anio , $idFiscalia, $tramAnt, $cdete,  $sdete, $auvinc, $aunvinc, $mix, $ppofic, $ppjus, $ppanju, $exgaeco, $emvien, $incuval, $pssafj, $scviind, $pcdrclug, $pccdper, $sindom, $steeca, $steapl, $coloele, $rpdmjd, $SDpapen,$SDpmuImpu, $acrep, $scpro, $criopor, $termant, $proabre, $acu, $citac, $Cconc, $Cnega, $ONapre, $ONcomp, $DRppa, $DRppd, $DRppmp, $apenoadmi, $SDIrev, $SDImod, $SDIconf, $Reproc, $MJGorap, $MJGorcomp, $MJCorapre, $MJCordcomp, $totAudiencias, $ACPREaie, $ACPREaio, $SOALscp, $SOALarep, $SENcon, $SENabsol, $SENmixc, $SENsreda, $SENnocreda, $INCOMdecre, $INCOMadmi, $ARJnap, $ARJnar, $ARJncoap, $ARJnoc, $ARJppmc, $ARJtps,  $ARJrvp, $ARJrnscp, $ARJnapa, $ARJsdpa, $ARJemp, $ARTEdap, $ARTEsd, $DSEDrfmp, $DSEDmfmp, $DSEDcfmp, $csjdsm, $FIsolic, $FIotor, $FInega,  $legal, $ilegal, $MCsol, $MCnega, $MCotor, $idMp,0, $recibiOtmp, $cesefunciones, $OSapre, $OScomp, $medidasProteccion, $MPV, $intervencionTR, $tomaMuestras, $exhumacion, $obDatosReservados, $intervencionCME, $provPrecautoria, $cadCustodia, $InspLugDis, $InspInmuebles, $entrevistasTestigos, $reconocimientoPer,  $solInfoPericiales, $InfInstiSeg, $examenFisPersona, $audJuiOral, $audFallo, $absolutorio, $AudIndiSan, $procEspecial, $audCondenatorio, $mecanismosAceleracion, $apeamparo, $amparoDirecto, $amparoIndirecto,0 ) 
+                            INSERT INTO Litigacion VALUES($idUnidad, GETDATE(), $mes, $anio , $idFiscalia, $tramAnt, $cdete,  $sdete, $auvinc, $aunvinc, $mix, $ppofic, $ppjus, $ppanju, $exgaeco, $emvien, $incuval, $pssafj, $scviind, $pcdrclug, $pccdper, $sindom, $steeca, $steapl, $coloele, $rpdmjd, $SDpapen,$SDpmuImpu, $acrep, $scpro, $criopor, $termant, $proabre, $acu, $citac, $Cconc, $Cnega, $ONapre, $ONcomp, $DRppa, $DRppd, $DRppmp, $apenoadmi, $SDIrev, $SDImod, $SDIconf, $Reproc, $MJGorap, $MJGorcomp, $MJCorapre, $MJCordcomp, $totAudiencias, $ACPREaie, $ACPREaio, $SOALscp, $SOALarep, $SENcon, $SENabsol, $SENmixc, $SENsreda, $SENnocreda, $INCOMdecre, $INCOMadmi, $ARJnap, $ARJnar, $ARJncoap, $ARJnoc, $ARJppmc, $ARJtps,  $ARJrvp, $ARJrnscp, $ARJnapa, $ARJsdpa, $ARJemp, $ARTEdap, $ARTEsd, $DSEDrfmp, $DSEDmfmp, $DSEDcfmp, $csjdsm, $FIsolic, $FIotor, $FInega,  $legal, $ilegal, $MCsol, $MCnega, $MCotor, $idMp,0, $recibiOtmp, $cesefunciones, $OSapre, $OScomp, $medidasProteccion, $MPV, $intervencionTR, $tomaMuestras, $exhumacion, $obDatosReservados, $intervencionCME, $provPrecautoria, $cadCustodia, $InspLugDis, $InspInmuebles, $entrevistasTestigos, $reconocimientoPer,  $solInfoPericiales, $InfInstiSeg, $examenFisPersona, $audJuiOral, $audFallo, $absolutorio, $AudIndiSan, $procEspecial, $audCondenatorio, $mecanismosAceleracion, $apeamparo, $amparoDirecto, $amparoIndirecto,0,$SDuno,$SDdos,$SDtres,$SDcuatro,$SDcinco,$SDseis,$SDsiete,$SDocho,$SDnueve,$SDdiez) 
 
 
                           COMMIT
@@ -253,11 +267,3 @@
                     }
 
       }
-
-
-
-
-
-
-
-?>

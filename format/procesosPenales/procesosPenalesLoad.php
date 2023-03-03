@@ -37,6 +37,23 @@ if (isset($_GET["capt"])) {
 	$capt = $_GET["capt"];
 }
 
+if($mesIni == $mesFin){
+
+	$bandTram = 1;
+	if ($mesIni == 1) {
+		$mesAnterior = 12;
+		$anioAnte = ($anioIni - 1);
+	} else {
+		$anioAnte = $anioIni;
+		$mesAnterior = ($mesIni - 1);
+	}
+	
+	$dataTramAnterior = getTramiteAnteriorProcesos($conn, $mesAnterior, $anioAnte, $idFiscalia, $juzgado);
+
+}else{
+	$bandTram = 0;
+}
+
 $enviado = getEnviadoEnlaceFormato($conn, $idEnlace, 21);
 						$env = $enviado[0][0];
 						$envArch = $enviado[0][1];
@@ -161,6 +178,8 @@ for ($j = 0; $j < sizeof($arrayAnios); $j++) {
 
 }
 
+
+
 ?>
 
 
@@ -179,7 +198,7 @@ for ($j = 0; $j < sizeof($arrayAnios); $j++) {
 								<form>
 									<div class="form-group">
 										<label for="exampleInputEmail1">EXISTENCIA ANTERIOR</label>
-										<input value="<?php 	echo $arraySumas[0];	 ?>" type="number" class="form-control form-control" id="p1" aria-describedby="emailHelp" placeholder="">
+										<input disabled value="<?php if($bandTram == 1){echo $dataTramAnterior[0][0]; }else{	echo $arraySumas[0]; }	 ?>" type="number" class="form-control form-control" id="p1" aria-describedby="emailHelp" placeholder="">
 									</div>
 								</form>
 							</div>

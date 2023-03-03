@@ -1348,7 +1348,7 @@ function validateMonthCapture($mesSelected, $anioSelected){
 	$diferencia = abs($mesActual - $mesSelected);
 	$diferencia_anio = $anioActual - $anioSelected;
 
-	$valida[0][0] = "NO"; //SIN EDITAR
+	$valida[0][0] = "SI"; //SIN EDITAR , AQUI LLEVA UN NO
 	$valida[0][1] = "SI"; //PERMITE EDITAR
 
 	if($mesActual == $mesSelected && $anioActual == $anioSelected){

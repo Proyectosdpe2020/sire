@@ -293,6 +293,10 @@ function getDataMedidaCautelar($conn, $idEstatusNucs){
 		$arreglo[$indice][2]=$row['fechaCierreInvest'];
 		$arreglo[$indice][3]=$row['formulacionAcusacion'];
 		$arreglo[$indice][4]=$row['fechaEscritoAcusacion'];
+		$arreglo[$indice][5]=$row['edad_imputado'];
+		$arreglo[$indice][6]=$row['temporalidad'];
+		$arreglo[$indice][7]=$row['parentesco_victima'];
+		$arreglo[$indice][8]=$row['id_sexo'];
 		$indice++;
 	}
 	if(isset($arreglo)){return $arreglo;}
@@ -618,5 +622,19 @@ function getDataSentenciasAveriguaciones($conn, $idEstatusNucs, $estatus){
 		}
 		if(isset($arreglo)){return $arreglo;}
 
+}
+
+//Funcion que obtiene el catalogo de opciones Dictonomicas para variables en general.
+function getCatParentescos($conn){
+	$query = "SELECT * FROM senap.CatParentescos"; 
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['id'];
+		$arreglo[$indice][1]=$row['nombre'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}	
 }
 ?>

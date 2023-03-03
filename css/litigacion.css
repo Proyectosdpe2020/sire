@@ -1,16 +1,15 @@
 
 .panelunoLitigacion{
 
-    background-image: url('../img/Formulario SIRE6-06.png'); 
+   background-image: url('../img/Formulario SIRE 2022 v3.png'); 
   background-repeat: repeat;  
   background-size: cover;
-  background-size: 100%; 
-  background-position-y: 52%;
+  background-position-y: center;
   height: 80vh;
    overflow-y: scroll;
   overflow-x:hidden;
 
-}
+} */
 
 hr{
 
@@ -81,3 +80,4 @@ hr{
 #inicio{
   display: block;
 }
+

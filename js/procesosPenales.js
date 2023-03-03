@@ -16,6 +16,9 @@ var idFiscalia = document.getElementById("fiscaliaJuzgado").value;
 
 function enviarDPEprocesos(idEnlace, format) {
 
+	var mes = document.getElementById("textMesCapturando").value;
+	var anio = document.getElementById("textAnioCapturando").value;
+
 	swal({
 		title: "",
 		text: "¿Esta seguro de enviar la información? \n\n Nota:    Una vez enviados a la Dirección de Planeación y Estadística no podra ser modificado. ",
@@ -38,6 +41,7 @@ function enviarDPEprocesos(idEnlace, format) {
 						var obj = eval("(" + json + ")");
 						if (obj.first == "NO") { swal("", "No se envió verifique los datos.", "warning"); } else {
 							if (obj.first == "SI") {
+								saveDataProcesos(1, idEnlace, mes, anio)
 								swal("", "Tu información ha sido enviada.", "success");
 								setTimeout("location.href = 'procesosPenales';", 500);
 							}

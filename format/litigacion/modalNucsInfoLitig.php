@@ -39,7 +39,7 @@ if($tipo_investigacion == 1){
 <div class="modal-body ">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12">
-			<? if($tipo_investigacion == 0){ ?> <h4>Registro estadístico del NUC: <strong><? echo $nuc; ?></strong></h4> <? }else{ ?> <h4>Registro estadístico de la averiguación previa: <strong><? echo $nuc; ?></strong></h4> <? } ?>
+			<? if($tipo_investigacion == 0){ ?> <h4>Registro estadístico del NUC: <strong><? echo $nuc; ?></strong></h4> <? }else{ ?> <h4>Registro estadístico del NUC: <strong><? echo $nuc; ?></strong></h4> <? } ?>
 		</div>
 	</div><br>
 
@@ -261,10 +261,44 @@ if($tipo_investigacion == 1){
 	 		$fechaCierreInvest = $getData[0][2] ->format('Y-m-d'); 
 	 		$formulacionAcusacion = $getData[0][3];
 	 		$fechaEscritoAcusacion = $getData[0][4] ->format('Y-m-d'); 
+	 		$edad_imputado_medida = $getData[0][5];
+	 		$temporalida_medida =$getData[0][6];
+	 		$parentesco_victima = $getData[0][7];
+	 		$id_sexo = $getData[0][8];
 	 	}else{ 	$opcInsert = 0; } 
 	?>
 	<div class="row">
 		<div class="col-xs-12 col-sm-12  col-md-12">
+				<div class="row">
+				<div class="col-xs-12 col-sm-12  col-md-6 input-group-lg">
+						<label for="id_sexo">Sexo del imputado</label><br>
+							<input type="radio" id="id_sexo" name="id_sexo"  value="M"   >
+							<label for="cv_sexo" >Masculino</label>&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="radio" id="id_sexo" name="id_sexo"  value="F"  >
+							<label for="cv_sexo" >Femenino</label>
+						</div>
+					</div><BR>
+				<div class="row">
+					<div class="col-xs-12 col-sm-12  col-md-3">
+						<label for="edad_imputado_medida">Edad del imputado:</label>
+						<input type="number" class="form-control" value="<?if($opcInsert == 1){echo $edad_imputado_medida;}?>" id="edad_imputado_medida" placeholder="ESPECIFICA LA EDAD DEL IMPUTADO" >
+					</div>
+							<div class="col-xs-12 col-sm-12  col-md-4">
+								<label for="temporalida_medida">Temporalidad (Meses):</label>
+								<input type="number" class="form-control" value="<?if($opcInsert == 1){echo $temporalida_medida;}?>" id="temporalida_medida" placeholder="ESPECIFICA LA TEMPORALIDAD EN MESES" >
+							</div>
+					<div class="col-xs-12 col-sm-12  col-md-5">
+						<label for="parentesco_victima">Parentesco con la víctima: </label>
+						<select id="parentesco_victima" name="parentesco_victima" tabindex="6" class="form-control redondear" >
+							<option style="color: black; font-weight: bold;" value="0"> Seleccione </option>
+							<?$getCatParentescos = getCatParentescos($conn);
+							for ($i=0; $i < sizeof($getCatParentescos); $i++) {
+								$idOpcion = $getCatParentescos[$i][0];	$opc = $getCatParentescos[$i][1];	?>
+								<option style="color: black; font-weight: bold;" value="<? echo $idOpcion; ?>" <?if($opcInsert == 1 && $idOpcion == $parentesco_victima ){ ?> selected <? } ?> ><? echo $opc; ?> </option>
+							<? } ?>
+						</select>
+					</div>
+			</div><BR><BR>
 			<!--¿Se impuso medida cautelar? :-->
 			<div class="row">
 				<div class="col-xs-12 col-sm-12  col-md-12">

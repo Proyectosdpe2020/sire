@@ -42,8 +42,23 @@ if ($a >= 1) {
 	$b = 1;
 }
 
+//// GET EXISTENCIA ANTERIOR /////
+
+if ($mesCapturando == 1) {
+	$mesAnterior = 12;
+	$anioAnte = ($anioCapturando - 1);
+} else {
+	$anioAnte = $anioCapturando;
+	$mesAnterior = ($mesCapturando - 1);
+}
+
+$dataTramAnterior = getTramiteAnteriorProcesos($conn, $mesAnterior, $anioAnte, $fiscaliaID, $juzgadFirs[0][0]);
+
 
 ?>
+
+<input id="textAnioCapturando" type="hidden" value="<?php echo $anioCapturando ?>">
+<input id="textMesCapturando" type="hidden" value="<?php echo $mesCapturando ?>">
 
 <div id="contenido">
 	<div class="right_col" role="main">
@@ -266,9 +281,7 @@ if ($a >= 1) {
 													<form>
 														<div class="form-group">
 															<label for="exampleInputEmail1">EXISTENCIA ANTERIOR</label>
-															<input value="<?php if ($b == 1) {
-																														echo $data[0][0];
-																													} ?>" type="number" class="form-control form-control" id="p1" aria-describedby="emailHelp" placeholder="">
+															<input disabled value="<?php echo $dataTramAnterior[0][0]; ?>" type="number" class="form-control form-control" id="p1" aria-describedby="emailHelp" placeholder="">
 														</div>
 													</form>
 												</div>

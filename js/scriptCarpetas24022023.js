@@ -220,7 +220,7 @@ function saveCarpetJudicidFirstTime(idMp, mes, anio, estatResolucion, idUnidad, 
 								document.getElementById('btnSaveNuc').disabled = true;
 
 								////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS
-								validarReglasNUC(nuc, estatResolucion, mes, anio, nuc, idUnidad, idMp, deten, envioselect,0);
+								validarReglasNUC(nuc, estatResolucion, mes, anio, nuc, idUnidad, idMp, deten, envioselect);
 								////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS										
 
 							}
@@ -286,7 +286,7 @@ function saveCarpetJudicid(idMp, mes, anio, estatResolucion, idUnidad, deten) {
 									document.getElementById('btnSaveNuc').disabled = true;
 
 									////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS
-									validarReglasNUC(nuc, estatResolucion, mes, anio, nuc, idUnidad, idMp, deten, envioselect,0);
+									validarReglasNUC(nuc, estatResolucion, mes, anio, nuc, idUnidad, idMp, deten, envioselect);
 									////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS										
 
 								}
@@ -322,24 +322,12 @@ function saveCarpet(idMp, mes, anio, estatResolucion, idUnidad, deten) {
 
 	texto = document.getElementById("nuc").value;
 	cantidadinicio = document.getElementById("nuc").value.length;
-	
 
 
 
 	if (estatResolucion == 22) { envioselect = document.getElementById("envioselect").value; } else {
 		envioselect = 0;
 	}
-
-	////// VALIDAR SI ES UN NO EJERCICIO Y ADEMAS NO HAYA SELECIONADO LA CAUSA ///////////
-	if (estatResolucion == 20 ) {
-		idCausa = document.getElementById("causaSeleted").value;
-		if(idCausa == 0){ 			 
-			return swal("", "Debe seleccionar una causa de extinción de la acción penal.", "warning"); 	//// SE AGREGA RETURN POR QUE SE REGRESA EL MSJ Y DETIENE LA EJECUCION SIN EL RETURN NO SE DETIEN
-		}
-	}else{
-		idCausa = 0;
-	}
-	////// VALIDAR SI ES UN NO EJERCICIO Y ADEMAS NO HAYA SELECIONADO LA CAUSA ///////////
 
 
 	if (cantidadinicio > 13) {
@@ -376,7 +364,7 @@ function saveCarpet(idMp, mes, anio, estatResolucion, idUnidad, deten) {
 										document.getElementById('btnSaveNuc').disabled = true;
 
 										////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS
-										validarReglasNUC(nuc, estatResolucion, mes, anio, nuc, idUnidad, idMp, deten, envioselect, idCausa);
+										validarReglasNUC(nuc, estatResolucion, mes, anio, nuc, idUnidad, idMp, deten, envioselect);
 										////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS										
 
 									}
@@ -411,7 +399,7 @@ function saveCarpet(idMp, mes, anio, estatResolucion, idUnidad, deten) {
 										document.getElementById('btnSaveNuc').disabled = true;
 
 										////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS
-										validarReglasNUC(nuc, estatResolucion, mes, anio, nuc, idUnidad, idMp, deten, envioselect, idCausa);
+										validarReglasNUC(nuc, estatResolucion, mes, anio, nuc, idUnidad, idMp, deten, envioselect);
 										////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS										
 
 									}
@@ -443,7 +431,7 @@ function saveCarpet(idMp, mes, anio, estatResolucion, idUnidad, deten) {
 }
 
 
-function validarReglasNUC(nuc, estatus, mes, anio, nuc, idUnidad, idMp, deten, envioselect, idCausaExtPenal) {
+function validarReglasNUC(nuc, estatus, mes, anio, nuc, idUnidad, idMp, deten, envioselect) {
 
 
 	acc = "reglasValidacionV2";
@@ -469,7 +457,7 @@ function validarReglasNUC(nuc, estatus, mes, anio, nuc, idUnidad, idMp, deten, e
 				if (objDatos.first == "SI") {
 
 					document.getElementById('btnSaveNuc').disabled = true;
-					insertNucCarpetas(idMp, estatus, mes, anio, nuc, idUnidad, deten, envioselect, idCausaExtPenal);
+					insertNucCarpetas(idMp, estatus, mes, anio, nuc, idUnidad, deten, envioselect);
 
 				} else {
 
@@ -531,6 +519,8 @@ function validarReglasNUC(nuc, estatus, mes, anio, nuc, idUnidad, idMp, deten, e
 				}
 			}
 
+			//insertNucCarpetas(idMp, estatResolucion, mes, anio, nuc, idUnidad);
+
 
 		}
 	}
@@ -545,7 +535,7 @@ function clearModalNUcsCarpe() {
 	document.getElementById('nuc').value = "";
 }
 
-function insertNucCarpetas(idMp, estatResolucion, mes, anio, nuc, idUnidad, deten, envioselect, idCausaExtPenal) {
+function insertNucCarpetas(idMp, estatResolucion, mes, anio, nuc, idUnidad, deten, envioselect) {
 
 
 	acc = "insertNucCarpetas";
@@ -575,7 +565,7 @@ function insertNucCarpetas(idMp, estatResolucion, mes, anio, nuc, idUnidad, dete
 		}
 	}
 	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	ajax.send("&nuc=" + nuc + "&acc=" + acc + "&idMp=" + idMp + "&estatResolucion=" + estatResolucion + "&mes=" + mes + "&anio=" + anio + "&idUnidad=" + idUnidad + "&deten=" + deten + "&envioselect=" + envioselect+ "&idCausaExtPenal=" + idCausaExtPenal);
+	ajax.send("&nuc=" + nuc + "&acc=" + acc + "&idMp=" + idMp + "&estatResolucion=" + estatResolucion + "&mes=" + mes + "&anio=" + anio + "&idUnidad=" + idUnidad + "&deten=" + deten + "&envioselect=" + envioselect);
 
 
 }
