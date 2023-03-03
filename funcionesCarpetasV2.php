@@ -183,7 +183,7 @@ function getLastResolucionCarpetaV2termin($conn, $carpetaId){
 	INNER JOIN CatUnidad u ON u.idUnidad = estatusNucsCarpetas.idUnidad
 	INNER JOIN CatFiscalia f ON f.idFiscalia = u.idFiscalia
 	INNER JOIN mp ON mp.idMp = estatusNucsCarpetas.idMp
-	WHERE idCarpeta = $carpetaId AND idEstatus IN(15,25,2) ORDER BY fecha DESC 
+	WHERE idCarpeta = $carpetaId AND idEstatus IN(15,25,2,20) ORDER BY fecha DESC 
 ";
 	
 
