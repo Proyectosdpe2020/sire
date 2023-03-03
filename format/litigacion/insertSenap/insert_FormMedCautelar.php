@@ -16,6 +16,11 @@ if (isset($_POST['formulacionAcusacion'])){ $formulacionAcusacion = $_POST['form
 if (isset($_POST['fechaEscritoAcusacion'])){ $fechaEscritoAcusacion = $_POST['fechaEscritoAcusacion']; }
 if (isset($_POST['opcInsert'])){ $opcInsert = $_POST['opcInsert']; }  
 
+if (isset($_POST['edad_imputado_medida'])){ $edad_imputado_medida = $_POST['edad_imputado_medida']; } 
+if (isset($_POST['temporalida_medida'])){ $temporalida_medida = $_POST['temporalida_medida']; } 
+if (isset($_POST['parentesco_victima'])){ $parentesco_victima = $_POST['parentesco_victima']; } 
+if (isset($_POST['id_sexo'])){ $id_sexo = $_POST['id_sexo']; }
+
 //Si opcInsert == 0 es un nuevo registro, si opcInsert == 1 es una edicion de registro
 if($opcInsert == 0){
 
@@ -25,8 +30,8 @@ if($opcInsert == 0){
                                 BEGIN TRANSACTION
                                       SET NOCOUNT ON 
 
-                                        INSERT INTO senap.medidaCautelar (idEstatusNucs, fechaCierreInvest, formulacionAcusacion, fechaEscritoAcusacion) 
-                                        VALUES('$idEstatusNucs', '$fechaCierreInvest', $formulacionAcusacion , '$fechaEscritoAcusacion')
+                                        INSERT INTO senap.medidaCautelar (idEstatusNucs, fechaCierreInvest, formulacionAcusacion, fechaEscritoAcusacion,edad_imputado ,temporalidad, parentesco_victima, id_sexo) 
+                                        VALUES('$idEstatusNucs', '$fechaCierreInvest', $formulacionAcusacion , '$fechaEscritoAcusacion',$edad_imputado_medida , $temporalida_medida, $parentesco_victima, '$id_sexo' )
                                                   
                                       COMMIT
                               END TRY
@@ -46,7 +51,11 @@ if($opcInsert == 0){
                                         UPDATE senap.medidaCautelar SET 
                                         fechaCierreInvest = '$fechaCierreInvest',
                                         formulacionAcusacion = $formulacionAcusacion,
-                                        fechaEscritoAcusacion = '$fechaEscritoAcusacion'
+                                        fechaEscritoAcusacion = '$fechaEscritoAcusacion',
+                                        edad_imputado = $edad_imputado_medida,
+                                        temporalidad = $temporalida_medida,
+                                        parentesco_victima = $parentesco_victima, 
+                                        id_sexo = '$id_sexo'
                                         WHERE idEstatusNucs = '$idEstatusNucs' ;
                                                   
                                       COMMIT

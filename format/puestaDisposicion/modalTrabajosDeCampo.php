@@ -159,7 +159,7 @@
 																			 </div>
 																			 <div class="form-row">
 																						<div class="form-group col-md-12">
-																								<label for="actos_vigentes">Actos vigentes:</label>	
+																								<label for="actos_vigentes">Actos urgentes:</label>	
 																								<input value="<?php if($a == 1){ echo  $actos_vigentes; } ?>" type="number" class="form-control" id="actos_vigentes" name="actos_vigentes">
 																					</div>
 																			 </div>

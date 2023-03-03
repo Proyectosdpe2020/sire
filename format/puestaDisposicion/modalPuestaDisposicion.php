@@ -122,14 +122,14 @@
  				<div class="col-xs-12 col-sm-12  col-md-2">
 	 				<label for="heard">Fecha Evento :</label><span class="aste"> (Requerido)</span>
 	 				<div >
-	 					<input id="fechaevento" type="datetime-local" value="<? if($a == 1){  echo 	$fechaev=str_ireplace(' ','T',$fechaev); } ?>" name="fechaevento" class="fechas form-control gehit" min="2022-01-01T00:00:00" max="<?echo $hoy; ?>T23:59:59" onchange="checkDateInforme('<?echo $fecha; ?>');" <? if($b == 0){ echo "readonly"; } ?> />	
+	 					<input id="fechaevento" type="datetime-local" value="<? if($a == 1){  echo 	$fechaev=str_ireplace(' ','T',$fechaev); } ?>" name="fechaevento" class="fechas form-control gehit" min="2021-01-01T00:00:00" max="<?echo $hoy; ?>T23:59:59" onchange="checkDateInforme('<?echo $fecha; ?>');" <? if($b == 0){ echo "readonly"; } ?> />	
 	 				</div>
  			 </div>
  			<? }else{ ?>
  			<div class="col-xs-12 col-sm-12  col-md-2">
  				<label for="heard">Fecha Evento :</label><span class="aste"> (Requerido)</span>
  				<div >
- 					<input id="fechaevento" type="datetime-local" value="<? if($a == 1){  echo 	$fechaev=str_ireplace(' ','T',$fechaev); } ?>" name="fechaevento" class="fechas form-control gehit" min="<?echo $anioActual; ?>-<?echo $m; ?>-01T00:00:00" max="<?echo $hoy; ?>T23:59:59" onchange="checkDateInforme('<?echo $fecha; ?>');" <? if($b == 0){ echo "readonly"; } ?> />	
+ 					<input id="fechaevento" type="datetime-local" value="<? if($a == 1){  echo 	$fechaev=str_ireplace(' ','T',$fechaev); } ?>" name="fechaevento" class="fechas form-control gehit" min="2021-01-01T00:00:00" max="<?echo $hoy; ?>T23:59:59" onchange="checkDateInforme('<?echo $fecha; ?>');" <? if($b == 0){ echo "readonly"; } ?> />	
  				</div>
  			</div>
  		 <? } ?>

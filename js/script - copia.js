@@ -939,7 +939,7 @@ function getDataVistaPrevia(idUnidad, mes, anio, idEnlace) {
 function loadSubIndex(idEnlace) {
 
 
-	cont = document.getElementById('contenido'); 
+	cont = document.getElementById('contenido');
 
 	ajax = objetoAjax();
 	ajax.open("POST", "contUbIndex.php");

@@ -333,7 +333,6 @@ function validateItsokLiti(idEnlace, mes, anio, idMp, idUnidad) {
 function guardarLitigacion(idEnlace, mes, anio, idMp, idUnidad) {
 
 
-
 	recibiOtmp = document.getElementById("recibiOtmp").value; if (recibiOtmp == "") { recibiOtmp = 0; } else { recibiOtmp = parseInt(document.getElementById("recibiOtmp").value); }
 	cesefunciones = document.getElementById("cesefunciones").value; if (cesefunciones == "") { cesefunciones = 0; } else { cesefunciones = parseInt(document.getElementById("cesefunciones").value); }
 
@@ -583,83 +582,25 @@ function guardarLitigacion(idEnlace, mes, anio, idMp, idUnidad) {
 	amparoIndirecto = document.getElementById("amparoIndirecto").value; if (amparoIndirecto == "") { amparoIndirecto = 0; } else { amparoIndirecto = parseInt(document.getElementById("amparoIndirecto").value); }
 	amparoIndirectoNu = document.getElementById("valor149").value; if (amparoIndirectoNu == "") { amparoIndirectoNu = 0; } else { amparoIndirectoNu = parseInt(document.getElementById("valor149").value); }
 
-	SDuno = document.getElementById("SDuno").value; if (SDuno == "") { SDuno = 0; } else { SDuno = parseInt(document.getElementById("SDuno").value); }
-	SDunoNu = document.getElementById("valor155").value; if (SDunoNu == "") { SDunoNu = 0; } else { SDunoNu = parseInt(document.getElementById("valor155").value); }
-
-	
-
-	SDdos = document.getElementById("SDdos").value; if (SDdos == "") { SDdos = 0; } else { SDdos = parseInt(document.getElementById("SDdos").value); }
-	SDdosNu = document.getElementById("valor156").value; if (SDdosNu == "") { SDdosNu = 0; } else { SDdosNu = parseInt(document.getElementById("valor156").value); }
-	
-
-	SDtres = document.getElementById("SDtres").value; if (SDtres == "") { SDtres = 0; } else { SDtres = parseInt(document.getElementById("SDtres").value); }
-	SDtresNu = document.getElementById("valor157").value; if (SDtresNu == "") { SDtresNu = 0; } else { SDtresNu = parseInt(document.getElementById("valor157").value); }
-	
-
-	SDcuatro = document.getElementById("SDcuatro").value; if (SDcuatro == "") { SDcuatro = 0; } else { SDcuatro = parseInt(document.getElementById("SDcuatro").value); }
-	SDcuatroNu = document.getElementById("valor158").value; if (SDcuatroNu == "") { SDcuatroNu = 0; } else { SDcuatroNu = parseInt(document.getElementById("valor158").value); }
-	
-
-	SDcinco = document.getElementById("SDcinco").value; if (SDcinco == "") { SDcinco = 0; } else { SDcinco = parseInt(document.getElementById("SDcinco").value); }
-	SDcincoNu = document.getElementById("valor159").value; if (SDcincoNu == "") { SDcincoNu = 0; } else { SDcincoNu = parseInt(document.getElementById("valor159").value); }
-	
-
-	SDseis = document.getElementById("SDseis").value; if (SDseis == "") { SDseis = 0; } else { SDseis = parseInt(document.getElementById("SDseis").value); }
-	SDseisNu = document.getElementById("valor160").value; if (SDseisNu == "") { SDseisNu = 0; } else { SDseisNu = parseInt(document.getElementById("valor160").value); }
-	
-
-	SDsiete = document.getElementById("SDsiete").value; if (SDsiete == "") { SDsiete = 0; } else { SDsiete = parseInt(document.getElementById("SDsiete").value); }
-	SDsieteNu = document.getElementById("valor161").value; if (SDsieteNu == "") { SDsieteNu = 0; } else { SDsieteNu = parseInt(document.getElementById("valor161").value); }
-
-
-	SDocho = document.getElementById("SDocho").value; if (SDocho == "") { SDocho = 0; } else { SDocho = parseInt(document.getElementById("SDocho").value); }
-	SDochoNu = document.getElementById("valor162").value; if (SDochoNu == "") { SDochoNu = 0; } else { SDochoNu = parseInt(document.getElementById("valor162").value); }
-	
-
-	SDnueve = document.getElementById("SDnueve").value; if (SDnueve == "") { SDnueve = 0; } else { SDnueve = parseInt(document.getElementById("SDnueve").value); }
-	SDnueveNu = document.getElementById("valor163").value; if (SDnueveNu == "") { SDnueveNu = 0; } else { SDnueveNu = parseInt(document.getElementById("valor163").value); }
-	
-
-	SDdiez = document.getElementById("SDdiez").value; if (SDdiez == "") { SDdiez = 0; } else { SDdiez = parseInt(document.getElementById("SDdiez").value); }
-	SDdiezNu = document.getElementById("valor164").value; if (SDdiezNu == "") { SDdiezNu = 0; } else { SDdiezNu = parseInt(document.getElementById("valor164").value); }
-	
-
-
-
 	var arrayCamposData = [cdete, sdete, FIsolic, FIotor, FInega, legal, ilegal, aunvinc, mix, MCsol, MCotor, MCnega, ppofic, ppjus, ppanju, exgaeco, emvien, incuval, pssafj, scviind, pcdrclug, pccdper, sindom, steeca, steapl, coloele, rpdmjd, SDpapen, SDpmuImpu, acrep, criopor, termant, acu, citac, Cconc, Cnega, ONapre, ONcomp, DRppa, DRppd, DRppmp, apenoadmi, SDIrev, SDImod, SDIconf, Reproc, MJGorap, MJGorcomp,
 		MJCorapre, MJCordcomp, totAudiencias, ACPREaie, ACPREaio, SOALscp, SOALarep, SENabsol, SENmixc, SENsreda, SENnocreda, INCOMdecre, INCOMadmi, ARJnap, ARJnar, ARJncoap, ARJnoc, ARJppmc, ARJtps, ARJrvp, ARJrnscp, ARJnapa, ARJsdpa, ARJemp, ARTEdap, ARTEsd, DSEDrfmp, DSEDmfmp, DSEDcfmp, csjdsm, OSapre, OScomp, medidasProteccion, intervencionTR, tomaMuestras, exhumacion, obDatosReservados,
-		intervencionCME, provPrecautoria, cadCustodia, InspLugDis, InspInmuebles, entrevistasTestigos, reconocimientoPer, solInfoPericiales, InfInstiSeg, examenFisPersona, audJuiOral, audFallo, absolutorio, AudIndiSan, procEspecial, audCondenatorio, mecanismosAceleracion, apeamparo, amparoDirecto, amparoIndirecto, auvinc, scpro, proabre, SENcon, SDuno, SDdos, SDtres, SDcuatro, SDcinco, SDseis, SDsiete, SDocho, SDnueve, SDdiez];
+		intervencionCME, provPrecautoria, cadCustodia, InspLugDis, InspInmuebles, entrevistasTestigos, reconocimientoPer, solInfoPericiales, InfInstiSeg, examenFisPersona, audJuiOral, audFallo, absolutorio, AudIndiSan, procEspecial, audCondenatorio, mecanismosAceleracion, apeamparo, amparoDirecto, amparoIndirecto, auvinc, scpro, proabre, SENcon];
 
 	var arrayNucsData = [cdeteNu, sdeteNu, FIsolicNu, FIotorNU, FInegaNu, legalNu, ilegalNu, aunvincNu, mixNu, MCsolNu, MCotorNu, MCnegaNu, ppoficNu, ppjusNu, ppanjuNu, exgaecoNu, emvienNu, incuvalNu, pssafjNu, scviindNu, pcdrclugNu, pccdperNu, sindomNu, steecaNu, steaplNu, coloeleNu, rpdmjdNu, SDpapenNu, SDpmuImpuNu, acrepNu, crioporNu, termantNu, acuNu, citacNu, CconcNu, CnegaNu, ONapreNu, ONcompNu, DRppaNu,
 		DRppdNu, DRppmpNu, apenoadmiNu, SDIrevNu, SDImodNu, SDIconfNu, ReprocNu, MJGorapNu, MJGorcompNu, MJCorapreNu, MJCordcompNu, totAudienciasNu, ACPREaieNu, ACPREaioNu, SOALscpNu, SOALarepNu, SENabsolNu, SENmixcNu, SENsredaNu, SENnocredaNu, INCOMdecreNu, INCOMadmiNu, ARJnapNu, ARJnarNu, ARJncoapNu, ARJnocNu, ARJppmcNu, ARJtpsNu, ARJrvpNu, ARJrnscpNu, ARJnapaNu, ARJsdpaNu, ARJempNu, ARTEdapNu,
 		ARTEsdNu, DSEDrfmpNu, DSEDmfmpNu, DSEDcfmpNu, csjdsmNu, OSapreNu, OScompNu, medidasProteccionNu, intervencionTRNu, tomaMuestrasNu, exhumacionNu, obDatosReservadosNu, intervencionCMENu, provPrecautoriaNu, cadCustodiaNu, InspLugDisNu, InspInmueblesNu, entrevistasTestigosNu, reconocimientoPerNu, solInfoPericialesNu, InfInstiSegNu, examenFisPersonaNu, audJuiOralNu, audFalloNu, absolutorioNu,
-		AudIndiSanNu, procEspecialNu, audCondenatorioNu, mecanismosAceleracionNu, apeamparoNu, amparoDirectoNu, amparoIndirectoNu, vincprocesoNU, scprocesoNu, proAbreNu, condenaNu, SDunoNu, SDdosNu, SDtresNu, SDcuatroNu, SDcincoNu, SDseisNu, SDsieteNu, SDochoNu, SDnueveNu, SDdiezNu];
+		AudIndiSanNu, procEspecialNu, audCondenatorioNu, mecanismosAceleracionNu, apeamparoNu, amparoDirectoNu, amparoIndirectoNu, vincprocesoNU, scprocesoNu, proAbreNu, condenaNu];
 
 	var arrayCheckicon = ["checCdeten", "checSdeten", "checkFIsolic", "checkFIotor", "checkFInega", "checklegal", "checkilegal", "checkaunvinc", "checkmix", "checkMCsol", "checkMCotor", "checkMCnega", "checkppofic", "checkppjus", "checkppanju", "checkexgaeco", "checkemvien", "checkincuval", "checkpssafj", "checkscviind", "checkpcdrclug", "checkpccdper", "checksindom", "checksteeca", "checksteapl", "checkcoloele",
 		"checkrpdmjd", "checkSDpapen", "checkSDpmuImpu", "checkCacrep", "checkcriopor", "checktermant", "checkacu", "checkcitac", "checkCconc", "checkCnega", "checkONapre", "checkONcomp", "checkDRppa", "checkDRppd", "checkDRppmp", "checkapenoadmi", "checkSDIrev", "checkSDImod", "checkSDIconf", "checkReproc", "checkMJGorap", "checkMJGorcomp", "checkMJCorapre", "checkMJCordcomp", "checktotAudiencias",
 		"checkACPREaie", "checkACPREaio", "checkSOALscp", "checkSOALarep", "checkSENabsol", "checkSENmixc", "checkSENsreda", "checkSENnocreda", "checkINCOMdecre", "checkINCOMadmi", "checkARJnap", "checkARJnar", "checkARJncoap", "checkARJnoc", "checkARJppmc", "checkARJtps", "checkARJrvp", "checkARJrnscp", "checkSARJnapa", "checkARJsdpa", "checkARJemp", "checkARTEdap", "checkARTEsd", "checkDSEDrfmp",
 		"checkDSEDmfmp", "checkDSEDcfmp", "checkcsjdsm", "checkOSapre", "checkOScomp", "checkMedidasProteccion", "checkIntervencionTR", "checkTomaMuestras", "checkExhumacion", "checkObDatosReservados", "checkIntervencionCME", "checkProvPrecautoria", "checkCadCustodia", "checkInspLugDis", "checkInspInmuebles", "checkEntrevistasTestigos", "checkReconocimientoPer", "checkSolInfoPericiales",
-		"checkInfInstiSeg", "checkExamenFisPersona", "checkAudJuiOral", "checkAudFallo", "checkAbsolutorio", "checkAIDS", "checkProcEspecial", "checkAudCondenatorio", "checkMecanismoAcele", "checkapeamparo", "checkAmparoDirecto", "checkAmparoIndirecto", "checkauvinc", "checkscpro", "checkproabre", "checkSENcon", "checkSDuno", "checkSDdos", "checkSDtres", "checkSDcuatro", "checkSDcinco", "checkSDseis", "checkSDsiete", "checkSDocho", "checkSDnueve", "checkSDdiez"];
+		"checkInfInstiSeg", "checkExamenFisPersona", "checkAudJuiOral", "checkAudFallo", "checkAbsolutorio", "checkAIDS", "checkProcEspecial", "checkAudCondenatorio", "checkMecanismoAcele", "checkapeamparo", "checkAmparoDirecto", "checkAmparoIndirecto", "checkauvinc", "checkscpro", "checkproabre", "checkSENcon"];
 
 	//alert(INCOMdecre+"-"+INCOMdecreNu);
 
-	if (SDpmuImpu == SDpmuImpu && cdete == cdeteNu && sdete == sdeteNu && FIsolic == FIsolicNu && FIotor == FIotorNU && FInega == FInegaNu && legal == legalNu && ilegal == ilegalNu && criopor == crioporNu && aunvinc == aunvincNu
-		&& mix == mixNu && MCsol == MCsolNu && MCotor == MCotorNu && MCnega == MCnegaNu && ppofic == ppoficNu && ppjus == ppjusNu && ppanju == ppanjuNu && exgaeco == exgaecoNu && emvien == emvienNu && incuval == incuvalNu
-		&& pssafj == pssafjNu && scviind == scviindNu && pcdrclug == pcdrclugNu && pccdper == pccdperNu && sindom == sindomNu && steeca == steecaNu && steapl == steaplNu && coloele == coloeleNu && rpdmjd == rpdmjdNu
-		&& SDpapen == SDpapenNu && acrep == acrepNu && termant == termantNu && acu == acuNu && citac == citacNu && Cconc == CconcNu && Cnega == CnegaNu && ONapre == ONapreNu && ONcomp == ONcompNu && DRppa == DRppaNu
-		&& DRppd == DRppdNu && DRppmp == DRppmpNu && apenoadmi == apenoadmiNu && SDIrev == SDIrevNu && SDImod == SDImodNu && SDIconf == SDIconfNu && Reproc == ReprocNu && MJGorap == MJGorapNu && MJGorcomp == MJGorcompNu
-		&& MJCorapre == MJCorapreNu && MJCordcomp == MJCordcompNu && totAudiencias == totAudienciasNu && ACPREaie == ACPREaieNu && ACPREaio == ACPREaioNu && SOALscp == SOALscpNu && SOALarep == SOALarepNu && SENabsol == SENabsolNu
-		&& SENmixc == SENmixcNu && SENsreda == SENsredaNu && SENnocreda == SENnocredaNu && INCOMdecre == INCOMdecreNu && INCOMadmi == INCOMadmiNu && ARJnap == ARJnapNu && ARJnar == ARJnarNu && ARJncoap == ARJncoapNu
-		&& ARJnoc == ARJnocNu && ARJppmc == ARJppmcNu && ARJtps == ARJtpsNu && ARJrvp == ARJrvpNu && ARJrnscp == ARJrnscpNu && ARJnapa == ARJnapaNu && ARJsdpa == ARJsdpaNu && ARJemp == ARJempNu && ARTEdap == ARTEdapNu
-		&& ARTEsd == ARTEsdNu && DSEDrfmp == DSEDrfmpNu && DSEDmfmp == DSEDmfmpNu && DSEDcfmp == DSEDcfmpNu && csjdsm == csjdsmNu && auvinc == vincprocesoNU && scpro == scprocesoNu && proabre == proAbreNu && SENcon == condenaNu
-		&& OSapre == OSapreNu && OScomp == OScompNu && medidasProteccion == medidasProteccionNu && intervencionTR == intervencionTRNu && tomaMuestras == tomaMuestrasNu && exhumacion == exhumacionNu
-		&& obDatosReservados == obDatosReservadosNu && intervencionCME == intervencionCMENu && provPrecautoria == provPrecautoriaNu && provPrecautoria == provPrecautoriaNu && cadCustodia == cadCustodiaNu
-		&& InspInmuebles == InspInmueblesNu && entrevistasTestigos == entrevistasTestigosNu && reconocimientoPer == reconocimientoPerNu && solInfoPericiales == solInfoPericialesNu && InfInstiSeg == InfInstiSegNu
-		&& examenFisPersona == examenFisPersonaNu && audJuiOral == audJuiOralNu && audFallo == audFalloNu && absolutorio == absolutorioNu && AudIndiSan == AudIndiSanNu && procEspecial == procEspecialNu
-		&& audCondenatorio == audCondenatorioNu && mecanismosAceleracion == mecanismosAceleracionNu && apeamparo == apeamparoNu && amparoDirecto == amparoDirectoNu && InspLugDis == InspLugDisNu
-		&& SDuno == SDunoNu && SDdos == SDdosNu && SDtres == SDtresNu && SDcuatro == SDcuatroNu && SDcinco == SDcincoNu && SDseis == SDseisNu && SDsiete == SDsieteNu && SDocho == SDochoNu && SDnueve == SDnueveNu && SDdiez == SDdiezNu) {
+	if (SDpmuImpu == SDpmuImpu && cdete == cdeteNu && sdete == sdeteNu && FIsolic == FIsolicNu && FIotor == FIotorNU && FInega == FInegaNu && legal == legalNu && ilegal == ilegalNu && criopor == crioporNu && aunvinc == aunvincNu && mix == mixNu && MCsol == MCsolNu && MCotor == MCotorNu && MCnega == MCnegaNu && ppofic == ppoficNu && ppjus == ppjusNu && ppanju == ppanjuNu && exgaeco == exgaecoNu && emvien == emvienNu && incuval == incuvalNu && pssafj == pssafjNu && scviind == scviindNu && pcdrclug == pcdrclugNu && pccdper == pccdperNu && sindom == sindomNu && steeca == steecaNu && steapl == steaplNu && coloele == coloeleNu && rpdmjd == rpdmjdNu && SDpapen == SDpapenNu && acrep == acrepNu && termant == termantNu && acu == acuNu && citac == citacNu && Cconc == CconcNu && Cnega == CnegaNu && ONapre == ONapreNu && ONcomp == ONcompNu && DRppa == DRppaNu && DRppd == DRppdNu && DRppmp == DRppmpNu && apenoadmi == apenoadmiNu && SDIrev == SDIrevNu && SDImod == SDImodNu && SDIconf == SDIconfNu && Reproc == ReprocNu && MJGorap == MJGorapNu && MJGorcomp == MJGorcompNu && MJCorapre == MJCorapreNu && MJCordcomp == MJCordcompNu && totAudiencias == totAudienciasNu && ACPREaie == ACPREaieNu && ACPREaio == ACPREaioNu && SOALscp == SOALscpNu && SOALarep == SOALarepNu && SENabsol == SENabsolNu && SENmixc == SENmixcNu && SENsreda == SENsredaNu && SENnocreda == SENnocredaNu && INCOMdecre == INCOMdecreNu && INCOMadmi == INCOMadmiNu && ARJnap == ARJnapNu && ARJnar == ARJnarNu && ARJncoap == ARJncoapNu && ARJnoc == ARJnocNu && ARJppmc == ARJppmcNu && ARJtps == ARJtpsNu && ARJrvp == ARJrvpNu && ARJrnscp == ARJrnscpNu && ARJnapa == ARJnapaNu && ARJsdpa == ARJsdpaNu && ARJemp == ARJempNu && ARTEdap == ARTEdapNu && ARTEsd == ARTEsdNu && DSEDrfmp == DSEDrfmpNu && DSEDmfmp == DSEDmfmpNu && DSEDcfmp == DSEDcfmpNu && csjdsm == csjdsmNu && auvinc == vincprocesoNU && scpro == scprocesoNu && proabre == proAbreNu && SENcon == condenaNu && OSapre == OSapreNu && OScomp == OScompNu && medidasProteccion == medidasProteccionNu && intervencionTR == intervencionTRNu && tomaMuestras == tomaMuestrasNu && exhumacion == exhumacionNu && obDatosReservados == obDatosReservadosNu && intervencionCME == intervencionCMENu && provPrecautoria == provPrecautoriaNu && provPrecautoria == provPrecautoriaNu && cadCustodia == cadCustodiaNu && InspInmuebles == InspInmueblesNu && entrevistasTestigos == entrevistasTestigosNu && reconocimientoPer == reconocimientoPerNu && solInfoPericiales == solInfoPericialesNu && InfInstiSeg == InfInstiSegNu && examenFisPersona == examenFisPersonaNu && audJuiOral == audJuiOralNu && audFallo == audFalloNu && absolutorio == absolutorioNu && AudIndiSan == AudIndiSanNu && procEspecial == procEspecialNu && audCondenatorio == audCondenatorioNu && mecanismosAceleracion == mecanismosAceleracionNu && apeamparo == apeamparoNu && amparoDirecto == amparoDirectoNu && InspLugDis == InspLugDisNu) {
 		//cont = document.getElementById('respuestaGuardalitig');    
-	
 		ajax = objetoAjax();
 		ajax.open("POST", "format/litigacion/guardarLitigacion.php");
 		ajax.onreadystatechange = function () {
@@ -701,8 +642,7 @@ function guardarLitigacion(idEnlace, mes, anio, idMp, idUnidad) {
 			+ "&ARJrvp=" + ARJrvp + "&ARJrnscp=" + ARJrnscp + "&ARJnapa=" + ARJnapa + "&ARJsdpa=" + ARJsdpa + "&ARJemp=" + ARJemp + "&ARTEdap=" + ARTEdap + "&ARTEsd=" + ARTEsd + "&DSEDrfmp=" + DSEDrfmp + "&DSEDmfmp=" + DSEDmfmp + "&DSEDcfmp=" + DSEDcfmp + "&csjdsm=" + csjdsm + "&legal=" + legal + "&ilegal=" + ilegal + "&SDpmuImpu=" + SDpmuImpu + "&recibiOtmp=" + recibiOtmp + "&cesefunciones=" + cesefunciones
 			+ "&OSapre=" + OSapre + "&OScomp=" + OScomp + "&medidasProteccion=" + medidasProteccion + "&MPV=" + MPV + "&intervencionTR=" + intervencionTR + "&tomaMuestras=" + tomaMuestras + "&exhumacion=" + exhumacion + "&obDatosReservados=" + obDatosReservados + "&intervencionCME=" + intervencionCME + "&provPrecautoria=" + provPrecautoria + "&cadCustodia=" + cadCustodia
 			+ "&InspLugDis=" + InspLugDis + "&InspInmuebles=" + InspInmuebles + "&entrevistasTestigos=" + entrevistasTestigos + "&reconocimientoPer=" + reconocimientoPer + "&solInfoPericiales=" + solInfoPericiales + "&InfInstiSeg=" + InfInstiSeg + "&examenFisPersona=" + examenFisPersona + "&audJuiOral=" + audJuiOral + "&audFallo=" + audFallo + "&absolutorio=" + absolutorio
-			+ "&AudIndiSan=" + AudIndiSan + "&procEspecial=" + procEspecial + "&audCondenatorio=" + audCondenatorio + "&mecanismosAceleracion=" + mecanismosAceleracion + "&apeamparo=" + apeamparo + "&amparoDirecto=" + amparoDirecto + "&amparoIndirecto=" + amparoIndirecto
-			+ "&SDuno=" + SDuno + "&SDdos=" + SDdos + "&SDtres=" + SDtres + "&SDcuatro=" + SDcuatro + "&SDcinco=" + SDcinco + "&SDseis=" + SDseis + "&SDsiete=" + SDsiete + "&SDocho=" + SDocho + "&SDnueve=" + SDnueve + "&SDdiez=" + SDdiez);
+			+ "&AudIndiSan=" + AudIndiSan + "&procEspecial=" + procEspecial + "&audCondenatorio=" + audCondenatorio + "&mecanismosAceleracion=" + mecanismosAceleracion + "&apeamparo=" + apeamparo + "&amparoDirecto=" + amparoDirecto + "&amparoIndirecto=" + amparoIndirecto);
 
 	} else {
 
@@ -797,7 +737,7 @@ function existenuclitigacion(nuc, idMp, estatResolucion, mes, anio, idUnidad, de
 
 
 
-	acc = "existeNuclitigacion";
+	acc = "existeNuclitigacion"; 
 
 	ajax = objetoAjax();
 	ajax.open("POST", "format/litigacion/accionesNucsLit.php");
@@ -806,7 +746,7 @@ function existenuclitigacion(nuc, idMp, estatResolucion, mes, anio, idUnidad, de
 		if (ajax.readyState == 4 && ajax.status == 200) {
 
 			var cadCodificadaJSON = ajax.responseText;
-			var objDatos = eval("(" + cadCodificadaJSON + ")");
+			var objDatos = eval("(" + cadCodificadaJSON + ")");					
 
 			if (objDatos.first == "judicializado") {
 				swal("", "El NUC ya fue judicializado.\n\n Ministerio Público: " + objDatos.nomCompleto + '\n Unidad: ' + objDatos.unidad + ' - ' + objDatos.fiscalia, "warning");
@@ -816,7 +756,7 @@ function existenuclitigacion(nuc, idMp, estatResolucion, mes, anio, idUnidad, de
 
 					if (objDatos.first == "SI") {
 						getExpedienteLit("expedCont", nuc);
-
+	
 						if (estatResolucion == 1 || estatResolucion == 2 || estatResolucion == 3 || estatResolucion == 4 ||
 							estatResolucion == 17 || estatResolucion == 18 || estatResolucion == 20 || estatResolucion == 21 ||
 							estatResolucion == 22 || estatResolucion == 23 || estatResolucion == 24 || estatResolucion == 25 ||
@@ -841,7 +781,7 @@ function existenuclitigacion(nuc, idMp, estatResolucion, mes, anio, idUnidad, de
 
 
 
-
+	
 
 		}
 	}

@@ -116,6 +116,21 @@ function getJuzgadosFiscaliasProcesosPenales($conn, $idFiscalia)
 	}
 }
 
+function getTramiteAnteriorProcesos($conn, $mesAnterior, $anioAnte, $fiscaliaID, $juzgado)
+{
+	$query = " SELECT [totalTramite] FROM [SIRE].[procesosPenales].[datosProcesosPenales] WHERE idFiscalia = $fiscaliaID AND idJuzgadoPenal = $juzgado AND anio = $anioAnte AND mes = $mesAnterior";
+
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+		$arreglo[$indice][0] = $row['totalTramite'];
+		$indice++;
+	}
+	if (isset($arreglo)) {
+		return $arreglo;
+	}
+}
+
 function getRegistrosProcesosPenalesData($conn, $mes, $anio, $fiscalia, $juz)
 {
 	$query = " SELECT [p1],[p2],[p3],[p4],[p5],[p6],[p7],[p8],[p9],[p10],[p11],[p12],[p13],[p14]
@@ -228,7 +243,7 @@ function getRegistrosProcesosPenalesDataEstatal($conn, $mes, $anio, $fiscalia)
 	,SUM([p57]) as p57,SUM([p58]) as p58,SUM([p59]) as p59,SUM([p60]) as p60,SUM([p61]) as p61,SUM([p62]) as p62,SUM([p63]) as p63,SUM([p64]) as p64,SUM([p65]) as p65,SUM([p66]) as p66,SUM([p67]) as p67,SUM([p68]) as p68,SUM([p69]) as p69,SUM([p70]) as p70
 	,SUM([p71]) as p71,SUM([p72]) as p72,SUM([p73]) as p73,SUM([p74]) as p74,SUM([p75]) as p75,SUM([p76]) as p76,SUM([p77]) as p77,SUM([p78]) as p78,SUM([p79]) as p79,SUM([p80]) as p80,SUM([p81]) as p81,SUM([totalTramite]) as totalTramite
 	FROM [SIRE].[procesosPenales].[datosProcesosPenales] WHERE anio = $anio AND mes = $mes";
-	
+
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
@@ -422,4 +437,3 @@ function getRegistrosProcesosPenalesDataEstatalXfiscalia($conn, $mes, $anio, $fi
 		return $arreglo;
 	}
 }
-

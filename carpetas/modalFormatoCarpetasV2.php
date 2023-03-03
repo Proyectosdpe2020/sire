@@ -73,13 +73,13 @@ if ($anio <= 2021 && $mes <= 6) {
 		}
 
 		$existenciaAnt = getExistenciaAnteriorV2($conn, $mesAnterior, $anioAnte, $idUnidad, $idMp);
-		
-		
+
+
 
 		if ($existenciaAnt) {
 
 			$tramiteAnte = $existenciaAnt[0][0];
-		
+
 			$bandHabTramite = 0;
 		} else {
 
@@ -449,10 +449,10 @@ if ($anio <= 2021 && $mes <= 6) {
 						<div class="panel-body">
 							<h5 class="text-on-pannel"><strong> Existencia Anterior </strong></h5>
 							<input class="form-control input-md redondear fdesv" id="inputTramiteAnterior" type="number" value="<? if ($bandHabTramite == 1) {
-																																	echo $tramAnterior;
-																																} else {
-																																	echo $tramAnterior;
-																																} ?>" <? echo "readonly"; ?>>
+																																																																																																												echo $tramAnterior;
+																																																																																																											} else {
+																																																																																																												echo $tramAnterior;
+																																																																																																											} ?>" <? echo "readonly"; ?>>
 						</div>
 					</div><br>
 

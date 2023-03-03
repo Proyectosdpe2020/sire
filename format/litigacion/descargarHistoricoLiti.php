@@ -146,15 +146,15 @@
 	$objPHPExcel->getActiveSheet()->SetCellValue("D51", $data[0][22]);
 
 
-	$objPHPExcel->getActiveSheet()->SetCellValue("H72", $data[0][23]); //Sobreseimientos decretados
-	$objPHPExcel->getActiveSheet()->SetCellValue("H73", $data[0][24]); //Prescripción de la accion penal
-	$objPHPExcel->getActiveSheet()->SetCellValue("H74", $data[0][25]); //por mecanismos alternativos
-	$objPHPExcel->getActiveSheet()->SetCellValue("H75", $data[0][26]); //Acuerdo reparatorio
-	$objPHPExcel->getActiveSheet()->SetCellValue("H76", $data[0][27]); //Suspencion condicional del proceso
-	$objPHPExcel->getActiveSheet()->SetCellValue("H77", $data[0][28]); //Criterio de oportunidad
-	$objPHPExcel->getActiveSheet()->SetCellValue("H78", $data[0][29]); //Terminacion anticipada
+	// $objPHPExcel->getActiveSheet()->SetCellValue("H72", $data[0][23]); //Sobreseimientos decretados
+	// $objPHPExcel->getActiveSheet()->SetCellValue("H73", $data[0][24]); //Prescripción de la accion penal
+	// $objPHPExcel->getActiveSheet()->SetCellValue("H74", $data[0][25]); //por mecanismos alternativos
+	// $objPHPExcel->getActiveSheet()->SetCellValue("H75", $data[0][26]); //Acuerdo reparatorio
+	// $objPHPExcel->getActiveSheet()->SetCellValue("H76", $data[0][27]); //Suspencion condicional del proceso
+	// $objPHPExcel->getActiveSheet()->SetCellValue("H77", $data[0][28]); //Criterio de oportunidad
+	// $objPHPExcel->getActiveSheet()->SetCellValue("H78", $data[0][29]); //Terminacion anticipada
 	
-	$objPHPExcel->getActiveSheet()->SetCellValue("H79", $data[0][31]); //Acumulación
+	// $objPHPExcel->getActiveSheet()->SetCellValue("H79", $data[0][31]); //Acumulación
 	$objPHPExcel->getActiveSheet()->SetCellValue("D52", $data[0][32]); //Citaciones
 
 	$objPHPExcel->getActiveSheet()->SetCellValue("D54", $data[0][33]); //Cateos solicitados
@@ -274,6 +274,17 @@
 
 	$objPHPExcel->getActiveSheet()->SetCellValue("H99", $data[0][90]); //Por cambios de situacion juridica declarados sin materia
 	$objPHPExcel->getActiveSheet()->SetCellValue("H101", $data[0][106]); //Canalizados por cese de funciones
+
+	$objPHPExcel->getActiveSheet()->SetCellValue("D101", $data[0][140]); //Canalizados por cese de funciones
+	$objPHPExcel->getActiveSheet()->SetCellValue("D102", $data[0][141]); //Canalizados por cese de funciones
+	$objPHPExcel->getActiveSheet()->SetCellValue("D103", $data[0][142]); //Canalizados por cese de funciones
+	$objPHPExcel->getActiveSheet()->SetCellValue("D104", $data[0][143]); //Canalizados por cese de funciones
+	$objPHPExcel->getActiveSheet()->SetCellValue("D105", $data[0][144]); //Canalizados por cese de funciones
+	$objPHPExcel->getActiveSheet()->SetCellValue("D106", $data[0][145]); //Canalizados por cese de funciones
+	$objPHPExcel->getActiveSheet()->SetCellValue("D107", $data[0][146]); //Canalizados por cese de funciones
+	$objPHPExcel->getActiveSheet()->SetCellValue("D108", $data[0][147]); //Canalizados por cese de funciones
+	$objPHPExcel->getActiveSheet()->SetCellValue("D109", $data[0][148]); //Canalizados por cese de funciones
+	$objPHPExcel->getActiveSheet()->SetCellValue("D110", $data[0][149]); //Canalizados por cese de funciones
 
 	$nombre_reporte = $nombrereporte.".xlsx";
 

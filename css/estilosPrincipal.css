@@ -371,10 +371,27 @@ width: 100%;
   background-position: center; 
  background-size: 100%; 
   background-position-y: 50%;
+}
+
+.imgBIVizual{
+
+
+  height: 70vh !important;
+  margin: 0 auto;
+  margin-top: 30%;
+  background-image: url('../img/Icono BI Evaluación 1.png') !important;
+    background-size: cover;
+ background-repeat: no-repeat;  
+  background-position: center; 
+ background-size: 100%; 
+  background-position-y: 50%;
 
 
 
 }
+
+
+
 
 
 
@@ -395,6 +412,12 @@ width: 100%;
 
     background-image: url('../img/Icono carpetas 2.2.png') !important;
 }
+
+.BILOGO:hover .imgBIVizual{
+
+  background-image: url('../img/Icono BI Evaluación 2.png') !important;
+}
+
 
 
 .litigacionLogo:hover{

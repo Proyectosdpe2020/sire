@@ -108,22 +108,22 @@ $data = getDatosLitigacionMpUnidad2($conn, $mesCapturar, $anioCaptura, $idUnidad
 						<tr>
 							<td style="width: 30%;" class="tdFiscalia"><label class="labelFiscalia">Ministerio Público:</label></td>
 							<td colspan="3" style="width: 70%;" class="">
-							<div id="contSelectedMps">
-								<select onchange="getDataHistoricaBDlitiga(<? echo $idUnidad; ?>)" id="mpsEnlaces" class="form-control redondear selectTranparent">
-									<option value="0" >Todos</option>
+								<div id="contSelectedMps">
+									<select onchange="getDataHistoricaBDlitiga(<? echo $idUnidad; ?>)" id="mpsEnlaces" class="form-control redondear selectTranparent">
+										<option value="0">Todos</option>
 
-									<?php
+										<?php
 
-									$dataMinisterios = getMpsCapturedLitigacion($conn, $idUnidad, $anioCaptura, $mesCapturar);
-									for ($p = 0; $p < sizeof($dataMinisterios); $p++) {
-										$idMp = $dataMinisterios[$p][0];
-										$nomMp = $dataMinisterios[$p][1];
-									?> <option value="<? echo $idMp ?>"><?php echo $nomMp; ?></option> <?
-																																																																																																															}
-																																																																																																																?>
+										$dataMinisterios = getMpsCapturedLitigacion($conn, $idUnidad, $anioCaptura, $mesCapturar);
+										for ($p = 0; $p < sizeof($dataMinisterios); $p++) {
+											$idMp = $dataMinisterios[$p][0];
+											$nomMp = $dataMinisterios[$p][1];
+										?> <option value="<? echo $idMp ?>"><?php echo $nomMp; ?></option> <?
+																																																																												}
+																																																																													?>
 
-								</select>
-							</div>
+									</select>
+								</div>
 							</td>
 						</tr>
 						<tr>
@@ -133,17 +133,17 @@ $data = getDatosLitigacionMpUnidad2($conn, $mesCapturar, $anioCaptura, $idUnidad
 								<select id="anioHistoriqueLiti" name="selMes" onchange="loadDataSelectMps(<? echo $idUnidad; ?>)" tabindex="6" class="form-control redondear selectTranparent" required>
 
 									<?
-									$arrayANios = array(2020, 2021, 2022,2023,2024,2025,2026,2027,2028,2029,2030);
+									$arrayANios = array(2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030);
 
 									for ($p = 0; $p < sizeof($arrayANios); $p++) {
 
 										if ($arrayANios[$p] == $anioCaptura) {
 									?> <option value="<? echo $arrayANios[$p];  ?>" selected><? echo $arrayANios[$p] ?></option> <?
-											} else {
-													?> <option value="<? echo $arrayANios[$p]; ?>"><? echo $arrayANios[$p]  ?></option> <?
-													}
-										}
-										?>
+																																																																																																					} else {
+																																																																																																						?> <option value="<? echo $arrayANios[$p]; ?>"><? echo $arrayANios[$p]  ?></option> <?
+																																																																																																																																																																																									}
+																																																																																																																																																																																								}
+																																																																																																																																																																																										?>
 								</select>
 
 							</td>
@@ -986,56 +986,135 @@ $data = getDatosLitigacionMpUnidad2($conn, $mesCapturar, $anioCaptura, $idUnidad
 												<center><? echo $data[0][85] ?></center>
 											</td>
 										</tr>
+										<!-- AQUI ESTA SECCION SE OCULTA YA QUE SE MODIFICARON LOS SOBRESEIMIENTOS DECRETADOS -->
+										<div id="seccionSobreseimientos">
+											<tr style="display:none !important;">
+												<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Sobreseimientos decretados</label></td>
+												<td style="width: 3%; font-weight: bold" class="tdFiscalia">
+													<center><br><? echo $data[0][23] ?></center>
+												</td>
+											</tr>
+											<tr style="display:none !important;">
+												<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Prescripción de la acción penal (-)</label></td>
+												<td style="width: 3%; font-weight: bold" class="tdFiscalia">
+													<center><? echo $data[0][24] ?></center>
+												</td>
+											</tr>
+											<tr style="display:none !important;">
+												<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Por mecanismos alternativos (-)</label></td>
+												<td style="width: 3%; font-weight: bold" class="tdFiscalia">
+													<center><? echo $data[0][25] ?></center>
+												</td>
+											</tr>
+											<tr style="display:none !important;">
+												<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Acuerdo reparatorio</label></td>
+												<td style="width: 3%; font-weight: bold" class="tdFiscalia">
+													<center><? echo $data[0][26] ?></center>
+												</td>
+											</tr>
+											<tr style="display:none !important;">
+												<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Suspension condicional del proceso</label></td>
+												<td style="width: 3%; font-weight: bold" class="tdFiscalia">
+													<center><? echo $data[0][27] ?></center>
+												</td>
+											</tr>
+											<tr style="display:none !important;">
+												<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Criterio de oportunidad</label></td>
+												<td style="width: 3%; font-weight: bold" class="tdFiscalia">
+													<center><? echo $data[0][28] ?></center>
+												</td>
+											</tr>
+											<tr style="display:none !important;">
+												<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Terminación anticipada (-)</label></td>
+												<td style="width: 3%; font-weight: bold" class="tdFiscalia">
+													<center><? echo $data[0][29] ?></center>
+												</td>
+											</tr>
+
+											<tr style="display:none !important;">
+												<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Acumulación (-)</label></td>
+												<td style="width: 3%; font-weight: bold" class="tdFiscalia">
+													<center><br><? echo $data[0][31] ?></center>
+												</td>
+											</tr>
+										</div>
+										<!-- AQUI ESTA SECCION SE OCULTA YA QUE SE MODIFICARON LOS SOBRESEIMIENTOS DECRETADOS -->
 
 										<tr>
-											<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Sobreseimientos decretados</label></td>
+											<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">SOBRESEIMIENTOS DECRETADOS</label></td>
+										</tr>
+										<tr>
+											<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia2">Cuando el Ministerio Público formule conclusiones no acusatorias, con autorización expresa del subprocurador de justicia respectivo
+</label></td>
 											<td style="width: 3%; font-weight: bold" class="tdFiscalia">
-												<center><br><? echo $data[0][23] ?></center>
+												<center><br><? echo $data[0][140] ?></center>
 											</td>
 										</tr>
 										<tr>
-											<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Prescripción de la acción penal (-)</label></td>
+											<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia2">Cuando se acredite la existencia de alguna causa que extinga la acción penal
+</label></td>
 											<td style="width: 3%; font-weight: bold" class="tdFiscalia">
-												<center><? echo $data[0][24] ?></center>
+												<center><br><? echo $data[0][141] ?></center>
 											</td>
 										</tr>
 										<tr>
-											<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Por mecanismos alternativos (-)</label></td>
+											<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia2">Cuando no se hubiere dictado auto de formal prisión o de sujeción a proceso y aparezca que el hecho que motiva la acusación no es delictuoso, o cuando, habiéndose agotado la averiguación, se compruebe que no existió el hecho delictivo que la motivó
+</label></td>
 											<td style="width: 3%; font-weight: bold" class="tdFiscalia">
-												<center><? echo $data[0][25] ?></center>
+												<center><br><? echo $data[0][142] ?></center>
 											</td>
 										</tr>
 										<tr>
-											<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Acuerdo reparatorio</label></td>
+											<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia2">Cuando el ofendido o su representante legal se desista de la querella
+</label></td>
 											<td style="width: 3%; font-weight: bold" class="tdFiscalia">
-												<center><? echo $data[0][26] ?></center>
+												<center><br><? echo $data[0][143] ?></center>
 											</td>
 										</tr>
 										<tr>
-											<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Suspension condicional del proceso</label></td>
+											<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia2">Cuando se acredite plenamente que el inculpado es menor de dieciséis años. Si esto ocurre, el juez lo pondrá de inmediato a disposición del consejo tutelar que debe conocer del asunto, al que remitirá el expediente o copia certificada de las actuaciones
+</label></td>
 											<td style="width: 3%; font-weight: bold" class="tdFiscalia">
-												<center><? echo $data[0][27] ?></center>
+												<center><br><? echo $data[0][144] ?></center>
 											</td>
 										</tr>
 										<tr>
-											<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Criterio de oportunidad</label></td>
+											<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia2">Cuando resulte evidente que se sigue proceso contra determinado inculpado por error de persona
+</label></td>
 											<td style="width: 3%; font-weight: bold" class="tdFiscalia">
-												<center><? echo $data[0][28] ?></center>
+												<center><br><? echo $data[0][145] ?></center>
 											</td>
 										</tr>
 										<tr>
-											<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Terminación anticipada (-)</label></td>
+											<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia2">Cuando exista sentencia ejecutoria en relación a los mismos hechos
+</label></td>
 											<td style="width: 3%; font-weight: bold" class="tdFiscalia">
-												<center><? echo $data[0][29] ?></center>
+												<center><br><? echo $data[0][146] ?></center>
+											</td>
+										</tr>
+										<tr>
+											<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia2">Cuando, observándose lo dispuesto por el último párrafo del artículo 249, se haya decretado la libertad por falta de pruebas para procesar o por desvanecimiento de datos
+</label></td>
+											<td style="width: 3%; font-weight: bold" class="tdFiscalia">
+												<center><br><? echo $data[0][147] ?></center>
+											</td>
+										</tr>
+										<tr>
+											<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia2">Cuando esté plenamente probada en favor del inculpado alguna causa excluyente de incriminación
+</label></td>
+											<td style="width: 3%; font-weight: bold" class="tdFiscalia">
+												<center><br><? echo $data[0][148] ?></center>
+											</td>
+										</tr>
+										<tr>
+											<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia2">Cuando esté debidamente acreditada en autos alguna otra causa de inimputabilidad en favordel procesado
+</label></td>
+											<td style="width: 3%; font-weight: bold" class="tdFiscalia">
+												<center><br><? echo $data[0][149] ?></center>
 											</td>
 										</tr>
 
-										<tr>
-											<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Acumulación (-)</label></td>
-											<td style="width: 3%; font-weight: bold" class="tdFiscalia">
-												<center><br><? echo $data[0][31] ?></center>
-											</td>
-										</tr>
+
 
 										<tr>
 											<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Incompetencias</label></td>

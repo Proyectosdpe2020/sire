@@ -139,13 +139,18 @@ function insertMedCautelar_db(idEstatusNucs, estatus, nuc, opcInsert){
 	var fechaCierreInvest = document.getElementById("fechaCierreInvest").value;
 	var formulacionAcusacion = document.getElementById("formulacionAcusacion").value;
 	var fechaEscritoAcusacion= document.getElementById("fechaEscritoAcusacion").value;
+	var edad_imputado_medida = document.getElementById("edad_imputado_medida").value;
+	var temporalida_medida = document.getElementById("temporalida_medida").value;
+	var parentesco_victima = document.getElementById("parentesco_victima").value;
+	var id_sexo = $('input[name="id_sexo"]:checked').val(); 
 
-	if(fechaCierreInvest != ""){
+	if(fechaCierreInvest != "" && edad_imputado_medida != "" && temporalida_medida != "" && parentesco_victima != "" && typeof id_sexo !== 'undefined'){
 		$.ajax({
 			type: "POST",
 		 dataType: "html",
 			url:  "format/litigacion/insertSenap/insert_FormMedCautelar.php",
-		 data: 'idEstatusNucs='+idEstatusNucs+'&nuc='+nuc+'&opcInsert='+opcInsert+'&fechaCierreInvest='+fechaCierreInvest+'&formulacionAcusacion='+formulacionAcusacion+'&fechaEscritoAcusacion='+fechaEscritoAcusacion,
+		 data: 'idEstatusNucs='+idEstatusNucs+'&nuc='+nuc+'&opcInsert='+opcInsert+'&fechaCierreInvest='+fechaCierreInvest+'&formulacionAcusacion='+formulacionAcusacion+'&fechaEscritoAcusacion='+fechaEscritoAcusacion+
+		       '&edad_imputado_medida='+edad_imputado_medida+'&temporalida_medida='+temporalida_medida+'&parentesco_victima='+parentesco_victima+'&id_sexo='+id_sexo,
 		 success: function(respuesta){
 		 	var json = respuesta;
 		 	var obj = eval("(" + json + ")");
@@ -774,8 +779,12 @@ function sendDataMedCautelar(nuc, estatus, idMp, mes, anio, deten, idUnidad, opc
 	var fechaCierreInvest = document.getElementById("fechaCierreInvest").value;
 	var formulacionAcusacion = document.getElementById("formulacionAcusacion").value;
 	var fechaEscritoAcusacion= document.getElementById("fechaEscritoAcusacion").value;
+	var edad_imputado_medida = document.getElementById("edad_imputado_medida").value;
+	var temporalida_medida = document.getElementById("temporalida_medida").value;
+	var parentesco_victima = document.getElementById("parentesco_victima").value;
+	var id_sexo = $('input[name="id_sexo"]:checked').val(); 
 
-		if(fechaCierreInvest != "" ){
+		if(fechaCierreInvest != "" && edad_imputado_medida != "" && temporalida_medida != "" && parentesco_victima != "" && typeof id_sexo !== 'undefined'){
 			insertarNucLit(idMp,estatus,mes,anio,nuc,deten,idUnidad, opcInsert);
 		  $('#modalNucsLitigInfo').modal('hide');
 				$('#modalNucsLitig').modal('show');
@@ -894,12 +903,12 @@ function sendDataSentencias(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcI
 	if(estatus == 66){ var sentDerivaProcAbrv = "noData"; }else{ var sentDerivaProcAbrv = document.getElementById("sentDerivaProcAbrv").value; }
 	if(estatus == 66){ var fechaDictoProcAbrv = "noData"; }else{ var fechaDictoProcAbrv = document.getElementById("fechaDictoProcAbrv").value; }
 
-		//DATA IMPUTADO
- var nombre_imputado = document.getElementById("nombre_imputado").value; 
-	var apellido_paterno = document.getElementById("apellido_paterno").value; 
-	var apellido_materno = document.getElementById("apellido_materno").value; 
-	var edad = document.getElementById("edad").value; 
-	var id_sexo = $('input[name="id_sexo"]:checked').val(); 
+//DATA IMPUTADO
+ if(tipo_investigacion != 2) { var nombre_imputado = document.getElementById("nombre_imputado").value; } else { var nombre_imputado = 'null'; }
+	if(tipo_investigacion != 2) { var apellido_paterno = document.getElementById("apellido_paterno").value; } else { var apellido_paterno = 'null'; }
+	if(tipo_investigacion != 2) { var apellido_materno = document.getElementById("apellido_materno").value; } else { var apellido_materno = 'null'; }
+	if(tipo_investigacion != 2) { var edad = document.getElementById("edad").value; } else { var edad = 'null'; }
+	if(tipo_investigacion != 2) { var id_sexo = $('input[name="id_sexo"]:checked').val(); } else { var id_sexo = 'null'; }
 
 	if(typeof idCatModalidadEst !== 'undefined' && nombre_imputado != "" && apellido_paterno != "" && apellido_materno != "" && edad != "" && id_sexo != ""){
 		if(estatus == 14){
