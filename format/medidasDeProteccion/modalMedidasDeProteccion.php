@@ -296,3 +296,5 @@ if (isset($_POST["idMedida"])){
 	 <? } ?>
 </div>
 
+
+

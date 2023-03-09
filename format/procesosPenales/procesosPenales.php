@@ -821,7 +821,7 @@ $dataTramAnterior = getTramiteAnteriorProcesos($conn, $mesAnterior, $anioAnte, $
 											</div><br>
 											<label for="exampleInputEmail1" class=""><strong> ADMITIDAS:</strong></label>
 											<div class="row">
-												<div class="col-sm-6"><label for="exampleInputEmail1"> CON PROCESO EN TRAMITE (-): </label>
+												<div class="col-sm-6"><label for="exampleInputEmail1"> CON PROCESO EN TRAMITE (+): </label>
 													<input value="<?php if ($b == 1) {
 																												echo $data[0][56];
 																											} ?>" type="number" class="form-control" id="p57" aria-describedby="emailHelp" placeholder="Ingresa número">

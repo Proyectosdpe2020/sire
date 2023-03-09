@@ -636,7 +636,7 @@ for ($j = 0; $j < sizeof($arrayAnios); $j++) {
 						</div><br>
 						<label for="exampleInputEmail1" class=""><strong> ADMITIDAS:</strong></label>
 						<div class="row">
-							<div class="col-sm-6"><label for="exampleInputEmail1"> CON PROCESO EN TRAMITE (-): </label>
+							<div class="col-sm-6"><label for="exampleInputEmail1"> CON PROCESO EN TRAMITE (+): </label>
 								<input value="<?php 	echo $arraySumas[56];	 ?>" type="number" class="form-control" id="p57" aria-describedby="emailHelp" placeholder="Ingresa número">
 							</div>
 							<div class="col-sm-6"><label for="exampleInputEmail1"> CON PROCESO EN NO TRAMITE: </label>
