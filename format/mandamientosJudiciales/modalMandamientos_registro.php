@@ -83,6 +83,8 @@ if(sizeof($get_data_inculpado) > 0 ){
 	}
 }	
 
+$get_tipo_user = get_tipo_user($idEnlace);
+
 ?>
 
 
@@ -409,7 +411,7 @@ if(sizeof($get_data_inculpado) > 0 ){
 											<?if(sizeof($existe_inculpado) == 0  ){ 
 												?>
 												<div id="div_button_averiguacion_imputado" hidden>
-														<button type="button" class="btn btn-primary btn-lg" href="#inculpados" onclick="showModal_inculpados_av(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?>, 1)"><span class="glyphicon glyphicon-plus"></span> Agregar inculpado </button>
+														<button type="button" class="btn btn-primary btn-lg" href="#inculpados" onclick="showModal_inculpados_av(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?>, 1)" ><span class="glyphicon glyphicon-plus"></span> Agregar inculpado </button>
 												</div>
 										  	<div id="div_button_nuc_imputado">
 										  		<button type="button" class="btn btn-primary btn-lg" href="#inculpados" onclick="showModal_inculpados(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?>, 2)"><span class="glyphicon glyphicon-plus"></span> Agregar inculpado</button>
@@ -458,7 +460,7 @@ if(sizeof($get_data_inculpado) > 0 ){
 													<th><center><?echo $getData_inculpado[$h][16]; ?></center></th>
 													<th><center><?echo $getData_inculpado[$h][17]; ?></center></th>
 													<th><center><?echo $getData_inculpado[$h][18]->format('Y-m-d'); ?></center></th>
-													<td><center><center><img src="img/editarMandamiento2.png" data-toggle="modal" href="#mandamientos"  onclick="showEditar_mandamiento_inculpado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?>);"></center></td>
+													<td> <?if($get_tipo_user != 1){ ?> <center><center><img src="img/editarMandamiento2.png" data-toggle="modal" href="#mandamientos"  onclick="showEditar_mandamiento_inculpado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?>);"></center><? } ?></td>
 													</tr>
 													<? } ?>
 												</tbody>
@@ -591,9 +593,11 @@ if(sizeof($get_data_inculpado) > 0 ){
 						      <input type="radio" id="ES_PRINCIPAL" name="ES_PRINCIPAL" value="0" checked style="height:25px; width:25px;">
 						      <label for="ES_PRINCIPAL" style="font-size: 20px;">No</label>
 										</div>
+										<?if($get_tipo_user != 1){ ?> ?>
 										<div class="col-xs-12 col-sm-12  col-md-3">
 											<button type="button" id="btn_Agregar_Delito" class="btn btn-primary btn-lg" style="width: 100%;" onclick="agregar_delito(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , <? echo $GET_ID_MANDAMIENTO_INTERNO; ?>, <? echo $GET_ID_DATOS_INCULPADO; ?>)"><span class="glyphicon glyphicon-plus"></span> Agregar delito</button>
 										</div>
+									<? } ?>
 									</div><br>
 									<div class="row">
 										<div class="col-xs-12 col-sm-12  col-md-12">
@@ -618,7 +622,7 @@ if(sizeof($get_data_inculpado) > 0 ){
 													<th><center><?echo $getData_Delitos[$h][9]; ?></center></th>
 													<th><center><?echo $getData_Delitos[$h][11]; ?></center></th>
 													<th><center><?echo $getData_Delitos[$h][13]; ?></center></th>
-													<th><center><center><img src="img/editarMandamiento2.png" data-toggle="modal" href="#mandamientos"  onclick="editar_delito(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Delitos[$h][1]; ?> , <?echo $getData_Delitos[$h][2]; ?>);"><img src="img/eliminar.png"  onclick="elimiar_delito(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Delitos[$h][1]; ?> , <?echo $getData_Delitos[$h][2]; ?> , <?echo sizeof($existen_delitos); ?>);"></center></th>
+													<th><?if($get_tipo_user != 1){ ?><center><center><img src="img/editarMandamiento2.png" data-toggle="modal" href="#mandamientos"  onclick="editar_delito(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Delitos[$h][1]; ?> , <?echo $getData_Delitos[$h][2]; ?>);"><img src="img/eliminar.png"  onclick="elimiar_delito(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Delitos[$h][1]; ?> , <?echo $getData_Delitos[$h][2]; ?> , <?echo sizeof($existen_delitos); ?>);"></center><? } ?></th>
 													</tr>
 													<? } ?>
 												</tbody>
@@ -653,6 +657,7 @@ if(sizeof($get_data_inculpado) > 0 ){
 									<h3 class="panel-title">DATOS DEL AGRAVIADO (S) </h3>
 								</div>
 								<div class="panel-body">
+									<?if($get_tipo_user != 1){ ?>
 									<div class="row">
 										<div class="col-xs-12 col-sm-12  col-md-3">
 							   <div id="div_button_averiguacion_agraviados"  <? echo $hide_show_av; ?> >
@@ -662,7 +667,9 @@ if(sizeof($get_data_inculpado) > 0 ){
 												<button type="button" href="#agraviados" class="btn btn-primary btn-lg" style="width: 100%;" onclick="showModal_agraviados(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , 0 , 0)"><span class="glyphicon glyphicon-plus"></span> Agregar agraviado</button>
 									 </div>
 										</div>
-									</div><br>
+									</div>
+								<? } ?>
+									<br>
 									<div class="row">
 										<div class="col-xs-12 col-sm-12  col-md-12">
 											<label for="heard"><span class="glyphicon glyphicon-user"></span> DATOS GENERALES DEL AGRAVIADO (S)</label>
@@ -687,7 +694,7 @@ if(sizeof($get_data_inculpado) > 0 ){
 													<th><center><?echo $getData_Agraviados[$h][6]; ?></center></th>
 													<th><center><?echo $getData_Agraviados[$h][7]; ?></center></th>
 													<th><center><?echo $getData_Agraviados[$h][9]; ?></center></th>
-													<td><center><img src="img/editarMandamiento2.png" data-toggle="modal" href="#mandamientos"  onclick="showEditar_mandamiento_agraviado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Agraviados[$h][1]; ?> , <? echo $ID_MANDAMIENTO_INTERNO; ?> , 1);"><img src="img/eliminar.png"  onclick="elimiar_agraviado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Agraviados[$h][1]; ?> , <?echo $getData_Agraviados[$h][2]; ?>);"></center></td>
+													<td><?if($get_tipo_user != 1){ ?><center><img src="img/editarMandamiento2.png" data-toggle="modal" href="#mandamientos"  onclick="showEditar_mandamiento_agraviado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Agraviados[$h][1]; ?> , <? echo $ID_MANDAMIENTO_INTERNO; ?> , 1);"><img src="img/eliminar.png"  onclick="elimiar_agraviado(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $getData_Agraviados[$h][1]; ?> , <?echo $getData_Agraviados[$h][2]; ?>);"></center><? } ?></td>
 													</tr>
 													<? } ?>
 												</tbody>
@@ -749,7 +756,7 @@ if(sizeof($get_data_inculpado) > 0 ){
 	</div>
 	<!--DATOS GENERALES-->
 
-	
+<?if($get_tipo_user != 1){ ?>	
 <div class="modal-footer">
 	<div class="row">
 
@@ -769,4 +776,12 @@ if(sizeof($get_data_inculpado) > 0 ){
 		</div>
 	</div>
 </div>
-
+<? }else{ ?>
+<div class="modal-footer">
+	<div class="row">
+		<div class="col-xs-12 col-sm-12  col-md-12">
+			<button type="button" class="btn btn-default btn-lg" style="width: 100%;" data-dismiss="modal" onclick="close_modal_mandamientos_no_update(<? echo $idEnlace; ?>,<?echo $idfisca; ?>, <?echo $idUnidad; ?>)" >Cerrar</button>
+		</div>
+	</div>
+</div>
+<? } ?>

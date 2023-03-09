@@ -475,3 +475,24 @@ width: 100%;
 
     background-image: url('../img/Icono-Policia-2.2.png') !important;
 }
+
+.imgCentralMandamientos{
+
+  height: 70vh !important;
+  margin: 0 auto;
+  margin-top: 30%;
+  background-image: url('../img/Iconos Mandamientos Judiciales 1.png') !important;
+    background-size: cover;
+    background-size: cover;
+ background-repeat: no-repeat;  
+  background-position: center; 
+ background-size: 100%; 
+  background-position-y: 50%;
+
+
+}
+
+.BILOGO:hover .imgCentralMandamientos{
+
+  background-image: url('../img/Iconos Mandamientos Judiciales 2.png') !important;
+}

@@ -1620,6 +1620,7 @@ function enviarAindex(idArchivo) {
 	if (idArchivo == 11) { var e = "Trimestral"; }
 	if (idArchivo == 12) { var e = "PoliciaConsulta"; }
 	if (idArchivo == 15) { var e = "carpetasJudicializadas"; }
+	if (idArchivo == 18) { var e = "mandamientosJudiciales"; }
 
 	setTimeout("location.href = '" + e + "';", 10);
 
