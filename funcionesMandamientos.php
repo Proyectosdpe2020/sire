@@ -304,8 +304,9 @@ function getData_Mandamiento($conn, $ID_MANDAMIENTO_INTERNO){
 }
 
 function get_data_mandamientos_dia($conn, $idEnlace){
-	if($idEnlace == 500){
-		$query = " SELECT m.ID_MANDAMIENTO_INTERNO
+	if($idEnlace == 500  ){
+		$query = " SELECT 
+		                 m.ID_MANDAMIENTO_INTERNO
 												      ,m.ID_MANDAMIENTO
 													  			,m.EDO_ORDEN
 													  			,cat_Estatus.tipo as estado
@@ -316,6 +317,7 @@ function get_data_mandamientos_dia($conn, $idEnlace){
 													 			 ,cat_fisca.nom_fis as nombreFiscalia
 												      ,m.ID_MUNICIPIO
 													 			 ,cat_muni.municipio 
+													 			 ,m.FECHA_CAPTURA
 												  FROM mandamientos.dbo.A_MANDAMIENTOS m
 												  INNER JOIN mandamientos.catalogos.estado_actual_mandamiento cat_Estatus ON cat_Estatus.cv_est_act_man = m.EDO_ORDEN
 												  INNER JOIN mandamientos.catalogos.tipo_mandato cat_Mandato ON cat_Mandato.cv_mandato = m.ID_TIPO_MANDATO
@@ -335,6 +337,7 @@ function get_data_mandamientos_dia($conn, $idEnlace){
 													 			 ,cat_fisca.nom_fis as nombreFiscalia
 												      ,m.ID_MUNICIPIO
 													 			 ,cat_muni.municipio 
+													 			 ,m.FECHA_CAPTURA
 												  FROM mandamientos.dbo.A_MANDAMIENTOS m
 												  INNER JOIN mandamientos.catalogos.estado_actual_mandamiento cat_Estatus ON cat_Estatus.cv_est_act_man = m.EDO_ORDEN
 												  INNER JOIN mandamientos.catalogos.tipo_mandato cat_Mandato ON cat_Mandato.cv_mandato = m.ID_TIPO_MANDATO
@@ -354,6 +357,7 @@ function get_data_mandamientos_dia($conn, $idEnlace){
 		$arreglo[$indice][5]=$row['NO_PROCESO'];
 		$arreglo[$indice][6]=$row['nombreFiscalia'];
 		$arreglo[$indice][7]=$row['municipio'];
+		$arreglo[$indice][8]=$row['FECHA_CAPTURA'];
 		$indice++;
 	}
 	if(isset($arreglo)){return $arreglo;}
@@ -617,7 +621,113 @@ function get_data_Inculpado_id($conn, $ID_MANDAMIENTO_INTERNO){
 	if(isset($arreglo)){return $arreglo;}
 }
 
+function getDataAnio_Mandamientos(){
+	$anio_captura_inicial = 2022; //Año inicial de captura en sire mandamientos.
+	$anio_actual = date("Y");
+	$j=0;
+	for($i = $anio_captura_inicial ; $i <= $anio_actual ; $i++){
+			$anio_captura[$j] =  $i;
+			$j++;
+	}
+	if(isset($anio_captura)){return $anio_captura;}
+}
 
+function get_data_enlaceFiscalia($conn){
+	$query = " SELECT  idFiscalia
+	                  ,nUnidad
+	                  ,idEnlace
+	                  ,estatus
+	                   FROM mandamientos.catalogos.enlaceFiscalia where estatus = 'VI' ";
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][1]=$row['idFiscalia'];
+		$arreglo[$indice][2]=$row['nUnidad'];
+		$arreglo[$indice][3]=$row['idEnlace'];
+		$arreglo[$indice][4]=$row['estatus'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
+
+function get_data_mandamientos_dia_administrador($conn, $idEnlace, $fiscalia, $mes_mandamiento=0, $anio_mandamiento=0){
+	if($fiscalia == 0 ){
+		$query = " SELECT 
+		                 m.ID_MANDAMIENTO_INTERNO
+												      ,m.ID_MANDAMIENTO
+													  			,m.EDO_ORDEN
+													  			,cat_Estatus.tipo as estado
+												      ,m.ID_TIPO_MANDATO
+													  			,cat_Mandato.tipo as tipo
+												      ,m.NO_PROCESO
+												      ,m.FISCALIA
+													 			 ,cat_fisca.nom_fis as nombreFiscalia
+												      ,m.ID_MUNICIPIO
+													 			 ,cat_muni.municipio 
+													 			 ,m.FECHA_CAPTURA
+													 			 ,m.CARPETA_INV
+													 			 ,m.NO_AVERIGUACION
+													 			 ,m.TIPO_INVESTIGACION
+												  FROM mandamientos.dbo.A_MANDAMIENTOS m
+												  INNER JOIN mandamientos.catalogos.estado_actual_mandamiento cat_Estatus ON cat_Estatus.cv_est_act_man = m.EDO_ORDEN
+												  INNER JOIN mandamientos.catalogos.tipo_mandato cat_Mandato ON cat_Mandato.cv_mandato = m.ID_TIPO_MANDATO
+												  INNER JOIN mandamientos.catalogos_int.fiscalias cat_fisca ON cat_fisca.id = m.FISCALIA
+												  INNER JOIN mandamientos.catalogos.municipios cat_muni ON cat_muni.cv_municipio = m.ID_MUNICIPIO 
+												   WHERE NOT m.idEnlace = 347 AND DATEPART(MONTH,  FECHA_CAPTURA) = $mes_mandamiento AND DATEPART(YEAR,  FECHA_CAPTURA) = $anio_mandamiento
+												  ORDER BY  m.ID_MANDAMIENTO_INTERNO DESC ";
+	}else{
+		$query = " SELECT m.ID_MANDAMIENTO_INTERNO
+												      ,m.ID_MANDAMIENTO
+													  			,m.EDO_ORDEN
+													  			,cat_Estatus.tipo as estado
+												      ,m.ID_TIPO_MANDATO
+													  			,cat_Mandato.tipo as tipo
+												      ,m.NO_PROCESO
+												      ,m.FISCALIA
+													 			 ,cat_fisca.nom_fis as nombreFiscalia
+												      ,m.ID_MUNICIPIO
+													 			 ,cat_muni.municipio 
+													 			 ,m.FECHA_CAPTURA
+													 			 ,m.CARPETA_INV
+													 			 ,m.NO_AVERIGUACION
+													 			 ,m.TIPO_INVESTIGACION
+												  FROM mandamientos.dbo.A_MANDAMIENTOS m
+												  INNER JOIN mandamientos.catalogos.estado_actual_mandamiento cat_Estatus ON cat_Estatus.cv_est_act_man = m.EDO_ORDEN
+												  INNER JOIN mandamientos.catalogos.tipo_mandato cat_Mandato ON cat_Mandato.cv_mandato = m.ID_TIPO_MANDATO
+												  INNER JOIN mandamientos.catalogos_int.fiscalias cat_fisca ON cat_fisca.id = m.FISCALIA
+												  INNER JOIN mandamientos.catalogos.municipios cat_muni ON cat_muni.cv_municipio = m.ID_MUNICIPIO 
+												  WHERE m.idEnlace = $fiscalia AND DATEPART(MONTH,  FECHA_CAPTURA) = $mes_mandamiento AND DATEPART(YEAR,  FECHA_CAPTURA) = $anio_mandamiento
+												  ORDER BY  m.ID_MANDAMIENTO_INTERNO DESC ";
+	}
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][1]=$row['ID_MANDAMIENTO_INTERNO'];
+		$arreglo[$indice][2]=$row['ID_MANDAMIENTO'];
+		$arreglo[$indice][3]=$row['estado'];
+		$arreglo[$indice][4]=$row['tipo'];
+		$arreglo[$indice][5]=$row['NO_PROCESO'];
+		$arreglo[$indice][6]=$row['nombreFiscalia'];
+		$arreglo[$indice][7]=$row['municipio'];
+		$arreglo[$indice][8]=$row['FECHA_CAPTURA'];
+		$arreglo[$indice][9]=$row['CARPETA_INV'];
+		$arreglo[$indice][10]=$row['NO_AVERIGUACION'];
+		$arreglo[$indice][11]=$row['TIPO_INVESTIGACION'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
+
+function get_tipo_user($idEnlace){
+	if($idEnlace == 486 || $idEnlace == 489 || $idEnlace == 490){
+		return true;
+	}else{
+		return false;
+	}
+
+}
 
 
 ?>

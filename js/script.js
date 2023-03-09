@@ -996,6 +996,12 @@ function loadtablaFormat(idUnidad, pagina, carpeta, idEnlace) {
      dataTable_iniciar_mandamientosJudiciales();
 		 }
 
+		 	//TABLA MANDAMIENTOS JUDICIALES
+			if (pagina == "mandamientosJudiciales_administrador.php") {
+     dataTable_iniciar_mandamientosJudiciales();
+		 }
+
+
 		 //TABLA MEDIDAS DE PROTECCION
 			if (pagina == "medidasDeProteccion.php") {
      dataTable_iniciar_medidasProteccion();
@@ -1620,6 +1626,7 @@ function enviarAindex(idArchivo) {
 	if (idArchivo == 11) { var e = "Trimestral"; }
 	if (idArchivo == 12) { var e = "PoliciaConsulta"; }
 	if (idArchivo == 15) { var e = "carpetasJudicializadas"; }
+	if (idArchivo == 19) { var e = "mandamientosJudicialesAdministrador"; }
 
 	setTimeout("location.href = '" + e + "';", 10);
 

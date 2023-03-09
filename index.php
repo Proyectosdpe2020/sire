@@ -62,6 +62,9 @@ if ($format == "medidasDeProteccion") {
 if ($format == "mandamientosJudiciales") {
 	$format = 18;
 }
+if ($format == "mandamientosJudicialesAdministrador") {
+	$format = 19;
+}
 if ($format == "procesosPenales") {
 	$format = 21;
 }
@@ -240,6 +243,7 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 		if ($format  == 15) { ?> onload="loadtablaFormat(0, 'carpetasJudicializadas.php', 'carpetasJudicializadas', <? echo $idEnlace; ?>);" <? }
 		if ($format  == 16) { ?> onload="loadtablaFormat(0, 'medidasDeProteccion.php', 'medidasDeProteccion', <? echo $idEnlace; ?>);" <? }
 		if ($format  == 18) { ?> onload="loadtablaFormat(0, 'mandamientosJudiciales.php', 'mandamientosJudiciales', <? echo $idEnlace; ?>);" <? }
+		if ($format  == 19) { ?> onload="loadtablaFormat(0, 'mandamientosJudiciales_administrador.php', 'mandamientosJudiciales', <? echo $idEnlace; ?>);" <? }
 		if ($format  == 21) { ?> onload="loadtablaFormat(0, 'procesosPenales.php', 'procesosPenales', <? echo $idEnlace; ?>);" <? }
 		}
 
@@ -288,7 +292,7 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 							}
 
 							if ($tipoUser == 1 and $format == 4) {
-							?>
+							?>|
 								<li style="background-color: #C8C8C8;  border: solid 2px #C8C8C8;"><a style="color:#152F4A !important;" onclick="loadBiEstadisticsLiti(<? echo $idEnlace; ?>)" href="#">BI Estadistícas de Evaluación de Desempeño</a></li>
 							<?
 							}
@@ -875,7 +879,7 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 <script language="JavaScript" type="text/javascript" src="js/litigacionSENAP_220602.js"></script>
 <script type="text/javascript" src="js/carpetasJudicializadas.js"></script>
 <?if($format == 16){ ?><script type="text/javascript" src="js/medidasDeProteccion.js"></script><? } ?>
-<?if($format == 18){ ?><script type="text/javascript" src="js/mandamientosJudiciales_20062022.js"></script><? } ?>
+<?if($format == 18 || $format == 19){ ?><script type="text/javascript" src="js/mandamientosJudiciales_20062022.js"></script><? } ?>
 <script language="JavaScript" type="text/javascript" src="js/estadoDeFuerza.js"></script>
 
 
