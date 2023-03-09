@@ -1009,7 +1009,7 @@ if($estatResolucion == 20){
 				# code...
 				$d = $dataLasResolucion[$h][0];
 				//$d == 15 || 
-				if ($d == 15 ||  $d == 25 || $d == 2 || $d == 20) {
+				if ($d == 15 ||  $d == 25 || $d == 2 || $d == 20) {  //// SON LOS ESTATUS QUE SI YA FUERON INGRESADOS POR EL MISMO YA NO PUEDEN VOLVER A SER INGRESADOS
 					$band1 = 1;
 					break;
 				}
