@@ -27,10 +27,17 @@ if ($idEnlace == 486 || $idEnlace == 489 || $idEnlace == 490) {
 	<div class="right_col" role="main">
 		<div style="" class="x_panel principalPanel">
 			<center><div class="row" style="height: 100vh !important; width:45% !important;">
-				<div class="col-xs-12 col-sm-12 col-md-12 BILOGO carpetasLogo" onclick="">
+				<div class="col-xs-12 col-sm-12 col-md-6 BILOGO carpetasLogo" onclick="">
 				<div id="logoBIvi">
 				<a target="_blank" href="https://app.powerbi.com/view?r=eyJrIjoiMGFiOGU2NzEtNzc2OS00ZTc5LWE3MDYtMDdiNDg2NzBhZjg2IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9">
 					<div class="imgBIVizual"></div>
+				</a>
+						</div>
+				</div>
+					<div class="col-xs-12 col-sm-12 col-md-6 BILOGO carpetasLogo" onclick="enviarAindex(19);">
+				<div id="logoBIvi">
+				<a href="">
+					<div class="imgCentralMandamientos"></div>
 				</a>
 						</div>
 				</div>
