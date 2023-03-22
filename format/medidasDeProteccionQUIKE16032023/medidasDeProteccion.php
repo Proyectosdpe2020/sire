@@ -294,15 +294,6 @@ $mesNom = Mes_Nombre($currentmonth);
 			</div>
 		</div>
 	</div>
-	<div class="modal fade bs-example-modal-sm" id="aplicarMedidaTestigo" role="dialog" data-backdrop="static" data-keyboard="false">
-		<div id="modalVistaCss" class="modal-dialog modal-sm" style = "width: 50%; margin-top: 3.4%;">
-			<div class="modal-content" style="">
-				<div id="contModalAplicarMedidaTestigo">
-
-				</div>
-			</div>
-		</div>
-	</div>
 	<!-- MODAL REGISTRO DE INFORMACION GENERAL DE MEDIDA DE PROTECCION  -->
 
 	<!-- MODAL CARPETAS PENDIENTES DE ASIGNAR A MP  -->

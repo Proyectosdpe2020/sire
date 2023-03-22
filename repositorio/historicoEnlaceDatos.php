@@ -459,7 +459,7 @@ switch ($format) {
 	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos11; ?> </td>
 	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos12; ?> </td>
 	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos13; ?> </td>
-	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos14; ?> </td>
+	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo number_format($dos14); ?> </td>
 	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos15; ?> </td>
 	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos16; ?> </td>
 	<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos17; ?> </td>
