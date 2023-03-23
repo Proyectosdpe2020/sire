@@ -19,7 +19,6 @@ if (isset($_POST["anio"])) {
 if (isset($_POST["mes"])) {
 	$mes = $_POST["mes"];
 }
-
 ?>
 
 
@@ -238,6 +237,7 @@ if (isset($_POST["mes"])) {
 				$dos12 = $dos12 + number_format($de41[0][0]);
 				$dos13 = $dos13 + number_format($de51[0][0]);
 				$dos14 = $dos14 + number_format($de61[0][0]);
+					// echo $dos14."<br>";
 				$dos15 = $dos15 + number_format($de91[0][0]);
 				$dos16 = $dos16 + number_format($de101[0][0]);
 
@@ -685,7 +685,8 @@ if (isset($_POST["mes"])) {
 	
 					$dos12 = $dos12 + number_format($de41[0][0]);
 					$dos13 = $dos13 + number_format($de51[0][0]);
-					$dos14 = $dos14 + number_format($de61[0][0]);
+					$dos14 = $dos14 + $de61[0][0];
+				
 					$dos15 = $dos15 + number_format($de91[0][0]);
 					$dos16 = $dos16 + number_format($de101[0][0]);
 	
@@ -755,7 +756,7 @@ if (isset($_POST["mes"])) {
 					<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos11; ?> </td>
 					<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos12; ?> </td>
 					<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos13; ?> </td>
-					<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos14; ?> </td>
+					<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo number_format($dos14); ?> </td>
 					<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos15; ?> </td>
 					<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos16; ?> </td>
 					<td style="background-color: #ccffff;   border: solid 1px #E4E4E4 !important; text-align: center; font-weight: bolder;"> <? echo $dos17; ?> </td>

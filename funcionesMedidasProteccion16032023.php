@@ -1,24 +1,4 @@
 <?
-
-function getCausaPenalNuc($conn, $nuc){
-
-	$query = " SELECT estatusNucs.[idEstatusNucs], sj.causaPenal
-	FROM [ESTADISTICAV2].[dbo].[estatusNucs] 
-	INNER JOIN senap.judicializadas sj ON sj.idEstatusNucs = dbo.estatusNucs.idEstatusNucs
-	WHERE nuc IN('$nuc') ";
-
-	$indice = 0;
-	$stmt = sqlsrv_query($conn, $query);
-	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
-	{
-		$arreglo[$indice][0]=$row['idEstatusNucs'];
-		$arreglo[$indice][1]=$row['causaPenal'];
-		$indice++;
-	}
-	if(isset($arreglo)){return $arreglo;}
-}
-
-
 function getDataMP($connMedidas){
 	$query = " SELECT
 	               	  mp.idMp
@@ -228,36 +208,6 @@ function getDataVictimas($connMedidas, $idMedida){
 	}
 	if(isset($arreglo)){return $arreglo;}
 }
-
-function getDataTestigos($connMedidas, $idMedida){
-	$query = " SELECT [idTestigo]
-	,[idMedida]
-	,[NUC]
-	,[causa]
-	,[nombre]
-	,[paterno]
-	,[materno]
-	,case when estadoMedida = 1 THEN 'Vigente' WHEN estadoMedida = 2 THEN 'Concluido' ELSE 'Desconocido' END as estadoMedida
-	,[observaciones]
-FROM [SIRE].[medidas].[testigo] WHERE idMedida = $idMedida ";
-	$indice = 0;
-	$stmt = sqlsrv_query($connMedidas, $query);
-	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
-	{
-		$arreglo[$indice][0]=$row['idTestigo'];
-		$arreglo[$indice][1]=$row['idMedida'];
-		$arreglo[$indice][2]=$row['NUC'];
-		$arreglo[$indice][3]=$row['causa'];
-		$arreglo[$indice][4]=$row['nombre'];
-		$arreglo[$indice][5]=$row['paterno'];
-		$arreglo[$indice][6]=$row['materno'];
-		$arreglo[$indice][7]=$row['estadoMedida'];
-		$arreglo[$indice][8]=$row['observaciones'];
-		$indice++;
-	}
-	if(isset($arreglo)){return $arreglo;}
-}
-
 
 function getDataResoluciones($connMedidas, $idMedida, $tipoConsulta, $idResolucion){
 	if($tipoConsulta == 0){
@@ -491,23 +441,6 @@ function getDataConstanciaLlamadas($connMedidas, $idMedida, $tipoConsulta, $idCo
 	}
 	if(isset($arreglo)){return $arreglo;}
 }
-
-function getMedidasAplicadasTest($connMedidas, $idMedida){
-	$query = " SELECT  [idMedidasAplicadasTestigo]
-	,[nuc]
-	,[idMedida]
-	,[idCatFraccion]
-FROM [SIRE].[medidas].[medidasAplicadasTestigo] WHERE idMedida = $idMedida ";
-	$indice = 0;
-	$stmt = sqlsrv_query($connMedidas, $query);
-	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
-	{
-		$arreglo[$indice][0]=$row['idCatFraccion'];
-		$indice++;
-	}
-	if(isset($arreglo)){return $arreglo;}
-}
-
 
 function getMedidasAplicadas($connMedidas, $idMedida){
 	$query = " SELECT idMedidaAplicada
@@ -1090,3 +1023,5 @@ function checkEdad($edad){
 		return "Meses";
 	}
 }
+
+?>
