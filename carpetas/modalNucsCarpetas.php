@@ -32,6 +32,8 @@ $idUsuario = $_SESSION['useridIE'];
 $estatusArr = getNameEstReisolicion($conn, $estatus);
 $estaNom = $estatusArr[0][0];
 
+$hoy = date("Y-m-d");//Fecha calendario
+
 ?>
 
 
@@ -54,7 +56,6 @@ $estaNom = $estatusArr[0][0];
 
 			<div class="row">
 				<div class="col-xs-12">
-
 
 					<?php if ($estatus == 20) {
 						$dataCausas = geteCausasExtincionPenal($conn, "'VI'");
@@ -112,6 +113,17 @@ $estaNom = $estatusArr[0][0];
 
 
 						</div><br>
+
+						<?php if ($estatus != 1) { ?>
+					<div class="row mt-1">
+
+							<div class="col-xs-12 col-sm-12  col-md-4 input-group-lg">
+								<label for="fecha_determinacion"><span class="glyphicon glyphicon-calendar"></span> Fecha de la determinación *:</label><br>
+								<input type="date" class="form-control"  id="fecha_determinacion" aria-describedby="sizing-addon1" max="<?echo $hoy; ?>"  >
+							</div>
+
+						</div><br>
+    <? } ?>
 
 
 						<div id="contentMotivo">

@@ -59,6 +59,7 @@ if (isset($_POST["idPuesta"])){
                   ";
          
 
+
                   $result = sqlsrv_query($conn,$queryTransaction, array(), array( "Scrollable" => 'static' ));                   
 
                   $arreglo[0] = "NO";

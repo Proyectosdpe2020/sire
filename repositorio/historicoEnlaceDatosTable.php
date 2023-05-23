@@ -203,7 +203,7 @@ if (isset($_POST["mes"])) {
 												<td style=" font-weight: bold; border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo $judicializadas; ?></td>
 												<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo number_format($de41[0][0]); ?></td>												
 												<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo number_format($de51[0][0]); ?></td>												
-												<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo number_format($de61[0][0]); ?></td>												
+												<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo $de61[0][0]; ?></td>												
 												<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo number_format($de91[0][0]); ?></td>												
 												<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo number_format($de101[0][0]); ?></td>												
 												<td style="  border: solid 1px #E4E4E4 !important; text-align: center;"> <? echo number_format($de111[0][0]); ?></td>
@@ -226,26 +226,25 @@ if (isset($_POST["mes"])) {
 				$dos3 = $dos3 + $iniciadasCd;
 				$dos4 = $dos4 + $iniciadasSd;
 				$dos5 = $dos5 + $iniciadas;
-				$dos6 = $dos6 + number_format($de11[0][0]);
+				$dos6 = $dos6 + $de11[0][0];
 
 				$dos7 = $dos7 + $recibidas;
 				$dos8 = $dos8 + $totalTrabajar;
-				$dos9 = $dos9 + number_format($de21[0][0]);
-				$dos10 = $dos10 + number_format($de31[0][0]);
-				$dos11 = $dos11 + number_format($judicializadas);
+				$dos9 = $dos9 + $de21[0][0];
+				$dos10 = $dos10 + $de31[0][0];
+				$dos11 = $dos11 + $judicializadas;
 
-				$dos12 = $dos12 + number_format($de41[0][0]);
-				$dos13 = $dos13 + number_format($de51[0][0]);
-				$dos14 = $dos14 + number_format($de61[0][0]);
-					// echo $dos14."<br>";
-				$dos15 = $dos15 + number_format($de91[0][0]);
-				$dos16 = $dos16 + number_format($de101[0][0]);
+				$dos12 = $dos12 + $de41[0][0];
+				$dos13 = $dos13 + $de51[0][0];
+				$dos14 = $dos14 + $de61[0][0];
+				$dos15 = $dos15 + $de91[0][0];
+				$dos16 = $dos16 + $de101[0][0];
 
-				$dos17 = $dos17 + number_format($de111[0][0]);
-				$dos18 = $dos18 + number_format($de121[0][0]);
-				$dos19 = $dos19 + number_format($de71[0][0]);
-				$dos20 = $dos20 + number_format($de81[0][0]);
-				$dos21 = $dos21 + number_format($totResoluciones);
+				$dos17 = $dos17 + $de111[0][0];
+				$dos18 = $dos18 + $de121[0][0];
+				$dos19 = $dos19 + $de71[0][0];
+				$dos20 = $dos20 + $de81[0][0];
+				$dos21 = $dos21 + $totResoluciones;
 
 				$dos22 = $dos22 + $enviUATP;
 				$dos23 = $dos23 + $enviUI;

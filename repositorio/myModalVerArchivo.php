@@ -4,7 +4,7 @@
 		if (isset($_POST["ubicacion"])){ $ubicacion = $_POST["ubicacion"]; }
 
 
-	$ruta = "http://201.116.252.158:8080/sire/repositorio/".$ubicacion;
+	$ruta = "repositorio/".$ubicacion;
 
 
 	
@@ -13,7 +13,7 @@
   
    	<div class="col-md-12 col-sm-12 col-xs-12 form-group">				
 
-						<embed id="frameVerArchivo" src="<? echo $ruta; ?>" type="application/pdf" width="100%" height="900"></embed>
+					<embed id="frameVerArchivo" src="<? echo $ruta; ?>" type="application/pdf" width="100%" height="900"></embed>
 
 				</div>
 

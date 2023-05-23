@@ -310,13 +310,14 @@ function loaNucTrimes(mes, anio, trimestre, quest, idEnlace, idUnidad, anioActua
 
 function enviarDataAnteriores(anio, idenlace, idUnidad, per, quest) {
 
-	var tamAnios = 5;
-	var anios = new Array(5);
+	var tamAnios = 6;
+	var anios = new Array(6);
 	anios[0] = 2017;
 	anios[1] = 2018;
 	anios[2] = 2019;
 	anios[3] = 2020;
 	anios[4] = 2021;
+	anios[5] = 2022;
 
 	if (quest == 5) { tam = 5; } /////// EL TAMAÑO ES EL NUMERO DE PREGUNTAS QUE TIENE EL APARTADO EN ESTE CASO ES EL 5
 	if (quest == 6) { tam = 3; }	

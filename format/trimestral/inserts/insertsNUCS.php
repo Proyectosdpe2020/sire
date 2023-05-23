@@ -22,7 +22,7 @@
 
 			if($aux=get_nuc_sicap ($nuc,$conSic)){  
 							
-				echo json_encode(array('first'=>$arreglo[0]));  
+				echo json_encode(array('first'=>$arreglo[0]));   
 
 				$queryTransaction = "  
 

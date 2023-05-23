@@ -586,27 +586,27 @@ function guardarLitigacion(idEnlace, mes, anio, idMp, idUnidad) {
 	SDuno = document.getElementById("SDuno").value; if (SDuno == "") { SDuno = 0; } else { SDuno = parseInt(document.getElementById("SDuno").value); }
 	SDunoNu = document.getElementById("valor155").value; if (SDunoNu == "") { SDunoNu = 0; } else { SDunoNu = parseInt(document.getElementById("valor155").value); }
 
-	
+
 
 	SDdos = document.getElementById("SDdos").value; if (SDdos == "") { SDdos = 0; } else { SDdos = parseInt(document.getElementById("SDdos").value); }
 	SDdosNu = document.getElementById("valor156").value; if (SDdosNu == "") { SDdosNu = 0; } else { SDdosNu = parseInt(document.getElementById("valor156").value); }
-	
+
 
 	SDtres = document.getElementById("SDtres").value; if (SDtres == "") { SDtres = 0; } else { SDtres = parseInt(document.getElementById("SDtres").value); }
 	SDtresNu = document.getElementById("valor157").value; if (SDtresNu == "") { SDtresNu = 0; } else { SDtresNu = parseInt(document.getElementById("valor157").value); }
-	
+
 
 	SDcuatro = document.getElementById("SDcuatro").value; if (SDcuatro == "") { SDcuatro = 0; } else { SDcuatro = parseInt(document.getElementById("SDcuatro").value); }
 	SDcuatroNu = document.getElementById("valor158").value; if (SDcuatroNu == "") { SDcuatroNu = 0; } else { SDcuatroNu = parseInt(document.getElementById("valor158").value); }
-	
+
 
 	SDcinco = document.getElementById("SDcinco").value; if (SDcinco == "") { SDcinco = 0; } else { SDcinco = parseInt(document.getElementById("SDcinco").value); }
 	SDcincoNu = document.getElementById("valor159").value; if (SDcincoNu == "") { SDcincoNu = 0; } else { SDcincoNu = parseInt(document.getElementById("valor159").value); }
-	
+
 
 	SDseis = document.getElementById("SDseis").value; if (SDseis == "") { SDseis = 0; } else { SDseis = parseInt(document.getElementById("SDseis").value); }
 	SDseisNu = document.getElementById("valor160").value; if (SDseisNu == "") { SDseisNu = 0; } else { SDseisNu = parseInt(document.getElementById("valor160").value); }
-	
+
 
 	SDsiete = document.getElementById("SDsiete").value; if (SDsiete == "") { SDsiete = 0; } else { SDsiete = parseInt(document.getElementById("SDsiete").value); }
 	SDsieteNu = document.getElementById("valor161").value; if (SDsieteNu == "") { SDsieteNu = 0; } else { SDsieteNu = parseInt(document.getElementById("valor161").value); }
@@ -614,15 +614,15 @@ function guardarLitigacion(idEnlace, mes, anio, idMp, idUnidad) {
 
 	SDocho = document.getElementById("SDocho").value; if (SDocho == "") { SDocho = 0; } else { SDocho = parseInt(document.getElementById("SDocho").value); }
 	SDochoNu = document.getElementById("valor162").value; if (SDochoNu == "") { SDochoNu = 0; } else { SDochoNu = parseInt(document.getElementById("valor162").value); }
-	
+
 
 	SDnueve = document.getElementById("SDnueve").value; if (SDnueve == "") { SDnueve = 0; } else { SDnueve = parseInt(document.getElementById("SDnueve").value); }
 	SDnueveNu = document.getElementById("valor163").value; if (SDnueveNu == "") { SDnueveNu = 0; } else { SDnueveNu = parseInt(document.getElementById("valor163").value); }
-	
+
 
 	SDdiez = document.getElementById("SDdiez").value; if (SDdiez == "") { SDdiez = 0; } else { SDdiez = parseInt(document.getElementById("SDdiez").value); }
 	SDdiezNu = document.getElementById("valor164").value; if (SDdiezNu == "") { SDdiezNu = 0; } else { SDdiezNu = parseInt(document.getElementById("valor164").value); }
-	
+
 
 
 
@@ -659,7 +659,7 @@ function guardarLitigacion(idEnlace, mes, anio, idMp, idUnidad) {
 		&& audCondenatorio == audCondenatorioNu && mecanismosAceleracion == mecanismosAceleracionNu && apeamparo == apeamparoNu && amparoDirecto == amparoDirectoNu && InspLugDis == InspLugDisNu
 		&& SDuno == SDunoNu && SDdos == SDdosNu && SDtres == SDtresNu && SDcuatro == SDcuatroNu && SDcinco == SDcincoNu && SDseis == SDseisNu && SDsiete == SDsieteNu && SDocho == SDochoNu && SDnueve == SDnueveNu && SDdiez == SDdiezNu) {
 		//cont = document.getElementById('respuestaGuardalitig');    
-	
+
 		ajax = objetoAjax();
 		ajax.open("POST", "format/litigacion/guardarLitigacion.php");
 		ajax.onreadystatechange = function () {
@@ -724,6 +724,389 @@ function guardarLitigacion(idEnlace, mes, anio, idMp, idUnidad) {
 
 }
 
+function mayus(e) {
+	e.value = e.value.toUpperCase();
+}
+
+//Función para validar una CURP
+function curpValida(curp) {
+	var re = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,
+		validado = curp.match(re);
+
+	if (!validado)  //Coincide con el formato general?
+		return false;
+
+	//Validar que coincida el dígito verificador
+	function digitoVerificador(curp17) {
+		//Fuente https://consultas.curp.gob.mx/CurpSP/
+		var diccionario = "0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZ",
+			lngSuma = 0.0,
+			lngDigito = 0.0;
+		for (var i = 0; i < 17; i++)
+			lngSuma = lngSuma + diccionario.indexOf(curp17.charAt(i)) * (18 - i);
+		lngDigito = 10 - lngSuma % 10;
+		if (lngDigito == 10) return 0;
+		return lngDigito;
+	}
+
+	if (validado[2] != digitoVerificador(validado[1]))
+		return false;
+
+	return true; //Validado
+}
+
+
+//Lleva la CURP a mayúsculas para validarlo
+function validarInputCURP() {
+
+	curp = document.getElementById('curpImputados').value.toUpperCase();
+	if (curpValida(curp)) { // ⬅️ Acá se comprueba
+		return true;
+	} else {
+		return false;
+	}
+
+}
+
+function deleteImputado(id, nuc) {
+	swal({
+		title: "",
+		text: "¿Esta seguro de Eliminar el Imputado?",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "Eliminar",
+		cancelButtonText: "Cancelar",
+		closeOnConfirm: true,
+		closeOnCancel: true
+	},
+		function (isConfirm) {
+			if (isConfirm) {
+
+				ajax = objetoAjax();
+				ajax.open("POST", "format/litigacion/deleteImputado.php");
+
+				ajax.onreadystatechange = function () {
+					if (ajax.readyState == 4 && ajax.status == 200) {
+						var cadCodificadaJSON = ajax.responseText;
+						var objDatos = eval("(" + cadCodificadaJSON + ")");
+						if (objDatos.first == "NO") { swal("", "Hubo un problema favor de revisar.", "Warning"); } else {
+							if (objDatos.first == "SI") {
+								updateTablaImputadosXnuc(nuc);
+							}
+						}
+					}
+				}
+				ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+				ajax.send("&id=" + id + "&nuc=" + nuc);
+
+			}
+		});
+}
+
+function updateDeterminacionesCarpeta(nuc) {
+	cont = document.getElementById('contentTableDeterminaciones');
+	ajax = objetoAjax();
+	ajax.open("POST", "format/litigacion/tableDeterminacionesCarpeta.php");
+
+	ajax.onreadystatechange = function () {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			cont.innerHTML = ajax.responseText;
+		}
+	}
+	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	ajax.send("&nuc=" + nuc);
+}
+
+function updateTablaImputadosXnuc(nuc) {
+	cont = document.getElementById('contTablaImputadosNuc');
+	ajax = objetoAjax();
+	ajax.open("POST", "format/litigacion/tableImputadosData.php");
+
+	ajax.onreadystatechange = function () {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			cont.innerHTML = ajax.responseText;
+			updateDeterminacionesCarpeta(nuc);
+		}
+	}
+	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	ajax.send("&nuc=" + nuc);
+}
+
+function limpiarDatosImputado() {
+	nom = document.getElementById('nomImpu').value = "";
+	paterno = document.getElementById('paternImpu').value = "";
+	materno = document.getElementById('maternImpu').value = "";
+	curp = document.getElementById('curpImputados').value = "";
+	document.getElementById("sexoImp").options.item(0).selected = 'selected';
+	edad = document.getElementById('edadImputado').value = "";
+}
+
+function guardarImputadoRegistrado(idImputado, nuc) {
+	ajax = objetoAjax();
+	ajax.open("POST", "format/litigacion/saveImputadoRegistradoData.php");
+
+	ajax.onreadystatechange = function () {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			var cadCodificadaJSON = ajax.responseText;
+			var objDatos = eval("(" + cadCodificadaJSON + ")");
+			if (objDatos.first == "NO") { swal("", "No se registro el imputado, favor de verificar.", "warning"); } else {
+				if (objDatos.first == "SI") {
+					///// SI SE INSERTO EL IMPUTADO ENTONCES ACTUALIZAR LA TABLA DE IMPUTADOS Y REINICIAR LOS DATOS INGRESADOS
+					swal("", "Se inserto el imputado a la carpeta.", "success");
+					updateTablaImputadosXnuc(nuc);
+					limpiarDatosImputado();
+					salirImputadoRegistrado();
+				}
+			}
+		}
+	}
+	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	ajax.send("&nuc=" + nuc + "&idImputado=" + idImputado);
+}
+
+function loadModalAddImptadoRegistrado(nuc, curp) {
+	cont = document.getElementById('contmodalSeleccionarImputado');
+	ajax = objetoAjax();
+	ajax.open("POST", "format/litigacion/modalNucImputadoRegistrado.php");
+	ajax.onreadystatechange = function () {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			cont.innerHTML = ajax.responseText;
+			$('#modalSeleccionarImputado').modal('show');
+			$('#modalFormatImputados').modal('hide');
+		}
+	}
+	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	ajax.send("&nuc=" + nuc + "&curp=" + curp);
+}
+
+function salirImputadoRegistrado() {
+	$('#modalSeleccionarImputado').modal('hide');
+	$('#modalFormatImputados').modal('show');
+}
+
+function salirIngresoImputados() {
+	$('#modalNucsLitig').modal('show');
+	$('#modalFormatImputados').modal('hide');
+}
+
+function guardarDeterminacionImputado(nuc, idEstatus, i, idEstatusNucs) {
+
+	var imputado = document.getElementById("imputadoSeleted" + i).value;
+
+	if (imputado == 0) { swal("", "Debe seleccionar un Imputado para la Determinación.", "warning"); } else {
+
+		ajax = objetoAjax();
+		ajax.open("POST", "format/litigacion/saveImputadoDeterminacion.php");
+
+		ajax.onreadystatechange = function () {
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				var cadCodificadaJSON = ajax.responseText;
+				var objDatos = eval("(" + cadCodificadaJSON + ")");
+
+				if (objDatos.first == "NO") { swal("", "No se registro, favor de verificar.", "warning"); } else {
+					if (objDatos.first == "SI") {
+						swal("", "Se guardo exitosamente.", "success");
+						updateTablaImputadosXnuc(nuc);
+					}
+				}
+
+			}
+		}
+		ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		ajax.send("&nuc=" + nuc + "&idEstatus=" + idEstatus + "&imputado=" + imputado + "&idEstatusNucs=" + idEstatusNucs);
+	}
+
+}
+
+function saveImputadoData(nom, paterno, materno, curp, sexo, edad, nuc) {
+
+	ajax = objetoAjax();
+	ajax.open("POST", "format/litigacion/saveImputadoData.php");
+
+	ajax.onreadystatechange = function () {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			var cadCodificadaJSON = ajax.responseText;
+			var objDatos = eval("(" + cadCodificadaJSON + ")");
+
+			if (objDatos.first == "EI") {
+				swal("", "Ya se encuentra el Imputado registrado con el CURP " + curp + " en la Carpeta " + nuc + ".", "warning");
+			} else {
+
+				if (objDatos.first == "EC") {
+					swal("", "Ya se encuentra el Imputado registrado con el CURP " + curp + ".", "warning");
+					// AQUI LANZAMOS EL MODAL PARA QUE PUEDAN AGREGAR EL IMPUTADO DE UNA LISTA 
+					loadModalAddImptadoRegistrado(nuc, curp);
+				} else {
+					if (objDatos.first == "NO") { swal("", "No se registro el imputado, favor de verificar.", "warning"); } else {
+						if (objDatos.first == "SI") {
+							///// SI SE INSERTO EL IMPUTADO ENTONCES ACTUALIZAR LA TABLA DE IMPUTADOS Y REINICIAR LOS DATOS INGRESADOS
+							swal("", "Se inserto el imputado.", "success");
+							updateTablaImputadosXnuc(nuc);
+							limpiarDatosImputado();
+						}
+					}
+				}
+			}
+		}
+	}
+	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	ajax.send("&nuc=" + nuc + "&nom=" + nom + "&paterno=" + paterno + "&materno="
+		+ materno + "&curp=" + curp + "&sexo=" + sexo + "&edad=" + edad);
+}
+
+function addImputado(nuc) {
+
+	nom = document.getElementById('nomImpu').value; nom.trim();
+	paterno = document.getElementById('paternImpu').value; paterno.trim();
+	materno = document.getElementById('maternImpu').value; materno.trim();
+	curp = document.getElementById('curpImputados').value; curp.trim();
+	sexo = document.getElementById('sexoImp').value;
+	edad = document.getElementById('edadImputado').value;
+
+	if (nom == "" || paterno == "" || materno == "" || curp == "" || sexo == "O" || edad == "" || edad == 0) {
+		swal("", "Faltan datos por capturar.", "warning");
+	} else {
+
+		if (curp.length < 18 || curp.length > 18) {
+			swal("", "La curp debe estar compuesta por 18 caracteres.", "warning");
+		} else {
+
+			if (validarInputCURP()) {
+				////// SE HACE EL PROCESO PARA GUARDAR LOS DATOS DEL IMPUTADO EN LA BD
+				saveImputadoData(nom, paterno, materno, curp, sexo, edad, nuc);
+
+			} else {
+				swal("", "Verifique que la CURP este correcta.", "warning");
+			}
+		}
+	}
+}
+
+function sendDataModalImputadosNUC(nuc) {
+
+	cont = document.getElementById('contmodalImputadosLitig');
+
+	ajax = objetoAjax();
+	ajax.open("POST", "format/litigacion/modalNucImputadosLitig.php");
+	ajax.onreadystatechange = function () {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			cont.innerHTML = ajax.responseText;
+
+			$('#modalNucsLitig').modal('hide');
+			$('#modalFormatImputados').modal('show');
+		}
+	}
+	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	ajax.send("&nuc=" + nuc);
+
+}
+
+function llenarImputadosXnuc(nuc,idMp,estatusResolucion, mes, anio, deten, idUnidad){
+	cont = document.getElementById('contentImputadosXnuc');
+	ajax = objetoAjax();
+	ajax.open("POST", "format/litigacion/selectImputadosNUc.php");
+	ajax.onreadystatechange = function () {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			cont.innerHTML = ajax.responseText;
+		}
+	}
+	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	ajax.send("&nuc=" + nuc + "&idMp=" + idMp+ "&estatusResolucion=" + estatusResolucion+ "&mes=" + mes+ "&anio=" + anio+ "&deten=" + deten+ "&idUnidad=" + idUnidad);
+}
+
+function checkImputadosXcarpeta(nuc, idMp, estatusResolucion, mes, anio, deten, idUnidad) {
+
+	acc = "existenImputadosNUC";
+	ajax = objetoAjax();
+	// ajax.open("POST", "formatos/accionesNucs.php");
+	ajax.open("POST", "format/litigacion/accionesNucsLit.php");
+
+	ajax.onreadystatechange = function () {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			var cadCodificadaJSON = ajax.responseText;
+			var objDatos = eval("(" + cadCodificadaJSON + ")");
+			if (objDatos.first == "NO") {
+				////// SI NO EXISTEN IMPUTADOS ENTONCES SE MANDA LA PANTALLA PARA AGREGAR IMPUTADOS Y RELACIONAR DETERMINACIONES
+				var text0 = "El numero de caso no cuenta con imputados o no se a asignado el imputado a las determinaciones de la carpeta, favor de ingresar información de los imputados y/o determinaciones.";
+				swal("", text0, "warning");
+				////LANZAR MODAL DE IMPUTADOS y OCULTAR EL MODAL ACTUAL
+				sendDataModalImputadosNUC(nuc);
+
+			} else {
+				if (objDatos.first == "SI") {
+
+					const idSestatus = [1, 2, 151, 10, 12, 13, 14, 15, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+						36, 38, 50, 53, 57, 58, 64, 65, 66, 67, 81, 84, 89, 90, 91, 93, 97, 99, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164];
+					/////// CUANDO LLEGUE AQUI VALIDAMOS PRIMERO QUE NADA SI EL ESTATUS REQUIERE IMPUTADO
+
+					/// SI HAY IMPUTADO PARA EL ESTATUS ENTONCES SE LLENAN LOS IMPUTADOS EN EL SELECT Y SE ACTUALIZA
+					if (idSestatus.includes(estatusResolucion)) {
+						// found element
+						llenarImputadosXnuc(nuc,idMp,estatusResolucion, mes, anio, deten, idUnidad);
+					}else{
+								//// SI NO HAY IMPUTADO ENTONCES SE MANDA LA VENTANA NORMAL QUE SE MANDABA
+								getDatosNucDetermEstlit(nuc, idMp, estatusResolucion, mes, anio, deten, idUnidad,0);
+					}
+					//// SI YA EXISTEN LOS IMPUTADOS REGISTRADOS ENTONCES SE REVISARA SI YA SE TIENE TODAS LAS DETERMINACIONES RELACIONADAS A UN NUC
+				
+				}
+			}
+		}
+	}
+	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	ajax.send("&nuc=" + nuc + "&acc=" + acc);
+}
+
+function saveDeterminacionXimputado(nuc, idMp, estatusResolucion, mes, anio, deten, idUnidad){
+			////// AQUI SOLO VAMOS A MANDAR LA INFO DEL IMPUTADO A LA FUNCION getDatosNucDetermEstlit
+			var imputadoID = document.getElementById("imputadoSeletedEnv").value;
+			var nuc = document.getElementById("nuc").value;
+
+			if(imputadoID == 0){
+				swal("", "Debe seleccionar un imputado para la resolución.", "warning");
+			}else{
+				getDatosNucDetermEstlit(nuc, idMp, estatusResolucion, mes, anio, deten, idUnidad, imputadoID);
+			}		
+}
+
+
+function checkNucJudiciImputado(estatusResolucion, idMp, mes, anio, deten, idUnidad) {
+	acc = "existeNucJudicializado";
+	ajax = objetoAjax();
+	// ajax.open("POST", "formatos/accionesNucs.php");
+	ajax.open("POST", "format/litigacion/accionesNucsLit.php");
+
+	nuc = document.getElementById('nuc').value;
+
+	ajax.onreadystatechange = function () {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			var cadCodificadaJSON = ajax.responseText;
+			var objDatos = eval("(" + cadCodificadaJSON + ")");
+			if (objDatos.first == "NO") {
+				//// lanzar mensaje de advertencia para que se ingrese como judicializada				
+				////// SI EL ESTATUS ES UNA JUDICIALIZADA CON O SIN DETENIDO ENTONCES PUEDO MANDAR EL MODAL PARA 
+				//CAPTURA DE IMPUTADOS SI NO SE MUESTRA EL MSJ QUE TIENE QUE INGRESAR COMO JUDICIALIZADA
+				if (estatusResolucion == 1 || estatusResolucion == 2) {
+					checkImputadosXcarpeta(nuc, idMp, estatusResolucion, mes, anio, deten, idUnidad);
+				} else {
+					var text1 = "El numero de caso no se ha judicializado en la plataforma, favor de ingresarlo como judicializado";
+					swal("", "" + text1 + "", "warning");
+				}
+
+			} else {
+				if (objDatos.first == "SI") {
+					///// VALIDAR QUE NO EXISTAN IMPUTADOS YA REGISTRADOS DE LA CARPETA ///////
+					checkImputadosXcarpeta(nuc, idMp, estatusResolucion, mes, anio, deten, idUnidad);
+				}
+			}
+		}
+	}
+	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	ajax.send("&nuc=" + nuc + "&acc=" + acc + "&estatusResolucion=" + estatusResolucion);
+}
+
+
 //////////// VALIDA EL NUC INGRESADO SI EXISTE EN SICAP PARA PODER SER INGRESADO A SISTEMA Y SI NO ES ASI HAY QUE INGRESARLO A SICAP PRIMERO /////////////////////
 
 function nucInserts(idinput, idMp, mes, anio, estatResolucion, deten, idUnidad) {
@@ -754,7 +1137,12 @@ function nucInserts(idinput, idMp, mes, anio, estatResolucion, deten, idUnidad) 
 						if (objDatos.first == "NO") { getExpediente("expedCont", nuc); swal("", "El numero de caso no existe.", "warning"); } else {
 
 							if (objDatos.first == "SI") {
-								getDatosNucDetermEstlit(nuc, idMp, estatResolucion, mes, anio, deten, idUnidad);
+
+								////// VALIDAR SI EL NUC SE ENCUENTRA YA JUDICIALIZADO O NO /////// 
+								checkNucJudiciImputado(estatResolucion, idMp, mes, anio, deten, idUnidad);
+
+								/////// SE EJECUTARA CUANDO YA SE QUIERA INSERTAR EL NUC EN BD DESPUES DE VALIDAR LOS IMPUTADOS
+								// getDatosNucDetermEstlit(nuc, idMp, estatResolucion, mes, anio, deten, idUnidad);
 							}
 						}
 					}
@@ -769,7 +1157,7 @@ function nucInserts(idinput, idMp, mes, anio, estatResolucion, deten, idUnidad) 
 
 ////////////////////////////////
 
-function getDatosNucDetermEstlit(nuc, idMp, estatResolucion, mes, anio, deten, idUnidad) {
+function getDatosNucDetermEstlit(nuc, idMp, estatResolucion, mes, anio, deten, idUnidad, idImputado) {
 
 
 	cont = document.getElementById("contDataNucDeterm");
@@ -781,7 +1169,7 @@ function getDatosNucDetermEstlit(nuc, idMp, estatResolucion, mes, anio, deten, i
 		if (ajax.readyState == 4 && ajax.status == 200) {
 
 			cont.innerHTML = ajax.responseText;
-			existenuclitigacion(nuc, idMp, estatResolucion, mes, anio, idUnidad, deten);
+			existenuclitigacion(nuc, idMp, estatResolucion, mes, anio, idUnidad, deten, idImputado);
 		}
 	}
 	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -793,7 +1181,7 @@ function getDatosNucDetermEstlit(nuc, idMp, estatResolucion, mes, anio, deten, i
 
 
 
-function existenuclitigacion(nuc, idMp, estatResolucion, mes, anio, idUnidad, deten) {
+function existenuclitigacion(nuc, idMp, estatResolucion, mes, anio, idUnidad, deten, idImputado) {
 
 
 
@@ -812,11 +1200,11 @@ function existenuclitigacion(nuc, idMp, estatResolucion, mes, anio, idUnidad, de
 				swal("", "El NUC ya fue judicializado.\n\n Ministerio Público: " + objDatos.nomCompleto + '\n Unidad: ' + objDatos.unidad + ' - ' + objDatos.fiscalia, "warning");
 			} else {
 
-				if (objDatos.first == "NO") { getExpediente("expedCont", nuc); swal("", "El Número de Caso ya se encuentra capturado.", "warning"); } else {
 
+
+				if (objDatos.first == "NO") { getExpediente("expedCont", nuc); swal("", "El Número de Caso ya se encuentra capturado.", "warning"); } else {
 					if (objDatos.first == "SI") {
 						getExpedienteLit("expedCont", nuc);
-
 						if (estatResolucion == 1 || estatResolucion == 2 || estatResolucion == 3 || estatResolucion == 4 ||
 							estatResolucion == 17 || estatResolucion == 18 || estatResolucion == 20 || estatResolucion == 21 ||
 							estatResolucion == 22 || estatResolucion == 23 || estatResolucion == 24 || estatResolucion == 25 ||
@@ -828,12 +1216,41 @@ function existenuclitigacion(nuc, idMp, estatResolucion, mes, anio, idUnidad, de
 							estatResolucion == 64 || estatResolucion == 60 || estatResolucion == 91 || estatResolucion == 65 ||
 							estatResolucion == 90 || estatResolucion == 68 ||
 							estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151 || estatResolucion == 154 || estatResolucion == 66) {
-							showModalNucLitInfo2(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad, 1);
+							showModalNucLitInfo2(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad, 1, idImputado);
 						} else if (estatResolucion == 50 || estatResolucion == 53 || estatResolucion == 58 || estatResolucion == 153) {
-							showModalAgregarImputados(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad);
+							showModalAgregarImputados(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad, idImputado);
 						} else {
-							setTimeout("insertarNucLit(" + idMp + "," + estatResolucion + "," + mes + "," + anio + "," + nuc + "," + deten + "," + idUnidad + ");", 100);
+							setTimeout("insertarNucLit(" + idMp + "," + estatResolucion + "," + mes + "," + anio + "," + nuc + "," + deten + "," + idUnidad + ",0,0,0);", 100);
+																																																	// idMp, estatResolucion, mes, anio, nuc, deten, idUnidad, opcInsert, tipo_investigacion, idImputado
 						}
+
+					} else {
+
+						if (objDatos.first == "NOjudicializado") {
+							swal("", "El Número de Caso no se encuentra Judicializado en sistema favor de ingresarlo como judicializado.", "warning");
+						} else {
+							getExpedienteLit("expedCont", nuc);
+							if (estatResolucion == 1 || estatResolucion == 2 || estatResolucion == 3 || estatResolucion == 4 ||
+								estatResolucion == 17 || estatResolucion == 18 || estatResolucion == 20 || estatResolucion == 21 ||
+								estatResolucion == 22 || estatResolucion == 23 || estatResolucion == 24 || estatResolucion == 25 ||
+								estatResolucion == 26 || estatResolucion == 27 || estatResolucion == 28 || estatResolucion == 29 ||
+								estatResolucion == 30 || estatResolucion == 31 || estatResolucion == 95 || estatResolucion == 61 ||
+								estatResolucion == 63 || estatResolucion == 89 || estatResolucion == 99 || estatResolucion == 101 ||
+								estatResolucion == 103 || estatResolucion == 105 || estatResolucion == 106 || estatResolucion == 107 ||
+								estatResolucion == 108 || estatResolucion == 109 || estatResolucion == 110 || estatResolucion == 111 ||
+								estatResolucion == 64 || estatResolucion == 60 || estatResolucion == 91 || estatResolucion == 65 ||
+								estatResolucion == 90 || estatResolucion == 68 ||
+								estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151 || estatResolucion == 154 || estatResolucion == 66) {
+								showModalNucLitInfo2(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad, 1, idImputado);
+							} else if (estatResolucion == 50 || estatResolucion == 53 || estatResolucion == 58 || estatResolucion == 153) {
+								showModalAgregarImputados(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad, idImputado);
+							} else {
+								setTimeout("insertarNucLit(" + idMp + "," + estatResolucion + "," + mes + "," + anio + "," + nuc + "," + deten + "," + idUnidad + ",0,0,0);", 100);
+							}
+
+						}
+
+
 					}
 				}
 
@@ -930,7 +1347,8 @@ function caninsertlit(nuc, idMp, estatResolucion, mes, anio, deten, idUnidad) {
 
 
 ///////////////////////////////
-function insertarNucLit(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad, opcInsert, tipo_investigacion) {
+function insertarNucLit(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad, opcInsert, tipo_investigacion, idImputado) {
+	
 	if (tipo_investigacion == 2) { nuc = "'" + nuc + "'"; }
 	acc = "insertNuc";
 	ajax = objetoAjax();
@@ -1012,7 +1430,8 @@ function insertarNucLit(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad, 
 		}
 	}
 	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	ajax.send("&nuc=" + nuc + "&acc=" + acc + "&idMp=" + idMp + "&estatResolucion=" + estatResolucion + "&mes=" + mes + "&anio=" + anio + "&deten=" + deten + "&idUnidad=" + idUnidad + "&tipo_investigacion=" + tipo_investigacion);
+	ajax.send("&nuc=" + nuc + "&acc=" + acc + "&idMp=" + idMp + "&estatResolucion=" + estatResolucion + "&mes=" + mes + "&anio=" + anio + "&deten=" 
+	+ deten + "&idUnidad=" + idUnidad + "&tipo_investigacion=" + tipo_investigacion + "&idImputado=" + idImputado);
 
 }
 
@@ -1317,7 +1736,7 @@ function averiguacionInserts(idinput, idMp, mes, anio, estatResolucion, deten, i
 		estatResolucion == 64 || estatResolucion == 60 || estatResolucion == 91 || estatResolucion == 65 ||
 		estatResolucion == 90 || estatResolucion == 68 ||
 		estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151 || estatResolucion == 154 || estatResolucion == 66) {
-		showModalNucLitInfo2(estatResolucion, NO_AVERIGUACION, idMp, mes, anio, deten, idUnidad, 2);
+		showModalNucLitInfo2(estatResolucion, NO_AVERIGUACION, idMp, mes, anio, deten, idUnidad, 2,0);
 	} else if (estatResolucion == 50 || estatResolucion == 53 || estatResolucion == 58) {
 		showModalAgregarImputados(estatResolucion, 'NO_AVERIGUACION', idMp, mes, anio, deten, idUnidad);
 	} else {

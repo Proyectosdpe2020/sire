@@ -1251,22 +1251,22 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 										for ($k = 0; $k <= 81; $k++) {
 											$arraySumas[$k] =  $arraySumas[$k] + $data[0][$k];
 										}
-										$objPHPExcel->getActiveSheet()->SetCellValue("D" . $renInicio, number_format($arraySumas[61]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("E" . $renInicio, number_format($arraySumas[62]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("F" . $renInicio, number_format($arraySumas[63]));
+										$objPHPExcel->getActiveSheet()->SetCellValue("D" . $renInicio, $arraySumas[61]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("E" . $renInicio, $arraySumas[62]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("F" . $renInicio, $arraySumas[63]);
 	
-										$objPHPExcel->getActiveSheet()->SetCellValue("H" . $renInicio, number_format($arraySumas[75]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("I" . $renInicio, number_format($arraySumas[76]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("J" . $renInicio, number_format($arraySumas[77]));
+										$objPHPExcel->getActiveSheet()->SetCellValue("H" . $renInicio, $arraySumas[75]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("I" . $renInicio, $arraySumas[76]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("J" . $renInicio, $arraySumas[77]);
 	
-										$objPHPExcel->getActiveSheet()->SetCellValue("L" . $renInicio, number_format($arraySumas[38]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("M" . $renInicio, number_format($arraySumas[39]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("N" . $renInicio, number_format($arraySumas[40]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("O" . $renInicio, number_format($arraySumas[41]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("P" . $renInicio, number_format($arraySumas[42]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("Q" . $renInicio, number_format($arraySumas[43]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("S" . $renInicio, number_format($arraySumas[78]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("T" . $renInicio, number_format($arraySumas[81]));
+										$objPHPExcel->getActiveSheet()->SetCellValue("L" . $renInicio, $arraySumas[38]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("M" . $renInicio, $arraySumas[39]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("N" . $renInicio, $arraySumas[40]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("O" . $renInicio, $arraySumas[41]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("P" . $renInicio, $arraySumas[42]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("Q" . $renInicio, $arraySumas[43]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("S" . $renInicio, $arraySumas[78]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("T" . $renInicio, $arraySumas[81]);
 									} else {
 										// $data = getRegistrosProcesosPenalesData($conn, $mesIni, $anioIniSelected, $idFiscalia, $juzgados[$r][0]);
 										
@@ -1280,22 +1280,22 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 										for ($k = 0; $k <= 81; $k++) {
 											$arraySumas[$k] =  $arraySumas[$k] + $data[0][$k];
 										}
-										$objPHPExcel->getActiveSheet()->SetCellValue("D" . $renInicio, number_format($arraySumas[61]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("E" . $renInicio, number_format($arraySumas[62]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("F" . $renInicio, number_format($arraySumas[63]));
+										$objPHPExcel->getActiveSheet()->SetCellValue("D" . $renInicio, $arraySumas[61]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("E" . $renInicio, $arraySumas[62]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("F" . $renInicio, $arraySumas[63]);
 	
-										$objPHPExcel->getActiveSheet()->SetCellValue("H" . $renInicio, number_format($arraySumas[75]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("I" . $renInicio, number_format($arraySumas[76]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("J" . $renInicio, number_format($arraySumas[77]));
+										$objPHPExcel->getActiveSheet()->SetCellValue("H" . $renInicio, $arraySumas[75]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("I" . $renInicio, $arraySumas[76]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("J" . $renInicio, $arraySumas[77]);
 	
-										$objPHPExcel->getActiveSheet()->SetCellValue("L" . $renInicio, number_format($arraySumas[38]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("M" . $renInicio, number_format($arraySumas[39]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("N" . $renInicio, number_format($arraySumas[40]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("O" . $renInicio, number_format($arraySumas[41]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("P" . $renInicio, number_format($arraySumas[42]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("Q" . $renInicio, number_format($arraySumas[43]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("S" . $renInicio, number_format($arraySumas[78]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("T" . $renInicio, number_format($arraySumas[81]));
+										$objPHPExcel->getActiveSheet()->SetCellValue("L" . $renInicio, $arraySumas[38]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("M" . $renInicio, $arraySumas[39]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("N" . $renInicio, $arraySumas[40]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("O" . $renInicio, $arraySumas[41]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("P" . $renInicio, $arraySumas[42]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("Q" . $renInicio, $arraySumas[43]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("S" . $renInicio, $arraySumas[78]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("T" . $renInicio, $arraySumas[81]);
 									} else {
 										// $data = getRegistrosProcesosPenalesData($conn, $i + 1, $arrayAnios[0], $idFiscalia, $juzgados[$r][0]);
 										
@@ -1311,22 +1311,22 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 										for ($k = 0; $k <= 81; $k++) {
 											$arraySumas[$k] =  $arraySumas[$k] + $data[0][$k];
 										}
-										$objPHPExcel->getActiveSheet()->SetCellValue("D" . $renInicio, number_format($arraySumas[61]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("E" . $renInicio, number_format($arraySumas[62]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("F" . $renInicio, number_format($arraySumas[63]));
+										$objPHPExcel->getActiveSheet()->SetCellValue("D" . $renInicio, $arraySumas[61]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("E" . $renInicio, $arraySumas[62]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("F" . $renInicio, $arraySumas[63]);
 	
-										$objPHPExcel->getActiveSheet()->SetCellValue("H" . $renInicio, number_format($arraySumas[75]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("I" . $renInicio, number_format($arraySumas[76]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("J" . $renInicio, number_format($arraySumas[77]));
+										$objPHPExcel->getActiveSheet()->SetCellValue("H" . $renInicio, $arraySumas[75]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("I" . $renInicio, $arraySumas[76]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("J" . $renInicio, $arraySumas[77]);
 	
-										$objPHPExcel->getActiveSheet()->SetCellValue("L" . $renInicio, number_format($arraySumas[38]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("M" . $renInicio, number_format($arraySumas[39]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("N" . $renInicio, number_format($arraySumas[40]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("O" . $renInicio, number_format($arraySumas[41]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("P" . $renInicio, number_format($arraySumas[42]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("Q" . $renInicio, number_format($arraySumas[43]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("S" . $renInicio, number_format($arraySumas[78]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("T" . $renInicio, number_format($arraySumas[81]));
+										$objPHPExcel->getActiveSheet()->SetCellValue("L" . $renInicio, $arraySumas[38]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("M" . $renInicio, $arraySumas[39]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("N" . $renInicio, $arraySumas[40]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("O" . $renInicio, $arraySumas[41]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("P" . $renInicio, $arraySumas[42]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("Q" . $renInicio, $arraySumas[43]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("S" . $renInicio, $arraySumas[78]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("T" . $renInicio, $arraySumas[81]);
 									} else {
 										// $data = getRegistrosProcesosPenalesData($conn, $i + 1, $arrayAnios[sizeof($arrayAnios) - 1], $idFiscalia, $juzgados[$r][0]);
 										
@@ -1340,22 +1340,22 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 										for ($k = 0; $k <= 81; $k++) {
 											$arraySumas[$k] =  $arraySumas[$k] + $data[0][$k];
 										}
-										$objPHPExcel->getActiveSheet()->SetCellValue("D" . $renInicio, number_format($arraySumas[61]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("E" . $renInicio, number_format($arraySumas[62]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("F" . $renInicio, number_format($arraySumas[63]));
+										$objPHPExcel->getActiveSheet()->SetCellValue("D" . $renInicio, $arraySumas[61]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("E" . $renInicio, $arraySumas[62]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("F" . $renInicio, $arraySumas[63]);
 	
-										$objPHPExcel->getActiveSheet()->SetCellValue("H" . $renInicio, number_format($arraySumas[75]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("I" . $renInicio, number_format($arraySumas[76]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("J" . $renInicio, number_format($arraySumas[77]));
+										$objPHPExcel->getActiveSheet()->SetCellValue("H" . $renInicio, $arraySumas[75]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("I" . $renInicio, $arraySumas[76]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("J" . $renInicio, $arraySumas[77]);
 	
-										$objPHPExcel->getActiveSheet()->SetCellValue("L" . $renInicio, number_format($arraySumas[38]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("M" . $renInicio, number_format($arraySumas[39]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("N" . $renInicio, number_format($arraySumas[40]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("O" . $renInicio, number_format($arraySumas[41]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("P" . $renInicio, number_format($arraySumas[42]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("Q" . $renInicio, number_format($arraySumas[43]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("S" . $renInicio, number_format($arraySumas[78]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("T" . $renInicio, number_format($arraySumas[81]));
+										$objPHPExcel->getActiveSheet()->SetCellValue("L" . $renInicio, $arraySumas[38]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("M" . $renInicio, $arraySumas[39]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("N" . $renInicio, $arraySumas[40]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("O" . $renInicio, $arraySumas[41]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("P" . $renInicio, $arraySumas[42]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("Q" . $renInicio, $arraySumas[43]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("S" . $renInicio, $arraySumas[78]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("T" . $renInicio, $arraySumas[81]);
 									} else {
 										// $data = getRegistrosProcesosPenalesData($conn, $i + 1, $arrayAnios[$j], $idFiscalia, $juzgados[$r][0]);
 										
@@ -1401,22 +1401,22 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 										for ($k = 0; $k <= 81; $k++) {
 											$arraySumas[$k] =  $arraySumas[$k] + $data[0][$k];
 										}
-										$objPHPExcel->getActiveSheet()->SetCellValue("D" . $renInicio, number_format($arraySumas[61]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("E" . $renInicio, number_format($arraySumas[62]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("F" . $renInicio, number_format($arraySumas[63]));
+										$objPHPExcel->getActiveSheet()->SetCellValue("D" . $renInicio, $arraySumas[61]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("E" . $renInicio, $arraySumas[62]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("F" . $renInicio, $arraySumas[63]);
 	
-										$objPHPExcel->getActiveSheet()->SetCellValue("H" . $renInicio, number_format($arraySumas[75]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("I" . $renInicio, number_format($arraySumas[76]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("J" . $renInicio, number_format($arraySumas[77]));
+										$objPHPExcel->getActiveSheet()->SetCellValue("H" . $renInicio, $arraySumas[75]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("I" . $renInicio, $arraySumas[76]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("J" . $renInicio, $arraySumas[77]);
 	
-										$objPHPExcel->getActiveSheet()->SetCellValue("L" . $renInicio, number_format($arraySumas[38]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("M" . $renInicio, number_format($arraySumas[39]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("N" . $renInicio, number_format($arraySumas[40]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("O" . $renInicio, number_format($arraySumas[41]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("P" . $renInicio, number_format($arraySumas[42]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("Q" . $renInicio, number_format($arraySumas[43]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("S" . $renInicio, number_format($arraySumas[78]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("T" . $renInicio, number_format($arraySumas[81]));
+										$objPHPExcel->getActiveSheet()->SetCellValue("L" . $renInicio, $arraySumas[38]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("M" . $renInicio, $arraySumas[39]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("N" . $renInicio, $arraySumas[40]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("O" . $renInicio, $arraySumas[41]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("P" . $renInicio, $arraySumas[42]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("Q" . $renInicio, $arraySumas[43]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("S" . $renInicio, $arraySumas[78]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("T" . $renInicio, $arraySumas[81]);
 									}
 								}
 							} else {
@@ -1429,22 +1429,22 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 										for ($k = 0; $k <= 81; $k++) {
 											$arraySumas[$k] =  $arraySumas[$k] + $data[0][$k];
 										}
-										$objPHPExcel->getActiveSheet()->SetCellValue("D" . $renInicio, number_format($arraySumas[61]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("E" . $renInicio, number_format($arraySumas[62]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("F" . $renInicio, number_format($arraySumas[63]));
+										$objPHPExcel->getActiveSheet()->SetCellValue("D" . $renInicio, $arraySumas[61]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("E" . $renInicio, $arraySumas[62]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("F" . $renInicio, $arraySumas[63]);
 	
-										$objPHPExcel->getActiveSheet()->SetCellValue("H" . $renInicio, number_format($arraySumas[75]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("I" . $renInicio, number_format($arraySumas[76]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("J" . $renInicio, number_format($arraySumas[77]));
+										$objPHPExcel->getActiveSheet()->SetCellValue("H" . $renInicio, $arraySumas[75]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("I" . $renInicio, $arraySumas[76]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("J" . $renInicio, $arraySumas[77]);
 	
-										$objPHPExcel->getActiveSheet()->SetCellValue("L" . $renInicio, number_format($arraySumas[38]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("M" . $renInicio, number_format($arraySumas[39]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("N" . $renInicio, number_format($arraySumas[40]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("O" . $renInicio, number_format($arraySumas[41]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("P" . $renInicio, number_format($arraySumas[42]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("Q" . $renInicio, number_format($arraySumas[43]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("S" . $renInicio, number_format($arraySumas[78]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("T" . $renInicio, number_format($arraySumas[81]));
+										$objPHPExcel->getActiveSheet()->SetCellValue("L" . $renInicio, $arraySumas[38]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("M" . $renInicio, $arraySumas[39]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("N" . $renInicio, $arraySumas[40]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("O" . $renInicio, $arraySumas[41]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("P" . $renInicio, $arraySumas[42]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("Q" . $renInicio, $arraySumas[43]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("S" . $renInicio, $arraySumas[78]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("T" . $renInicio, $arraySumas[81]);
 									}
 								}
 							}
@@ -1459,22 +1459,22 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 										for ($k = 0; $k <= 81; $k++) {
 											$arraySumas[$k] =  $arraySumas[$k] + $data[0][$k];
 										}
-										$objPHPExcel->getActiveSheet()->SetCellValue("D" . $renInicio, number_format($arraySumas[61]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("E" . $renInicio, number_format($arraySumas[62]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("F" . $renInicio, number_format($arraySumas[63]));
+										$objPHPExcel->getActiveSheet()->SetCellValue("D" . $renInicio, $arraySumas[61]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("E" . $renInicio, $arraySumas[62]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("F" . $renInicio, $arraySumas[63]);
 	
-										$objPHPExcel->getActiveSheet()->SetCellValue("H" . $renInicio, number_format($arraySumas[75]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("I" . $renInicio, number_format($arraySumas[76]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("J" . $renInicio, number_format($arraySumas[77]));
+										$objPHPExcel->getActiveSheet()->SetCellValue("H" . $renInicio, $arraySumas[75]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("I" . $renInicio, $arraySumas[76]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("J" . $renInicio, $arraySumas[77]);
 	
-										$objPHPExcel->getActiveSheet()->SetCellValue("L" . $renInicio, number_format($arraySumas[38]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("M" . $renInicio, number_format($arraySumas[39]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("N" . $renInicio, number_format($arraySumas[40]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("O" . $renInicio, number_format($arraySumas[41]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("P" . $renInicio, number_format($arraySumas[42]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("Q" . $renInicio, number_format($arraySumas[43]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("S" . $renInicio, number_format($arraySumas[78]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("T" . $renInicio, number_format($arraySumas[81]));
+										$objPHPExcel->getActiveSheet()->SetCellValue("L" . $renInicio, $arraySumas[38]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("M" . $renInicio, $arraySumas[39]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("N" . $renInicio, $arraySumas[40]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("O" . $renInicio, $arraySumas[41]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("P" . $renInicio, $arraySumas[42]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("Q" . $renInicio, $arraySumas[43]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("S" . $renInicio, $arraySumas[78]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("T" . $renInicio, $arraySumas[81]);
 									}
 								}
 							} else {
@@ -1487,22 +1487,22 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 										for ($k = 0; $k <= 81; $k++) {
 											$arraySumas[$k] =  $arraySumas[$k] + $data[0][$k];
 										}
-										$objPHPExcel->getActiveSheet()->SetCellValue("D" . $renInicio, number_format($arraySumas[61]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("E" . $renInicio, number_format($arraySumas[62]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("F" . $renInicio, number_format($arraySumas[63]));
+										$objPHPExcel->getActiveSheet()->SetCellValue("D" . $renInicio,$arraySumas[61]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("E" . $renInicio, $arraySumas[62]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("F" . $renInicio, $arraySumas[63]);
 	
-										$objPHPExcel->getActiveSheet()->SetCellValue("H" . $renInicio, number_format($arraySumas[75]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("I" . $renInicio, number_format($arraySumas[76]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("J" . $renInicio, number_format($arraySumas[77]));
+										$objPHPExcel->getActiveSheet()->SetCellValue("H" . $renInicio, $arraySumas[75]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("I" . $renInicio, $arraySumas[76]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("J" . $renInicio, $arraySumas[77]);
 	
-										$objPHPExcel->getActiveSheet()->SetCellValue("L" . $renInicio, number_format($arraySumas[38]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("M" . $renInicio, number_format($arraySumas[39]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("N" . $renInicio, number_format($arraySumas[40]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("O" . $renInicio, number_format($arraySumas[41]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("P" . $renInicio, number_format($arraySumas[42]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("Q" . $renInicio, number_format($arraySumas[43]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("S" . $renInicio, number_format($arraySumas[78]));
-										$objPHPExcel->getActiveSheet()->SetCellValue("T" . $renInicio, number_format($arraySumas[81]));
+										$objPHPExcel->getActiveSheet()->SetCellValue("L" . $renInicio, $arraySumas[38]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("M" . $renInicio, $arraySumas[39]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("N" . $renInicio, $arraySumas[40]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("O" . $renInicio, $arraySumas[41]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("P" . $renInicio, $arraySumas[42]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("Q" . $renInicio, $arraySumas[43]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("S" . $renInicio, $arraySumas[78]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("T" . $renInicio, $arraySumas[81]);
 									}
 								}
 							}
@@ -1567,7 +1567,7 @@ $objPHPExcel->getActiveSheet()->getProtection()->setAutofilter(true);
 $objPHPExcel->getActiveSheet()->getProtection()->setObjects(true);
 $objPHPExcel->getActiveSheet()->getProtection()->setScenarios(true);
 $objPHPExcel->getActiveSheet()->getProtection()->setSheet(true);
-$objPHPExcel->getActiveSheet()->getProtection()->setPassword('2D0P2E2');
+// $objPHPExcel->getActiveSheet()->getProtection()->setPassword('2D0P2E2');
 
 
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');

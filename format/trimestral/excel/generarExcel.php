@@ -124,11 +124,11 @@ $sheet->getStyle('B14')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\
 
 
 $sheet->getStyle('A8:J8')->getAlignment()->setWrapText(true)
-					  ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
-					  ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+            ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
+            ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
 $sheet->getStyle('A9:J9')->getAlignment()->setWrapText(true)
-					  ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
-					  ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+            ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
+            ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
 
 $sheet->getStyle('A1:DL1')->getFont()->setBold(true)->setSize(9)->getColor()->setARGB(\PhpOffice\PhpSpreadsheet\Style\Color::COLOR_BLACK);
 
@@ -184,6 +184,7 @@ $sheet->setCellValue('D14', "CII 2018");
 $sheet->setCellValue('E14', "CII 2019"); 
 $sheet->setCellValue('F14', "CII 2020"); 
 $sheet->setCellValue('G14', "CII 2021"); 
+$sheet->setCellValue('H14', "CII 2022");
 
 
 $query = "SELECT p.nombre
@@ -193,6 +194,7 @@ $query = "SELECT p.nombre
    ,ISNULL(SUM(CASE WHEN (s.periodo = $periodoSeleccionado AND s.anio = $getAnio) then s.val2019 end),0) as VAL2019
    ,ISNULL(SUM(CASE WHEN (s.periodo = $periodoSeleccionado AND s.anio = $getAnio) then s.val2020 end),0) as VAL2020
    ,ISNULL(SUM(CASE WHEN (s.periodo = $periodoSeleccionado AND s.anio = $getAnio) then s.val2021 end),0) as VAL2021
+   ,ISNULL(SUM(CASE WHEN (s.periodo = $periodoSeleccionado AND s.anio = $getAnio) then s.val2022 end),0) as VAL2022
   FROM [ESTADISTICAV2].[trimestral].[datosAnteriorTrimestral] s
 LEFT JOIN trimestral.pregunta p ON p.idPregunta = s.idPregunta
 GROUP BY p.nombre , s.idPregunta
@@ -205,11 +207,12 @@ ORDER BY s.idPregunta ASC";
   $sheet->setCellValue('E'.(string)($cont1), $row['VAL2019']);
   $sheet->setCellValue('F'.(string)($cont1), $row['VAL2020']);
   $sheet->setCellValue('G'.(string)($cont1), $row['VAL2021']);
+  $sheet->setCellValue('H'.(string)($cont1), $row['VAL2022']);
   $cont1+=1;
  } 
 }
 
-if($getAnio >= 2022){ $col = 'H'; }else{ $col = 'C'; }
+if($getAnio >= 2022){ $col = 'I'; }else{ $col = 'C'; }
 $contTrimestre = 1;
 $trimestre = 'trimestre'.$contTrimestre;
 $ultimaColumna = "";
@@ -227,28 +230,28 @@ WHILE ($periodoConsulta <= $periodoSeleccionado) {
                   p.nombre
                  ,s.idPregunta
                  ,CASE 
-                  WHEN s.idPregunta = 10 AND $getAnio >= 2022 AND $periodoConsulta >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 10 and anio = $getAnio and periodo = $periodoConsulta)
-                  WHEN s.idPregunta = 11 AND $getAnio >= 2022 AND $periodoConsulta >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 11 and anio = $getAnio and periodo = $periodoConsulta)
-                  WHEN s.idPregunta = 12 AND $getAnio >= 2022 AND $periodoConsulta >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 12 and anio = $getAnio and periodo = $periodoConsulta)
-                  WHEN s.idPregunta = 13 AND $getAnio >= 2022 AND $periodoConsulta >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 13 and anio = $getAnio and periodo = $periodoConsulta)
-                  WHEN s.idPregunta = 14 AND $getAnio >= 2022 AND $periodoConsulta >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 14 and anio = $getAnio and periodo = $periodoConsulta)
-                  WHEN s.idPregunta = 15 AND $getAnio >= 2022 AND $periodoConsulta >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 15 and anio = $getAnio and periodo = $periodoConsulta)
-                  WHEN s.idPregunta = 16 AND $getAnio >= 2022 AND $periodoConsulta >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 16 and anio = $getAnio and periodo = $periodoConsulta)
-                  WHEN s.idPregunta = 17 AND $getAnio >= 2022 AND $periodoConsulta >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 17 and anio = $getAnio and periodo = $periodoConsulta)
-                  WHEN s.idPregunta = 24 AND $getAnio >= 2022 AND $periodoConsulta >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 24 and anio = $getAnio and periodo = $periodoConsulta)
-                  WHEN s.idPregunta = 25 AND $getAnio >= 2022 AND $periodoConsulta >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 25 and anio = $getAnio and periodo = $periodoConsulta)
-                  WHEN s.idPregunta = 27 AND $getAnio >= 2022 AND $periodoConsulta >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 27 and anio = $getAnio and periodo = $periodoConsulta) + SUM(CASE WHEN (s.idPeriodo = $periodoConsulta AND s.anio = $getAnio) then s.total end)
-                  WHEN s.idPregunta = 34 AND $getAnio >= 2022 AND $periodoConsulta >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 34 and anio = $getAnio and periodo = $periodoConsulta)
-                  WHEN s.idPregunta = 36 AND $getAnio >= 2022 AND $periodoConsulta >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 36 and anio = $getAnio and periodo = $periodoConsulta)
-                  WHEN s.idPregunta = 38 AND $getAnio >= 2022 AND $periodoConsulta >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 38 and anio = $getAnio and periodo = $periodoConsulta)
-                  WHEN s.idPregunta = 39 AND $getAnio >= 2022 AND $periodoConsulta >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 39 and anio = $getAnio and periodo = $periodoConsulta)
-                  WHEN s.idPregunta = 41 AND $getAnio >= 2022 AND $periodoConsulta >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 41 and anio = $getAnio and periodo = $periodoConsulta)
-                  WHEN s.idPregunta = 42 AND $getAnio >= 2022 AND $periodoConsulta >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 42 and anio = $getAnio and periodo = $periodoConsulta)
-                  WHEN s.idPregunta = 51 AND $getAnio >= 2022 AND $periodoConsulta >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 51 and anio = $getAnio and periodo = $periodoConsulta)
-                  WHEN s.idPregunta = 52 AND $getAnio >= 2022 AND $periodoConsulta >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 52 and anio = $getAnio and periodo = $periodoConsulta)
-                  WHEN s.idPregunta = 53 AND $getAnio >= 2022 AND $periodoConsulta >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 53 and anio = $getAnio and periodo = $periodoConsulta)
-                  WHEN s.idPregunta = 54 AND $getAnio >= 2022 AND $periodoConsulta >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 54 and anio = $getAnio and periodo = $periodoConsulta)
-                  WHEN s.idPregunta = 55 AND $getAnio >= 2022 AND $periodoConsulta >= 2 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 55 and anio = $getAnio and periodo = $periodoConsulta)
+                  WHEN s.idPregunta = 10 AND $getAnio >= 2022 AND $periodoConsulta >= 1 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 10 and anio = $getAnio and periodo = $periodoConsulta)
+                  WHEN s.idPregunta = 11 AND $getAnio >= 2022 AND $periodoConsulta >= 1 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 11 and anio = $getAnio and periodo = $periodoConsulta)
+                  WHEN s.idPregunta = 12 AND $getAnio >= 2022 AND $periodoConsulta >= 1 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 12 and anio = $getAnio and periodo = $periodoConsulta)
+                  WHEN s.idPregunta = 13 AND $getAnio >= 2022 AND $periodoConsulta >= 1 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 13 and anio = $getAnio and periodo = $periodoConsulta)
+                  WHEN s.idPregunta = 14 AND $getAnio >= 2022 AND $periodoConsulta >= 1 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 14 and anio = $getAnio and periodo = $periodoConsulta)
+                  WHEN s.idPregunta = 15 AND $getAnio >= 2022 AND $periodoConsulta >= 1 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 15 and anio = $getAnio and periodo = $periodoConsulta)
+                  WHEN s.idPregunta = 16 AND $getAnio >= 2022 AND $periodoConsulta >= 1 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 16 and anio = $getAnio and periodo = $periodoConsulta)
+                  WHEN s.idPregunta = 17 AND $getAnio >= 2022 AND $periodoConsulta >= 1 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 17 and anio = $getAnio and periodo = $periodoConsulta)
+                  WHEN s.idPregunta = 24 AND $getAnio >= 2022 AND $periodoConsulta >= 1 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 24 and anio = $getAnio and periodo = $periodoConsulta)
+                  WHEN s.idPregunta = 25 AND $getAnio >= 2022 AND $periodoConsulta >= 1 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 25 and anio = $getAnio and periodo = $periodoConsulta)
+                  WHEN s.idPregunta = 27 AND $getAnio >= 2022 AND $periodoConsulta >= 1 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 27 and anio = $getAnio and periodo = $periodoConsulta) + SUM(CASE WHEN (s.idPeriodo = $periodoConsulta AND s.anio = $getAnio) then s.total end)
+                  WHEN s.idPregunta = 34 AND $getAnio >= 2022 AND $periodoConsulta >= 1 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 34 and anio = $getAnio and periodo = $periodoConsulta)
+                  WHEN s.idPregunta = 36 AND $getAnio >= 2022 AND $periodoConsulta >= 1 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 36 and anio = $getAnio and periodo = $periodoConsulta)
+                  WHEN s.idPregunta = 38 AND $getAnio >= 2022 AND $periodoConsulta >= 1 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 38 and anio = $getAnio and periodo = $periodoConsulta)
+                  WHEN s.idPregunta = 39 AND $getAnio >= 2022 AND $periodoConsulta >= 1 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 39 and anio = $getAnio and periodo = $periodoConsulta)
+                  WHEN s.idPregunta = 41 AND $getAnio >= 2022 AND $periodoConsulta >= 1 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 41 and anio = $getAnio and periodo = $periodoConsulta)
+                  WHEN s.idPregunta = 42 AND $getAnio >= 2022 AND $periodoConsulta >= 1 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 42 and anio = $getAnio and periodo = $periodoConsulta)
+                  WHEN s.idPregunta = 51 AND $getAnio >= 2022 AND $periodoConsulta >= 1 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 51 and anio = $getAnio and periodo = $periodoConsulta)
+                  WHEN s.idPregunta = 52 AND $getAnio >= 2022 AND $periodoConsulta >= 1 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 52 and anio = $getAnio and periodo = $periodoConsulta)
+                  WHEN s.idPregunta = 53 AND $getAnio >= 2022 AND $periodoConsulta >= 1 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 53 and anio = $getAnio and periodo = $periodoConsulta)
+                  WHEN s.idPregunta = 54 AND $getAnio >= 2022 AND $periodoConsulta >= 1 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 54 and anio = $getAnio and periodo = $periodoConsulta)
+                  WHEN s.idPregunta = 55 AND $getAnio >= 2022 AND $periodoConsulta >= 1 THEN (SELECT COUNT(NUC) AS totalNuc FROM trimestral.nucsTrimestral WHERE idPregunta = 55 and anio = $getAnio and periodo = $periodoConsulta)
                   ELSE SUM(CASE WHEN (s.idPeriodo = $periodoConsulta AND s.anio = $getAnio) then s.total end) end as $trimestre
           FROM ESTADISTICAV2.trimestral.seguimiento s
           INNER JOIN trimestral.pregunta p ON p.idPregunta = s.idPregunta
@@ -281,23 +284,23 @@ $cont += 3;
 $indice = 15; //Para empezar a colorear desde la celda B15
 
 for($i=14; $i<$cont; $i++){
-	$sheet->getStyle('C'.($i).':'.$ultimaColumna.($i))->getAlignment()->setWrapText(true)
-					  ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
-					  ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+  $sheet->getStyle('C'.($i).':'.$ultimaColumna.($i))->getAlignment()->setWrapText(true)
+            ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
+            ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
     if($indice < $cont){
-    	if(($i)%2 == 0){
-    		$sheet->getStyle('B'.($indice).':'.$ultimaColumna.($indice))->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('d8d8d8');
-    	}else{
-    		$sheet->getStyle('B'.($indice).':'.$ultimaColumna.($indice))->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('efdecd');
-    	}
+      if(($i)%2 == 0){
+        $sheet->getStyle('B'.($indice).':'.$ultimaColumna.($indice))->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('d8d8d8');
+      }else{
+        $sheet->getStyle('B'.($indice).':'.$ultimaColumna.($indice))->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('efdecd');
+      }
     }
- 					  
-	$sheet->getStyle('A'.($i).':'.$ultimaColumna.($i))->applyFromArray($styleArray);
+            
+  $sheet->getStyle('A'.($i).':'.$ultimaColumna.($i))->applyFromArray($styleArray);
  $indice++;  
 }
 
 /*AQUI SE COLOREAN LOS ENCABEZADOS DE CADA TRIMESTRE*/
-if($getAnio >= 2022){ $totalEncabezados = 5 + $periodoSeleccionado; }else{ $totalEncabezados = 4; }
+if($getAnio >= 2022){ $totalEncabezados = 6 + $periodoSeleccionado; }else{ $totalEncabezados = 4; }
 $indiceEncabezado = 'C';
 for($j = 1; $j <= $totalEncabezados; $j++){
   if(($j)%2 == 0){
