@@ -367,42 +367,94 @@ FROM [ESTADISTICAV2].[dbo].[enlaceFormato]) ef on ef.idEnlace = subqsec.idEnlace
 
 where seven_ten_quest != 1 ORDER BY idPregunta";	
 
-echo $sql;
-
-
 $params = array();
 $options = array( "Scrollable" => SQLSRV_CURSOR_KEYSET );
 $result = sqlsrv_query( $conn, $sql , $params, $options );
+
+$prev_count = getPrevYears(
+    (object) array(
+        'link' => $link,
+        'year' => $year,
+        'conn' => $conn,
+        'params' => $params,
+        'options' => $options
+    )
+);
+
+//echo json_encode($prev_count, JSON_FORCE_OBJECT);
 
 $row_count = sqlsrv_num_rows( $result );
 
 $records = array();
 
 if($row_count > 0){
+
     while( $row = sqlsrv_fetch_array( $result) ) {
-        array_push($records, 
-            array(
-                'number' => $row['idPregunta'],
-                'question' => $row['question'],
-                'year' => $row['anioCaptura'],
-                'period' => $row['periodo'],
-                'count' => array($row['m1'], $row['m2'], $row['m3']),
-                'previous_years' => $row['previous_years'],
-                'section' => $row['section'],
-                'period_id' => $row['idPeriodo'],
-                'year' => $_POST['year'],
-                'unity' => $_POST['unity'],
-                'link' => $_POST['link']
-            )
-        );
+
+        $previous_years = $row['previous_years'];
+        $previous_years_flag = false;
+
+
+        //if(in_array($row['idPregunta'], $prev_count)) {
+        if (array_key_exists($row['idPregunta'], $prev_count)) {
+            $previous_years = $prev_count[$row['idPregunta']];
+            $previous_years_flag = true;
+        }
+
+        if($row['idPregunta'] == 27 && $row['periodo'] == null){
+
+        }
+        else{
+            array_push($records, 
+                array(
+                    'number' => $row['idPregunta'],
+                    'question' => $row['question'],
+                    'year' => $row['anioCaptura'],
+                    'period' => $row['periodo'],
+                    'count' => array($row['m1'], $row['m2'], $row['m3']),
+                    'previous_years' => $previous_years,
+                    'section' => $row['section'],
+                    'period_id' => $row['idPeriodo'],
+                    'year' => $_POST['year'],
+                    'unity' => $_POST['unity'],
+                    'link' => $_POST['link'],
+                    'previous_years_flag' => $previous_years_flag
+                )
+            );
+        }
     }
 }
+
 
 $_SESSION['question_records'] = $records;
 
 echo json_encode($records, JSON_FORCE_OBJECT);
 
 sqlsrv_close($conn);
+
+
+
+function getPrevYears($attr){
+
+    $sql = "SELECT [idPregunta]
+                ,sum(val2017+ val2018+ val2019+ val2020+ val2021+ val2022) as prev_years
+            FROM [ESTADISTICAV2].[trimestral].[datosAnteriorTrimestral] where idEnlace = $attr->link and anio in ($attr->year) 
+            group by [idPregunta] having sum(val2017+ val2018+ val2019+ val2020+ val2021+ val2022) > 0";
+
+    $result = sqlsrv_query($attr->conn, $sql, $attr->params, $attr->options);
+
+    $row_count = sqlsrv_num_rows( $result );
+
+    $prev_count = array();
+
+    if($row_count > 0){
+        while( $row = sqlsrv_fetch_array( $result) ) {
+            $prev_count[$row['idPregunta']] = $row['prev_years'];
+        }
+    }
+
+    return $prev_count;
+}
 
 ?>
 

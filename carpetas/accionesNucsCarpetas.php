@@ -86,6 +86,10 @@ switch ($acc) {
 			$idCausaExtPenal = $_POST["idCausaExtPenal"];
 		}
 
+		if (isset($_POST["fecha_determinacion"]) ) {
+			$fecha_determinacion = $_POST["fecha_determinacion"];
+		}
+
 
 
 
@@ -97,7 +101,7 @@ switch ($acc) {
  BEGIN TRANSACTION
  SET NOCOUNT ON    
 
- INSERT INTO estatusNucsCarpetas VALUES('$nuc', $estatResolucion, $idMp, $idUnidad, GETDATE(), $anio, $mes, '$idCarpeta', $deten, $envioselect, $idCausaExtPenal)  
+ INSERT INTO estatusNucsCarpetas VALUES('$nuc', $estatResolucion, $idMp, $idUnidad, GETDATE(), $anio, $mes, '$idCarpeta', $deten, $envioselect, $idCausaExtPenal, '$fecha_determinacion')  
 
  COMMIT
  END TRY

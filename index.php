@@ -1,4 +1,4 @@
-<?php
+.<?php
 session_start();
 include("validar_sesion.php");
 include("funciones.php");
@@ -862,7 +862,7 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 			<script language="JavaScript" type="text/javascript" src="js/scriptCarpetas.js"></script>
 		<script language="JavaScript" type="text/javascript" src="js/cmasc.js"></script>
 		<!--<script language="JavaScript" type="text/javascript" src="js/litigacion.js"></script>-->
-		<script language="JavaScript" type="text/javascript" src="js/litigacion_220602.js"></script>
+		<script language="JavaScript" type="text/javascript" src="js/litigacion_230404.js"></script>
 		<script language="JavaScript" type="text/javascript" src="js/trimestral.js"></script>
 			<script language="JavaScript" type="text/javascript" src="js/desapar.js"></script>
 			<script language="JavaScript" type="text/javascript" src="js/procesosPenales.js"></script>
@@ -876,7 +876,7 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 <script language="JavaScript" type="text/javascript" src="format/trimestral/pdf/js/function_220708150000.js"></script>
 <script language="JavaScript" type="text/javascript" src="js/forestales.js"></script>
 <!--<script language="JavaScript" type="text/javascript" src="js/litigacionSENAP.js"></script>-->
-<script language="JavaScript" type="text/javascript" src="js/litigacionSENAP_220602.js"></script>
+<script language="JavaScript" type="text/javascript" src="js/litigacionSENAP_230404.js"></script>
 <script type="text/javascript" src="js/carpetasJudicializadas.js"></script>
 <?if($format == 16){ ?><script type="text/javascript" src="js/medidasDeProteccion.js"></script><? } ?>
 <?if($format == 18 || $format == 19){ ?><script type="text/javascript" src="js/mandamientosJudiciales_20062022.js"></script><? } ?>

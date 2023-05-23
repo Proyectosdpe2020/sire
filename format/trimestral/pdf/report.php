@@ -287,14 +287,16 @@ function set_table_content($pdf2, $records, $section, $w){
                 $records[$i]['count'][0],
                 $records[$i]['count'][1],
                 $records[$i]['count'][2],
-                $records[$i]['count'][0]+$records[$i]['count'][1]+$records[$i]['count'][2]+$records[$i]['previous_years']
+                $records[$i]['count'][0]+$records[$i]['count'][1]+$records[$i]['count'][2]
+                //$records[$i]['count'][0]+$records[$i]['count'][1]+$records[$i]['count'][2]+$records[$i]['previous_years']
             ),'c');
             
             $ind = true;
 
             $n++;
 
-            $total+=$records[$i]['count'][0]+$records[$i]['count'][1]+$records[$i]['count'][2]+$records[$i]['previous_years'];
+            $total+=$records[$i]['count'][0]+$records[$i]['count'][1]+$records[$i]['count'][2];
+            //$total+=$records[$i]['count'][0]+$records[$i]['count'][1]+$records[$i]['count'][2]+$records[$i]['previous_years'];
 
         }
 
