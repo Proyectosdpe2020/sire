@@ -22,159 +22,159 @@ switch ($acc) {
 
 	case 'getExp':
 
-	$datossicap = get_datos_carpeta_capturado($conSic, $nuc);
-	?>
-	<div id="expedCont">
-		<input id="expediente" type="" name="expediente" value="<? echo $datossicap[0][2]; ?>" tabindex="0" placeholder="" style="height:38px;" class="fechas form-control redondear" disabled />
-	</div>
+		$datossicap = get_datos_carpeta_capturado($conSic, $nuc);
+?>
+		<div id="expedCont">
+			<input id="expediente" type="" name="expediente" value="<? echo $datossicap[0][2]; ?>" tabindex="0" placeholder="" style="height:38px;" class="fechas form-control redondear" disabled />
+		</div>
 	<?
 
-	break;
+		break;
 
 	case 'caninsert':
 
-	$arreglo[0] = "SI";
-	$arreglo[1] = "NO";
-	if (isset($_POST["acc"])) {
-		$acc = $_POST["acc"];
-	}
-	if (isset($_POST["nuc"])) {
-		$nuc = $_POST["nuc"];
-	}
-	if (isset($_POST["idMp"])) {
-		$idMp = $_POST["idMp"];
-	}
-	if (isset($_POST["estatResolucion"])) {
-		$estatResolucion = $_POST["estatResolucion"];
-	}
-	if (isset($_POST["mes"])) {
-		$mes = $_POST["mes"];
-	}
-	if (isset($_POST["anio"])) {
-		$anio = $_POST["anio"];
-	}
-	if (isset($_POST["deten"])) {
-		$deten = $_POST["deten"];
-	}
-	if (isset($_POST["idUnidad"])) {
-		$idUnidad = $_POST["idUnidad"];
-	}
+		$arreglo[0] = "SI";
+		$arreglo[1] = "NO";
+		if (isset($_POST["acc"])) {
+			$acc = $_POST["acc"];
+		}
+		if (isset($_POST["nuc"])) {
+			$nuc = $_POST["nuc"];
+		}
+		if (isset($_POST["idMp"])) {
+			$idMp = $_POST["idMp"];
+		}
+		if (isset($_POST["estatResolucion"])) {
+			$estatResolucion = $_POST["estatResolucion"];
+		}
+		if (isset($_POST["mes"])) {
+			$mes = $_POST["mes"];
+		}
+		if (isset($_POST["anio"])) {
+			$anio = $_POST["anio"];
+		}
+		if (isset($_POST["deten"])) {
+			$deten = $_POST["deten"];
+		}
+		if (isset($_POST["idUnidad"])) {
+			$idUnidad = $_POST["idUnidad"];
+		}
 
-	if (isset($_POST["numcasos"])) {
-		$numcasos = $_POST["numcasos"];
-	}
+		if (isset($_POST["numcasos"])) {
+			$numcasos = $_POST["numcasos"];
+		}
 
 
-	if ($estatResolucion != 19 || $estatResolucion != 7 || $estatResolucion != 15 || $estatResolucion != 13 || $estatResolucion != 14) {
+		if ($estatResolucion != 19 || $estatResolucion != 7 || $estatResolucion != 15 || $estatResolucion != 13 || $estatResolucion != 14) {
 			//////// Ver la determinacion si ya existe en tabla estatusNucs ///////////////////
-		$carpeAgente = getDistincCarpetasAgenteLitigacion($conn, $idMp, $estatResolucion, $mes, $anio);
-	} else {
+			$carpeAgente = getDistincCarpetasAgenteLitigacion($conn, $idMp, $estatResolucion, $mes, $anio);
+		} else {
 			///OBTENER LAS CARPETAS DEL AGENTE ESTO EN SICAP
-		$carpeAgente = getDistincCarpetasAgente($conSic, $idMp, $estatResolucion, $mes, $anio, $deten);
-	}
+			$carpeAgente = getDistincCarpetasAgente($conSic, $idMp, $estatResolucion, $mes, $anio, $deten);
+		}
 
 
 
-	$numResol = 0;
+		$numResol = 0;
 
 
-	for ($i = 0; $i < sizeof($carpeAgente); $i++) {
+		for ($i = 0; $i < sizeof($carpeAgente); $i++) {
 
 
-		$numResol++;
-	}
+			$numResol++;
+		}
 
 
-	if ($numResol >= $numcasos) {
-		echo json_encode(array('first' => $arreglo[1]));
-	} elseif ($numResol < $numcasos) {
-		echo json_encode(array('first' => $arreglo[0]));
-	}
+		if ($numResol >= $numcasos) {
+			echo json_encode(array('first' => $arreglo[1]));
+		} elseif ($numResol < $numcasos) {
+			echo json_encode(array('first' => $arreglo[0]));
+		}
 
-	break;
+		break;
 
 		////////////// Revisa si un nuca ya existe o no         
 
 	case 'checkinsert':
 
-	if (isset($_POST["mes"])) {
-		$mes = $_POST["mes"];
-	}
-	if (isset($_POST["nuc"])) {
-		$nuc = $_POST["nuc"];
-	}
-	if (isset($_POST["idUnidad"])) {
-		$idUnidad = $_POST["idUnidad"];
-	}
-	if (isset($_POST["estatResolucion"])) {
-		$estatResolucion = $_POST["estatResolucion"];
-	}
+		if (isset($_POST["mes"])) {
+			$mes = $_POST["mes"];
+		}
+		if (isset($_POST["nuc"])) {
+			$nuc = $_POST["nuc"];
+		}
+		if (isset($_POST["idUnidad"])) {
+			$idUnidad = $_POST["idUnidad"];
+		}
+		if (isset($_POST["estatResolucion"])) {
+			$estatResolucion = $_POST["estatResolucion"];
+		}
 
 
-	$datossicap = get_datos_carpeta_capturado($conSic, $nuc);
-	$idCarpeta = $datossicap[0][0];
+		$datossicap = get_datos_carpeta_capturado($conSic, $nuc);
+		$idCarpeta = $datossicap[0][0];
 
 
-	$arreglo[0] = "SI";
-	$arreglo[1] = "NO";
+		$arreglo[0] = "SI";
+		$arreglo[1] = "NO";
 
-	if ($estatResolucion != 19  || $estatResolucion != 15 || $estatResolucion != 13 || $estatResolucion != 14) {
+		if ($estatResolucion != 19  || $estatResolucion != 15 || $estatResolucion != 13 || $estatResolucion != 14) {
 
 			//////// Ver la determinacion si ya existe en tabla estatusNucs ///////////////////
-		$lastDetermin = getLastDeterminacionCarpetaLitigacion($conn, $nuc, $estatResolucion);
-	} else {
+			$lastDetermin = getLastDeterminacionCarpetaLitigacion($conn, $nuc, $estatResolucion);
+		} else {
 
 			///////////// Se obtiene la ultima determinacion para saber en que unidad esta ESTO EN SICAP
-		$lastDetermin = getLastDeterminacionCarpetaEsta($conSic, $idCarpeta, $estatResolucion, $mes);
-	}
+			$lastDetermin = getLastDeterminacionCarpetaEsta($conSic, $idCarpeta, $estatResolucion, $mes);
+		}
 
 
 
 
 
-	$idResolMP = $lastDetermin[0][0];
-	$carpid = $lastDetermin[0][1];
-	$idUnidade = $lastDetermin[0][2];
+		$idResolMP = $lastDetermin[0][0];
+		$carpid = $lastDetermin[0][1];
+		$idUnidade = $lastDetermin[0][2];
 
 		// $nucinfo = getExisteNuc($conSic, $idCarpeta, $idUnidad);
 
-	if ($idUnidad == $idUnidade) {
-		echo json_encode(array('first' => $arreglo[0]));
-	} else {
+		if ($idUnidad == $idUnidade) {
+			echo json_encode(array('first' => $arreglo[0]));
+		} else {
 
-		echo json_encode(array('first' => $arreglo[1]));
-	}
+			echo json_encode(array('first' => $arreglo[1]));
+		}
 
-	break;
+		break;
 
 		////////////////  INSERTA LOS DATOS DE LA NUEVA RESOLUCION QUE SE PRODUCE AL CAMBIAR EL ESTATUS 
 
 	case 'insertNuc':
 
 
-	$arreglo[0] = "SI";
-	$arreglo[1] = "NO";
+		$arreglo[0] = "SI";
+		$arreglo[1] = "NO";
 
-	if (isset($_POST["idMp"])) {
-		$idMp = $_POST["idMp"];
-	}
-	if (isset($_POST["estatResolucion"])) {
-		$estatResolucion = $_POST["estatResolucion"];
-	}
-	if (isset($_POST["mes"])) {
-		$mes = $_POST["mes"];
-	}
-	if (isset($_POST["anio"])) {
-		$anio = $_POST["anio"];
-	}
-	if (isset($_POST["deten"])) {
-		$deten = $_POST["deten"];
-	}
-	if (isset($_POST["idUnidad"])) {
-		$idUnidad = $_POST["idUnidad"];
-	}
-	if (isset($_POST["tipo_investigacion"])) {
-		$tipo_investigacion = $_POST["tipo_investigacion"];
+		if (isset($_POST["idMp"])) {
+			$idMp = $_POST["idMp"];
+		}
+		if (isset($_POST["estatResolucion"])) {
+			$estatResolucion = $_POST["estatResolucion"];
+		}
+		if (isset($_POST["mes"])) {
+			$mes = $_POST["mes"];
+		}
+		if (isset($_POST["anio"])) {
+			$anio = $_POST["anio"];
+		}
+		if (isset($_POST["deten"])) {
+			$deten = $_POST["deten"];
+		}
+		if (isset($_POST["idUnidad"])) {
+			$idUnidad = $_POST["idUnidad"];
+		}
+		if (isset($_POST["tipo_investigacion"])) {
+			$tipo_investigacion = $_POST["tipo_investigacion"];
 		} //Para identificar si se recibe NUC o Averiguacion
 
 
@@ -193,39 +193,37 @@ switch ($acc) {
 				$nuc = $datossicap[0][1];
 				$carpid = $datossicap[0][0];
 
-				if($estatResolucion == 2 || $estatResolucion == 1){
-					$idImputado = 0;
-				}	
 
 
 
 
-				$queryTransaction = "                              
-				BEGIN                     
-				BEGIN TRY 
-				BEGIN TRANSACTION
-				SET NOCOUNT ON    
-				
-				DECLARE @idEstatusNuc INT;
-				INSERT INTO estatusNucs (nuc, idEstatus, idmp, idUnidad, fecha, anio, mes, idCarpeta) VALUES ('$nuc', $estatResolucion, $idMp, $idUnidad, GETDATE(), $anio, $mes, $carpid)   
-				SET @idEstatusNuc = SCOPE_IDENTITY();
+				$queryTransaction = "  
+                            
+                            BEGIN                     
+                            BEGIN TRY 
+                              BEGIN TRANSACTION
+                                  SET NOCOUNT ON    
+                               
+																																		DECLARE @idEstatusNuc INT;
+                                              INSERT INTO estatusNucs (nuc, idEstatus, idmp, idUnidad, fecha, anio, mes, idCarpeta) VALUES ('$nuc', $estatResolucion, $idMp, $idUnidad, GETDATE(), $anio, $mes, $carpid)   
+																																														SET @idEstatusNuc = SCOPE_IDENTITY();
+																																														INSERT INTO [ESTADISTICAV2].[dbo].[imputadoLitigacionDetermNuc] VALUES($idImputado,$estatResolucion, '$nuc',@idEstatusNuc)
+                                              SELECT MAX(idEstatusNucs) AS idEstatusNucs FROM estatusNucs
 
-				INSERT INTO [ESTADISTICAV2].[dbo].[imputadoLitigacionDetermNuc] VALUES($idImputado,$estatResolucion, '$nuc',@idEstatusNuc)
 
-				SELECT MAX(idEstatusNucs) AS idEstatusNucs FROM estatusNucs
-				COMMIT
-				END TRY
-				BEGIN CATCH 
-				ROLLBACK TRANSACTION
-				RAISERROR('No se realizo la transaccion',16,1)
-				END CATCH
-				END
+                                  COMMIT
+                            END TRY
+                            BEGIN CATCH 
+                                  ROLLBACK TRANSACTION
+                                  RAISERROR('No se realizo la transaccion',16,1)
+                            END CATCH
+                            END
 
-				";
+                          ";
 
 				$result = sqlsrv_query($conn, $queryTransaction, array(), array("Scrollable" => 'static'));
 
-				// echo "1".$queryTransaction;
+				//echo $queryTransaction;
 
 				if ($result) {
 					while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
@@ -241,29 +239,29 @@ switch ($acc) {
 				//INGRESAR AVERIGUACIONES PREVIAS
 
 				$queryTransaction = "  
-				
-				BEGIN                     
-				BEGIN TRY 
-				BEGIN TRANSACTION
-				SET NOCOUNT ON    
-				
-				INSERT INTO estatusAveriguaciones (no_averiguacion, idEstatus, idmp, idUnidad, fecha, anio, mes) VALUES ($nuc, $estatResolucion, $idMp, $idUnidad, GETDATE(), $anio, $mes)   
+                            
+                            BEGIN                     
+                            BEGIN TRY 
+                              BEGIN TRANSACTION
+                                  SET NOCOUNT ON    
+                               
+                                              INSERT INTO estatusAveriguaciones (no_averiguacion, idEstatus, idmp, idUnidad, fecha, anio, mes) VALUES ($nuc, $estatResolucion, $idMp, $idUnidad, GETDATE(), $anio, $mes)   
 
-				SELECT MAX(idEstatusAveriguacion) AS idEstatusAveriguacion FROM estatusAveriguaciones        
+                                              SELECT MAX(idEstatusAveriguacion) AS idEstatusAveriguacion FROM estatusAveriguaciones        
 
-				COMMIT
-				END TRY
-				BEGIN CATCH 
-				ROLLBACK TRANSACTION
-				RAISERROR('No se realizo la transaccion',16,1)
-				END CATCH
-				END
+                                  COMMIT
+                            END TRY
+                            BEGIN CATCH 
+                                  ROLLBACK TRANSACTION
+                                  RAISERROR('No se realizo la transaccion',16,1)
+                            END CATCH
+                            END
 
-				";
+                          ";
 
 				$result = sqlsrv_query($conn, $queryTransaction, array(), array("Scrollable" => 'static'));
 
-				// echo "2".$queryTransaction;
+				//echo $queryTransaction;
 
 				if ($result) {
 					while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
@@ -285,25 +283,25 @@ switch ($acc) {
 
 			$queryTransaction = "  
 
-			BEGIN                     
-			BEGIN TRY 
-			BEGIN TRANSACTION
-			SET NOCOUNT ON    
-			
-			INSERT INTO Resoluciones (CarpetaID, Fechaoficio, Fechaingreso, Judicializada, CatModalidadesEstadisticasID, EstatusID, AgenteID, UsuarioID, NumOficio, deten, mes, anio, idUnidad) VALUES ($carpid, GETDATE(), GETDATE(), 0, 0, $estatResolucion, $idMp, 0, 'S/O', $deten, $mes, $anio, $idUnidad)                       
+                            BEGIN                     
+                            BEGIN TRY 
+                              BEGIN TRANSACTION
+                                  SET NOCOUNT ON    
+                               
+                                    INSERT INTO Resoluciones (CarpetaID, Fechaoficio, Fechaingreso, Judicializada, CatModalidadesEstadisticasID, EstatusID, AgenteID, UsuarioID, NumOficio, deten, mes, anio, idUnidad) VALUES ($carpid, GETDATE(), GETDATE(), 0, 0, $estatResolucion, $idMp, 0, 'S/O', $deten, $mes, $anio, $idUnidad)                       
 
-			COMMIT
-			END TRY
-			BEGIN CATCH 
-			ROLLBACK TRANSACTION
-			RAISERROR('No se realizo la transaccion',16,1)
-			END CATCH
-			END
-			";
+                                  COMMIT
+                            END TRY
+                            BEGIN CATCH 
+                                  ROLLBACK TRANSACTION
+                                  RAISERROR('No se realizo la transaccion',16,1)
+                            END CATCH
+                            END
+                          ";
 
 			$result = sqlsrv_query($conSic, $queryTransaction, array(), array("Scrollable" => 'static'));
 
-			// echo "3".$queryTransaction;
+			//echo $queryTransaction;
 
 			if ($result) {
 				echo json_encode(array('first' => $arreglo[0]));
@@ -316,7 +314,7 @@ switch ($acc) {
 
 		/////////////////////// MUESTRA LOS DATOS AL ACTUALIZAR O INSERTAR UN REGISTRO
 
-		case 'showtable':
+	case 'showtable':
 
 		if (isset($_POST["idMp"])) {
 			$idMp = $_POST["idMp"];
@@ -343,7 +341,7 @@ switch ($acc) {
 		//Valida si el status recibido pide informacion adicional para SENAP 
 		$validaInfo =  validarEstatusShowInfo($estatResolucion);
 
-		?>
+	?>
 
 		<table class="table table-striped tblTransparente">
 			<thead>
@@ -388,7 +386,7 @@ switch ($acc) {
 						$nuc = $nucs[0][0];
 						$exp = $nucs[0][1];
 
-						?>
+				?>
 						<tr>
 
 							<td class="tdRowMain negr"><? echo ($sumador + 1); ?></td>
@@ -406,7 +404,7 @@ switch ($acc) {
 							</td>
 
 						</tr>
-						<?
+				<?
 						$sumador++;
 					}
 				}
@@ -422,7 +420,7 @@ switch ($acc) {
 			$carpeAgente = getDistincAveriguacionesAgenteLitigacion($conn, $idMp, $estatResolucion, $mes, $anio, $idUnidad);
 
 			if (sizeof($carpeAgente) >= 0) {
-				?>
+		?>
 
 				<table class="table table-striped tblTransparente">
 					<thead>
@@ -449,7 +447,7 @@ switch ($acc) {
 							$idEstatusNucs = $lastDetermin[$k][1];
 							$nuc = $lastDetermin[$k][0];
 
-							?>
+						?>
 							<tr>
 
 								<td class="tdRowMain negr"><? echo ($sumador + 1); ?></td>
@@ -466,19 +464,19 @@ switch ($acc) {
 								</td>
 
 							</tr>
-							<?
+						<?
 							$sumador++;
 						}
 
 						?>
 					</tbody>
 				</table>
-			<?           }
+		<?           }
 		} ?>
 
 
 
-		<?
+	<?
 
 		break;
 
@@ -486,7 +484,7 @@ switch ($acc) {
 		////////////////////// MUESTRA LOS DATOS AL ACTUALIZAR O INSERTAR UN REGISTRO
 
 
-		case 'showtable2':
+	case 'showtable2':
 
 		if (isset($_POST["idMp"])) {
 			$idMp = $_POST["idMp"];
@@ -510,7 +508,7 @@ switch ($acc) {
 		$nucResol2 = getResolucionesMPsic($conSic, $idMp, $estatResolucion, $mes, $anio, $deten);
 		$validaInfo =  validarEstatusShowInfo($estatResolucion);
 
-		?>
+	?>
 
 		<table class="table table-striped tblTransparente">
 			<thead>
@@ -537,7 +535,7 @@ switch ($acc) {
 					$nuc = $nucs[0][0];
 					$exp = $nucs[0][1];
 
-					?>
+				?>
 					<tr>
 
 						<td class="tdRowMain negr"><? echo ($j + 1); ?></td>
@@ -554,7 +552,7 @@ switch ($acc) {
 						</td>
 
 					</tr>
-					<?
+				<?
 				}
 
 				?>
@@ -571,7 +569,7 @@ switch ($acc) {
 
 		//////////////////////// ELIMINA UNA RESOLUCION SI ES QUE SE LE REQUIERE
 
-		case 'deleteResol':
+	case 'deleteResol':
 
 
 		$arreglo[0] = "SI";
@@ -605,38 +603,38 @@ switch ($acc) {
 		if ($tipo_investigacion != 2) {
 
 			$queryTransaction = "                    BEGIN                     
-			BEGIN TRY 
-			BEGIN TRANSACTION
-			SET NOCOUNT ON
-			
-			DELETE FROM estatusNucs WHERE idEstatusNucs = 	$idEstatusNucs
-			DELETE FROM imputadoLitigacionDetermNuc WHERE idEstatusNucs = 	$idEstatusNucs
+                    BEGIN TRY 
+                      BEGIN TRANSACTION
+                          SET NOCOUNT ON
+                                   
+                             DELETE FROM estatusNucs WHERE idEstatusNucs = 	$idEstatusNucs
+																													DELETE FROM imputadoLitigacionDetermNuc WHERE idEstatusNucs = 	$idEstatusNucs
 
-			COMMIT
-			END TRY
-			BEGIN CATCH 
-			ROLLBACK TRANSACTION
-			RAISERROR('No se realizo la transaccion',16,1)
-			END CATCH
-			END
-			";
+                          COMMIT
+                    END TRY
+                    BEGIN CATCH 
+                          ROLLBACK TRANSACTION
+                          RAISERROR('No se realizo la transaccion',16,1)
+                    END CATCH
+                    END
+                  ";
 		} else {
 
 			$queryTransaction = "                    BEGIN                     
-			BEGIN TRY 
-			BEGIN TRANSACTION
-			SET NOCOUNT ON
-			
-			DELETE FROM estatusAveriguaciones WHERE idEstatusAveriguacion = $idEstatusNucs AND idMp = $idMp AND anio = $anio AND mes = $mes AND idUnidad = $idUnidad
+                    BEGIN TRY 
+                      BEGIN TRANSACTION
+                          SET NOCOUNT ON
+                                   
+                             DELETE FROM estatusAveriguaciones WHERE idEstatusAveriguacion = $idEstatusNucs AND idMp = $idMp AND anio = $anio AND mes = $mes AND idUnidad = $idUnidad
 
-			COMMIT
-			END TRY
-			BEGIN CATCH 
-			ROLLBACK TRANSACTION
-			RAISERROR('No se realizo la transaccion',16,1)
-			END CATCH
-			END
-			";
+                          COMMIT
+                    END TRY
+                    BEGIN CATCH 
+                          ROLLBACK TRANSACTION
+                          RAISERROR('No se realizo la transaccion',16,1)
+                    END CATCH
+                    END
+                  ";
 		}
 
 
@@ -657,7 +655,7 @@ switch ($acc) {
 		/////////////////// VALIDA SI LA CANTIDAD QUE SE ESCRBIBIO EN EL INPUT CORREPONDE A LA MISMA CANTIDAD DE NUCS REGISTRADOS
 
 
-		case 'validateCheck':
+	case 'validateCheck':
 
 
 		$arreglo[0] = "SI";
@@ -705,7 +703,7 @@ switch ($acc) {
 		///////////// REGISTRA LOS NUMEROS DE CADA CAMPO QUE SE COMPARARA Y PODER HACER LA REVISION
 
 
-		case 'validateitok':
+	case 'validateitok':
 
 
 		$arreglo[0] = "SI";
@@ -740,7 +738,7 @@ switch ($acc) {
 
 				$valor = getLAstResolucionesFromAdetermLit($conn, $idMp, $arregloEsatusLit[$p], $mes, $anio, 0, $idUnidad);
 
-				?>
+		?>
 				<input id="valor<? echo $arregloEsatusLit[$p]; ?>" type="hidden" value="<? echo $valor; ?>" name="">
 				<?
 
@@ -751,30 +749,30 @@ switch ($acc) {
 
 					$valor = getLAstResolucionesFromAdetermLit($conn, $idMp, $arregloEsatusLit[9], $mes, $anio, 0, $idUnidad);
 
-					?>
+				?>
 					<input id="valor13" type="hidden" value="<? echo $valor; ?>" name="">
-					<?
+				<?
 				}
 
 				if ($p == 10) {
 					$valor = getLAstResolucionesFromAdetermLit($conn, $idMp, $arregloEsatusLit[10], $mes, $anio, 0, $idUnidad);
-					?>
+				?>
 					<input id="valor14" type="hidden" value="<? echo $valor; ?>" name="">
-					<?
+				<?
 				}
 
 				if ($p == 11) {
 					$valor = getLAstResolucionesFromAdetermLit($conn, $idMp, $arregloEsatusLit[11], $mes, $anio, 0, $idUnidad);
-					?>
+				?>
 					<input id="valor15" type="hidden" value="<? echo $valor; ?>" name="">
-					<?
+				<?
 				}
 
 				if ($p == 14) {
 					$valor = getLAstResolucionesFromAdetermLit($conn, $idMp, $arregloEsatusLit[14], $mes, $anio, 0, $idUnidad);
-					?>
+				?>
 					<input id="valor19" type="hidden" value="<? echo $valor; ?>" name="">
-					<?
+		<?
 				}
 			}
 		}
@@ -793,7 +791,7 @@ switch ($acc) {
 		<!--<input id="proAbre" type="hidden" value="<? echo $proAbre; ?>" name="">-->
 		<!--<input id="condena" type="hidden" value="<? echo $condena; ?>" name="">-->
 
-		<?
+	<?
 
 		break;
 
@@ -801,7 +799,7 @@ switch ($acc) {
 		///////////// REGISTRA LOS NUMEROS DE CADA CAMPO QUE SE COMPARARA Y PODER HACER LA REVISION EN LA ACTUALIZACION
 
 
-		case 'validateitokUpd':
+	case 'validateitokUpd':
 
 
 		$arreglo[0] = "SI";
@@ -837,7 +835,7 @@ switch ($acc) {
 		$acumlUpd = getLAstResolucionesFromAdeterm($conSic, $idMp, 3, $mes, $anio, 0, $idUnidad);
 
 
-		?>
+	?>
 		<input id="condetenidoUpd" type="hidden" value="<? echo $condetenidoUpd; ?>" name="">
 		<input id="sindetenidoUpd" type="hidden" value="<? echo $sindetenidoUpd; ?>" name="">
 		<input id="abstenUpd" type="hidden" value="<? echo $abstenUpd; ?>" name="">
@@ -855,7 +853,7 @@ switch ($acc) {
 		break;
 
 
-		case 'getDataNuc':
+	case 'getDataNuc':
 
 		//// SE OBTIENE EL NOMBRE DEL ULTIMO MP DE LA MISMA UNIDAD QUE HIZO LA DETERMINACION /////
 
@@ -903,10 +901,10 @@ switch ($acc) {
 			$nunidad = $nuni[0][0];
 
 
-			?>
+		?>
 			<input type="hidden" id="nombreMpinput" value="<? echo $nomMp; ?>">
 			<input type="hidden" id="nombreUnidadinput" value="<? echo $nunidad; ?>">
-			<?
+<?
 		}
 
 
@@ -916,7 +914,7 @@ switch ($acc) {
 
 
 
-		case 'lastCheck':
+	case 'lastCheck':
 
 		//// SE OBTIENE EL NOMBRE DEL ULTIMO MP DE LA MISMA UNIDAD QUE HIZO LA DETERMINACION /////
 
@@ -1130,7 +1128,7 @@ switch ($acc) {
 		break;
 
 
-		case 'existeNuc':
+	case 'existeNuc':
 
 		//// SE OBTIENE EL NOMBRE DEL ULTIMO MP DE LA MISMA UNIDAD QUE HIZO LA DETERMINACION /////
 		$arreglo[0] = "SI";
@@ -1153,7 +1151,7 @@ switch ($acc) {
 		break;
 
 		///// VALIDAR QUE ESTE JUDICIALIZADO EN NUC
-		case 'existeNucJudicializado':
+	case 'existeNucJudicializado':
 		$arreglo[0] = "SI";
 		$arreglo[1] = "NO";
 
@@ -1173,7 +1171,7 @@ switch ($acc) {
 		break;
 
 		///// VALIDAR QUE ESTE JUDICIALIZADO EN NUC
-		case 'existenImputadosNUC':
+	case 'existenImputadosNUC':
 		$arreglo[0] = "SI";
 		$arreglo[1] = "NO";
 
@@ -1191,37 +1189,26 @@ switch ($acc) {
 		$determinXnucImputado =  getDataFromimputadoLitigacionDetermNucXnuc($conn, $nuc);
 		$countDeterNucImputado = sizeof($determinXnucImputado);
 
-		$impuxNUc = getImputadoFromNUC($conn, $nuc);
-		$countimpuxNUc = sizeof($impuxNUc);
+			if ($countDeterNuc == 0) {
+			//// QUIERE DECIR QUE LO ESTAN INGRESANDO POR PRIMERA VEZ
+			////VALIDAMOS QUE EL NUC YA CUENTA CON POR LO MENOS UN IMPUTADO
+			$dataImputaoNUc = getImputadoFromNUCImputadoLitigacionCarpeta($conn, $nuc);
+			$countInpNuc = sizeof($dataImputaoNUc);
 
-		// 28-04-2023 SE MODIFICA LA VALIDACION A QUE YA CUENTE LA CARPETA CON IMPUTADOS
 
-		if($countimpuxNUc > 0){
-			$aux1 = 1;
-		}else{
-			$aux1 = 0;
+			if ($countInpNuc >= 1) {
+				$aux1 = 1;
+			} else {
+				$aux1 = 0;
+			}
+		} else {
+
+			if ($countDeterNuc == $countDeterNucImputado) {
+				$aux1 = 1;
+			} else {
+				$aux1 = 0;
+			}
 		}
-
-		// if ($countDeterNuc == 0) {
-		// 	//// QUIERE DECIR QUE LO ESTAN INGRESANDO POR PRIMERA VEZ
-		// 	////VALIDAMOS QUE EL NUC YA CUENTA CON POR LO MENOS UN IMPUTADO
-		// 	$dataImputaoNUc = getImputadoFromNUCImputadoLitigacionCarpeta($conn, $nuc);
-		// 	$countInpNuc = sizeof($dataImputaoNUc);
-
-
-		// 	if ($countInpNuc >= 1) {
-		// 		$aux1 = 1;
-		// 	} else {
-		// 		$aux1 = 0;
-		// 	}
-		// } else {
-
-		// 	if ($countDeterNuc == $countDeterNucImputado) {
-		// 		$aux1 = 1;
-		// 	} else {
-		// 		$aux1 = 0;
-		// 	}
-		// }
 
 
 
@@ -1234,7 +1221,7 @@ switch ($acc) {
 		break;
 
 
-		case 'existeNuclitigacion':
+	case 'existeNuclitigacion':
 
 		//// SE OBTIENE EL NOMBRE DEL ULTIMO MP DE LA MISMA UNIDAD QUE HIZO LA DETERMINACION /////
 		$arreglo[0] = "SI";
@@ -1261,9 +1248,9 @@ switch ($acc) {
 
 
 		/// SI LOS ESTATUS SON AUDIENCIAS, FORMULACIONES, ORDENES APREHENSION, VINCULACIONES A PROCESO
-		/// SE AGREGARON LOS IDS 17 y 18 para poder agregar doble nuc en los imputados de prision preventivas
+		/// SE AGREGARON LOS IDS 17 y 18 para poder agregar doble nuc en los imputados de prision preventiva
 		if (
-			$estatResolucion == 64 || $estatResolucion == 155 || $estatResolucion == 156 || $estatResolucion == 157 || $estatResolucion == 158 || $estatResolucion == 159 || $estatResolucion == 160 || $estatResolucion == 161 || $estatResolucion == 162 || $estatResolucion == 163 || $estatResolucion == 164 || $estatResolucion == 60 || $estatResolucion == 61 || $estatResolucion == 152 || $estatResolucion == 63 || $estatResolucion == 50 || $estatResolucion == 53 || $estatResolucion == 3 || $estatResolucion == 4 || $estatResolucion == 5 || $estatResolucion == 10 || $estatResolucion == 12 || $estatResolucion == 78 || $estatResolucion == 17 || $estatResolucion == 18 || $estatResolucion == 114 || $estatResolucion == 115 || $estatResolucion == 116 || $estatResolucion == 117 || $estatResolucion == 119 || $estatResolucion == 120 || $estatResolucion == 121 || $estatResolucion == 122
+			$estatResolucion == 60 || $estatResolucion == 61 || $estatResolucion == 63 || $estatResolucion == 50 || $estatResolucion == 53 || $estatResolucion == 3 || $estatResolucion == 4 || $estatResolucion == 5 || $estatResolucion == 10 || $estatResolucion == 12 || $estatResolucion == 78 || $estatResolucion == 17 || $estatResolucion == 18 || $estatResolucion == 114 || $estatResolucion == 115 || $estatResolucion == 116 || $estatResolucion == 117 || $estatResolucion == 119 || $estatResolucion == 120 || $estatResolucion == 121 || $estatResolucion == 122
 			|| $estatResolucion == 123 || $estatResolucion == 124 || $estatResolucion == 125 || $estatResolucion == 126 || $estatResolucion == 127 || $estatResolucion == 128 || $estatResolucion == 140 || $estatResolucion == 112 || $estatResolucion == 151 || $estatResolucion == 6 || $estatResolucion == 7 || $estatResolucion == 98 || $estatResolucion == 97 || $estatResolucion == 96 || $estatResolucion == 95 || $estatResolucion == 20 || $estatResolucion == 21 || $estatResolucion == 22 || $estatResolucion == 23 || $estatResolucion == 24 || $estatResolucion == 25 || $estatResolucion == 26 || $estatResolucion == 27 || $estatResolucion == 28 || $estatResolucion == 29 || $estatResolucion == 30 || $estatResolucion == 31 || $estatResolucion == 33 || $estatResolucion == 34 || $estatResolucion == 35 || $estatResolucion == 36 || $estatResolucion == 38 || $estatResolucion == 112 || $estatResolucion == 113 || $estatResolucion == 57 || $estatResolucion == 58 || $estatResolucion == 129 || $estatResolucion == 114 || $estatResolucion == 115 || $estatResolucion == 116 || $estatResolucion == 117 || $estatResolucion == 119 || $estatResolucion == 120 || $estatResolucion == 121 || $estatResolucion == 122 || $estatResolucion == 123 || $estatResolucion == 124 || $estatResolucion == 125 || $estatResolucion == 126 || $estatResolucion == 127 || $estatResolucion == 128 || $estatResolucion == 154 || $estatResolucion == 66 || $estatResolucion == 67 || $estatResolucion == 139
 		) {
 			/// SE AGREGO LA VINCULACION A PROCESO QUE SE REPITIERA, HAY QUE REVISARLO ES EL ID 151
@@ -1309,9 +1296,9 @@ switch ($acc) {
 
 
 		break;
-	}
+}
 
 
 
 
-	?>
+?>

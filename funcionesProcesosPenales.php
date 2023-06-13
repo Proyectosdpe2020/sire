@@ -33,7 +33,7 @@ function topJuzgadoXFiscalia($conn, $idFiscalia)
 
 function getJuzgadoXfiscalia($conn, $idFiscalia)
 {
-	$query = "  SELECT idJuzgadoProcesoPenal, nombre FROM procesosPenales.juzgadoProcesoPenal WHERE idFiscalia = $idFiscalia";
+	$query = "  SELECT idJuzgadoProcesoPenal, nombre FROM procesosPenales.juzgadoProcesoPenal WHERE idFiscalia = $idFiscalia AND estatus = 'VI'";
 
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);

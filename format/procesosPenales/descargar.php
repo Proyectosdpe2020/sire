@@ -147,8 +147,8 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 
 		if ($idFiscalia == 0) {
 
-			$IDSFISCALIAS = array(1, 2, 3, 4, 5, 6, 7);
-			$nameFiscalias = array("Apatzingan", "La Piedad", "Lázaro Cárdenas", "Morelia", "Uruapan", "Zamora", "Zítacuaro");
+			$IDSFISCALIAS = array(1, 2, 3, 4, 5, 6, 7,8, 9 , 10);
+			$nameFiscalias = array("Apatzingan", "La Piedad", "Lázaro Cárdenas", "Morelia", "Uruapan", "Zamora", "Zítacuaro", "Coalcoman", "Huetamo", "Jiquilpan");
 			$renInicio = "11";
 			for ($r = 0; $r < sizeof($IDSFISCALIAS); $r++) {
 				$objPHPExcel->getActiveSheet()->SetCellValue("C" . $renInicio, $nameFiscalias[$r]);
