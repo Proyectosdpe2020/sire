@@ -1,4 +1,4 @@
-.<?php
+<?php
 session_start();
 include("validar_sesion.php");
 include("funciones.php");
