@@ -1233,6 +1233,79 @@ function validaInput_litigacion(e, tipo) {
 	}
 }
 
+function sendDataMotivosCarpetaTramite(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcInsert, idImputado) {
+	var motivoCarpetaTramite = document.getElementById("motivoCarpetaTramite").value;
+
+	if (motivoCarpetaTramite != 0) {
+		insertarNucLit(idMp, estatus, mes, anio, nuc, deten, idUnidad, opcInsert,0, idImputado);
+		$('#modalNucsLitigInfo').modal('hide');
+		$('#modalNucsLitig').modal('show');
+	} else {
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+/****Ingresa a la bd la informacion de SENAP de Criterios de Oportunidad****/
+function insertFormMotivosTramiteCarpeta_db(idEstatusNucs, estatus, nuc, opcInsert) {
+	var motivoCarpetaTramite = document.getElementById("motivoCarpetaTramite").value;
+	if (motivoCarpetaTramite != 0) {
+		$.ajax({
+			type: "POST",
+			dataType: "html",
+			url: "format/litigacion/insertSenap/insert_FormMotivosTramiteCarpeta.php",
+			data: 'idEstatusNucs=' + idEstatusNucs + '&nuc=' + nuc + '&opcInsert=' + opcInsert + '&motivoCarpetaTramite=' + motivoCarpetaTramite,
+			success: function (respuesta) {
+				var json = respuesta;
+				var obj = eval("(" + json + ")");
+				if (obj.first == "NO") {
+					swal("", "No se registro verifique los datos.", "warning");
+				} else {
+					if (obj.first == "SI") {
+						var obj = eval("(" + json + ")");
+						swal("", "Registro exitosamente.", "success");
+						//reloadOpcInsertButton(idEstatusNucs, estatus, nuc,  1);
+						$('#modalNucsLitigInfo').modal('hide');
+						$('#modalNucsLitig').modal('show');
+					}
+				}
+			}
+		});
+	} else {
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
+/****Ingresa a la bd la informacion de carpetas en tramite****/
+function insertMotivosCarpetaTramite_db(idEstatusNucs, estatus, nuc, opcInsert) {
+	var motivoCarpetaTramite = document.getElementById("motivoCarpetaTramite").value;
+
+	if (motivoCarpetaTramite != 0) {
+		$.ajax({
+			type: "POST",
+			dataType: "html",
+			url: "format/litigacion/insertSenap/insert_FormMotivosTramiteCarpeta.php",
+			data: 'idEstatusNucs=' + idEstatusNucs + '&nuc=' + nuc + '&opcInsert=' + opcInsert + '&motivoCarpetaTramite=' + motivoCarpetaTramite,
+			success: function (respuesta) {
+				var json = respuesta;
+				var obj = eval("(" + json + ")");
+				if (obj.first == "NO") {
+					swal("", "No se registro verifique los datos.", "warning");
+				} else {
+					if (obj.first == "SI") {
+						var obj = eval("(" + json + ")");
+						swal("", "Registro exitosamente.", "success");
+						//reloadOpcInsertButton(idEstatusNucs, estatus, nuc,  1);
+						$('#modalNucsLitigInfo').modal('hide');
+						$('#modalNucsLitig').modal('show');
+					}
+				}
+			}
+		});
+	} else {
+		swal("", "Faltan datos por registrar.", "warning");
+	}
+}
+
 /*
 //Mecanismo para cambiar de formulario a otro
 function openForm(evt, etapa) {

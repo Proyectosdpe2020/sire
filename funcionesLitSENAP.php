@@ -637,4 +637,33 @@ function getCatParentescos($conn){
 	}
 	if(isset($arreglo)){return $arreglo;}	
 }
+
+//Función para obtener el catalogo de motivos del tramite
+function getDataMotivosCarpetaTramite($conn){
+	 $query = "SELECT * FROM senap.catMotivosCarpetaTramite WHERE estatus = 'VI' "; 
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['idCatMotivo'];
+		$arreglo[$indice][1]=$row['motivo'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
+
+//Función para obtener la información de SENAP sobre acuerdos reparatorios
+function getMotivosCarpetaTramite($conn, $idEstatusNucs){
+	 $query = "SELECT * FROM senap.motivoCarpetasTramite WHERE idEstatusNucs = '$idEstatusNucs' "; 
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['idMotivoTramite'];
+		$arreglo[$indice][1]=$row['idEstatusNucs'];
+		$arreglo[$indice][2]=$row['idCatMotivo'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
 ?>
