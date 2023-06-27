@@ -56,7 +56,7 @@ function getDataAdscripcion($connMedidas, $agentesMP_id){
 		$arreglo[$indice][0]=$row['idUnidad'];
 		$arreglo[$indice][1]=$row['nombreUnidad'];
 		$arreglo[$indice][2]=$row['idFiscalia'];
-		$arreglo[$indice][3]=$row['nombreFiscalia'];
+		$arreglo[$indice][3]=$row['n2142ombreFiscalia'];
 		$indice++;
 	}
 	if(isset($arreglo)){return $arreglo;}
