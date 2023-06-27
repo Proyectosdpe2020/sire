@@ -20,8 +20,8 @@
 	if (isset($_POST["idImputado"])){ $idImputado = $_POST["idImputado"]; }
 
 	
-	$dataImputado = getDataFromImputadoID($conn, $idImputado);
-	$bandImputado = 0;
+	//$dataImputado = getDataFromImputadoID($conn, $idImputado);
+	//$bandImputado = 0;
 
 	$arrayIDSllevanImputado = array(1,	2,	151,	10,	12,	13,	14,	15,	17,	18,	19,	20,	21,	22,	23,	24,	25,	26,	27,	28,	29,	30,	31,	36,	38
 	,	50,	53,	57,	58,	64,	65,	66,	67,	81,	84,	89,	90,	91,	93,	97,	99,	152,	153,	154,	155,	156,	157,	158,	159,	160,	161,	162,	163,	164);
@@ -53,7 +53,7 @@ if($tipo_investigacion == 1){
 ?>
 
 <div class="modal-header" style="background-color:#152F4A;">
-	<center><h4  style="font-weight: bold; color: white;" class="modal-title"><? echo $idImputado; ?>Estadística Básica del Sistema Estadistico de Procuración de Justicia (SENAP)</h4></center>
+	<center><h4  style="font-weight: bold; color: white;" class="modal-title">Estadística Básica del Sistema Estadistico de Procuración de Justicia (SENAP)</h4></center>
 </div>
 
 <div class="modal-body ">
@@ -1196,7 +1196,49 @@ if($tipo_investigacion == 1){
 	</div>
  <? } ?>
 
+  <!-- CARPETAS EN TRAMITE MOTIVO :-->
+  <? if($estatus == 165){ 
+  	$getData = getMotivosCarpetaTramite($conn, $idEstatusNucs);
+	 	if(sizeof($getData) > 0){ 
+	 		$opcInsert = 1; 
+	 		$getDataMotivo = $getData[0][2];
+	 	}else{ 	$opcInsert = 0; }
+	 	?>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12  col-md-12">
+		<!--En caso de acuerdos reparatorios, ¿tipo de acuerdos reparatorios?  :-->
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12">
+						<label for="motivoCarpetaTramite">Seleccione la etapa en la que se encuentra la carpeta: </label>
+						<select id="motivoCarpetaTramite" name="motivoCarpetaTramite" tabindex="6" class="form-control redondear ">
+							<option value="0">Selecciona</option>
+							<?$getMotivosCarpetaTramite = getDataMotivosCarpetaTramite($conn);
+							for ($i=0; $i < sizeof($getMotivosCarpetaTramite); $i++) {
+								$idCatMotivo = $getMotivosCarpetaTramite[$i][0];	$motivo = $getMotivosCarpetaTramite[$i][1];	?>
+								<option style="color: black; font-weight: bold;" value="<? echo $idCatMotivo; ?>" <?if($opcInsert == 1 && $idCatMotivo == $getDataMotivo){ ?> selected <? } ?> ><? echo $motivo; ?> </option>
+							<? } ?>
+						</select>
+					</div>
+			</div>
+	 </div>
+	</div><br><br><br><br>
+	<div class="row">
+		<div class="col-xs-12 col-sm-6 col-md-6">
+			<button style="width: 88%;" onclick="closeModalNucsLitigInfo()" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button>
+		</div>
+		<div class="col-xs-12 col-sm-6  col-md-6 ">
+				<?if(	$opcInsert == 0){ ?>
+				<button style="width: 88%;" onclick="sendDataMotivosCarpetaTramite(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> ,  <? echo $opcInsert; ?>, <? echo $dataImputado[0][7]; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
+					<?}elseif(	$opcInsert == 1 ){?>
+			<button style="width: 88%;" onclick="insertMotivosCarpetaTramite_db(<? echo $idEstatusNucs; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
+		<? } ?>
+		</div>
+	</div>
+ <? } ?>
+ <!-- CARPETAS EN TRAMITE MOTIVO :-->
+
 </div>
+
 
 <div class="modal-footer">
 	

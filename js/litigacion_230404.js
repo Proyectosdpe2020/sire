@@ -623,23 +623,26 @@ function guardarLitigacion(idEnlace, mes, anio, idMp, idUnidad) {
 	SDdiez = document.getElementById("SDdiez").value; if (SDdiez == "") { SDdiez = 0; } else { SDdiez = parseInt(document.getElementById("SDdiez").value); }
 	SDdiezNu = document.getElementById("valor164").value; if (SDdiezNu == "") { SDdiezNu = 0; } else { SDdiezNu = parseInt(document.getElementById("valor164").value); }
 
+ totCarpTram_nucs = document.getElementById("totCarpTram_nucs").value; if (totCarpTram_nucs == "") { totCarpTram_nucs = 0; } else { totCarpTram_nucs = parseInt(document.getElementById("totCarpTram_nucs").value); }
+	totCarpTram_nucsNu = document.getElementById("valor165").value; if (totCarpTram_nucsNu == "") { totCarpTram_nucsNu = 0; } else { totCarpTram_nucsNu = parseInt(document.getElementById("valor165").value); }
 
 
 
 	var arrayCamposData = [cdete, sdete, FIsolic, FIotor, FInega, legal, ilegal, aunvinc, mix, MCsol, MCotor, MCnega, ppofic, ppjus, ppanju, exgaeco, emvien, incuval, pssafj, scviind, pcdrclug, pccdper, sindom, steeca, steapl, coloele, rpdmjd, SDpapen, SDpmuImpu, acrep, criopor, termant, acu, citac, Cconc, Cnega, ONapre, ONcomp, DRppa, DRppd, DRppmp, apenoadmi, SDIrev, SDImod, SDIconf, Reproc, MJGorap, MJGorcomp,
 		MJCorapre, MJCordcomp, totAudiencias, ACPREaie, ACPREaio, SOALscp, SOALarep, SENabsol, SENmixc, SENsreda, SENnocreda, INCOMdecre, INCOMadmi, ARJnap, ARJnar, ARJncoap, ARJnoc, ARJppmc, ARJtps, ARJrvp, ARJrnscp, ARJnapa, ARJsdpa, ARJemp, ARTEdap, ARTEsd, DSEDrfmp, DSEDmfmp, DSEDcfmp, csjdsm, OSapre, OScomp, medidasProteccion, intervencionTR, tomaMuestras, exhumacion, obDatosReservados,
-		intervencionCME, provPrecautoria, cadCustodia, InspLugDis, InspInmuebles, entrevistasTestigos, reconocimientoPer, solInfoPericiales, InfInstiSeg, examenFisPersona, audJuiOral, audFallo, absolutorio, AudIndiSan, procEspecial, audCondenatorio, mecanismosAceleracion, apeamparo, amparoDirecto, amparoIndirecto, auvinc, scpro, proabre, SENcon, SDuno, SDdos, SDtres, SDcuatro, SDcinco, SDseis, SDsiete, SDocho, SDnueve, SDdiez];
+		intervencionCME, provPrecautoria, cadCustodia, InspLugDis, InspInmuebles, entrevistasTestigos, reconocimientoPer, solInfoPericiales, InfInstiSeg, examenFisPersona, audJuiOral, audFallo, absolutorio, AudIndiSan, procEspecial, audCondenatorio, mecanismosAceleracion, apeamparo, amparoDirecto, amparoIndirecto, auvinc, scpro, proabre, SENcon, SDuno, SDdos, SDtres, SDcuatro, SDcinco, SDseis, SDsiete, SDocho, SDnueve, SDdiez, totCarpTram_nucs];
 
 	var arrayNucsData = [cdeteNu, sdeteNu, FIsolicNu, FIotorNU, FInegaNu, legalNu, ilegalNu, aunvincNu, mixNu, MCsolNu, MCotorNu, MCnegaNu, ppoficNu, ppjusNu, ppanjuNu, exgaecoNu, emvienNu, incuvalNu, pssafjNu, scviindNu, pcdrclugNu, pccdperNu, sindomNu, steecaNu, steaplNu, coloeleNu, rpdmjdNu, SDpapenNu, SDpmuImpuNu, acrepNu, crioporNu, termantNu, acuNu, citacNu, CconcNu, CnegaNu, ONapreNu, ONcompNu, DRppaNu,
 		DRppdNu, DRppmpNu, apenoadmiNu, SDIrevNu, SDImodNu, SDIconfNu, ReprocNu, MJGorapNu, MJGorcompNu, MJCorapreNu, MJCordcompNu, totAudienciasNu, ACPREaieNu, ACPREaioNu, SOALscpNu, SOALarepNu, SENabsolNu, SENmixcNu, SENsredaNu, SENnocredaNu, INCOMdecreNu, INCOMadmiNu, ARJnapNu, ARJnarNu, ARJncoapNu, ARJnocNu, ARJppmcNu, ARJtpsNu, ARJrvpNu, ARJrnscpNu, ARJnapaNu, ARJsdpaNu, ARJempNu, ARTEdapNu,
 		ARTEsdNu, DSEDrfmpNu, DSEDmfmpNu, DSEDcfmpNu, csjdsmNu, OSapreNu, OScompNu, medidasProteccionNu, intervencionTRNu, tomaMuestrasNu, exhumacionNu, obDatosReservadosNu, intervencionCMENu, provPrecautoriaNu, cadCustodiaNu, InspLugDisNu, InspInmueblesNu, entrevistasTestigosNu, reconocimientoPerNu, solInfoPericialesNu, InfInstiSegNu, examenFisPersonaNu, audJuiOralNu, audFalloNu, absolutorioNu,
-		AudIndiSanNu, procEspecialNu, audCondenatorioNu, mecanismosAceleracionNu, apeamparoNu, amparoDirectoNu, amparoIndirectoNu, vincprocesoNU, scprocesoNu, proAbreNu, condenaNu, SDunoNu, SDdosNu, SDtresNu, SDcuatroNu, SDcincoNu, SDseisNu, SDsieteNu, SDochoNu, SDnueveNu, SDdiezNu];
+		AudIndiSanNu, procEspecialNu, audCondenatorioNu, mecanismosAceleracionNu, apeamparoNu, amparoDirectoNu, amparoIndirectoNu, vincprocesoNU, scprocesoNu, proAbreNu, condenaNu, SDunoNu, SDdosNu, SDtresNu, SDcuatroNu, SDcincoNu, SDseisNu, SDsieteNu, SDochoNu, SDnueveNu, SDdiezNu , totCarpTram_nucsNu];
 
 	var arrayCheckicon = ["checCdeten", "checSdeten", "checkFIsolic", "checkFIotor", "checkFInega", "checklegal", "checkilegal", "checkaunvinc", "checkmix", "checkMCsol", "checkMCotor", "checkMCnega", "checkppofic", "checkppjus", "checkppanju", "checkexgaeco", "checkemvien", "checkincuval", "checkpssafj", "checkscviind", "checkpcdrclug", "checkpccdper", "checksindom", "checksteeca", "checksteapl", "checkcoloele",
 		"checkrpdmjd", "checkSDpapen", "checkSDpmuImpu", "checkCacrep", "checkcriopor", "checktermant", "checkacu", "checkcitac", "checkCconc", "checkCnega", "checkONapre", "checkONcomp", "checkDRppa", "checkDRppd", "checkDRppmp", "checkapenoadmi", "checkSDIrev", "checkSDImod", "checkSDIconf", "checkReproc", "checkMJGorap", "checkMJGorcomp", "checkMJCorapre", "checkMJCordcomp", "checktotAudiencias",
 		"checkACPREaie", "checkACPREaio", "checkSOALscp", "checkSOALarep", "checkSENabsol", "checkSENmixc", "checkSENsreda", "checkSENnocreda", "checkINCOMdecre", "checkINCOMadmi", "checkARJnap", "checkARJnar", "checkARJncoap", "checkARJnoc", "checkARJppmc", "checkARJtps", "checkARJrvp", "checkARJrnscp", "checkSARJnapa", "checkARJsdpa", "checkARJemp", "checkARTEdap", "checkARTEsd", "checkDSEDrfmp",
 		"checkDSEDmfmp", "checkDSEDcfmp", "checkcsjdsm", "checkOSapre", "checkOScomp", "checkMedidasProteccion", "checkIntervencionTR", "checkTomaMuestras", "checkExhumacion", "checkObDatosReservados", "checkIntervencionCME", "checkProvPrecautoria", "checkCadCustodia", "checkInspLugDis", "checkInspInmuebles", "checkEntrevistasTestigos", "checkReconocimientoPer", "checkSolInfoPericiales",
-		"checkInfInstiSeg", "checkExamenFisPersona", "checkAudJuiOral", "checkAudFallo", "checkAbsolutorio", "checkAIDS", "checkProcEspecial", "checkAudCondenatorio", "checkMecanismoAcele", "checkapeamparo", "checkAmparoDirecto", "checkAmparoIndirecto", "checkauvinc", "checkscpro", "checkproabre", "checkSENcon", "checkSDuno", "checkSDdos", "checkSDtres", "checkSDcuatro", "checkSDcinco", "checkSDseis", "checkSDsiete", "checkSDocho", "checkSDnueve", "checkSDdiez"];
+		"checkInfInstiSeg", "checkExamenFisPersona", "checkAudJuiOral", "checkAudFallo", "checkAbsolutorio", "checkAIDS", "checkProcEspecial", "checkAudCondenatorio", "checkMecanismoAcele", "checkapeamparo", "checkAmparoDirecto", "checkAmparoIndirecto", "checkauvinc", "checkscpro", "checkproabre", "checkSENcon", "checkSDuno", "checkSDdos", "checkSDtres", "checkSDcuatro", "checkSDcinco", "checkSDseis", "checkSDsiete", "checkSDocho", "checkSDnueve", "checkSDdiez",
+		"checktotCarpTram_nucs"];
 
 	//alert(INCOMdecre+"-"+INCOMdecreNu);
 
@@ -657,7 +660,7 @@ function guardarLitigacion(idEnlace, mes, anio, idMp, idUnidad) {
 		&& InspInmuebles == InspInmueblesNu && entrevistasTestigos == entrevistasTestigosNu && reconocimientoPer == reconocimientoPerNu && solInfoPericiales == solInfoPericialesNu && InfInstiSeg == InfInstiSegNu
 		&& examenFisPersona == examenFisPersonaNu && audJuiOral == audJuiOralNu && audFallo == audFalloNu && absolutorio == absolutorioNu && AudIndiSan == AudIndiSanNu && procEspecial == procEspecialNu
 		&& audCondenatorio == audCondenatorioNu && mecanismosAceleracion == mecanismosAceleracionNu && apeamparo == apeamparoNu && amparoDirecto == amparoDirectoNu && InspLugDis == InspLugDisNu
-		&& SDuno == SDunoNu && SDdos == SDdosNu && SDtres == SDtresNu && SDcuatro == SDcuatroNu && SDcinco == SDcincoNu && SDseis == SDseisNu && SDsiete == SDsieteNu && SDocho == SDochoNu && SDnueve == SDnueveNu && SDdiez == SDdiezNu) {
+		&& SDuno == SDunoNu && SDdos == SDdosNu && SDtres == SDtresNu && SDcuatro == SDcuatroNu && SDcinco == SDcincoNu && SDseis == SDseisNu && SDsiete == SDsieteNu && SDocho == SDochoNu && SDnueve == SDnueveNu && SDdiez == SDdiezNu && totCarpTram_nucs == totCarpTram_nucsNu) {
 		//cont = document.getElementById('respuestaGuardalitig');    
 
 		ajax = objetoAjax();
@@ -702,7 +705,7 @@ function guardarLitigacion(idEnlace, mes, anio, idMp, idUnidad) {
 			+ "&OSapre=" + OSapre + "&OScomp=" + OScomp + "&medidasProteccion=" + medidasProteccion + "&MPV=" + MPV + "&intervencionTR=" + intervencionTR + "&tomaMuestras=" + tomaMuestras + "&exhumacion=" + exhumacion + "&obDatosReservados=" + obDatosReservados + "&intervencionCME=" + intervencionCME + "&provPrecautoria=" + provPrecautoria + "&cadCustodia=" + cadCustodia
 			+ "&InspLugDis=" + InspLugDis + "&InspInmuebles=" + InspInmuebles + "&entrevistasTestigos=" + entrevistasTestigos + "&reconocimientoPer=" + reconocimientoPer + "&solInfoPericiales=" + solInfoPericiales + "&InfInstiSeg=" + InfInstiSeg + "&examenFisPersona=" + examenFisPersona + "&audJuiOral=" + audJuiOral + "&audFallo=" + audFallo + "&absolutorio=" + absolutorio
 			+ "&AudIndiSan=" + AudIndiSan + "&procEspecial=" + procEspecial + "&audCondenatorio=" + audCondenatorio + "&mecanismosAceleracion=" + mecanismosAceleracion + "&apeamparo=" + apeamparo + "&amparoDirecto=" + amparoDirecto + "&amparoIndirecto=" + amparoIndirecto
-			+ "&SDuno=" + SDuno + "&SDdos=" + SDdos + "&SDtres=" + SDtres + "&SDcuatro=" + SDcuatro + "&SDcinco=" + SDcinco + "&SDseis=" + SDseis + "&SDsiete=" + SDsiete + "&SDocho=" + SDocho + "&SDnueve=" + SDnueve + "&SDdiez=" + SDdiez);
+			+ "&SDuno=" + SDuno + "&SDdos=" + SDdos + "&SDtres=" + SDtres + "&SDcuatro=" + SDcuatro + "&SDcinco=" + SDcinco + "&SDseis=" + SDseis + "&SDsiete=" + SDsiete + "&SDocho=" + SDocho + "&SDnueve=" + SDnueve + "&SDdiez=" + SDdiez + "&totCarpTram_nucs=" + totCarpTram_nucsNu);
 
 	} else {
 
@@ -1227,7 +1230,7 @@ function existenuclitigacion(nuc, idMp, estatResolucion, mes, anio, idUnidad, de
 							estatResolucion == 108 || estatResolucion == 109 || estatResolucion == 110 || estatResolucion == 111 ||
 							estatResolucion == 64 || estatResolucion == 60 || estatResolucion == 91 || estatResolucion == 65 ||
 							estatResolucion == 90 || estatResolucion == 68 ||
-							estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151 || estatResolucion == 154 || estatResolucion == 66) {
+							estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151 || estatResolucion == 154 || estatResolucion == 66 || estatResolucion == 165) {
 							showModalNucLitInfo2(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad, 1, idImputado);
 						} else if (estatResolucion == 50 || estatResolucion == 53 || estatResolucion == 58 || estatResolucion == 153) {
 							showModalAgregarImputados(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad, idImputado);
@@ -1252,7 +1255,7 @@ function existenuclitigacion(nuc, idMp, estatResolucion, mes, anio, idUnidad, de
 								estatResolucion == 108 || estatResolucion == 109 || estatResolucion == 110 || estatResolucion == 111 ||
 								estatResolucion == 64 || estatResolucion == 60 || estatResolucion == 91 || estatResolucion == 65 ||
 								estatResolucion == 90 || estatResolucion == 68 ||
-								estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151 || estatResolucion == 154 || estatResolucion == 66) {
+								estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151 || estatResolucion == 154 || estatResolucion == 66 || estatResolucion == 165) {
 								showModalNucLitInfo2(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad, 1, idImputado);
 							} else if (estatResolucion == 50 || estatResolucion == 53 || estatResolucion == 58 || estatResolucion == 153) {
 								showModalAgregarImputados(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad, idImputado);
@@ -1273,7 +1276,7 @@ function existenuclitigacion(nuc, idMp, estatResolucion, mes, anio, idUnidad, de
 								estatResolucion == 108 || estatResolucion == 109 || estatResolucion == 110 || estatResolucion == 111 ||
 								estatResolucion == 64 || estatResolucion == 60 || estatResolucion == 91 || estatResolucion == 65 ||
 								estatResolucion == 90 || estatResolucion == 68 ||
-								estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151 || estatResolucion == 154 || estatResolucion == 66) {
+								estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151 || estatResolucion == 154 || estatResolucion == 66 || estatResolucion == 165) {
 								showModalNucLitInfo2(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad, 1, idImputado);
 							} else if (estatResolucion == 50 || estatResolucion == 53 || estatResolucion == 58 || estatResolucion == 153) {
 								showModalAgregarImputados(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad, idImputado);
@@ -1453,6 +1456,9 @@ function insertarNucLit(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad, 
 							break;
 						case 50: case 53: case 58: case 153:
 							setTimeout("insertInputados_db(" + objDatos.idEstatusNucs + "," + estatResolucion + "," + nuc + ", " + opcInsert + "," + idMp + ", " + mes + ", " + anio + ");", 100);
+							break;
+							case 165:
+							setTimeout("insertFormMotivosTramiteCarpeta_db(" + objDatos.idEstatusNucs + "," + estatResolucion + "," + nuc + ", " + opcInsert + ");", 100);
 							break;
 						default:
 							break;
@@ -1674,7 +1680,7 @@ function validarEstatusShowInfoSica(estatResolucion) {
 		|| estatResolucion == 110 || estatResolucion == 111 || estatResolucion == 64 || estatResolucion == 60 || estatResolucion == 14
 		|| estatResolucion == 65 || estatResolucion == 66 || estatResolucion == 67 || estatResolucion == 68 || estatResolucion == 90
 		|| estatResolucion == 91 || estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151 || estatResolucion == 154
-		|| estatResolucion == 50 || estatResolucion == 53 || estatResolucion == 58 || estatResolucion == 153) {
+		|| estatResolucion == 50 || estatResolucion == 53 || estatResolucion == 58 || estatResolucion == 153 || estatResolucion == 165) {
 		return true;
 	}
 	else {

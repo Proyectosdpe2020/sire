@@ -895,7 +895,7 @@ function getDatosLitigacionMpUnidad($conn, $idMp, $mes, $anio, $idFiscalia, $idU
 	, [sinControlJudicialEntrevistasTestigos], [sinControlJudicialReconocimientoPer], [sinControlJudicialSolInfoPericiales], [sinControlJudicialInfInstiSeg]
 	, [sinControlJudicialexamenFisPersona], [resolucionesJuicioOral], [audienciaJuicioOral], [audienciaFallo], [absolutorio], [audienciaIndiviSancion]
 	, [procedimientoEspecial], [audienciaCondenatorio], [mecanismosAceleracion], [apelacionesAmparo], [amparos], [amparoDirecto], [amparoIndirecto]
-	, [SDuno],[SDdos],[SDtres],[SDcuatro],[SDcinco],[SDseis],[SDsiete],[SDocho],[SDnueve],[SDdiez]
+	, [SDuno],[SDdos],[SDtres],[SDcuatro],[SDcinco],[SDseis],[SDsiete],[SDocho],[SDnueve],[SDdiez],[totCarpTram_nucs]
 	FROM Litigacion WHERE idMes = $mes AND idAnio = $anio AND idFiscalia = $idFiscalia AND idMp = $idMp AND idUnidad = $idUnidad";
 
 
@@ -1077,6 +1077,7 @@ function getDatosLitigacionMpUnidad($conn, $idMp, $mes, $anio, $idFiscalia, $idU
 		$arreglo[$indice][143] = $row['SDocho'];
 		$arreglo[$indice][144] = $row['SDnueve'];
 		$arreglo[$indice][145] = $row['SDdiez'];
+		$arreglo[$indice][146] = $row['totCarpTram_nucs'];
 		$indice++;
 	}
 	if (isset($arreglo)) {

@@ -1972,6 +1972,7 @@ if ($datalit) {
 																																																																																					} ?>" />
 								</div>
 							</div>
+							<!--
 							<div class="row">
 								<div class="col-xs-12">
 									<label class="colorLetras" for="inputlg">Total de carpetas judicializadas en tramite:</label>
@@ -1981,7 +1982,22 @@ if ($datalit) {
 																																						echo 0;
 																																					} ?>" placeholder="" class="first" disabled="true" id="totCarjudTram" />
 								</div>
+							</div>-->
+
+							<div class="row">
+								<div class="col-xs-12">
+									<label class="colorLetras" for="inputlg"> Total de carpetas judicializadas en tramite :</label>
+									<div class="iconiput">
+										<input type="number" placeholder="cantidad" class="first" id="totCarpTram_nucs" value="<? if ($a == 1) {
+																																																																																								echo  $datalit[0][146];
+																																																																																							} ?>" />
+										<span onclick="sendDataModalLitigacion('totCarpTram_nucs',165,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)">
+											<div id="checktotCarpTram_nucs"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div>
+										</span>
+									</div>
+								</div>
 							</div>
+
 
 						</div>
 					</div>
