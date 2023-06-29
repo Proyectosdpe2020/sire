@@ -111,13 +111,13 @@ for ($j = 0; $j < sizeof($arrayAnios); $j++) {
 					}
 				}
 			} else {
-
-
-				if ($mesIni == ($i + 1) or $mesIni <= ($i + 1)) {
-
+				
+				// if ($mesIni == ($i + 1) or $mesIni <= ($i + 1)) { //// SE MODIFICA EL 27-06-23
+					if ($mesIni == ($i + 1) or ($i+1) <= $mesFin) {		
+						
 					if ($juzgado == 0) {
 						$data = getRegistrosProcesosPenalesDataEstatal($conn, $i + 1, $arrayAnios[0], $idFiscalia);
-					} else {
+					} else {						
 						$data = getRegistrosProcesosPenalesData($conn, $i + 1, $arrayAnios[0], $idFiscalia, $juzgado);
 					}
 					$a = sizeof($data);
@@ -133,6 +133,8 @@ for ($j = 0; $j < sizeof($arrayAnios); $j++) {
 				}
 			}
 		} else {
+
+
 
 			if ($arrayAnios[$j] == $lastAnio) {
 

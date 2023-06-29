@@ -4,11 +4,10 @@ session_start();
 
 include('Conexiones/Conexion.php');
 include("funciones.php");
+include("validateInjectionString.php");
 
-$usuario = $_POST['usuario'];
-$password = $_POST['contrasena'];
-
-
+$usuario = cleanTextInjec($_POST['usuario']);
+$password = cleanTextInjec($_POST['contrasena']);
 
 
 $_SESSION['yainicieIE'] = "NO";

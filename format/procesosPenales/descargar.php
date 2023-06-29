@@ -147,7 +147,7 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 
 		if ($idFiscalia == 0) {
 
-			$IDSFISCALIAS = array(1, 2, 3, 4, 5, 6, 7,8, 9 , 10);
+			$IDSFISCALIAS = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 			$nameFiscalias = array("Apatzingan", "La Piedad", "Lázaro Cárdenas", "Morelia", "Uruapan", "Zamora", "Zítacuaro", "Coalcoman", "Huetamo", "Jiquilpan");
 			$renInicio = "11";
 			for ($r = 0; $r < sizeof($IDSFISCALIAS); $r++) {
@@ -345,8 +345,11 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 									}
 								}
 							} else {
-								if ($mesIni == ($i + 1) or $mesIni <= ($i + 1)) {
 
+
+
+								// if ($mesIni == ($i + 1) or $mesIni <= ($i + 1)) {
+								if ($mesIni == ($i + 1) or ($i + 1) <= $mesFin) {
 									if ($juzgados[$r][0] == 0) {
 										//$data = getRegistrosSalasPenalesDataEstatal($conn, $i + 1, $arrayAnios[0], $idFiscalia);
 									} else {
@@ -626,8 +629,11 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 									}
 								}
 							} else {
-								if ($mesIni == ($i + 1) or $mesIni <= ($i + 1)) {
 
+
+
+								// if ($mesIni == ($i + 1) or $mesIni <= ($i + 1)) {
+									if ($mesIni == ($i + 1) or ($i+1) <= $mesFin) {		
 									if ($juzgados[$r][0] == 0) {
 										//$data = getRegistrosSalasPenalesDataEstatal($conn, $i + 1, $arrayAnios[0], $idFiscalia);
 									} else {
@@ -903,8 +909,10 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 									}
 								}
 							} else {
-								if ($mesIni == ($i + 1) or $mesIni <= ($i + 1)) {
 
+
+								// if ($mesIni == ($i + 1) or $mesIni <= ($i + 1)) {
+									if ($mesIni == ($i + 1) or ($i+1) <= $mesFin) {		
 									if ($juzgados[$r][0] == 0) {
 										//$data = getRegistrosSalasPenalesDataEstatal($conn, $i + 1, $arrayAnios[0], $idFiscalia);
 									} else {
@@ -1151,8 +1159,10 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 									}
 								}
 							} else {
-								if ($mesIni == ($i + 1) or $mesIni <= ($i + 1)) {
 
+
+								// if ($mesIni == ($i + 1) or $mesIni <= ($i + 1)) {
+									if ($mesIni == ($i + 1) or ($i+1) <= $mesFin) {		
 									if ($juzgados[$r][0] == 0) {
 										//$data = getRegistrosSalasPenalesDataEstatal($conn, $i + 1, $arrayAnios[0], $idFiscalia);
 									} else {
@@ -1230,9 +1240,9 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 
 			$renInicio = "11";
 			for ($r = 0; $r < sizeof($IDSFISCALIAS); $r++) {
-	
+
 				$objPHPExcel->getActiveSheet()->SetCellValue("C" . $renInicio, $nameFiscalias[$r]);
-	
+
 				$arraySumas = array(
 					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 				);
@@ -1242,9 +1252,9 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 					///// DESARROLLAR EL METODO PARA QUE TOME TODOS LOS MESES DE LOS AÑOS ENTRE EL RANGO 
 					for ($i = 0; $i < 12; $i++) {
 						if ($arrayAnios[$j] == $anioIniSelected) {
-	
+
 							if ($mesIni == $mesFin && $anioIniSelected == $anioFinSelected) {
-	
+
 								if (($i + 1) == $mesIni) {
 									if ($idFiscalia == 0) {
 										$data = getRegistrosProcesosPenalesDataEstatalXfiscalia($conn, $mesIni, $anioIniSelected, $IDSFISCALIAS[$r]);
@@ -1254,11 +1264,11 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 										$objPHPExcel->getActiveSheet()->SetCellValue("D" . $renInicio, $arraySumas[61]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("E" . $renInicio, $arraySumas[62]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("F" . $renInicio, $arraySumas[63]);
-	
+
 										$objPHPExcel->getActiveSheet()->SetCellValue("H" . $renInicio, $arraySumas[75]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("I" . $renInicio, $arraySumas[76]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("J" . $renInicio, $arraySumas[77]);
-	
+
 										$objPHPExcel->getActiveSheet()->SetCellValue("L" . $renInicio, $arraySumas[38]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("M" . $renInicio, $arraySumas[39]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("N" . $renInicio, $arraySumas[40]);
@@ -1269,12 +1279,12 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 										$objPHPExcel->getActiveSheet()->SetCellValue("T" . $renInicio, $arraySumas[81]);
 									} else {
 										// $data = getRegistrosProcesosPenalesData($conn, $mesIni, $anioIniSelected, $idFiscalia, $juzgados[$r][0]);
-										
+
 									}
 								}
 							} else {
 								if ($mesIni == ($i + 1) or $mesIni <= ($i + 1)) {
-	
+
 									if ($idFiscalia == 0) {
 										$data = getRegistrosProcesosPenalesDataEstatalXfiscalia($conn, $i + 1, $arrayAnios[0], $IDSFISCALIAS[$r]);
 										for ($k = 0; $k <= 81; $k++) {
@@ -1283,11 +1293,11 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 										$objPHPExcel->getActiveSheet()->SetCellValue("D" . $renInicio, $arraySumas[61]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("E" . $renInicio, $arraySumas[62]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("F" . $renInicio, $arraySumas[63]);
-	
+
 										$objPHPExcel->getActiveSheet()->SetCellValue("H" . $renInicio, $arraySumas[75]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("I" . $renInicio, $arraySumas[76]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("J" . $renInicio, $arraySumas[77]);
-	
+
 										$objPHPExcel->getActiveSheet()->SetCellValue("L" . $renInicio, $arraySumas[38]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("M" . $renInicio, $arraySumas[39]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("N" . $renInicio, $arraySumas[40]);
@@ -1298,13 +1308,13 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 										$objPHPExcel->getActiveSheet()->SetCellValue("T" . $renInicio, $arraySumas[81]);
 									} else {
 										// $data = getRegistrosProcesosPenalesData($conn, $i + 1, $arrayAnios[0], $idFiscalia, $juzgados[$r][0]);
-										
+
 									}
 								}
 							}
 						} else {
 							if ($arrayAnios[$j] == $lastAnio) {
-	
+
 								if ($mesFin >= ($i + 1)) {
 									if ($idFiscalia == 0) {
 										$data = getRegistrosProcesosPenalesDataEstatalXfiscalia($conn, $i + 1, $arrayAnios[sizeof($arrayAnios) - 1], $IDSFISCALIAS[$r]);
@@ -1314,11 +1324,11 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 										$objPHPExcel->getActiveSheet()->SetCellValue("D" . $renInicio, $arraySumas[61]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("E" . $renInicio, $arraySumas[62]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("F" . $renInicio, $arraySumas[63]);
-	
+
 										$objPHPExcel->getActiveSheet()->SetCellValue("H" . $renInicio, $arraySumas[75]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("I" . $renInicio, $arraySumas[76]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("J" . $renInicio, $arraySumas[77]);
-	
+
 										$objPHPExcel->getActiveSheet()->SetCellValue("L" . $renInicio, $arraySumas[38]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("M" . $renInicio, $arraySumas[39]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("N" . $renInicio, $arraySumas[40]);
@@ -1329,12 +1339,12 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 										$objPHPExcel->getActiveSheet()->SetCellValue("T" . $renInicio, $arraySumas[81]);
 									} else {
 										// $data = getRegistrosProcesosPenalesData($conn, $i + 1, $arrayAnios[sizeof($arrayAnios) - 1], $idFiscalia, $juzgados[$r][0]);
-										
+
 									}
 								}
 							} else {
 								if ($arrayAnios[$j] != $anioIniSelected or $arrayAnios[$j] != $lastAnio) {
-	
+
 									if ($idFiscalia == 0) {
 										$data = getRegistrosProcesosPenalesDataEstatalXfiscalia($conn, $i + 1, $arrayAnios[$j], $IDSFISCALIAS[$r]);
 										for ($k = 0; $k <= 81; $k++) {
@@ -1343,11 +1353,11 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 										$objPHPExcel->getActiveSheet()->SetCellValue("D" . $renInicio, $arraySumas[61]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("E" . $renInicio, $arraySumas[62]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("F" . $renInicio, $arraySumas[63]);
-	
+
 										$objPHPExcel->getActiveSheet()->SetCellValue("H" . $renInicio, $arraySumas[75]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("I" . $renInicio, $arraySumas[76]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("J" . $renInicio, $arraySumas[77]);
-	
+
 										$objPHPExcel->getActiveSheet()->SetCellValue("L" . $renInicio, $arraySumas[38]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("M" . $renInicio, $arraySumas[39]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("N" . $renInicio, $arraySumas[40]);
@@ -1358,29 +1368,27 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 										$objPHPExcel->getActiveSheet()->SetCellValue("T" . $renInicio, $arraySumas[81]);
 									} else {
 										// $data = getRegistrosProcesosPenalesData($conn, $i + 1, $arrayAnios[$j], $idFiscalia, $juzgados[$r][0]);
-										
+
 									}
 								}
 							}
 						}
 					} /// FIN FOR
-	
-	
+
+
 				}
 				$renInicio++;
 				////////////////////// FOR  ///////////////////////
 			}
-
-
 		} else {
 
 			$juzgados  = getJuzgadoXfiscalia($conn, $idFiscalia);
 
 			$renInicio = "11";
 			for ($r = 0; $r < sizeof($juzgados); $r++) {
-	
+
 				$objPHPExcel->getActiveSheet()->SetCellValue("C" . $renInicio, $juzgados[$r][1]);
-	
+
 				$arraySumas = array(
 					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 				);
@@ -1390,9 +1398,9 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 					///// DESARROLLAR EL METODO PARA QUE TOME TODOS LOS MESES DE LOS AÑOS ENTRE EL RANGO 
 					for ($i = 0; $i < 12; $i++) {
 						if ($arrayAnios[$j] == $anioIniSelected) {
-	
+
 							if ($mesIni == $mesFin && $anioIniSelected == $anioFinSelected) {
-	
+
 								if (($i + 1) == $mesIni) {
 									if ($juzgados[$r][0] == 0) {
 										//$data = getRegistrosSalasPenalesDataEstatal($conn, $mesIni, $anioIniSelected, $idFiscalia);
@@ -1404,11 +1412,11 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 										$objPHPExcel->getActiveSheet()->SetCellValue("D" . $renInicio, $arraySumas[61]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("E" . $renInicio, $arraySumas[62]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("F" . $renInicio, $arraySumas[63]);
-	
+
 										$objPHPExcel->getActiveSheet()->SetCellValue("H" . $renInicio, $arraySumas[75]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("I" . $renInicio, $arraySumas[76]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("J" . $renInicio, $arraySumas[77]);
-	
+
 										$objPHPExcel->getActiveSheet()->SetCellValue("L" . $renInicio, $arraySumas[38]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("M" . $renInicio, $arraySumas[39]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("N" . $renInicio, $arraySumas[40]);
@@ -1420,8 +1428,10 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 									}
 								}
 							} else {
-								if ($mesIni == ($i + 1) or $mesIni <= ($i + 1)) {
-	
+
+
+								// if ($mesIni == ($i + 1) or $mesIni <= ($i + 1)) {
+									if ($mesIni == ($i + 1) or ($i+1) <= $mesFin) {		
 									if ($juzgados[$r][0] == 0) {
 										//$data = getRegistrosSalasPenalesDataEstatal($conn, $i + 1, $arrayAnios[0], $idFiscalia);
 									} else {
@@ -1432,11 +1442,11 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 										$objPHPExcel->getActiveSheet()->SetCellValue("D" . $renInicio, $arraySumas[61]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("E" . $renInicio, $arraySumas[62]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("F" . $renInicio, $arraySumas[63]);
-	
+
 										$objPHPExcel->getActiveSheet()->SetCellValue("H" . $renInicio, $arraySumas[75]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("I" . $renInicio, $arraySumas[76]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("J" . $renInicio, $arraySumas[77]);
-	
+
 										$objPHPExcel->getActiveSheet()->SetCellValue("L" . $renInicio, $arraySumas[38]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("M" . $renInicio, $arraySumas[39]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("N" . $renInicio, $arraySumas[40]);
@@ -1450,7 +1460,7 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 							}
 						} else {
 							if ($arrayAnios[$j] == $lastAnio) {
-	
+
 								if ($mesFin >= ($i + 1)) {
 									if ($juzgados[$r][0] == 0) {
 										//$data = getRegistrosSalasPenalesDataEstatal($conn, $i + 1, $arrayAnios[sizeof($arrayAnios) - 1], $idFiscalia);
@@ -1462,11 +1472,11 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 										$objPHPExcel->getActiveSheet()->SetCellValue("D" . $renInicio, $arraySumas[61]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("E" . $renInicio, $arraySumas[62]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("F" . $renInicio, $arraySumas[63]);
-	
+
 										$objPHPExcel->getActiveSheet()->SetCellValue("H" . $renInicio, $arraySumas[75]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("I" . $renInicio, $arraySumas[76]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("J" . $renInicio, $arraySumas[77]);
-	
+
 										$objPHPExcel->getActiveSheet()->SetCellValue("L" . $renInicio, $arraySumas[38]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("M" . $renInicio, $arraySumas[39]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("N" . $renInicio, $arraySumas[40]);
@@ -1479,7 +1489,7 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 								}
 							} else {
 								if ($arrayAnios[$j] != $anioIniSelected or $arrayAnios[$j] != $lastAnio) {
-	
+
 									if ($juzgados[$r][0] == 0) {
 										//$data = getRegistrosSalasPenalesDataEstatal($conn, $i + 1, $arrayAnios[$j], $idFiscalia);
 									} else {
@@ -1487,14 +1497,14 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 										for ($k = 0; $k <= 81; $k++) {
 											$arraySumas[$k] =  $arraySumas[$k] + $data[0][$k];
 										}
-										$objPHPExcel->getActiveSheet()->SetCellValue("D" . $renInicio,$arraySumas[61]);
+										$objPHPExcel->getActiveSheet()->SetCellValue("D" . $renInicio, $arraySumas[61]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("E" . $renInicio, $arraySumas[62]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("F" . $renInicio, $arraySumas[63]);
-	
+
 										$objPHPExcel->getActiveSheet()->SetCellValue("H" . $renInicio, $arraySumas[75]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("I" . $renInicio, $arraySumas[76]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("J" . $renInicio, $arraySumas[77]);
-	
+
 										$objPHPExcel->getActiveSheet()->SetCellValue("L" . $renInicio, $arraySumas[38]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("M" . $renInicio, $arraySumas[39]);
 										$objPHPExcel->getActiveSheet()->SetCellValue("N" . $renInicio, $arraySumas[40]);
@@ -1508,16 +1518,13 @@ for ($a = 0; $a < sizeof($arrHojas); $a++) {
 							}
 						}
 					} /// FIN FOR
-	
-	
+
+
 				}
 				$renInicio++;
 				////////////////////// FOR  ///////////////////////
 			}
-
 		}
-
-	
 	}
 }
 
