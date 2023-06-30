@@ -1214,16 +1214,21 @@ $data = getDatosLitigacionMpUnidad2($conn, $mesCapturar, $anioCaptura, $idUnidad
 												<center><? echo $data[0][48] ?></center>
 											</td>
 										</tr>
+											<tr>
+											<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Total de Carpetas Judicializadas en trámite</label></td>
+											<td style="width: 3%; font-weight: bold" class="tdFiscalia">
+												<center><br><? echo $data[0][150] ?></center>
+											</td>
+										</tr>
 
-
-
+<!--
 										<tr>
 											<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Total de Carpetas Judicializadas en trámite</label></td>
 											<td style="width: 3%; font-weight: bold" class="tdFiscalia">
 												<center><br><? echo $data[0][49] ?></center>
 											</td>
 										</tr>
-
+-->
 
 									</table>
 

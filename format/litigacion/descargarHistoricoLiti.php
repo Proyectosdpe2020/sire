@@ -216,7 +216,8 @@
 	$objPHPExcel->getActiveSheet()->SetCellValue("H90", $data[0][47]); //Confirma
 	$objPHPExcel->getActiveSheet()->SetCellValue("H91", $data[0][48]);  //Reposicion del procedimiento
 
-	$objPHPExcel->getActiveSheet()->SetCellValue("H13", $data[0][49]); //Total de carpetas judicializadas en tramite
+	//$objPHPExcel->getActiveSheet()->SetCellValue("H13", $data[0][49]); //Total de carpetas judicializadas en tramite
+	$objPHPExcel->getActiveSheet()->SetCellValue("H13", $data[0][150]); //Total de carpetas judicializadas en tramite
 
 	$objPHPExcel->getActiveSheet()->SetCellValue("H30", $data[0][56]); //Total de audiencias
 
