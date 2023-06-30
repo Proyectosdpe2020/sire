@@ -83,7 +83,8 @@ function getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad, $idMp)
   sum([SDsiete]) as 'SDsiete',
   sum([SDocho]) as 'SDocho',
   sum([SDnueve]) as 'SDnueve',
-  sum([SDdiez]) as 'SDdiez'
+  sum([SDdiez]) as 'SDdiez',
+  sum([totCarpTram_nucs]) as 'totCarpTram_nucs'
    FROM Litigacion WHERE idMes = $mes AND idAnio = $anio AND idUnidad = $idUnidad";
 	} else {
 
@@ -235,6 +236,7 @@ function getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad, $idMp)
       ,[SDocho]
       ,[SDnueve]
       ,[SDdiez]
+      ,[totCarpTram_nucs]
 FROM [ESTADISTICAV2].[dbo].[Litigacion] WHERE idMes = $mes AND idAnio = $anio AND idUnidad = $idUnidad AND idMp = $idMp";
 	}
 
@@ -418,6 +420,7 @@ FROM [ESTADISTICAV2].[dbo].[Litigacion] WHERE idMes = $mes AND idAnio = $anio AN
 		$arreglo[$indice][147] = $row['SDocho'];
 		$arreglo[$indice][148] = $row['SDnueve'];
 		$arreglo[$indice][149] = $row['SDdiez'];
+		$arreglo[$indice][150] = $row['totCarpTram_nucs'];
 		$indice++;
 	}
 	if (isset($arreglo)) {
