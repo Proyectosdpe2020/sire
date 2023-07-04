@@ -114,6 +114,20 @@ $idUsuario = $_SESSION['useridIE'];
 			</div>
 		</div>
 
+<?if($estatus == 165){ ?>
+	  <br /> 
+			<div class="row">
+				<div class="col-xs-6"> 
+					<label style="font-weight:bold">Carga masiva de NUCS *</label>
+
+							<button type="button"  onclick="cargarModal_Excel('nuc', <? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $estatus; ?>, 0, <? echo $idUnidad; ?>)" class="btn btn-danger btn-sm redondear btnCapturarTbl">
+								<span class="glyphicon glyphicon-cloud-upload"></span> Subir Archivo 
+							</button>
+
+				</div>
+			</div>
+<? } ?>
+
 		<div id="div_averiguacion" hidden>
 			<div class="row">
 				<div class="col-xs-6">
