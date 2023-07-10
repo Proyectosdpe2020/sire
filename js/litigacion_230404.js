@@ -1835,6 +1835,22 @@ function deleteResolLit_ave(idEstatusNucs, idMp, anio, mes, estatResolucion, nuc
 
 //Funcion para cargar el modal de carga de excel
 function cargarModal_Excel(nuc, idMp, mes, anio, estatResolucion, deten, idUnidad){
+	$.ajax({
+		type: "POST",
+		dataType: "html",
+		url: 'format/litigacion/modalCargarExcel.php',
+	 success: function(respuesta){
+	 $('#contmodal_cargaNucsExcel').html( respuesta );
+  $('#modal_cargaNucsExcel').modal('show');
+  dataTable_iniciar_litigacionCargaExcel();
+	 $('#modalNucsLitig').modal('hide');
+	 }
+	});
+}
+
+/*
+//Funcion para cargar el modal de carga de excel
+function cargarModal_Excel(nuc, idMp, mes, anio, estatResolucion, deten, idUnidad){
 
 		
 	ajax = objetoAjax();
@@ -1852,7 +1868,7 @@ function cargarModal_Excel(nuc, idMp, mes, anio, estatResolucion, deten, idUnida
 	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); 
 	ajax.send();
 
-}
+}*/
 
 
 //Función para inicializar la tabla de nucs cargados de excel
@@ -1909,20 +1925,18 @@ function closeModalCargarExcel() {
 }
 
 function cargar_excel(input){
-	console.log('entra aqui');
-	var archivoInput = document.getElementById('btn_excel');
+	
+	var archivoInput = document.getElementById('file');
 	var archivoRuta = archivoInput.value;
-	var extPermitidas = /(.jpg|.JPG|.png|.PNG|.jpeg|.JPEG)$/i;
+	var extPermitidas = /(.xlsx)$/i;
 	var tamano_m = function(mega){ return Math.pow(2,20) * mega; }
  //Validar formato de archivo permitido: IMAGENES
 	if(!extPermitidas.exec(archivoRuta)){
-		swal("", "Formato de imagen incorrecto. \n Formatos permitidos: jpg , png y jpeg", "warning");
+		swal("", "Formato de archivo incorrecto. \n Formatos permitidos: xlsx", "warning");
 		archivoInput.value = ''; //Para que no se almacene en buffer
 	}else{
-		//Validar tamaño de la imagen, si es menor a 1mb se acepta, de lo contrario mandar alerta
-		if(input.files[0].size <= tamano_m(1)){
-			swal("", "Tamaño de archivo permitido", "success");
 			if (input.files && input.files[0]) {
+				console.log(input.files[0].name);
 				var reader = new FileReader();
 				var progress = document.getElementById('progreso');
 				var etiqueta = document.getElementById('etiqueta');
@@ -1932,7 +1946,7 @@ function cargar_excel(input){
 					etiqueta.innerHTML = Math.round(progress.value) + "% Carga completa";
 				}
 				reader.onload = function (e) {
-					
+					$('#imgMando').attr('src', e.target.result); // Renderizamos la imagen
 				}
 				reader.readAsDataURL(input.files[0]);
 				//Despues de validar y renderizar invocamos a la función para subir imagen al servidor
@@ -1941,9 +1955,6 @@ function cargar_excel(input){
     myFormData.append('file', input.files[0]);
 				saveDataIMG(myFormData); 
 			}
-		}else{
-			swal("", "Tamaño de archivo no permitido", "warning");
-		}
 	}
 
 }

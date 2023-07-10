@@ -30,12 +30,15 @@ if(isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }
 		<div class="panel-body">
   <div class="row">
   	<div class="col-xs-4"> 
-  		<form>
-  		<label style="font-weight:bold">Carga archivo Excel *</label>
-  		<span class="btn btn-default btn-file glyphicon glyphicon-upload"> CARGAR FOTOGRAFIA <input type="file" id="btn_excel"></span>		
+  	 <form onsubmit="return false" action="return false">
+	  		<label style="font-weight:bold">Carga archivo Excel *</label>
+	  		<span class="btn btn-default btn-file glyphicon glyphicon-upload"> CARGAR FOTOGRAFIA <input type="file" id="file" name="file"></span>		
+	  		<progress value="0" max="100" class="progress" id="progreso">0%</progress>
+								<label for="" id="etiqueta"> 0%</label>
   		</form>		
   	</div>
   </div><br />
+  
 
 		<!--	<h5 class="text-on-pannel"><strong>Vista previa de nucs</strong></h5>-->
 			<div class="row">
@@ -149,8 +152,8 @@ if(isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }
 </div>
 
 <script type="text/javascript">
-  $("#btn_excel").change(function () {
-  	console.log("fsfsfsdf");
+  $("#file").change(function () {
+  	console.log('hola');
     cargar_excel(this);
   });
 </script>

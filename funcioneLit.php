@@ -84,7 +84,8 @@ function getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad, $idMp)
   sum([SDocho]) as 'SDocho',
   sum([SDnueve]) as 'SDnueve',
   sum([SDdiez]) as 'SDdiez',
-  sum([totCarpTram_nucs]) as 'totCarpTram_nucs'
+  sum([totCarpTram_nucs]) as 'totCarpTram_nucs',
+  sum([SobreseimientosMuerteImputado]) as 'SobreseimientosMuerteImputado'
    FROM Litigacion WHERE idMes = $mes AND idAnio = $anio AND idUnidad = $idUnidad";
 	} else {
 
@@ -421,6 +422,8 @@ FROM [ESTADISTICAV2].[dbo].[Litigacion] WHERE idMes = $mes AND idAnio = $anio AN
 		$arreglo[$indice][148] = $row['SDnueve'];
 		$arreglo[$indice][149] = $row['SDdiez'];
 		$arreglo[$indice][150] = $row['totCarpTram_nucs'];
+        $arreglo[$indice][151] = $row['SobreseimientosMuerteImputado'];
+
 		$indice++;
 	}
 	if (isset($arreglo)) {
