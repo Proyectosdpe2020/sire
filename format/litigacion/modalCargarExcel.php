@@ -30,7 +30,7 @@ if(isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }
 		<div class="panel-body">
   <div class="row">
   	<div class="col-xs-4"> 
-  	 <form onsubmit="return false" action="return false">
+  	 <form onsubmit="return false" action="return false" id="filesForm">
 	  		<label style="font-weight:bold">Carga archivo Excel *</label>
 	  		<span class="btn btn-default btn-file glyphicon glyphicon-upload"> CARGAR FOTOGRAFIA <input type="file" id="file" name="file"></span>		
 	  		<progress value="0" max="100" class="progress" id="progreso">0%</progress>
@@ -59,70 +59,10 @@ if(isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }
 										<tr class="cabeceraConsultaPolicia" >
 											<th class="textCent">#</th>
 											<th class="textCent10">NUC</th>
-											<th class="">ETAPA</th>
 										</tr>
 									</thead>
 									<tbody id="contentConsulta">
-											<tr>
-												<td>1</td>
-												<td>100320231452</td>
-												<td>ETAPA INICIAL</td>
-											</tr>
-													<tr>
-												<td>1</td>
-												<td>100320231452</td>
-												<td>ETAPA INICIAL</td>
-											</tr>
-													<tr>
-												<td>1</td>
-												<td>100320231452</td>
-												<td>ETAPA INICIAL</td>
-											</tr>
-													<tr>
-												<td>1</td>
-												<td>100320231452</td>
-												<td>ETAPA INICIAL</td>
-											</tr>
-													<tr>
-												<td>1</td>
-												<td>100320231452</td>
-												<td>ETAPA INICIAL</td>
-											</tr>
-													<tr>
-												<td>1</td>
-												<td>100320231452</td>
-												<td>ETAPA INICIAL</td>
-											</tr>
-													<tr>
-												<td>1</td>
-												<td>100320231452</td>
-												<td>ETAPA INICIAL</td>
-											</tr>
-													<tr>
-												<td>1</td>
-												<td>100320231452</td>
-												<td>ETAPA INICIAL</td>
-											</tr>
-													<tr>
-												<td>1</td>
-												<td>100320231452</td>
-												<td>ETAPA INICIAL</td>
-											</tr>
-													<tr>
-												<td>1</td>
-												<td>100320231452</td>
-												<td>ETAPA INICIAL</td>
-											</tr>
-													<tr>
-												<td>1</td>
-												<td>100320231452</td>
-												<td>ETAPA INICIAL</td>
-											</tr>
-													<tr>
-												<td>1</td>
-												<td>100320231452</td>
-												<td>ETAPA INICIAL</td>
-											</tr>
+										
 										</tbody>
 									</table><br>
 								</div>
