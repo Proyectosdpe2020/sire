@@ -63,8 +63,12 @@ for ($row = 1; $row <= $highestRow; ++$row) {
  }
 }
 
+$nucs_bank = array_filter( $nucs );
+$listRegenerado = array_merge($nucs_bank);
+$longitud = sizeof($listRegenerado);
 
-  $d = array('first' => $totalDeHojas , 'nucs' => $nucs );
+
+  $d = array('first' => $totalDeHojas , 'nucs' =>$listRegenerado, 'longitud' => $longitud );
   echo json_encode($d);
 
 

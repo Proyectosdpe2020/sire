@@ -1875,7 +1875,7 @@ function cargarModal_Excel(nuc, idMp, mes, anio, estatResolucion, deten, idUnida
 function dataTable_iniciar_litigacionCargaExcel(){
 	var table = $('#gridPolicia').DataTable();
 
-//able.destroy();
+ table.destroy();
 
 
 table=$('#gridPolicia').DataTable({
@@ -1961,8 +1961,11 @@ function cargar_excel(input){
 }
 
 function leer_excel(myFormData_excel){
-dataTable_iniciar_litigacionCargaExcel();
+	var table = $('#gridPolicia').DataTable();
+	$("#gridPolicia").hide();
+	table.destroy();
 	console.log('entra aca ' + myFormData_excel );
+	var cont = 1;
 	$.ajax({
 		//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
 		url: 'format/litigacion/importar_excel.php',
@@ -1972,39 +1975,24 @@ dataTable_iniciar_litigacionCargaExcel();
 		processData: false,
 		cache: false
 	}).done(function (respuesta) {
-		//$("#contTableNucs2").html(respuesta);
 	 var json = respuesta;
 	 var obj = eval("(" + json + ")");
 		console.log(obj.first);
 		console.log(obj.nucs);
-		
-		for (i = 0; i < obj.nucs.length; i++) {
-  		$("#gridPolicia tbody").append('<tr><td>' + i + '</td><td>' + obj.nucs[i] + '</td></tr>');
+		console.log(obj.longitud);
+		$("#gridPolicia").show();
+		for (i = 0; i < obj.longitud; i++) {
+  		$("#gridPolicia tbody").append('<tr><td>' + cont + '</td><td>' + obj.nucs[i] + '</td></tr>');
+  		cont++;
   } 
- 
-		//swal("", "Guardado Exitosamente.", "success")
-		//cargarTablaNucsTrim(quest, per, anio, idUnidad, idEnlace, mes, anioActual)
-		//document.getElementById('laodimgmain').style.display = "none";
-		//$("#btnUpload").attr("disabled", false)
+		reloadDataTable();
 	});
 }
 
-function cargar_nucs_dataTable(){
-	$('#preloaderIMG').show();
- var table = $('#gridPolicia').DataTable();
- $("#gridPolicia").hide();
- table.destroy();
- //$('#preloader').append('<label>Cargando datos...</label><div class="progress"><div class="indeterminate"></div></div>');
- $.ajax({
-  type: "POST",
-  dataType: 'html',
-  url:'format/mandamientosJudiciales/templates/template_reload_table_mandamientos.php',
-  data: "&idEnlace="+idEnlace+"&idfisca="+idfisca+"&idUnidad="+idUnidad,
-  success: function(resp){
-  	 $('#preloaderIMG').hide();
-    $("#gridPolicia").show();
-    $("#gridPolicia tbody").html(resp);
-    table=$('#gridPolicia').DataTable({
+
+function reloadDataTable(){
+
+	table=$('#gridPolicia').DataTable({
        retrieve: true,
       "language": {"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"},
        scrollY: 400,
@@ -2043,7 +2031,4 @@ function cargar_nucs_dataTable(){
        "order": [], // "0" means First column and "desc" is order type; 
 
       } );
-    	$('#mandamientos').modal('hide');
-  }
- });
 }
