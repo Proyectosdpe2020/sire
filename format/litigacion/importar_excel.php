@@ -2,6 +2,8 @@
 header('Content-Type: text/html; charset=utf-8'); 
 
 include ("../../Conexiones/Conexion.php");
+include("../../Conexiones/conexionSicap.php");
+include("../../funcionesLitSENAP.php");
 require '../../vendors/autoload.php';
 
 # Indicar que usaremos el IOFactory
@@ -54,21 +56,39 @@ $highestColumn = $worksheet->getHighestColumn(); // e.g 'F'
 // Increment the highest column letter
 $highestColumn++;
 
-$nucs = [];
+$array_nucs = []; //Almacenamos los nucs validos
+$array_nucs_invalido = []; //Almacenamos los datos
 $indice = 0;
+$indice2 = 0;
 for ($row = 1; $row <= $highestRow; ++$row) {
  for ($col = 'A'; $col != $highestColumn; ++$col) {
-  $nucs[$indice] = $worksheet->getCell($col . $row)->getValue() ;
+
+  ///// VALIDAMOS QUE EL NUC EXISTA EN SICAP ////// 
+  if($aux = get_nuc_sicap_valida($worksheet->getCell($col . $row)->getValue() , $conSic)){  
+    $array_nucs[$indice] = str_replace( ' ', '', $worksheet->getCell($col . $row)->getValue() );
+  }else{
+    $array_nucs_invalido[$indice2] = $worksheet->getCell($col . $row)->getValue() ;
+  }
   $indice++;
+  $indice2++;
+/*
+  $array_nucs[$indice] = $worksheet->getCell($col . $row)->getValue() ;
+  $indice++;*/
  }
 }
 
-$nucs_bank = array_filter( $nucs );
-$listRegenerado = array_merge($nucs_bank);
-$longitud = sizeof($listRegenerado);
+
+$arrayNucsFilter = array_filter( $array_nucs );
+$nucs = array_merge($arrayNucsFilter);
+$longitud = sizeof($nucs);
+
+$arrayNucsFilter_invalido = array_filter( $array_nucs_invalido );
+$nucs_invalido = array_merge($arrayNucsFilter_invalido);
+$longitud_invalido = sizeof($nucs_invalido );
 
 
-  $d = array('first' => $totalDeHojas , 'nucs' =>$listRegenerado, 'longitud' => $longitud );
+
+  $d = array('first' => $totalDeHojas , 'nucs' =>$nucs, 'longitud' => $longitud, 'nucs_invalido' => $nucs_invalido, 'longitud_invalido' => $longitud_invalido);
   echo json_encode($d);
 
 

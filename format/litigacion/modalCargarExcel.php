@@ -58,13 +58,17 @@ if(isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }
 									<thead>
 										<tr class="cabeceraConsultaPolicia" >
 											<th class="textCent">#</th>
+											<th class="textCent">Capturado?</th>
 											<th class="textCent10">NUC</th>
+											<th class="textCent10">IMPUTADO</th>
+											<th class="textCent10">ETAPA</th>
 										</tr>
 									</thead>
 									<tbody id="contentConsulta">
 										
 										</tbody>
 									</table><br>
+
 								</div>
 							</div><br>
 						</div>
@@ -74,6 +78,49 @@ if(isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }
 					</div>	
 				</div>	
 			</div>
+
+			<div class="row" id="div_nuc_invalidos" hidden="true">
+				<div class="col-xs-12 col-sm-12  col-md-12 input-group-lg">
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3 class="panel-title">DATOS INVALIDOS.</h3>
+						</div>
+						<div class="panel-body" style="background-color: lightyellow;">	
+							<div class="row">
+								<div class="col-xs-12 col-sm-12  col-md-12 input-group-lg">
+									<label>Los siguientes datos no han sido procesados debido a que es un dato invalido ó el NUC no se ha podido validar. Verifique en su archivo excel cada uno de los siguientes datos e ingreselos manualmente.</label>
+								</div>
+							</div><br>
+							<div class="row">
+								<div class="col-xs-12 col-sm-12  col-md-12 input-group-lg">
+										<div class="col-md-6 col-md-offset-3" id="preloaderIMG" hidden>
+											<img src="images/cargando.gif"/>
+										</div>
+         
+										<table id="gridPolicia2" class="display table table-striped  table-hover" width="100%">
+											<thead>
+												<tr class="cabeceraConsultaPolicia" >
+													<th class="textCent">#</th>
+													<th class="textCent10">NUC</th>
+												</tr>
+											</thead>
+											<tbody id="contentConsulta2">
+											
+											</tbody>
+										</table><br>
+
+								</div>
+							</div><br>
+						</div>
+						<div class="panel-footer">
+						
+					 </div>
+					</div>	
+				</div>	
+			</div>
+
+
+
 		</div>
 	</div>
 </div>
