@@ -71,9 +71,6 @@ for ($row = 1; $row <= $highestRow; ++$row) {
   }
   $indice++;
   $indice2++;
-/*
-  $array_nucs[$indice] = $worksheet->getCell($col . $row)->getValue() ;
-  $indice++;*/
  }
 }
 
@@ -86,9 +83,13 @@ $arrayNucsFilter_invalido = array_filter( $array_nucs_invalido );
 $nucs_invalido = array_merge($arrayNucsFilter_invalido);
 $longitud_invalido = sizeof($nucs_invalido );
 
+foreach($nucs as $indice){
+  $array_imputados = $nucs;
+}
 
 
-  $d = array('first' => $totalDeHojas , 'nucs' =>$nucs, 'longitud' => $longitud, 'nucs_invalido' => $nucs_invalido, 'longitud_invalido' => $longitud_invalido);
+  $d = array('first' => $totalDeHojas , 'nucs' =>$nucs, 'longitud' => $longitud, 'nucs_invalido' => $nucs_invalido, 'longitud_invalido' => $longitud_invalido, 
+            'idImputado' => $array_imputados);
   echo json_encode($d);
 
 

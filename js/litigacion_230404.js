@@ -1986,8 +1986,14 @@ function leer_excel(myFormData_excel){
 		//console.log(obj.longitud);
 		console.log('NUCS INVALIDOS: ' + obj.nucs_invalido);
 		var axu = 1;
+		//console.log('imputados: ' + obj.idImputado);
 		$("#gridPolicia").show();
+
+		var nuevoArray = new Array();
+
 		for (i = 0; i < obj.longitud; i++) {
+			  nuevoArray[i] = getData_imputados(obj.nucs[i]);
+
   		$("#gridPolicia tbody").append('<tr><td><center>' + cont + '<center></td><td class="tdRowMain">' + (axu == 3 ? '<span class="glyphicon glyphicon-ok spanOK"></span>' : '<span class="glyphicon glyphicon-remove spanRemove"></span>' ) + '</td><td><center>' + obj.nucs[i] + '<center></td><td ><center><button type="button" data-toggle="modal" href="" onclick="" class="btn btn-primary btn-lg redondear "><span class="glyphicon glyphicon-pencil"></span> Capturar </button></center></td></td><td><center>Etapa Inicial<center></td></tr>');
   		cont++;
   } 
@@ -1997,6 +2003,21 @@ function leer_excel(myFormData_excel){
   } 
   if( j > 0 ){ $("#gridPolicia2").show(); $("#div_nuc_invalidos").show(); }
 		reloadDataTable();
+		console.log(nuevoArray);
+	});
+}
+
+function getData_imputados(nuc){
+	$.ajax({
+		type: "POST",
+		dataType: "html",
+		url: "format/litigacion/getDataImputados.php",
+		data: 'nuc=' + nuc,
+		success: function (respuesta) {
+			var json = respuesta;
+			var obj = eval("(" + json + ")");
+			return obj.imputado;
+		}
 	});
 }
 
