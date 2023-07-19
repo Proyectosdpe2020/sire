@@ -1981,20 +1981,48 @@ function leer_excel(myFormData_excel){
 	}).done(function (respuesta) {
 	 var json = respuesta;
 	 var obj = eval("(" + json + ")");
-		//console.log(obj.first);
 		console.log('NUCS VALIDOS: ' + obj.nucs);
-		//console.log(obj.longitud);
 		console.log('NUCS INVALIDOS: ' + obj.nucs_invalido);
 		var axu = 1;
-		//console.log('imputados: ' + obj.idImputado);
 		$("#gridPolicia").show();
-
-		var nuevoArray = new Array();
+ 
+  let	array_data_imputado ;
 
 		for (i = 0; i < obj.longitud; i++) {
-			  nuevoArray[i] = getData_imputados(obj.nucs[i]);
 
-  		$("#gridPolicia tbody").append('<tr><td><center>' + cont + '<center></td><td class="tdRowMain">' + (axu == 3 ? '<span class="glyphicon glyphicon-ok spanOK"></span>' : '<span class="glyphicon glyphicon-remove spanRemove"></span>' ) + '</td><td><center>' + obj.nucs[i] + '<center></td><td ><center><button type="button" data-toggle="modal" href="" onclick="" class="btn btn-primary btn-lg redondear "><span class="glyphicon glyphicon-pencil"></span> Capturar </button></center></td></td><td><center>Etapa Inicial<center></td></tr>');
+			 getData_imputados(obj.nucs[i], function(arrayData){
+			 	array_data_imputado = arrayData;
+			 });
+
+	   var html = '<tr>';
+
+			 html += '<td><center>' + cont + '<center></td>';
+    
+    if(axu == 3){
+    	html += '<td class="tdRowMain"><span class="glyphicon glyphicon-ok spanOK"></span></td>';
+    }
+    else{
+    	html += '<td class="tdRowMain"><span class="glyphicon glyphicon-remove spanRemove"></span></td>';
+    }
+
+    html += '<td><center>' + obj.nucs[i] + '<center></td>';
+
+    if(array_data_imputado == 'SIN IMPUTADO'){
+    	html += '<td><center><button type="button" data-toggle="modal" href="" onclick="" class="btn btn-primary btn-lg redondear "><span class="glyphicon glyphicon-pencil"></span> Capturar </button></center></td>';
+    }else{
+     html +='<td><select class="select-css"><option value="">Seleccione el imputado</option>'; 
+     for(k = 0; k < array_data_imputado.length; k++){
+     	html += '<option value="">' + array_data_imputado[k][1]+' '+array_data_imputado[k][2]+' '+array_data_imputado[k][3] + '</option>'; 
+     }
+     html += '</select></td>';
+    }
+    
+    html += '<td><select class="select-css"><option value="0">Seleccione la etapa</option><option value="1">Etapa inicial</option><option value="2">Etapa intermedia</option><option value="3">Etapa de juicio oral</option><option value="4">Etapa cero</option></td>';
+
+     html += '</tr>';
+
+   $("#gridPolicia tbody").append(html);
+    		
   		cont++;
   } 
   for (j = 0; j < obj.longitud_invalido; j++) {
@@ -2003,20 +2031,23 @@ function leer_excel(myFormData_excel){
   } 
   if( j > 0 ){ $("#gridPolicia2").show(); $("#div_nuc_invalidos").show(); }
 		reloadDataTable();
-		console.log(nuevoArray);
 	});
+
 }
 
-function getData_imputados(nuc){
+function getData_imputados(nuc, my_callback){
+	console.log('recibe ' + nuc);
 	$.ajax({
 		type: "POST",
 		dataType: "html",
+		async: false,
 		url: "format/litigacion/getDataImputados.php",
 		data: 'nuc=' + nuc,
 		success: function (respuesta) {
 			var json = respuesta;
 			var obj = eval("(" + json + ")");
-			return obj.imputado;
+				my_callback(obj.imputado); //AQUI
+					return obj.imputado;
 		}
 	});
 }
@@ -2033,6 +2064,7 @@ function reloadDataTable(){
        lengthMenu: [[10, 25, 50, -1],
                     ['10', '25', '50', 'todo']
                    ],
+       "columnDefs": [ { "width": "5%", "targets": [0,1] } , { "width": "30%", "targets": [3] } , { "width": "20%", "targets": [4] }],
        buttons: [{
         extend: 'excel',
         title: '',
@@ -2063,6 +2095,7 @@ function reloadDataTable(){
        "order": [], // "0" means First column and "desc" is order type; 
 
       } );
+
 
 	table2=$('#gridPolicia2').DataTable({
        retrieve: true,

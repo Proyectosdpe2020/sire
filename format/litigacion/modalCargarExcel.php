@@ -57,11 +57,11 @@ if(isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }
 								<table id="gridPolicia" class="display table table-striped  table-hover" width="100%" >
 									<thead>
 										<tr class="cabeceraConsultaPolicia" >
-											<th class="textCent">#</th>
-											<th class="textCent">Capturado?</th>
-											<th class="textCent10">NUC</th>
-											<th class="textCent10">IMPUTADO</th>
-											<th class="textCent10">ETAPA</th>
+											<th >#</th>
+											<th >Capturado?</th>
+											<th >NUC</th>
+											<th >IMPUTADO</th>
+											<th >ETAPA</th>
 										</tr>
 									</thead>
 									<tbody id="contentConsulta">
