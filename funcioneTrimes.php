@@ -38,6 +38,7 @@ function getCountNucsTrim($conn, $anio, $quest, $idEn, $idUn, $per, $mes){
 				  AND idUnidad = $idUn
 				  AND periodo = $per
 				  AND mes = $mes
+				  AND anioCaptura = 2023   /*VERIFICAR*/
 				  ";
 				  $indice = 0;
 				  $stmt = sqlsrv_query($conn, $query);
@@ -55,7 +56,7 @@ function getNucsTrim($conn, $anio, $quest, $idEn, $idUn, $per, $mes, $anioactual
 if($anio == 0 AND $mes == 0){
 
 	$query = "SELECT NUC, idNucsTrimestral FROM trimestral.nucsTrimestral 
-	WHERE SUBSTRING(NUC, 5,4) < $anioactual  AND idEnlace = $idEn AND idUnidad = $idUn AND periodo = $per AND idPregunta = $quest";
+	WHERE SUBSTRING(NUC, 5,4) < $anioactual  AND idEnlace = $idEn AND idUnidad = $idUn AND periodo = $per AND idPregunta = $quest AND anioCaptura = 2023"; /*SE AGREGO AND anioCaptura = 2023*/
 
 }else{
 	$query = "  SELECT NUC, idNucsTrimestral
@@ -66,6 +67,7 @@ if($anio == 0 AND $mes == 0){
 				  AND idUnidad = $idUn
 				  AND periodo = $per
 				  AND mes = $mes
+				  AND anioCaptura = 2023;
 				  ";
 }
 
