@@ -666,4 +666,28 @@ function getMotivosCarpetaTramite($conn, $idEstatusNucs){
 	}
 	if(isset($arreglo)){return $arreglo;}
 }
+
+function get_nuc_sicap_valida($nuc,$conn){	
+	$checkNuc = $nuc;
+	$checkNuc = str_replace(' ', '', $checkNuc); //Quitamos los espacios en blanco
+ /*Comprobamos si es una cadena de numeros y si esta tiene 13 digitos*/
+	if(is_numeric($checkNuc)){
+		if(strlen($checkNuc) == 13){
+			$consulta="select * from Carpeta where nuc=".$checkNuc ;
+			$stmt = sqlsrv_query( $conn, $consulta);
+			$row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC );
+			if($row)
+				return true;   //Existe el NUC en la base de datos de SICAP
+			else 
+				return  false; //No existe el NUC en la base de datos de SICAP
+		}else{
+			return  false; //La cadena no tiene 13 digitos.
+		}
+	}else{
+		return false; //No es una cadena numerica.
+	}
+}
+
+
+
 ?>

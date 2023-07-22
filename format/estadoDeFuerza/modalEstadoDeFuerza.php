@@ -519,6 +519,7 @@ if(isset($_POST['idMando'])){
 
 <script type="text/javascript">
   $("#file").change(function () {
+  	console.log('hola');
     readImage(this);
   });
 </script>

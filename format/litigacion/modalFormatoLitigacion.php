@@ -61,6 +61,10 @@ if ($datalit) {
 	$a = 0;
 }
 
+$dataTramite = getCarpetasAgenteLitigacion_totalTramite($conn, $idMp, 165, $mes, $anio, $idUnidad);
+$total_tramite = $dataTramite[0][0];
+
+
 
 
 ?>
@@ -1988,9 +1992,7 @@ if ($datalit) {
 								<div class="col-xs-12">
 									<label class="colorLetras" for="inputlg"> Total de carpetas judicializadas en tramite :</label>
 									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="totCarpTram_nucs" value="<? if ($a == 1) {
-																																																																																								echo  $datalit[0][146];
-																																																																																							} ?>" />
+										<input type="number" placeholder="cantidad" class="first" id="totCarpTram_nucs" value="<?echo $total_tramite; ?>" />
 										<span onclick="sendDataModalLitigacion('totCarpTram_nucs',165,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)">
 											<div id="checktotCarpTram_nucs"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div>
 										</span>
@@ -2028,3 +2030,4 @@ if ($datalit) {
 </div><br>
 
 <div id="respuestaGuardado"></div>
+

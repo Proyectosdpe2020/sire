@@ -3327,3 +3327,21 @@ function getIdUnidEnlaceMPunidad($conn, $idEnlace)
 		return $arreglo;
 	}
 }
+
+
+function getCarpetasAgenteLitigacion_totalTramite($conSic, $idMp, $estatus, $mes, $anio, $idUnidad)
+{
+
+	$query = " SELECT count(nuc) as total FROM estatusNucs WHERE idMp = $idMp AND idEstatus = 165  ";
+
+	$indice = 0;
+
+	$stmt = sqlsrv_query($conSic, $query);
+	while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+		$arreglo[$indice][0] = $row['total'];
+		$indice++;
+	}
+	if (isset($arreglo)) {
+		return $arreglo;
+	}
+}

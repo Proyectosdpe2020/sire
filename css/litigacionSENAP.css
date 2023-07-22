@@ -21,3 +21,17 @@ input[type=checkbox] {
 #showSuspencionCondi{ display: none; }
 #showJuicioOral{ display: none; }
 #showSentencia{ display: none; }
+
+.panel_modalCargaNucsExcel{
+ background-image: url('../img/Fondo SIRE4-0450.png'); 
+ background-repeat: repeat;  
+ background-size: cover;
+ background-size: 100%; 
+ background-position-y: 52%;
+}
+
+a{
+ border-bottom:1px dotted #9999CC;
+ text-decoration:none;
+ color: black;
+}
