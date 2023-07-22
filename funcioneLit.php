@@ -422,7 +422,7 @@ FROM [ESTADISTICAV2].[dbo].[Litigacion] WHERE idMes = $mes AND idAnio = $anio AN
 		$arreglo[$indice][148] = $row['SDnueve'];
 		$arreglo[$indice][149] = $row['SDdiez'];
 		$arreglo[$indice][150] = $row['totCarpTram_nucs'];
-        $arreglo[$indice][151] = $row['SobreseimientosMuerteImputado'];
+		$arreglo[$indice][151] = $row['SobreseimientosMuerteImputado'];
 
 		$indice++;
 	}

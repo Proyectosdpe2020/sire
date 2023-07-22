@@ -149,7 +149,6 @@
 	// $objPHPExcel->getActiveSheet()->SetCellValue("H72", $data[0][23]); //Sobreseimientos decretados
 	$objPHPExcel->getActiveSheet()->SetCellValue("D111", $data[0][24]); //Prescripción de la accion penal
 	$objPHPExcel->getActiveSheet()->SetCellValue("D112", $data[0][151]); //Prescripción de la accion penal
-	// $objPHPExcel->getActiveSheet()->SetCellValue("H74", $data[0][25]); //por mecanismos alternativos
 	// $objPHPExcel->getActiveSheet()->SetCellValue("H75", $data[0][26]); //Acuerdo reparatorio
 	// $objPHPExcel->getActiveSheet()->SetCellValue("H76", $data[0][27]); //Suspencion condicional del proceso
 	// $objPHPExcel->getActiveSheet()->SetCellValue("H77", $data[0][28]); //Criterio de oportunidad
