@@ -30,7 +30,7 @@ if (isset($_POST["estatus"])) {
 $bandImputado = 0;
 
 $arrayIDSllevanImputado = array(1,	2,	151,	10,	12,	13,	14,	15,	17,	18,	19,	20,	21,	22,	23,	24,	25,	26,	27,	28,	29,	30,	31,	36,	38
-,	50,	53,	57,	58,	64,	65,	66,	67,	81,	84,	89,	90,	91,	93,	97,	99,	152,	153,	154,	155,	156,	157,	158,	159,	160,	161,	162,	163,	164);
+,	50,	53,	57,	58,	64,	65,	66,	67,	81,	84,	89,	90,	91,	93,	97,	99,	152,	153,	154,	155,	156,	157,	158,	159,	160,	161,	162,	163,	164, 165);
 
 if(in_array($estatus, $arrayIDSllevanImputado)){
 	$bandImputado = 1;
@@ -118,10 +118,10 @@ $idUsuario = $_SESSION['useridIE'];
 	  <br /> 
 			<div class="row">
 				<div class="col-xs-6"> 
-					<label style="font-weight:bold">Carga masiva de NUCS *</label>
+					<label style="font-weight:bold">Carga NUCS desde archivo Excel</label>
 
 							<button type="button"  onclick="cargarModal_Excel('nuc', <? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $estatus; ?>, 0, <? echo $idUnidad; ?>)" class="btn btn-danger btn-sm redondear btnCapturarTbl">
-								<span class="glyphicon glyphicon-cloud-upload"></span> Subir Archivo 
+								<span class="glyphicon glyphicon-cloud-upload"></span> Cargar Archivo 
 							</button>
 
 				</div>
@@ -278,8 +278,59 @@ $idUsuario = $_SESSION['useridIE'];
 			<tbody>
 
 				<?
+/*solo para el estatus = 165*/
+   if($estatus == 165){ 
+
+   		//// Obtener las carpetas del Mp 
+				$sumador = 0;
+				$carpeAgente = getCarpetasAgenteLitigacion2($conn, $idMp, $estatus, $mes, $anio, $idUnidad);
 
 
+				for ($i = 0; $i < sizeof($carpeAgente); $i++) {
+
+					$nuc = $carpeAgente[$i][0];
+					$idEstatusNucsThisNUC = $carpeAgente[$i][1]; //se agrego para obtener el idEstatusNucs 
+					//// Por cada Carpeta Obtener la Ultima Determinacion que se realizo
+					$lastDetermin = getLastDeterminacionCarpetaLitig($conn, $nuc);
+
+					for ($k = 0; $k < sizeof($lastDetermin); $k++) {
+
+						$idEstatusNucs = $lastDetermin[$k][0];
+						$nuc = $lastDetermin[$k][1];
+						$idUnidade = $lastDetermin[$k][2];
+						$EstatusID = $lastDetermin[$k][3];
+						$idCarpeta = $lastDetermin[$k][4];
+
+
+						$nucs = getNucExpSicap($conSic, $idCarpeta);
+						$nuc = $nucs[0][0];
+						$exp = $nucs[0][1];
+
+				?>
+						<tr>
+
+							<td class="tdRowMain negr"><? echo ($sumador + 1); ?></td>
+							<td class="tdRowMain negr"><? echo $nuc; ?></td>
+							<td class="tdRowMain negr"><? echo $exp; ?></td>
+							<!--SE AGREGO EL BOTON PARA ABRIR EL NUEVO MODAL-->
+							<? if ($validaInfo) { ?>
+								<td class="tdRowMain">
+									<center>
+										<div class="buttonInfo"><button type="button" onclick="showModalNucLitInfo(<? echo $idEstatusNucsThisNUC; ?>, <? echo $estatus; ?>, <? echo $nuc; ?>, <? echo $idCarpeta; ?>, <? echo $idMp; ?>, <? echo $mes; ?> , <? echo $anio; ?>, 1 )" class="btn btn-success btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-pencil"></span> Agregar </button></div>
+									</center>
+								</td>
+							<? } ?>
+							<td class="tdRowMain">
+								<center><button type="button" onclick="deleteResolLit(<? echo $idEstatusNucsThisNUC; ?>, <? echo $idMp; ?>, <? echo $anio; ?>, <? echo $mes; ?>, <? echo $estatus ?>, <? echo $nuc; ?>, <? echo $idUnidad; ?>)" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar </button></center>
+							</td>
+
+						</tr>
+				<?
+						$sumador++;
+					}
+				}
+
+   }else{
 
 				//// Obtener las carpetas del Mp 
 				$sumador = 0;
@@ -330,7 +381,10 @@ $idUsuario = $_SESSION['useridIE'];
 					}
 				}
 
+			}/*solo para el estatus = 165*/
 				?>
+
+
 			</tbody>
 		</table>
 

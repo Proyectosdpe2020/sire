@@ -364,7 +364,13 @@ switch ($acc) {
 
 				//// Obtener las carpetas del Mp 
 				$sumador = 0;
-				$carpeAgente = getDistincCarpetasAgenteLitigacion($conn, $idMp, $estatResolucion, $mes, $anio, $idUnidad);
+
+				if($estatResolucion == 165){
+					$carpeAgente = getCarpetasAgenteLitigacion2($conn, $idMp, $estatResolucion, $mes, $anio, $idUnidad);
+				}else{
+					$carpeAgente = getDistincCarpetasAgenteLitigacion($conn, $idMp, $estatResolucion, $mes, $anio, $idUnidad);
+				}
+				
 
 
 				for ($i = 0; $i < sizeof($carpeAgente); $i++) {
@@ -736,7 +742,7 @@ switch ($acc) {
 
 
 
-			if ($p != 9 &&  $p != 10  &&  $p != 11 &&  $p != 14) {
+			if ($p != 9 &&  $p != 10  &&  $p != 11 &&  $p != 14 ) {
 
 				$valor = getLAstResolucionesFromAdetermLit($conn, $idMp, $arregloEsatusLit[$p], $mes, $anio, 0, $idUnidad);
 
@@ -1264,7 +1270,7 @@ switch ($acc) {
 		/// SE AGREGARON LOS IDS 17 y 18 para poder agregar doble nuc en los imputados de prision preventivas
 		if (
 			$estatResolucion == 64 || $estatResolucion == 155 || $estatResolucion == 156 || $estatResolucion == 157 || $estatResolucion == 158 || $estatResolucion == 159 || $estatResolucion == 160 || $estatResolucion == 161 || $estatResolucion == 162 || $estatResolucion == 163 || $estatResolucion == 164 || $estatResolucion == 60 || $estatResolucion == 61 || $estatResolucion == 152 || $estatResolucion == 63 || $estatResolucion == 50 || $estatResolucion == 53 || $estatResolucion == 3 || $estatResolucion == 4 || $estatResolucion == 5 || $estatResolucion == 10 || $estatResolucion == 12 || $estatResolucion == 78 || $estatResolucion == 17 || $estatResolucion == 18 || $estatResolucion == 114 || $estatResolucion == 115 || $estatResolucion == 116 || $estatResolucion == 117 || $estatResolucion == 119 || $estatResolucion == 120 || $estatResolucion == 121 || $estatResolucion == 122
-			|| $estatResolucion == 123 || $estatResolucion == 124 || $estatResolucion == 125 || $estatResolucion == 126 || $estatResolucion == 127 || $estatResolucion == 128 || $estatResolucion == 140 || $estatResolucion == 112 || $estatResolucion == 151 || $estatResolucion == 6 || $estatResolucion == 7 || $estatResolucion == 98 || $estatResolucion == 97 || $estatResolucion == 96 || $estatResolucion == 95 || $estatResolucion == 20 || $estatResolucion == 21 || $estatResolucion == 22 || $estatResolucion == 23 || $estatResolucion == 24 || $estatResolucion == 25 || $estatResolucion == 26 || $estatResolucion == 27 || $estatResolucion == 28 || $estatResolucion == 29 || $estatResolucion == 30 || $estatResolucion == 31 || $estatResolucion == 33 || $estatResolucion == 34 || $estatResolucion == 35 || $estatResolucion == 36 || $estatResolucion == 38 || $estatResolucion == 112 || $estatResolucion == 113 || $estatResolucion == 57 || $estatResolucion == 58 || $estatResolucion == 129 || $estatResolucion == 114 || $estatResolucion == 115 || $estatResolucion == 116 || $estatResolucion == 117 || $estatResolucion == 119 || $estatResolucion == 120 || $estatResolucion == 121 || $estatResolucion == 122 || $estatResolucion == 123 || $estatResolucion == 124 || $estatResolucion == 125 || $estatResolucion == 126 || $estatResolucion == 127 || $estatResolucion == 128 || $estatResolucion == 154 || $estatResolucion == 66 || $estatResolucion == 67 || $estatResolucion == 139
+			|| $estatResolucion == 123 || $estatResolucion == 124 || $estatResolucion == 125 || $estatResolucion == 126 || $estatResolucion == 127 || $estatResolucion == 128 || $estatResolucion == 140 || $estatResolucion == 112 || $estatResolucion == 151 || $estatResolucion == 6 || $estatResolucion == 7 || $estatResolucion == 98 || $estatResolucion == 97 || $estatResolucion == 96 || $estatResolucion == 95 || $estatResolucion == 20 || $estatResolucion == 21 || $estatResolucion == 22 || $estatResolucion == 23 || $estatResolucion == 24 || $estatResolucion == 25 || $estatResolucion == 26 || $estatResolucion == 27 || $estatResolucion == 28 || $estatResolucion == 29 || $estatResolucion == 30 || $estatResolucion == 31 || $estatResolucion == 33 || $estatResolucion == 34 || $estatResolucion == 35 || $estatResolucion == 36 || $estatResolucion == 38 || $estatResolucion == 112 || $estatResolucion == 113 || $estatResolucion == 57 || $estatResolucion == 58 || $estatResolucion == 129 || $estatResolucion == 114 || $estatResolucion == 115 || $estatResolucion == 116 || $estatResolucion == 117 || $estatResolucion == 119 || $estatResolucion == 120 || $estatResolucion == 121 || $estatResolucion == 122 || $estatResolucion == 123 || $estatResolucion == 124 || $estatResolucion == 125 || $estatResolucion == 126 || $estatResolucion == 127 || $estatResolucion == 128 || $estatResolucion == 154 || $estatResolucion == 66 || $estatResolucion == 67 || $estatResolucion == 139 || $estatResolucion == 165
 		) {
 			/// SE AGREGO LA VINCULACION A PROCESO QUE SE REPITIERA, HAY QUE REVISARLO ES EL ID 151
 

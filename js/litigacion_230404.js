@@ -1032,7 +1032,8 @@ function checkImputadosXcarpeta(nuc, idMp, estatusResolucion, mes, anio, deten, 
 			if (objDatos.first == "NO") {
 
 				/// VALIDAR QUE EL ESTATUS QUE LLEGA AQUI PUEDA CAPTURAR IMPUTADOS SON LOS ESTATUS QUE NO CAPTURAN LA INFORMACION DL IMPUTADO
-				const idEstatusNoValidos = [34, 35, 114, 115, 116, 117, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 165];
+				//const idEstatusNoValidos = [34, 35, 114, 115, 116, 117, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 165]; //DESCOMENTAR
+					const idEstatusNoValidos = [34, 35, 114, 115, 116, 117, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128];
 
 				if (idEstatusNoValidos.includes(estatusResolucion)) {
 					//// SI ES UNO DE ESTOS ESTATUS ENTONCES NO MANDA LA PANTALLA PARA CAPTURA DE NUCS
@@ -1051,7 +1052,7 @@ function checkImputadosXcarpeta(nuc, idMp, estatusResolucion, mes, anio, deten, 
 				if (objDatos.first == "SI") {
 
 					const idSestatus = [1, 2, 151, 10, 12, 13, 14, 15, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
-						36, 38, 50, 53, 57, 58, 64, 65, 66, 67, 81, 84, 89, 90, 91, 93, 97, 99, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164];
+						36, 38, 50, 53, 57, 58, 64, 65, 66, 67, 81, 84, 89, 90, 91, 93, 97, 99, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165];
 					/////// CUANDO LLEGUE AQUI VALIDAMOS PRIMERO QUE NADA SI EL ESTATUS REQUIERE IMPUTADO
 
 					/// SI HAY IMPUTADO PARA EL ESTATUS ENTONCES SE LLENAN LOS IMPUTADOS EN EL SELECT Y SE ACTUALIZA
@@ -1403,7 +1404,13 @@ function insertarNucLit(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad, 
 				if (objDatos.first == "SI") {
 
 					swal("", "Se Registro Correctamente.", "success");
-					updateTableNucsLiti(idMp, anio, mes, estatResolucion, nuc, deten, idUnidad);
+
+      /*EN caso de ser el estatus de tramite se tiene que realizar nueva consulta para traer el historial de tramite de ese MPy actualizar tabla*/
+      if(estatResolucion == 165){
+      		updateTableNucsLiti_tramite(idMp, anio, mes, estatResolucion, nuc, deten, idUnidad);
+      }else{
+      		updateTableNucsLiti(idMp, anio, mes, estatResolucion, nuc, deten, idUnidad);
+      }
 					/*Despues de haber validado la información adicional de SENAP y haber guardado el NUC se extrae el idEstatusNucs para 
 							proceder a insertar la informacion del senap en la respectiva tabla dependiendo del idEstatus*/
 					switch (estatResolucion) {
@@ -1839,6 +1846,7 @@ function cargarModal_Excel(nuc, idMp, mes, anio, estatResolucion, deten, idUnida
 		type: "POST",
 		dataType: "html",
 		url: 'format/litigacion/modalCargarExcel.php',
+		data: "idMp="+idMp+"&mes="+mes+"&anio="+anio+"&estatResolucion="+estatResolucion+"&idUnidad="+idUnidad,
 	 success: function(respuesta){
 	 $('#contmodal_cargaNucsExcel').html( respuesta );
   $('#modal_cargaNucsExcel').modal('show');
@@ -1920,6 +1928,14 @@ table=$('#gridPolicia').DataTable({
 }
 
 function closeModalCargarExcel() {
+	var idMp = $("#idMp").val();
+ var mes = $("#mes").val();
+ var anio = $("#anio").val();
+ var estatResolucion = $("#estatResolucion").val();
+ var idUnidad = $("#idUnidad").val();
+
+ updateTableNucsLiti2(idMp, anio, mes, estatResolucion, nuc, 0, idUnidad);
+
 	$('#modal_cargaNucsExcel').modal('hide');
 	$('#modalNucsLitig').modal('show');
 }
@@ -1970,6 +1986,8 @@ function leer_excel(myFormData_excel){
 	console.log('entra aca ' + myFormData_excel );
 	var cont = 1;
 	var cont2 = 1;
+	$('.preloaderSelect_NUC').show(); //GIF carga de información
+		$('#filesForm').hide(); //GIF carga de información
 	$.ajax({
 		//url:'repositorio/subir.php?quest='+quest+'&idEnlace='+idEnlace+'&mes='+mes+'&anio='+anio+'&oberv='+oberv+'&idTipoArch='+idTipoArch,
 		url: 'format/litigacion/importar_excel.php',
@@ -1979,6 +1997,7 @@ function leer_excel(myFormData_excel){
 		processData: false,
 		cache: false
 	}).done(function (respuesta) {
+		$('.preloaderSelect_NUC').hide(); //GIF carga de información
 	 var json = respuesta;
 	 var obj = eval("(" + json + ")");
 		console.log('NUCS VALIDOS: ' + obj.nucs);
@@ -1996,7 +2015,7 @@ function leer_excel(myFormData_excel){
 
 	   var html = '<tr>';
 
-			 html += '<td><center>' + cont + '<center></td>';
+			 html += '<td>' + cont + '</td>';
     
     if(axu == 3){
     	html += '<td class="tdRowMain"><span class="glyphicon glyphicon-ok spanOK"></span></td>';
@@ -2005,19 +2024,26 @@ function leer_excel(myFormData_excel){
     	html += '<td class="tdRowMain"><span class="glyphicon glyphicon-remove spanRemove"></span></td>';
     }
 
-    html += '<td><center>' + obj.nucs[i] + '<center></td>';
+    html += '<td>' + obj.nucs[i] + '</td>';
 
     if(array_data_imputado == 'SIN IMPUTADO'){
-    	html += '<td><center><button type="button" data-toggle="modal" href="" onclick="" class="btn btn-primary btn-lg redondear "><span class="glyphicon glyphicon-pencil"></span> Capturar </button></center></td>';
+    	html += '<td class="td_editar"><center><button type="button" class="editar btn btn-primary btn-lg redondear" data-toggle="modal" href="#editar" ><span class="glyphicon glyphicon-pencil"></span> Capturar </button></center></td>';
     }else{
-     html +='<td><select class="select-css"><option value="">Seleccione el imputado</option>'; 
+     html +='<td><select class="imputados select-css"><option value="0">Seleccione el imputado</option>'; 
      for(k = 0; k < array_data_imputado.length; k++){
-     	html += '<option value="">' + array_data_imputado[k][1]+' '+array_data_imputado[k][2]+' '+array_data_imputado[k][3] + '</option>'; 
+     	html += '<option value="'+array_data_imputado[k][0]+'">' + array_data_imputado[k][1]+' '+array_data_imputado[k][2]+' '+array_data_imputado[k][3] + '</option>'; 
      }
      html += '</select></td>';
     }
     
-    html += '<td><select class="select-css"><option value="0">Seleccione la etapa</option><option value="1">Etapa inicial</option><option value="2">Etapa intermedia</option><option value="3">Etapa de juicio oral</option><option value="4">Etapa cero</option></td>';
+    html += '<td><select class="etapa select-css"><option value="0">Seleccione la etapa</option><option value="1">Etapa inicial</option><option value="2">Etapa intermedia</option><option value="3">Etapa de juicio oral</option><option value="4">Etapa cero</option></td>';
+
+     if(array_data_imputado == 'SIN IMPUTADO'){
+    	html += '<td class="td_guardar_data_imputado"><center><button type="button" class="guardar_data_imputado btn btn-primary btn-lg redondear" ><span class="glyphicon glyphicon-pencil"></span> Guardar  </button></center></td>';
+    }else{
+    	html += '<td class="td_guardar_no_data_imputado"><center><button type="button" class="guardar_no_data_imputado btn btn-primary btn-lg redondear" ><span class="glyphicon glyphicon-pencil"></span> Guardar  </button></center></td>';
+    }
+
 
      html += '</tr>';
 
@@ -2052,10 +2078,55 @@ function getData_imputados(nuc, my_callback){
 	});
 }
 
+//FUNCION PARA OBTENER LOS DATOS DE LAS COLUMNAS Y EDITAR AL HACER CLIC
+	var editar = function(tbody, table){
+  $(tbody).on("click",".td_editar", function(){
 
+  	var rowData = table.rows(this).data().toArray(); 
+   var rowNodes = table.rows(this).nodes().toArray();
+
+  var datos_columna = [];  
+  for (i = 0; i < rowData.length; i++) {
+    let selected_imputado_nombre = $(rowNodes[i]).find("select.imputados option:selected").text();
+    let selected_imputado_idLitigacion = $(rowNodes[i]).find("select.imputados option:selected").val();
+    let selected_etapa_nombre = $(rowNodes[i]).find("select.etapa option:selected").text();
+    let selected_etapa_id = $(rowNodes[i]).find("select.etapa option:selected").val();
+    let tempObj = {
+    	 id_registro: rowData[i].id,
+      nuc: rowData[i].NUC,
+      imputado: selected_imputado_nombre,
+      imputado_idLitigacion: selected_imputado_idLitigacion,
+      etapa: selected_etapa_nombre,
+      etapa_id: selected_etapa_id
+    }
+    datos_columna.push(tempObj);
+  }
+  
+  $("#id_registro").val(datos_columna[0].id_registro);
+  $("#nuc_label").text(datos_columna[0].nuc);
+
+  console.log(datos_columna[0].id_registro + ' Se ha seleccionado el nuc: ' + datos_columna[0].nuc + ' con el imputado: ' + datos_columna[0].imputado + ' con ID: ' + datos_columna[0].imputado_idLitigacion + ' en la etapa: ' +  datos_columna[0].etapa + ' con id de etapa ' +  datos_columna[0].etapa_id );
+
+/*USAR EN CASO DE GUARDAR MASIVAMENTE
+  var dataArr = [];  
+  for (i = 0; i < rowData.length; i++) {
+    let selected_imputado = $(rowNodes[i]).find("select.imputados option:selected").text();
+    let tempObj = {
+      nuc: rowData[i].NUC,
+      imputado: selected_imputado
+    }
+    dataArr.push(tempObj);
+  }
+*/
+  })
+	}
+
+
+//FUNCION PARA INICIALIZAR DATATABLES
 function reloadDataTable(){
 
-	table=$('#gridPolicia').DataTable({
+	var table = $('#gridPolicia').DataTable({
+
        retrieve: true,
       "language": {"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"},
        scrollY: 400,
@@ -2065,6 +2136,15 @@ function reloadDataTable(){
                     ['10', '25', '50', 'todo']
                    ],
        "columnDefs": [ { "width": "5%", "targets": [0,1] } , { "width": "30%", "targets": [3] } , { "width": "20%", "targets": [4] }],
+       rowId: 'id',
+       "columns": [
+           { "data": "id" , className: "text-center"},
+							    { "data": "Capturado?" },
+							    { "data": "NUC" , className: "text-center"},
+							      { "data": "IMPUTADO" },
+							    { "data": "ETAPA" },
+							    { "data": "ACCIONES" },
+							],
        buttons: [{
         extend: 'excel',
         title: '',
@@ -2095,6 +2175,10 @@ function reloadDataTable(){
        "order": [], // "0" means First column and "desc" is order type; 
 
       } );
+   
+   editar("#gridPolicia tbody",table);
+   agregar("#gridPolicia tbody",table);
+   guardar("#gridPolicia tbody",table);
 
 
 	table2=$('#gridPolicia2').DataTable({
@@ -2136,4 +2220,303 @@ function reloadDataTable(){
        "order": [], // "0" means First column and "desc" is order type; 
 
       } );
+}
+
+function closeModalImputados(){
+		 $('#editar').modal('hide');
+}
+
+
+//FUNCION PARA OBTENER LOS DATOS DE LAS COLUMNAS Y EDITAR AL HACER CLIC
+	var agregar = function(tbody, table){
+		$('#agregar_imputado').click(function(){
+			id_registro = $("#id_registro").val();
+	 	nombre = $("#nombre").val();
+		 ap_paterno = $("#ap_paterno").val();
+		 ap_materno = $("#ap_materno").val();
+   edad = $("#edad").val();
+   id_sexo = $('input[name="id_sexo"]:checked').val();
+   curp = $("#curp").val();
+
+   var checkCampos = valida_campos_no_data_imputado();
+
+   if(checkCampos){
+   	console.log(nombre);
+
+	  // Get the id
+   var id = id_registro;
+   var rowId = '#' + id;
+
+	   // Get the current row using the ID
+	   var row = table.row('#' + id);
+
+
+	  var input_nombre = 'Nombre: <input type="text" id="nombre_row_add_'+ id_registro +'" class="input-css" placeholder="ESPECIFICA EL NOMBRE" aria-describedby="sizing-addon1" maxlength="50" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="" value="" >';
+	  var input_ap_paterno = 'Paterno: <input type="text" id="paterno_row_add_'+ id_registro +'"  class="input-css" placeholder="ESPECIFICA EL APELLIDO PATERNO" aria-describedby="sizing-addon1" maxlength="50" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="" value="" >';
+	  var input_ap_materno = 'Materno: <input type="text" id="materno_row_add_'+ id_registro +'" class="input-css" placeholder="ESPECIFICA EL APELLIDO MATERNO" aria-describedby="sizing-addon1" maxlength="50" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="" value="" >';
+	  var input_edad = 'Edad: <input type="text" id="edad_row_add_'+ id_registro +'" class="input-css" placeholder="ESPECIFICA LA EDAD" aria-describedby="sizing-addon1" maxlength="50" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="" value="" >';
+	  var input_sexo = 'Sexo:<br><input type="radio" id="id_sexo_row_add_'+ id_registro +'" name="id_sexo_'+id_registro+'" value="M" style="height:25px; width:25px;"><label for="cv_sexo" style="font-size: 20px;">Masculino</label><br><input type="radio" id="id_sexo_row_add_'+ id_registro +'" name="id_sexo_'+id_registro+'" value="F" style="height:25px; width:25px;"><label for="cv_sexo" style="font-size: 20px;">Femenino</label><br>';
+	  var input_curp = 'CURP: <input type="text" id="curp_row_add_'+ id_registro +'" class="input-css" placeholder="ESPECIFICA EL CURP" aria-describedby="sizing-addon1" maxlength="50" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="" value="" >';
+
+
+	  var html = input_nombre+input_ap_paterno+input_ap_materno+input_edad+input_sexo+input_curp;
+
+	   table.cell( rowId, 3 ).data( html );
+
+	   console.log(id_sexo);
+
+	  $("#nombre_row_add_"+ id_registro).val(nombre);
+	  $("#paterno_row_add_"+ id_registro).val(ap_paterno);
+	  $("#materno_row_add_"+ id_registro).val(ap_materno);
+	  $("#edad_row_add_"+ id_registro).val(edad);
+	  $("input[name=id_sexo_"+ id_registro + "][value='"+ id_sexo +"']").prop("checked",true);
+	  $("#curp_row_add_"+ id_registro).val(curp);
+
+	   console.log(id);
+	   console.log('entra aca');
+	   $("#id_registro").val('');
+	   $("#nombre").val('');
+		  $("#ap_paterno").val('');
+			 $("#ap_materno").val('');
+	   $("#edad").val('');
+	   $('input[name="id_sexo"]').prop('checked', false);
+	   $("#curp").val('');
+	   closeModalImputados();
+   }else{
+   	swal("", "Faltan campos por registrar, verifique.", "warning");
+   }
+
+		});
+	}
+
+//FUNCION PARA GUARDAR LOS DATOS DE LAS COLUMNAS Y EDITAR AL HACER CLIC
+	var guardar = function(tbody, table){
+  $(tbody).on("click","button.guardar_no_data_imputado", function(){
+
+  	var ID = $(this).closest('tr').find('td').eq(0).text();
+  	console.log(ID);
+
+  	var idMp = $("#idMp").val();
+  	var mes = $("#mes").val();
+  	var anio = $("#anio").val();
+  	var estatResolucion = $("#estatResolucion").val();
+  	var idUnidad = $("#idUnidad").val();
+   
+   var acc = 'save_no_data_imp';
+
+  	var rowData = table.rows('#' + ID).data().toArray(); 
+   var rowNodes = table.rows('#' + ID).nodes().toArray();
+
+  var datos_columna = [];  
+  for (i = 0; i < rowData.length; i++) {
+    let selected_imputado_nombre = $(rowNodes[i]).find("select.imputados option:selected").text();
+    let selected_imputado_idLitigacion = $(rowNodes[i]).find("select.imputados option:selected").val();
+    let selected_etapa_nombre = $(rowNodes[i]).find("select.etapa option:selected").text();
+    let selected_etapa_id = $(rowNodes[i]).find("select.etapa option:selected").val();
+    let tempObj = {
+    	 id_registro: rowData[i].id,
+      nuc: rowData[i].NUC,
+      imputado: selected_imputado_nombre,
+      imputado_idLitigacion: selected_imputado_idLitigacion,
+      etapa: selected_etapa_nombre,
+      etapa_id: selected_etapa_id
+    }
+    datos_columna.push(tempObj);
+  }
+  var checkCampos = valida_columna_no_data_imputado(datos_columna[0].nuc, datos_columna[0].imputado_idLitigacion, datos_columna[0].etapa_id);
+  if(checkCampos){
+
+	  console.log(datos_columna[0].id_registro + ' Se ha seleccionado el nuc: ' + datos_columna[0].nuc + ' con el imputado: ' + datos_columna[0].imputado + ' con ID: ' + datos_columna[0].imputado_idLitigacion + ' en la etapa: ' +  datos_columna[0].etapa + ' con id de etapa ' +  datos_columna[0].etapa_id );
+   /*ENVIAMOS INFORMACION PARA INSERTAR*/
+   	$.ajax({
+				type: "POST",
+    dataType: 'html',
+					url: "format/litigacion/insert_tramite.php",
+					data: "acc="+acc+"&nuc="+datos_columna[0].nuc+"&imputado_idLitigacion="+datos_columna[0].imputado_idLitigacion+"&etapa_id="+datos_columna[0].etapa_id+
+					       "&idMp="+idMp+"&mes="+mes+"&anio="+anio+"&estatResolucion="+estatResolucion+"&idUnidad="+idUnidad,
+					success: function (respuesta) {
+						var json = respuesta;
+						var obj = eval("(" + json + ")");
+
+						if (obj.first == "NO") { swal("", "El NUC no se ha registrado favor de intentarlo nuevamente.", "Warning"); } else {
+
+						if (obj.first == "SI") {
+								 // Get the id
+				   var id = datos_columna[0].id_registro;
+				   var rowId = '#' + id;
+				   // Get the current row using the ID
+				   var row = table.row('#' + id);
+
+					  var checkSave = '<span class="glyphicon glyphicon-ok spanOK"></span>';
+					  var html = checkSave;
+					  table.cell( rowId, 1 ).data( html );
+				   table.cell( rowId, 5 ).data( 'CAPTURADO' );
+							swal("", "Se Registro Correctamente.", "success");
+							//updateTableNucsLiti(idMp, anio, mes, estatResolucion, nuc, deten, idUnidad);
+						}
+					}
+
+								console.log(obj.carpeta_id);
+							}
+						});
+
+
+	  }else{
+	  	swal("", "Faltan campos por registrar, verifique.", "warning");
+	  }  
+
+  })
+
+  $(tbody).on("click","button.guardar_data_imputado", function(){
+
+  	var ID = $(this).closest('tr').find('td').eq(0).text();
+  	console.log(ID);
+
+  	var idMp = $("#idMp").val();
+  	var mes = $("#mes").val();
+  	var anio = $("#anio").val();
+  	var estatResolucion = $("#estatResolucion").val();
+  	var idUnidad = $("#idUnidad").val();
+
+  	var rowData = table.rows('#' + ID).data().toArray(); 
+   var rowNodes = table.rows('#' + ID).nodes().toArray();
+
+   var acc = 'save_data_imp';
+
+  var datos_columna = [];  
+  for (i = 0; i < rowData.length; i++) {
+    let input_imputado_nombre = $("#nombre_row_add_"+ rowData[i].id).val();
+    let input_imputado_ap_paterno = $("#paterno_row_add_"+ rowData[i].id).val();
+    let input_imputado_ap_materno = $("#materno_row_add_"+ rowData[i].id).val();
+    let input_imputado_edad = $("#edad_row_add_"+ rowData[i].id).val(); 
+    let input_imputado_sexo = $("input[name=id_sexo_"+ rowData[i].id + "]:checked").val();
+    let input_imputado_curp = $("#curp_row_add_"+ rowData[i].id).val();
+    let selected_etapa_nombre = $(rowNodes[i]).find("select.etapa option:selected").text();
+    let selected_etapa_id = $(rowNodes[i]).find("select.etapa option:selected").val();
+    
+    let tempObj = {
+    	 id_registro: rowData[i].id,
+      nuc: rowData[i].NUC,
+      imputado_nombre: input_imputado_nombre,
+      imputado_ap_paterno : input_imputado_ap_paterno,
+      imputado_ap_materno : input_imputado_ap_materno,
+      imputado_edad : input_imputado_edad,
+      imputado_sexo : input_imputado_sexo,
+      imputado_curp : input_imputado_curp,
+      etapa: selected_etapa_nombre,
+      etapa_id: selected_etapa_id,
+    }
+    datos_columna.push(tempObj);
+  }
+  
+  var checkCampos = valida_campos_data_imputado(datos_columna[0].imputado_nombre, datos_columna[0].imputado_ap_paterno, datos_columna[0].imputado_ap_materno, datos_columna[0].imputado_edad, datos_columna[0].imputado_sexo, datos_columna[0].etapa_id );
+  console.log('VER ARRAY: ' + datos_columna[0].imputado_nombre);
+	  if(checkCampos){
+
+	  	/*ENVIAMOS INFORMACION PARA INSERTAR*/
+   	$.ajax({
+					type: "POST",
+	    dataType: 'html',
+						url: "format/litigacion/insert_tramite.php",
+						data: "acc="+acc+"&nuc="+datos_columna[0].nuc+"&imputado_nombre="+datos_columna[0].imputado_nombre+"&imputado_ap_paterno="+datos_columna[0].imputado_ap_paterno+
+						      "&imputado_ap_materno="+datos_columna[0].imputado_ap_materno+"&imputado_edad="+datos_columna[0].imputado_edad+"&imputado_sexo="+datos_columna[0].imputado_sexo+"&imputado_curp="+datos_columna[0].imputado_curp+
+						      "&etapa_id="+datos_columna[0].etapa_id+"&idMp="+idMp+"&mes="+mes+"&anio="+anio+"&estatResolucion="+estatResolucion+"&idUnidad="+idUnidad,
+						success: function (respuesta) {
+									var json = respuesta;
+									var obj = eval("(" + json + ")");
+
+									if (obj.first == "NO") { swal("", "El NUC no se ha registrado favor de intentarlo nuevamente.", "Warning"); } else {
+
+									if (obj.first == "SI") {
+											 // Get the id
+							   var id = datos_columna[0].id_registro;
+							   var rowId = '#' + id;
+							   // Get the current row using the ID
+							   var row = table.row('#' + id);
+								  var checkSave = '<span class="glyphicon glyphicon-ok spanOK"></span>';
+								  var html = checkSave;
+								  table.cell( rowId, 1 ).data( html );
+								  table.cell( rowId, 5 ).data( 'CAPTURADO' );
+										swal("", "Se Registro Correctamente.", "success");
+										//updateTableNucsLiti(idMp, anio, mes, estatResolucion, nuc, deten, idUnidad);
+									}
+								}
+								
+							}
+						});  
+	  
+	  }else{
+	  	 	swal("", "Faltan campos por registrar, verifique.", "warning");
+	  }
+	  console.log(datos_columna[0].id_registro + ' Se ha seleccionado el nuc: ' + datos_columna[0].nuc + ' con el imputado: ' + datos_columna[0].imputado_nombre + ' ' + datos_columna[0].imputado_ap_paterno + ' ' + datos_columna[0].imputado_ap_materno + ' Edad: ' + datos_columna[0].imputado_edad + ' Sexo: ' + datos_columna[0].imputado_sexo + ' CURP: ' + datos_columna[0].imputado_curp + ' en la etapa: ' +  datos_columna[0].etapa + ' con id de etapa ' +  datos_columna[0].etapa_id );
+  })
+	}
+
+	function valida_campos_no_data_imputado(){
+	 	nombre = $("#nombre").val();
+		 ap_paterno = $("#ap_paterno").val();
+		 ap_materno = $("#ap_materno").val();
+   edad = $("#edad").val();
+   id_sexo = $('input[name="id_sexo"]:checked').val();
+   curp = $("#curp").val();
+   console.log('este es el sexo y se pasa validacion ' + id_sexo);
+   if(	nombre !== "" && ap_paterno !== "" && ap_materno !== "" && edad !== "" && id_sexo !=undefined){
+   	return true;
+   }else{
+   	return false;
+   }
+	}
+
+function valida_campos_data_imputado(nombre, ap_paterno, ap_materno, edad, sexo, etapa_id){
+	if(	nombre !== "" && ap_paterno !== "" && ap_materno !== "" && edad !== "" && sexo !=undefined && etapa_id != 0){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+function valida_columna_no_data_imputado(nuc, imputado_idLitigacion, etapa_id){
+	if(	nuc !== "" && imputado_idLitigacion != 0 && etapa_id != 0){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+
+function updateTableNucsLiti2(idMp, anio, mes, estatResolucion, nuc, deten, idUnidad) {
+	acc = "showtable";
+	cont = document.getElementById("contTableNucslitg");
+	ajax = objetoAjax();
+	ajax.open("POST", "format/litigacion/accionesNucsLit.php");
+
+	ajax.onreadystatechange = function () {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			cont.innerHTML = ajax.responseText;
+			//getExpedienteLit("expedCont", nuc);
+		}
+	}
+	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	ajax.send("&acc=" + acc + "&idMp=" + idMp + "&estatResolucion=" + estatResolucion + "&mes=" + mes + "&anio=" + anio + "&nuc=" + nuc + "&deten=" + deten + "&idUnidad=" + idUnidad);
+
+}
+
+
+//funcion para actualizar tabla del estatus tramite 165
+function updateTableNucsLiti_tramite(idMp, anio, mes, estatResolucion, nuc, deten, idUnidad) {
+
+	acc = "showtable";
+	cont = document.getElementById("contTableNucslitg");
+	ajax = objetoAjax();
+	ajax.open("POST", "format/litigacion/accionesNucsLit.php");
+
+	ajax.onreadystatechange = function () {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			cont.innerHTML = ajax.responseText;
+			//getExpedienteLit("expedCont", nuc);
+		}
+	}
+	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	ajax.send("&acc=" + acc + "&idMp=" + idMp + "&estatResolucion=" + estatResolucion + "&mes=" + mes + "&anio=" + anio + "&nuc=" + nuc + "&deten=" + deten + "&idUnidad=" + idUnidad);
+
 }

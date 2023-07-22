@@ -509,7 +509,10 @@ function getDistincCarpetasAgenteLitigacion($conn, $idMp, $estatus, $mes, $anio,
 			$query = " SELECT nuc, idEstatusNucs FROM estatusNucs WHERE idMp = $idMp AND idEstatus = $estatus AND mes = $mes AND anio = $anio AND idUnidad = $idUnidad  union all
 																SELECT no_averiguacion , idEstatusAveriguacion FROM estatusAveriguaciones 
 					WHERE idMp = $idMp AND mes = $mes AND anio = $anio AND  idEstatus = $estatus AND idUnidad = $idUnidad  ";
-		} else {
+		} 
+		else if ($estatus == 165 ) {
+			$query = " SELECT nuc, idEstatusNucs FROM estatusNucs WHERE idMp = $idMp AND idEstatus = $estatus  ";
+		}else {
 			$query = " SELECT DISTINCT nuc, idEstatusNucs FROM estatusNucs WHERE idMp = $idMp AND idEstatus = $estatus AND mes = $mes AND anio = $anio AND idUnidad = $idUnidad Group BY nuc , idEstatusNucs";
 		}
 	}
@@ -622,6 +625,9 @@ function getDistincCarpetasAgenteDetemrn20Lit($conn, $idMp, $mes, $anio,  $deten
 			  union all
 																SELECT no_averiguacion FROM estatusAveriguaciones 
 					WHERE idMp = $idMp AND mes = $mes AND anio = $anio AND  idEstatus = $estatus AND idUnidad = $idUnidad  ";
+		}
+		else if ($estatus == 165 ) {
+			$query = "  SELECT nuc FROM estatusNucs WHERE idMp = $idMp AND  idEstatus = $estatus ";
 		} else {
 			$query = "  SELECT DISTINCT nuc FROM estatusNucs 
 			  WHERE idMp = $idMp AND mes = $mes AND anio = $anio AND  idEstatus = $estatus AND idUnidad = $idUnidad  Group BY nuc, idEstatus";
@@ -746,25 +752,24 @@ function getDistincAveriguacionesAgenteLitigacion($conn, $idMp, $estatus, $mes, 
 
 ////// OBTIENE LA ULTIMA DETERMINACION DE UNA CARPETA PARA SABER DONDE FUE DONDE SE DETERMINO POR ULTIMA VEZ
 
-function getLastDeterminacionCarpetaLitigAveriguacion($conn, $nuc)
+function getCarpetasAgenteLitigacion2($conSic, $idMp, $estatus, $mes, $anio, $idUnidad)
 {
 
-	$query = " SELECT idEstatusAveriguacion, no_averiguacion, idUnidad, fecha, idEstatus, idCarpeta FROM estatusAveriguaciones
-	WHERE idEstatusNucs IN( SELECT MAX(idEstatusNucs) FROM estatusNucs WHERE nuc = '$nuc' ) ";
-
-
+	$query = " SELECT nuc, idEstatusNucs FROM estatusNucs WHERE idMp = $idMp AND idEstatus = 165  Group BY nuc , idEstatusNucs";
 
 	$indice = 0;
 
-	$stmt = sqlsrv_query($conn, $query);
+	$stmt = sqlsrv_query($conSic, $query);
 	while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-		$arreglo[$indice][0] = $row['idEstatusAveriguacion'];
-		$arreglo[$indice][1] = $row['no_averiguacion'];
-		$arreglo[$indice][2] = $row['idUnidad'];
-		$arreglo[$indice][3] = $row['idEstatus'];
+		$arreglo[$indice][0] = $row['nuc'];
+		$arreglo[$indice][1] = $row['idEstatusNucs'];
 		$indice++;
 	}
 	if (isset($arreglo)) {
 		return $arreglo;
 	}
 }
+
+
+
+
