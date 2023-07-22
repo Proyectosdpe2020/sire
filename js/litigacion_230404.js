@@ -1028,11 +1028,11 @@ function checkImputadosXcarpeta(nuc, idMp, estatusResolucion, mes, anio, deten, 
 	ajax.onreadystatechange = function () {
 		if (ajax.readyState == 4 && ajax.status == 200) {
 			var cadCodificadaJSON = ajax.responseText;
-			var objDatos = eval("(" + cadCodificadaJSON + ")");
+			var objDatos = eval("(" + cadCodificadaJSON + ")"); 
 			if (objDatos.first == "NO") {
 
 				/// VALIDAR QUE EL ESTATUS QUE LLEGA AQUI PUEDA CAPTURAR IMPUTADOS SON LOS ESTATUS QUE NO CAPTURAN LA INFORMACION DL IMPUTADO
-				const idEstatusNoValidos = [34, 35, 114, 115, 116, 117, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 165];
+				const idEstatusNoValidos = [34, 35, 114, 115, 116, 117, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 165, 129];
 
 				if (idEstatusNoValidos.includes(estatusResolucion)) {
 					//// SI ES UNO DE ESTOS ESTATUS ENTONCES NO MANDA LA PANTALLA PARA CAPTURA DE NUCS

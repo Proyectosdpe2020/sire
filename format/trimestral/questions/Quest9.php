@@ -541,8 +541,8 @@
 									$validaEnlace = $idEnlace;
 									$data_sended = false;
 
-									if(!is_null($data2)){ //check if the question has something
-										$data = $data2;
+									if(!is_null($data3)){ //check if the question has something
+										$data = $data3;
 										$has_captured = true;
 									}
 
