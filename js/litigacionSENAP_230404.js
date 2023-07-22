@@ -1238,6 +1238,7 @@ function sendDataMotivosCarpetaTramite(nuc, estatus, idMp, mes, anio, deten, idU
 
 	if (motivoCarpetaTramite != 0) {
 		insertarNucLit(idMp, estatus, mes, anio, nuc, deten, idUnidad, opcInsert,0, idImputado);
+		
 		$('#modalNucsLitigInfo').modal('hide');
 		$('#modalNucsLitig').modal('show');
 	} else {
