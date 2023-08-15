@@ -153,8 +153,6 @@ function getLastResolucionCarpetaV2($conn, $carpetaId){
 	WHERE idCarpeta = $carpetaId ORDER BY fecha DESC 
 ";
 	
-
-
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))

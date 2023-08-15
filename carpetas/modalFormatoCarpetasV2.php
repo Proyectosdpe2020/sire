@@ -689,7 +689,7 @@ if ($anio <= 2021 && $mes <= 6) {
 							</div>
 							<div class="row">
 
-								<div class="col-xs-6">
+								<div class="col-xs-12">
 									<label class="colorLetras" for="inputlg">Criterios de Oportunidad :</label>
 									<div class="iconiput">
 										<input type="number" value="<? echo number_format($de111[0][0]); ?>" onclick="sendModalCarpetasNucs(25,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)" readonly style="cursor: pointer;" placeholder="Clic para ingresar NUCS" class="first" id="inputCriteOpor" />
@@ -699,7 +699,7 @@ if ($anio <= 2021 && $mes <= 6) {
 									</div>
 
 								</div>
-								<div class="col-xs-6">
+							<!-- 	<div class="col-xs-6">
 									<label class="colorLetras" for="inputlg">Suspensión Condicional del Proceso :</label>
 									<div class="iconiput">
 										<input type="number" value="<? echo number_format($de121[0][0]); ?>" onclick="sendModalCarpetasNucs(15,<? echo $idMp; ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, 0)" readonly style="cursor: pointer;" placeholder="Clic para ingresar NUCS" class="first" id="inputSCP" />
@@ -708,7 +708,7 @@ if ($anio <= 2021 && $mes <= 6) {
 										</span>
 									</div>
 
-								</div>
+								</div> -->
 
 							</div>
 

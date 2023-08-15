@@ -61,7 +61,7 @@ $array_nucs_invalido = []; //Almacenamos los datos
 $indice = 0;
 $indice2 = 0;
 for ($row = 1; $row <= $highestRow; ++$row) {
- for ($col = 'A'; $col != $highestColumn; ++$col) {
+ for ($col = 'A'; $col != 'B'; ++$col) {
 
   ///// VALIDAMOS QUE EL NUC EXISTA EN SICAP ////// 
   if($aux = get_nuc_sicap_valida($worksheet->getCell($col . $row)->getValue() , $conSic)){  
