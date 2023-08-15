@@ -1076,10 +1076,9 @@ if($estatResolucion == 20){
 						}
 					}
 				} else {
-
+				
 
 					if ($estatus != 1) {
-
 
 						if ($estatus == 22) {
 
@@ -1134,7 +1133,6 @@ if($estatResolucion == 20){
 				}
 			}
 		} else {
-
 			///////////////////////////////// SE INSERTA SIMPLEMENTE EL NUC PERO SE VERIFICA QUE ANTES NO PROVENGA DEL ESTATUS DE REINICIADO POR QUE SERIA LA PRIMERA VEZ QUE ENTRA
 			if ($estatus !=  1) {
 

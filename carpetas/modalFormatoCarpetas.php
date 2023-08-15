@@ -368,7 +368,7 @@ $totTramitss = $totaTrabvajar - $enviaddetermns;
 						</div>
 						<div class="row">
 
-							<div class="col-xs-6">
+							<div class="col-xs-12">
 								<label class="colorLetras" for="inputlg">Criterios de Oportunidad :</label>
 								<div class="iconiput">
 									<input type="number" placeholder="cantidad" class="first" onkeyup="actualizarResoluciones()" id="inputCriteOpor" />
@@ -378,7 +378,7 @@ $totTramitss = $totaTrabvajar - $enviaddetermns;
 								</div>
 
 							</div>
-							<div class="col-xs-6">
+						<!-- 	<div class="col-xs-6">
 								<label class="colorLetras" for="inputlg">Suspensión Condicional del Proceso :</label>
 								<div class="iconiput">
 									<input type="number" placeholder="cantidad" class="first" onkeyup="actualizarResoluciones()" id="inputSCP" />
@@ -387,7 +387,7 @@ $totTramitss = $totaTrabvajar - $enviaddetermns;
 									</span>
 								</div>
 
-							</div>
+							</div> -->
 
 						</div>
 
