@@ -581,5 +581,19 @@ $idUsuario = $_SESSION['useridIE'];
 		</div>
 
 
+		<div class="modal fade bs-example-modal-sm" id="modal_descargarNucsLiti" role="dialog" data-backdrop="static" data-keyboard="false" style="overflow: auto">
+
+			<div id="modalVistaCss" class="modal-dialog modal-sm" style="width: 50%; margin-top: 1%; ">
+
+				<div class="modal-content">
+
+					<div id="contmodal_descargarNucsLiti"></div>
+
+				</div>
+			</div>
+
+		</div>
+
+
 
 		</html>
