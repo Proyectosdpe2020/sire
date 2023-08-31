@@ -88,11 +88,11 @@ $data = getDatosLitigacionMpUnidad2($conn, $mesCapturar, $anioCaptura, $idUnidad
 					<table border="0" id="table111" width="100%" style="margin-top: -50px;">
 						<tr>
 							<td style="width: 30%;" class="tdFiscalia"><label class="labelFiscalia">Fiscalía Regional:</label></td>
-							<td colspan="3" style="width: 70%; color: #566573 ; font-weight: bolder;" class="tdFiscalia">FISCALÍA REGIONAL DE <? echo $namefis[0][0]; ?></td>
+							<td colspan="4" style="width: 70%; color: #566573 ; font-weight: bolder;" class="tdFiscalia">FISCALÍA REGIONAL DE <? echo $namefis[0][0]; ?></td>
 						</tr>
 						<tr>
 							<td style="width: 30%;" class="tdFiscalia"><label class="labelFiscalia">Área de Adscripción:</label></td>
-							<td colspan="3" style="width: 70%;" class="">
+							<td colspan="4" style="width: 70%;" class="">
 
 								<select id="enlaceid" class="form-control redondear selectTranparent">
 
@@ -107,7 +107,7 @@ $data = getDatosLitigacionMpUnidad2($conn, $mesCapturar, $anioCaptura, $idUnidad
 						</tr>
 						<tr>
 							<td style="width: 30%;" class="tdFiscalia"><label class="labelFiscalia">Ministerio Público:</label></td>
-							<td colspan="3" style="width: 70%;" class="">
+							<td colspan="4" style="width: 70%;" class="">
 								<div id="contSelectedMps">
 									<select onchange="getDataHistoricaBDlitiga(<? echo $idUnidad; ?>)" id="mpsEnlaces" class="form-control redondear selectTranparent">
 										<option value="0">Todos</option>
@@ -147,7 +147,7 @@ $data = getDatosLitigacionMpUnidad2($conn, $mesCapturar, $anioCaptura, $idUnidad
 								</select>
 
 							</td>
-							<td style="width: 40%;" class="">
+							<td style="width: 30%;" class="">
 
 
 
@@ -173,9 +173,15 @@ $data = getDatosLitigacionMpUnidad2($conn, $mesCapturar, $anioCaptura, $idUnidad
 
 
 							</td>
-							<td style="width: 20%;">
+							<td style="width: 10%;">
 
-								<button type="button" data-toggle="modal" href="" onclick="descargarHistoricLitig(4, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>);" class="btn btn-success btn-sm redondear btnCapturarTbl"><i class="far fa-file-excel" style="font-size:1.5em"></i> Descargar </button>
+								<button type="button" data-toggle="modal" href="" onclick="descargarHistoricLitig(4, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>);" class="btn btn-success btn-sm redondear btnCapturarTbl"><i class="far fa-file-excel" style="font-size:1.5em"></i> Descargar Informe </button>
+		
+
+							</td>
+						<td style="width: 10%;" >
+								
+								<button type="button" data-toggle="modal" href="" onclick="descargarNucsExcel(4, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>);" class="btn btn-primary btn-sm redondear btnCapturarTbl"><i class="far fa-file-excel" style="font-size:1.5em"></i> Descargar NUCS </button><br>
 
 							</td>
 						</tr><br>
@@ -1280,7 +1286,23 @@ $data = getDatosLitigacionMpUnidad2($conn, $mesCapturar, $anioCaptura, $idUnidad
 
 			</div>
 
+<!--MODAL PARA MOSTRAR LOS NUCS-->
+			<div class="modal fade bs-example-modal-sm" id="modal_descargarNucsLiti" role="dialog" data-backdrop="static" data-keyboard="false" style="overflow: auto">
+
+			<div id="modalVistaCss" class="modal-dialog modal-sm" style="width: 80%; margin-top: 1%; ">
+
+				<div class="modal-content">
+
+					<div id="contmodal_descargarNucsLiti"></div>
+
+				</div>
+			</div>
+
+		</div>
+		<!--MODAL PARA MOSTRAR LOS NUCS-->
+
 		</div>
 
 
 	</div>
+
