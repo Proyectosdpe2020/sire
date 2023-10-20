@@ -37,6 +37,38 @@ function getImputadoFromNUC($conn, $nuc)
 	}
 }
 
+function getUnidadesFiscalias22($conn, $unidades)
+{
+	$query = " SELECT idUnidad, idFiscalia,nUnidad FROM CatUnidad WHERE  idUnidad $unidades";
+
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+		$arreglo[$indice][0] = $row['idUnidad'];
+		$arreglo[$indice][1] = $row['nUnidad'];
+		$indice++;
+	}
+	if (isset($arreglo)) {
+		return $arreglo;
+	}
+}
+
+function getEstatusCarpetas($conn)
+{
+	$query = " SELECT EstatusID, nombre FROM estatusCarpetasResoluciones ";
+
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+		$arreglo[$indice][0] = $row['EstatusID'];
+		$arreglo[$indice][1] = $row['nombre'];
+		$indice++;
+	}
+	if (isset($arreglo)) {
+		return $arreglo;
+	}
+}
+
 
 function getDataFromimputadoLitigacionDetermNucXnuc($conn, $nuc)
 {
@@ -139,7 +171,6 @@ function getDataFromImputadoID($conn, $idImputado)
 
 function getImputadosXnuc($conn, $nuc)
 {
-
 	$query = " SELECT imputadoLitigacion.idImputadoLitigacion, nombre, paterno, materno, edad, sexo, curp, ilc.nuc 
 	FROM imputadoLitigacion 
 	INNER JOIN imputadoLitigacionCarpeta ilc ON ilc.idImputadoLitigacion = imputadoLitigacion.idImputadoLitigacion
@@ -673,7 +704,6 @@ function getIdUnidEnlaceFormat($conn, $idEnlace, $format)
 function getDataMpsUniMesAnioUnids($conn, $idUnidad, $anio, $mes)
 {
 
-
 	$query = "SELECT [idCarpetas]
       ,[fecha]
       ,[idMes]
@@ -751,9 +781,7 @@ function getDataMpsUniMesAnioUnids($conn, $idUnidad, $anio, $mes)
 
 function getDataMpsUniMesAnio($conn, $idUnidad, $anio, $mes)
 {
-
-
-	$query = "SELECT [idCarpetas]
+		$query = "SELECT [idCarpetas]
       ,[fecha]
       ,[idMes]
       ,[idAnio]
@@ -829,7 +857,6 @@ function getDataMpsUniMesAnio($conn, $idUnidad, $anio, $mes)
 
 function getIdUnidEnlace($conn, $idEnlace)
 {
-
 	$query = "    SELECT idUnidad FROm enlace WHERE idEnlace = $idEnlace ";
 
 	$indice = 0;
@@ -845,10 +872,7 @@ function getIdUnidEnlace($conn, $idEnlace)
 
 function getAnioCapEnlaceArchivo($conn, $idEnlace, $idFormato)
 {
-
 	$query = " SELECT idAnio FROM enlaceMesValidaEnviado WHERE idEnlace = $idEnlace AND idFormato = $idFormato ";
-	//echo $query;
-
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
@@ -1087,10 +1111,7 @@ function getDatosLitigacionMpUnidad($conn, $idMp, $mes, $anio, $idFiscalia, $idU
 
 function get_anio_enlace($conn, $idEnlace, $idFormato)
 {
-
 	$query = " SELECT idAnio FROM enlaceMesValidaEnviado WHERE idEnlace = $idEnlace AND idFormato = $idFormato ";
-	//echo $query;
-
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
@@ -1107,8 +1128,6 @@ function getUnidadEnlaceFormat($conn, $idEnlace, $idFormato)
 {
 
 	$query = " SELECT idUnidad FROM enlace WHERE idEnlace = $idEnlace AND idFormato = $idFormato ";
-	//echo $query;
-
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
@@ -1122,10 +1141,7 @@ function getUnidadEnlaceFormat($conn, $idEnlace, $idFormato)
 
 function getMesCapEnlaceArchivo($conn, $idEnlace, $idFormato)
 {
-
 	$query = " SELECT mesCap, idAnio FROM enlaceMesValidaEnviado WHERE idEnlace = $idEnlace AND idFormato = $idFormato ";
-	//echo $query;
-
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
@@ -1141,11 +1157,7 @@ function getMesCapEnlaceArchivo($conn, $idEnlace, $idFormato)
 
 function  getFiscaNameXunidad($conn, $idUnidad)
 {
-
 	$query = " SELECT cf.nFiscalia FROM CatUnidad Cu INNER JOIN CatFiscalia cf ON cf.idFiscalia = Cu.idFiscalia  WHERE Cu.idUnidad = $idUnidad";
-
-
-
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
@@ -1159,10 +1171,7 @@ function  getFiscaNameXunidad($conn, $idUnidad)
 
 function getFormsAccesosEnlace($conn, $idEnlace)
 {
-
 	$query = "  SELECT idEnlaceFormato FRom enlaceFormato WHERE idEnlace = $idEnlace ";
-
-
 	$stmt = sqlsrv_query($conn, $query, array(), array("Scrollable" => SQLSRV_CURSOR_STATIC));
 	$row_count = sqlsrv_num_rows($stmt);
 	if ($row_count > 1) {
@@ -1175,7 +1184,6 @@ function getFormsAccesosEnlace($conn, $idEnlace)
 
 function getDataEstatusLitigacion($conn, $idEstatus)
 {
-
 	$query = " SELECT        nombre, descripcion, estatus
 					FROM            estatus
 					WHERE        (idEstatus = $idEstatus) ";
@@ -1197,8 +1205,6 @@ function getCapturadoMesAnioMPLitig($conn, $mesCapturar, $anioCaptura, $idMp, $i
 {
 
 	$query = " SELECT idLitigacion FROM Litigacion WHERE idMes = $mesCapturar AND idAnio = $anioCaptura AND idMp = $idMp AND idFiscalia = $idFiscalia AND idUnidad = $idUnidad";
-
-
 	$stmt = sqlsrv_query($conn, $query, array(), array("Scrollable" => SQLSRV_CURSOR_STATIC));
 	$row_count = sqlsrv_num_rows($stmt);
 	if ($row_count > 0) {
@@ -1211,10 +1217,8 @@ function getCapturadoMesAnioMPLitig($conn, $mesCapturar, $anioCaptura, $idMp, $i
 
 function getinfoTitular($conn, $idEnlace)
 {
-
 	$query = "  SELECT t.nombre, t.paterno, t.materno, t.cargo FROM titular t 
   INNER JOIN titularEnlaceFormato tef ON tef.idTitular = t.idTitular  WHERE idEnlace = $idEnlace ";
-
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
@@ -1231,11 +1235,7 @@ function getinfoTitular($conn, $idEnlace)
 
 function getDatosLitigacionMp($conn, $idMp, $mes, $anio, $idFiscalia)
 {
-
-
 	$query = "  SELECT [existenciaAnterior],[carpetasJudicializadas],[judicializadasConDetenido],[judicializadasSinDetenido],[autoDeVinculacion],[autoDeNoVinculacion],[Mixtos],[imposicionMedidasCautelares],[prisionPreventivaOficiosa],[prisionPreventivaJustificada],[presentacionPeriodicaAnteElJuez],[exhibicionGarantiaEconomica],[embargoDeBienes],[inmovilizacionDeCuentasValores],[prohibicionSalirSinAutorizacionDelJuez],[sometimientoCuidadoVigilanciaInstitucion],[prohibicionConcurrirDeterminadasReunionesLugares],[prohibicionConvivirComunicarseDeterminadasPersonas],[separacionInmediataDelDomicilio],[suspensionTemporalEjercicioDelCargo],[suspensionTemporalActividadProfesionalLaboral],[colocacionLocalizadoresElectronicos],[resguardoPropioDomicilioModalidades],[sobreseimientosDecretados],[sobreseimientosPrescripcionAccionPenal],[sobreseimientosMecanismosAlternativos],[sobreseimientosAcuerdoReparatorio],[sobreseimientosSuspensionCondicionalProceso],[sobreseimientosCriterioOportunidad],[terminacionAnticipada],[procedimientosAbreviados],[acumulacion],[citaciones],[cateosSolilcitados],[cateosConcedidos],[cateosNegados],[ordenesNegadas],[ordenesNegadasAprehension],[ordenesNegadasComparecencia],[desistimientoDelRecurso],[desistimientoDelRecursoParterAcusado],[desistimientoDelRecursoParteDefensor],[desistimientoDelRecursoMP],[apelacionesNoAdmitidas],[sentenciasDictadas],[sentenciasDictadasRevoca],[sentenciasDictadasModifica],[sentenciasDictadasConfirma],[reposicionProcedimiento],[totalJudicializadasTramite],[mandamientosJudicialesGirados],[MandamientosJudicialesGiradosOrdenesAprehension],[MandamientosJudicialesGiradosOrdenesComparecencia],[mandamientosJudicialesCumplidos],[MandamientosJudicialesCumplidosOrdenesAprehension],[MandamientosJudicialesCumplidosOrdenesComparecencia],[totalAudiencias],[acusacionesPresentadas],[audienciaIntermediaEscrita],[audienciaIntermediaOral],[solucionesAlternas],[solucionesAlternasSuspensionCondicionalProceso],[solucionesAlternasAcuerdoReparatorio],[sentencias],[sentenciasCondenatorias],[sentenciasAbsolutorias],[sentenciasMixtas],[sentenciasCondenaReparacionDanos],[sentenciasNoCondenaReparacionDanos],[incompetencias],[incompetenciasDecretadas],[incompetenciasAdmitidas],[apelacionesContraResolucionJuezControl],[apelacionesNegarAnticipoPrueba],[apelacionesNegarAcuerdoReparatorio],[apelacionesNegarCancelarOrdenAprehension],[apelacionesNegarOrdenCateo],[apelacionesProvidenciasPrecautoriasMedidaCautelar],[apelacionesQuePonganTerminoAlProcedimiento],[apelacionesAutoQueResuelveVinculacionAProceso],[apelacionesQueConcedanRevoquenNieguenSuspension],[apelacionesNegativaAbrirProcedimientoAbreviado],[apelacionesSetenciaDefinitivaProcedimientoAbreviado],[apelacionesExcluirMedioPrueba],[apelacionesContraResolucionesTribunalEnjuiciamiento],[apelacionesDesistimientoAccionPenal],[apelacionesSentenciaDefinitiva],[deLasSentenciasDictadas],[revocacionesFavorablesAlMP],[modificacionesFavorablesAlMP],[confirmacionesFavorablesAlMP],[porCambioDeclaradosSituacionJuridicaDeclaradaSinMateria],[FormulaImputacion_Soli],[FormulaImputacion_Otorga],[FormulaImputacion_Negadas],[LegalDetencion],[IlegalDetencion],[Med_CautelresSolicitadas],[Med_CautelaresNegadas],[Med_CautelaresOtorgadas],[SobreseimientosMuerteImputado],[recibiOtmp],[cesefunciones] FROM Litigacion WHERE idMes = $mes AND idAnio = $anio AND idFiscalia = $idFiscalia AND idMp = $idMp";
-
-
 
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
@@ -1381,8 +1381,6 @@ function getDatosLitigacionMp($conn, $idMp, $mes, $anio, $idFiscalia)
 
 function getDatosCarpetaMP($conn, $idMp2, $mes, $anio, $idUnidad2)
 {
-
-
 	$query = "SELECT reiniciadas,judicializadasConDetenido, judicializadasSinDetenido, abstencionInvestigacion, archivoTemporal, noEjercicioAccionPenal, incompetencia, acumulacion, mediacion, conciliacion, criteriosOportunidad, suspensionCondicional  FROM Carpetas WHERE idMes = $mes AND idAnio = $anio AND idUnidad = $idUnidad2 AND idMp = $idMp2";
 
 	$indice = 0;
@@ -1409,7 +1407,6 @@ function getDatosCarpetaMP($conn, $idMp2, $mes, $anio, $idUnidad2)
 
 function getNombreMP($conn, $idMp)
 {
-
 	$query = " SELECT nombre, paterno, materno FROM mp WHERE idMp = $idMp ";
 
 	$indice = 0;
@@ -1426,11 +1423,7 @@ function getNombreMP($conn, $idMp)
 }
 function getNunidad($conn, $idUnidad)
 {
-
-
 	$query = " SELECT nUnidad FROM CatUnidad WHERE idUnidad = $idUnidad ";
-	//	echo $query;
-
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
@@ -2899,7 +2892,6 @@ function getTrimestralUsersByPeriod($conn, $period, $anio)
 				,u.[paterno]
 				,u.[materno]
 				,u.[usuario]
-				,u.[contrasena]
 				,u.[estatus]
 				,u.[areaNombre]
 				,cf.nFiscalia
@@ -2952,7 +2944,7 @@ function getTrimestralUsersByPeriod($conn, $period, $anio)
 		$arreglo[$indice][1] = $row['paterno'];
 		$arreglo[$indice][2] = $row['materno'];
 		$arreglo[$indice][3] = $row['usuario'];
-		$arreglo[$indice][4] = $row['contrasena'];
+		//$arreglo[$indice][4] = $row['contrasena'];
 		$arreglo[$indice][5] = $row['estatus'];
 		$arreglo[$indice][6] = $row['areaNombre'];
 		$arreglo[$indice][7] = $row['nFiscalia'];
@@ -2983,7 +2975,6 @@ function getTrimestralUsersByPastPeriod($conn, $period, $anio)
 				,u.[paterno]
 				,u.[materno]
 				,u.[usuario]
-				,u.[contrasena]
 				,u.[estatus]
 				,u.[areaNombre]
 				,cf.nFiscalia
@@ -3016,7 +3007,7 @@ function getTrimestralUsersByPastPeriod($conn, $period, $anio)
 		$arreglo[$indice][1] = $row['paterno'];
 		$arreglo[$indice][2] = $row['materno'];
 		$arreglo[$indice][3] = $row['usuario'];
-		$arreglo[$indice][4] = $row['contrasena'];
+		//$arreglo[$indice][4] = $row['contrasena'];
 		$arreglo[$indice][5] = $row['estatus'];
 		$arreglo[$indice][6] = $row['areaNombre'];
 		$arreglo[$indice][7] = $row['nFiscalia'];

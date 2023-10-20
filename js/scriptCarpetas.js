@@ -35,6 +35,35 @@ function loadCarpetasFormat(idUnidad) {
 
 }
 
+function closeNucsModal() {
+	$('#modalNucsDescargarC').modal('hide');
+}
+
+function downloadNucsCarpe(idEnlace) {
+	var anio = document.getElementById("añoNuc").value;
+	var mes = document.getElementById("mesNuc").value;
+	var estNuc = document.getElementById("estNuc").value;
+	var unidad = document.getElementById("unidadNuc").value;
+	document.getElementById('laodimgmain').style.display = "block";
+	$('#modalNucsDescargarC').modal('hide');
+	 cont = document.getElementById('conDescargaNucs');
+
+	ajax = objetoAjax();
+	ajax.open("POST", "carpetas/descargarNucsCarp.php");
+	nombrereporte = "nucsCarpetasInvestigacion-" + unidad + "-" + mes + "-" + anio;
+
+
+	ajax.onreadystatechange = function () {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			$('#modalNucsDescargarC').modal('show');
+			document.getElementById('laodimgmain').style.display = "none";
+			cont.innerHTML = ajax.responseText;
+			document.location.href = "carpetas/downloadNucs/" + nombrereporte + ".xlsx";
+		}
+	}
+	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	ajax.send('&unidad=' + unidad + '&mes=' + mes + '&anio=' + anio + '&idEnlace=' + idEnlace + '&estNuc=' + estNuc);
+}
 
 function descargarHisrtoricV2(format, idUnidad, idEnlace) {
 
@@ -50,17 +79,46 @@ function descargarHisrtoricV2(format, idUnidad, idEnlace) {
 	ajax.onreadystatechange = function () {
 		if (ajax.readyState == 4 && ajax.status == 200) {
 			cont.innerHTML = ajax.responseText;
-			
-				document.getElementById('laodimgmain').style.display = "none";
-				document.location.href = "carpetas/downloadReport/" + nombrereporte + ".xlsx";
-		
-			
+			document.getElementById('laodimgmain').style.display = "none";
+			document.location.href = "carpetas/downloadReport/" + nombrereporte + ".xlsx";
 		}
 	}
 	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	ajax.send('&idUnidad=' + idUnidad + '&mes=' + mes + '&anio=' + anio + '&idEnlace=' + idEnlace);
 
 }
+
+function descargarNucsC(idUnidad, idEnlace) {
+	cont = document.getElementById('contmodalnucsDescargarC');
+	$('#nuc').focus();
+	ajax = objetoAjax();
+	ajax.open("POST", "carpetas/modalNucsCarpetasDescargarC.php");
+	ajax.onreadystatechange = function () {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			cont.innerHTML = ajax.responseText;
+			$('#modalNucsDescargarC').modal('show');
+		}
+	}
+	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	ajax.send("&idUnidad=" + idUnidad + "&idEnlace=" + idEnlace);
+
+}
+function downloadNucsC(idUnidad, idEnlace) {
+	cont = document.getElementById('contmodalnucsDescargarC');
+	$('#nuc').focus();
+	ajax = objetoAjax();
+	ajax.open("POST", "carpetas/modalNucsCarpetasDescargarC.php");
+	ajax.onreadystatechange = function () {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			cont.innerHTML = ajax.responseText;
+			$('#modalNucsDescargarC').modal('show');
+		}
+	}
+	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	ajax.send("&idUnidad=" + idUnidad + "&idEnlce=" + idEnlace);
+
+}
+
 
 
 
@@ -189,10 +247,10 @@ function saveCarpetJudicidFirstTime(idMp, mes, anio, estatResolucion, idUnidad, 
 	cantidadinicio = document.getElementById("nuc").value.length;
 	envioselect = 0;
 
-	if(estatResolucion != 1){ fecha_determinacion = document.getElementById("fecha_determinacion").value; }else { fecha_determinacion = '1900-01-01'; }
+	if (estatResolucion != 1) { fecha_determinacion = document.getElementById("fecha_determinacion").value; } else { fecha_determinacion = '1900-01-01'; }
 
-	if(fecha_determinacion == ""){
-	  return swal("", "Debe seleccionar la fecha en la que se determinó.", "warning"); 	//// SE AGREGA RETURN POR QUE SE REGRESA EL MSJ Y DETIENE LA EJECUCION SIN EL RETURN NO SE DETIEN
+	if (fecha_determinacion == "") {
+		return swal("", "Debe seleccionar la fecha en la que se determinó.", "warning"); 	//// SE AGREGA RETURN POR QUE SE REGRESA EL MSJ Y DETIENE LA EJECUCION SIN EL RETURN NO SE DETIEN
 	}
 
 
@@ -227,7 +285,7 @@ function saveCarpetJudicidFirstTime(idMp, mes, anio, estatResolucion, idUnidad, 
 								document.getElementById('btnSaveNuc').disabled = true;
 
 								////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS
-								validarReglasNUC(nuc, estatResolucion, mes, anio, nuc, idUnidad, idMp, deten, envioselect,0, fecha_determinacion);
+								validarReglasNUC(nuc, estatResolucion, mes, anio, nuc, idUnidad, idMp, deten, envioselect, 0, fecha_determinacion);
 								////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS										
 
 							}
@@ -258,7 +316,7 @@ function saveCarpetJudicid(idMp, mes, anio, estatResolucion, idUnidad, deten) {
 	cantidadinicio = document.getElementById("nuc").value.length;
 	envioselect = document.getElementById("envioselect").value;
 
-	if(estatResolucion != 1){ fecha_determinacion = document.getElementById("fecha_determinacion").value; }else { fecha_determinacion = '1900-01-01'; }
+	if (estatResolucion != 1) { fecha_determinacion = document.getElementById("fecha_determinacion").value; } else { fecha_determinacion = '1900-01-01'; }
 
 
 	if (cantidadinicio > 13) {
@@ -271,11 +329,11 @@ function saveCarpetJudicid(idMp, mes, anio, estatResolucion, idUnidad, deten) {
 			if (cantidadinicio == 13) {
 
 
-				if (envioselect == 0) { 
+				if (envioselect == 0) {
 					swal("", "Debe seleccionar un motivo.", "warning");
-				}else if(fecha_determinacion == ""){
-            return swal("", "Debe seleccionar la fecha en la que se determinó.", "warning"); 	//// SE AGREGA RETURN POR QUE SE REGRESA EL MSJ Y DETIENE LA EJECUCION SIN EL RETURN NO SE DETIEN
-		 }else {
+				} else if (fecha_determinacion == "") {
+					return swal("", "Debe seleccionar la fecha en la que se determinó.", "warning"); 	//// SE AGREGA RETURN POR QUE SE REGRESA EL MSJ Y DETIENE LA EJECUCION SIN EL RETURN NO SE DETIEN
+				} else {
 
 
 
@@ -299,7 +357,7 @@ function saveCarpetJudicid(idMp, mes, anio, estatResolucion, idUnidad, deten) {
 									document.getElementById('btnSaveNuc').disabled = true;
 
 									////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS
-									validarReglasNUC(nuc, estatResolucion, mes, anio, nuc, idUnidad, idMp, deten, envioselect,0,fecha_determinacion);
+									validarReglasNUC(nuc, estatResolucion, mes, anio, nuc, idUnidad, idMp, deten, envioselect, 0, fecha_determinacion);
 									////// VALIDAR TODO EL NUC QUE VA ENTRANDO CON LAS DIFERENTES REGLAS										
 
 								}
@@ -335,9 +393,9 @@ function saveCarpet(idMp, mes, anio, estatResolucion, idUnidad, deten) {
 
 	texto = document.getElementById("nuc").value;
 	cantidadinicio = document.getElementById("nuc").value.length;
-	
- if(estatResolucion != 1){ fecha_determinacion = document.getElementById("fecha_determinacion").value; }else { fecha_determinacion = '1900-01-01'; }
- console.log(fecha_determinacion);
+
+	if (estatResolucion != 1) { fecha_determinacion = document.getElementById("fecha_determinacion").value; } else { fecha_determinacion = '1900-01-01'; }
+	console.log(fecha_determinacion);
 
 
 	if (estatResolucion == 22) { envioselect = document.getElementById("envioselect").value; } else {
@@ -345,17 +403,17 @@ function saveCarpet(idMp, mes, anio, estatResolucion, idUnidad, deten) {
 	}
 
 	////// VALIDAR SI ES UN NO EJERCICIO Y ADEMAS NO HAYA SELECIONADO LA CAUSA ///////////
-	if (estatResolucion == 20 ) {
+	if (estatResolucion == 20) {
 		idCausa = document.getElementById("causaSeleted").value;
-		if(idCausa == 0){ 			 
+		if (idCausa == 0) {
 			return swal("", "Debe seleccionar una causa de extinción de la acción penal.", "warning"); 	//// SE AGREGA RETURN POR QUE SE REGRESA EL MSJ Y DETIENE LA EJECUCION SIN EL RETURN NO SE DETIEN
-		}else if(fecha_determinacion == ""){
-            return swal("", "Debe seleccionar la fecha en la que se determinó.", "warning"); 	//// SE AGREGA RETURN POR QUE SE REGRESA EL MSJ Y DETIENE LA EJECUCION SIN EL RETURN NO SE DETIEN
+		} else if (fecha_determinacion == "") {
+			return swal("", "Debe seleccionar la fecha en la que se determinó.", "warning"); 	//// SE AGREGA RETURN POR QUE SE REGRESA EL MSJ Y DETIENE LA EJECUCION SIN EL RETURN NO SE DETIEN
 		}
-	}else{
+	} else {
 		idCausa = 0;
-		if(fecha_determinacion == ""){
-            return swal("", "Debe seleccionar la fecha en la que se determinó.", "warning"); 	//// SE AGREGA RETURN POR QUE SE REGRESA EL MSJ Y DETIENE LA EJECUCION SIN EL RETURN NO SE DETIEN
+		if (fecha_determinacion == "") {
+			return swal("", "Debe seleccionar la fecha en la que se determinó.", "warning"); 	//// SE AGREGA RETURN POR QUE SE REGRESA EL MSJ Y DETIENE LA EJECUCION SIN EL RETURN NO SE DETIEN
 		}
 	}
 	////// VALIDAR SI ES UN NO EJERCICIO Y ADEMAS NO HAYA SELECIONADO LA CAUSA ///////////
@@ -496,8 +554,8 @@ function validarReglasNUC(nuc, estatus, mes, anio, nuc, idUnidad, idMp, deten, e
 
 						/// OBTENER DATOS DEL NUC DONDE Y QUE ESTATUS TIENE Y QUIEN LO REALIZO Y LA FECHA
 
-						
-						swal("", "El NUC debe ser reiniciado para poder ser utilizado. \n\n ULTIMA DETERMINACIÓN \n Ministerio Público: "+objDatos.nombre+'\n Unidad: '+objDatos.unidad+' - '+objDatos.fiscalia+'\n Estatus: '+objDatos.estatus+'\n Fecha: '+objDatos.mes+' - '+objDatos.anio, "warning");
+
+						swal("", "El NUC debe ser reiniciado para poder ser utilizado. \n\n ULTIMA DETERMINACIÓN \n Ministerio Público: " + objDatos.nombre + '\n Unidad: ' + objDatos.unidad + ' - ' + objDatos.fiscalia + '\n Estatus: ' + objDatos.estatus + '\n Fecha: ' + objDatos.mes + ' - ' + objDatos.anio, "warning");
 						clearModalNUcsCarpe();
 					}
 
@@ -505,7 +563,7 @@ function validarReglasNUC(nuc, estatus, mes, anio, nuc, idUnidad, idMp, deten, e
 
 						/// OBTENER DATOS DEL NUC DONDE Y QUIEN LO FINALIZO Y LA FECHA
 
-						swal("", "El NUC no puede ser insertado por que ha finalizado su proceso.\n\n ULTIMA DETERMINACIÓN \n Ministerio Público: "+objDatos.nombre+'\n Unidad: '+objDatos.unidad+' - '+objDatos.fiscalia+'\n Estatus: '+objDatos.estatus+'\n Fecha: '+objDatos.mes+' - '+objDatos.anio, "warning");
+						swal("", "El NUC no puede ser insertado por que ha finalizado su proceso.\n\n ULTIMA DETERMINACIÓN \n Ministerio Público: " + objDatos.nombre + '\n Unidad: ' + objDatos.unidad + ' - ' + objDatos.fiscalia + '\n Estatus: ' + objDatos.estatus + '\n Fecha: ' + objDatos.mes + ' - ' + objDatos.anio, "warning");
 						clearModalNUcsCarpe();
 					}
 
@@ -513,15 +571,15 @@ function validarReglasNUC(nuc, estatus, mes, anio, nuc, idUnidad, idMp, deten, e
 
 						/// OBTENER DATOS DEL NUC DONDE Y QUIEN LO REINICIO Y LA FECHA
 
-						swal("", "El ultimo Estatus del NUC es Reiniciado, no puede volver a entrar como reiniciado. \n\n ULTIMA DETERMINACIÓN \n Ministerio Público: "+objDatos.nombre+'\n Unidad: '+objDatos.unidad+' - '+objDatos.fiscalia+'\n Estatus: '+objDatos.estatus+'\n Fecha: '+objDatos.mes+' - '+objDatos.anio, "warning");
+						swal("", "El ultimo Estatus del NUC es Reiniciado, no puede volver a entrar como reiniciado. \n\n ULTIMA DETERMINACIÓN \n Ministerio Público: " + objDatos.nombre + '\n Unidad: ' + objDatos.unidad + ' - ' + objDatos.fiscalia + '\n Estatus: ' + objDatos.estatus + '\n Fecha: ' + objDatos.mes + ' - ' + objDatos.anio, "warning");
 						clearModalNUcsCarpe();
 					}
 
-						if (objDatos.first == "NOIRN") {
+					if (objDatos.first == "NOIRN") {
 
 						/// OBTENER DATOS DEL NUC DONDE Y QUIEN LO REINICIO Y LA FECHA
 
-						swal("", "El ultimo Estatus del NUC es Reiniciado, no puede volver a entrar como reiniciado. \n\n ULTIMA DETERMINACIÓN \n Ministerio Público: "+objDatos.nombre+'\n Unidad: '+objDatos.unidad+' - '+objDatos.fiscalia+'\n Estatus: '+objDatos.estatus+'\n Fecha: '+objDatos.mes+' - '+objDatos.anio, "warning");
+						swal("", "El ultimo Estatus del NUC es Reiniciado, no puede volver a entrar como reiniciado. \n\n ULTIMA DETERMINACIÓN \n Ministerio Público: " + objDatos.nombre + '\n Unidad: ' + objDatos.unidad + ' - ' + objDatos.fiscalia + '\n Estatus: ' + objDatos.estatus + '\n Fecha: ' + objDatos.mes + ' - ' + objDatos.anio, "warning");
 						clearModalNUcsCarpe();
 					}
 
@@ -534,15 +592,15 @@ function validarReglasNUC(nuc, estatus, mes, anio, nuc, idUnidad, idMp, deten, e
 					}
 
 					if (objDatos.first == "RECHAZOCMASC") {
-                 
+
 						/// OBTENER DATOS DEL NUC DONDE Y QUIEN LO REINICIO Y LA FECHA
-						swal("", "El NUC fue rechazado por el CMASC por el siguiente motivo:\n\n "+objDatos.motivoRechazo+'.'+'\n\n Favor de comunicarse al CMASC.', "warning");
+						swal("", "El NUC fue rechazado por el CMASC por el siguiente motivo:\n\n " + objDatos.motivoRechazo + '.' + '\n\n Favor de comunicarse al CMASC.', "warning");
 						clearModalNUcsCarpe();
 					}
 					if (objDatos.first == "NOCONTABILIZA") {
 
 						/// OBTENER DATOS DEL NUC DONDE Y QUIEN LO REINICIO Y LA FECHA
-						swal("", 'El NUC fue recibido por CMASC pero fue recibido despues de la fecha limite (día 25 de cada mes, fecha de ingreso: '+objDatos.second+'), favor de ingresarlo el siguiente mes de captura', "warning");
+						swal("", 'El NUC fue recibido por CMASC pero fue recibido despues de la fecha limite (día 25 de cada mes, fecha de ingreso: ' + objDatos.second + '), favor de ingresarlo el siguiente mes de captura', "warning");
 						clearModalNUcsCarpe();
 					}
 
@@ -595,7 +653,7 @@ function insertNucCarpetas(idMp, estatResolucion, mes, anio, nuc, idUnidad, dete
 		}
 	}
 	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	ajax.send("&nuc=" + nuc + "&acc=" + acc + "&idMp=" + idMp + "&estatResolucion=" + estatResolucion + "&mes=" + mes + "&anio=" + anio + "&idUnidad=" + idUnidad + "&deten=" + deten + "&envioselect=" + envioselect+ "&idCausaExtPenal=" + idCausaExtPenal+ "&fecha_determinacion=" + fecha_determinacion);
+	ajax.send("&nuc=" + nuc + "&acc=" + acc + "&idMp=" + idMp + "&estatResolucion=" + estatResolucion + "&mes=" + mes + "&anio=" + anio + "&idUnidad=" + idUnidad + "&deten=" + deten + "&envioselect=" + envioselect + "&idCausaExtPenal=" + idCausaExtPenal + "&fecha_determinacion=" + fecha_determinacion);
 
 
 }
@@ -792,9 +850,9 @@ function mostrarModalValidacionNUcsV2(validado, idEnlace, mesCapturar, anioCaptu
 
 ///////// VALIDAR Y ACTUALIZAR DATOS DE TRAMITE FINAL DE CADA MP ////////////////////////////
 
-function updateTramites(idEnlace, anio, mes, format){
+function updateTramites(idEnlace, anio, mes, format) {
 
-	acc = "updateTramites"; 
+	acc = "updateTramites";
 	//cont = document.getElementById("totTrabajarContent");
 	ajax = objetoAjax();
 	ajax.open("POST", "carpetas/accionesNucsCarpetas.php");
@@ -807,20 +865,20 @@ function updateTramites(idEnlace, anio, mes, format){
 			var json = ajax.responseText;
 			var obj = eval("(" + json + ")");
 
-			if(obj.first == "NOS"){ 
-				swal("", "No se han capturado todos los Ministerios Públicos.", "warning"); 
+			if (obj.first == "NOS") {
+				swal("", "No se han capturado todos los Ministerios Públicos.", "warning");
 				document.getElementById('laodimgmain').style.display = "none";
-			}else{
+			} else {
 
 				if (obj.first == "NO") { swal("", "No se actualizaron los tramites.", "warning"); } else {
-					if (obj.first == "SI") {						
+					if (obj.first == "SI") {
 						UpdatesEnviado(idEnlace, format);
 					}
 				}
 
 			}
 
-		
+
 		}
 	}
 	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -829,7 +887,7 @@ function updateTramites(idEnlace, anio, mes, format){
 
 }
 
-function UpdatesEnviado(idEnlace, format){
+function UpdatesEnviado(idEnlace, format) {
 
 
 	ajax = objetoAjax();
@@ -855,7 +913,7 @@ function UpdatesEnviado(idEnlace, format){
 }
 
 
-function enviarDPEvalidatesV2(anio, mes, incorrectReni, idEnlace, format) { 
+function enviarDPEvalidatesV2(anio, mes, incorrectReni, idEnlace, format) {
 
 
 
@@ -894,7 +952,7 @@ function enviarDPEvalidatesV2(anio, mes, incorrectReni, idEnlace, format) {
 				if (isConfirm) {
 
 					updateTramites(idEnlace, anio, mes, format);
-				
+
 				}
 			});
 	}
@@ -914,7 +972,7 @@ function cargaContHistoricoEnlaceDatosV2(idUsuario, idEnlace, format, idUnidad) 
 		if (ajax.readyState == 4 && ajax.status == 200) {
 
 			cont.innerHTML = ajax.responseText;
-			if(ajax.responseText){
+			if (ajax.responseText) {
 				document.getElementById('laodimgmain').style.display = "none";
 			}
 		}

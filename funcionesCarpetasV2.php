@@ -1,5 +1,106 @@
 <? 
 
+function getAllDataNucsOther($conn, $qanios, $qmeses, $qestatus, $unidades){
+
+	$query = "   SELECT nuc, anio, mes,
+	case idEstatus 
+			  WHEN 1 THEN 'Abierto/Reiniciado'
+			  WHEN 22 THEN 'Enviadas a Litigacion'
+			  WHEN 2 THEN 'Abstencion de Investigar'
+			  WHEN 5 THEN 'Archivo Temporal'
+			  WHEN 20 THEN 'No Ejercicio de la accion penal'
+			  WHEN 21 THEN 'Incompetencia'
+			  WHEN 3 THEN 'Acumulacion'
+			  WHEN 23 THEN 'Mediacion'
+			  WHEN 24 THEN 'Conciliacion'
+			  WHEN 25 THEN 'Criterios de Oportunidad'
+			  WHEN 15 THEN 'Suspension Condicional del Proceso'
+			  ELSE 'NO DEFINIDO'
+			  END AS 'Estatus'
+	,
+	case deten
+			  WHEN 0 THEN 'No Detenido' 
+			  ELSE 'Detenido' 
+			  END AS 'Detenido'
+			  , u.nUnidad as 'Unidad'
+			  , f.nFiscalia as 'Fiscalia'
+			  , mp.nombre +' '+mp.paterno+' '+mp.materno as 'ministerioPublico'
+	FROM estatusNucsCarpetas 
+	INNER JOIN CatUnidad u ON u.idUnidad = estatusNucsCarpetas.idUnidad
+	INNER JOIN CatFiscalia f ON f.idFiscalia = u.idFiscalia
+	INNER JOIN mp ON mp.idMp = estatusNucsCarpetas.idMp
+	WHERE $qanios AND $qmeses AND $qestatus AND estatusNucsCarpetas.idUnidad $unidades
+	ORDER BY anio DESC, mes DESC, estatusNucsCarpetas.idUnidad ";
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['nuc'];
+		$arreglo[$indice][1]=$row['anio'];
+		$arreglo[$indice][2]=$row['mes'];
+		$arreglo[$indice][3]=$row['Estatus'];
+		$arreglo[$indice][4]=$row['Detenido'];
+		$arreglo[$indice][5]=$row['Unidad'];
+		$arreglo[$indice][6]=$row['Fiscalia'];
+		$arreglo[$indice][7]=$row['ministerioPublico'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
+
+
+
+function getAllDataNucs($conn, $unidades){
+
+	$query = "   SELECT nuc, anio, mes,
+	case idEstatus 
+			  WHEN 1 THEN 'Abierto/Reiniciado'
+			  WHEN 22 THEN 'Enviadas a Litigacion'
+			  WHEN 2 THEN 'Abstencion de Investigar'
+			  WHEN 5 THEN 'Archivo Temporal'
+			  WHEN 20 THEN 'No Ejercicio de la accion penal'
+			  WHEN 21 THEN 'Incompetencia'
+			  WHEN 3 THEN 'Acumulacion'
+			  WHEN 23 THEN 'Mediacion'
+			  WHEN 24 THEN 'Conciliacion'
+			  WHEN 25 THEN 'Criterios de Oportunidad'
+			  WHEN 15 THEN 'Suspension Condicional del Proceso'
+			  ELSE 'NO DEFINIDO'
+			  END AS 'Estatus'
+	,
+	case deten
+			  WHEN 0 THEN 'No Detenido' 
+			  ELSE 'Detenido' 
+			  END AS 'Detenido'
+			  , u.nUnidad as 'Unidad'
+			  , f.nFiscalia as 'Fiscalia'
+			  , mp.nombre +' '+mp.paterno+' '+mp.materno as 'ministerioPublico'
+	FROM estatusNucsCarpetas 
+	INNER JOIN CatUnidad u ON u.idUnidad = estatusNucsCarpetas.idUnidad
+	INNER JOIN CatFiscalia f ON f.idFiscalia = u.idFiscalia
+	INNER JOIN mp ON mp.idMp = estatusNucsCarpetas.idMp
+	WHERE estatusNucsCarpetas.idUnidad $unidades AND anio > 2020
+	ORDER BY anio DESC, mes DESC, estatusNucsCarpetas.idUnidad ";
+
+
+
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['nuc'];
+		$arreglo[$indice][1]=$row['anio'];
+		$arreglo[$indice][2]=$row['mes'];
+		$arreglo[$indice][3]=$row['Estatus'];
+		$arreglo[$indice][4]=$row['Detenido'];
+		$arreglo[$indice][5]=$row['Unidad'];
+		$arreglo[$indice][6]=$row['Fiscalia'];
+		$arreglo[$indice][7]=$row['ministerioPublico'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
+
 ///////////////////////////////// FUNCION GET EXISTENCIA ANTERIOR /////////////////////////////////
 ///////////////////////////////// FUNCION GET EXISTENCIA ANTERIOR /////////////////////////////////
 ///////////////////////////////// FUNCION GET EXISTENCIA ANTERIOR /////////////////////////////////

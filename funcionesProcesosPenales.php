@@ -131,6 +131,35 @@ function getTramiteAnteriorProcesos($conn, $mesAnterior, $anioAnte, $fiscaliaID,
 	}
 }
 
+function getTramiteLastMonth($conn, $mes, $anio, $fiscalia, $juz)
+{
+	$query = "SELECT [totalTramite]
+	FROM [SIRE].[procesosPenales].[datosProcesosPenales] WHERE idFiscalia = $fiscalia AND idJuzgadoPenal = $juz AND anio = $anio AND mes = $mes";
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+		$arreglo[$indice][0] = $row['totalTramite'];
+		$indice++;
+	}
+	if (isset($arreglo)) {
+		return $arreglo;
+	}
+}
+function getTramiteLastMonthEstatal($conn, $mes, $anio, $fiscalia)
+{
+	$query = "SELECT SUM([totalTramite]) as 'totalTramite'
+	FROM [SIRE].[procesosPenales].[datosProcesosPenales] WHERE idFiscalia = $fiscalia AND anio = $anio AND mes = $mes";
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+		$arreglo[$indice][0] = $row['totalTramite'];
+		$indice++;
+	}
+	if (isset($arreglo)) {
+		return $arreglo;
+	}
+}
+
 function getRegistrosProcesosPenalesData($conn, $mes, $anio, $fiscalia, $juz)
 {
 	$query = " SELECT [p1],[p2],[p3],[p4],[p5],[p6],[p7],[p8],[p9],[p10],[p11],[p12],[p13],[p14]

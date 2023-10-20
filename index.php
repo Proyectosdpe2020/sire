@@ -21,7 +21,7 @@ if (isset($_GET["idUnidadSelect"])) {
 
 
 
-if($format == "ControlProcesos") {
+if ($format == "ControlProcesos") {
 	$format = 17;
 }
 
@@ -89,17 +89,14 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 
 	if ($idEnlace != 0) {
 		//VALIDAR PRIMERO A LOS ENLACES QUE CAPTURAN SIRE CARPETAS Y LITIGACION CON LOS MISMOS MP 
-		if( ($idEnlace == 30 || $idEnlace == 28 || $idEnlace == 27 )&& $format == 4){
+		if (($idEnlace == 30 || $idEnlace == 28 || $idEnlace == 27) && $format == 4) {
 
 			$unienla = getIdUnidEnlaceMPunidad($conn, $idEnlace);
-		 $idUnidEnlac = $unienla[0][0];
+			$idUnidEnlac = $unienla[0][0];
+		} else {
 
-			
-		}else{
-
-				$unienla = getIdUnidEnlace($conn, $idEnlace);
-		  $idUnidEnlac = $unienla[0][0];
-
+			$unienla = getIdUnidEnlace($conn, $idEnlace);
+			$idUnidEnlac = $unienla[0][0];
 		}
 	} else {
 		$idUnidEnlac = 0;
@@ -230,26 +227,26 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 </head>
 
 <body style="zoom: 83%;" <? if ($tipoUser == 1) {
-		if ($format == 1) { 	?> onload="loadCarpetasFormat(<? echo $idUnidadSelect; ?>);" <? } else {
-		/*if($format  == 2){ ?> 	onload="loadtablaFormat(0, 'formatCmasc.php', 'cmasc', <? echo $idEnlace; ?>);" 	<? }*/
-		if ($format  == 4) { ?> onload="loadtablaFormat(0, 'formatLitigacion.php', 'litigacion', <? echo $idEnlace; ?>);" <? }
-		/*if($format  == 6){ ?>  	onload="loadtablaFormat(0, 'formatDesaparecidos.php', 'desaparecidos', <? echo $idEnlace; ?>);" 	<? }*/
-		if ($format  == 11) { ?> onload="loadtablaFormat(<? echo $idUnidEnlac ?>, 'trimestral.php', 'trimestral', <? echo $idEnlace; ?>);" <? }
-		if ($format  == 9) { ?> onload="loadtablaFormat(0, 'puestaDisposicion.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" <? }
-		if ($format  == 10) { ?> onload="loadtablaFormat(0, 'puestaDisposicionSuper.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" <? }
-		if ($format  == 12) { ?> onload="loadtablaFormat(0, 'puestaDisposicionConsulta.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" <? }
-		if ($format  == 13) { ?> onload="loadtablaFormat(0, 'estadoDeFuerza.php', 'estadoDeFuerza', <? echo $idEnlace; ?>);" <? }
-		if ($format  == 14) { ?> onload="loadtablaFormat(0, 'forestales.php', 'forestales', <? echo $idEnlace; ?>);" <? }
-		if ($format  == 15) { ?> onload="loadtablaFormat(0, 'carpetasJudicializadas.php', 'carpetasJudicializadas', <? echo $idEnlace; ?>);" <? }
-		if ($format  == 16) { ?> onload="loadtablaFormat(0, 'medidasDeProteccion.php', 'medidasDeProteccion', <? echo $idEnlace; ?>);" <? }
-		if ($format  == 18) { ?> onload="loadtablaFormat(0, 'mandamientosJudiciales.php', 'mandamientosJudiciales', <? echo $idEnlace; ?>);" <? }
-		if ($format  == 19) { ?> onload="loadtablaFormat(0, 'mandamientosJudiciales_administrador.php', 'mandamientosJudiciales', <? echo $idEnlace; ?>);" <? }
-		if ($format  == 21) { ?> onload="loadtablaFormat(0, 'procesosPenales.php', 'procesosPenales', <? echo $idEnlace; ?>);" <? }
-		}
-
-		} else {																																	
-			if ($tipoUser == 3) {		?> onload="cargaContHistoricoEnlaceDatosConsulta(<? echo $idUsuario; ?>, <? echo $idEnlace; ?>, <? echo $format; ?>, <? echo $idUnidEnlac; ?>)" <? 		
-		} else {	?> onload="loadEnlacesFaltantes();" <?	}	} ?>>
+																										if ($format == 1) { 	?> onload="loadCarpetasFormat(<? echo $idUnidadSelect; ?>);" <? } else {
+																																																																																				/*if($format  == 2){ ?> 	onload="loadtablaFormat(0, 'formatCmasc.php', 'cmasc', <? echo $idEnlace; ?>);" 	<? }*/
+																																																																																				if ($format  == 4) { ?> onload="loadtablaFormat(0, 'formatLitigacion.php', 'litigacion', <? echo $idEnlace; ?>);" <? }
+																																																																																																																			/*if($format  == 6){ ?>  	onload="loadtablaFormat(0, 'formatDesaparecidos.php', 'desaparecidos', <? echo $idEnlace; ?>);" 	<? }*/
+																																																																																																																			if ($format  == 11) { ?> onload="loadtablaFormat(<? echo $idUnidEnlac ?>, 'trimestral.php', 'trimestral', <? echo $idEnlace; ?>);" <? }
+																																																																																																																																				if ($format  == 9) { ?> onload="loadtablaFormat(0, 'puestaDisposicion.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" <? }
+																																																																																																																																				if ($format  == 10) { ?> onload="loadtablaFormat(0, 'puestaDisposicionSuper.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" <? }
+																																																																																																																																				if ($format  == 12) { ?> onload="loadtablaFormat(0, 'puestaDisposicionConsulta.php', 'puestaDisposicion', <? echo $idEnlace; ?>);" <? }
+																																																																																																																																				if ($format  == 13) { ?> onload="loadtablaFormat(0, 'estadoDeFuerza.php', 'estadoDeFuerza', <? echo $idEnlace; ?>);" <? }
+																																																																																																																																				if ($format  == 14) { ?> onload="loadtablaFormat(0, 'forestales.php', 'forestales', <? echo $idEnlace; ?>);" <? }
+																																																																																																																																				if ($format  == 15) { ?> onload="loadtablaFormat(0, 'carpetasJudicializadas.php', 'carpetasJudicializadas', <? echo $idEnlace; ?>);" <? }
+																																																																																																																																						if ($format  == 16) { ?> onload="loadtablaFormat(0, 'medidasDeProteccion.php', 'medidasDeProteccion', <? echo $idEnlace; ?>);" <? }
+																																																																																																																																						if ($format  == 18) { ?> onload="loadtablaFormat(0, 'mandamientosJudiciales.php', 'mandamientosJudiciales', <? echo $idEnlace; ?>);" <? }
+																																																																																																																																						if ($format  == 19) { ?> onload="loadtablaFormat(0, 'mandamientosJudiciales_administrador.php', 'mandamientosJudiciales', <? echo $idEnlace; ?>);" <? }
+																																																																																																																																																				if ($format  == 21) { ?> onload="loadtablaFormat(0, 'procesosPenales.php', 'procesosPenales', <? echo $idEnlace; ?>);" <? }
+																																																																																																																																																			}
+																																																																																																																																																		} else {
+																																																																																																																																																			if ($tipoUser == 3) {		?> onload="cargaContHistoricoEnlaceDatosConsulta(<? echo $idUsuario; ?>, <? echo $idEnlace; ?>, <? echo $format; ?>, <? echo $idUnidEnlac; ?>)" <?
+																																																																																																																																																																									} else {	?> onload="loadEnlacesFaltantes();" <?	}
+																																																																																																																																																																								} ?>>
 
 	<div id="opacity"></div>
 	<header>
@@ -288,17 +285,17 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 
 							?>
 								<li style="background-color: #C09F77;  border: solid 2px #C09F77;"><a onclick="loadBiEstadistics(<? echo $idEnlace; ?>)" href="#">BI Estadistícas de Evaluación de Desempeño</a></li>
-							<?
+								<?
 							}
 
 							if ($tipoUser == 1 and $format == 4) {
-							?>|
+								?>|
 								<li style="background-color: #C8C8C8;  border: solid 2px #C8C8C8;"><a style="color:#152F4A !important;" onclick="loadBiEstadisticsLiti(<? echo $idEnlace; ?>)" href="#">BI Estadistícas de Evaluación de Desempeño</a></li>
 							<?
 							}
 
-							 //CARGAR BI POLICIA
-								if ($tipoUser == 1 and $format == 12) {
+							//CARGAR BI POLICIA
+							if ($tipoUser == 1 and $format == 12) {
 							?>
 								<li style="background-color: #C8C8C8;  border: solid 2px #C8C8C8;"><a style="color:#152F4A !important;" onclick="loadBiEstadisticsPolicia(<? echo $idEnlace; ?>)" href="#">BI Estadistícas de Evaluación de Desempeño</a></li>
 							<?
@@ -494,7 +491,7 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 								if ($tipoUser == 3) {
 
 								?>
-								/// SE CAMBIO AQUI 
+									/// SE CAMBIO AQUI
 									<li><a onclick="cargaContHistoricoEnlaceDatos(<? echo $idUsuario; ?>, <? echo $idEnlace; ?>, 1, <? echo $idUnidEnlac; ?>)" href="#">Datos Historico</a></li>
 									<!--<li><a onclick="cargaContHistoricoEnlaceDatosLiti(<? echo $idUsuario; ?>, <? echo $idEnlace; ?>, <? echo $format; ?>, <? echo $idUnidEnlac; ?>)" href="#">Datos Historico</a></li>-->
 									<li style="background-color: #C09F77;  border: solid 2px #C09F77;"><a onclick="loadBiEstadistics(<? echo $idEnlace; ?>)" href="#">BI Estadistícas de Evaluación de Desempeño</a></li>
@@ -694,6 +691,19 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 
 			</div>
 
+			<div class="modal fade bs-example-modal-sm" id="modalNucsDescargarC" role="dialog" data-backdrop="static" data-keyboard="false">
+
+				<div id="modalVistaCss" class="modal-dialog modal-sm" style="width: 40% !important; margin-top: 15%;">
+
+					<div class="modal-content">
+
+						<div id="contmodalnucsDescargarC"></div>
+
+					</div>
+				</div>
+
+			</div>
+
 			<div class="modal fade bs-example-modal-sm" id="modalNucsEdit" role="dialog" data-backdrop="static" data-keyboard="false">
 
 				<div id="modalVistaCss" class="modal-dialog modal-sm" style="width: 30%; margin-top: 1%;">
@@ -857,30 +867,30 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 
 
 	<script language="JavaScript" type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-		<script src="http://code.jquery.com/jquery-latest.js"></script>
-		<script language="JavaScript" type="text/javascript" src="js/script.js"></script>
-			<script language="JavaScript" type="text/javascript" src="js/scriptCarpetas.js"></script>
-		<script language="JavaScript" type="text/javascript" src="js/cmasc.js"></script>
-		<!--<script language="JavaScript" type="text/javascript" src="js/litigacion.js"></script>-->
-		<script language="JavaScript" type="text/javascript" src="js/litigacion_230404.js"></script>
-		<script language="JavaScript" type="text/javascript" src="js/trimestral.js"></script>
-			<script language="JavaScript" type="text/javascript" src="js/desapar.js"></script>
-			<script language="JavaScript" type="text/javascript" src="js/procesosPenales.js"></script>
-				<script language="JavaScript" type="text/javascript" src="js/puesDispos230217.js"></script>
-				<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-<!--<script src="vendors/jquery/dist/jquery.min.js"></script>-->
-<script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- Custom Theme Scripts -->
-<script src="build/js/custom.min.js"></script>
-<script language="JavaScript" type="text/javascript" src="dist/sweetalert.min.js"></script>
-<script language="JavaScript" type="text/javascript" src="format/trimestral/pdf/js/function_220708150000.js"></script>
-<script language="JavaScript" type="text/javascript" src="js/forestales.js"></script>
-<!--<script language="JavaScript" type="text/javascript" src="js/litigacionSENAP.js"></script>-->
-<script language="JavaScript" type="text/javascript" src="js/litigacionSENAP_230404.js"></script>
-<script type="text/javascript" src="js/carpetasJudicializadas.js"></script>
-<?if($format == 16){ ?><script type="text/javascript" src="js/medidasDeProteccion.js"></script><? } ?>
-<?if($format == 18 || $format == 19){ ?><script type="text/javascript" src="js/mandamientosJudiciales_20062022.js"></script><? } ?>
-<script language="JavaScript" type="text/javascript" src="js/estadoDeFuerza.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script language="JavaScript" type="text/javascript" src="js/script.js"></script>
+	<script language="JavaScript" type="text/javascript" src="js/scriptCarpetas.js"></script>
+	<script language="JavaScript" type="text/javascript" src="js/cmasc.js"></script>
+	<!--<script language="JavaScript" type="text/javascript" src="js/litigacion.js"></script>-->
+	<script language="JavaScript" type="text/javascript" src="js/litigacion_230404.js"></script>
+	<script language="JavaScript" type="text/javascript" src="js/trimestral.js"></script>
+	<script language="JavaScript" type="text/javascript" src="js/desapar.js"></script>
+	<script language="JavaScript" type="text/javascript" src="js/procesosPenales.js"></script>
+	<script language="JavaScript" type="text/javascript" src="js/puesDispos230217.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+	<!--<script src="vendors/jquery/dist/jquery.min.js"></script>-->
+	<script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- Custom Theme Scripts -->
+	<script src="build/js/custom.min.js"></script>
+	<script language="JavaScript" type="text/javascript" src="dist/sweetalert.min.js"></script>
+	<script language="JavaScript" type="text/javascript" src="format/trimestral/pdf/js/function_220708150000.js"></script>
+	<script language="JavaScript" type="text/javascript" src="js/forestales.js"></script>
+	<!--<script language="JavaScript" type="text/javascript" src="js/litigacionSENAP.js"></script>-->
+	<script language="JavaScript" type="text/javascript" src="js/litigacionSENAP_230404.js"></script>
+	<script type="text/javascript" src="js/carpetasJudicializadas.js"></script>
+	<? if ($format == 16) { ?><script type="text/javascript" src="js/medidasDeProteccion.js"></script><? } ?>
+	<? if ($format == 18 || $format == 19) { ?><script type="text/javascript" src="js/mandamientosJudiciales_20062022.js"></script><? } ?>
+	<script language="JavaScript" type="text/javascript" src="js/estadoDeFuerza.js"></script>
 
 
 	<!--<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>-->
