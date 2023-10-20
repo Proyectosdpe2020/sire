@@ -54,7 +54,6 @@ function enviarDPEprocesos(idEnlace, format) {
 		});
 
 }
-
 function descargarDocProcesoPenales() {
 
 	var mesIni = document.getElementById("mesIni").value;

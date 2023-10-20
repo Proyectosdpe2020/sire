@@ -28,7 +28,6 @@
 
 
                   ";
-
      
 
                   $result = sqlsrv_query($conn,$queryTransaction, array(), array( "Scrollable" => 'static' ));  

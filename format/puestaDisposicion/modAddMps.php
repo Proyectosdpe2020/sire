@@ -6,14 +6,13 @@
 				if (isset($_POST["idEnlace"])){ $idEnlace = $_POST["idEnlace"]; }	
 				if (isset($_POST["f"])){ $f = $_POST["f"]; }		
 		
-				$infoUni = dataUnidadEnlaceFormat2($conn, $idEnlace, $f);	
-				
+				$infoUni = dataUnidadEnlaceFormat2($conn, $idEnlace, $f);				
 
 					if($idEnlace != 14 AND $idEnlace != 15 AND $idEnlace != 16 AND $idEnlace != 17 AND $idEnlace != 18 AND $idEnlace != 19 
 					AND $idEnlace != 21 AND $idEnlace != 22 AND $idEnlace != 23  ){
 							
-						///// SE AGREGA HARDCODEADA PARA LOS ENLACES QUE TIENEN MAS DE UNA UNIDAD Y QUE SON LAS ESPECIALIZADAS
-						if($idEnlace == 26){
+						///// SE AGREGA HARDCODEADA PARA LOS ENLACES QUE TIENEN MAS DE UNA UNIDAD Y QUE SON LAS ESPECIALIZADAS Y TAMBIEN POLIVALENTES
+						if($idEnlace == 26 || $idEnlace == 30 || $idEnlace == 28 || $idEnlace == 31 || $idEnlace == 27 || $idEnlace == 29 || $idEnlace == 3 ){
 							$forms = getFormatsFromEnlacs($conn, $idEnlace); /// SE OBTIENEN LOS FORMATOS QUE LLENA EL ENLACE							
 							for ($w=0; $w < sizeof($forms) ; $w++) { 								
 									/// OBNTENER ID DE UNIDAD Y NOMBRE DEL ENLACE

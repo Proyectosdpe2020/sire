@@ -38,7 +38,7 @@ include("pdf_review_modal.php")
 
                             $nombre = $trimesUsers[$i][0]." ".$trimesUsers[$i][1]." ".$trimesUsers[$i][2];
                             $usu = $trimesUsers[$i][3];
-                            $contrasena = $trimesUsers[$i][4];
+                            //$contrasena = $trimesUsers[$i][4];
                             $estatus = $trimesUsers[$i][5];
                             $area = $trimesUsers[$i][6];
                             $fiscalia = $trimesUsers[$i][7];

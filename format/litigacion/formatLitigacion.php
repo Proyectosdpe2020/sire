@@ -328,7 +328,6 @@ $idUsuario = $_SESSION['useridIE'];
 									<th class="textCent">Accion </th>
 								<? } ?>
 
-								<th class="textCent">Accion </th>
 
 							</tr>
 						</thead>
@@ -394,12 +393,12 @@ $idUsuario = $_SESSION['useridIE'];
 
 									<? } ?>
 
-									<td class="tdRowMain">
+									<!-- <td class="tdRowMain">
 										<center><button type="button" data-toggle="modal" href="#modalFormatoLitigVer" onclick="cargarMOdalFormatoVerLit('<? echo $nomCompleto; ?>',<? echo $idMp; ?>, <? echo $idUnidad; ?>, <? echo $mesCapturar; ?>, <? echo $anioCaptura; ?>, <? echo $idEnlace; ?>);" class="btn btn-info btn-sm redondear btnCapturarTbl" <? if ($capturado == 1) {
 																																																																																								} else {
 																																																																																									echo "disabled";
 																																																																																								} ?>><span class="glyphicon glyphicon-search"></span> Ver Formato </button></center>
-									</td>
+									</td> -->
 								</tr>
 							<?
 
