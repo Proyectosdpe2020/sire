@@ -68,6 +68,9 @@ if ($format == "mandamientosJudicialesAdministrador") {
 if ($format == "procesosPenales") {
 	$format = 21;
 }
+if ($format == "Busquedas") {
+		$format = 23;
+	}
 
 $_SESSION['formatis'] = $format;
 
@@ -241,6 +244,7 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 																																																																																																																																						if ($format  == 16) { ?> onload="loadtablaFormat(0, 'medidasDeProteccion.php', 'medidasDeProteccion', <? echo $idEnlace; ?>);" <? }
 																																																																																																																																						if ($format  == 18) { ?> onload="loadtablaFormat(0, 'mandamientosJudiciales.php', 'mandamientosJudiciales', <? echo $idEnlace; ?>);" <? }
 																																																																																																																																						if ($format  == 19) { ?> onload="loadtablaFormat(0, 'mandamientosJudiciales_administrador.php', 'mandamientosJudiciales', <? echo $idEnlace; ?>);" <? }
+                                                                                                                                      if ($format  == 23) { ?> onload="loadtablaFormat(0, 'menu.php', 'Busquedas', <? echo $idEnlace; ?>);" <? }
 																																																																																																																																																				if ($format  == 21) { ?> onload="loadtablaFormat(0, 'procesosPenales.php', 'procesosPenales', <? echo $idEnlace; ?>);" <? }
 																																																																																																																																																			}
 																																																																																																																																																		} else {
@@ -891,6 +895,7 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 	<? if ($format == 16) { ?><script type="text/javascript" src="js/medidasDeProteccion.js"></script><? } ?>
 	<? if ($format == 18 || $format == 19) { ?><script type="text/javascript" src="js/mandamientosJudiciales_20062022.js"></script><? } ?>
 	<script language="JavaScript" type="text/javascript" src="js/estadoDeFuerza.js"></script>
+	<script language="JavaScript" type="text/javascript" src="js/busquedas.js"></script>
 
 
 	<!--<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>-->
