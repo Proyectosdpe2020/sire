@@ -76,6 +76,7 @@ if ($passwordDecrypted === $password) {
 	if ($_SESSION['idArchivo'] == 21) {
 		$nameFormat = "procesosPenales";
 	}
+	
 
 
 	if ($band) {
