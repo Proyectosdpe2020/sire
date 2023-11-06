@@ -1627,6 +1627,7 @@ function enviarAindex(idArchivo) {
 	if (idArchivo == 12) { var e = "PoliciaConsulta"; }
 	if (idArchivo == 15) { var e = "carpetasJudicializadas"; }
 	if (idArchivo == 19) { var e = "mandamientosJudicialesAdministrador"; }
+	if (idArchivo == 23) { var e = "Busquedas"; }
 
 	setTimeout("location.href = '" + e + "';", 10);
 

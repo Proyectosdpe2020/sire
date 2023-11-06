@@ -11,6 +11,7 @@ if (isset($_POST["idEnlace"])) {
 }
 $dataEnlaceArc = getArchvsEnla($conn, $idEnlace);
 $tam = sizeof($dataEnlaceArc);
+
 if ($tam == 2) {
 	$colum = "6";
 }

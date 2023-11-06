@@ -45,7 +45,7 @@ if(isset($_POST['idMando'])){
 
 					<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-6">
-									<div class="col-xs-12 col-sm-12 col-md-6"><sapn class="reporte btn btn-default glyphicon glyphicon-download" onclick="descargarReporteCompleto(<? echo $idMando; ?>)">Descargar Reporte</span></div>
+									<div class="col-xs-12 col-sm-12 col-md-6"><span class="reporte btn btn-default glyphicon glyphicon-download" onclick="descargarReporteCompleto(<? echo $idMando; ?>)">Descargar Reporte</span></div>
 							</div>
 						</div><br><br>
 
