@@ -4,37 +4,44 @@ function actualizar_busqueda(element){
 		$('.imput_imputado').show();
 		$('.imput_nuc').hide();
 		$('.btn_buscar').show();
-
+  $("#tipo_busqueda option[value=0]").attr('disabled', 'disabled');
+  
 		document.getElementById("nuc").value = "";
 	}else{
 		$('.imput_imputado').hide();
 		$('.imput_nuc').show();
 		$('.btn_buscar').show();
+  $("#tipo_busqueda option[value=0]").attr('disabled', 'disabled');
 
 		document.getElementById("imputado").value = "";
 	}
 }
 
 function realizar_busqueda(){
-	$(".div_tabla").show();
-	var table = $('#gridPolicia').DataTable();
- table.destroy();
+
 	tipo_busqueda = document.getElementById("tipo_busqueda").value;
 	imputado = document.getElementById("imputado").value;
 	nuc = document.getElementById("nuc").value;
 	$('.preloaderSelect_NUC').show(); //GIF carga de información
 
- 	$.ajax({
-  type: "POST",
-  dataType: 'html',
-  url:'format/Busquedas/table_data.php',
-  data: "tipo_busqueda="+tipo_busqueda+"&imputado="+imputado+"&nuc="+nuc,
-  success: function(resp){
-  	 $('#preloaderIMG').hide();
-    $("#gridPolicia tbody").html(resp);
-    reloadDataTables();
-   }
- });
+ if(tipo_busqueda != 0 && (imputado != "" || nuc != "" ) ){
+   $(".div_tabla").show();
+   var table = $('#gridPolicia').DataTable();
+   table.destroy();
+   $.ajax({
+   type: "POST",
+   dataType: 'html',
+   url:'format/Busquedas/table_data.php',
+   data: "tipo_busqueda="+tipo_busqueda+"&imputado="+imputado+"&nuc="+nuc,
+   success: function(resp){
+     $('#preloaderIMG').hide();
+     $("#gridPolicia tbody").html(resp);
+     reloadDataTables();
+    }
+  });
+ }else{
+  swal("", "Ingrese datos de busqueda.", "warning");
+ }
 }
 
 //FUNCION PARA INICIALIZAR DATATABLES
