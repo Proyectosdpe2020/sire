@@ -81,9 +81,6 @@ if ($passwordDecrypted === $password) {
 		$nameFormat = "Busquedas";
 	}
 
-
-
-
 	if ($band) {
 		$_SESSION['yainicieIE'] = "SI";
 		// Insert is created to ensure user enter to the system

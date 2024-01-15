@@ -13,7 +13,7 @@ for ($i=0; $i < sizeof($data_imputado) ; $i++) { ?>
 	<tr>
 		<td><? echo $i+1; ?></td> 
 		<td><? echo $data_imputado[$i][1]; ?></td> 
-		<td><? echo $data_imputado[$i][2]; ?></td> 
+		<td><? echo $data_imputado[$i][9]; ?></td> 
 		<td><? echo $data_imputado[$i][2]; ?></td> 
 		<td><? echo $data_imputado[$i][3]; ?></td> 
 		<td><? echo $data_imputado[$i][4]; ?></td>

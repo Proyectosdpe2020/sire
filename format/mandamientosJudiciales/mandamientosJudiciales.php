@@ -56,7 +56,7 @@ $mesNom = Mes_Nombre($currentmonth);
 					<label for="heard">Año:</label><br>
 					<select id="anio" name="selAnio" tabindex="6" class="form-control redondear selectTranparent" onchange="reloadDaysMonth(<? echo $idEnlace; ?>)" required>
 
-							<option value="<? echo $anioCaptura; ?>" selected>2023</option>
+							<option value="<? echo $anioCaptura; ?>" selected>2024</option>
 
 						</select>
 				</div>
@@ -67,7 +67,7 @@ $mesNom = Mes_Nombre($currentmonth);
 						<select id="mesMedidaSelected" name="selMes" tabindex="6"class="form-control redondear selectTranparent" required>
 
 
-									<option value="1" selected>Noviembre</option>
+									<option value="1" selected>Enero</option>
 
 					
 

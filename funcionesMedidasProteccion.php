@@ -746,6 +746,7 @@ function getDataAnio(){
 	$arreglo[0][0]=2021;
 	$arreglo[1][0]=2022;
 	$arreglo[2][0]=2023;
+	$arreglo[3][0]=2024;
 	return $arreglo;
 }
 
