@@ -133,7 +133,7 @@ $mesNom = Mes_Nombre($currentmonth);
 				<thead>
 					<tr class="cabeceraConsultaPolicia">
 						<th class="textCent">Folio</th>
-						<th class="textCent10">Agente del Ministerio Publico</th>
+						<th class="textCent10">Agente del Ministerio Público</th>
 						<th class="">Nuc</th>
 						<th class=" textCent">Victima(s)</th>
 						<th class=" textCent">Delito</th>
