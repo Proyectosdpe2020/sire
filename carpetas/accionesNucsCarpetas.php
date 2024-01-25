@@ -1046,7 +1046,7 @@ if($estatResolucion == 20){
 								$carpetaRecibida = $checkCMASC[0][7];
 								$motivoRechazo = $checkCMASC[0][9];
 								$fechaIngreso = $checkCMASC[0][2]->format('Y-n-d');
-								$anioCapturaSire = 2023;
+								$anioCapturaSire = 2024;
 								$mesCapturaSire = $mes;
 								$diaInicialCapturaSire = 26;
 								$diaLimiteCapturaSire = 25;
@@ -1101,7 +1101,7 @@ if($estatResolucion == 20){
 								$carpetaRecibida = $checkCMASC[0][7];
 								$motivoRechazo = $checkCMASC[0][9];
 								$fechaIngreso = $checkCMASC[0][2]->format('Y-n-d');
-								$anioCapturaSire = 2023;
+								$anioCapturaSire = 2024;
 								$mesCapturaSire = $mes;
 								$diaInicialCapturaSire = 26;
 								$diaLimiteCapturaSire = 25;
@@ -1148,7 +1148,7 @@ if($estatResolucion == 20){
 						$carpetaRecibida = $checkCMASC[0][7];
 						$motivoRechazo = $checkCMASC[0][9];
 						$fechaIngreso = $checkCMASC[0][2]->format('Y-n-d');
-						$anioCapturaSire = 2023;
+						$anioCapturaSire = 2024;
 						$mesCapturaSire = $mes;
 						$diaInicialCapturaSire = 26;
 						$diaLimiteCapturaSire = 25;
