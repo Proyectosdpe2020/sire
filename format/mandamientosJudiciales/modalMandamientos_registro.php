@@ -593,7 +593,7 @@ $get_tipo_user = get_tipo_user($idEnlace);
 						      <input type="radio" id="ES_PRINCIPAL" name="ES_PRINCIPAL" value="0" checked style="height:25px; width:25px;">
 						      <label for="ES_PRINCIPAL" style="font-size: 20px;">No</label>
 										</div>
-										<?if($get_tipo_user != 1){ ?> ?>
+										<?if($get_tipo_user != 1){ ?> 
 										<div class="col-xs-12 col-sm-12  col-md-3">
 											<button type="button" id="btn_Agregar_Delito" class="btn btn-primary btn-lg" style="width: 100%;" onclick="agregar_delito(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>, <?echo $idUnidad; ?> , <?echo $idfisca; ?> , <?echo $ID_MANDAMIENTO_INTERNO; ?> , <? echo $GET_ID_MANDAMIENTO_INTERNO; ?>, <? echo $GET_ID_DATOS_INCULPADO; ?>)"><span class="glyphicon glyphicon-plus"></span> Agregar delito</button>
 										</div>

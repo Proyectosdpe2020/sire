@@ -115,12 +115,12 @@ function validaInput(e, tipo) {
     }
   }
 
- function descargarAcuse(imputado){
+ function descargarAcuse(imputado, existe_imputado){
  $.ajax({
   type: "POST",
   dataType: 'json',
   url: 'format/Busquedas/documents/word/acuse.php',
-  data: "imputado="+imputado,
+  data: "imputado="+imputado+"&existe_imputado="+existe_imputado,
  }).done(function(data){
     var $a = $("<a>");
     $a.attr("href",data.file);
