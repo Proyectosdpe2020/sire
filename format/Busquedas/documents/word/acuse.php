@@ -18,6 +18,8 @@ if (isset($_POST["imputado"])){ //Recibe nombre del imputado
  $imputado = implode(' ',array_filter(explode(' ',$cad)));  //Eliminamos espacios
 }
 
+if (isset($_POST["existe_imputado"])){ $existe_imputado = $_POST["existe_imputado"]; }
+
 //Obtenemos fecha actual
 $dia = date("d");
 $mes_actual = date("n");
@@ -26,6 +28,12 @@ $anio = date("Y");
 
 
 $templateProcessor->setValues( array('nombre' => $imputado , 'mes' => $mes , 'año' => $anio , 'dia' => $dia ) );
+
+if($existe_imputado > 0){
+ $templateProcessor->setValues( array('msg' => '.') ); //Existe información relacionada con la busqueda
+}else{ 
+ $templateProcessor->setValues( array('msg' => 'no existe información alguna.') ); //No se encontro información relacionada con la busqueda
+}
 
 /*******PROCESO DE GUARDADO DEL DOCUMENTO*************/
 $file = 'acuse.docx';
