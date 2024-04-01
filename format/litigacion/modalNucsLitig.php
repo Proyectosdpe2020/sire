@@ -189,7 +189,7 @@ $idUsuario = $_SESSION['useridIE'];
 					<table class="table table-striped tblTransparente">
 						<thead>
 							<tr class="cabezeraTabla">
-								<th class="col-xs-1 col-sm-1 col-md-1 textCent">No</th>
+								<th class="col-xs-1 col-sm-1 col-md-1 textCent">No xd</th>
 								<th class="col-xs-4 col-sm-4 col-md-4 textCent">Numero Caso </th>
 								<th class="col-xs-6 col-sm-6 col-md-6 textCent">Expediente</th>
 								<? if ($validaInfo) { ?><th class="col-xs-1 col-sm-1 col-md-1 textCent">Acción</th><? } ?>
