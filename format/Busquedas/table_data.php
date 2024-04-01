@@ -19,7 +19,7 @@ for ($i=0; $i < sizeof($data_imputado) ; $i++) { ?>
 		<td><? echo $data_imputado[$i][4]; ?></td>
 		<td><? echo $data_imputado[$i][5]; ?></td>  
 		<td><? echo $data_imputado[$i][10]; ?></td> 
-		<td><center><span class="reporte btn btn-default glyphicon glyphicon-download" onclick="descargarAcuse('<?echo $data_imputado[$i][10]; ?>')"> ACUSE</span></center></td>
+		<td><center><span class="reporte btn btn-default glyphicon glyphicon-download" onclick="descargarAcuse('<?echo $data_imputado[$i][10]; ?>' , '<? echo sizeof($data_imputado) ?>')"> ACUSE</span></center></td>
 	</tr>
 	<? }
 }else{ ?>
@@ -32,7 +32,7 @@ for ($i=0; $i < sizeof($data_imputado) ; $i++) { ?>
 		<td></td>
 		<td></td>  
 		<td></td> 
-		<td><center><span class="reporte btn btn-default glyphicon glyphicon-download" onclick="descargarAcuse('<?echo $imputado; ?>')"> ACUSE</span></center></td>
+		<td><center><span class="reporte btn btn-default glyphicon glyphicon-download" onclick="descargarAcuse('<?echo $imputado; ?>' , '<? echo sizeof($data_imputado) ?>')"> ACUSE</span></center></td>
 	</tr>
 	</tr>
 <? } ?>

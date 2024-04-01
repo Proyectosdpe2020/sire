@@ -2230,7 +2230,7 @@ function getEnviadoEnlaceFormato($conn, $idEnlace, $idFormato)
 	$query = "SELECT enviado, enviadoArchivo FROM enlaceMesValidaEnviado WHERE idEnlace = $idEnlace AND idFormato = $idFormato ";
 	$indice = 0;
 
-
+// echo $query;
 
 	$stmt = sqlsrv_query($conn, $query);
 	while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {

@@ -246,6 +246,8 @@ $idUsuario = $_SESSION['useridIE'];
 						$enliti = getEnlaceIDlitigacion($conn, $idEnlace, 4);
 						$idliti = $enliti[0][0];
 
+						// echo $idliti;
+
 
 
 						$enviado = getEnviadoEnlaceFormato($conn, $idliti, 4);

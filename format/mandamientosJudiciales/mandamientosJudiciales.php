@@ -67,48 +67,13 @@ $mesNom = Mes_Nombre($currentmonth);
 						<select id="mesMedidaSelected" name="selMes" tabindex="6"class="form-control redondear selectTranparent" required>
 
 
-									<option value="1" selected>Enero</option>
+									<option value="1" selected>Marzo</option>
 
 					
 
 					</select>
 				</div>
-					<!--
-					<div id="contMonth">
-						<select id="mesMedidaSelected" name="selMes" tabindex="6"class="form-control redondear selectTranparent" onchange="loadDaysMonth(<? echo $anioCaptura; ?>, <? echo $idEnlace; ?>, 0)" required>
-							<?for ($g=1; $g <= 12 ; $g++) {
-								if($g == intval($currentmonth)){ ?>
-									<option value="<? echo $currentmonth; ?>" selected><? echo $mesNom; ?></option>
-							<?}else{?>
-								<option value="<? echo $g; ?>" ><? echo $meses[$g-1]; ?></option>
-							<? } 
-						}?>
-					</select>
-				</div>-->
-			</div><!--
-			<div class="col-xs-6 col-sm-4  col-md-1">
-				<label for="heard">Día:</label><br>
-				<div id="contDays">
-					<select id="diaSeleted" name="selDia" tabindex="6"class="form-control redondear selectTranparent" onchange="loadDataPuestDay(<? echo $anioCaptura; ?>, <? echo $idEnlace; ?>, 0)" required>
-						<option value="0">Todo</option>
-						<?$diasNumero = cal_days_in_month(CAL_GREGORIAN, $currentmonth, $anioCaptura);
-						for ($t=1; $t <= $diasNumero ; $t++) {
-							if($t == $diames){?>
-								<option value="<? echo $t; ?>" selected> <? echo "".$diaLetra."-".$diames; ?></option>
-								<?}else{
-									$fecha = $t."-".$currentmonth."-".$anioCaptura; 
-									$nommesa =  getDiaMesnombre($fecha);
-								?>
-								<option value="<? echo $t; ?>"> <? echo "".$nommesa."-".$t; ?></option>
-								<?}
-							}?>
-						</select>
-					</div>
-				</div>-->
-				<!--<div class="col-xs-12 col-sm-12  col-md-3">
-					<label class="transparente">.</label>
-					<center><button type="button" data-toggle="modal" href="#medidaDeProteccion" style="white-space: normal;"  onclick="showModalMDP(0, <? echo $idEnlace; ?>,0,<? echo $tiparchiv; ?>, 1);" class="btn btn-warning btn-sm redondear btnCapturarTbl"><span class="glyphicon glyphicon-search"></span> Búsqueda de Mandamientos </button></center>
-				</div>-->
+			</div>
 				<div class="col-xs-12 col-sm-12  col-md-3">
 					<label class="transparente">.</label>
 					<center><button type="button" data-toggle="modal" href="#mandamientos" style="white-space: normal;"  onclick="modalMandamientos_registro(0, <? echo $idEnlace; ?>,0,<? echo $tiparchiv; ?>, 1, <?echo $idfisca; ?>, <?echo $idUnidad; ?>);" class="btn btn-success btn-sm redondeasr btnCapturarTbl"><span class="glyphicon glyphicon-plus-sign"></span> Registrar Mandamiento Judicial </button></center>
