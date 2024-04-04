@@ -28,7 +28,8 @@ $diames= date("d");
 $currentmonth = date("n");
 $meses = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
 $mesNom = Mes_Nombre($currentmonth);
-
+$getAnios = getDataAnio_Mandamientos();
+$anio_actual = date("Y");
 ?>
 
 <div id="contenido" style="">
@@ -41,7 +42,7 @@ $mesNom = Mes_Nombre($currentmonth);
 						<td width="50%">
 							<div class="tituloCentralSegu">
 								<div class="titulosCabe1">
-									<label class="titulo1" style="color: #686D72;">Registro de Mandamientos Judiciales</label>
+									<label class="titulo1" style="color: #686D72;">Administrador de Mandamientos Judiciales</label>
 									<h4><label id="titfisc" class="titulo2">Fiscalía General del Estado de Michoácan</label></h4>
 							 </div>
 							</div>
@@ -54,65 +55,69 @@ $mesNom = Mes_Nombre($currentmonth);
 			<div class="row pad20">
 				<div class="col-xs-6 col-sm-4  col-md-1">
 					<label for="heard">Año:</label><br>
-					<select id="anio" name="selAnio" tabindex="6" class="form-control redondear selectTranparent" onchange="reloadDaysMonth(<? echo $idEnlace; ?>)" required>
-
-							<option value="<? echo $anioCaptura; ?>" selected>2024</option>
-
+					<select id="anio_mandamiento" name="anio_mandamiento" tabindex="6" class="form-control redondear selectTranparent" onchange="reload_table_mandamientos_mes(<? echo $idEnlace; ?>)" required>
+      <?for($i=0; $i < sizeof($getAnios); $i++){ ?>
+							<option value="<? echo $getAnios[$i]; ?>" <?if($anio_actual == $getAnios[$i]){ ?> selected <? } ?>><? echo $getAnios[$i]; ?></option>
+      <? } ?>
 						</select>
 				</div>
 				<div class="col-xs-6 col-sm-4  col-md-1">
 					<label for="heard">Mes:</label><br>
-
 					<div id="contMonth">
-						<select id="mesMedidaSelected" name="selMes" tabindex="6"class="form-control redondear selectTranparent" required>
-
-
-									<option value="1" selected>Enero</option>
-
-					
-
+						<select id="mes_mandamiento" name="mes_mandamiento" tabindex="6"class="form-control redondear selectTranparent" onchange="reload_table_mandamientos_mes(<? echo $idEnlace; ?>)" >
+							<?for($i=0; $i < sizeof($meses) ; $i++){ ?>
+									<option value="<?echo $i+1; ?>" <?if($mesNom == $meses[$i]){ ?> selected <? } ?> > <?echo $meses[$i];  ?> </option>
+							<? } ?>
 					</select>
 				</div>
 			</div>
-				<div class="col-xs-12 col-sm-12  col-md-3">
-					<label class="transparente">.</label>
-					<center><button type="button" data-toggle="modal" href="#mandamientos" style="white-space: normal;"  onclick="modalMandamientos_registro(0, <? echo $idEnlace; ?>,0,<? echo $tiparchiv; ?>, 1, <?echo $idfisca; ?>, <?echo $idUnidad; ?>);" class="btn btn-success btn-sm redondeasr btnCapturarTbl"><span class="glyphicon glyphicon-plus-sign"></span> Registrar Mandamiento Judicial </button></center>
-				</div>
+			<div class="col-xs-12 col-sm-12  col-md-7">
+					<label for="heard">Fiscalia:</label><br>
+						<div id="contFiscalia">
+							<select id="fiscalia_selecciconada" name="fiscalia_selecciconada" tabindex="6"class="form-control redondear selectTranparent" onchange="reload_table_mandamientos_mes(<? echo $idEnlace; ?>)"  >
+								<option value="0" > GENERAL </option>
+								<?$data = get_data_enlaceFiscalia($conn);
+								  for($i=0; $i < sizeof($data) ; $i++){ ?>
+										<option value="<?echo $data[$i][3]; ?>" > <?echo $data[$i][2];  ?> </option>
+								<? } ?>
+						</select>
+					</div>
+			</div>
 			</div><br>
-			<div class="col-md-6 col-md-offset-3" id="preloaderIMG" hidden>
+		<div class="col-md-6 col-md-offset-3" id="preloaderIMG" hidden>
 				<img src="images/cargando.gif"/>
 			</div>
-
 			<table id="gridPolicia" class="display table table-striped  table-hover" width="100%" >
 				<thead>
 					<tr class="cabeceraConsultaPolicia">
-						<th class="textCent">Folio</th>
+						<th class="textCent">#</th>
+						<th class="textCent10">NUC / AVERIGUACIÓN</th>
 						<th class="textCent10">Estado</th>
 						<th class="">Tipo Mandamiento</th>
+						<th class="">Fecha de captura</th>
 						<th class="">Proceso</th>
-						<th class="">Nombre del inculpado</th>
+						<th class="">Nombre del inputado</th>
 						<th class="">Fiscalía</th>
 						<th class="">Municipio</th>
 						<th class="">Acciones</th>
-						<th class="">Archivo</th>
 					</tr>
 				</thead>
 				<tbody id="contentConsulta">
-					<?$data = get_data_mandamientos_dia($conn, $idEnlace);
+					<?$data = get_data_mandamientos_dia_administrador($conn, $idEnlace, 0, $currentmonth , $anio_actual);
 					for ($h=0; $h < sizeof($data) ; $h++) { 
 							$inculpado = get_data_inculpado($conn, $data[$h][1]);
 					 ?>
 						<tr>
 							<td><? echo $h+1; ?></td>
+							<td><? if($data[$h][11] == 2 ){ echo $data[$h][9]; }else{ echo $data[$h][10]; } ?></td>
 							<td><? echo $data[$h][3]; ?></td>
 							<td><? echo $data[$h][4]; ?></td>
+							<td><? echo $data[$h][8]->format('Y-m-d'); ?></td>
 							<td><? echo $data[$h][5]; ?></td>
 						 <td><? echo $inculpado[0][5].' '.$inculpado[0][6].' '.$inculpado[0][7]; ?></td>
 							<td><? echo $data[$h][6]; ?></td>
 							<td><? echo $data[$h][7]; ?></td>
 							<td><center><img src="img/editarMandamiento2.png" data-toggle="modal" href="#mandamientos"  onclick="modalMandamientos_registro(0, <? echo $idEnlace; ?>,<? echo $data[$h][1]; ?>,<? echo $tiparchiv; ?>, 1, <?echo $idfisca; ?>, <?echo $idUnidad; ?>);"><!--<img src="img/resumenMandamiento.png"></center>-->
-							</td>
-							<td><center><img src="img/pdfMandamiento2.png" data-toggle="modal" href="#myModaVerPDFmandamiento"  onclick="modalMandamientos_PDF(<? echo $data[$h][1]; ?>);"><!--<img src="img/resumenMandamiento.png"></center>-->
 							</td>
 						</tr>
 						<? } ?>
@@ -239,17 +244,6 @@ $mesNom = Mes_Nombre($currentmonth);
 	</div>
 	<!-- MODAL EDITAR DELITOS  -->
 
-	<!-- MODAL EDITAR DELITOS  -->
-	<div class="modal fade bs-example-modal-sm" id="myModaVerPDFmandamiento" role="dialog" data-backdrop="static" data-keyboard="false" style="overflow-y: scroll;">
-		<div id="modalVistaCss" class="modal-dialog modal-sm" style = "width: 65%; margin-top: 2.5%;">
-			<div class="modal-content" style="">
-				<div id="contModalMandamientos_PDF">
-
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- MODAL EDITAR DELITOS  -->
 	
 
 </html>

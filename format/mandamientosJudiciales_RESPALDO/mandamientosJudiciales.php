@@ -67,7 +67,7 @@ $mesNom = Mes_Nombre($currentmonth);
 						<select id="mesMedidaSelected" name="selMes" tabindex="6"class="form-control redondear selectTranparent" required>
 
 
-									<option value="1" selected>Enero</option>
+									<option value="1" selected>Marzo</option>
 
 					
 
@@ -94,7 +94,6 @@ $mesNom = Mes_Nombre($currentmonth);
 						<th class="">Fiscalía</th>
 						<th class="">Municipio</th>
 						<th class="">Acciones</th>
-						<th class="">Archivo</th>
 					</tr>
 				</thead>
 				<tbody id="contentConsulta">
@@ -111,8 +110,6 @@ $mesNom = Mes_Nombre($currentmonth);
 							<td><? echo $data[$h][6]; ?></td>
 							<td><? echo $data[$h][7]; ?></td>
 							<td><center><img src="img/editarMandamiento2.png" data-toggle="modal" href="#mandamientos"  onclick="modalMandamientos_registro(0, <? echo $idEnlace; ?>,<? echo $data[$h][1]; ?>,<? echo $tiparchiv; ?>, 1, <?echo $idfisca; ?>, <?echo $idUnidad; ?>);"><!--<img src="img/resumenMandamiento.png"></center>-->
-							</td>
-							<td><center><img src="img/pdfMandamiento2.png" data-toggle="modal" href="#myModaVerPDFmandamiento"  onclick="modalMandamientos_PDF(<? echo $data[$h][1]; ?>);"><!--<img src="img/resumenMandamiento.png"></center>-->
 							</td>
 						</tr>
 						<? } ?>
@@ -239,17 +236,6 @@ $mesNom = Mes_Nombre($currentmonth);
 	</div>
 	<!-- MODAL EDITAR DELITOS  -->
 
-	<!-- MODAL EDITAR DELITOS  -->
-	<div class="modal fade bs-example-modal-sm" id="myModaVerPDFmandamiento" role="dialog" data-backdrop="static" data-keyboard="false" style="overflow-y: scroll;">
-		<div id="modalVistaCss" class="modal-dialog modal-sm" style = "width: 65%; margin-top: 2.5%;">
-			<div class="modal-content" style="">
-				<div id="contModalMandamientos_PDF">
-
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- MODAL EDITAR DELITOS  -->
 	
 
 </html>
