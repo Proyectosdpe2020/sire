@@ -1,4 +1,37 @@
 <?
+function getFileFromMAndamiento($connSIMAJ, $ID_MANDAMIENTO_INTERNO){
+	$query = "SELECT TOP (100) [ID_MANDAMIENTO_INTERNO]
+	,[idEnlace]
+	,[idUnidad]
+	,[idFiscalia]
+	,[idFile]
+	,f.ID_FILE
+	,f.NAME_FILE
+	,f.PATH_FILE
+	FROM [mandamientos].[dbo].[A_MANDAMIENTOS]
+	INNER JOIN mandamientos.dbo.M_FILES f ON f.ID_FILE = A_MANDAMIENTOS.idFile
+	WHERE ID_MANDAMIENTO_INTERNO = $ID_MANDAMIENTO_INTERNO 
+	ORDER BY ID_MANDAMIENTO_INTERNO DESC 
+	";
+	$indice = 0;
+	$stmt = sqlsrv_query($connSIMAJ, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC )){
+		$arreglo[$indice][0]=$row['NAME_FILE'];
+		$arreglo[$indice][1]=$row['PATH_FILE'];
+		$arreglo[$indice][2]=$row['ID_FILE'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
+function formatearNombreMandamiento($cadena){ 
+	$tofind = "ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ· "; 
+	$replac = "AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn-_"; 
+	$cadena = utf8_decode($cadena);      
+	$cadena = strtr($cadena, utf8_decode($tofind), $replac);  
+	$cadena = strtolower($cadena);  
+	return utf8_encode($cadena); 
+
+}  
 //CATALOGO DE NACIONALIDADES
 function getNacionalidades($connSIMAJ){
 	$query = " SELECT cv_nacionalidad
