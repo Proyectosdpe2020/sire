@@ -1574,6 +1574,7 @@ function validateDataMandamiento_av(){
  var OBSERVACIONES = document.getElementById("OBSERVACIONES").value;
  var OBSERVACIONES_INT = document.getElementById("OBSERVACIONES_INT").value;
  var COLABORACION = $('#colaboracion').prop('checked');
+ var type_update = document.getElementById("type_update").value;
  if(COLABORACION == true) { COLABORACION = 1; ID_JUZGADO = 'no'; }else{ COLABORACION = 0; JUZGADO_COLABORACION = 'no' }
 
 
@@ -1593,10 +1594,33 @@ function validateDataMandamiento_av(){
  	}
  }
 
+ console.log("tipo update: "+type_update);
+if(type_update == 0){
+	var archivos = document.getElementById("customFile");
+ var archivo = archivos.files;
+ cont = document.getElementById("customFile"); 
+ if (typeof archivo[0] != 'undefined') {
+
+ 	cont.style.border = "none";
+ 	var size = archivo[0].size;
+ 	var extension = (archivo[0].name.substring(archivo[0].name.lastIndexOf("."))).toLowerCase();
+ 	if(archivo != ""){
+ 		if (extension != '.pdf' || extension != '.pdf' ) { swal("", "Archivo no compatible el archivo debe de ser formato PDF.", "warning"); return; }
+ 		if (size >= 5000000) { swal("", "El archivo es demasiado grande.", "warning"); return; }
+ 	}
+ } else {
+ 	cont.style.border = "1px solid red";
+ }
+}else{
+	var name_archive = document.getElementById("idFileTexMandamiento").value; 
+	console.log("texto "+ name_archive);
+}
+ 
+
  if( FECHA_CAPTURA != "" && ID_PAIS != "" && ID_ESTADO_EMISOR != "" && ID_MUNICIPIO != "" && ID_EMISOR != "" && FISCALIA != "" && ID_TIPO_MANDATO != "" &&
  	NO_MANDATO != "" && ID_TIPO_PROCESO != "" && EDO_ORDEN  != "" && FECHA_RECEPCION != "" && FECHA_OFICIO != "" && ID_TIPO_CUANTIA != "" && ID_FUERO_PROCESO != "" &&
  	ID_PROCESO_EXTRADI != "" && ID_ESTADO_JUZGADO != "" && JUZGADO_COLABORACION != "" && ID_JUZGADO != ""  && OFICIO_JUZGADO != "" &&
- 	NO_CAUSA != "" && NO_PROCESO != "" && FECHA_LIBRAMIENTO != "" && TIPO_INVESTIGACION != "" ){
+ 	NO_CAUSA != "" && NO_PROCESO != "" && FECHA_LIBRAMIENTO != "" && TIPO_INVESTIGACION != "" && cont.value != ""  ){
 
  	if(ID_JUZGADO == 'no') ID_JUZGADO = 0;
  if(JUZGADO_COLABORACION == 'no') JUZGADO_COLABORACION = '';
@@ -1722,12 +1746,28 @@ function showModal_inculpados_av(tipoModal, idEnlace, idUnidad, idfisca, ID_MAND
 						if (isConfirm) {
 							/********INSERCION*******/
 							if(ID_MANDAMIENTO_INTERNO == 0){
+									var archivos = document.getElementById("customFile");
+		  					var archivo = archivos.files;
+		  					var formdata = new FormData();
+		  					for (var i = 0; i < archivo.length; i++) {
+		  						formdata.append('archivo'+i, archivo[i]);
+		  					}
+		  						formdata.append('dataInputadoArray', dataInputadoArray);
+		  					formdata.append('dataInputadoArray', dataInputadoArray);
+		  					formdata.append('tipoModal', tipoModal);
+		  					formdata.append('idEnlace', idEnlace);
+		  					formdata.append('idUnidad', idUnidad);
+		  					formdata.append('idfisca', idfisca);
+		  					formdata.append('ID_MANDAMIENTO_INTERNO', ID_MANDAMIENTO_INTERNO);
+		  					formdata.append('dataPrincipalArray', dataPrincipalArray);
+		  					formdata.append('tipoActualizacion', tipoActualizacion);
 								$.ajax({
-									type: "POST",
-									dataType: 'html',
-									url: "format/mandamientosJudiciales/inserts/guardar_mandamiento_inculpado.php",
-									data: "&dataInputadoArray="+dataInputadoArray+"&tipoModal="+tipoModal+"&idEnlace="+idEnlace+"&idUnidad="+idUnidad+"&idfisca="+idfisca+"&ID_MANDAMIENTO_INTERNO="+ID_MANDAMIENTO_INTERNO+"&dataPrincipalArray="+dataPrincipalArray+
-									"&tipoActualizacion="+tipoActualizacion,
+									 type: "POST",
+		  						url: "format/mandamientosJudiciales/inserts/guardar_mandamiento_inculpado.php",
+		  						contentType:false,
+		  						processData:false,
+		  						enctype: 'multipart/form-data',
+		  						data: formdata,	
 									success: function(resp){
 										var json = resp;
 										var obj = eval("(" + json + ")");
