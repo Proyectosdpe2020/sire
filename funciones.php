@@ -1486,7 +1486,7 @@ function getTramiteANteriore($conn, $idMp, $mesAnterior, $idFiscalia, $idUnidad,
 {
 
 	$query23 = "  SELECT totalJudicializadasTramite FROM Litigacion WHERE idMp = $idMp AND idMes = $mesAnterior AND idFiscalia = $idFiscalia AND idUnidad = $idUnidad AND idAnio = $anio";
-	echo $query23;
+	//echo $query23;
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query23);
 	while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
