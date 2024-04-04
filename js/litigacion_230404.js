@@ -1078,11 +1078,48 @@ function saveDeterminacionXimputado(nuc, idMp, estatusResolucion, mes, anio, det
 	////// AQUI SOLO VAMOS A MANDAR LA INFO DEL IMPUTADO A LA FUNCION getDatosNucDetermEstlit
 	var imputadoID = document.getElementById("imputadoSeletedEnv").value;
 	var nuc = document.getElementById("nuc").value;
-
+ 
 	if (imputadoID == 0) {
 		swal("", "Debe seleccionar un imputado para la resolución.", "warning");
 	} else {
-		getDatosNucDetermEstlit(nuc, idMp, estatusResolucion, mes, anio, deten, idUnidad, imputadoID);
+
+			/*
+			NUEVO
+			Estatus que se validaran para no meter imputados repetidos.
+			*/
+	  const idEstatusValidaImputados = [154 , 66 , 67 , 153];
+
+		 if( idEstatusValidaImputados.includes(estatusResolucion) ){
+		 		acc = "valida_imputado_determinacion";
+		   ajax = objetoAjax();
+		   ajax.open("POST", "format/litigacion/accionesNucsLit.php");
+		   ajax.onreadystatechange = function () {
+		   	if (ajax.readyState == 4 && ajax.status == 200) {
+		   		var cadCodificadaJSON = ajax.responseText;
+							var objDatos = eval("(" + cadCodificadaJSON + ")");
+							if(objDatos.tam > 0){
+								var informacion = "";
+								for(i=0; i < objDatos.tam; i++){
+									informacion+="Nombre imputado: " + objDatos.datos[i][2] +  "\n" + "Estatus: " + objDatos.datos[i][1] +  "\n" + "NUC: " + objDatos.datos[i][3] + "\n" + "Expediente: " + objDatos.datos[i][4] + "\n"  + "Ministerio Público: " + objDatos.datos[i][5] + "\n" + "Unidad: " + objDatos.datos[i][6] +  "\n" + "Fiscalía: " + objDatos.datos[i][7] + "\n" + " Mes: " + objDatos.datos[i][8] + " Año: " + objDatos.datos[i][9] + "\n\n Favor de verificar la información.";
+					    console.log('aqui: ' + objDatos.datos[i] );
+					   }	
+					   swal("", "El imputado ya cuenta con determinación con los siguientes datos:\n\n "+informacion, "warning");
+							}else{
+								//Si el imputado no se encuentra con alguna determinación indicado en la variable idEstatusValidaImputados , se procede a guardar la información
+								getDatosNucDetermEstlit(nuc, idMp, estatusResolucion, mes, anio, deten, idUnidad, imputadoID);
+							}
+		   }
+
+		 }
+		 	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		  ajax.send("nuc=" + nuc + "&imputadoID=" + imputadoID + "&acc=" + acc  );
+		  /*
+			NUEVO
+			*/
+		}else{
+			//Si no es necesario validar el imputado con la determinación para no repetir, se procede a guardar información
+			getDatosNucDetermEstlit(nuc, idMp, estatusResolucion, mes, anio, deten, idUnidad, imputadoID);
+		}
 	}
 }
 

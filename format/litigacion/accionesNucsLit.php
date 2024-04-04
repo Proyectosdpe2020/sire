@@ -1317,6 +1317,26 @@ switch ($acc) {
 
 
 		break;
+
+		case 'valida_imputado_determinacion':
+
+		if (isset($_POST["nuc"])) { $nuc = $_POST["nuc"]; }
+		if (isset($_POST["imputadoID"])) { $imputadoID = $_POST["imputadoID"]; }
+
+		$valida_imputado = valida_imputado_determinacion($conn, $nuc , $imputadoID);
+		if($valida_imputado){
+			$aux1 = 1;
+		}else{
+			$aux1 = 0;
+		}
+
+		if ($aux1 == 1 ) {
+			echo json_encode(array('datos' => $valida_imputado , 'tam' => sizeof($valida_imputado) ));
+			}else{
+				echo json_encode(array('msg' => "SIN_DATO"));
+			}
+
+		break;
 	}
 
 

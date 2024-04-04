@@ -770,6 +770,65 @@ function getCarpetasAgenteLitigacion2($conSic, $idMp, $estatus, $mes, $anio, $id
 	}
 }
 
+function valida_imputado_determinacion($conn, $nuc, $imputadoID){
+	$query = "SELECT n.idEstatusNucs
+																	,e.nombre as estatus
+																	,n.nuc
+																	,impuDet.idImputadoLitigacion
+																	,impu.nombre+' '+impu.paterno+' '+impu.materno as imputado
+																	,c.Expediente
+																	,mp.nombre+' '+mp.paterno+' '+mp.materno as nombreMP
+																	,u.nUnidad AS nombreUnidadLitigacion
+																	,f.nFiscalia AS nombreFiscalia
+																				,CASE
+																				WHEN n.[mes] = 1 THEN 'Enero'
+																				WHEN n.[mes] = 2 THEN 'Febrero'
+																				WHEN n.[mes] = 3 THEN 'Marzo'
+																				WHEN n.[mes] = 4 THEN 'Abril'
+																				WHEN n.[mes] = 5 THEN 'Mayo'
+																				WHEN n.[mes] = 6 THEN 'Junio'
+																				WHEN n.[mes] = 7 THEN 'Julio'
+																				WHEN n.[mes] = 8 THEN 'Agosto'
+																				WHEN n.[mes] = 9 THEN 'Septiembre'
+																				WHEN n.[mes] = 10 THEN 'Octubre'
+																				WHEN n.[mes] = 11 THEN 'Noviembre'
+																				WHEN n.[mes] = 12 THEN 'Diciembre'
+																				ELSE 'Desconocido' 
+																				END as nombreMes
+																				,n.anio
+																	FROM ESTADISTICAV2.dbo.estatusNucs n
+																	INNER JOIN dbo.estatus e ON e.idEstatus = n.idEstatus
+																	INNER JOIN dbo.mp mp ON mp.idMp = n.idMp
+																	INNER JOIN dbo.CatUnidad u ON u.idUnidad = n.idUnidad
+																	LEFT JOIN PRUEBA.dbo.Carpeta c on c.CarpetaID = n.idCarpeta
+																	LEFT JOIN PRUEBA.dbo.CatUIs unS ON unS.CatUIsID = c.CatUIsID
+																	LEFT JOIN dbo.CatFiscalia f ON f.idFiscalia = u.idFiscalia
+																	LEFT JOIN dbo.imputadoLitigacionDetermNuc impuDet ON impuDet.idEstatusNucs = n.idEstatusNucs
+																	LEFT JOIN dbo.imputadoLitigacion impu ON impu.idImputadoLitigacion = impuDet.idImputadoLitigacion
+																	WHERE  impuDet.idImputadoLitigacion = $imputadoID and n.idEstatus IN (154,66,67) 
+																	ORDER BY n.mes asc";
+
+	$indice = 0;
+
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+		$arreglo[$indice][0] = $row['idEstatusNucs'];
+  $arreglo[$indice][1] = $row['estatus'];
+  $arreglo[$indice][2] = $row['imputado'];
+  $arreglo[$indice][3] = $row['nuc'];
+  $arreglo[$indice][4] = $row['Expediente'];
+  $arreglo[$indice][5] = $row['nombreMP'];
+  $arreglo[$indice][6] = $row['nombreUnidadLitigacion'];
+  $arreglo[$indice][7] = $row['nombreFiscalia'];
+  $arreglo[$indice][8] = $row['nombreMes'];
+  $arreglo[$indice][9] = $row['anio'];
+
+		$indice++;
+	}
+	if (isset($arreglo)) {
+		return $arreglo;
+	}
+}
 
 
 

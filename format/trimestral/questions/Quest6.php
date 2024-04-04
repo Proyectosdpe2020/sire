@@ -124,6 +124,7 @@
 							<th scope="col">2020</th>
 							<th scope="col">2021</th>
 							<th scope="col">2022</th>
+							<th scope="col">2023</th>
 							<th scope="col">Años Anteriores</th>
 							<th scope="col"><? echo $m1; ?></th>
 							<th scope="col"><? echo $m2; ?></th>
@@ -172,6 +173,8 @@
 							<td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 15, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d1[4]; ?><input type="hidden" value="<? echo $d1[4]; ?>" id="1val2021"></td>
 							<td class="cPo" onclick="loaNucTrimeShow(0,2022, <? echo $per; ?>, 15, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d1[5]; ?><input type="hidden" value="<? echo $d1[5]; ?>" id="1val2022"></td>
 
+							<td class="cPo" onclick="loaNucTrimeShow(0,2023, <? echo $per; ?>, 15, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d1[6]; ?><input type="hidden" value="<? echo $d1[6]; ?>" id="1val2023"></td>
+
 							<td class="cPo" onclick="loaNucTrimes(0,0, <? echo $per; ?>, 15, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)">Capturar</td>
 
 							<td class="cPo" onclick="loaNucTrimes(<? echo $mes1; ?>,<? echo $anio; ?>, <? echo $per; ?>, 15, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[0][0]; ?></td>
@@ -193,6 +196,8 @@
 							<td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 16, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d2[4]; ?><input type="hidden" value="<? echo $d2[4]; ?>" id="2val2021"></td>
 							<td class="cPo" onclick="loaNucTrimeShow(0,2022, <? echo $per; ?>, 16, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d2[5]; ?><input type="hidden" value="<? echo $d2[5]; ?>" id="2val2022"></td>
 
+								<td class="cPo" onclick="loaNucTrimeShow(0,2023, <? echo $per; ?>, 16, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d2[6]; ?><input type="hidden" value="<? echo $d2[6]; ?>" id="2val2023"></td>
+
 							<td class="cPo" onclick="loaNucTrimes(0,0, <? echo $per; ?>, 16, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)">Capturar</td>
 							<td class="cPo" onclick="loaNucTrimes(<? echo $mes1; ?>,<? echo $anio; ?>, <? echo $per; ?>, 16, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d20[0][0]; ?></td>
 							<td class="cPo" onclick="loaNucTrimes(<? echo $mes2; ?>,<? echo $anio; ?>, <? echo $per; ?>, 16, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d21[0][0]; ?></td>
@@ -211,6 +216,8 @@
 							<td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 17, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d3[3]; ?><input type="hidden" value="<? echo $d3[3]; ?>" id="3val2020"></td>
 							<td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 17, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d3[4]; ?><input type="hidden" value="<? echo $d3[4]; ?>" id="3val2021"></td>
 							<td class="cPo" onclick="loaNucTrimeShow(0,2022, <? echo $per; ?>, 17, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d3[5]; ?><input type="hidden" value="<? echo $d3[5]; ?>" id="3val2022"></td>
+
+									<td class="cPo" onclick="loaNucTrimeShow(0,2023, <? echo $per; ?>, 17, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d3[6]; ?><input type="hidden" value="<? echo $d3[6]; ?>" id="3val2023"></td>
 							
 							<td class="cPo" onclick="loaNucTrimes(0,0, <? echo $per; ?>, 17, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)">Capturar</td>
 							<td class="cPo" onclick="loaNucTrimes(<? echo $mes1; ?>,<? echo $anio; ?>, <? echo $per; ?>, 17, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d30[0][0]; ?></td>
@@ -220,6 +227,7 @@
 						</tr>
 						<tr>
 						 <th style=" border: inset 0pt" scope="row"></th>
+							<td style=" border: inset 0pt"></td>
 							<td style=" border: inset 0pt"></td>
 							<td style=" border: inset 0pt"></td>
 							<td style=" border: inset 0pt"></td>
