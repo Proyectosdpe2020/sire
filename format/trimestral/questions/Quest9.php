@@ -120,6 +120,7 @@
 							<th scope="col">2020</th>
 							<th scope="col">2021</th>
 							<th scope="col">2022</th>
+							<th scope="col">2023</th>
 							<th scope="col">Años Anteriores</th>
 							<th scope="col"><? echo $m1; ?></th>
 							<th scope="col"><? echo $m2; ?></th>
@@ -154,7 +155,7 @@
 					?>
 						<tr>
 							<th scope="row">9.1</th>
-							<td style="text-align: left;">Número de inputados a los que se les impuso prisión preventiva oficiosa</td>
+							<td style="text-align: left;">Número de imputados a los que se les impuso prisión preventiva oficiosa</td>
 							<?
 							  $has_litigation = false;
 									$has_captured = false;
@@ -226,6 +227,13 @@
 							}else{ $quest_value = $dataQuestAn48[0][5]; } ?>
 							<td class="<?php echo $quest_class; ?>" >
 								<input type="number" value="<? echo $quest_value; ?>" id="1val2022" <? echo $quest_readonly; ?> >
+							</td>
+								<?if($has_litigation){
+								$dataLit = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 17, $per1, 2023);
+								$quest_value = $dataLit[0][0];
+							}else{ $quest_value = $dataQuestAn48[0][6]; } ?>
+							<td class="<?php echo $quest_class; ?>" >
+								<input type="number" value="<? echo $quest_value; ?>" id="1val2023" <? echo $quest_readonly; ?> >
 							</td>
 							<td class="<?php echo $quest_class; ?>">- - -</td>
 							<?
@@ -377,6 +385,13 @@
 							<td class="<?php echo $quest_class; ?>" >
 								<input type="number" value="<? echo $quest_value; ?>" id="2val2022" <? echo $quest_readonly; ?> >
 							</td>
+								<?if($has_litigation){
+								$dataLit = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 18, $per1, 2023);
+								$quest_value = $dataLit[0][0];
+							}else{ $quest_value = $dataQuestAn49[0][6]; } ?>
+							<td class="<?php echo $quest_class; ?>" >
+								<input type="number" value="<? echo $quest_value; ?>" id="2val2023" <? echo $quest_readonly; ?> >
+							</td>
 							<td class="<?php echo $quest_class; ?>">- - -</td>
 							<?
 									$tota = 0; $tota1 = 0;
@@ -450,7 +465,7 @@
 							?>	
 							<td class="blockInp"><input type="number" value="<? echo $tota;  ?>" id="p49tot" readonly></td>
 						</tr>
-						</tr>
+					<!--	</tr> -->
 						<tr>
 							<th scope="row">9.3</th>
 							<td style="text-align: left;">Número de imputados a los que se les impuso otra medida cautelar</td>
@@ -530,6 +545,14 @@
 							}else{ $quest_value = $dataQuestAn50[0][5]; } ?>
 							<td class="<?php echo $quest_class; ?>" >
 								<input type="number" value="<? echo $quest_value; ?>" id="3val2022" <? echo $quest_readonly; ?>>
+							</td>
+								<?
+							if($has_litigation){
+								$dataLit = getDAtaSIREQuestionEstatusLitiHistorico_Quest_9_3($conn , $per1, $anio, $idUn, 2023);
+								$quest_value = $dataLit[0][0];
+							}else{ $quest_value = $dataQuestAn50[0][6]; } ?>
+							<td class="<?php echo $quest_class; ?>" >
+								<input type="number" value="<? echo $quest_value; ?>" id="3val2023" <? echo $quest_readonly; ?>>
 							</td>
 							
 							<td class="<?php echo $quest_class; ?>">- - -</td>
@@ -625,6 +648,7 @@
 							<td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 51, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[3]; ?><input type="hidden" value="<? echo $d11[3]; ?>" id="4val2020"></td>
 							<td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 51, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[4]; ?><input type="hidden" value="<? echo $d11[4]; ?>" id="4val2021"></td>
 							<td class="cPo" onclick="loaNucTrimeShow(0,2022, <? echo $per; ?>, 51, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[5]; ?><input type="hidden" value="<? echo $d11[5]; ?>" id="4val2022"></td>
+							<td class="cPo" onclick="loaNucTrimeShow(0,2023, <? echo $per; ?>, 51, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[6]; ?><input type="hidden" value="<? echo $d11[6]; ?>" id="4val2023"></td>
 
 							<td class="cPo" onclick="loaNucTrimes(0,0, <? echo $per; ?>, 51, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)">Capturar</td>
 
@@ -635,6 +659,7 @@
 						</tr>
 						<tr>
 						 <th style=" border: inset 0pt" scope="row"></th>
+							<td style=" border: inset 0pt"></td>
 							<td style=" border: inset 0pt"></td>
 							<td style=" border: inset 0pt"></td>
 							<td style=" border: inset 0pt"></td>
