@@ -28,8 +28,10 @@
 			<td><? echo $data[$h][7]; ?></td>
 			<td><center><img src="img/editarMandamiento2.png" data-toggle="modal" href="#mandamientos"  onclick="modalMandamientos_registro(0, <? echo $idEnlace; ?>,<? echo $data[$h][1]; ?>,18, 1, <?echo $idfisca; ?>, <?echo $idUnidad; ?>);"><!--<img src="img/resumenMandamiento.png"></center>-->
 			</td>
-				<td><center><img src="img/pdfMandamiento2.png" data-toggle="modal" href="#myModaVerPDFmandamiento"  onclick="modalMandamientos_PDF(<? echo $data[$h][1]; ?>);"><!--<img src="img/resumenMandamiento.png"></center>-->
-							</td>
+				<td>
+				<?$has_pdf = getFileFromMAndamiento($conn, $data[$h][1]);
+				if(sizeof($has_pdf) > 0){ ?> 	<center><img src="img/pdfMandamiento2.png" data-toggle="modal" href="#myModaVerPDFmandamiento"  onclick="modalMandamientos_PDF(<? echo $data[$h][1]; ?>);"> <? }else{ } ?> 
+				</td>
 		</tr>
 	<? } ?>
 
