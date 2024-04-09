@@ -185,6 +185,7 @@ $sheet->setCellValue('E14', "CII 2019");
 $sheet->setCellValue('F14', "CII 2020"); 
 $sheet->setCellValue('G14', "CII 2021"); 
 $sheet->setCellValue('H14', "CII 2022");
+$sheet->setCellValue('I14', "CII 2023");
 
 
 $query = "SELECT p.nombre
@@ -195,6 +196,7 @@ $query = "SELECT p.nombre
    ,ISNULL(SUM(CASE WHEN (s.periodo = $periodoSeleccionado AND s.anio = $getAnio) then s.val2020 end),0) as VAL2020
    ,ISNULL(SUM(CASE WHEN (s.periodo = $periodoSeleccionado AND s.anio = $getAnio) then s.val2021 end),0) as VAL2021
    ,ISNULL(SUM(CASE WHEN (s.periodo = $periodoSeleccionado AND s.anio = $getAnio) then s.val2022 end),0) as VAL2022
+   ,ISNULL(SUM(CASE WHEN (s.periodo = $periodoSeleccionado AND s.anio = $getAnio) then s.val2023 end),0) as VAL2023
   FROM [ESTADISTICAV2].[trimestral].[datosAnteriorTrimestral] s
 LEFT JOIN trimestral.pregunta p ON p.idPregunta = s.idPregunta
 GROUP BY p.nombre , s.idPregunta
@@ -208,11 +210,12 @@ ORDER BY s.idPregunta ASC";
   $sheet->setCellValue('F'.(string)($cont1), $row['VAL2020']);
   $sheet->setCellValue('G'.(string)($cont1), $row['VAL2021']);
   $sheet->setCellValue('H'.(string)($cont1), $row['VAL2022']);
+  $sheet->setCellValue('I'.(string)($cont1), $row['VAL2023']);
   $cont1+=1;
  } 
 }
 
-if($getAnio >= 2022){ $col = 'I'; }else{ $col = 'C'; }
+if($getAnio >= 2022){ $col = 'J'; }else{ $col = 'C'; }
 $contTrimestre = 1;
 $trimestre = 'trimestre'.$contTrimestre;
 $ultimaColumna = "";
@@ -300,7 +303,7 @@ for($i=14; $i<$cont; $i++){
 }
 
 /*AQUI SE COLOREAN LOS ENCABEZADOS DE CADA TRIMESTRE*/
-if($getAnio >= 2022){ $totalEncabezados = 6 + $periodoSeleccionado; }else{ $totalEncabezados = 4; }
+if($getAnio >= 2022){ $totalEncabezados = 7 + $periodoSeleccionado; }else{ $totalEncabezados = 4; }
 $indiceEncabezado = 'C';
 for($j = 1; $j <= $totalEncabezados; $j++){
   if(($j)%2 == 0){
