@@ -3392,3 +3392,51 @@ function get_data_nuc_descarga($conn, $mes, $anio, $idUnidad)
 		return $arreglo;
 	}
 }
+
+
+function getDataDocumet($conn , $idEnlace , $idTipoArch){
+	$query = "SELECT a.idArchivo
+																,a.idEnlace
+																,a.idUnidad
+																,a.idTipoArchivo
+																,a.nombreArchivo
+																,a.observacionesUser
+																,a.tamanio
+																,a.fechaSubida
+																,a.ubicacion
+																,a.mes
+																,a.anio
+																,a.estatusArch
+																,a.observacionesRevision
+																,a.fechaConcluido
+																,a.fechareenviado
+																FROM ESTADISTICAV2.dbo.archivo a
+																where a.idEnlace = $idEnlace AND a.idTipoArchivo = $idTipoArch AND 
+																a.mes = (SELECT v.mesCap FROM ESTADISTICAV2.dbo.enlaceMesValidaEnviado v WHERE v.idEnlace = $idEnlace AND v.idFormato = $idTipoArch) AND 
+																a.anio = (SELECT v.idAnio FROM ESTADISTICAV2.dbo.enlaceMesValidaEnviado v WHERE v.idEnlace = $idEnlace AND v.idFormato = $idTipoArch)";
+
+	$indice = 0;
+
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+			$arreglo[$indice][0]=$row['idArchivo'];
+		 $arreglo[$indice][1]=$row['idEnlace'];
+		 $arreglo[$indice][2]=$row['idUnidad'];
+		 $arreglo[$indice][3]=$row['idTipoArchivo'];
+		 $arreglo[$indice][4]=$row['nombreArchivo'];
+		 $arreglo[$indice][5]=$row['observacionesUser'];
+		 $arreglo[$indice][6]=$row['tamanio'];
+		 $arreglo[$indice][7]=$row['fechaSubida'];
+		 $arreglo[$indice][8]=$row['ubicacion'];
+		 $arreglo[$indice][9]=$row['mes'];
+		 $arreglo[$indice][10]=$row['anio'];
+		 $arreglo[$indice][11]=$row['estatusArch'];
+		 $arreglo[$indice][12]=$row['observacionesRevision'];
+		 $arreglo[$indice][13]=$row['fechaConcluido'];
+		 $arreglo[$indice][14]=$row['fechareenviado'];
+		$indice++;
+	}
+	if (isset($arreglo)) {
+		return $arreglo;
+	}
+}
