@@ -3299,3 +3299,24 @@ table=$('#gridDescargarNucsLiti').DataTable({
 
       } );
 }
+
+//funcion para verificar el estatus del documento enviado
+$("#checkStatusDocument").ready(function(){
+	var idEnlace = $('#idEnlace_checkStatusDocument');
+	var format = $('#format_checkStatusDocument');
+	$.ajax({
+		type: "POST",
+		dataType: 'html',
+		url: "checkStatusDocument.php",
+		data: "idEnlace="+idEnlace.val()+"&format=" + format.val(),
+		success: function (respuesta) {
+			var json = respuesta;
+			var obj = eval("(" + json + ")");
+			if(obj.first == "SI"){
+				if(obj.estatus_archivo == "rac"){
+					swal("", "Estimado/a enlace. \n Lamentamos informarle que su archivo ha sido rechazado, por favor, revise el archivo y vuelva a subirlo a la plataforma. \n\nMOTIVO: "+obj.motivo_rechazo, "warning");
+				}
+			}	
+		}
+	}); 
+});
