@@ -861,7 +861,8 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 
 			<div style="display: none;" id="laodimgmain" class="jm-loadingpage"></div>
 
-
+   <input type="hidden" value="<?echo $idEnlace; ?>" id="idEnlace_checkStatusDocument">
+   <input type="hidden" value="<?echo $format; ?>" id="format_checkStatusDocument">
 
 
 
