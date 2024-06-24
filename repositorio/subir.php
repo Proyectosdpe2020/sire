@@ -31,6 +31,16 @@
 
       $ubicacion = 'documentos/';
 
+      //Se obtiene los datos del documento enviado
+      $getDataDocument = getDataDocumet($conn , $idEnlace , $idTipoArch);
+      $estatus_archivo =  $getDataDocument[0][11];
+      $remplazo = 0; //Si el usuario va a remplazar un documento la viariable cambiara a 1
+
+      if($estatus_archivo == 'rac'){
+       $remplazo = 1;   
+       $idArchivo = $getDataDocument[0][0];
+      }
+
       foreach ($_FILES as $key) {
 
         if ($key['error'] == UPLOAD_ERR_OK) {
@@ -45,8 +55,8 @@
 
             $destino = $ubicacion.$nuevoname.".pdf";          
 
-
-                   $queryTransaction = "  
+            if($remplazo == 0){
+             $queryTransaction = "  
 
                     BEGIN 
                     
@@ -73,8 +83,37 @@
 
 
                   ";
+            }else{
+              $queryTransaction = "  
 
-                
+                    BEGIN 
+                    
+                    BEGIN TRY 
+                      BEGIN TRANSACTION
+
+                          SET NOCOUNT ON
+
+                            DELETE FROM archivo WHERE idArchivo = $idArchivo
+
+                            INSERT INTO archivo (idEnlace,idUnidad, idTipoArchivo, nombreArchivo, observacionesUser, tamanio, fechaSubida, ubicacion, mes, anio, estatusArch) 
+                            VALUES ($idEnlace, $idUnidad, $idTipoArch,'$nuevoname','$oberv',$fileSize,GETDATE(),'$destino',$mes,$anio,'env') 
+                          
+                            UPDATE enlaceMesValidaEnviado SET enviadoArchivo = 1 WHERE idEnlace = $idEnlace AND idAnio = $anio AND idFormato = $idTipoArch
+
+                          COMMIT
+                    END TRY
+
+                    BEGIN CATCH 
+                          ROLLBACK TRANSACTION
+                          RAISERROR('No se realizo la transaccion',16,1)
+                    END CATCH
+
+                    END
+
+
+                  ";
+            }
+                           
 
                   $result = sqlsrv_query($conn,$queryTransaction, array(), array( "Scrollable" => 'static' ));  
 
