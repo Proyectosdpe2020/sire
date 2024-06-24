@@ -3,6 +3,7 @@ session_start();
 include('../../../../Conexiones/Conexion.php');
 
 $link = $_POST['link'];
+$unity_id = $_POST['unity_id'];
 
 $sql = "SELECT [FirmaID]
                 ,[Nombre]
@@ -12,7 +13,7 @@ $sql = "SELECT [FirmaID]
                 ,[Cargo]
                 ,[Funcion]
                 ,[PosicionFirma]
-            FROM [ESTADISTICAV2].[trimestral].[Firmas] WHERE idEnlace = $link";
+            FROM [ESTADISTICAV2].[trimestral].[Firmas] WHERE idEnlace = $link AND idUnidad = $unity_id";
 
 $params = array();
 $options = array( "Scrollable" => SQLSRV_CURSOR_KEYSET );
