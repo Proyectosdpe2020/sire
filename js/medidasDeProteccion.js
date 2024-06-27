@@ -155,19 +155,33 @@ function modalDatosMedida(tipoModal, idEnlace, b, fraccion, idMedida, sectionAct
 }
 
 //FUNCION MUESTRA MODAL REGISTRO DE INFORMACION GENERAL DE MEDIDA
-function modalDatosMedidaCapturista(tipoModal, idEnlace, b, fraccion, idMedida, sectionActive) {
+function modalDatosMedidaCapturista(tipoModal, idEnlace, b, fraccion, idMedida, sectionActive, rolUser) {
 	/////////////////////////// SI EL TIPO MODAL ES UNA NUEVA MEDIDA ENTONCES ES  0 ///////////////////////////////
 	if (idMedida == 0) {
-		var dataValidate = validateDataMedidaCapturista(); //Validamos que la información principal halla sido llenada previamente
+		if(rolUser == 4){
+   var dataValidate = validateDataMedidaGeneralRegionales(); //Validamos que la información principal halla sido llenada previamente
+		}else{
+			var dataValidate = validateDataMedidaCapturista(); //Validamos que la información principal halla sido llenada previamente
+		}
 		if (dataValidate[0] == 'true') {
 			$('#cargandoInfo').modal('show');
+			if(rolUser == 4){ 	
+				var contentArrayMedidasAplicadasData = JSON.parse(dataValidate[2]); /*Obtenemos la informacion del arreglo de medidas aplicadas*/
+				var dataMedidasAplicadasArray = {};
+				for (j in contentArrayMedidasAplicadasData) { dataMedidasAplicadasArray[j] = contentArrayMedidasAplicadasData[j]; }
+					dataMedidasAplicadasArray = JSON.stringify(dataMedidasAplicadasArray);
+						console.log("dos: "+dataMedidasAplicadasArray);
+				 //dataMedidasAplicadasArray = getValuesMedidasAplicadas(dataValidate[2]); eliminar
+			}else { var dataMedidasAplicadasArray = 0; } 
 			var contentArrayData = JSON.parse(dataValidate[1]); //Obtenemos la informacion del arreglo
 			console.log(contentArrayData[1]); //NUC
+			console.log("Total de medidas aplicadas: "+dataMedidasAplicadasArray)
 			var nuc = contentArrayData[1];
 			var existeNuc;
 			var dataPrincipalArray = {};
 			for (i in contentArrayData) { dataPrincipalArray[i] = contentArrayData[i]; }
 			dataPrincipalArray = JSON.stringify(dataPrincipalArray);
+		 console.log("Información del array principal: " + dataPrincipalArray);
 			//Invocamos a la funcion que valida si existe el NUC en sigi realizando un callback a la funcion succes de ajax para retornar el valor
 			validaNucSIGI(nuc, function (resp, arrayData) {
 				existeNuc = resp;
@@ -192,7 +206,7 @@ function modalDatosMedidaCapturista(tipoModal, idEnlace, b, fraccion, idMedida, 
 									type: "POST",
 									dataType: 'html',
 									url: "format/medidasDeProteccion/inserts/saveDatosGenerales.php",
-									data: "&idEnlace=" + idEnlace + "&fraccion=" + fraccion + "&idMedida=" + idMedida + "&b=" + b + "&tipoModal=" + tipoModal + "&dataPrincipalArray=" + dataPrincipalArray,
+									data: "&idEnlace=" + idEnlace + "&fraccion=" + fraccion + "&idMedida=" + idMedida + "&b=" + b + "&tipoModal=" + tipoModal + "&dataPrincipalArray=" + dataPrincipalArray + "&dataMedidasAplicadasArray=" + dataMedidasAplicadasArray + "&rolUser=" + rolUser,
 									success: function (resp) {
 										var json = resp;
 										var obj = eval("(" + json + ")");
@@ -264,8 +278,12 @@ function modalDatosMedidaCapturista(tipoModal, idEnlace, b, fraccion, idMedida, 
 	}
 }
 
-function actualizarDatosCarpeta(tipoModal, idEnlace, b, fraccion, idMedida, sectionActive) {
-	var dataValidate = validateDataMedidaCapturistaUpdate(); //Validamos que la información principal halla sido llenada previamente
+function actualizarDatosCarpeta(tipoModal, idEnlace, b, fraccion, idMedida, rolUser) {
+		if(rolUser == 4){
+   var dataValidate = validateDataMedidaGeneralRegionalesUpdate(); //Validamos que la información principal halla sido llenada previamente
+		}else{
+			var dataValidate = validateDataMedidaCapturistaUpdate(); //Validamos que la información principal halla sido llenada previamente
+		}
 	if (dataValidate[0] == 'true') {
 		var contentArrayData = JSON.parse(dataValidate[1]); //Obtenemos la informacion del arreglo
 		var dataPrincipalArray = {};
@@ -288,7 +306,7 @@ function actualizarDatosCarpeta(tipoModal, idEnlace, b, fraccion, idMedida, sect
 						type: "POST",
 						dataType: 'html',
 						url: "format/medidasDeProteccion/inserts/updateDatosCarpeta.php",
-						data: "&idEnlace=" + idEnlace + "&fraccion=" + fraccion + "&idMedida=" + idMedida + "&b=" + b + "&tipoModal=" + tipoModal + "&dataPrincipalArray=" + dataPrincipalArray,
+						data: "&idEnlace=" + idEnlace + "&fraccion=" + fraccion + "&idMedida=" + idMedida + "&b=" + b + "&tipoModal=" + tipoModal + "&dataPrincipalArray=" + dataPrincipalArray + "&rolUser=" + rolUser,
 						success: function (resp) {
 							var json = resp;
 							var obj = eval("(" + json + ")");
@@ -1461,6 +1479,7 @@ function saveNuevaMedidaTestigo(idMedida, fraccion, idEnlace, nuc) {
 			} else {
 				if (obj.first == "SI") {
 					var obj = eval("(" + json + ")");
+						$('#aplicarMedidaTestigo').modal('hide');
 					swal("", "Medida de protección aplicada exitosamente. ", "success");
 					//checkValidaDataModulos(obj.idMedidaUltimo);
 					//setTimeout("modalDatosMedida(1, "+idEnlace+", 0 , 0, "+obj.idMedidaUltimo+");",100);
@@ -1765,7 +1784,7 @@ function closeModalCarpetasPendientes(anio, idEnlace, camMes) {
 
 }
 
-function closeModalMDP(anio, idEnlace, camMes) {
+function closeModalMDP(anio, idEnlace, camMes, rolUser) {
 
 	var messelected = document.getElementById("mesMedidaSelected").value;
 	var diaselected = document.getElementById("diaSeleted").value;
@@ -1824,7 +1843,10 @@ function closeModalMDP(anio, idEnlace, camMes) {
 
 			});
 			$('#medidaDeProteccion').modal('hide');
-			checkFaltantes(idEnlace);
+			if(rolUser == 1){
+				//Solo el coordinador podra verificar cuales tiene pendientes.
+				checkFaltantes(idEnlace);
+			}
 		}
 	});
 
@@ -1991,4 +2013,179 @@ function checkDateAcuerdo(fecha) {
 		swal("", "La fecha del acuerdo no puede ser mayor a la fecha del informe.", "warning");
 		document.getElementById("fechaAcuerdo").value = '';
 	}
+}
+
+function validateDataMedidaGeneralRegionales() {
+ var agentesMP_id = document.getElementById("agentesMP_id").value;
+	var idCargo = document.getElementById("idCargo").value;
+	var idFuncion = document.getElementById("idFuncion").value;
+	var idAdscripcion = document.getElementById("idAdscripcion").value;
+	var idFiscAdscrito = document.getElementById("idFiscAdscrito").value;//No ocupa validacion
+ var fechaConclu = document.getElementById("fechaConclu").value;
+
+	var nuc = document.getElementById("nuc").value;
+	var idDelito = document.getElementById("idDelito").value;
+	var fechaAcuerdo = document.getElementById("fechaAcuerdo").value;
+	var fechaRegistro = document.getElementById("fechaRegistro").value;
+
+ var nombreVicti = document.getElementById("nombreVicti").value; 
+	var paternoVicti = document.getElementById("paternoVicti").value; 
+	var maternoVicti = document.getElementById("maternoVicti").value; 
+	var generoVicti = document.getElementById("generoVicti").value; 
+ var edadVictima = document.getElementById("edadVictima").value; 
+
+	var idFiscaliaProc = document.getElementById("idFiscaliaProc").value;
+
+var inputMedidaHidden = document.getElementsByClassName("inputMedidaHidden"); //Para obtener la cantidad de inputs que se agregaron dinamicamente
+var totalInputs = inputMedidaHidden.length; 
+
+	//Arreglo de campos para validar con color rojo, si se agrega un nuevo campo, agregar en el arreglo para incluir en la validacion de color
+	var arrayCamposValida = ["agentesMP_id_div", "idCargo", "idFuncion", "idAdscripcion", "nuc", "idDelito_div", "fechaAcuerdo", "fechaRegistro", "nombreVicti", "paternoVicti", "maternoVicti", "generoVicti", "edadVictima", "idFiscaliaProc_div" , "fechaConclu"];
+	//Arreglo de variables de informacion, donde se verifica si hay informacion en dicha variable
+	var arrayCamposData = [agentesMP_id, idCargo, idFuncion, idAdscripcion, nuc, idDelito, fechaAcuerdo, fechaRegistro, nombreVicti, paternoVicti, maternoVicti, generoVicti, edadVictima, idFiscaliaProc, fechaConclu];
+	//Bucle del tamaño de los campos, se verifica si la variable tiene información, si esta no tiene coloreamos el input de color rojo
+	for (x = 0; x < arrayCamposValida.length; x++) {
+		if ($.trim(arrayCamposData[x]) == "") {
+			cont = document.getElementById(arrayCamposValida[x]);
+			cont.style.border = "1px solid red";
+		}
+	}
+	//Obtenemos la temporalidad de la medida aplicada en base a la fecha del acuerdo y fecha de conclusión.
+	let temporalidad = calculo_temporalidad(fechaConclu, fechaAcuerdo);
+	console.log("La temporalidad de la medida es de: " + temporalidad + " días");
+
+	if (agentesMP_id != "" && idCargo != "" && idFuncion != "" && idAdscripcion != "" && nuc != "" && idDelito != "" && fechaAcuerdo != "" && fechaRegistro != "" && nombreVicti != "" && paternoVicti != "" && maternoVicti != "" && generoVicti != "" && edadVictima != "" && idFiscaliaProc != "" && totalInputs != 0 && fechaConclu != "") {
+
+		var dataGenerales = Array();
+		dataGenerales[1] = nuc.trim();
+		dataGenerales[2] = idDelito;
+		dataGenerales[3] = fechaAcuerdo;
+		dataGenerales[4] = fechaRegistro;
+		dataGenerales[5] = nombreVicti.trim();
+		dataGenerales[6] = paternoVicti.trim();
+		dataGenerales[7] = maternoVicti.trim();
+		dataGenerales[8] = generoVicti;
+		dataGenerales[9] = edadVictima;
+		dataGenerales[10] = idFiscaliaProc;
+
+		dataGenerales[11] = agentesMP_id;
+		dataGenerales[12] = idCargo;
+		dataGenerales[13] = idFuncion;
+		dataGenerales[14] = idAdscripcion;
+		dataGenerales[15] = idFiscAdscrito;
+		dataGenerales[16] = fechaConclu;
+		dataGenerales[17] = temporalidad;
+
+
+//Obtenemos el nombre de los id de los input agregados dinamicamente
+		const getIdNameInput = [...document.querySelectorAll('.inputMedidaHidden')].map(el => el.id);
+		var dataMedidasAplicadasArray = {};
+		for (j in getIdNameInput){
+			dataMedidasAplicadasArray[j] = document.getElementById(getIdNameInput[j]).value;
+		}
+
+
+		var dataGeneralArray = {};
+		for (i in dataGenerales) {
+			dataGeneralArray[i] = dataGenerales[i];
+		}
+
+		dataGeneralArray = JSON.stringify(dataGeneralArray);
+		dataMedidasAplicadasArray = JSON.stringify(	dataMedidasAplicadasArray);
+		return ['true', dataGeneralArray, dataMedidasAplicadasArray];
+	} else {
+		return ['false', 0];
+	}
+
+}
+
+function agregarMedida(etiqueta, idCatFraccion , img){
+	let medidas_seleccionadas = document.getElementById("medidas_seleccionadas"); //Obtiene div donde se insertaran los input ocultos
+	let medidaProteccion = '<input type="hidden" id="medidaSeleccionada'+idCatFraccion+'" class="inputMedidaHidden" name="medidaSeleccionada'+idCatFraccion+'" value="'+idCatFraccion+'">'; //creamos etiqueta
+	medidas_seleccionadas.innerHTML+=medidaProteccion; //Se insertan de manera secuencial los input agregados
+	etiqueta.removeAttribute('onmouseout'); //Se remueve función onmouseout para evitar conflictos y mostrar bien la imagen de la medida seleccionada
+	etiqueta.removeAttribute('onclick'); //Se remueve onclick para evitar que se añada mas de un input del mismo valor
+	console.log(etiqueta);
+	hoverIMG(etiqueta, img);
+}
+
+//Calcula la temporalidad que dura la medida aplicada, basandose en la fecha del acuerdo y fecha de conclusion
+function calculo_temporalidad(fechaConclu, fechaAcuerdo){
+	var month_acuerdo = new Date(fechaAcuerdo).getMonth() + 1;
+	var year_acuerdo = new Date(fechaAcuerdo).getFullYear();
+	var day_acuerdo= new Date(fechaAcuerdo).getDate();
+
+	var month_conclu = new Date(fechaConclu).getMonth() + 1;
+	var year_conclu = new Date(fechaConclu).getFullYear();
+	var day_conclu = new Date(fechaConclu).getDate();
+ /*Declaramos dos variables con las fechas de las que deseamos obtener los días de diferencia*/
+ let  fecha_acuerdo = new Date(month_acuerdo + "-" + day_acuerdo + "-" + year_acuerdo);
+	let  fecha_conclusion = new Date(month_conclu + "-" + day_conclu + "-" + year_conclu);
+	/*Obtenemos el número de milisegundos entre las dos fechas usando el método .getTime del objeto Date() 
+	restandole a los milisegundos de la fecha 2 los de la fecha 1.*/
+	let diferencia = fecha_conclusion.getTime() - fecha_acuerdo.getTime();
+ /*Por último obtenemos la diferencia entre los dos números y la dividimos entre los milisegundos contenidos en un día.*/
+	let diasDeDiferencia = diferencia / 1000 / 60 / 60 / 24;
+	return diasDeDiferencia;
+}
+
+function validateDataMedidaGeneralRegionalesUpdate() {
+	var agentesMP_id = document.getElementById("agentesMP_id").value;
+	var idCargo = document.getElementById("idCargo").value;
+	var idFuncion = document.getElementById("idFuncion").value;
+	var idAdscripcion = document.getElementById("idAdscripcion").value;
+	var idFiscAdscrito = document.getElementById("idFiscAdscrito").value;//No ocupa validacion
+ var fechaConclu = document.getElementById("fechaConclu").value;
+
+	var nuc = document.getElementById("nuc").value;
+	var idDelito = document.getElementById("idDelito").value;
+	var fechaAcuerdo = document.getElementById("fechaAcuerdo").value;
+	var fechaRegistro = document.getElementById("fechaRegistro").value;
+	var idFiscaliaProc = document.getElementById("idFiscaliaProc").value;
+
+	//Arreglo de campos para validar con color rojo, si se agrega un nuevo campo, agregar en el arreglo para incluir en la validacion de color
+	var arrayCamposValida = ["nuc", "idDelito_div", "fechaAcuerdo", "fechaRegistro", "idFiscaliaProc_div", "agentesMP_id", "idCargo", "idFuncion", "idAdscripcion" , "fechaConclu"];
+	//Arreglo de variables de informacion, donde se verifica si hay informacion en dicha variable
+	var arrayCamposData = [nuc, idDelito, fechaAcuerdo, fechaRegistro, idFiscaliaProc, agentesMP_id, idCargo, idFuncion, idAdscripcion, fechaConclu];
+	//Bucle del tamaño de los campos, se verifica si la variable tiene información, si esta no tiene coloreamos el input de color rojo
+	for (x = 0; x < arrayCamposValida.length; x++) {
+		if ($.trim(arrayCamposData[x]) == "") {
+			cont = document.getElementById(arrayCamposValida[x]);
+			cont.style.border = "1px solid red";
+		}
+	}
+
+	//Obtenemos la temporalidad de la medida aplicada en base a la fecha del acuerdo y fecha de conclusión.
+	let temporalidad = calculo_temporalidad(fechaConclu, fechaAcuerdo);
+	console.log("La temporalidad de la medida es de: " + temporalidad + " días");
+
+	if (agentesMP_id != "" && idCargo != "" && idFuncion != "" && idAdscripcion != "" && nuc != "" && idDelito != "" && fechaAcuerdo != "" && fechaRegistro != "" && idFiscaliaProc != "" && fechaConclu != "") {
+
+		var dataGenerales = Array();
+		dataGenerales[1] = nuc.trim();
+		dataGenerales[2] = idDelito;
+		dataGenerales[3] = fechaAcuerdo;
+		dataGenerales[4] = fechaRegistro;
+		dataGenerales[5] = idFiscaliaProc;
+
+		dataGenerales[6] = agentesMP_id;
+		dataGenerales[7] = idCargo;
+		dataGenerales[8] = idFuncion;
+		dataGenerales[9] = idAdscripcion;
+		dataGenerales[10] = idFiscAdscrito;
+		dataGenerales[11] = fechaConclu;
+		dataGenerales[12] = temporalidad;
+
+
+
+		var dataGeneralArray = {};
+		for (i in dataGenerales) {
+			dataGeneralArray[i] = dataGenerales[i];
+		}
+		dataGeneralArray = JSON.stringify(dataGeneralArray);
+		return ['true', dataGeneralArray];
+	} else {
+		return ['false', 0];
+	}
+
 }

@@ -139,13 +139,13 @@ $mesNom = Mes_Nombre($currentmonth);
 						<th class=" textCent">Delito</th>
 						<?if($rolUser != 2 ){?><th class=" textCent">Fecha del acuerdo</th><? }else{ ?> <th class=" textCent">Fecha del registro</th> <? } ?>
 						<?if($rolUser == 1){?><th class=" textCent">Capturista</th><? } ?>
-						<?if($rolUser != 3){?><th class="textCent">Carpeta asignada?</th><? } ?>
-						<?if($rolUser == 1 || $rolUser == 3){?><th class=" textCent">ESTADO</th><? } ?>
+						<?if($rolUser != 3 && $rolUser != 4){?><th class="textCent">Carpeta asignada?</th><? } ?>
+						<?if($rolUser == 1 || $rolUser == 3 || $rolUser == 4){?><th class=" textCent">ESTADO</th><? } ?>
 						<th class=" textCent">Acciones</th>
 					</tr>
 				</thead>
 				<tbody id="contentConsulta">
-					<?$dataMedidasDia = get_data_medidas_dia($connMedidas, $numeroDia, $diames, 2021, $idfisca, $idEnlace, $currentmonth, $rolUser);
+					<?$dataMedidasDia = get_data_medidas_dia($connMedidas, $numeroDia, $diames, 2024, $idfisca, $idEnlace, $currentmonth, $rolUser);
 					for ($h=0; $h < sizeof($dataMedidasDia) ; $h++) { 
 							$getDataVictimas = getDataVictimas($connMedidas, $dataMedidasDia[$h][0]); 
 							$checkEstatus = checkFechaConclusion($dataMedidasDia[$h][19]);
@@ -170,8 +170,8 @@ $mesNom = Mes_Nombre($currentmonth);
 							<td><? echo $dataMedidasDia[$h][7]; ?></td>
 							<?if($rolUser != 2 ){?> <td><center><? echo $dataMedidasDia[$h][8]; ?><center></td> <? }else{ ?> <td><center><? echo $dataMedidasDia[$h][9]; ?><center></td> <? } ?>
 							<?if($rolUser == 1){?><td><center><? echo $dataMedidasDia[$h][18]; ?><center></td><? } ?>
-							<?if($rolUser != 3){?><td><?if($dataMedidasDia[$h][2] != 0){ ?><div class="verdCol" id="circulo"><? }else{ ?> <div class="redCol" id="circulo"> <? } ?></div></td><? } ?>
-						 <?if($rolUser == 1 || $rolUser == 3){ ?>
+							<?if($rolUser != 3 && $rolUser != 4){?><td><?if($dataMedidasDia[$h][2] != 0){ ?><div class="verdCol" id="circulo"><? }else{ ?> <div class="redCol" id="circulo"> <? } ?></div></td><? } ?>
+						 <?if($rolUser == 1 || $rolUser == 3 || $rolUser == 4){ ?>
 							<td>
 							<?if($checkEstatus == 'CONCLUIDA'){ ?>
 								<div class="verdCol" id="circulo"></div><center>Concluida</center>
