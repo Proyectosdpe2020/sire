@@ -83,6 +83,7 @@ if (isset($_POST["idMedida"])) {
 		$bandCausa = 0;
 	}
 }
+
 ?>
 
 
@@ -95,32 +96,44 @@ if (isset($_POST["idMedida"])) {
 		<div class="panel-body">
 			<h5 class="text-on-pannel"><strong>Datos generales</strong></h5>
 			<!---INICIA SECCION COORDINADOR Y MP(LECTURA)-->
-			<? if ($rolUser == 1 || $rolUser == 3) { ?>
-				<input type="hidden" name="nuc" id="nuc" value="<? echo	$get_nuc; ?>">
+			<? if ($rolUser == 1 || $rolUser == 3 || $rolUser == 4) {
+			  if($rolUser != 4){ ?>
+				<input type="hidden" name="nuc" id="nuc" value="<? echo	$get_nuc; ?>"> <? } ?>
 				<div class="row">
 					<div class="col-xs-12 col-sm-12  col-md-3">
 						<label for="heard">Agente del Ministerio Público: <span class="aste">(*)</span></label><br>
 						<div id="agentesMP_id_div">
 							<select class="dataAutocomplet form-control browser-default custom-select" onchange="refreshDataAgente()" id="agentesMP_id" locked="locked" name="agentesMP_id" type="text" <? if ($rolUser == 3) { ?> disabled <? } ?>>
 								<option></option>
-								<? $agentes = getDataMP($connMedidas);
+								<? $agentes = getDataMP($connMedidas, $rolUser, $idEnlace);
 								for ($h = 0; $h < sizeof($agentes); $h++) {
 									$idMP = $agentes[$h][0];
-									$nombrecom = $agentes[$h][1]; ?>
+									$nombrecom = $agentes[$h][1]; 
+									$idFiscAdscrito = $agentes[$h][3]; ?>
 									<option class="fontBold" value="<? echo $idMP; ?>" <? if ($a == 1 && $idMP == $get_idMP) { ?> selected <? } ?>><? echo $nombrecom; ?></option>
 								<? } ?>
 							</select>
 						</div>
 					</div>
+					<input type="hidden" name="idFiscAdscrito" id="idFiscAdscrito" value="<? echo	$idFiscAdscrito; ?>"> 
 					<div id="contDataAgente">
+					<? if ( $idMedida != 0) { ?>
 						<div class="col-xs-12 col-sm-12  col-md-3">
-							<label for="idAdscripcion">Área de adscripción :</label>
+							<label for="idAdscripcion">Área de adscripción : </label>
 							<select class="form-control" id="idAdscripcion" disabled>
-								<option class="fontBold" value="<? if ($a == 1) {
-																																									echo $get_idUnidad;
-																																								} ?>"> <? if ($a == 1) { ?> Unidad de medidas de protección <? } ?> </option>
-							</select>
+								<?$data = getDataAdscripcion($connMedidas, $get_idMP);
+								 	$idUnidad = $data[0][0];	$nombreUnidad = $data[0][1]; ?>
+									<option class="fontBold" value="<? echo $idUnidad; ?>" > <? echo $nombreUnidad; ?> </option>
+								</select>
 						</div>
+						<? } else { ?>
+						<div class="col-xs-12 col-sm-12  col-md-3">
+							<label for="idAdscripcion">Área de adscripción : </label>
+							 <select class="form-control" id="idAdscripcion" disabled>
+									<option class="fontBold" value="0" > </option>
+								</select>
+						</div>
+						<? } ?>
 						<div class="col-xs-12 col-sm-12  col-md-2">
 							<label for="idCargo">Cargo :</label>
 							<select class="form-control" id="idCargo" disabled>
@@ -294,80 +307,102 @@ if (isset($_POST["idMedida"])) {
 		</div>
 	</div>
 	<!--DATOS DE LA VICTIMA-->
-	<? if ($rolUser == 3 || $rolUser == 1) { ?>
+	<? if ($rolUser == 3 || $rolUser == 1 || $rolUser == 4) { ?>
+		<div id="medidas_seleccionadas"></div>
 		<div class="panel panel-default fd1">
 			<div class="panel-body">
 				<h5 class="text-on-pannel"><strong>Medidas de protección VICTIMA</strong></h5>
 				<div class="row">
 					<div class="col-xs-12 col-sm-6  col-md-6">
 						<img <? if ($a == 1 && in_array(1, $aplicadas)) { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 01 Fondo.png" <? } else { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 01 Gris.png" onmouseover="hoverIMG(this, 'uno');" onmouseout="unhoverIMG(this, 'uno')" <? if ($a == 1 && (sizeof($getMedidasAplicadas) > 0) && $rolUser != 1) { ?> onclick="aplicarMedida(<? echo $idEnlace; ?>, <? echo $idMedida; ?>, 1, <? echo $get_nuc; ?>)" <? } else {
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																												if ($rolUser != 1) { ?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 1, <? echo $idMedida; ?>)" <? }
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																					}
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																				} ?> class="cursorp" width="100%">
+							if ($rolUser != 1 && $rolUser != 4) { ?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 1, <? echo $idMedida; ?>)" <? }
+							elseif($rolUser == 4) { ?> onclick="agregarMedida(this, 1 , 'uno')" <? }
+					}
+				} ?> class="cursorp" width="100%">
 					</div>
 					<div class="col-xs-12 col-sm-6  col-md-6">
 						<img <? if ($a == 1 && in_array(2, $aplicadas)) { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 02 Fondo.png" <? } else { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 02 Gris.png" onmouseover="hoverIMG(this, 'dos');" onmouseout="unhoverIMG(this, 'dos')" <? if ($a == 1 && (sizeof($getMedidasAplicadas) > 0) && $rolUser != 1) { ?> onclick="aplicarMedida(<? echo $idEnlace; ?>, <? echo $idMedida; ?>, 2, <? echo $get_nuc; ?>)" <? } else {
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																												if ($rolUser != 1) { ?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 2, <? echo $idMedida; ?>)" <? }
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																					}
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																				} ?> class="cursorp" width="100%">
-					</div>
+							if ($rolUser != 1 && $rolUser != 4) { ?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 2, <? echo $idMedida; ?>)" <? }
+							elseif($rolUser == 4) { ?> onclick="agregarMedida(this, 2 , 'dos')" <? }
+					}
+				} ?> class="cursorp" width="100%">
+				</div>
 				</div><br>
 				<div class="row">
 					<div class="col-xs-12 col-sm-6  col-md-6">
 						<img <? if ($a == 1 && in_array(3, $aplicadas)) { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 03 Fondo.png" <? } else { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 03 Gris.png" onmouseover="hoverIMG(this, 'tres');" onmouseout="unhoverIMG(this, 'tres')" <? if ($a == 1 && (sizeof($getMedidasAplicadas) > 0) && $rolUser != 1) { ?> onclick="aplicarMedida(<? echo $idEnlace; ?>, <? echo $idMedida; ?>, 3, <? echo $get_nuc; ?>)" <? } else {
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																														if ($rolUser != 1) { ?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 3, <? echo $idMedida; ?>)" <? }
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																							}
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																						} ?> class="cursorp" width="100%">
+							if ($rolUser != 1 && $rolUser != 4) { ?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 3, <? echo $idMedida; ?>)" <? }
+							elseif($rolUser == 4) { ?> onclick="agregarMedida(this, 3 , 'tres')" <? }
+					}
+				} ?> class="cursorp" width="100%">
 					</div>
 					<div class="col-xs-12 col-sm-6  col-md-6">
-						<img <? if ($a == 1 && in_array(4, $aplicadas)) { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 04 Fondo.png" <? } else { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 04 Gris.png" onmouseover="hoverIMG(this, 'cuatro');" onmouseout="unhoverIMG(this, 'cuatro')" <? if ($a == 1 && (sizeof($getMedidasAplicadas) > 0) && $rolUser != 1) { ?> onclick="aplicarMedida(<? echo $idEnlace; ?>, <? echo $idMedida; ?>, 4, <? echo $get_nuc; ?>)" <? } else {
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																		if ($rolUser != 1) { ?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 4, <? echo $idMedida; ?>)" <? }
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																											}
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																										} ?> class="cursorp" width="100%">
-					</div>
+						<img <? if ($a == 1 && in_array(4, $aplicadas)) { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 04 Fondo.png" <? } else { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 04 Gris.png" onmouseover="hoverIMG(this, 'cuatro');" onmouseout="unhoverIMG(this, 'cuatro')" <? if ($a == 1 && (sizeof($getMedidasAplicadas) > 0) && $rolUser != 1) { ?> onclick="aplicarMedida(<? echo $idEnlace; ?>, <? echo $idMedida; ?>, 4, <? echo $get_nuc; ?>)" <? } else{
+							if ($rolUser != 1 && $rolUser != 4) { ?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 4, <? echo $idMedida; ?>)" <? }
+							elseif($rolUser == 4) { ?> onclick="agregarMedida(this, 4 , 'cuatro')" <? }
+					}
+				} ?> class="cursorp" width="100%">
+				</div>
 				</div><br>
 				<div class="row">
 					<div class="col-xs-12 col-sm-6  col-md-6">
 						<img <? if ($a == 1 && in_array(5, $aplicadas)) { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 05 Fondo.png" <? } else { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 05 Gris.png" onmouseover="hoverIMG(this, 'cinco');" onmouseout="unhoverIMG(this, 'cinco')" <? if ($a == 1 && (sizeof($getMedidasAplicadas) > 0) && $rolUser != 1) { ?> onclick="aplicarMedida(<? echo $idEnlace; ?>, <? echo $idMedida; ?>, 5, <? echo $get_nuc; ?>)" <? } else {
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																if ($rolUser != 1) { ?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 5, <? echo $idMedida; ?>)" <? }
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																									}
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																								} ?> class="cursorp" width="100%">
+							if ($rolUser != 1 && $rolUser != 4) { ?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 5, <? echo $idMedida; ?>)" <? }
+							elseif($rolUser != 1) { ?> onclick="agregarMedida(this, 5 , 'cinco')" <? }
+					}
+				} ?> class="cursorp" width="100%">
 					</div>
 					<div class="col-xs-12 col-sm-6  col-md-6">
 						<img <? if ($a == 1 && in_array(6, $aplicadas)) { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 06 Fondo.png" <? } else { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 06 Gris.png" onmouseover="hoverIMG(this, 'seis');" onmouseout="unhoverIMG(this, 'seis')" <? if ($a == 1 && (sizeof($getMedidasAplicadas) > 0) && $rolUser != 1) { ?> onclick="aplicarMedida(<? echo $idEnlace; ?>, <? echo $idMedida; ?>, 6, <? echo $get_nuc; ?>)" <? } else {
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																														if ($rolUser != 1) { ?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 6, <? echo $idMedida; ?>)" <? }
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																							}
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																						} ?> class="cursorp" width="100%">
-					</div>
+							if ($rolUser != 1 && $rolUser != 4) { ?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 6, <? echo $idMedida; ?>)" <? }
+							elseif($rolUser == 4) { ?> onclick="agregarMedida(this, 6 , 'seis')" <? }
+					}
+				} ?> class="cursorp" width="100%">
+				</div>
 				</div><br>
 				<div class="row">
 					<div class="col-xs-12 col-sm-6  col-md-6">
-						<img <? if ($a == 1 && in_array(7, $aplicadas)) { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 07 Fondo.png" <? } else { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 07 Gris.png" onmouseover="hoverIMG(this, 'siete');" onmouseout="unhoverIMG(this, 'siete')" <? if ($a == 1 && (sizeof($getMedidasAplicadas) > 0) && $rolUser != 1) { ?> onclick="aplicarMedida(<? echo $idEnlace; ?>, <? echo $idMedida; ?>, 7, <? echo $get_nuc; ?>)" <? } else {
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																if ($rolUser != 1) {  ?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 7, <? echo $idMedida; ?>)" <? }
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																										}
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																									} ?> class="cursorp" width="100%">
+						<img <? if ($a == 1 && in_array(7, $aplicadas)) { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 07 Fondo.png" <? } else { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 07 Gris.png" onmouseover="hoverIMG(this, 'siete');" onmouseout="unhoverIMG(this, 'siete')" <? if ($a == 1 && (sizeof($getMedidasAplicadas) > 0) && $rolUser != 1) { ?> onclick="aplicarMedida(<? echo $idEnlace; ?>, <? echo $idMedida; ?>, 7, <? echo $get_nuc; ?>)" <? } else{
+							if ($rolUser != 1 && $rolUser != 4) { ?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 7, <? echo $idMedida; ?>)" <? }
+							elseif($rolUser == 4) {  ?> onclick="agregarMedida(this, 7 , 'siete')" <? }
+					}
+				} ?> class="cursorp" width="100%">
 					</div>
 					<div class="col-xs-12 col-sm-6  col-md-6">
 						<img <? if ($a == 1 && in_array(8, $aplicadas)) { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 08 Fondo.png" <? } else { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 08 Gris.png" onmouseover="hoverIMG(this, 'ocho');" onmouseout="unhoverIMG(this, 'ocho')" <? if ($a == 1 && (sizeof($getMedidasAplicadas) > 0) && $rolUser != 1) { ?> onclick="aplicarMedida(<? echo $idEnlace; ?>, <? echo $idMedida; ?>, 8, <? echo $get_nuc; ?>)" <? } else {
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																														if ($rolUser != 1) { ?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 8, <? echo $idMedida; ?>)" <? }
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																							}
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																						} ?> class="cursorp" width="100%">
+							if ($rolUser != 1 && $rolUser != 4) { ?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 8, <? echo $idMedida; ?>)" <? }
+							elseif($rolUser == 4) { ?> onclick="agregarMedida(this, 8 , 'ocho')" <? }
+					}
+				} ?> class="cursorp" width="100%">
 					</div>
 				</div><br>
 				<div class="row">
 					<div class="col-xs-12 col-sm-6  col-md-6">
 						<img <? if ($a == 1 && in_array(9, $aplicadas)) { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 09 Fondo.png" <? } else { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 09 Gris.png" onmouseover="hoverIMG(this, 'nueve');" onmouseout="unhoverIMG(this, 'nueve')" <? if ($a == 1 && (sizeof($getMedidasAplicadas) > 0) && $rolUser != 1) { ?> onclick="aplicarMedida(<? echo $idEnlace; ?>, <? echo $idMedida; ?>, 9, <? echo $get_nuc; ?>)" <? } else {
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																if ($rolUser != 1) { ?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 9, <? echo $idMedida; ?>)" <? }
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																									}
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																								} ?> class="cursorp" width="100%">
+							if ($rolUser != 1 && $rolUser != 4) { ?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 9, <? echo $idMedida; ?>)" <? }
+							elseif($rolUser == 4) { ?> onclick="agregarMedida(this, 9 , 'nueve')" <? }
+					}
+				} ?> class="cursorp" width="100%">
 					</div>
 					<div class="col-xs-12 col-sm-6  col-md-6">
 						<img <? if ($a == 1 && in_array(10, $aplicadas)) { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 10 Fondo.png" <? } else { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 10 Gris.png" onmouseover="hoverIMG(this, 'diez');" onmouseout="unhoverIMG(this, 'diez')" <? if ($a == 1 && (sizeof($getMedidasAplicadas) > 0) && $rolUser != 1) { ?> onclick="aplicarMedida(<? echo $idEnlace; ?>, <? echo $idMedida; ?>, 10, <? echo $get_nuc; ?>)" <? } else {
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																if ($rolUser != 1) { ?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 10, <? echo $idMedida; ?>)" <? }
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																										}
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																									} ?> class="cursorp" width="100%">
+							if ($rolUser != 1 && $rolUser != 4) { ?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 10, <? echo $idMedida; ?>)" <? }
+							elseif($rolUser == 4) { ?> onclick="agregarMedida(this, 10 , 'diez')" <? }	
+					}
+				} ?> class="cursorp" width="100%">
 					</div>
 				</div><br>
+				<?if($rolUser == 4){ 
+					if($a == 1){ 
+						 $getFechaConclusion = getDataGenerales($connMedidas, $idMedida, 0, 0);
+						 $fechaConclusion = $getFechaConclusion[0][3]->format('Y-m-d H:i'); } ?>
+				<div class="row">
+					<div class="col-xs-12 col-sm-12  col-md-3">
+						<label for="fechaConclusion">Fecha de conclusión: <span class="aste">(*)</span></label>
+						<input id="fechaConclu" type="datetime-local" value="<?if($a == 1){ echo $fechaConclusion; } ?>" name="fechaConclu" onchange="validateMedidaOK(this.id)" class="fechas form-control gehit" />
+					</div>
+				</div><br>
+			<? } ?>
 			</div>
 		</div>
 	<? } ?>
@@ -476,7 +511,7 @@ if (isset($_POST["idMedida"])) {
 				</div>
 			<? } ?>
 
-			<? if ($rolUser == 3 || $rolUser == 1) { ?>
+			<? if ($rolUser == 3 || $rolUser == 1 || $rolUser == 4) { ?>
 				<div class="panel panel-default fd1">
 					<div class="panel-body">
 						<h5 class="text-on-pannel"><strong>Medidas de protección TESTIGO</strong></h5>
@@ -535,11 +570,11 @@ if (isset($_POST["idMedida"])) {
 
 
 	<div class="modal-footer">
-		<button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeModalMDP(<? echo $anioActual; ?>, <? echo $idEnlace; ?>, 0)">Cerrar</button>
-		<? if ($rolUser == 2 && $idMedida == 0) { ?>
-			<button type="button" class="btn btn-primary" onclick="modalDatosMedidaCapturista(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 10, <? echo $idMedida; ?>)">Guardar información</button>
-		<? } elseif ($rolUser == 2 && $idMedida != 0) { ?>
-			<button type="button" class="btn btn-primary" onclick="actualizarDatosCarpeta(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 10, <? echo $idMedida; ?>)">Actualizar información</button>
+		<button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeModalMDP(<? echo $anioActual; ?>, <? echo $idEnlace; ?>, 0, <? echo $rolUser; ?> )">Cerrar</button>
+		<? if ( ($rolUser == 2 && $idMedida == 0) || ($rolUser == 4 && $idMedida == 0 ) ) { ?>
+			<button type="button" class="btn btn-primary" onclick="modalDatosMedidaCapturista(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 10, <? echo $idMedida; ?>,0, <? echo $rolUser; ?>)">Guardar información</button>
+		<? } elseif ( ($rolUser == 2  && $idMedida != 0) || ($rolUser == 4  && $idMedida != 0) ) { ?>
+			<button type="button" class="btn btn-primary" onclick="actualizarDatosCarpeta(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 10, <? echo $idMedida; ?>, <? echo $rolUser; ?>)">Actualizar información</button>
 		<? } elseif ($rolUser == 1) { ?>
 			<button type="button" class="btn btn-primary" onclick="asignar_medida_mp(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 10, <? echo $idMedida; ?>)">Asignar a Ministerio Publico</button>
 		<? } ?>
