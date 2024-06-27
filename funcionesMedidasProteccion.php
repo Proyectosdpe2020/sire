@@ -19,13 +19,25 @@ function getCausaPenalNuc($conn, $nuc){
 }
 
 
-function getDataMP($connMedidas){
-	$query = " SELECT
+function getDataMP($connMedidas, $rolUser, $idEnlace){
+	if($rolUser != 4){
+		$query = " SELECT
 	               	  mp.idMp
 	                 ,mp.nombre+' '+mp.paterno+' '+mp.materno AS nombreMP
 		                ,mp.idUnidad
+		                ,mp.idFiscalia
 										  FROM SIRE.medidas.mp 
-										  WHERE mp.estatus = 'VI' ";
+										  WHERE mp.estatus = 'VI' and mp.idUnidad = 1 ";
+	}else{
+		$query = " SELECT
+	               	  mp.idMp
+	                 ,mp.nombre+' '+mp.paterno+' '+mp.materno AS nombreMP
+		                ,mp.idUnidad
+		                ,mp.idFiscalia
+										  FROM SIRE.medidas.mp 
+										  WHERE mp.idEnlace = $idEnlace AND mp.estatus = 'VI' ";
+	}
+	
 	$indice = 0;
 	$stmt = sqlsrv_query($connMedidas, $query);
 	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
@@ -33,6 +45,7 @@ function getDataMP($connMedidas){
 		$arreglo[$indice][0]=$row['idMp'];
 		$arreglo[$indice][1]=$row['nombreMP'];
 		$arreglo[$indice][2]=$row['idUnidad'];
+		$arreglo[$indice][3]=$row['idFiscalia'];
 		$indice++;
 	}
 	if(isset($arreglo)){return $arreglo;}
@@ -541,7 +554,7 @@ function getFracciones($connMedidas, $fraccion){
 }
 
 function get_data_medidas_dia($connMedidas, $numeroDia, $diames, $anio, $fiscalia, $idenlace, $mes, $rolUser){
-	//CONSULTA PARA COORDINADOR
+	//CONSULTA PARA COORDINADOR DE MEDIDAS DE PROTECCION
 	if($rolUser == 1){
 		if($diames != 0){
 				$query = " SELECT m.idMedida
@@ -569,7 +582,8 @@ function get_data_medidas_dia($connMedidas, $numeroDia, $diames, $anio, $fiscali
 															  INNER JOIN PRUEBA.dbo.CatModalidadesEstadisticas d ON d.CatModalidadesEstadisticasID = m.idDelito
 															  INNER JOIN medidas.catFiscalias f ON f.catFiscaliasID = m.idFiscaliaProcedencia 
 															  INNER JOIN ESTADISTICAV2.dbo.enlace e ON e.idEnlace = m.idEnlace
-															  WHERE m.diaSemana = $numeroDia AND m.anio = $anio AND m.diaMes = $diames AND m.mes = $mes order by m.idMedida desc ";
+															  WHERE m.idUnidad = 1 AND m.idFiscalia = 1 AND m.diaSemana = $numeroDia AND m.anio = $anio AND m.diaMes = $diames AND m.mes = $mes
+															  order by m.idMedida desc ";
 		}else{
 			       $query = " SELECT m.idMedida
 															      ,m.nuc
@@ -596,7 +610,7 @@ function get_data_medidas_dia($connMedidas, $numeroDia, $diames, $anio, $fiscali
 															  INNER JOIN PRUEBA.dbo.CatModalidadesEstadisticas d ON d.CatModalidadesEstadisticasID = m.idDelito
 															  INNER JOIN medidas.catFiscalias f ON f.catFiscaliasID = m.idFiscaliaProcedencia 
 															  INNER JOIN ESTADISTICAV2.dbo.enlace e ON e.idEnlace = m.idEnlace
-															  WHERE m.anio = $anio  AND m.mes = $mes order by m.idMedida desc ";
+															  WHERE m.idUnidad = 1 AND m.idFiscalia = 1 AND m.anio = $anio  AND m.mes = $mes order by m.idMedida desc ";
 		}
 	}elseif($rolUser == 2){
 		if($diames != 0){
@@ -657,6 +671,62 @@ function get_data_medidas_dia($connMedidas, $numeroDia, $diames, $anio, $fiscali
 															  WHERE DATEPART(year, fechaRegistro) = $anio  AND DATEPART(month, fechaRegistro) = $mes AND m.idEnlace = $idenlace order by m.idMedida desc ";
 		}
 	}elseif($rolUser == 3){
+		if($diames != 0){
+				$query = " SELECT m.idMedida
+															      ,m.nuc
+															      ,m.idMP
+																  			,mp.nombre+' '+mp.paterno+' '+mp.materno AS nombreMP
+															      ,m.idUnidad
+															      ,m.idFiscalia
+															      ,m.idDelito
+																 			 ,d.Nombre AS nombreDelito
+															      ,m.fechaAcuerdo
+															      ,m.fechaRegistro
+															      ,m.diaSemana
+															      ,m.diaMes
+															      ,m.mes
+															      ,m.anio
+															      ,m.idEnlace
+															      ,m.idFiscaliaProcedencia
+																 				,f.nombre as nombreFiscProc
+															      ,m.estatus
+															      ,e.nombre+' '+e.apellidoPaterno+' '+e.apellidoMarterno AS nombreEnlace
+															      ,m.fechaConclusion
+															  FROM SIRE.medidas.medidasProteccion m
+															  LEFT JOIN medidas.mp ON mp.idMp = m.idMP
+															  INNER JOIN PRUEBA.dbo.CatModalidadesEstadisticas d ON d.CatModalidadesEstadisticasID = m.idDelito
+															  INNER JOIN medidas.catFiscalias f ON f.catFiscaliasID = m.idFiscaliaProcedencia 
+															  INNER JOIN ESTADISTICAV2.dbo.enlace e ON e.idEnlace = m.idEnlace
+															  WHERE m.diaSemana = $numeroDia AND m.anio = $anio AND m.diaMes = $diames AND m.mes = $mes AND mp.idEnlace = $idenlace order by m.idMedida desc ";
+		}else{
+			       $query = " SELECT m.idMedida
+															      ,m.nuc
+															      ,m.idMP
+																  			,mp.nombre+' '+mp.paterno+' '+mp.materno AS nombreMP
+															      ,m.idUnidad
+															      ,m.idFiscalia
+															      ,m.idDelito
+																 			 ,d.Nombre AS nombreDelito
+															      ,m.fechaAcuerdo
+															      ,m.fechaRegistro
+															      ,m.diaSemana
+															      ,m.diaMes
+															      ,m.mes
+															      ,m.anio
+															      ,m.idEnlace
+															      ,m.idFiscaliaProcedencia
+																 				,f.nombre as nombreFiscProc
+															      ,m.estatus
+															      ,e.nombre+' '+e.apellidoPaterno+' '+e.apellidoMarterno AS nombreEnlace
+															      ,m.fechaConclusion
+															  FROM SIRE.medidas.medidasProteccion m
+															  LEFT JOIN medidas.mp ON mp.idMp = m.idMP
+															  INNER JOIN PRUEBA.dbo.CatModalidadesEstadisticas d ON d.CatModalidadesEstadisticasID = m.idDelito
+															  INNER JOIN medidas.catFiscalias f ON f.catFiscaliasID = m.idFiscaliaProcedencia 
+															  INNER JOIN ESTADISTICAV2.dbo.enlace e ON e.idEnlace = m.idEnlace
+															  WHERE m.anio = $anio  AND m.mes = $mes AND mp.idEnlace = $idenlace order by m.idMedida desc ";
+		}
+	}elseif($rolUser == 4){
 		if($diames != 0){
 				$query = " SELECT m.idMedida
 															      ,m.nuc
@@ -948,7 +1018,7 @@ function getRolUser($connMedidas , $idEnlace){
 //Funcion para checar el total de carpetas faltantes de asignar a Ministerio Publico
 function getCarpetasFaltante($connMedidas){
 	$query = " SELECT count(idMP) AS totalPendientes
-            FROM SIRE.medidas.medidasProteccion WHERE idMP = 0 ";
+            FROM SIRE.medidas.medidasProteccion WHERE idUnidad = 0 AND idFiscalia = 0 AND idMP = 0 ";
 	$indice = 0;
 	$stmt = sqlsrv_query($connMedidas, $query);
 	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
@@ -985,7 +1055,7 @@ function get_data_medidas_pendientes($connMedidas){
 															  INNER JOIN PRUEBA.dbo.CatModalidadesEstadisticas d ON d.CatModalidadesEstadisticasID = m.idDelito
 															  INNER JOIN medidas.catFiscalias f ON f.catFiscaliasID = m.idFiscaliaProcedencia 
 															  INNER JOIN ESTADISTICAV2.dbo.enlace e ON e.idEnlace = m.idEnlace
-															  WHERE m.idMP = 0 ";
+															  WHERE m.idUnidad = 0 AND m.idFiscalia = 0 AND m.idMP = 0 ";
 		
 	$indice = 0;
 	$stmt = sqlsrv_query($connMedidas, $query);

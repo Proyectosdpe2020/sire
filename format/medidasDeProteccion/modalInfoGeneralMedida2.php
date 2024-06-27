@@ -44,7 +44,7 @@ if (isset($_POST["idMedida"])){
 		<?if($rolUser == 1){
 			//Menu Coordinador
 			include('templates/template_menuCoordinador.php');
-		}elseif($rolUser == 3){
+		}elseif($rolUser == 3 || $rolUser == 4){
 			//Menu ministerio publico
 			include('templates/template_menuMP.php');
 		}elseif($rolUser == 2){
