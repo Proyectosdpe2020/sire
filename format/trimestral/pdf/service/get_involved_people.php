@@ -13,7 +13,7 @@ $sql = "SELECT [FirmaID]
                 ,[Cargo]
                 ,[Funcion]
                 ,[PosicionFirma]
-            FROM [ESTADISTICAV2].[trimestral].[Firmas] WHERE idEnlace = $link AND idUnidad = $unity_id";
+            FROM [ESTADISTICAV2].[trimestral].[Firmas] WHERE idEnlace = $link";
 
 $params = array();
 $options = array( "Scrollable" => SQLSRV_CURSOR_KEYSET );

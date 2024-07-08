@@ -532,12 +532,28 @@ function set_sign_field($pdf2, $user, $position, $involved_people){
     //$pdf2->Cell(170, 80, iconv('UTF-8', 'windows-1252', $involved_people['validated_by']['position']), "", "", 'C');
 
     if(strlen($involved_people['validated_by']['position']) > 51){
-
+    //if(strlen($involved_people['elaborated_by']['position']) > 51 || strlen($involved_people['validated_by']['position']) > 51){
+    
+        /*
         $pdf2->Ln(40);
         $pdf2->Cell(80, 6, iconv('UTF-8', 'windows-1252', $involved_people['elaborated_by']['position']), "", "", 'C');
         $pdf2->Cell(25, 6, '', "", "", 'C');
         $pdf2->MultiCell(95,6,iconv('UTF-8', 'windows-1252', $involved_people['validated_by']['position']), 0, 'C');
+        */
 
+        if(strlen($involved_people['elaborated_by']['position']) > 51){
+            $y_minus = 24;
+        }
+        else{
+            $y_minus = 10;
+        }
+
+        $pdf2->Ln(40);
+        $pdf2->MultiCell(70,6,iconv('UTF-8', 'windows-1252', $involved_people['elaborated_by']['position']), 0, 'C', true);
+        $x = $pdf2->GetX();
+        $y = $pdf2->GetY();
+        $pdf2->SetXY($x + 120, $y - $y_minus);
+        $pdf2->MultiCell(70,6,iconv('UTF-8', 'windows-1252', $involved_people['validated_by']['position']), 0, 'C', true);
     }
     else{
         $pdf2->Cell(70, 80, iconv('UTF-8', 'windows-1252', $involved_people['elaborated_by']['position']), "", "", 'C');
@@ -547,14 +563,14 @@ function set_sign_field($pdf2, $user, $position, $involved_people){
     if(isset($involved_people['third_person'])){
         $pdf2->Ln(-25);
 
-        $pdf2->Cell(180, 80, iconv('UTF-8', 'windows-1252', $involved_people['third_person']['function']), "", "", 'C');
+        $pdf2->Cell(190, 80, iconv('UTF-8', 'windows-1252', $involved_people['third_person']['function']), "", "", 'C');
 
         $pdf2->Ln(8);
 
-        $pdf2->Cell(180, 80, iconv('UTF-8', 'windows-1252', $involved_people['third_person']['name']), "", "", 'C');
+        $pdf2->Cell(190, 80, iconv('UTF-8', 'windows-1252', $involved_people['third_person']['name']), "", "", 'C');
         $pdf2->Ln(45);
         $pdf2->Cell(40, 6, '', "", "", 'C');
-        $pdf2->MultiCell(95,6,iconv('UTF-8', 'windows-1252', $involved_people['third_person']['position']), 0, 'C');
+        $pdf2->MultiCell(110,6,iconv('UTF-8', 'windows-1252', $involved_people['third_person']['position']), 0, 'C');
     }
 
 }
