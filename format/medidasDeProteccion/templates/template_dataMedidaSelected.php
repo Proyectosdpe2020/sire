@@ -53,8 +53,8 @@
 																									<td><? echo $dataMedidasDia[$h][7]; ?></td>
 																										<?if($rolUser != 2 ){?> <td><center><? echo $dataMedidasDia[$h][8]; ?><center></td> <? }else{ ?> <td><center><? echo $dataMedidasDia[$h][9]; ?><center></td> <? } ?>
 																								 <?if($rolUser == 1){?><td><center><? echo $dataMedidasDia[$h][18]; ?><center></td><? } ?>
-																									<?if($rolUser != 3){?><td><?if($dataMedidasDia[$h][2] != 0){ ?><div class="verdCol" id="circulo"><? }else{ ?> <div class="redCol" id="circulo"> <? } ?></div></td><? } ?>
-																										<?if($rolUser == 1 || $rolUser == 3){ ?>
+																									<?if($rolUser != 3 && $rolUser != 4){?><td><?if($dataMedidasDia[$h][2] != 0){ ?><div class="verdCol" id="circulo"><? }else{ ?> <div class="redCol" id="circulo"> <? } ?></div></td><? } ?>
+																										<?if($rolUser == 1 || $rolUser == 3 || $rolUser == 4){ ?>
 																									 	<td>
 																									 		<?if($checkEstatus == 'CONCLUIDA'){ ?>
 																									 			<div class="verdCol" id="circulo"></div><center> Concluida</center>
