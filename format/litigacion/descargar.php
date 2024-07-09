@@ -93,7 +93,7 @@
 	$objPHPExcel->getActiveSheet()->SetCellValue("F9", $anio);
 
 
-     $data = getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad, 0);
+ $data = getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad, 0);
 
 
 	$objPHPExcel->getActiveSheet()->SetCellValue("D12", $data[0][0]); //Existencia anterior
@@ -282,6 +282,215 @@
 	$objPHPExcel->getActiveSheet()->SetCellValue("D110", $data[0][149]); //Canalizados por cese de funciones
 
 	$nombre_reporte = $nombrereporte.".xlsx";
+
+ //Obtenemos el numero total de MP en la unidad
+	$dataMp = getDataMP_documentExcel($conn, $mes, $anio, $idUnidad);
+	$totalMP = sizeof($dataMp);
+ $k = 0;
+ $tituloSheet = [];
+	//temp sheet copy
+for($pageIndex=1; $pageIndex <= $totalMP; $pageIndex++){
+	$tituloSheet[$k] = formatTitleSheet($dataMp[$k][152], $dataMp[$k][153], $dataMp[$k][154]);
+	$tempSheet = $objPHPExcel->getSheet(0)->copy();
+	$tempSheet->setTitle($tituloSheet[$k]);
+	$objPHPExcel->addSheet($tempSheet);
+
+	$sheet = $objPHPExcel->getSheet($pageIndex);
+ $sheet->SetCellValue("D10", $dataMp[$k][152].' '.$dataMp[$k][153].' '.$dataMp[$k][154]);
+
+
+ $sheet->SetCellValue("D12", $dataMp[$k][0]); //Existencia anterior
+	$sheet->SetCellValue("H12", $dataMp[$k][105]);  //Recibidas por otro ministerio publico
+
+	$sheet->SetCellValue("D13", $dataMp[$k][1]); //Carpetas Judicializadas
+	$sheet->SetCellValue("D14", $dataMp[$k][2]); //Con detenido
+	$sheet->SetCellValue("D15", $dataMp[$k][3]); //Sin detenido
+
+	$sheet->SetCellValue("D18", $dataMp[$k][91]); //Formulaciones de la imputacion SOLICITADAS
+	$sheet->SetCellValue("D19", $dataMp[$k][92]); //Formulaciones de la imputacion OTORGADAS
+	$sheet->SetCellValue("D20", $dataMp[$k][93]); //Formulaciones de la imputacion NEGADAS
+
+ $sheet->SetCellValue("D23", $dataMp[$k][94]); //Control de la detencion Legal
+	$sheet->SetCellValue("D24", $dataMp[$k][95]); //Control de la detencion Ilegal
+
+	$sheet->SetCellValue("D27", $dataMp[$k][4]); //Auto de vinculacion
+ $sheet->SetCellValue("D28", $dataMp[$k][5]); //Auto de no vinculación
+	$sheet->SetCellValue("D29", $dataMp[$k][6]); //Mixtos
+
+	$sheet->SetCellValue("D32", $dataMp[$k][96]); //Medidas cautelares solicitadas
+	$sheet->SetCellValue("D33", $dataMp[$k][98]); //Medidas cautelares otorgadas
+	$sheet->SetCellValue("D34", $dataMp[$k][97]); //Medidas cautelares negadas
+
+
+	$sheet->SetCellValue("D36", $dataMp[$k][7]); //Imposicion de medidas cautelares
+	$sheet->SetCellValue("D37", $dataMp[$k][8]);
+	$sheet->SetCellValue("D38", $dataMp[$k][9]);
+	$sheet->SetCellValue("D39", $dataMp[$k][10]);
+	$sheet->SetCellValue("D40", $dataMp[$k][11]);
+	$sheet->SetCellValue("D41", $dataMp[$k][12]);
+	$sheet->SetCellValue("D42", $dataMp[$k][13]);
+	$sheet->SetCellValue("D43", $dataMp[$k][14]);
+	$sheet->SetCellValue("D44", $dataMp[$k][15]);
+ $sheet->SetCellValue("D45", $dataMp[$k][16]);
+	$sheet->SetCellValue("D46", $dataMp[$k][17]);
+	$sheet->SetCellValue("D47", $dataMp[$k][18]);
+	$sheet->SetCellValue("D48", $dataMp[$k][19]);
+	$sheet->SetCellValue("D49", $dataMp[$k][20]);
+	$sheet->SetCellValue("D50", $dataMp[$k][21]);
+	$sheet->SetCellValue("D51", $dataMp[$k][22]);
+
+
+	// $objPHPExcel->getActiveSheet()->SetCellValue("H72", $data[0][23]); //Sobreseimientos decretados
+ $sheet->SetCellValue("D111", $dataMp[$k][24]); //Prescripción de la accion penal
+	$sheet->SetCellValue("D112", $dataMp[$k][151]); //Prescripción de la accion penal
+	// $objPHPExcel->getActiveSheet()->SetCellValue("H75", $data[0][26]); //Acuerdo reparatorio
+	// $objPHPExcel->getActiveSheet()->SetCellValue("H76", $data[0][27]); //Suspencion condicional del proceso
+	// $objPHPExcel->getActiveSheet()->SetCellValue("H77", $data[0][28]); //Criterio de oportunidad
+	// $objPHPExcel->getActiveSheet()->SetCellValue("H78", $data[0][29]); //Terminacion anticipada
+	
+	// $objPHPExcel->getActiveSheet()->SetCellValue("H79", $data[0][31]); //Acumulación
+
+	$sheet->SetCellValue("D52", $dataMp[$k][32]); //Citaciones
+
+	$sheet->SetCellValue("D54", $dataMp[$k][33]); //Cateos solicitados
+	$sheet->SetCellValue("D55", $dataMp[$k][34]); //Cateos concedidos
+ $sheet->SetCellValue("D56", $dataMp[$k][35]); //Cateos negados
+
+	$sheet->SetCellValue("D58", $dataMp[$k][36]); //Ordenes negadas
+	$sheet->SetCellValue("D59", $dataMp[$k][37]); //Aprehension
+ $sheet->SetCellValue("D60", $dataMp[$k][38]); //Comparecencia
+	$sheet->SetCellValue("D61", $dataMp[$k][107]); //Ordenes solicitadas
+	$sheet->SetCellValue("D62", $dataMp[$k][108]); //Aprehension
+	$sheet->SetCellValue("D63", $dataMp[$k][109]); //Comparecencia
+
+	$sheet->SetCellValue("D65", $dataMp[$k][50]); //mANDAMIENTOS JUDICIALES GIRADOS
+	$sheet->SetCellValue("D66", $dataMp[$k][51]); 
+	$sheet->SetCellValue("D67", $dataMp[$k][52]);
+
+	$sheet->SetCellValue("D68", $dataMp[$k][53]); //Mandamientos judiciales cumplidos
+	$sheet->SetCellValue("D69", $dataMp[$k][54]);
+	$sheet->SetCellValue("D70", $dataMp[$k][55]);
+
+	$sheet->SetCellValue("D71", $dataMp[$k][110]); //Medidas de proteccion
+	$sheet->SetCellValue("D72", $dataMp[$k][111]); //total de victimas de protección
+
+	$sheet->SetCellValue("D74", $dataMp[$k][112]); //Actos de investigacion CON control judicial
+	$sheet->SetCellValue("D75", $dataMp[$k][113]); //Intervención en tiempo real
+	$sheet->SetCellValue("D76", $dataMp[$k][114]); //Toma de muestras
+	$sheet->SetCellValue("D77", $dataMp[$k][115]); //Exhumaciíon
+	$sheet->SetCellValue("D78", $dataMp[$k][116]);  //Obtención de datos reservados
+	$sheet->SetCellValue("D79", $dataMp[$k][117]);  //Intervencion de comunicaciones
+ $sheet->SetCellValue("D80", $dataMp[$k][118]); //Providencia precautoria
+
+	$sheet->SetCellValue("D83", $dataMp[$k][119]); //Actos de investigacion SIN control judicial
+	$sheet->SetCellValue("D84", $dataMp[$k][120]); //Cadena de custodia
+ $sheet->SetCellValue("D85", $dataMp[$k][121]); //Inspeccion de lugar distina a los hechos
+ $sheet->SetCellValue("D86", $dataMp[$k][122]); //Inspeccion de inmuebles
+ $sheet->SetCellValue("D87", $dataMp[$k][123]); //Entrevista entre testigos
+ $sheet->SetCellValue("D88", $dataMp[$k][124]); //Reconocimiento entre persona
+ $sheet->SetCellValue("D89", $dataMp[$k][125]); //Solicitud de informes periciales
+ $sheet->SetCellValue("D90", $dataMp[$k][126]); //Información de institutos de seguridad
+ $sheet->SetCellValue("D91", $dataMp[$k][127]); //Reconocimiento ó examen fisico de persona
+
+ $sheet->SetCellValue("H15", $dataMp[$k][128]); //Resoluciones de juicio oral
+ $sheet->SetCellValue("H16", $dataMp[$k][129]); //Audiencia juicio oral
+ $sheet->SetCellValue("H17", $dataMp[$k][130]); //Audiencia de fallo
+ $sheet->SetCellValue("H18", $dataMp[$k][132]); //Audiencia de individualizacion de sancion
+ $sheet->SetCellValue("H19", $dataMp[$k][133]); //Procedimiento especial
+ $sheet->SetCellValue("H20", $dataMp[$k][131]); //Audiencia absolutorio
+ $sheet->SetCellValue("H21", $dataMp[$k][134]); //Audiencia condenatorio
+
+
+	$sheet->SetCellValue("H58", $dataMp[$k][43]); //Apleaciones no admitidas
+	$sheet->SetCellValue("H41", $dataMp[$k][30]); //Procedimientos abreviados
+	$sheet->SetCellValue("H42", $dataMp[$k][135]); //Mecanismos de aceleracion
+
+	$sheet->SetCellValue("H87", $dataMp[$k][44]); //Sentencias dictadas
+	$sheet->SetCellValue("H88", $dataMp[$k][45]); //Revoca
+ $sheet->SetCellValue("H89", $dataMp[$k][46]); //Modifica
+	$sheet->SetCellValue("H90", $dataMp[$k][47]); //Confirma
+	$sheet->SetCellValue("H91", $dataMp[$k][48]);  //Reposicion del procedimiento
+
+	//$objPHPExcel->getActiveSheet()->SetCellValue("H13", $data[0][49]); //Total de carpetas judicializadas en tramite
+
+	$sheet->SetCellValue("H13", $dataMp[$k][150]); //Total de carpetas judicializadas en tramite NUEVO CAMPO NUCS
+
+	$sheet->SetCellValue("H30", $dataMp[$k][56]); //Total de audiencias
+
+	$sheet->SetCellValue("D93", $dataMp[$k][99]); //Acusaciones presentadas
+	$sheet->SetCellValue("D94", $dataMp[$k][57]); //Audiencia intermedia escrita
+	$sheet->SetCellValue("D95", $dataMp[$k][58]); //Audiencia intermedia oral
+
+	$sheet->SetCellValue("H37", $dataMp[$k][59]); //Soluciones alternas
+	$sheet->SetCellValue("H38", $dataMp[$k][60]); //Suspension condicional del proceso
+	$sheet->SetCellValue("H39", $dataMp[$k][61]); //Acuerdos reparatorios
+
+	$sheet->setCellValue("H23", $dataMp[$k][62]); //Sentencias
+	$sheet->SetCellValue("H24", $dataMp[$k][63]); //Sentencias condenatorias
+	$sheet->SetCellValue("H25", $dataMp[$k][64]); //Sentencias absolutorias
+	$sheet->SetCellValue("H26", $dataMp[$k][65]); //Sentencias Mixtas
+	$sheet->SetCellValue("H27", $dataMp[$k][66]); //Se condena la reparación del daño
+	$sheet->SetCellValue("H28", $dataMp[$k][67]); //No se condena
+
+	$sheet->SetCellValue("H83", $dataMp[$k][68]); //Incompetencias
+	$sheet->SetCellValue("H84", $dataMp[$k][69]); //Decretadas
+	$sheet->SetCellValue("H85", $dataMp[$k][70]); //Admitidas
+
+	$sheet->SetCellValue("H44", $dataMp[$k][71]); //Apelaciones contra resolucion del juez de control
+	$sheet->SetCellValue("H45", $dataMp[$k][72]); //negar anticipo de prueba
+	$sheet->SetCellValue("H46", $dataMp[$k][73]); //Negar acuerdo reparatorio
+	$sheet->SetCellValue("H47", $dataMp[$k][74]);
+	$sheet->SetCellValue("H48", $dataMp[$k][75]);
+	$sheet->SetCellValue("H49", $dataMp[$k][76]);
+	$sheet->SetCellValue("H50", $dataMp[$k][77]);
+	$sheet->SetCellValue("H51", $dataMp[$k][78]);
+	$sheet->SetCellValue("H53", $dataMp[$k][79]);
+	$sheet->SetCellValue("H54", $dataMp[$k][80]);
+	$sheet->SetCellValue("H55", $dataMp[$k][81]);
+	$sheet->SetCellValue("H56", $dataMp[$k][82]); //Apelaciones excluir medios de prueba
+
+	$sheet->SetCellValue("H60", $dataMp[$k][136]); //Apelaciones por amparo
+
+	$sheet->SetCellValue("H62", $dataMp[$k][137]); //Amparos
+	$sheet->SetCellValue("H63", $dataMp[$k][138]); //Amparo directo
+	$sheet->SetCellValue("H64", $dataMp[$k][139]); //Amparo indirecto
+
+	$sheet->SetCellValue("H68", $dataMp[$k][83]); //Apelaciones contra resoluciones del tribunal de enjuiciamiento
+	$sheet->SetCellValue("H69", $dataMp[$k][84]); //Desistimiento de la acción penal
+	$sheet->SetCellValue("H70", $dataMp[$k][85]); // sentencia definitiva
+
+	$sheet->SetCellValue("H32", $dataMp[$k][86]); //De las sentencias dictadas
+	$sheet->SetCellValue("H33", $dataMp[$k][87]); //Revocaciones favorables a mp
+	$sheet->SetCellValue("H34", $dataMp[$k][88]); //Modificaciones favorables a mp
+	$sheet->SetCellValue("H35", $dataMp[$k][89]); //Confirmaciones favorables a mp
+
+	$sheet->SetCellValue("H93", $dataMp[$k][39]); //Desistimiento del recurso
+	$sheet->SetCellValue("H94", $dataMp[$k][40]); //Por parte del acusado
+	$sheet->SetCellValue("H95", $dataMp[$k][41]); //Por parte del defensor
+	$sheet->SetCellValue("H96", $dataMp[$k][42]); //Por parte del ministerio publico
+
+	$sheet->SetCellValue("H99", $dataMp[$k][90]); //Por cambios de situacion juridica declarados sin materia
+	$sheet->SetCellValue("H101", $dataMp[$k][106]); //Canalizados por cese de funciones
+
+	
+	$sheet->SetCellValue("D101", $dataMp[$k][140]); //Canalizados por cese de funciones
+	$sheet->SetCellValue("D102", $dataMp[$k][141]); //Canalizados por cese de funciones
+	$sheet->SetCellValue("D103", $dataMp[$k][142]); //Canalizados por cese de funciones
+ $sheet->SetCellValue("D104", $dataMp[$k][143]); //Canalizados por cese de funciones
+	$sheet->SetCellValue("D105", $dataMp[$k][144]); //Canalizados por cese de funciones
+	$sheet->SetCellValue("D106", $dataMp[$k][145]); //Canalizados por cese de funciones
+	$sheet->SetCellValue("D107", $dataMp[$k][146]); //Canalizados por cese de funciones
+	$sheet->SetCellValue("D108", $dataMp[$k][147]); //Canalizados por cese de funciones
+	$sheet->SetCellValue("D109", $dataMp[$k][148]); //Canalizados por cese de funciones
+	$sheet->SetCellValue("D110", $dataMp[$k][149]); //Canalizados por cese de funciones
+
+ 
+
+
+ unset($tempSheet);
+	$k++;
+}
+
 
 
 	$objPHPExcel->getActiveSheet()->getProtection()->setSelectLockedCells(false);
