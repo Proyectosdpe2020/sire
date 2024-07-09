@@ -541,7 +541,7 @@ function set_sign_field($pdf2, $user, $position, $involved_people){
         $pdf2->MultiCell(95,6,iconv('UTF-8', 'windows-1252', $involved_people['validated_by']['position']), 0, 'C');
         */
 
-        if(strlen($involved_people['elaborated_by']['position']) > 51){
+        if(strlen($involved_people['elaborated_by']['position']) > 80){
             $y_minus = 24;
         }
         else{
