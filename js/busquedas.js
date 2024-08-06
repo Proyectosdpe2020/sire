@@ -95,7 +95,7 @@ function validaInput(e, tipo) {
     var key = e.keyCode || e.which;
     var tecla = String.fromCharCode(key).toLowerCase();
     if(tipo == 'int'){ var letras = "1234567890"; }
-    if(tipo == 'varchar_letras'){ var letras = "abcdefghijklmnopqrstuvwxyz"; }
+    if(tipo == 'varchar_letras'){ var letras = "abcdefghijklmnñopqrstuvwxyz"; }
     var especiales = [8, 37, 39, 46, 110, 32];
     var tecla_especial = false;
 
