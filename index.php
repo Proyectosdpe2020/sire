@@ -81,7 +81,7 @@ $idfisca = $enlace[0][1];
 ////// SI HAY UN ENLACE QUE LLEVE MAS DE UN MODULO DE CAPTURA SE AGREGA AQUI Y SE MODIFICA LA TABLA EN SQL ENLACEFORMATO
 ////// EN LA TABLA ENLACE FORMATO SE PONEN LOS FORMATOS Y EL idEnlaceLiti DEL ENLACE DE LITIGACION EN SU CASO
 
-if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || $idEnlace == 17 || $idEnlace == 18 || $idEnlace == 16 || $idEnlace == 19 || $idEnlace == 58 || $idEnlace == 337 || $idEnlace == 26) {
+if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || $idEnlace == 17 || $idEnlace == 18 || $idEnlace == 16 || $idEnlace == 19 || $idEnlace == 58 || $idEnlace == 337 || $idEnlace == 26 || $idEnlace == 532) {
 
 	$unienlaenla = getIdUnidEnlaceFormat($conn, $idEnlace, $format);
 	$idEnlaces = $unienlaenla[0][0];
