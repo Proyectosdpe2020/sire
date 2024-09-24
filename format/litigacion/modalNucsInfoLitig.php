@@ -1237,6 +1237,34 @@ if($tipo_investigacion == 1){
  <? } ?>
  <!-- CARPETAS EN TRAMITE MOTIVO :-->
 
+  <? if($estatus == 140 || $estatus == 139 || $estatus == 141 || $estatus == 144 || $estatus == 145 || $estatus == 142){ 
+ 	$getData = getData_total_horas_audiencia($conn, $idEstatusNucs);
+	 	if(sizeof($getData) > 0){ 
+	 		$opcInsert = 1; 
+	 		$total_horas = $getData[0][3]; 
+	 	}else{ 	$opcInsert = 0; }
+	 	?>
+	<div class="row">
+		<!--fecha cumplimento mandamiento judicial :-->
+		<div class="col-xs-12 col-sm-12  col-md-12">
+			<label for="horasAudiencia">Cantidad total de horas en audiencia : </label>
+			<input id="horasAudiencia" type="number" value="<?if($opcInsert == 1){echo $total_horas; }?>" name="horasAudiencia" class="fechas form-control gehit"  />
+		</div>
+	</div><br><br><br><br>
+	<div class="row">
+		<div class="col-xs-12 col-sm-6 col-md-6">
+			<button style="width: 88%;" onclick="closeModalNucsLitigInfo()" type="button" class="btn btn-default redondear" data-dismiss="modal">Salir</button>
+		</div>
+		<div class="col-xs-12 col-sm-6  col-md-6 ">
+		<?if(	$opcInsert == 0){ ?>
+			<button style="width: 88%;" onclick="sendDataHorasAudiencia(<? echo $nuc; ?>, <? echo $estatus; ?>, <? echo $idMp; ?> , <? echo $mes; ?> , <? echo $anio; ?> , <? echo $deten; ?> , <? echo $idUnidad; ?> ,  <? echo $opcInsert; ?>, <? echo $dataImputado[0][7]; ?>)" type="button" class="btn btn-primary redondear" >Aceptar</button>
+			<?}elseif(	$opcInsert == 1 ){?>
+			<button style="width: 88%;" onclick="insertHorasAudiencia_db(<? echo $idEstatusNucs; ?> , <? echo $estatus; ?> , <? echo $nuc; ?> , <? echo $opcInsert; ?>)" type="button" class="btn btn-primary redondear" >Guardar</button>
+		<? } ?>
+		</div>
+	</div>
+ <? } ?>
+
 </div>
 
 
