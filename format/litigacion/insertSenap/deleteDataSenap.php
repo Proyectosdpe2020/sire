@@ -360,6 +360,24 @@ if (isset($_POST["tipo_investigacion"])){ $tipo_investigacion = $_POST["tipo_inv
 										                    END
 										                  "; 
 		break;
+		case 140: case 139: case 141: case 144: case 145: case 142:
+			$queryTransaction = "BEGIN                     
+										                    BEGIN TRY 
+										                      BEGIN TRANSACTION
+										                          SET NOCOUNT ON
+										                   
+
+										                             DELETE FROM senap.total_audiencias WHERE idEstatusNucs = '$idEstatusNucs' 
+
+										                          COMMIT
+										                    END TRY
+										                    BEGIN CATCH 
+										                          ROLLBACK TRANSACTION
+										                          RAISERROR('No se realizo la transaccion',16,1)
+										                    END CATCH
+										                    END
+										                  "; 
+		break;
  }
 	$result1 = sqlsrv_query($conn,$queryTransaction, array(), array( "Scrollable" => 'static' ));
 
