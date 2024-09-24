@@ -688,6 +688,20 @@ function get_nuc_sicap_valida($nuc,$conn){
 	}
 }
 
-
+//Función para obtener el total de horas de audiencia
+function getData_total_horas_audiencia($conn, $idEstatusNucs){
+	$query = "SELECT * FROM senap.total_audiencias WHERE idEstatusNucs = '$idEstatusNucs' "; 
+	$indice = 0;
+	$stmt = sqlsrv_query($conn, $query);
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC ))
+	{
+		$arreglo[$indice][0]=$row['id'];
+		$arreglo[$indice][1]=$row['idEstatusNucs'];
+		$arreglo[$indice][2]=$row['nuc'];
+		$arreglo[$indice][3]=$row['total_horas'];
+		$indice++;
+	}
+	if(isset($arreglo)){return $arreglo;}
+}
 
 ?>

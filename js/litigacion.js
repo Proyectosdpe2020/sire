@@ -772,7 +772,9 @@ function existenuclitigacion(nuc, idMp, estatResolucion, mes, anio, idUnidad, de
 							estatResolucion == 108 || estatResolucion == 109 || estatResolucion == 110 || estatResolucion == 111 ||
 							estatResolucion == 64 || estatResolucion == 60 || estatResolucion == 91 || estatResolucion == 65 ||
 							estatResolucion == 90 || estatResolucion == 68 ||
-							estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151 || estatResolucion == 154 || estatResolucion == 66) {
+							estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151 || estatResolucion == 154 || estatResolucion == 66
+							|| estatResolucion == 140 || estatResolucion == 139 || estatResolucion == 141 || || estatResolucion == 144 
+							|| estatResolucion == 145 || estatResolucion == 142) {
 							showModalNucLitInfo2(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad);
 						} else if (estatResolucion == 50 || estatResolucion == 53 || estatResolucion == 58) {
 							showModalAgregarImputados(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad);

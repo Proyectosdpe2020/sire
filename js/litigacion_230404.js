@@ -1269,7 +1269,9 @@ function existenuclitigacion(nuc, idMp, estatResolucion, mes, anio, idUnidad, de
 							estatResolucion == 108 || estatResolucion == 109 || estatResolucion == 110 || estatResolucion == 111 ||
 							estatResolucion == 64 || estatResolucion == 60 || estatResolucion == 91 || estatResolucion == 65 ||
 							estatResolucion == 90 || estatResolucion == 68 ||
-							estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151 || estatResolucion == 154 || estatResolucion == 66 || estatResolucion == 165) {
+							estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151 || estatResolucion == 154 || estatResolucion == 66 || estatResolucion == 165
+							|| estatResolucion == 140 || estatResolucion == 139 || estatResolucion == 141 || estatResolucion == 144 
+							|| estatResolucion == 145 || estatResolucion == 142) {
 							showModalNucLitInfo2(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad, 1, idImputado);
 						} else if (estatResolucion == 50 || estatResolucion == 53 || estatResolucion == 58 || estatResolucion == 153) {
 							showModalAgregarImputados(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad, idImputado);
@@ -1294,7 +1296,9 @@ function existenuclitigacion(nuc, idMp, estatResolucion, mes, anio, idUnidad, de
 								estatResolucion == 108 || estatResolucion == 109 || estatResolucion == 110 || estatResolucion == 111 ||
 								estatResolucion == 64 || estatResolucion == 60 || estatResolucion == 91 || estatResolucion == 65 ||
 								estatResolucion == 90 || estatResolucion == 68 ||
-								estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151 || estatResolucion == 154 || estatResolucion == 66 || estatResolucion == 165) {
+								estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151 || estatResolucion == 154 || estatResolucion == 66 || estatResolucion == 165
+								|| estatResolucion == 140 || estatResolucion == 139 || estatResolucion == 141 || estatResolucion == 144 
+							|| estatResolucion == 145 || estatResolucion == 142) {
 								showModalNucLitInfo2(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad, 1, idImputado);
 							} else if (estatResolucion == 50 || estatResolucion == 53 || estatResolucion == 58 || estatResolucion == 153) {
 								showModalAgregarImputados(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad, idImputado);
@@ -1315,7 +1319,9 @@ function existenuclitigacion(nuc, idMp, estatResolucion, mes, anio, idUnidad, de
 								estatResolucion == 108 || estatResolucion == 109 || estatResolucion == 110 || estatResolucion == 111 ||
 								estatResolucion == 64 || estatResolucion == 60 || estatResolucion == 91 || estatResolucion == 65 ||
 								estatResolucion == 90 || estatResolucion == 68 ||
-								estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151 || estatResolucion == 154 || estatResolucion == 66 || estatResolucion == 165) {
+								estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151 || estatResolucion == 154 || estatResolucion == 66 || estatResolucion == 165
+								|| estatResolucion == 140 || estatResolucion == 139 || estatResolucion == 141 || estatResolucion == 144 
+							|| estatResolucion == 145 || estatResolucion == 142) {
 								showModalNucLitInfo2(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad, 1, idImputado);
 							} else if (estatResolucion == 50 || estatResolucion == 53 || estatResolucion == 58 || estatResolucion == 153) {
 								showModalAgregarImputados(estatResolucion, nuc, idMp, mes, anio, deten, idUnidad, idImputado);
@@ -1504,6 +1510,9 @@ function insertarNucLit(idMp, estatResolucion, mes, anio, nuc, deten, idUnidad, 
 							break;
 							case 165:
 							setTimeout("insertFormMotivosTramiteCarpeta_db(" + objDatos.idEstatusNucs + "," + estatResolucion + "," + nuc + ", " + opcInsert + ");", 100);
+							break;
+						case 140: case 139: case 141: case 144: case 145: case 142:
+							setTimeout("insertHorasAudiencia_db(" + objDatos.idEstatusNucs + "," + estatResolucion + "," + nuc + ", " + opcInsert + "," + idMp + ", " + mes + ", " + anio + ", " + idUnidad + ");", 100);
 							break;
 						default:
 							break;
@@ -1725,7 +1734,9 @@ function validarEstatusShowInfoSica(estatResolucion) {
 		|| estatResolucion == 110 || estatResolucion == 111 || estatResolucion == 64 || estatResolucion == 60 || estatResolucion == 14
 		|| estatResolucion == 65 || estatResolucion == 66 || estatResolucion == 67 || estatResolucion == 68 || estatResolucion == 90
 		|| estatResolucion == 91 || estatResolucion == 129 || estatResolucion == 57 || estatResolucion == 151 || estatResolucion == 154
-		|| estatResolucion == 50 || estatResolucion == 53 || estatResolucion == 58 || estatResolucion == 153 || estatResolucion == 165) {
+		|| estatResolucion == 50 || estatResolucion == 53 || estatResolucion == 58 || estatResolucion == 153 || estatResolucion == 165 
+		|| estatResolucion == 140 || estatResolucion == 139 || estatResolucion == 141 || estatResolucion == 144 || estatResolucion == 145
+		|| estatResolucion == 142) {
 		return true;
 	}
 	else {

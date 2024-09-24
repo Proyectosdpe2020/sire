@@ -1307,6 +1307,55 @@ function insertMotivosCarpetaTramite_db(idEstatusNucs, estatus, nuc, opcInsert) 
 	}
 }
 
+function sendDataHorasAudiencia(nuc, estatus, idMp, mes, anio, deten, idUnidad, opcInsert, idImputado) {
+	var horasAudiencia = document.getElementById("horasAudiencia").value;
+	// Convertimos la entrada a número entero
+ horasAudiencia = parseInt(horasAudiencia);
+ console.log(horasAudiencia);
+ // Validar que sea un número entero positivo
+  if (isNaN(horasAudiencia) || horasAudiencia < 0) {
+        swal("", "Por favor, ingrese un número entero válido de horas (sin decimales ni números negativos).", "warning");
+    }else {
+		insertarNucLit(idMp, estatus, mes, anio, nuc, deten, idUnidad, opcInsert,0, idImputado);
+		$('#modalNucsLitigInfo').modal('hide');
+		$('#modalNucsLitig').modal('show');
+	} 
+}
+
+/****Ingresa a la bd la informacion de horas de audiencia****/
+function insertHorasAudiencia_db(idEstatusNucs, estatus, nuc, opcInsert, idMp, mes, anio, idUnidad) {
+	var horasAudiencia = document.getElementById("horasAudiencia").value;
+	// Convertimos la entrada a número entero
+ horasAudiencia = parseInt(horasAudiencia);
+ // Validar que sea un número entero positivo
+  if (isNaN(horasAudiencia) || horasAudiencia < 0) {
+        swal("", "Por favor, ingrese un número entero válido de horas (sin decimales ni números negativos).", "warning");
+    }else {
+		$.ajax({
+			type: "POST",
+			dataType: "html",
+			url: "format/litigacion/insertSenap/insert_FormHorasAudiencia.php",
+			data: 'idEstatusNucs=' + idEstatusNucs + '&nuc=' + nuc + '&opcInsert=' + opcInsert + '&horasAudiencia=' + horasAudiencia
+			+ '&idMp=' + idMp + '&mes=' + mes + '&anio=' + anio + '&idUnidad=' + idUnidad + '&estatus=' + estatus,
+			success: function (respuesta) {
+				var json = respuesta;
+				var obj = eval("(" + json + ")");
+				if (obj.first == "NO") {
+					swal("", "No se registro verifique los datos.", "warning");
+				} else {
+					if (obj.first == "SI") {
+						var obj = eval("(" + json + ")");
+						swal("", "Registro exitosamente.", "success");
+						//reloadOpcInsertButton(idEstatusNucs, estatus, nuc,  1);
+						$('#modalNucsLitigInfo').modal('hide');
+						$('#modalNucsLitig').modal('show');
+					}
+				}
+			}
+		});
+	}
+}
+
 /*
 //Mecanismo para cambiar de formulario a otro
 function openForm(evt, etapa) {
