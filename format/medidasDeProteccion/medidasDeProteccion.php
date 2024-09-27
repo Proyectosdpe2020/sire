@@ -7,6 +7,8 @@ include ("../../Conexiones/conexionMedidas.php");
 include("../../funcionesMedidasProteccion.php");
 include("../../funciones.php");		
 
+// PRUEBA
+
 $idUsuario = $_SESSION['useridIE'];
 
 if (isset($_POST["idUnidad"])){ $idUnidad = $_POST["idUnidad"]; }
