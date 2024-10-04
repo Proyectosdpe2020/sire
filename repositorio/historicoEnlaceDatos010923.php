@@ -77,7 +77,7 @@ switch ($format) {
 						<select id="anioHistorique" name="selMes" onchange="getDataHistoricaBD(<? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" tabindex="6" class="form-control redondear selectTranparent" required>
 
 							<?
-							$arrayANios = array(2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030);
+							$arrayANios = array(2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,1054);
 
 							for ($p=0; $p < sizeof($arrayANios) ; $p++) { 
 
@@ -199,7 +199,7 @@ switch ($format) {
 								if($idEnlace == 22){ $unidadedes = "IN(120,121,122,123,124,125)"; }
 								if($idEnlace == 16){ $unidadedes = "IN(108,109,110,111,112,113,114,115,1008,1009,1010)"; }
 								if($idEnlace == 23){ $unidadedes = "IN(71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,94,95,96,97,98)"; }
-								if($idEnlace == 19){ $unidadedes = "IN(62,63,64,65,66,67,68,69,70,152,1005,1006,1050)"; }
+								if($idEnlace == 19){ $unidadedes = "IN(62,63,64,65,66,67,68,69,70,152,1005,1006,1050,1054)"; }
 								if($idEnlace == 15){ $unidadedes = "IN(53,54,55,56,57,58,59,60,61,150,151)"; }
 								if($idEnlace == 21){ $unidadedes = "IN(27,28,29,30,31,32,93,102,103)"; }
 								if($idEnlace == 17){ $unidadedes = "IN(16,17,18,19,20,21,22,23,24,25,26,153,154)"; }
