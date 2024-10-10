@@ -221,7 +221,8 @@ $getNombreEnlace = array('EnlaceSexualesTrimestral',
                          'EnlaceApatzingan',  
                          'EnlacedeCJIM',
                          'LiliaJacoboDimas',
-                         'EnlacedeGrupos Vulnerables'); 
+                         'EnlacedeGrupos Vulnerables',
+                         'EnlaceCarpetasCJIM Zamora'); 
 
 $getNombreUnidad = array('Unidad de Atención a Delitos Sexuales', 
                          'Unidad contra el Robo al Transporte', 
@@ -255,7 +256,8 @@ $getNombreUnidad = array('Unidad de Atención a Delitos Sexuales',
                          'Unidad de Investigación Apatzingán',  
                          'Centro de Justicia Integral para las Mujeres',
                          'Centro de Justicia Integral para las Mujeres Uruapan',
-                         'Grupos Vulnerables'
+                         'Grupos Vulnerables',
+                         'Centro de Justicia Integral para las Mujeres Zamora'
                         ); 
 
 $j = 0;
