@@ -314,12 +314,29 @@ if (isset($_POST["idMedida"])) {
 				<h5 class="text-on-pannel"><strong>Medidas de protección VICTIMA</strong></h5>
 				<div class="row">
 					<div class="col-xs-12 col-sm-6  col-md-6">
-						<img <? if ($a == 1 && in_array(1, $aplicadas)) { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 01 Fondo.png" <? } else { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 01 Gris.png" onmouseover="hoverIMG(this, 'uno');" onmouseout="unhoverIMG(this, 'uno')" <? if ($a == 1 && (sizeof($getMedidasAplicadas) > 0) && $rolUser != 1) { ?> onclick="aplicarMedida(<? echo $idEnlace; ?>, <? echo $idMedida; ?>, 1, <? echo $get_nuc; ?>)" <? } else {
-							if ($rolUser != 1 && $rolUser != 4) { ?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 1, <? echo $idMedida; ?>)" <? }
-							elseif($rolUser == 4) { ?> onclick="agregarMedida(this, 1 , 'uno')" <? }
-					}
-				} ?> class="cursorp" width="100%">
+						<img 
+							<? if ($a == 1 && in_array(1, $aplicadas)) { 
+								?> 
+									src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 01 Fondo.png" 
+								<? 
+								} 
+								else { 
+								?> 
+									src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 01 Gris.png" 
+									onmouseover="hoverIMG(this, 'uno');" 
+									onmouseout="unhoverIMG(this, 'uno')" 
+									<? if ($a == 1 && (sizeof($getMedidasAplicadas) > 0) && $rolUser != 1) { 
+										?> onclick="aplicarMedida(<? echo $idEnlace; ?>, <? echo $idMedida; ?>, 1, <? echo $get_nuc; ?>)" <? 
+									} else {
+											if ($rolUser != 1 && $rolUser != 4) { 
+												?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 1, <? echo $idMedida; ?>)" <? }
+											elseif($rolUser == 4) { 
+												?> onclick="agregarMedida(this, 1 , 'uno')" <? 
+											}
+									}
+								} ?> class="cursorp" width="100%">
 					</div>
+					
 					<div class="col-xs-12 col-sm-6  col-md-6">
 						<img <? if ($a == 1 && in_array(2, $aplicadas)) { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 02 Fondo.png" <? } else { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 02 Gris.png" onmouseover="hoverIMG(this, 'dos');" onmouseout="unhoverIMG(this, 'dos')" <? if ($a == 1 && (sizeof($getMedidasAplicadas) > 0) && $rolUser != 1) { ?> onclick="aplicarMedida(<? echo $idEnlace; ?>, <? echo $idMedida; ?>, 2, <? echo $get_nuc; ?>)" <? } else {
 							if ($rolUser != 1 && $rolUser != 4) { ?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 2, <? echo $idMedida; ?>)" <? }
@@ -409,7 +426,7 @@ if (isset($_POST["idMedida"])) {
 	<? $getDataTestigos = getDataTestigos($connMedidas, $idMedida); 
 				if (sizeof($getDataTestigos) > 0){ $banT = 1;}else{$banT = 0;}
 	?>																			
-	<hr>																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																				
+	<hr>
 	<div class="form-check">
 	<input class="form-check-input"<? if($banT == 1){echo "checked"; } ?> <? if($banT == 1){ echo "disabled"; } ?> onchange="toggleCheckboxTestigo(this)" type="checkbox" value="" id="flexCheckDefault">
   

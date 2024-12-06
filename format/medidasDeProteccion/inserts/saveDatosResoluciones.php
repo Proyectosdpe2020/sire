@@ -19,9 +19,13 @@ if (isset($_POST["idMedida"])){
 
 //VARIABLES DEL FORMULARIO OBTENIDO
 if (isset($_POST['ratificacion'])){ $ratificacion = $_POST['ratificacion']; }
-if (isset($_POST['observacionRatifica'])){ $observacionRatifica = $_POST['observacionRatifica']; }
+if (isset($_POST['observacionRatificacion'])){ $observacionRatificacion = $_POST['observacionRatificacion']; }
 if (isset($_POST['modifica'])){ $modifica = $_POST['modifica']; }
-if (isset($_POST['observacionModifica'])){ $observacionModifica = $_POST['observacionModifica']; }
+if (isset($_POST['observacionModificada'])){ $observacionModificada = $_POST['observacionModificada']; }
+if (isset($_POST['ampliada'])){ $ampliada = $_POST['ampliada']; }
+if (isset($_POST['observacionAmpliada'])){ $observacionAmpliada = $_POST['observacionAmpliada']; }
+if (isset($_POST['revocada'])){ $revocada = $_POST['revocada']; }
+if (isset($_POST['observacionRevocada'])){ $observacionRevocada = $_POST['observacionRevocada']; }
 
 if (isset($_POST['idEnlace'])){ $idEnlace = $_POST['idEnlace']; }
 if (isset($_POST['fraccion'])){ $fraccion = $_POST['fraccion']; }
@@ -37,8 +41,8 @@ if (isset($_POST['tipoActualizacion'])){ $tipoActualizacion = $_POST['tipoActual
     BEGIN TRANSACTION
      SET NOCOUNT ON
 
-       INSERT INTO medidas.resoluciones (idMedida , ratificacion , modificada , observacionRatifica , observacionModifica) 
-       VALUES($idMedida , $ratificacion, $modifica, '$observacionRatifica', '$observacionModifica' )
+       INSERT INTO medidas.resoluciones (idMedida , ratificacion , modificada , observacionRatificacion , observacionModificada, ampliada, revocada, observacionAmpliada, observacionRevocada) 
+       VALUES($idMedida , $ratificacion, $modifica, '$observacionRatificacion', '$observacionModificada', $ampliada, $revocada, '$observacionAmpliada', '$observacionRevocada' )
 
        COMMIT
       END TRY

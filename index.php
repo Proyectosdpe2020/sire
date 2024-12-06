@@ -893,7 +893,11 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 	<!--<script language="JavaScript" type="text/javascript" src="js/litigacionSENAP.js"></script>-->
 	<script language="JavaScript" type="text/javascript" src="js/litigacionSENAP_230404.js"></script>
 	<script type="text/javascript" src="js/carpetasJudicializadas.js"></script>
-	<? if ($format == 16) { ?><script type="text/javascript" src="js/medidasDeProteccion.js"></script><? } ?>
+	<? if ($format == 16) { ?>
+		<script type="text/javascript" src="js/medidasDeProteccion.js"></script>		
+		<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+	<? } ?>
+
 	<? if ($format == 18 || $format == 19) { ?><script type="text/javascript" src="js/mandamientosJudiciales_20062022Late.js"></script><? } ?>
 	<script language="JavaScript" type="text/javascript" src="js/estadoDeFuerza.js"></script>
 	<script language="JavaScript" type="text/javascript" src="js/busquedas.js"></script>

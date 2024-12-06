@@ -93,6 +93,23 @@ elseif($moduloID == 6){
                      END
                    "; 
 }
+elseif($moduloID == 7){
+$modulo = 'seguimientoMedidas';
+$queryTransaction = "
+                        BEGIN                     
+                        BEGIN TRY 
+                        BEGIN TRANSACTION
+                              SET NOCOUNT ON                                    
+                                    DELETE FROM medidas.seguimientos WHERE idSeguimiento = $item_ID AND idMedida = $idMedida
+                              COMMIT
+                        END TRY
+                        BEGIN CATCH 
+                              ROLLBACK TRANSACTION
+                              RAISERROR('No se realizo la transaccion',16,1)
+                        END CATCH
+                        END
+                  ";       
+}
 
       
 $result = sqlsrv_query($connMedidas,$queryTransaction, array(), array( "Scrollable" => 'static' )); 
