@@ -18,15 +18,41 @@ if (isset($_POST["idMedida"])){ $idMedida = $_POST["idMedida"]; }
   $arreglo[0] = "mod1_ISNULL";
  }
 
- $query2 = "SELECT count(idResolucion) AS total FROM medidas.resoluciones where idMedida = $idMedida ";
- $stmt2 = sqlsrv_query($connMedidas, $query2);
- while ($row2 = sqlsrv_fetch_array( $stmt2, SQLSRV_FETCH_ASSOC )){$total2[0][0]=$row2['total'];}
+ $query2 = "WITH TotalCount AS (
+  SELECT COUNT(*) AS total
+  FROM medidas.resoluciones
+  WHERE idMedida = $idMedida
+)
+SELECT 
+  tc.total,
+  COUNT(DISTINCT am.idAmpliada) AS totalAmpliada,
+  COUNT(DISTINCT r.idRatificada) AS totalRatificada,
+  COUNT(DISTINCT mo.idModificada) AS totalModificada,
+  COUNT(DISTINCT re.idRevocada) AS totalRevocada
+FROM TotalCount tc
+LEFT JOIN medidas.resoluciones m ON m.idMedida = $idMedida
+LEFT JOIN SIRE.medidas.ampliada am ON am.idResolucion = m.idResolucion
+LEFT JOIN SIRE.medidas.ratificada r ON r.idResolucion = m.idResolucion
+LEFT JOIN SIRE.medidas.modificada mo ON mo.idResolucion = m.idResolucion
+LEFT JOIN SIRE.medidas.revocada re ON re.idResolucion = m.idResolucion
+WHERE tc.total > 0
+GROUP BY tc.total";
 
- if ($total2[0][0] > 0) {
-  $arreglo[1] = "mod2_OK"; 
- }else{
+$stmt2 = sqlsrv_query($connMedidas, $query2);
+$row2 = sqlsrv_fetch_array($stmt2, SQLSRV_FETCH_ASSOC);
+
+if ($row2['total'] > 0) {
+  $t = ['totalAmpliada', 'totalRatificada', 'totalModificada', 'totalRevocada'];
   $arreglo[1] = "mod2_ISNULL";
- }
+  foreach($t as $total){
+      if($row2[$total] > 0){
+          $arreglo[1] = "mod2_OK";
+          break;
+      }
+  }
+} else {
+  $arreglo[1] = "mod2_ISNULL";
+}
 
  $query3 = "SELECT count(idVictima) AS totalVictimas FROM medidas.victimas where idMedida = $idMedida ";
  $stmt3 = sqlsrv_query($connMedidas, $query3);
@@ -71,7 +97,17 @@ if (isset($_POST["idMedida"])){ $idMedida = $_POST["idMedida"]; }
   $arreglo[5] = "mod6_ISNULL";
  }
 
-  $d = array('first'=>$arreglo[0], 'second'=>$arreglo[1] , 'three'=>$arreglo[2] , 'four'=>$arreglo[3] , 'five'=>$arreglo[4] , 'six'=>$arreglo[5] );
+ $query7 = "SELECT count(idSeguimiento) AS total FROM medidas.seguimientos where idMedida = $idMedida ";
+ $stmt7 = sqlsrv_query($connMedidas, $query7);
+ while ($row7 = sqlsrv_fetch_array( $stmt7, SQLSRV_FETCH_ASSOC )){$total7[0][0]=$row7['total'];}
+
+ if ($total7[0][0] > 0) {
+  $arreglo[6] = "mod7_OK"; 
+ }else{
+  $arreglo[6] = "mod7_ISNULL";
+ }
+
+  $d = array('first'=>$arreglo[0], 'second'=>$arreglo[1] , 'three'=>$arreglo[2] , 'four'=>$arreglo[3] , 'five'=>$arreglo[4] , 'six'=>$arreglo[5], 'seven'=>$arreglo[6] );
   echo json_encode($d);
 
 

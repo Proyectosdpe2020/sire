@@ -4,5 +4,6 @@
 				<button type="button" class="btn btn-default btn-lg btn-block" id="mod3" onclick="mostrarCampos(event, 'victima')" >Victima</button>
 				<button type="button" class="btn btn-default btn-lg btn-block" id="mod4" onclick="mostrarCampos(event, 'imputados')" >Imputados</button>
 				<button type="button" class="btn btn-default btn-lg btn-block" id="mod5" onclick="mostrarCampos(event, 'constanciaLlamadas')">Constancia de llamadas</button>
+				<button type="button" class="btn btn-default btn-lg btn-block" id="mod6" onclick="mostrarCampos(event, 'seguimientoMedidas')">Seguimientos</button>
 				<br>
 		</div>

@@ -38,6 +38,7 @@ if(date("l") === "Saturday"){ $numeroDia = 6; 	$diaLetra = "Sabado";}
 if(date("l") === "Sunday"){ $numeroDia = 7; 	$diaLetra = "Domingo";}
 $diames= date("d");
 $currentmonth = date("n");
+$anio = date("Y");
 $meses = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
 $mesNom = Mes_Nombre($currentmonth);
 
@@ -53,7 +54,7 @@ $mesNom = Mes_Nombre($currentmonth);
 						<td width="50%">
 							<div class="tituloCentralSegu">
 								<div class="titulosCabe1">
-									<label class="titulo1" style="color: #686D72;">Registro de Medidas de Protección </label>
+									<label class="titulo1" style="color: #686D72;">Registro de Medidas de Protección</label>
 									<h4><label id="titfisc" class="titulo2">Fiscalía General del Estado de Michoácan</label></h4>
 							 </div>
 							</div>
@@ -130,8 +131,25 @@ $mesNom = Mes_Nombre($currentmonth);
 			<div class="col-md-6 col-md-offset-3" id="preloaderIMG" hidden>
 				<img src="images/cargando.gif"/>
 			</div>
-
-			<table id="gridPolicia" class="display table table-striped  table-hover" width="100%" >
+			<div style="margin-bottom: 10px" class="col-xs-12 col-sm-12 col-md-12 d-flex justify-content-end pb-5">
+				<div class="button-group pb-5">
+					<button 
+						type="button"
+						onclick="generarExcel(<?php echo $idEnlace; ?>, <?php echo $rolUser; ?>)" 
+						class="btn btn-elegante">
+						<span class="glyphicon glyphicon-file"></span> Generar Excel
+					</button>
+					
+					<button 
+						type="button"
+						onclick="generarPDF(<?php echo $idEnlace; ?>, <?php echo $rolUser; ?>)" 
+						class="btn btn-elegante"
+						disabled>
+						<span class="glyphicon glyphicon-file"></span> Generar PDF
+					</button>
+				</div>
+			</div>
+			<table id="gridPolicia" class="display table table-striped table-hover" width="100%" >
 				<thead>
 					<tr class="cabeceraConsultaPolicia">
 						<th class="textCent">Folio</th>
@@ -139,9 +157,11 @@ $mesNom = Mes_Nombre($currentmonth);
 						<th class="">Nuc</th>
 						<th class=" textCent">Victima(s)</th>
 						<th class=" textCent">Delito</th>
+						<th class=" textCent">Medidas de Protección</th>
 						<?if($rolUser != 2 ){?><th class=" textCent">Fecha del acuerdo</th><? }else{ ?> <th class=" textCent">Fecha del registro</th> <? } ?>
 						<?if($rolUser == 1){?><th class=" textCent">Capturista</th><? } ?>
-						<?if($rolUser != 3 && $rolUser != 4){?><th class="textCent">Carpeta asignada?</th><? } ?>
+						<?if($rolUser != 3 && $rolUser != 4){?><th class="textCent">Carpeta asignada</th><? } ?>
+						<th class=" textCent">Resolución</th>
 						<?if($rolUser == 1 || $rolUser == 3 || $rolUser == 4){?><th class=" textCent">ESTADO</th><? } ?>
 						<th class=" textCent">Acciones</th>
 					</tr>
@@ -157,28 +177,60 @@ $mesNom = Mes_Nombre($currentmonth);
 							<td><?if($dataMedidasDia[$h][2] != 0){ echo $dataMedidasDia[$h][3];}else{ ?><p style="color: red;">SIN ASIGNAR <? } ?>
 							<td><? echo $dataMedidasDia[$h][1]; ?></td>
 							<td>
-							<? if(sizeof($getDataVictimas) > 0){ 
-									for ($j=0; $j < sizeof($getDataVictimas) ; $j++) {
-										if(sizeof($getDataVictimas) > 1){
-											echo ' - '.$getDataVictimas[$j][7].'<br>';
-											}else{
-												echo $getDataVictimas[$j][7];
-											}
+								<? 
+									if(sizeof($getDataVictimas) > 0){ 
+										for ($j=0; $j < sizeof($getDataVictimas) ; $j++) { ?>
+											<? echo $getDataVictimas[$j][7] ?> <?
+										}
 									}
-							}else{
-								echo 'SIN VICTIMA, VERIFIQUE';
-							} ?>
-						 </td>
+									else{
+										echo 'SIN VICTIMA, VERIFIQUE';
+									} 
+								?>
+							</td>							
 							<td><? echo $dataMedidasDia[$h][7]; ?></td>
+							<td>
+								<?
+									$medidasAplicadas = getMedidasAplicadas($connMedidas, $dataMedidasDia[$h][0]);
+									if($medidasAplicadas > 0){
+										for($i = 0; $i < sizeof($medidasAplicadas); $i++){
+											$medidas = getFracciones($connMedidas, $medidasAplicadas[$i][0]);
+											echo convertirARomanos($medidasAplicadas[$i][0]).'. '.strval($medidas[0][0]).'<br>';
+										}
+									}	
+									else{
+										echo 'No se han registrado Medidas de Protección';
+									}
+								?>
+							</td>							
 							<?if($rolUser != 2 ){?> <td><center><? echo $dataMedidasDia[$h][8]; ?><center></td> <? }else{ ?> <td><center><? echo $dataMedidasDia[$h][9]; ?><center></td> <? } ?>
 							<?if($rolUser == 1){?><td><center><? echo $dataMedidasDia[$h][18]; ?><center></td><? } ?>
 							<?if($rolUser != 3 && $rolUser != 4){?><td><?if($dataMedidasDia[$h][2] != 0){ ?><div class="verdCol" id="circulo"><? }else{ ?> <div class="redCol" id="circulo"> <? } ?></div></td><? } ?>
-						 <?if($rolUser == 1 || $rolUser == 3 || $rolUser == 4){ ?>
+							<td> 
+								<?php
+									$idResolucion = getIdResoluciones($connMedidas, $dataMedidasDia[$h][0]);					
+									$getDataResolucion = getDataResolucion($connMedidas, $idResolucion[0]);
+
+									$resoluciones = ['ratificada', 'ampliada', 'modificada', 'revocada'];
+									$resultado = 'No establecido';
+									if($getDataResolucion != null){
+										foreach($resoluciones as $resolucion){
+											if($getDataResolucion[0][$resolucion] == 1){
+												$resultado = ucfirst($resolucion);
+												break;
+											}						
+										}
+									}
+									echo $resultado;
+								?>
+							</td>
+
+						 	<?if($rolUser == 1 || $rolUser == 3 || $rolUser == 4){ ?>
 							<td>
-							<?if($checkEstatus == 'CONCLUIDA'){ ?>
+							<?if($checkEstatus == 'CONCLUIDA'){?>
 								<div class="verdCol" id="circulo"></div><center>Concluida</center>
 								<? }elseif($checkEstatus == 'ACTIVA'){ ?> 
-									<div class="yelloCol" id="circulo"></div><center>En curso</center>
+									<div class="yelloCol" id="circulo"></div><center>Vigente</center>
 									<? }elseif($checkEstatus == 'NOTRABAJADA'){ ?>
 										<div class="redCol" id="circulo"></div><center>Sin medida aplicada</center>
 								<? } ?>
@@ -190,7 +242,6 @@ $mesNom = Mes_Nombre($currentmonth);
 						<? } ?>
 					</tbody>
 				</table><br>
-
 				<div class="x_panel piepanel">
 					<div class="piepanel2">
 						<div class="piepanel3">
@@ -214,9 +265,21 @@ $mesNom = Mes_Nombre($currentmonth);
 			</div>
 		</div>
 	</div>
-	<!-- MODAL REGISTRO DE MEDIDA DE PROTECCION  -->
+<!-- MODAL REGISTRO DE MEDIDA DE PROTECCION  -->
 
-	<!-- MODAL REGISTRO DE INFORMACION GENERAL DE MEDIDA DE PROTECCION  -->
+<!-- MODAL INFORMACIÓN DE USUARIO  -->
+<div class="modal fade bs-example-modal-sm" id="medidaDeProteccion" role="dialog" data-backdrop="static" data-keyboard="false" style="overflow-y: scroll;">
+		<div id="modalVistaCss" class="modal-dialog modal-sm" style = "width: 85%; margin-top: 0.5%;">
+			<div class="modal-content" style="">
+				<div id="contModalInfo">
+
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- MODAL INFORMACIÓN DE USUARIO  -->
+
+<!-- MODAL REGISTRO DE INFORMACION GENERAL DE MEDIDA DE PROTECCION  -->
  <div class="modal fade bs-example-modal-sm" id="infoGeneralMedida" role="dialog" data-backdrop="static" data-keyboard="false">
 		<div id="modalVistaCss" class="modal-dialog modal-sm" style = "width: 85%; margin-top: 3.4%;">
 			<div class="modal-content" style="">

@@ -1,5 +1,5 @@
 .cabeceraTablaVictimas{
-  background: rgba(21,47,74,.9);
+  background: #152f4ae6;
   color: white;
 }
 
@@ -21,6 +21,7 @@
 #imputados{ display: none; }
 #constanciaLlamadas{ display: none; }
 #fracciones{ display: none; }
+#seguimientoMedidas{ display:none; }
 
 .tabcontent{
   padding: 5px;
@@ -59,3 +60,51 @@
        -moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.3);
        box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.3);
     }
+
+.btn-elegante {
+    background: linear-gradient(to left, #152f4a, #152f4a);
+    color: #fff;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgb(255, 255, 255);
+}
+
+.btn-elegante:disabled {
+  background: linear-gradient(to left, #152f4a, #152f4a);
+  box-shadow: 0 6px 10px rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+  font-weight: bold;
+  opacity: 0.9;
+  cursor: not-allowed;
+}
+
+  /* background: linear-gradient(to left, #007bff, #ff0000);
+  box-shadow: 0 6px 10px rgb(255, 255, 255);
+  color: #ffffff;
+  font-weight: bold;   */
+
+.btn-elegante:hover {
+    background: linear-gradient(to left, #152f4a, #000000);
+    box-shadow: 0 6px 10px rgb(255, 255, 255);
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.btn-elegante:focus,
+.btn-elegante:active {
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(255, 255, 255);
+    color: #ffffff;
+}
+
+.button-group {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-spacing {
+  margin-left: 10px;
+} 
