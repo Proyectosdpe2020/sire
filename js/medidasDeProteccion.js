@@ -1013,7 +1013,7 @@ function checkValidaDataModulos(idMedida) {
 }
 
 //Funcion que guarda cada una de las resoluciones en caso de existir.
-function saveDatosResoluciones(idEnlace, fraccion, idMedida, tipoActualizacion, idResolucion, fechaConclusion, medidasAplicadas, nuc) {
+function saveDatosResoluciones(idEnlace, fraccion, idMedida, tipoActualizacion, idResolucion, fechaConclusion, medidasAplicadas, nuc, tempPrevia) {
     var ratificacion = document.getElementById("ratificacion").value;
     var modifica = document.getElementById("modifica").value;
     var ampliada = document.getElementById("ampliada").value;
@@ -1031,7 +1031,7 @@ function saveDatosResoluciones(idEnlace, fraccion, idMedida, tipoActualizacion, 
     if (datosValidos) {
         for (var key in acciones) {
             if (acciones[key].valor === '1') {
-                acciones[key].funcion(idEnlace, idResolucion, idMedida, acciones[key].valor, medidasAplicadas, fechaConclusion, nuc);
+                acciones[key].funcion(idEnlace, idResolucion, idMedida, acciones[key].valor, medidasAplicadas, fechaConclusion, nuc, tempPrevia);
             } else if (acciones[key].valor !== "") {
                 swal("", "Se debe confirmar el cambio a la medida para poder aplicarse", "warning");
             }
@@ -1079,16 +1079,13 @@ async function saveRatificacion(idEnlace, idResolucion, idMedida, ratificacion) 
 }
 
 //Funcion que guarda en caso de que la medida sea modificada
-async function saveModificada(idEnlace, idResolucion, idMedida, modifica, fraccionesPrevias, fechaPrevia, nuc) {
+async function saveModificada(idEnlace, idResolucion, idMedida, modifica, fraccionesPrevias, fechaPrevia, nuc, tempPrevia) {
     var observacion = document.getElementById("observacionModifica").value;
     var fechaConclusion = document.getElementById("fechaConclusionModificada").value;	
     var fraccionesActuales = consultarInputHidden();
 
     fraccionesPrevias = fraccionesPrevias.map(String);
     var boolComparar = compararArray(fraccionesActuales, fraccionesPrevias);
-    // console.log("FP = FC" + (fechaPrevia == fechaConclusion));	BORRAR
-    // console.log("Fracciones Actuales: " + (fraccionesActuales == ""));	BORRAR
-    // console.log("BoolComparar" + boolComparar);	BORRAR
 
     if (!(fechaPrevia == fechaConclusion && (fraccionesActuales == "" || boolComparar == true))) {
 		if(fraccionesActuales == ""){
@@ -1111,6 +1108,14 @@ async function saveModificada(idEnlace, idResolucion, idMedida, modifica, fracci
                 obj.error.forEach(element => console.log(element));
             } else if (obj.first === "SI") {
                 swal("", "Resoluciones registradas exitosamente.", "success");
+				if(fechaPrevia != fechaConclusion){
+					fP = new Date(fechaPrevia);
+					fC = new Date(fechaConclusion);
+			
+					temp = Math.floor((fC - fP )/ (1000 * 60 * 60 * 24));
+					nTemp = temp + tempPrevia;					
+					updateCuadernoAntecedentes(idMedida, nTemp, 'temporalidad');
+				}
                 updateFechaConclusion(idMedida, fechaConclusion);							
                 await updateFraccionesResolucion(idMedida, fraccionesPrevias, fraccionesActuales, nuc);
                 modalDatosMedida(1, idEnlace, 0, 0, obj.idMedidaUltimo, 'resolucion');
@@ -1126,7 +1131,7 @@ async function saveModificada(idEnlace, idResolucion, idMedida, modifica, fracci
 
 
 //Fucnion que guarda en caso de que la medida sea ampliada
-function saveAmpliada(idEnlace, idResolucion, idMedida, ampliada, medidasAplicadas, fechaC){
+function saveAmpliada(idEnlace, idResolucion, idMedida, ampliada, medidasAplicadas, fechaC, nuc, tempPrevia){
 	var temporalidad = document.getElementById("temporalidadRes").value;
 
 	if(temporalidad != ""){
@@ -1137,6 +1142,8 @@ function saveAmpliada(idEnlace, idResolucion, idMedida, ampliada, medidasAplicad
 	
 		fechaPrevia = fechaPrevia.toISOString().slice(0, 16);
 		fechaConclusion = fechaConclusion.toISOString().slice(0, 16);
+		
+		nTemp = temporalidad + tempPrevia;
 	
 		$.ajax({
 			type: "POST",
@@ -1155,8 +1162,8 @@ function saveAmpliada(idEnlace, idResolucion, idMedida, ampliada, medidasAplicad
 					if (obj.first == "SI") {
 						var obj = eval("(" + json + ")");
 						swal("", "Resoluciones registradas exitosamente. ", "success");
-						updateFechaConclusion(idMedida, fechaConclusion);						
-						updateCuadernoAntecedentes(idMedida, temporalidad, 'temporalidad');
+						updateFechaConclusion(idMedida, fechaConclusion);
+						updateCuadernoAntecedentes(idMedida, nTemp, 'temporalidad');
 						modalDatosMedida(1, idEnlace, 0, 0, obj.idMedidaUltimo, 'resolucion');
 					}
 				}
@@ -1489,9 +1496,9 @@ function generarExcel(idEnlace, rolUser) {
         },
         success: function(resp) {
             if (Array.isArray(resp) && resp.length > 0) {
-                //console.log("Datos:", resp);				 Mostrar el array en caso de que la respuesta sea exitosa.
+                console.log("Datos:", resp);				 //Mostrar el array en caso de que la respuesta sea exitosa.
             } else {
-                //console.log("No se encontraron resultados.");		
+                console.log("No se encontraron resultados.");		
             }
         },
         error: function(xhr, status, error) {

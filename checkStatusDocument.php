@@ -29,7 +29,7 @@ $query = "SELECT a.idArchivo
   $result = sqlsrv_query($conn,$query, array(), array( "Scrollable" => 'static' ));
   $arreglo[0] = "NO";
   $arreglo[1] = "SI";
- 
+  $data = [];
 
   while ($row = sqlsrv_fetch_array( $result, SQLSRV_FETCH_ASSOC ))
   {

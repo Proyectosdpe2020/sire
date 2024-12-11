@@ -432,7 +432,7 @@ $drawing->setDescription('logo');
 $drawing->setPath('../../../images/dgtipe.png');
 $drawing->setHeight(250);
 $drawing->setWidth(400);
-$drawing->setCoordinates('Y2');
+$drawing->setCoordinates('Z2');
 $drawing->setWorksheet($sheet);
 
 $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
@@ -478,7 +478,8 @@ $celdas = [
     'U10' => 'IX',
     'V10' => 'X',
     'AA10' => 'Sí',
-    'AB10' => 'No'
+    'AB10' => 'No',
+    'AD9' => 'Coorporación Policial'
 ];
 
 //------------------------STYLES---------------------
@@ -547,7 +548,7 @@ $styleContent = [
 $mergeCells = [
     'C8:AC8', 'A9:A10', 'B9:B10', 'C9:C10', 'D9:D10', 'E9:E10', 'F9:F10', 'G9:G10', 'H9:H10', 
     'I9:I10', 'J9:J10', 'K9:K10', 'L9:L10', 'M9:V9', 'W9:W10', 'X9:X10', 'Y9:Y10', 'Z9:Z10', 
-    'AA9:AB9', 'AC9:AC10', 'A1:B7', 'X1:AC7', 'C5:I5', 'C6:I6'
+    'AA9:AB9', 'AC9:AC10', 'A1:B7', 'X1:AC7', 'C5:I5', 'C6:I6', 'AD9:AD10'
 ];
 
 $cellFracciones = ['G', 'K', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'AA', 'AB', 'AC'];
@@ -581,7 +582,8 @@ $cellWidth = [
     'Z' => 154,
     'AA' => 45,
     'AB' => 45,
-    'AC' => 119
+    'AC' => 119,
+    'AD' => 180
 ];
 
 foreach ($cellWidth as $cell => $width) {
@@ -595,17 +597,17 @@ foreach ($celdas as $celda => $valor) {
 }
 $total = count($arreglo) + 10;
 
-$sheet->getStyle('A9:AC10')->applyFromArray($styleEncabezado);
-$sheet->getStyle('A1:AC8')->applyFromArray($styleFormato);
-$sheet->getStyle('A11:AC' . $total)->applyFromArray($styleContent);
-$sheet->getStyle('A9:AC' . $total)->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+$sheet->getStyle('A9:AD10')->applyFromArray($styleEncabezado);
+$sheet->getStyle('A1:AD8')->applyFromArray($styleFormato);
+$sheet->getStyle('A11:AD' . $total)->applyFromArray($styleContent);
+$sheet->getStyle('A9:AD' . $total)->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
 
 $sheet->getStyle('A8')->getFont()->setBold(true)->setSize(24);
 $sheet->getStyle('A8')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
 
 for($i = 11; $i <= $total; $i++){
     if($i % 2 == 0){
-        $sheet->getStyle('A'.$i.':'.'AC'.$i)->getFill()
+        $sheet->getStyle('A'.$i.':'.'AD'.$i)->getFill()
             ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
             ->getStartColor()->setARGB('B5B2B2');
     }
