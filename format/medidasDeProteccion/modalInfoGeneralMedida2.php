@@ -161,7 +161,7 @@ if (isset($_POST["idMedida"])){
 											type="button" <?if($rolUser != 3 && $rolUser != 4){ ?> disabled <? } ?> 
 											class="btn btn-primary btn-lg" 
 											onclick="											
-												saveDatosResoluciones(<?php echo $idEnlace; ?> , <?php echo $fraccion; ?>, <?echo $idMedida ?>, <?echo $a; ?>, <?= $idResolucion[0]; ?>, '<?= $fechaConclusion; ?>', <?= json_encode($aplicadas); ?>, <?= $nuc ?>)
+												saveDatosResoluciones(<?php echo $idEnlace; ?> , <?php echo $fraccion; ?>, <?echo $idMedida ?>, <?echo $a; ?>, <?= $idResolucion[0]; ?>, '<?= $fechaConclusion; ?>', <?= json_encode($aplicadas); ?>, <?= $nuc ?>, <?= $getDataGenerales[0][2] ?>)
 											">Guardar información
 										</button>
 									</div>
