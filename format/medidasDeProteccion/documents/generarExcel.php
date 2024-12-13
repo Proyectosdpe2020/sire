@@ -29,6 +29,7 @@ if($rolUser == 1){
                 mp.nombre + ' ' + mp.paterno + ' ' + mp.materno AS nombreMP,
                 m.nuc,
                 d.Nombre AS delito,
+                cu.nombre AS unidad,
                 (
                     SELECT 
                         v.nombre + ' ' + v.paterno + ' ' + v.materno AS nombreVictima,
@@ -80,6 +81,7 @@ if($rolUser == 1){
                 INNER JOIN PRUEBA.dbo.CatModalidadesEstadisticas d ON d.CatModalidadesEstadisticasID = m.idDelito
                 LEFT JOIN SIRE.medidas.cuadernoAntecedentes ca ON ca.idMedida = m.idMedida
                 LEFT JOIN SIRE.medidas.resoluciones r ON r.idMedida = m.idMedida
+                LEFT JOIN SIRE.medidas.catUnidad cu ON cu.idUnidad = m.idUnidad
                 LEFT JOIN (
                     SELECT 
                         am.idResolucion,
@@ -101,6 +103,7 @@ if($rolUser == 1){
                 mp.nombre + ' ' + mp.paterno + ' ' + mp.materno AS nombreMP,
                 m.nuc,
                 d.Nombre AS delito,
+                cu.nombre AS unidad,
                 (
                     SELECT 
                         v.nombre + ' ' + v.paterno + ' ' + v.materno AS nombreVictima,
@@ -152,6 +155,7 @@ if($rolUser == 1){
                 INNER JOIN PRUEBA.dbo.CatModalidadesEstadisticas d ON d.CatModalidadesEstadisticasID = m.idDelito
                 LEFT JOIN SIRE.medidas.cuadernoAntecedentes ca ON ca.idMedida = m.idMedida
                 LEFT JOIN SIRE.medidas.resoluciones r ON r.idMedida = m.idMedida
+                LEFT JOIN SIRE.medidas.catUnidad cu ON cu.idUnidad = m.idUnidad
                 LEFT JOIN (
                     SELECT 
                         am.idResolucion,
@@ -175,6 +179,7 @@ elseif($rolUser == 4){
                 mp.nombre + ' ' + mp.paterno + ' ' + mp.materno AS nombreMP,
                 m.nuc,
                 d.Nombre AS delito,
+                cu.nombre AS unidad,
                 (
                     SELECT 
                         v.nombre + ' ' + v.paterno + ' ' + v.materno AS nombreVictima,
@@ -226,6 +231,7 @@ elseif($rolUser == 4){
                 INNER JOIN PRUEBA.dbo.CatModalidadesEstadisticas d ON d.CatModalidadesEstadisticasID = m.idDelito
                 LEFT JOIN SIRE.medidas.cuadernoAntecedentes ca ON ca.idMedida = m.idMedida
                 LEFT JOIN SIRE.medidas.resoluciones r ON r.idMedida = m.idMedida
+                LEFT JOIN SIRE.medidas.catUnidad cu ON cu.idUnidad = m.idUnidad
                 LEFT JOIN (
                     SELECT 
                         am.idResolucion,
@@ -247,6 +253,7 @@ elseif($rolUser == 4){
                 mp.nombre + ' ' + mp.paterno + ' ' + mp.materno AS nombreMP,
                 m.nuc,
                 d.Nombre AS delito,
+                cu.nombre AS unidad,
                 (
                     SELECT 
                         v.nombre + ' ' + v.paterno + ' ' + v.materno AS nombreVictima,
@@ -298,6 +305,7 @@ elseif($rolUser == 4){
                 INNER JOIN PRUEBA.dbo.CatModalidadesEstadisticas d ON d.CatModalidadesEstadisticasID = m.idDelito
                 LEFT JOIN SIRE.medidas.cuadernoAntecedentes ca ON ca.idMedida = m.idMedida
                 LEFT JOIN SIRE.medidas.resoluciones r ON r.idMedida = m.idMedida
+                LEFT JOIN SIRE.medidas.catUnidad cu ON cu.idUnidad = m.idUnidad
                 LEFT JOIN (
                     SELECT 
                         am.idResolucion,
@@ -328,7 +336,7 @@ sqlsrv_free_stmt($result);
 sqlsrv_close($connMedidas);
 
 $contC = 11;
-$keys = ['folio', 'nombreMP', 'nuc', 'delito'];
+$keys = ['folio', 'nombreMP', 'nuc', 'delito','unidad'];
 $keysVictima = ['nombreVictima', 'genero', 'edad', 'nacionalidad', 'estado', 'municipio'];
 $keysMedida = ['nombre', 'fraccion'];
 $keysFechas = ['fechaRegistro', 'inicio', 'fin', 'ampliacion', 'temporalidadActual'];
@@ -375,16 +383,16 @@ foreach ($arreglo as $registro) {
                         $col++;
                     }
                     $sheet->setCellValue($col.(string)($contC), 'X');
-                    $cell = $sheet->getCell('M' . (string)($contC));
+                    $cell = $sheet->getCell('N' . (string)($contC));
                     $cellValue = $cell->getValue();
                     if($cellValue == ''){
-                        $sheet->setCellValue('M'.(string)($contC), ' '); 
+                        $sheet->setCellValue('N'.(string)($contC), ' '); 
                     }
                 }
             }
         }
     }
-    $col = 'W';
+    $col = 'X';
     if($registro['ampliacion'] != "") {
         $sheet->setCellValue($col.(string)($contC), $registro['temporalidadPrevia']);
         $col++;
@@ -432,7 +440,7 @@ $drawing->setDescription('logo');
 $drawing->setPath('../../../images/dgtipe.png');
 $drawing->setHeight(250);
 $drawing->setWidth(400);
-$drawing->setCoordinates('Z2');
+$drawing->setCoordinates('AA2');
 $drawing->setWorksheet($sheet);
 
 $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
@@ -450,36 +458,37 @@ $celdas = [
     'B9' => 'Agente del Ministerio Público',
     'C9' => 'NUC',
     'D9' => 'Delito',
-    'E9' => 'Víctima(s)',
-    'F9' => 'Sexo',
-    'G9' => 'Edad',
-    'H9' => 'Nacionalidad',
-    'I9' => 'Estado',
-    'J9' => 'Municipio',
-    'K9' => 'Número de Órdenes de Protección',
-    'L9' => 'Medidas de Protección Solicitadas',
+    'E9' => 'Unidad',
+    'F9' => 'Víctima(s)',
+    'G9' => 'Sexo',
+    'H9' => 'Edad',
+    'I9' => 'Nacionalidad',
+    'J9' => 'Estado',
+    'K9' => 'Municipio',
+    'L9' => 'Número de Órdenes de Protección',
+    'M9' => 'Medidas de Protección Solicitadas',
     'C5' => 'Periodo Correspondiente: ' . $fechaConsulta,
     'C6' => 'Consultado: ' . $fechaReporte,
-    'M9' => 'Artículo 1311 CNPP.',
-    'W9' => 'Temporalidad',
-    'X9' => 'Fecha del acuerdo',
-    'Y9' => 'Inicio',
-    'Z9' => 'Fin',
-    'AA9' => 'Ampliación',
-    'AC9' => 'Temporalidad',
-    'M10' => 'I',
-    'N10' => 'II',
-    'O10' => 'III',
-    'P10' => 'IV',
-    'Q10' => 'V',
-    'R10' => 'VI',
-    'S10' => 'VII',
-    'T10' => 'VIII',
-    'U10' => 'IX',
-    'V10' => 'X',
-    'AA10' => 'Sí',
-    'AB10' => 'No',
-    'AD9' => 'Coorporación Policial'
+    'N9' => 'Artículo 137 CNPP.',
+    'X9' => 'Temporalidad',
+    'Y9' => 'Fecha del acuerdo',
+    'Z9' => 'Inicio',
+    'AA9' => 'Fin',
+    'AB9' => 'Ampliación',
+    'AD9' => 'Temporalidad',
+    'AE9' => 'Coorporación Policial',
+    'N10' => 'I',
+    'O10' => 'II',
+    'P10' => 'III',
+    'Q10' => 'IV',
+    'R10' => 'V',
+    'S10' => 'VI',
+    'T10' => 'VII',
+    'U10' => 'VIII',
+    'V10' => 'IX',
+    'W10' => 'X',
+    'AB10' => 'Sí',
+    'AC10' => 'No'    
 ];
 
 //------------------------STYLES---------------------
@@ -547,26 +556,26 @@ $styleContent = [
 
 $mergeCells = [
     'C8:AC8', 'A9:A10', 'B9:B10', 'C9:C10', 'D9:D10', 'E9:E10', 'F9:F10', 'G9:G10', 'H9:H10', 
-    'I9:I10', 'J9:J10', 'K9:K10', 'L9:L10', 'M9:V9', 'W9:W10', 'X9:X10', 'Y9:Y10', 'Z9:Z10', 
-    'AA9:AB9', 'AC9:AC10', 'A1:B7', 'X1:AC7', 'C5:I5', 'C6:I6', 'AD9:AD10'
+    'I9:I10', 'J9:J10', 'K9:K10', 'L9:L10', 'M9:M10', 'N9:W9', 'X9:X10', 'Y9:Y10', 'Z9:Z10', 
+    'AA9:AA10', 'AB9:AC9', 'A1:B7', 'Z1:AE7', 'C5:I5', 'C6:I6', 'AD9:AD10', 'AE9:AE10'
 ];
 
-$cellFracciones = ['G', 'K', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'AA', 'AB', 'AC'];
+$cellFracciones = ['G', 'H', 'L', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'AB', 'AC', 'AD'];
 
 $cellWidth = [
     'A' => 48,
     'B' => 250,
     'C' => 120,
-    'D' => 352,
-    'E' => 410,
-    'F' => 82,
-    'G' => 48,
-    'H' => 112,
-    'I' => 158,
-    'J' => 138,
-    'K' => 74,
-    'L' => 600,
-    'M' => 31,
+    'D' => 350,
+    'E' => 350,
+    'F' => 410,
+    'G' => 82,
+    'H' => 48,
+    'I' => 112,
+    'J' => 158,
+    'K' => 138,
+    'L' => 74,
+    'M' => 600,
     'N' => 31,
     'O' => 31,
     'P' => 31,
@@ -576,14 +585,15 @@ $cellWidth = [
     'T' => 31,
     'U' => 31,
     'V' => 31,
-    'W' => 119,
+    'W' => 31,
     'X' => 154,
     'Y' => 154,
     'Z' => 154,
-    'AA' => 45,
+    'AA' => 154,
     'AB' => 45,
-    'AC' => 119,
-    'AD' => 180
+    'AC' => 45,
+    'AD' => 180,
+    'AE' => 180
 ];
 
 foreach ($cellWidth as $cell => $width) {
@@ -597,17 +607,17 @@ foreach ($celdas as $celda => $valor) {
 }
 $total = count($arreglo) + 10;
 
-$sheet->getStyle('A9:AD10')->applyFromArray($styleEncabezado);
-$sheet->getStyle('A1:AD8')->applyFromArray($styleFormato);
-$sheet->getStyle('A11:AD' . $total)->applyFromArray($styleContent);
-$sheet->getStyle('A9:AD' . $total)->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+$sheet->getStyle('A9:AE10')->applyFromArray($styleEncabezado);
+$sheet->getStyle('A1:AE8')->applyFromArray($styleFormato);
+$sheet->getStyle('A11:AE' . $total)->applyFromArray($styleContent);
+$sheet->getStyle('A9:AE' . $total)->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
 
-$sheet->getStyle('A8')->getFont()->setBold(true)->setSize(24);
-$sheet->getStyle('A8')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+// $sheet->getStyle('A8')->getFont()->setBold(true)->setSize(24);
+// $sheet->getStyle('A8')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
 
 for($i = 11; $i <= $total; $i++){
     if($i % 2 == 0){
-        $sheet->getStyle('A'.$i.':'.'AD'.$i)->getFill()
+        $sheet->getStyle('A'.$i.':'.'AE'.$i)->getFill()
             ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
             ->getStartColor()->setARGB('B5B2B2');
     }
