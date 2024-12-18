@@ -393,14 +393,16 @@ foreach ($arreglo as $registro) {
         }
     }
     $col = 'X';
-    if($registro['ampliacion'] != "") {
-        $sheet->setCellValue($col.(string)($contC), $registro['temporalidadPrevia']);
-        $col++;
-    }
-    else{
-        $sheet->setCellValue($col.(string)($contC), $registro['temporalidad']);
-        $col++;
-    }
+    $sheet->setCellValue($col.(string)($contC), $registro['temporalidad']);
+    $col++;
+    // if($registro['ampliacion'] != "") {
+    //     $sheet->setCellValue($col.(string)($contC), $registro['temporalidadPrevia']);
+    //     $col++;
+    // }
+    // else{
+    //     $sheet->setCellValue($col.(string)($contC), $registro['temporalidad']);
+    //     $col++;
+    // }
     foreach($keysFechas as $key){
         if($key == 'ampliacion'){
             if($registro[$key] === 1){
@@ -409,13 +411,20 @@ foreach ($arreglo as $registro) {
             }
             elseif($registro[$key] == 0){
                 $col++;
-                $sheet->setCellValue($col.(string)($contC), 'X');                
+                $sheet->setCellValue($col.(string)($contC), 'X');          
             }
             else{
                 $col++;
             }
             $col++;
             continue;
+        }
+        if($key == 'temporalidadActual'){
+            if($registro[$key] == ''){
+                $sheet->setCellValue($col.(string)($contC), 'N/A');
+                $col++;
+                continue;
+            }            
         }     
         $sheet->setCellValue($col.(string)($contC), $registro[$key]);
         $col++;
@@ -592,7 +601,7 @@ $cellWidth = [
     'AA' => 154,
     'AB' => 45,
     'AC' => 45,
-    'AD' => 180,
+    'AD' => 154,
     'AE' => 180
 ];
 
