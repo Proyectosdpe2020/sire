@@ -390,7 +390,7 @@ if (isset($_POST["idMedida"])){
 											<label for="temporalidadRes">Temporalidad: <span class="aste">(*)</span></label>
 											<select class="form-control" id="temporalidadRes">
 												<option value="">Seleccione</option>
-												<?php for ($i=1; $i<=99; $i++){ ?>
+												<?php for ($i=1; $i<=60; $i++){ ?>
 													<option class="fontBold" value="<?php echo $i; ?>"><?php echo $i;?> días</option>
 												<?php } ?>
 											</select>											

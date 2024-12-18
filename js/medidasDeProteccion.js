@@ -2640,11 +2640,65 @@ function deleteItemV(moduloID, item_ID, idEnlace, idMedida, banderaTotal) {
 		});
 }
 
-function checkDateAcuerdo(fecha) {
-	var fechaAcuerdo = document.getElementById("fechaAcuerdo").value;
+function checkDateAcuerdo(fecha) {	
+	var fechaAcuerdo = document.getElementById("fechaAcuerdo").value;	
 	if (Date.parse(fecha) <= Date.parse(fechaAcuerdo)) {
 		swal("", "La fecha del acuerdo no puede ser mayor a la fecha del informe.", "warning");
 		document.getElementById("fechaAcuerdo").value = '';
+	}
+	//createOptionsDate();
+}
+
+function createOptionsDate(){	
+	var fechaAcuerdo = document.getElementById("fechaAcuerdo").value;
+	const fechaConclusion = document.getElementById("fechaConclu");
+	if(fechaAcuerdo != ''){
+		var date30 = new Date(fechaAcuerdo);
+		var date60 = new Date(fechaAcuerdo);
+		date30.setDate(date30.getDate() + 30);
+		date60.setDate(date60.getDate() + 60);
+		date30 = formatDateCalendar(date30);
+		date60 = formatDateCalendar(date60);
+
+		var existingDataList = document.getElementById('fechasPermitidas');
+		if (existingDataList) {
+			existingDataList.remove();
+		}
+
+		fechaConclusion.setAttribute('list', 'fechasPermitidas');
+		var dataList = document.createElement('datalist');
+		dataList.id = 'fechasPermitidas';
+		dataList.innerHTML = `<option value="${date30}"><option value="${date60}">`;
+		document.body.appendChild(dataList);
+	}			
+}
+
+const formatDateCalendar = (date) => {
+	const year = date.getFullYear();
+	const month = String(date.getMonth() + 1).padStart(2, '0');
+	const day = String(date.getDate()).padStart(2, '0');
+	const hours = String(date.getHours()).padStart(2, '0');
+	const minutes = String(date.getMinutes()).padStart(2, '0');
+	return `${year}-${month}-${day}T${hours}:${minutes}`;
+};
+
+function validarFechaConclusion(element){
+	fechaConclusion = document.getElementById(element).value;
+	var existingDataList = document.getElementById('fechasPermitidas');
+	var validate = false;
+	if (existingDataList) {
+		const dataList = document.getElementById('fechasPermitidas');
+		const options = dataList.getElementsByTagName('option'); 
+		for (let i = 0; i < options.length; i++) {			
+			if(options[i].value == fechaConclusion){
+				validate = true;
+				break;
+			}
+		}
+	}
+	if(!validate){
+		swal("", "Fecha de conclusión no válida. Verificar con fecha del acuerdo.", "warning");
+		document.getElementById(element).value = '';
 	}
 }
 
@@ -2670,7 +2724,7 @@ function validateDataMedidaGeneralRegionales() {
 	var idFiscaliaProc = document.getElementById("idFiscaliaProc").value;
 
 var inputMedidaHidden = document.getElementsByClassName("inputMedidaHidden"); //Para obtener la cantidad de inputs que se agregaron dinamicamente
-var totalInputs = inputMedidaHidden.length; 
+var totalInputs = inputMedidaHidden.length;
 
 	//Arreglo de campos para validar con color rojo, si se agrega un nuevo campo, agregar en el arreglo para incluir en la validacion de color
 	var arrayCamposValida = ["agentesMP_id_div", "idCargo", "idFuncion", "idAdscripcion", "nuc", "idDelito_div", "fechaAcuerdo", "fechaRegistro", "nombreVicti", "paternoVicti", "maternoVicti", "generoVicti", "edadVictima", "idFiscaliaProc_div" , "fechaConclu"];
@@ -2687,7 +2741,12 @@ var totalInputs = inputMedidaHidden.length;
 	let temporalidad = calculo_temporalidad(fechaConclu, fechaAcuerdo);
 	console.log("La temporalidad de la medida es de: " + temporalidad + " días");
 
-	if (agentesMP_id != "" && idCargo != "" && idFuncion != "" && idAdscripcion != "" && nuc != "" && idDelito != "" && fechaAcuerdo != "" && fechaRegistro != "" && nombreVicti != "" && paternoVicti != "" && maternoVicti != "" && generoVicti != "" && edadVictima != "" && idFiscaliaProc != "" && totalInputs != 0 && fechaConclu != "") {
+	if(temporalidad != 30 && temporalidad != 60){
+		swal("", "Fecha de conclusión invalidada.", "warning");
+		temporalidad = 0;
+	}
+
+	if (agentesMP_id != "" && idCargo != "" && idFuncion != "" && idAdscripcion != "" && nuc != "" && idDelito != "" && fechaAcuerdo != "" && fechaRegistro != "" && nombreVicti != "" && paternoVicti != "" && maternoVicti != "" && generoVicti != "" && edadVictima != "" && idFiscaliaProc != "" && totalInputs != 0 && fechaConclu != "" && temporalidad != 0) {
 
 		var dataGenerales = Array();
 		dataGenerales[1] = nuc.trim();

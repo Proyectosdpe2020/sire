@@ -188,17 +188,33 @@ if (isset($_POST["idMedida"])) {
 				</div>
 				<div class="col-xs-12 col-sm-12  col-md-2">
 					<label for="fechaAcuerdo">Fecha del acuerdo: <span class="aste">(*)</span></label>
-					<input id="fechaAcuerdo" type="datetime-local" value="<? if ($a == 1) {
-																																																												echo $fechaev = str_ireplace(' ', 'T', $get_fechaAcuerdo);
-																																																											} ?>" onchange="validateMedidaOK(this.id) , checkDateAcuerdo('<? echo $fecha ?>') " name="fechaAcuerdo" class="fechas form-control gehit" min="<? echo $anioActual; ?>-<? echo $m; ?>-01T00:00:00" max="<? echo $hoy; ?>T23:59:59" <? if ($rolUser == 1 || $rolUser == 3) { ?> disabled <? } ?> />
+					<input 
+						id="fechaAcuerdo" 
+						type="datetime-local" 
+						value="<? if ($a == 1) {
+							echo $fechaev = str_ireplace(' ', 'T', $get_fechaAcuerdo);
+						} ?>" 
+						onchange="
+							validateMedidaOK(this.id), 
+							checkDateAcuerdo('<? echo $fecha ?>') " 						
+						name="fechaAcuerdo" 
+						class="fechas form-control gehit" 
+						min="<? echo $anioActual; ?>-<? echo $m; ?>-01T00:00:00" 
+						max="<? echo $hoy; ?>T23:59:59" 
+						<? if ($rolUser == 1 || $rolUser == 3) { ?> disabled <? } ?> />
 				</div>
 				<div class="col-xs-12 col-sm-12  col-md-2">
 					<label for="fechaRegistro">Fecha de registro:</label>
-					<input class="form-control" id="fechaRegistro" value="<? if ($a == 1) {
-																																																												echo $get_fechaRegistro;
-																																																											} else {
-																																																												echo $fecha;
-																																																											} ?>" type="text" readonly><br>
+					<input 
+						class="form-control"
+						id="fechaRegistro" 
+						value="<? if ($a == 1) {
+								echo $get_fechaRegistro;
+							} else {
+								echo $fecha;
+							} ?>" 
+						type="text" 
+						readonly><br>
 				</div>
 			</div>
 		</div>
@@ -416,7 +432,16 @@ if (isset($_POST["idMedida"])) {
 				<div class="row">
 					<div class="col-xs-12 col-sm-12  col-md-3">
 						<label for="fechaConclusion">Fecha de conclusión: <span class="aste">(*)</span></label>
-						<input id="fechaConclu" type="datetime-local" value="<?if($a == 1){ echo $fechaConclusion; } ?>" name="fechaConclu" onchange="validateMedidaOK(this.id)" class="fechas form-control gehit" />
+						<input 
+							id="fechaConclu" 
+							type="datetime-local" 
+							value="<?if($a == 1){ echo $fechaConclusion; } ?>" 
+							name="fechaConclu" 
+							onchange="
+								validateMedidaOK(this.id)
+								validarFechaConclusion(this.id)" 
+							onclick="createOptionsDate()"
+							class="fechas form-control gehit" />
 					</div>
 				</div><br>
 			<? } ?>
