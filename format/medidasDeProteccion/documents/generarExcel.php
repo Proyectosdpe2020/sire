@@ -75,13 +75,18 @@ if($rolUser == 1){
                 m.fechaConclusion AS fin,
                 ultimaAmpliacion.ampliacion,
                 ultimaAmpliacion.temporalidadPrevia,
-                ultimaAmpliacion.temporalidadActual
+                ultimaAmpliacion.temporalidadActual,
+				CASE
+					WHEN cc.nombre IS NULL THEN 'Desconocido'
+					ELSE cc.nombre
+				END  AS coorporacion
                 FROM SIRE.medidas.medidasProteccion m
                 LEFT JOIN SIRE.medidas.mp ON mp.idMp = m.idMP
                 INNER JOIN PRUEBA.dbo.CatModalidadesEstadisticas d ON d.CatModalidadesEstadisticasID = m.idDelito
                 LEFT JOIN SIRE.medidas.cuadernoAntecedentes ca ON ca.idMedida = m.idMedida
                 LEFT JOIN SIRE.medidas.resoluciones r ON r.idMedida = m.idMedida
                 LEFT JOIN SIRE.medidas.catUnidad cu ON cu.idUnidad = m.idUnidad
+				LEFT JOIN SIRE.medidas.catCoorporacion cc ON cc.idCatCoorporacion = m.idCatCoorporacion
                 LEFT JOIN (
                     SELECT 
                         am.idResolucion,
@@ -149,13 +154,18 @@ if($rolUser == 1){
                 m.fechaConclusion AS fin,
                 ultimaAmpliacion.ampliacion,
                 ultimaAmpliacion.temporalidadPrevia,
-                ultimaAmpliacion.temporalidadActual
+                ultimaAmpliacion.temporalidadActual,
+				CASE
+					WHEN cc.nombre IS NULL THEN 'Desconocido'
+					ELSE cc.nombre
+				END  AS coorporacion
                 FROM SIRE.medidas.medidasProteccion m
                 LEFT JOIN SIRE.medidas.mp ON mp.idMp = m.idMP
                 INNER JOIN PRUEBA.dbo.CatModalidadesEstadisticas d ON d.CatModalidadesEstadisticasID = m.idDelito
                 LEFT JOIN SIRE.medidas.cuadernoAntecedentes ca ON ca.idMedida = m.idMedida
                 LEFT JOIN SIRE.medidas.resoluciones r ON r.idMedida = m.idMedida
                 LEFT JOIN SIRE.medidas.catUnidad cu ON cu.idUnidad = m.idUnidad
+				LEFT JOIN SIRE.medidas.catCoorporacion cc ON cc.idCatCoorporacion = m.idCatCoorporacion
                 LEFT JOIN (
                     SELECT 
                         am.idResolucion,
@@ -225,13 +235,18 @@ elseif($rolUser == 4){
                 m.fechaConclusion AS fin,
                 ultimaAmpliacion.ampliacion,
                 ultimaAmpliacion.temporalidadPrevia,
-                ultimaAmpliacion.temporalidadActual
+                ultimaAmpliacion.temporalidadActual,
+				CASE
+					WHEN cc.nombre IS NULL THEN 'Desconocido'
+					ELSE cc.nombre
+				END  AS coorporacion
                 FROM SIRE.medidas.medidasProteccion m
                 LEFT JOIN SIRE.medidas.mp ON mp.idMp = m.idMP
                 INNER JOIN PRUEBA.dbo.CatModalidadesEstadisticas d ON d.CatModalidadesEstadisticasID = m.idDelito
                 LEFT JOIN SIRE.medidas.cuadernoAntecedentes ca ON ca.idMedida = m.idMedida
                 LEFT JOIN SIRE.medidas.resoluciones r ON r.idMedida = m.idMedida
                 LEFT JOIN SIRE.medidas.catUnidad cu ON cu.idUnidad = m.idUnidad
+				LEFT JOIN SIRE.medidas.catCoorporacion cc ON cc.idCatCoorporacion = m.idCatCoorporacion
                 LEFT JOIN (
                     SELECT 
                         am.idResolucion,
@@ -299,13 +314,18 @@ elseif($rolUser == 4){
                 m.fechaConclusion AS fin,
                 ultimaAmpliacion.ampliacion,
                 ultimaAmpliacion.temporalidadPrevia,
-                ultimaAmpliacion.temporalidadActual
+                ultimaAmpliacion.temporalidadActual,
+				CASE
+					WHEN cc.nombre IS NULL THEN 'Desconocido'
+					ELSE cc.nombre
+				END  AS coorporacion
                 FROM SIRE.medidas.medidasProteccion m
                 LEFT JOIN SIRE.medidas.mp ON mp.idMp = m.idMP
                 INNER JOIN PRUEBA.dbo.CatModalidadesEstadisticas d ON d.CatModalidadesEstadisticasID = m.idDelito
                 LEFT JOIN SIRE.medidas.cuadernoAntecedentes ca ON ca.idMedida = m.idMedida
                 LEFT JOIN SIRE.medidas.resoluciones r ON r.idMedida = m.idMedida
                 LEFT JOIN SIRE.medidas.catUnidad cu ON cu.idUnidad = m.idUnidad
+				LEFT JOIN SIRE.medidas.catCoorporacion cc ON cc.idCatCoorporacion = m.idCatCoorporacion
                 LEFT JOIN (
                     SELECT 
                         am.idResolucion,
@@ -339,7 +359,7 @@ $contC = 11;
 $keys = ['folio', 'nombreMP', 'nuc', 'delito','unidad'];
 $keysVictima = ['nombreVictima', 'genero', 'edad', 'nacionalidad', 'estado', 'municipio'];
 $keysMedida = ['nombre', 'fraccion'];
-$keysFechas = ['fechaRegistro', 'inicio', 'fin', 'ampliacion', 'temporalidadActual'];
+$keysFechas = ['fechaRegistro', 'inicio', 'fin', 'ampliacion', 'temporalidadActual', 'coorporacion'];
 
 foreach ($arreglo as $registro) {
     $col = 'A';
