@@ -18,6 +18,28 @@ function getCausaPenalNuc($conn, $nuc){
 	if(isset($arreglo)){return $arreglo;}
 }
 
+function getCoorporacion($connMedidas) {
+    $query = "
+        SELECT idCatCoorporacion, nombre
+        FROM medidas.catCoorporacion";
+    $stmt = sqlsrv_prepare($connMedidas, $query);
+    if ($stmt) {
+        $result = sqlsrv_execute($stmt);
+        if ($result) {
+            $array = [];
+            while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+                $array[] = $row; // Agregar cada fila al array
+            }
+            return $array;
+        } else {
+            $errors = sqlsrv_errors();
+            return $errors;
+        }
+    } else {
+        $errors = sqlsrv_errors();
+        return $errors;
+    }
+}
 
 function getDataMP($connMedidas, $rolUser, $idEnlace){
 	if($rolUser != 4){
@@ -188,6 +210,7 @@ function get_data_medida($connMedidas, $idMedida){
 													      ,[idEnlace]
 													      ,[idFiscaliaProcedencia]
 													      ,[estatus]
+														  ,[idCatCoorporacion]
 													  FROM [SIRE].[medidas].[medidasProteccion] WHERE idMedida = $idMedida ";
 	$indice = 0;
 	$stmt = sqlsrv_query($connMedidas, $query);
@@ -205,6 +228,7 @@ function get_data_medida($connMedidas, $idMedida){
 		$arreglo[$indice][9]=$row['idFiscaliaProcedencia'];
 		$arreglo[$indice][11]=$row['estatus'];
 		$arreglo[$indice][12]=$row['fechaAcuerdo']->format('Y-m-d');
+		$arreglo[$indice][13]=$row['idCatCoorporacion'];
 
 		$indice++;
 	}

@@ -8,6 +8,7 @@ $fecha_actual = date("d/m/Y");
 $fecha = strftime("%Y-%m-%d %H:%M:%S", time());
 $anioActual = date("Y");
 $hoy = date("Y-m-d"); //Fecha calendario
+$get_idCoorporacion = 0;
 
 if (isset($_POST["idEnlace"])) {
 	$idEnlace = $_POST["idEnlace"];
@@ -60,6 +61,7 @@ if (isset($_POST["idMedida"])) {
 		$get_idEnlace = $medidaData[0][8];
 		$get_idFiscaliaProcedencia = $medidaData[0][9];
 		$get_estatus = $medidaData[0][11];
+		$get_idCoorporacion = $medidaData[0][13];
 		$a = 1;
 
 		///// MEDIDAS APLICADAS PARA EL RESTIGO /////
@@ -118,7 +120,7 @@ if (isset($_POST["idMedida"])) {
 					<input type="hidden" name="idFiscAdscrito" id="idFiscAdscrito" value="<? echo	$idFiscAdscrito; ?>"> 
 					<div id="contDataAgente">
 					<? if ( $idMedida != 0) { ?>
-						<div class="col-xs-12 col-sm-12  col-md-3">
+						<div class="col-xs-12 col-sm-12  col-md-2">
 							<label for="idAdscripcion">Área de adscripción : </label>
 							<select class="form-control" id="idAdscripcion" disabled>
 								<?$data = getDataAdscripcion($connMedidas, $get_idMP);
@@ -127,7 +129,7 @@ if (isset($_POST["idMedida"])) {
 								</select>
 						</div>
 						<? } else { ?>
-						<div class="col-xs-12 col-sm-12  col-md-3">
+						<div class="col-xs-12 col-sm-12  col-md-2">
 							<label for="idAdscripcion">Área de adscripción : </label>
 							 <select class="form-control" id="idAdscripcion" disabled>
 									<option class="fontBold" value="0" > </option>
@@ -146,6 +148,26 @@ if (isset($_POST["idMedida"])) {
 								<option value="<? if ($a == 1) { ?> 1 <? } ?>"><? if ($a == 1) { ?> Agente <? } ?></option>
 							</select>
 						</div>
+						<div class="col-xs-10 col-sm-10  col-md-3">
+							<label for="idCoorporacion">Coorporación Policial que dará protección: <span class="aste">(*)</span></label>
+							<select class="form-control" id="idCoorporacion" >
+								<option value=null>Seleccione la coorporación</option>
+								<?php 
+								$getCoorporacion = getCoorporacion($connMedidas);
+								foreach($getCoorporacion as $coorporacion){ ?>									
+									<option 
+										value="<?= $coorporacion['idCatCoorporacion'] ?>"
+										<?php
+										if($a == 1 && $coorporacion['idCatCoorporacion'] == $get_idCoorporacion){ ?>
+											selected
+										<? } ?>
+									>
+										<?= $coorporacion['nombre'] ?>
+									</option>
+								<?}
+								?>
+							</select>
+						</div>
 					</div>
 				</div><br>
 			<? } ?>
@@ -153,9 +175,7 @@ if (isset($_POST["idMedida"])) {
 			<div class="row">
 				<div class="col-xs-12 col-sm-12  col-md-2">
 					<label for="nuc">NUC: <span class="aste">(*)</span></label>
-					<input class="form-control mandda gehit" value="<? if ($a == 1) {
-																																																						echo $get_nuc;
-																																																					} ?>" onchange="validateMedidaOK(this.id)" id="nuc" type="text" <? if ($rolUser == 1 || $rolUser == 3) { ?> disabled <? } ?>>
+					<input class="form-control mandda gehit" value="<? if ($a == 1) {echo $get_nuc;} ?>" onchange="validateMedidaOK(this.id)" id="nuc" type="text" <? if ($rolUser == 1 || $rolUser == 3) { ?> disabled <? } ?>>
 				</div>
 				<div class="col-xs-12 col-sm-12  col-md-3">
 					<label for="idDelito">Delito: <span class="aste">(*)</span></label>
@@ -612,7 +632,8 @@ if (isset($_POST["idMedida"])) {
 
 
 	<div class="modal-footer">
-		<button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeModalMDP(<? echo $anioActual; ?>, <? echo $idEnlace; ?>, 0, <? echo $rolUser; ?> )">Cerrar</button>
+		<button type="button" class="btn btn-default"  onclick="closeModalMDP(<? echo $anioActual; ?>, <? echo $idEnlace; ?>, 0, <? echo $rolUser; ?>, <?= $get_idCoorporacion ?> )">Cerrar</button>
+		<!-- data-dismiss="modal" Se eliminó temporal Botón cerrar -->
 		<? if ( ($rolUser == 2 && $idMedida == 0) || ($rolUser == 4 && $idMedida == 0 ) ) { ?>
 			<button type="button" class="btn btn-primary" onclick="modalDatosMedidaCapturista(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 10, <? echo $idMedida; ?>,0, <? echo $rolUser; ?>)">Guardar información</button>
 		<? } elseif ( ($rolUser == 2  && $idMedida != 0) || ($rolUser == 4  && $idMedida != 0) ) { ?>
