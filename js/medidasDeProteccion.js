@@ -218,6 +218,7 @@ function modalDatosMedidaCapturista(tipoModal, idEnlace, b, fraccion, idMedida, 
 										var json = resp;
 										var obj = eval("(" + json + ")");
 										if (obj.first == "NO") {
+											console.log("NO SE GUARADORON LOS DATOS");
 											swal("", "No se registro verifique los datos.", "warning");
 										} else {
 											if (obj.first == "SI") {
