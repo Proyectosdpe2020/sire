@@ -30,7 +30,7 @@ $nombreFiscalia  = $data[0][3];
 	</select>
 </div>
 <div class="col-xs-10 col-sm-10  col-md-3">
-	<label for="idCoorporacion">Coorporación Policial que dará protección: <span class="aste">(*)</span></label>
+	<label for="idCoorporacion">Coorporación Policial que dará protección: </label>
 	<select class="form-control" id="idCoorporacion">
 		<option value=null>Seleccione la coorporación</option>
 		<?php 

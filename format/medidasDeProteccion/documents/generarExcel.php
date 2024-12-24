@@ -373,11 +373,30 @@ foreach ($arreglo as $registro) {
         foreach($victimas as $victima){
             $col = $aux;            
             foreach($keysVictima as $key){
-                $cell = $sheet->getCell($col . (string)($contC));
-                $cellValue = $cell->getValue();            
-                $newValue = $cellValue . "\n" . $victima[$key];
-                $sheet->setCellValue($col.(string)($contC), $newValue);
-                $col++;
+                if($key == 'edad'){
+                    $cell = $sheet->getCell($col.(string)($contC));
+                    $cellValue = $cell->getValue();
+                    if($victima[$key] < 0){
+                        $v = $victima[$key] * -1;
+                        $meses = ($v == 1) ? 'mes' : 'meses';
+                        $newValue = $cellValue . "\n" . $v . ' ' . $meses;
+                        $sheet->setCellValue($col.(string)($contC), $newValue);
+                        $col++;                        
+                    }
+                    else{
+                        $y = ($victima[$key] == 1) ? 'año' : 'años';
+                        $newValue = $cellValue . "\n" . $victima[$key] . ' ' . $y;
+                        $sheet->setCellValue($col.(string)($contC), $newValue);
+                        $col++;
+                    }
+                }
+                else{
+                    $cell = $sheet->getCell($col . (string)($contC));
+                    $cellValue = $cell->getValue();            
+                    $newValue = $cellValue . "\n" . $victima[$key];
+                    $sheet->setCellValue($col.(string)($contC), $newValue);
+                    $col++;
+                }                
             }
         }
     }
@@ -599,7 +618,7 @@ $cellWidth = [
     'E' => 350,
     'F' => 410,
     'G' => 82,
-    'H' => 48,
+    'H' => 68,
     'I' => 112,
     'J' => 158,
     'K' => 138,
