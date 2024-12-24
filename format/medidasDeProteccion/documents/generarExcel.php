@@ -376,10 +376,15 @@ foreach ($arreglo as $registro) {
                 if($key == 'edad'){
                     $cell = $sheet->getCell($col.(string)($contC));
                     $cellValue = $cell->getValue();
-                    if($victima[$key] < 0){
+                    if($victima[$key] <= 0){
                         $v = $victima[$key] * -1;
-                        $meses = ($v == 1) ? 'mes' : 'meses';
-                        $newValue = $cellValue . "\n" . $v . ' ' . $meses;
+                        if($v == 0){
+                            $v = 'Desconocido';
+                        }
+                        else{
+                            $v = ($v == 1) ? $v . ' mes' : $v . ' meses';
+                        }
+                        $newValue = $cellValue . "\n" . $v;
                         $sheet->setCellValue($col.(string)($contC), $newValue);
                         $col++;                        
                     }
