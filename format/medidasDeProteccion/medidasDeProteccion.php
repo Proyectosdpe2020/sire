@@ -135,7 +135,7 @@ $mesNom = Mes_Nombre($currentmonth);
 				<div class="button-group pb-5">
 					<button 
 						type="button"
-						onclick="generarExcel(<?php echo $idEnlace; ?>, <?php echo $rolUser; ?>)" 
+						onclick="showModalReporte(<?php echo $idEnlace; ?>, <?php echo $rolUser; ?>, <?= 1; ?>)" 
 						class="btn btn-elegante">
 						<span class="glyphicon glyphicon-file"></span> Generar Excel
 					</button>
@@ -278,6 +278,18 @@ $mesNom = Mes_Nombre($currentmonth);
 		</div>
 	</div>
 <!-- MODAL INFORMACIÓN DE USUARIO  -->
+
+<!-- MODAL GENERAR REPORTE DE MEDIDA DE PROTECCION  -->
+<div class="modal fade bs-example-modal-sm" id="generarReporte" role="dialog" data-backdrop="static" data-keyboard="false" style="overflow-y: scroll;">
+		<div id="modalVistaCss" class="modal-dialog modal-sm" style = "width: 45%; margin-top: 15%;">
+			<div class="modal-content" style="">
+				<div id="contGenerarReporte">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- MODAL GENERAR REPORTE DE MEDIDA DE PROTECCION  -->
 
 <!-- MODAL REGISTRO DE INFORMACION GENERAL DE MEDIDA DE PROTECCION  -->
  <div class="modal fade bs-example-modal-sm" id="infoGeneralMedida" role="dialog" data-backdrop="static" data-keyboard="false">

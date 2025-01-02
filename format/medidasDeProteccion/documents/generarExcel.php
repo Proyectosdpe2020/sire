@@ -8,337 +8,187 @@ require '../../../vendors/autoload.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-$day = isset($_POST['day']) ? $_POST['day'] : null;
-$month = isset($_POST['month']) ? $_POST['month'] : null;
-$year = isset($_POST['year']) ? $_POST['year'] : null;
+$dayInicio = isset($_POST['dayInicio']) ? $_POST['dayInicio'] : null;
+$monthInicio = isset($_POST['monthInicio']) ? $_POST['monthInicio'] : null;
+$yearInicio = isset($_POST['yearInicio']) ? $_POST['yearInicio'] : null;
+$dayFinal = isset($_POST['dayFinal']) ? $_POST['dayFinal'] : null;
+$monthFinal = isset($_POST['monthFinal']) ? $_POST['monthFinal'] : null;
+$yearFinal = isset($_POST['yearFinal']) ? $_POST['yearFinal'] : null;
+
 $idEnlace = isset($_POST['idEnlace']) ? $_POST['idEnlace'] : null;
 $rolUser = isset($_POST['rolUser']) ? $_POST['rolUser'] : null;
 $fechaReporte = date("d") . '-' . date("m") . '-' . date("Y");
 
-$fechaConsulta = ($day != 0) ? $day . '-' . $month . '-' . $year : $month . '-' . $year;
+$fechaConsulta = ($dayInicio == $dayFinal && $monthInicio == $monthFinal && $yearInicio == $yearFinal)
+    ? str_pad($dayInicio, 2, '0', STR_PAD_LEFT) . '-' . str_pad($monthInicio, 2, '0', STR_PAD_LEFT) . '-' . $yearInicio
+    : str_pad($dayInicio, 2, '0', STR_PAD_LEFT) . '-' . str_pad($monthInicio, 2, '0', STR_PAD_LEFT) . '-' . $yearInicio . ' AL ' . str_pad($dayFinal, 2, '0', STR_PAD_LEFT) . '-' . str_pad($monthFinal, 2, '0', STR_PAD_LEFT) . '-' . $yearInicio;
 
 $spreadsheet = new Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
 
 if($rolUser == 1){
-    if($day != 0){
-        $query = "
-            SELECT * FROM (
+    $query = "
+        DECLARE @fechaInicio DATE = DATEFROMPARTS($yearInicio, $monthInicio, $dayInicio);
+        DECLARE @fechaFinal DATE = DATEFROMPARTS($yearFinal, $monthFinal, $dayFinal);
+
+        SELECT * FROM (
+            SELECT 
+            m.idMedida AS folio,
+            mp.nombre + ' ' + mp.paterno + ' ' + mp.materno AS nombreMP,
+            m.nuc,
+            d.Nombre AS delito,
+            cu.nombre AS unidad,
+            (
                 SELECT 
-                m.idMedida AS folio,
-                mp.nombre + ' ' + mp.paterno + ' ' + mp.materno AS nombreMP,
-                m.nuc,
-                d.Nombre AS delito,
-                cu.nombre AS unidad,
-                (
-                    SELECT 
-                        v.nombre + ' ' + v.paterno + ' ' + v.materno AS nombreVictima,
-                        CASE
-                            WHEN v.genero = 1 THEN 'Masculino'
-                            WHEN v.genero = 2 THEN 'Femenino'
-                            ELSE 'Desconocido'
-                        END AS genero,
-                        v.edad,
-                        'Mexicana' AS nacionalidad,
-                        CASE
-                            WHEN ce.Nombre IS NULL THEN 'Desconocido'
-                            ELSE ce.Nombre
-                        END AS estado,	
-                        CASE
-                            WHEN cm.Nombre IS NULL THEN 'Desconocido'
-                            ELSE cm.Nombre
-                        END AS municipio			
-                    FROM SIRE.medidas.medidasProteccion m2
-                    LEFT JOIN SIRE.medidas.victimas v ON v.idMedida = m2.idMedida
-                    LEFT JOIN PRUEBA.dbo.CatEntidades ce ON ce.EntidadID = v.idEntidad
-                    LEFT JOIN PRUEBA.dbo.CatMunicipiosPais cm ON cm.MunicipioID = v.idMunicipio
-                    WHERE m2.idMedida = m.idMedida
-                    FOR JSON PATH
-                ) AS victimas,
-                (
-                    SELECT COUNT(*)
-                    FROM SIRE.medidas.medidasAplicadas ma
-                    WHERE ma.idMedida = m.idMedida
-                ) AS numeroMedidasAplicadas,
-                (
-                    SELECT 
-                        cf.nombre,
-                        cf.idCatFraccion AS fraccion			
-                    FROM SIRE.medidas.medidasAplicadas m2
-                    INNER JOIN SIRE.medidas.catFracciones cf ON m2.idCatFraccion = cf.idCatFraccion
-                    WHERE m2.idMedida = m.idMedida
-                    FOR JSON PATH
-                ) AS medidasAplicadas,
-                ca.temporalidad,
-                m.fechaRegistro,
-                m.fechaAcuerdo AS inicio,
-                m.fechaConclusion AS fin,
-                ultimaAmpliacion.ampliacion,
-                ultimaAmpliacion.temporalidadPrevia,
-                ultimaAmpliacion.temporalidadActual,
-				CASE
-					WHEN cc.nombre IS NULL THEN 'Desconocido'
-					ELSE cc.nombre
-				END  AS coorporacion
-                FROM SIRE.medidas.medidasProteccion m
-                LEFT JOIN SIRE.medidas.mp ON mp.idMp = m.idMP
-                INNER JOIN PRUEBA.dbo.CatModalidadesEstadisticas d ON d.CatModalidadesEstadisticasID = m.idDelito
-                LEFT JOIN SIRE.medidas.cuadernoAntecedentes ca ON ca.idMedida = m.idMedida
-                LEFT JOIN SIRE.medidas.resoluciones r ON r.idMedida = m.idMedida
-                LEFT JOIN SIRE.medidas.catUnidad cu ON cu.idUnidad = m.idUnidad
-				LEFT JOIN SIRE.medidas.catCoorporacion cc ON cc.idCatCoorporacion = m.idCatCoorporacion
-                LEFT JOIN (
-                    SELECT 
-                        am.idResolucion,
-                        am.ampliacion,
-                        am.temporalidadPrevia,
-                        am.temporalidadActual,
-                        ROW_NUMBER() OVER(PARTITION BY am.idResolucion ORDER BY am.idAmpliada DESC) AS rn
-                    FROM SIRE.medidas.ampliada as am
-                ) AS ultimaAmpliacion ON r.idResolucion = ultimaAmpliacion.idResolucion AND ultimaAmpliacion.rn = 1
-                WHERE m.anio = $year AND m.mes = $month AND m.diaMes = $day
-            ) AS subconsulta ORDER BY folio desc;
-        ";
-    }
-    else{
-        $query = "
-            SELECT * FROM (
+                    v.nombre + ' ' + v.paterno + ' ' + v.materno AS nombreVictima,
+                    CASE
+                        WHEN v.genero = 1 THEN 'Masculino'
+                        WHEN v.genero = 2 THEN 'Femenino'
+                        ELSE 'Desconocido'
+                    END AS genero,
+                    v.edad,
+                    'Mexicana' AS nacionalidad,
+                    CASE
+                        WHEN ce.Nombre IS NULL THEN 'Desconocido'
+                        ELSE ce.Nombre
+                    END AS estado,	
+                    CASE
+                        WHEN cm.Nombre IS NULL THEN 'Desconocido'
+                        ELSE cm.Nombre
+                    END AS municipio			
+                FROM SIRE.medidas.medidasProteccion m2
+                LEFT JOIN SIRE.medidas.victimas v ON v.idMedida = m2.idMedida
+                LEFT JOIN PRUEBA.dbo.CatEntidades ce ON ce.EntidadID = v.idEntidad
+                LEFT JOIN PRUEBA.dbo.CatMunicipiosPais cm ON cm.MunicipioID = v.idMunicipio
+                WHERE m2.idMedida = m.idMedida
+                FOR JSON PATH
+            ) AS victimas,
+            (
+                SELECT COUNT(*)
+                FROM SIRE.medidas.medidasAplicadas ma
+                WHERE ma.idMedida = m.idMedida
+            ) AS numeroMedidasAplicadas,
+            (
                 SELECT 
-                m.idMedida AS folio,
-                mp.nombre + ' ' + mp.paterno + ' ' + mp.materno AS nombreMP,
-                m.nuc,
-                d.Nombre AS delito,
-                cu.nombre AS unidad,
-                (
-                    SELECT 
-                        v.nombre + ' ' + v.paterno + ' ' + v.materno AS nombreVictima,
-                        CASE
-                            WHEN v.genero = 1 THEN 'Masculino'
-                            WHEN v.genero = 2 THEN 'Femenino'
-                            ELSE 'Desconocido'
-                        END AS genero,
-                        v.edad,
-                        'Mexicana' AS nacionalidad,
-                        CASE
-                            WHEN ce.Nombre IS NULL THEN 'Desconocido'
-                            ELSE ce.Nombre
-                        END AS estado,	
-                        CASE
-                            WHEN cm.Nombre IS NULL THEN 'Desconocido'
-                            ELSE cm.Nombre
-                        END AS municipio			
-                    FROM SIRE.medidas.medidasProteccion m2
-                    LEFT JOIN SIRE.medidas.victimas v ON v.idMedida = m2.idMedida
-                    LEFT JOIN PRUEBA.dbo.CatEntidades ce ON ce.EntidadID = v.idEntidad
-                    LEFT JOIN PRUEBA.dbo.CatMunicipiosPais cm ON cm.MunicipioID = v.idMunicipio
-                    WHERE m2.idMedida = m.idMedida
-                    FOR JSON PATH
-                ) AS victimas,
-                (
-                    SELECT COUNT(*)
-                    FROM SIRE.medidas.medidasAplicadas ma
-                    WHERE ma.idMedida = m.idMedida
-                ) AS numeroMedidasAplicadas,
-                (
-                    SELECT 
-                        cf.nombre,
-                        cf.idCatFraccion AS fraccion			
-                    FROM SIRE.medidas.medidasAplicadas m2
-                    INNER JOIN SIRE.medidas.catFracciones cf ON m2.idCatFraccion = cf.idCatFraccion
-                    WHERE m2.idMedida = m.idMedida
-                    FOR JSON PATH
-                ) AS medidasAplicadas,
-                ca.temporalidad,
-                m.fechaRegistro,
-                m.fechaAcuerdo AS inicio,
-                m.fechaConclusion AS fin,
-                ultimaAmpliacion.ampliacion,
-                ultimaAmpliacion.temporalidadPrevia,
-                ultimaAmpliacion.temporalidadActual,
-				CASE
-					WHEN cc.nombre IS NULL THEN 'Desconocido'
-					ELSE cc.nombre
-				END  AS coorporacion
-                FROM SIRE.medidas.medidasProteccion m
-                LEFT JOIN SIRE.medidas.mp ON mp.idMp = m.idMP
-                INNER JOIN PRUEBA.dbo.CatModalidadesEstadisticas d ON d.CatModalidadesEstadisticasID = m.idDelito
-                LEFT JOIN SIRE.medidas.cuadernoAntecedentes ca ON ca.idMedida = m.idMedida
-                LEFT JOIN SIRE.medidas.resoluciones r ON r.idMedida = m.idMedida
-                LEFT JOIN SIRE.medidas.catUnidad cu ON cu.idUnidad = m.idUnidad
-				LEFT JOIN SIRE.medidas.catCoorporacion cc ON cc.idCatCoorporacion = m.idCatCoorporacion
-                LEFT JOIN (
-                    SELECT 
-                        am.idResolucion,
-                        am.ampliacion,
-                        am.temporalidadPrevia,
-                        am.temporalidadActual,
-                        ROW_NUMBER() OVER(PARTITION BY am.idResolucion ORDER BY am.idAmpliada DESC) AS rn
-                    FROM SIRE.medidas.ampliada as am
-                ) AS ultimaAmpliacion ON r.idResolucion = ultimaAmpliacion.idResolucion AND ultimaAmpliacion.rn = 1
-                WHERE m.anio = $year AND m.mes = $month 
-            ) AS subconsulta ORDER BY folio desc;
-        ";
-    }
+                    cf.nombre,
+                    cf.idCatFraccion AS fraccion			
+                FROM SIRE.medidas.medidasAplicadas m2
+                INNER JOIN SIRE.medidas.catFracciones cf ON m2.idCatFraccion = cf.idCatFraccion
+                WHERE m2.idMedida = m.idMedida
+                FOR JSON PATH
+            ) AS medidasAplicadas,
+            ca.temporalidad,
+            m.fechaRegistro,
+            m.fechaAcuerdo AS inicio,
+            m.fechaConclusion AS fin,
+            ultimaAmpliacion.ampliacion,
+            ultimaAmpliacion.temporalidadPrevia,
+            ultimaAmpliacion.temporalidadActual,
+            CASE
+                WHEN cc.nombre IS NULL THEN 'Desconocido'
+                ELSE cc.nombre
+            END  AS coorporacion
+            FROM SIRE.medidas.medidasProteccion m
+            LEFT JOIN SIRE.medidas.mp ON mp.idMp = m.idMP
+            INNER JOIN PRUEBA.dbo.CatModalidadesEstadisticas d ON d.CatModalidadesEstadisticasID = m.idDelito
+            LEFT JOIN SIRE.medidas.cuadernoAntecedentes ca ON ca.idMedida = m.idMedida
+            LEFT JOIN SIRE.medidas.resoluciones r ON r.idMedida = m.idMedida
+            LEFT JOIN SIRE.medidas.catUnidad cu ON cu.idUnidad = m.idUnidad
+            LEFT JOIN SIRE.medidas.catCoorporacion cc ON cc.idCatCoorporacion = m.idCatCoorporacion
+            LEFT JOIN (
+                SELECT 
+                    am.idResolucion,
+                    am.ampliacion,
+                    am.temporalidadPrevia,
+                    am.temporalidadActual,
+                    ROW_NUMBER() OVER(PARTITION BY am.idResolucion ORDER BY am.idAmpliada DESC) AS rn
+                FROM SIRE.medidas.ampliada as am
+            ) AS ultimaAmpliacion ON r.idResolucion = ultimaAmpliacion.idResolucion AND ultimaAmpliacion.rn = 1
+            WHERE CAST(m.fechaAcuerdo AS DATE) BETWEEN @fechaInicio AND @fechaFinal
+        ) AS subconsulta ORDER BY folio desc;
+    ";
 }
 elseif($rolUser == 4){
-    if($day != 0){
-        $query = "
-            SELECT * FROM (
+    $query = "
+        DECLARE @fechaInicio DATE = DATEFROMPARTS($yearInicio, $monthInicio, $dayInicio);
+        DECLARE @fechaFinal DATE = DATEFROMPARTS($yearFinal, $monthFinal, $dayFinal);
+
+        SELECT * FROM (
+            SELECT 
+            m.idMedida AS folio,
+            mp.nombre + ' ' + mp.paterno + ' ' + mp.materno AS nombreMP,
+            m.nuc,
+            d.Nombre AS delito,
+            cu.nombre AS unidad,
+            (
                 SELECT 
-                m.idMedida AS folio,
-                mp.nombre + ' ' + mp.paterno + ' ' + mp.materno AS nombreMP,
-                m.nuc,
-                d.Nombre AS delito,
-                cu.nombre AS unidad,
-                (
-                    SELECT 
-                        v.nombre + ' ' + v.paterno + ' ' + v.materno AS nombreVictima,
-                        CASE
-                            WHEN v.genero = 1 THEN 'Masculino'
-                            WHEN v.genero = 2 THEN 'Femenino'
-                            ELSE 'Desconocido'
-                        END AS genero,
-                        v.edad,
-                        'Mexicana' AS nacionalidad,
-                        CASE
-                            WHEN ce.Nombre IS NULL THEN 'Desconocido'
-                            ELSE ce.Nombre
-                        END AS estado,	
-                        CASE
-                            WHEN cm.Nombre IS NULL THEN 'Desconocido'
-                            ELSE cm.Nombre
-                        END AS municipio			
-                    FROM SIRE.medidas.medidasProteccion m2
-                    LEFT JOIN SIRE.medidas.victimas v ON v.idMedida = m2.idMedida
-                    LEFT JOIN PRUEBA.dbo.CatEntidades ce ON ce.EntidadID = v.idEntidad
-                    LEFT JOIN PRUEBA.dbo.CatMunicipiosPais cm ON cm.MunicipioID = v.idMunicipio
-                    WHERE m2.idMedida = m.idMedida
-                    FOR JSON PATH
-                ) AS victimas,
-                (
-                    SELECT COUNT(*)
-                    FROM SIRE.medidas.medidasAplicadas ma
-                    WHERE ma.idMedida = m.idMedida
-                ) AS numeroMedidasAplicadas,
-                (
-                    SELECT 
-                        cf.nombre,
-                        cf.idCatFraccion AS fraccion			
-                    FROM SIRE.medidas.medidasAplicadas m2
-                    INNER JOIN SIRE.medidas.catFracciones cf ON m2.idCatFraccion = cf.idCatFraccion
-                    WHERE m2.idMedida = m.idMedida
-                    FOR JSON PATH
-                ) AS medidasAplicadas,
-                ca.temporalidad,
-                m.fechaRegistro,
-                m.fechaAcuerdo AS inicio,
-                m.fechaConclusion AS fin,
-                ultimaAmpliacion.ampliacion,
-                ultimaAmpliacion.temporalidadPrevia,
-                ultimaAmpliacion.temporalidadActual,
-				CASE
-					WHEN cc.nombre IS NULL THEN 'Desconocido'
-					ELSE cc.nombre
-				END  AS coorporacion
-                FROM SIRE.medidas.medidasProteccion m
-                LEFT JOIN SIRE.medidas.mp ON mp.idMp = m.idMP
-                INNER JOIN PRUEBA.dbo.CatModalidadesEstadisticas d ON d.CatModalidadesEstadisticasID = m.idDelito
-                LEFT JOIN SIRE.medidas.cuadernoAntecedentes ca ON ca.idMedida = m.idMedida
-                LEFT JOIN SIRE.medidas.resoluciones r ON r.idMedida = m.idMedida
-                LEFT JOIN SIRE.medidas.catUnidad cu ON cu.idUnidad = m.idUnidad
-				LEFT JOIN SIRE.medidas.catCoorporacion cc ON cc.idCatCoorporacion = m.idCatCoorporacion
-                LEFT JOIN (
-                    SELECT 
-                        am.idResolucion,
-                        am.ampliacion,
-                        am.temporalidadPrevia,
-                        am.temporalidadActual,
-                        ROW_NUMBER() OVER(PARTITION BY am.idResolucion ORDER BY am.idAmpliada DESC) AS rn
-                    FROM SIRE.medidas.ampliada as am
-                ) AS ultimaAmpliacion ON r.idResolucion = ultimaAmpliacion.idResolucion AND ultimaAmpliacion.rn = 1
-                WHERE m.anio = $year AND m.mes = $month AND m.diaMes = $day AND mp.idEnlace = $idEnlace
-            ) AS subconsulta ORDER BY folio desc;
-        ";
-    }
-    else{
-        $query = "
-            SELECT * FROM (
+                    v.nombre + ' ' + v.paterno + ' ' + v.materno AS nombreVictima,
+                    CASE
+                        WHEN v.genero = 1 THEN 'Masculino'
+                        WHEN v.genero = 2 THEN 'Femenino'
+                        ELSE 'Desconocido'
+                    END AS genero,
+                    v.edad,
+                    'Mexicana' AS nacionalidad,
+                    CASE
+                        WHEN ce.Nombre IS NULL THEN 'Desconocido'
+                        ELSE ce.Nombre
+                    END AS estado,	
+                    CASE
+                        WHEN cm.Nombre IS NULL THEN 'Desconocido'
+                        ELSE cm.Nombre
+                    END AS municipio			
+                FROM SIRE.medidas.medidasProteccion m2
+                LEFT JOIN SIRE.medidas.victimas v ON v.idMedida = m2.idMedida
+                LEFT JOIN PRUEBA.dbo.CatEntidades ce ON ce.EntidadID = v.idEntidad
+                LEFT JOIN PRUEBA.dbo.CatMunicipiosPais cm ON cm.MunicipioID = v.idMunicipio
+                WHERE m2.idMedida = m.idMedida
+                FOR JSON PATH
+            ) AS victimas,
+            (
+                SELECT COUNT(*)
+                FROM SIRE.medidas.medidasAplicadas ma
+                WHERE ma.idMedida = m.idMedida
+            ) AS numeroMedidasAplicadas,
+            (
                 SELECT 
-                m.idMedida AS folio,
-                mp.nombre + ' ' + mp.paterno + ' ' + mp.materno AS nombreMP,
-                m.nuc,
-                d.Nombre AS delito,
-                cu.nombre AS unidad,
-                (
-                    SELECT 
-                        v.nombre + ' ' + v.paterno + ' ' + v.materno AS nombreVictima,
-                        CASE
-                            WHEN v.genero = 1 THEN 'Masculino'
-                            WHEN v.genero = 2 THEN 'Femenino'
-                            ELSE 'Desconocido'
-                        END AS genero,
-                        v.edad,
-                        'Mexicana' AS nacionalidad,
-                        CASE
-                            WHEN ce.Nombre IS NULL THEN 'Desconocido'
-                            ELSE ce.Nombre
-                        END AS estado,	
-                        CASE
-                            WHEN cm.Nombre IS NULL THEN 'Desconocido'
-                            ELSE cm.Nombre
-                        END AS municipio			
-                    FROM SIRE.medidas.medidasProteccion m2
-                    LEFT JOIN SIRE.medidas.victimas v ON v.idMedida = m2.idMedida
-                    LEFT JOIN PRUEBA.dbo.CatEntidades ce ON ce.EntidadID = v.idEntidad
-                    LEFT JOIN PRUEBA.dbo.CatMunicipiosPais cm ON cm.MunicipioID = v.idMunicipio
-                    WHERE m2.idMedida = m.idMedida
-                    FOR JSON PATH
-                ) AS victimas,
-                (
-                    SELECT COUNT(*)
-                    FROM SIRE.medidas.medidasAplicadas ma
-                    WHERE ma.idMedida = m.idMedida
-                ) AS numeroMedidasAplicadas,
-                (
-                    SELECT 
-                        cf.nombre,
-                        cf.idCatFraccion AS fraccion			
-                    FROM SIRE.medidas.medidasAplicadas m2
-                    INNER JOIN SIRE.medidas.catFracciones cf ON m2.idCatFraccion = cf.idCatFraccion
-                    WHERE m2.idMedida = m.idMedida
-                    FOR JSON PATH
-                ) AS medidasAplicadas,
-                ca.temporalidad,
-                m.fechaRegistro,
-                m.fechaAcuerdo AS inicio,
-                m.fechaConclusion AS fin,
-                ultimaAmpliacion.ampliacion,
-                ultimaAmpliacion.temporalidadPrevia,
-                ultimaAmpliacion.temporalidadActual,
-				CASE
-					WHEN cc.nombre IS NULL THEN 'Desconocido'
-					ELSE cc.nombre
-				END  AS coorporacion
-                FROM SIRE.medidas.medidasProteccion m
-                LEFT JOIN SIRE.medidas.mp ON mp.idMp = m.idMP
-                INNER JOIN PRUEBA.dbo.CatModalidadesEstadisticas d ON d.CatModalidadesEstadisticasID = m.idDelito
-                LEFT JOIN SIRE.medidas.cuadernoAntecedentes ca ON ca.idMedida = m.idMedida
-                LEFT JOIN SIRE.medidas.resoluciones r ON r.idMedida = m.idMedida
-                LEFT JOIN SIRE.medidas.catUnidad cu ON cu.idUnidad = m.idUnidad
-				LEFT JOIN SIRE.medidas.catCoorporacion cc ON cc.idCatCoorporacion = m.idCatCoorporacion
-                LEFT JOIN (
-                    SELECT 
-                        am.idResolucion,
-                        am.ampliacion,
-                        am.temporalidadPrevia,
-                        am.temporalidadActual,
-                        ROW_NUMBER() OVER(PARTITION BY am.idResolucion ORDER BY am.idAmpliada DESC) AS rn
-                    FROM SIRE.medidas.ampliada as am
-                ) AS ultimaAmpliacion ON r.idResolucion = ultimaAmpliacion.idResolucion AND ultimaAmpliacion.rn = 1
-                WHERE m.anio = $year AND m.mes = $month AND mp.idEnlace = $idEnlace
-            ) AS subconsulta ORDER BY folio desc;
-        ";
-    }
+                    cf.nombre,
+                    cf.idCatFraccion AS fraccion			
+                FROM SIRE.medidas.medidasAplicadas m2
+                INNER JOIN SIRE.medidas.catFracciones cf ON m2.idCatFraccion = cf.idCatFraccion
+                WHERE m2.idMedida = m.idMedida
+                FOR JSON PATH
+            ) AS medidasAplicadas,
+            ca.temporalidad,
+            m.fechaRegistro,
+            m.fechaAcuerdo AS inicio,
+            m.fechaConclusion AS fin,
+            ultimaAmpliacion.ampliacion,
+            ultimaAmpliacion.temporalidadPrevia,
+            ultimaAmpliacion.temporalidadActual,
+            CASE
+                WHEN cc.nombre IS NULL THEN 'Desconocido'
+                ELSE cc.nombre
+            END  AS coorporacion
+            FROM SIRE.medidas.medidasProteccion m
+            LEFT JOIN SIRE.medidas.mp ON mp.idMp = m.idMP
+            INNER JOIN PRUEBA.dbo.CatModalidadesEstadisticas d ON d.CatModalidadesEstadisticasID = m.idDelito
+            LEFT JOIN SIRE.medidas.cuadernoAntecedentes ca ON ca.idMedida = m.idMedida
+            LEFT JOIN SIRE.medidas.resoluciones r ON r.idMedida = m.idMedida
+            LEFT JOIN SIRE.medidas.catUnidad cu ON cu.idUnidad = m.idUnidad
+            LEFT JOIN SIRE.medidas.catCoorporacion cc ON cc.idCatCoorporacion = m.idCatCoorporacion
+            LEFT JOIN (
+                SELECT 
+                    am.idResolucion,
+                    am.ampliacion,
+                    am.temporalidadPrevia,
+                    am.temporalidadActual,
+                    ROW_NUMBER() OVER(PARTITION BY am.idResolucion ORDER BY am.idAmpliada DESC) AS rn
+                FROM SIRE.medidas.ampliada as am
+            ) AS ultimaAmpliacion ON r.idResolucion = ultimaAmpliacion.idResolucion AND ultimaAmpliacion.rn = 1
+            WHERE CAST(m.fechaAcuerdo AS DATE) BETWEEN @fechaInicio AND @fechaFinal AND mp.idEnlace = $idEnlace
+        ) AS subconsulta ORDER BY folio desc;
+    ";
 }
 
 $result = sqlsrv_query($connMedidas, $query, array(), array("Scrollable" => 'static'));
