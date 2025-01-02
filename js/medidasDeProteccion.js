@@ -18,6 +18,29 @@ function showModalMDP(tipoModal, idEnlace, idMedida, typeArch, typeCheck) {
 	ajax.send("&tipoModal=" + tipoModal + "&idEnlace=" + idEnlace + "&idMedida=" + idMedida + "&typeArch=" + typeArch + "&typeCheck=" + typeCheck);
 }
 
+function showModalReporte(idEnlace, rolUser, tipo){
+	var year = document.getElementById("anio").value;
+    var month = document.getElementById("mesMedidaSelected").value;
+    var day = document.getElementById("diaSeleted").value;
+	cont = document.getElementById('contGenerarReporte');
+	
+	ajax = objetoAjax();
+	ajax.open("POST", "format/medidasDeProteccion/modalGenerarReporte.php");
+	ajax.onreadystatechange = function () {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			cont.innerHTML = ajax.responseText;
+			$('.dataAutocomplet').select2({
+				width: '100%',
+				placeholder: "Seleccione",
+				allowClear: false
+			});
+			$('#generarReporte').modal('show');
+		}
+	}
+	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	ajax.send("&idEnlace=" + idEnlace + "&rolUser=" + rolUser + "&tipo=" + tipo + "&year=" + year + "&month=" + month + "&day=" + day);
+}
+
 //FUNCIONES CAMBIAR IMAGENES DE MEDIDAS
 function hoverIMG(element, img) {
 	if (img == "uno") { element.setAttribute('src', 'img/iconosMedidasDeProteccion/iconosMedidas/Medidas 01 Fondo.png'); }
@@ -1478,46 +1501,65 @@ function disabledItem(idValue, id){
 	}
 }
 
+//Función para generar el pdf
+function generarPDF(idEnlace, rolUser){
+	console.log("GENERANDO PDF");
+}
+
 //Funcion para generar el excel
 function generarExcel(idEnlace, rolUser) {
-    var year = document.getElementById("anio").value;
-    var month = document.getElementById("mesMedidaSelected").value;
-    var day = document.getElementById("diaSeleted").value;
+	var yearInicio = document.getElementById("anioReporteInicio").value;
+	var monthInicio = document.getElementById("mesReporteInicio").value;
+	var dayInicio = document.getElementById("diaReporteInicio").value;
+	var yearFinal = document.getElementById("anioReporteFinal").value;
+	var monthFinal = document.getElementById("mesReporteFinal").value;
+	var dayFinal = document.getElementById("diaReporteFinal").value;
 
-    $.ajax({
-        type: "POST",
-        dataType: 'json',
-        url: "format/medidasDeProteccion/documents/generarExcel.php",
-        data: {
-            day: day,
-            month: month,
-            year: year,
-            idEnlace: idEnlace,
-            rolUser: rolUser
-        },
-        success: function(resp) {
-            if (Array.isArray(resp) && resp.length > 0) {
-                console.log("Datos:", resp);				 //Mostrar el array en caso de que la respuesta sea exitosa.
-            } else {
-                console.log("No se encontraron resultados.");		
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error("Error en la solicitud:", status, error);
-        }
-    }).done(function (data) {
-		var $a = $("<a>");
-		$a.attr("href", data.file);
-		$("body").append($a);
-		$a.attr("download", year + '-' + month + '-' + day + " - SIRE Medidas de Protección.xlsx");
-		$a[0].click();
-		$a.remove();
-		swal("", "Se ha descargado el reporte.", "success");
-	});
+	var dateInicio = new Date(yearInicio, monthInicio - 1, dayInicio); // Restamos 1 al mes porque los meses en JavaScript son 0-indexados var dateFinal = new Date(year, month - 1, dayFinal);
+	var dateFinal = new Date(yearFinal, monthFinal - 1, dayFinal);
+	
+	if(dateInicio <= dateFinal) {		
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: "format/medidasDeProteccion/documents/generarExcel.php",
+			data: {
+				dayInicio: dayInicio,
+				monthInicio: monthInicio,
+				yearInicio: yearInicio,
+				dayFinal: dayFinal,
+				monthFinal: monthFinal,
+				yearFinal: yearFinal,
+				idEnlace: idEnlace,
+				rolUser: rolUser
+			},
+			success: function(resp) {
+				if (Array.isArray(resp) && resp.length > 0) {
+					console.log("Datos:", resp);				 //Mostrar el array en caso de que la respuesta sea exitosa.
+				} else {
+					console.log("No se encontraron resultados.");		
+				}
+			},
+			error: function(xhr, status, error) {
+				console.error("Error en la solicitud:", status, error);
+			}
+		}).done(function (data) {
+			var $a = $("<a>");
+			$a.attr("href", data.file);
+			$("body").append($a);
+			$a.attr("download", yearInicio + '-' + monthInicio + '-' + dayInicio + " - SIRE Medidas de Protección.xlsx");
+			$a[0].click();
+			$a.remove();
+			swal("", "Se ha descargado el reporte.", "success");
+		});		
+	}
+	else{
+		swal("", "Corrige la fecha final para realizar el reporte.", "warning");
+	}
 }
 
 
-//Funcion para editar informacion de la pestaña: RESOLUCIONES
+//Función para editar informacion de la pestaña: RESOLUCIONES
 function updateResolucion(idEnlace, idResolucion, idMedida) {
 	var ratificacion = document.getElementById("ratificacion").value;
 	var observacionRatifica = document.getElementById("observacionRatifica").value;
@@ -2147,6 +2189,86 @@ function reloadModalMDP2(tipoModal, idEnlace, idMedida, typeArch, typeCheck) {
 	ajax.send("&tipoModal=" + tipoModal + "&idEnlace=" + idEnlace + "&idMedida=" + idMedida + "&typeArch=" + typeArch + "&typeCheck=" + typeCheck);
 }
 
+function reloadDaysMonthReport(idEnlace, section) {
+	if (section == 0) {
+		var year = document.getElementById("anioReporteInicio").value;
+		var month = document.getElementById("mesReporteInicio").value;
+		var day = document.getElementById("diaReporteInicio").value;
+		cont = document.getElementById("contDaysReportInicio");
+	}
+	else if (section == 1) {
+		var year = document.getElementById("anioReporteFinal").value;
+		var month = document.getElementById("mesReporteFinal").value;
+		var day = document.getElementById("diaReporteFinal").value;
+		cont = document.getElementById("contDaysReportFinal");
+	}
+	ajax = objetoAjax();
+	ajax.open("POST", "format/medidasDeProteccion/daysReport.php");
+
+	ajax.onreadystatechange = function () {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			cont.innerHTML = ajax.responseText;
+
+			//// RECARGAR CONSULTA DE PUESTAS EN EL MES SELECCIONADO Y PRIMER DIA DEL MES CORRESPONDIENTE
+			// loadDataPuestDay(anio, idEnlace, 1);
+			setTimeout("reloadMonthReport(" + idEnlace + "," + year + "," + month + "," + section +");", 100);
+		}
+	}
+	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	ajax.send("&day=" + day + "&month=" + month + "&year=" + year + "&idEnlace=" + idEnlace + "&section=" + section);
+}
+
+function reloadMonthReport (idEnlace, year, month, section) {
+	if (section == 0 ) {
+		cont = document.getElementById('contMonthReportInicio');
+	}
+	else if ( section == 1 ) {
+		cont = document.getElementById('contMonthReportFinal');
+	}
+	ajax = objetoAjax();
+
+	ajax.open("POST", "format/medidasDeProteccion/reloadSelectMonthReport.php");
+
+	ajax.onreadystatechange = function () {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			cont.innerHTML = ajax.responseText;
+
+			//// RECARGAR CONSULTA DE PUESTAS EN EL MES SELECCIONADO Y PRIMER DIA DEL MES CORRESPONDIENTE
+			// loadDataPuestDay(anio, idEnlace, 1);
+		}
+	}
+	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	ajax.send("&month=" + month + "&year=" + year + "&idEnlace=" + idEnlace + "&section=" + section);
+}
+
+function loadDaysMonthReport(idEnlace, year, section) {
+	if (section == 0 ) {
+		var month = document.getElementById("mesReporteInicio").value;
+		var day = document.getElementById("diaReporteInicio").value;
+		cont = document.getElementById('contDaysReportInicio');
+	}
+	else if (section == 1 ) {
+		var month = document.getElementById("mesReporteFinal").value;
+		var day = document.getElementById("diaReporteFinal").value;
+		cont = document.getElementById('contDaysReportFinal');		
+	}
+	ajax = objetoAjax();
+
+	ajax.open("POST", "format/medidasDeProteccion/daysReport.php");
+
+	ajax.onreadystatechange = function () {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			cont.innerHTML = ajax.responseText;
+
+			//// RECARGAR CONSULTA DE PUESTAS EN EL MES SELECCIONADO Y PRIMER DIA DEL MES CORRESPONDIENTE
+			// loadDataPuestDay(anio, idEnlace, camMes);
+
+		}
+	}
+	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	ajax.send("&day=" + day + "&month=" + month + "&year=" + year + "&idEnlace=" + idEnlace + "&section=" + section);
+}
+
 function reloadDaysMonth(idEnlace) {
 
 	var anio = document.getElementById("anio").value;
@@ -2414,6 +2536,45 @@ function closeModalCarpetasPendientes(anio, idEnlace, camMes) {
 		}
 	});
 
+}
+
+function closeModalReporte(anio, idEnlace, camMes, rolUser) {
+	var messelected = document.getElementById("mesMedidaSelected").value;
+	var diaselected = document.getElementById("diaSeleted").value;
+
+	$('#preloaderIMG').show();
+		var table = $('#gridPolicia').DataTable();
+		$("#gridPolicia").hide();
+		table.destroy();
+		//$('#preloader').append('<label>Cargando datos...</label><div class="progress"><div class="indeterminate"></div></div>');
+		$.ajax({
+			type: "POST",
+			dataType: 'html',
+			url: 'format/medidasDeProteccion/templates/template_dataMedidaSelected.php',
+			data: "messelected=" + messelected + "&anio=" + anio + "&idEnlace=" + idEnlace + "&diaselected=" + diaselected + "&camMes=" + camMes,
+			success: function (resp) {
+				$('#preloaderIMG').hide();
+				$("#gridPolicia").show();
+				$("#gridPolicia tbody").html(resp);
+				table = $('#gridPolicia').DataTable({
+					retrieve: true,
+					"language": { "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json" },
+					scrollY: 400,
+					select: true,
+					dom: 'lfrtip',
+					lengthMenu: [[10, 25, 50, -1],
+					['10', '25', '50', 'todo']
+					],
+					"order": [], // "0" means First column and "desc" is order type; 
+	
+				});
+				$('#generarReporte').modal('hide');
+				if(rolUser == 1){
+					//Solo el coordinador podra verificar cuales tiene pendientes.
+					checkFaltantes(idEnlace);
+				}
+			}
+		});		
 }
 
 function closeModalMDP(anio, idEnlace, camMes, rolUser, idCoorporacion) {
