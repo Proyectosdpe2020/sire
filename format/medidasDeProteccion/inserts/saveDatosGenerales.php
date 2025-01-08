@@ -80,7 +80,7 @@ if($idMedida == 0 && $rolUser != 4){
      SET NOCOUNT ON
        declare @insertado int
      
-       INSERT INTO medidas.medidasProteccion VALUES($data[1],0,0,0,$data[2], $fechaAcuerdo,GETDATE(), DATEPART(dw, $fechaAcuerdo), DATEPART(day, $fechaAcuerdo), DATEPART(month, $fechaAcuerdo), DATEPART(year, $fechaAcuerdo), $idEnlace, $data[10], 1, '')
+       INSERT INTO medidas.medidasProteccion VALUES($data[1],0,0,0,$data[2], $fechaAcuerdo,GETDATE(), DATEPART(dw, $fechaAcuerdo), DATEPART(day, $fechaAcuerdo), DATEPART(month, $fechaAcuerdo), DATEPART(year, $fechaAcuerdo), $idEnlace, $data[10], 1, '',null)
 
        select @insertado = @@IDENTITY
 
