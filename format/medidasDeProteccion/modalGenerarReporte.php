@@ -162,7 +162,9 @@ $diames = date("d");
     <button
         type="button"
         class="btn btn-default"
-        onclick="closeModalReporte(<? echo $year; ?>, <? echo $idEnlace; ?>, 0, <? echo $rolUser; ?>)">Cerrar
+        data-dismiss="modal"
+        onclick="closeModalReporte(<? echo $year; ?>, <? echo $idEnlace; ?>, 0, <? echo $rolUser; ?>)"
+        >Cerrar
     </button>
     <button
         type="button"

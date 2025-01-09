@@ -448,7 +448,10 @@ if (isset($_POST["idMedida"])) {
 				<?if($rolUser == 4){ 
 					if($a == 1){ 
 						 $getFechaConclusion = getDataGenerales($connMedidas, $idMedida, 0, 0);
-						 $fechaConclusion = $getFechaConclusion[0][3]->format('Y-m-d H:i'); } ?>
+						 if ($getFechaConclusion[0][3] != null) {
+							$fechaConclusion = $getFechaConclusion[0][3]->format('Y-m-d H:i'); 
+						  }
+						 } ?>
 				<div class="row">
 					<div class="col-xs-12 col-sm-12  col-md-3">
 						<label for="fechaConclusion">Fecha de conclusión: <span class="aste">(*)</span></label>
