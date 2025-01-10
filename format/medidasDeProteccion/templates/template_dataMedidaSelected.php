@@ -12,7 +12,7 @@ if (isset($_POST["idEnlace"])){ $idEnlace = $_POST["idEnlace"]; }
 if (isset($_POST["diaselected"])){ $diaselected = $_POST["diaselected"]; }
 if (isset($_POST["camMes"])){ $camMes = $_POST["camMes"]; }
 
-if ($camMes == 1 ) { $dianum = date("w",strtotime("01-".$messelected."-".$anio));	 $diaselected = 1;}				
+if ($camMes == 1 ) { $dianum = date("w",strtotime("01-".$messelected."-".$anio));	 $diaselected = 0;}				
 if ($camMes == 0 ) { $dianum = date("w",strtotime($diaselected."-".$messelected."-".$anio));	}
 if ($dianum == 0 ) { $dianum = 7;} else{ $dianum = $dianum; }
 						
