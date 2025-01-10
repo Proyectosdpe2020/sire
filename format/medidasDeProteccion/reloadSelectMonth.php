@@ -29,9 +29,9 @@
 
 		<?
 		for ($g = 1; $g <= 12; $g++) {
-			if ($g == intval($currentmonth)) {
+			if ($g == intval($messelected)) {
 		?>
-				<option value="<? echo $currentmonth; ?>" selected><? echo $mesNom; ?></option>
+				<option value="<?= $g; ?>" selected><? echo $meses[$g - 1]; ?></option>
 			<?
 			} else {
 			?>

@@ -1517,6 +1517,9 @@ function generarExcel(idEnlace, rolUser) {
 
 	var dateInicio = new Date(yearInicio, monthInicio - 1, dayInicio); // Restamos 1 al mes porque los meses en JavaScript son 0-indexados var dateFinal = new Date(year, month - 1, dayFinal);
 	var dateFinal = new Date(yearFinal, monthFinal - 1, dayFinal);
+
+	$('#preloaderIMG').show();
+	$('#contFechasReporte').hide();
 	
 	if(dateInicio <= dateFinal) {		
 		$.ajax({
@@ -1534,6 +1537,7 @@ function generarExcel(idEnlace, rolUser) {
 				rolUser: rolUser
 			},
 			success: function(resp) {
+				$('#preloaderIMG').hide();
 				if (Array.isArray(resp) && resp.length > 0) {
 					console.log("Datos:", resp);				 //Mostrar el array en caso de que la respuesta sea exitosa.
 				} else {
@@ -2305,7 +2309,7 @@ function reloadMonth(anio, idEnlace, messelected) {
 			cont.innerHTML = ajax.responseText;
 
 			//// RECARGAR CONSULTA DE PUESTAS EN EL MES SELECCIONADO Y PRIMER DIA DEL MES CORRESPONDIENTE
-			loadDataPuestDay(anio, idEnlace, 1);
+			// loadDataPuestDay(anio, idEnlace, 1);
 
 		}
 	}
@@ -2584,9 +2588,10 @@ function closeModalMDP(anio, idEnlace, camMes, rolUser, idCoorporacion) {
 	// 	return "";
 	// }
 	// else{
+		anio = document.getElementById("anio").value;
 		var messelected = document.getElementById("mesMedidaSelected").value;
 		var diaselected = document.getElementById("diaSeleted").value;
-	
+		
 		$('#preloaderIMG').show();
 		var table = $('#gridPolicia').DataTable();
 		$("#gridPolicia").hide();
@@ -2653,15 +2658,16 @@ function closeModalMDP(anio, idEnlace, camMes, rolUser, idCoorporacion) {
 function checkFaltantes(idEnlace) {
 	cont = document.getElementById('msgAlert');
 	ajax = objetoAjax();
-	ajax.open("POST", "format/medidasDeProteccion/templates/template_msgAlertFaltantes.php");
-
-	ajax.onreadystatechange = function () {
-		if (ajax.readyState == 4 && ajax.status == 200) {
-			cont.innerHTML = ajax.responseText;
+	if (cont != null) {
+		ajax.open("POST", "format/medidasDeProteccion/templates/template_msgAlertFaltantes.php");
+		ajax.onreadystatechange = function () {
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				cont.innerHTML = ajax.responseText;
+			}
 		}
+		ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		ajax.send("&idEnlace=" + idEnlace);
 	}
-	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	ajax.send("&idEnlace=" + idEnlace);
 }
 
 function deleteItem(moduloID, item_ID, idEnlace, idMedida, banderaTotal) {
