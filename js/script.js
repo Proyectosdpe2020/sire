@@ -53,6 +53,7 @@ if(idEnlace == 8) { var win = window.open('https://app.powerbi.com/view?r=eyJrIj
 if(idEnlace == 65) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiMGJlYTdhZDUtMWZiNC00YTk0LTk3YTctZTgwMGI0MGJkNjBjIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
 if(idEnlace == 80) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiY2MxMTg2ZDUtMzYwYS00ZTk2LWFjMTMtMTk3MGI0OGEwMDdmIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
 if(idEnlace == 337) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiZTg1YTY3ZTQtOTg5My00MjcxLWI3MmUtNGY1MjA0YzE2NjFmIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
+if(idEnlace == 532) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiZDE0ZmNhMWYtMzVjMy00N2UzLWIyZWYtOWUzMzYyNTk0M2VhIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
 }
 
 function loadBiEstadisticsLiti(idEnlace) {
@@ -92,7 +93,7 @@ function loadBiEstadisticsLiti(idEnlace) {
 	if(idEnlace == 28) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiOWNhZDFkMDktNmU5YS00OTM1LTlhZmQtOWFkYTc3YzI2MjNlIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
 	if(idEnlace == 30) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiOWNhZDFkMDktNmU5YS00OTM1LTlhZmQtOWFkYTc3YzI2MjNlIiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
 	if(idEnlace == 337) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiYmE1YjIyMGItMDY4Ny00YzQyLWI0NjctNmI1OWMyOTVjNTE3IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
-
+    if(idEnlace == 532) { var win = window.open('https://app.powerbi.com/view?r=eyJrIjoiYWNjOGY2NzctNWE5Ny00ZDYyLTk0NjctYTUzY2QyZmQwZDU1IiwidCI6ImZjY2YwMTQ5LWYzNTQtNGU2My1hNzExLTA5YjkzYTE3NzVkMiIsImMiOjR9', '_blank'); }
 }
 
 function loadBiEstadisticsPolicia(idEnlace) {
