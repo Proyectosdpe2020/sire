@@ -91,7 +91,7 @@ function reloadDataTables(){
 
 
 //FUNCION PARA VALIDAR LOS CAMPOS, varchar, int
-function validaInput(e, tipo) {
+function validaInput_busqueda(e, tipo) {
     var key = e.keyCode || e.which;
     var tecla = String.fromCharCode(key).toLowerCase();
     if(tipo == 'int'){ var letras = "1234567890"; }
