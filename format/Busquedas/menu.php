@@ -49,11 +49,11 @@ $idUsuario = $_SESSION['useridIE'];
 						</div>
 						<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg imput_imputado" hidden>
 							<label for="imputado"> Busqueda por imputado * :</label><br>
-							<input type="text" class="form-control" id="imputado" placeholder="NOMBRE PATERNO MATENRO" maxlength="50" aria-describedby="sizing-addon1" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="return validaInput(event, 'varchar_letras')" value="" >
+							<input type="text" class="form-control" id="imputado" placeholder="NOMBRE PATERNO MATENRO" maxlength="50" aria-describedby="sizing-addon1" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="return validaInput_busqueda(event, 'varchar_letras')" value="" >
 						</div>
 						<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg imput_nuc" hidden>
 							<label for="nuc"> Busqueda por NUC * :</label><br>
-							<input type="text" class="form-control" id="nuc" placeholder="NUMERO DE CASO" maxlength="13" aria-describedby="sizing-addon1" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="return validaInput(event, 'int')"  value="" >
+							<input type="text" class="form-control" id="nuc" placeholder="NUMERO DE CASO" maxlength="13" aria-describedby="sizing-addon1" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); "  onkeypress="return validaInput_busqueda(event, 'int')"  value="" >
 						</div>
 						<div class="col-xs-12 col-sm-12  col-md-3 input-group-lg btn_buscar" hidden>
 							<label for="boton_buscar" hidden="true">.</label><br>
