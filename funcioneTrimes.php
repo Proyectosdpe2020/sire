@@ -16,7 +16,7 @@ function getHasCapturaNucs($conn, $idEnlace){
 
 function getArrayCounts($conn, $quest, $idEnlace, $idUnidad, $per, $mes){
 
-	$anios = array( 2017, 2018, 2019, 2020, 2021, 2022, 2023 );
+	$anios = array( 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 );
 	$valores =  array();
 	
 	for ($i=0; $i < sizeof($anios) ; $i++) { 
@@ -38,7 +38,7 @@ function getCountNucsTrim($conn, $anio, $quest, $idEn, $idUn, $per, $mes){
 				  AND idUnidad = $idUn
 				  AND periodo = $per
 				  AND mes = $mes
-				  AND anioCaptura = 2024   /*VERIFICAR*/
+				  AND anioCaptura = 2025   /*VERIFICAR*/
 				  ";
 				  $indice = 0;
 				  $stmt = sqlsrv_query($conn, $query);
@@ -56,7 +56,7 @@ function getNucsTrim($conn, $anio, $quest, $idEn, $idUn, $per, $mes, $anioactual
 if($anio == 0 AND $mes == 0){
 
 	$query = "SELECT NUC, idNucsTrimestral FROM trimestral.nucsTrimestral 
-	WHERE SUBSTRING(NUC, 5,4) < $anioactual  AND idEnlace = $idEn AND idUnidad = $idUn AND periodo = $per AND idPregunta = $quest AND anioCaptura = 2024"; /*SE AGREGO AND anioCaptura = 2023*/
+	WHERE SUBSTRING(NUC, 5,4) < $anioactual  AND idEnlace = $idEn AND idUnidad = $idUn AND periodo = $per AND idPregunta = $quest AND anioCaptura = 2025"; /*SE AGREGO AND anioCaptura = 2023*/
 
 }else{
 	$query = "  SELECT NUC, idNucsTrimestral
@@ -67,7 +67,7 @@ if($anio == 0 AND $mes == 0){
 				  AND idUnidad = $idUn
 				  AND periodo = $per
 				  AND mes = $mes
-				  AND anioCaptura = 2024;
+				  AND anioCaptura = 2025;
 				  ";
 }
 
@@ -99,7 +99,7 @@ function getNamePregunta($conn, $quest){
 
 function getDataAnteriores($conn, $quest, $idEnlace, $idUnidad, $anio, $periodo){
 
-	$query = "   SELECT val2017, val2018, val2019, val2020, val2021, val2022, val2023  FROM trimestral.datosAnteriorTrimestral WHERE idPregunta = $quest AND idEnlace = $idEnlace AND idUnidad = $idUnidad AND anio = $anio AND periodo = $periodo ";
+	$query = "   SELECT val2017, val2018, val2019, val2020, val2021, val2022, val2023, val2024  FROM trimestral.datosAnteriorTrimestral WHERE idPregunta = $quest AND idEnlace = $idEnlace AND idUnidad = $idUnidad AND anio = $anio AND periodo = $periodo ";
 
 	$indice = 0;
 	$stmt = sqlsrv_query($conn, $query);
@@ -112,6 +112,7 @@ function getDataAnteriores($conn, $quest, $idEnlace, $idUnidad, $anio, $periodo)
 		$arreglo[$indice][4]=$row['val2021'];
 		$arreglo[$indice][5]=$row['val2022'];
 		$arreglo[$indice][6]=$row['val2023'];
+        $arreglo[$indice][7]=$row['val2024'];
 		$indice++;
 	}
 	if(isset($arreglo)){return $arreglo;}

@@ -1,3 +1,18 @@
+.scroll-container {
+
+	overflow: auto;
+	border: 1px solid #ccc;
+}
+
+/* Aplica solo al scroll dentro de .scroll-container */
+.scroll-container::-webkit-scrollbar {
+	width: 12px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+	background: rgb(21, 47, 74); /* Azul */
+}
+
 .tituloIndicadores{
 	font-size: 25px;
 	color: #152F5A;
@@ -275,3 +290,5 @@ outline: none !important;
 .contentQuest td:hover{
 	background: #FFEC33;
 }
+
+
