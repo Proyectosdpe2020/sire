@@ -138,7 +138,7 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 	<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 	<link rel="stylesheet" type="text/css" href="css/principal.css">
 	<link rel="stylesheet" type="text/css" href="css/puesDispo.css">
-	<link rel="stylesheet" type="text/css" href="css/trimestral.css">
+	<link rel="stylesheet" type="text/css" href="css/trimestral_20250404.css">
 	<link rel="stylesheet" type="text/css" href="css/carpetasJudicializadas.css">
 
 
