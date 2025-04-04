@@ -129,6 +129,7 @@
 							<th scope="col">2021</th>
 							<th scope="col">2022</th>
 							<th scope="col">2023</th>
+                            <th scope="col">2024</th>
 							<th scope="col">Años Anteriores</th>
 							<th scope="col"><? echo $m1; ?></th>
 							<th scope="col"><? echo $m2; ?></th>
@@ -178,6 +179,7 @@
 							<td class="cPo" onclick="loaNucTrimeShow(0,2022, <? echo $per; ?>, 15, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d1[5]; ?><input type="hidden" value="<? echo $d1[5]; ?>" id="1val2022"></td>
 
 							<td class="cPo" onclick="loaNucTrimeShow(0,2023, <? echo $per; ?>, 15, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d1[6]; ?><input type="hidden" value="<? echo $d1[6]; ?>" id="1val2023"></td>
+                            <td class="cPo" onclick="loaNucTrimeShow(0,2024, <? echo $per; ?>, 15, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d1[7]; ?><input type="hidden" value="<? echo $d1[7]; ?>" id="1val2024"></td>
 
 							<td class="cPo" onclick="loaNucTrimes(0,0, <? echo $per; ?>, 15, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)">Capturar</td>
 
@@ -201,6 +203,7 @@
 							<td class="cPo" onclick="loaNucTrimeShow(0,2022, <? echo $per; ?>, 16, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d2[5]; ?><input type="hidden" value="<? echo $d2[5]; ?>" id="2val2022"></td>
 
 								<td class="cPo" onclick="loaNucTrimeShow(0,2023, <? echo $per; ?>, 16, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d2[6]; ?><input type="hidden" value="<? echo $d2[6]; ?>" id="2val2023"></td>
+                                <td class="cPo" onclick="loaNucTrimeShow(0,2024, <? echo $per; ?>, 16, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d2[7]; ?><input type="hidden" value="<? echo $d2[7]; ?>" id="2val2024"></td>
 
 							<td class="cPo" onclick="loaNucTrimes(0,0, <? echo $per; ?>, 16, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)">Capturar</td>
 							<td class="cPo" onclick="loaNucTrimes(<? echo $mes1; ?>,<? echo $anio; ?>, <? echo $per; ?>, 16, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d20[0][0]; ?></td>
@@ -222,6 +225,7 @@
 							<td class="cPo" onclick="loaNucTrimeShow(0,2022, <? echo $per; ?>, 17, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d3[5]; ?><input type="hidden" value="<? echo $d3[5]; ?>" id="3val2022"></td>
 
 									<td class="cPo" onclick="loaNucTrimeShow(0,2023, <? echo $per; ?>, 17, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d3[6]; ?><input type="hidden" value="<? echo $d3[6]; ?>" id="3val2023"></td>
+                                    <td class="cPo" onclick="loaNucTrimeShow(0,2024, <? echo $per; ?>, 17, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d3[7]; ?><input type="hidden" value="<? echo $d3[7]; ?>" id="3val2024"></td>
 							
 							<td class="cPo" onclick="loaNucTrimes(0,0, <? echo $per; ?>, 17, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)">Capturar</td>
 							<td class="cPo" onclick="loaNucTrimes(<? echo $mes1; ?>,<? echo $anio; ?>, <? echo $per; ?>, 17, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d30[0][0]; ?></td>
@@ -242,6 +246,7 @@
 							<td style=" border: inset 0pt"></td>
 							<td style=" border: inset 0pt"></td>
 							<td style=" border: inset 0pt"></td>
+                            <td style=" border: inset 0pt"></td>
 							<td style=" border: inset 0pt"><strong>TOTAL:</strong></td>
 							<td class="blockInp"><strong><?php echo $todgen; ?></strong></td>
 						</tr>
