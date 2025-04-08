@@ -19,7 +19,7 @@ if (isset($_GET["idenlace"])) {
 }
 $a = json_decode($_GET["arrData"], true);
 
-$arAnios = array(2017, 2018, 2019, 2020, 2021, 2022, 2023);
+$arAnios = array(2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024);
 $strPrgts = "";
 if ($quest == 5) {
   $tam = 5;///// ESTE ES EL TAMAÑO DE LOS ARREGLOS EN ESTE CASO ES 5 POR QUE CONTIENE 5 PREGUNTAS LA PREGUNTA 5
@@ -57,6 +57,7 @@ if ($row_count > 0) {
     $val5 = intval($a[$i][4]);
     $val6 = intval($a[$i][5]);
     $val7 = intval($a[$i][6]);
+    $val8 = intval($a[$i][7]);
 
     $queryTransaction = " 
                     BEGIN                     
@@ -71,6 +72,7 @@ if ($row_count > 0) {
                           UPDATE trimestral.datosAnteriorTrimestral SET val2021 = $val5 WHERE idPregunta = $arPregnts[$i] AND periodo = $per AND anio = $anio AND idUnidad = $idUnidad AND idEnlace = $idEnlace 
                           UPDATE trimestral.datosAnteriorTrimestral SET val2022 = $val6 WHERE idPregunta = $arPregnts[$i] AND periodo = $per AND anio = $anio AND idUnidad = $idUnidad AND idEnlace = $idEnlace 
                           UPDATE trimestral.datosAnteriorTrimestral SET val2023 = $val7 WHERE idPregunta = $arPregnts[$i] AND periodo = $per AND anio = $anio AND idUnidad = $idUnidad AND idEnlace = $idEnlace
+                          UPDATE trimestral.datosAnteriorTrimestral SET val2024 = $val8 WHERE idPregunta = $arPregnts[$i] AND periodo = $per AND anio = $anio AND idUnidad = $idUnidad AND idEnlace = $idEnlace
                           
                           COMMIT
                     END TRY
@@ -108,6 +110,7 @@ if ($row_count > 0) {
     $val5 = intval($a[$i][4]);
     $val6 = intval($a[$i][5]);
     $val7 = intval($a[$i][6]);
+    $val8 = intval($a[$i][7]);
 
     $queryTransaction = " 
           BEGIN                     
@@ -115,7 +118,7 @@ if ($row_count > 0) {
             BEGIN TRANSACTION
                 SET NOCOUNT ON    
 
-                INSERT INTO trimestral.datosAnteriorTrimestral VALUES($arPregnts[$i],$idEnlace,$idUnidad,$anio,$per,$val1,$val2,$val3,$val4,$val5,$val6,$val7 )
+                INSERT INTO trimestral.datosAnteriorTrimestral VALUES($arPregnts[$i],$idEnlace,$idUnidad,$anio,$per,$val1,$val2,$val3,$val4,$val5,$val6,$val7,$val8 )
                 
                 COMMIT
           END TRY
