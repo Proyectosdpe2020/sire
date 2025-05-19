@@ -580,6 +580,38 @@ $total_tramite = $dataTramite[0][0];
 					<div class="panel panel-default fd1">
 						<div class="panel-body">
 							<h5 class="text-on-pannel"><strong> Ordenes </strong></h5>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-4">
+                                    <label class="colorLetras" for="inputlg">Ordenes solicitadas :</label>
+                                    <input type="number" value="<? if ($a == 1) {
+                                        echo  $datalit[0][102];
+                                    } else {
+                                        echo 0;
+                                    } ?>" placeholder="" disabled="" class="first" id="OS" />
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4">
+                                    <label class="colorLetras" for="inputlg">Aprehensión :</label>
+                                    <div class="iconiput">
+                                        <input type="number" placeholder="cantidad" class="first" id="OSapre" onblur="sumcordnesSoli(event)" value="<? if ($a == 1) {
+                                            echo  $datalit[0][103];
+                                        } ?>" />
+                                        <span onclick="sendDataModalLitigacion('OSapre',112,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)">
+											<div id="checkOSapre"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div>
+										</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4">
+                                    <label class="colorLetras" for="inputlg">Comparecencia :</label>
+                                    <div class="iconiput">
+                                        <input type="number" placeholder="cantidad" class="first" id="OScomp" onblur="sumcordnesSoli(event)" value="<? if ($a == 1) {
+                                            echo  $datalit[0][104];
+                                        } ?>" />
+                                        <span onclick="sendDataModalLitigacion('OScomp',113,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)">
+											<div id="checkOScomp"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div>
+										</span>
+                                    </div>
+                                </div>
+                            </div>
 							<div class="row">
 								<div class="col-xs-12 col-sm-12 col-md-4">
 									<label class="colorLetras" for="inputlg">Ordenes negadas :</label>
@@ -608,38 +640,6 @@ $total_tramite = $dataTramite[0][0];
 																																																																																																																		} ?>" />
 										<span onclick="sendDataModalLitigacion('ONcomp',38,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)">
 											<div id="checkONcomp"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div>
-										</span>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-12 col-sm-12 col-md-4">
-									<label class="colorLetras" for="inputlg">Ordenes solicitadas :</label>
-									<input type="number" value="<? if ($a == 1) {
-																																						echo  $datalit[0][102];
-																																					} else {
-																																						echo 0;
-																																					} ?>" placeholder="" disabled="" class="first" id="OS" />
-								</div>
-								<div class="col-xs-12 col-sm-12 col-md-4">
-									<label class="colorLetras" for="inputlg">Aprehensión :</label>
-									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="OSapre" onblur="sumcordnesSoli(event)" value="<? if ($a == 1) {
-																																																																																																																							echo  $datalit[0][103];
-																																																																																																																						} ?>" />
-										<span onclick="sendDataModalLitigacion('OSapre',112,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)">
-											<div id="checkOSapre"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div>
-										</span>
-									</div>
-								</div>
-								<div class="col-xs-12 col-sm-12 col-md-4">
-									<label class="colorLetras" for="inputlg">Comparecencia :</label>
-									<div class="iconiput">
-										<input type="number" placeholder="cantidad" class="first" id="OScomp" onblur="sumcordnesSoli(event)" value="<? if ($a == 1) {
-																																																																																																																							echo  $datalit[0][104];
-																																																																																																																						} ?>" />
-										<span onclick="sendDataModalLitigacion('OScomp',113,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)">
-											<div id="checkOScomp"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div>
 										</span>
 									</div>
 								</div>
