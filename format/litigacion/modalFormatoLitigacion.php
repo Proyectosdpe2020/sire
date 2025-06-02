@@ -836,7 +836,7 @@ $total_tramite = $dataTramite[0][0];
                     <!--TECNICAS DE INVESTIGACION ESPECIALES-->
                     <div class="panel panel-default fd1">
                         <div class="panel-body">
-                            <h5 class="text-on-pannel"><strong> Tecnicas de investigación especiales </strong></h5>
+                            <h5 class="text-on-pannel"><strong> Técnicas de investigación especiales </strong></h5>
 
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-3">

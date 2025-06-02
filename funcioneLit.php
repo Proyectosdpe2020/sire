@@ -85,7 +85,21 @@ function getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad, $idMp)
   sum([SDnueve]) as 'SDnueve',
   sum([SDdiez]) as 'SDdiez',
   sum([totCarpTram_nucs]) as 'totCarpTram_nucs',
-  sum([SobreseimientosMuerteImputado]) as 'SobreseimientosMuerteImputado'
+  sum([SobreseimientosMuerteImputado]) as 'SobreseimientosMuerteImputado',
+  sum([audienciaIncial]) as 'audienciaIncial',
+  sum([pruebaAnticipada]) as 'pruebaAnticipada',
+  sum([escritoAcusacion]) as 'escritoAcusacion',
+  sum([actosInvComplementaria]) as 'actosInvComplementaria',
+  sum([audienciaEjecuSanciones]) as 'audienciaEjecuSanciones',
+  sum([apelRevModAbsolutoria]) as 'apelRevModAbsolutoria',
+  sum([TIEotorgaIntervensionComuni]) as 'TIEotorgaIntervensionComuni',
+  sum([TIEotorgaDatosConservados]) as 'TIEotorgaDatosConservados',
+  sum([TIEotorgaDatosBancarios]) as 'TIEotorgaDatosBancarios',
+  sum([TIEnegativaIntervencionComuni]) as 'TIEnegativaIntervencionComuni',
+  sum([TIEnegativaDatosConservados]) as 'TIEnegativaDatosConservados',
+  sum([TIEnegativaDatosBancarios]) as 'TIEnegativaDatosBancarios',
+  sum([TIEotorgadas]) as 'TIEotorgadas',
+  sum([TIEnegadas]) as 'TIEnegadas'
    FROM Litigacion WHERE idMes = $mes AND idAnio = $anio AND idUnidad = $idUnidad";
 	} else {
 
@@ -238,6 +252,20 @@ function getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad, $idMp)
       ,[SDnueve]
       ,[SDdiez]
       ,[totCarpTram_nucs]
+,[audienciaIncial]
+,[pruebaAnticipada]
+,[escritoAcusacion]
+,[actosInvComplementaria]
+,[audienciaEjecuSanciones]
+,[apelRevModAbsolutoria]
+,[TIEotorgaIntervensionComuni]
+,[TIEotorgaDatosConservados]
+,[TIEotorgaDatosBancarios]
+,[TIEnegativaIntervencionComuni]
+,[TIEnegativaDatosConservados]
+,[TIEnegativaDatosBancarios]
+,[TIEotorgadas]
+,[TIEnegadas]
 FROM [ESTADISTICAV2].[dbo].[Litigacion] WHERE idMes = $mes AND idAnio = $anio AND idUnidad = $idUnidad AND idMp = $idMp";
 	}
 
@@ -423,6 +451,21 @@ FROM [ESTADISTICAV2].[dbo].[Litigacion] WHERE idMes = $mes AND idAnio = $anio AN
 		$arreglo[$indice][149] = $row['SDdiez'];
 		$arreglo[$indice][150] = $row['totCarpTram_nucs'];
 		$arreglo[$indice][151] = $row['SobreseimientosMuerteImputado'];
+
+        $arreglo[$indice][152] = $row['audienciaIncial'];
+        $arreglo[$indice][153] = $row['pruebaAnticipada'];
+        $arreglo[$indice][154] = $row['escritoAcusacion'];
+        $arreglo[$indice][155] = $row['actosInvComplementaria'];
+        $arreglo[$indice][156] = $row['audienciaEjecuSanciones'];
+        $arreglo[$indice][157] = $row['apelRevModAbsolutoria'];
+        $arreglo[$indice][158] = $row['TIEotorgaIntervensionComuni'];
+        $arreglo[$indice][159] = $row['TIEotorgaDatosConservados'];
+        $arreglo[$indice][160] = $row['TIEotorgaDatosBancarios'];
+        $arreglo[$indice][161] = $row['TIEnegativaIntervencionComuni'];
+        $arreglo[$indice][162] = $row['TIEnegativaDatosConservados'];
+        $arreglo[$indice][163] = $row['TIEnegativaDatosBancarios'];
+        $arreglo[$indice][164] = $row['TIEotorgadas'];
+        $arreglo[$indice][165] = $row['TIEnegadas'];
 
 		$indice++;
 	}
@@ -983,6 +1026,20 @@ function getDataMP_documentExcel($conn, $mes, $anio, $idUnidad){
 																	  ,mp.nombre as nombreMP
 																	  ,mp.paterno as paternoMP
 																	  ,mp.materno as maternoMP
+                                                                ,l.[audienciaIncial]
+                                                                ,l.[pruebaAnticipada]
+                                                                ,l.[escritoAcusacion]
+                                                                ,l.[actosInvComplementaria]
+                                                                ,l.[audienciaEjecuSanciones]
+                                                                ,l.[apelRevModAbsolutoria]
+                                                                ,l.[TIEotorgaIntervensionComuni]
+                                                                ,l.[TIEotorgaDatosConservados]
+                                                                ,l.[TIEotorgaDatosBancarios]
+                                                                ,l.[TIEnegativaIntervencionComuni]
+                                                                ,l.[TIEnegativaDatosConservados]
+                                                                ,l.[TIEnegativaDatosBancarios]
+                                                                ,l.[TIEotorgadas]
+                                                                ,l.[TIEnegadas]
 		FROM [ESTADISTICAV2].[dbo].[Litigacion] l
 		INNER JOIN dbo.mp mp ON mp.idMp = l.idMp
 		WHERE l.idUnidad = $idUnidad AND l.idMes = $mes and l.idAnio = $anio";
@@ -1171,6 +1228,21 @@ function getDataMP_documentExcel($conn, $mes, $anio, $idUnidad){
 		$arreglo[$indice][152] = $row['nombreMP'];
 		$arreglo[$indice][153] = $row['paternoMP'];
 		$arreglo[$indice][154] = $row['maternoMP'];
+
+        $arreglo[$indice][155] = $row['audienciaIncial'];
+        $arreglo[$indice][156] = $row['pruebaAnticipada'];
+        $arreglo[$indice][157] = $row['escritoAcusacion'];
+        $arreglo[$indice][158] = $row['actosInvComplementaria'];
+        $arreglo[$indice][159] = $row['audienciaEjecuSanciones'];
+        $arreglo[$indice][160] = $row['apelRevModAbsolutoria'];
+        $arreglo[$indice][161] = $row['TIEotorgaIntervensionComuni'];
+        $arreglo[$indice][162] = $row['TIEotorgaDatosConservados'];
+        $arreglo[$indice][163] = $row['TIEotorgaDatosBancarios'];
+        $arreglo[$indice][164] = $row['TIEnegativaIntervencionComuni'];
+        $arreglo[$indice][165] = $row['TIEnegativaDatosConservados'];
+        $arreglo[$indice][166] = $row['TIEnegativaDatosBancarios'];
+        $arreglo[$indice][167] = $row['TIEotorgadas'];
+        $arreglo[$indice][168] = $row['TIEnegadas'];
 
 
 		$indice++;
