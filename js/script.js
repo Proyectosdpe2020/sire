@@ -1765,7 +1765,7 @@ function enviarDPEvalidates(idUnidad, anio, mes, incorrect, validado, idEnlace, 
 
 			swal({
 				title: "",
-				text: "¿Esta seguro de enviar la información2? \n\n Nota:    Una vez enviados a la Dirección de Planeación y Estadística no podra ser modificado. ",
+				text: "¿Esta seguro de enviar la información? \n\n Nota:    Una vez enviados a la Dirección de Planeación y Estadística no podra ser modificado. ",
 				type: "warning",
 				showCancelButton: true,
 				confirmButtonColor: "#DD6B55",
