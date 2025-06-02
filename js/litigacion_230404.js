@@ -305,6 +305,22 @@ function sumResoJuicioOral() {
 	audCondenatorio = document.getElementById("audCondenatorio").value; if (audCondenatorio == "") { audCondenatorio = 0; } else { audCondenatorio = parseInt(document.getElementById("audCondenatorio").value); }
 	var final = audJuiOral + audFallo + absolutorio + AudIndiSan + procEspecial + audCondenatorio; document.getElementById("RESOJuiOral").value = final;
 }
+
+function sumTIEotorgadas() {
+	TIE_intervencion_comunicaciones = document.getElementById("TIE_intervencion_comunicaciones").value; if (TIE_intervencion_comunicaciones == "") { TIE_intervencion_comunicaciones = 0; } else { TIE_intervencion_comunicaciones = parseInt(document.getElementById("TIE_intervencion_comunicaciones").value); }
+	TIE_datos_conservados = document.getElementById("TIE_datos_conservados").value; if (TIE_datos_conservados == "") { TIE_datos_conservados = 0; } else { TIE_datos_conservados = parseInt(document.getElementById("TIE_datos_conservados").value); }
+	TIE_datos_bancarios = document.getElementById("TIE_datos_bancarios").value; if (TIE_datos_bancarios == "") { TIE_datos_bancarios = 0; } else { TIE_datos_bancarios = parseInt(document.getElementById("TIE_datos_bancarios").value); }
+
+	var final = TIE_intervencion_comunicaciones + TIE_datos_conservados + TIE_datos_bancarios; document.getElementById("TIE_otorgadas").value = final;
+}
+
+function sumTIEnegadas() {
+	TIEneg_intervencion_comunicaciones = document.getElementById("TIEneg_intervencion_comunicaciones").value; if (TIEneg_intervencion_comunicaciones == "") { TIEneg_intervencion_comunicaciones = 0; } else { TIEneg_intervencion_comunicaciones = parseInt(document.getElementById("TIEneg_intervencion_comunicaciones").value); }
+	TIEneg_datos_conservados = document.getElementById("TIEneg_datos_conservados").value; if (TIEneg_datos_conservados == "") { TIEneg_datos_conservados = 0; } else { TIEneg_datos_conservados = parseInt(document.getElementById("TIEneg_datos_conservados").value); }
+	TIEneg_datos_bancarios = document.getElementById("TIEneg_datos_bancarios").value; if (TIEneg_datos_bancarios == "") { TIEneg_datos_bancarios = 0; } else { TIEneg_datos_bancarios = parseInt(document.getElementById("TIEneg_datos_bancarios").value); }
+
+	var final = TIEneg_intervencion_comunicaciones + TIEneg_datos_conservados + TIEneg_datos_bancarios; document.getElementById("TIE_negadas").value = final;
+}
 //////////////////////////////////////////////////////////////////////////
 
 
@@ -626,23 +642,60 @@ function guardarLitigacion(idEnlace, mes, anio, idMp, idUnidad) {
  totCarpTram_nucs = document.getElementById("totCarpTram_nucs").value; if (totCarpTram_nucs == "") { totCarpTram_nucs = 0; } else { totCarpTram_nucs = parseInt(document.getElementById("totCarpTram_nucs").value); }
 	totCarpTram_nucsNu = document.getElementById("valor165").value; if (totCarpTram_nucsNu == "") { totCarpTram_nucsNu = 0; } else { totCarpTram_nucsNu = parseInt(document.getElementById("valor165").value); }
 
+	audiencia_incial = document.getElementById("audiencia_incial").value; if (audiencia_incial== "") { audiencia_incial = 0; } else { audiencia_incial = parseInt(document.getElementById("audiencia_incial").value); }
+	audiencia_incialNu = document.getElementById("valor166").value; if (audiencia_incialNu == "") { audiencia_incialNu = 0; } else { audiencia_incialNu = parseInt(document.getElementById("valor166").value); }
 
+	prueba_anticipada = document.getElementById("prueba_anticipada").value; if (prueba_anticipada== "") { prueba_anticipada = 0; } else { prueba_anticipada = parseInt(document.getElementById("prueba_anticipada").value); }
+	prueba_anticipadaNu = document.getElementById("valor167").value; if (prueba_anticipadaNu == "") { prueba_anticipadaNu = 0; } else { prueba_anticipadaNu = parseInt(document.getElementById("valor167").value); }
+
+	escrito_acusacion = document.getElementById("escrito_acusacion").value; if (escrito_acusacion== "") { escrito_acusacion = 0; } else { escrito_acusacion = parseInt(document.getElementById("escrito_acusacion").value); }
+	escrito_acusacionNu = document.getElementById("valor168").value; if (escrito_acusacionNu == "") { escrito_acusacionNu = 0; } else { escrito_acusacionNu = parseInt(document.getElementById("valor168").value); }
+
+	investigacion_complementaria = document.getElementById("investigacion_complementaria").value; if (investigacion_complementaria== "") { investigacion_complementaria = 0; } else { investigacion_complementaria = parseInt(document.getElementById("investigacion_complementaria").value); }
+	investigacion_complementariaNu = document.getElementById("valor170").value; if (investigacion_complementariaNu == "") { investigacion_complementariaNu = 0; } else { investigacion_complementariaNu = parseInt(document.getElementById("valor170").value); }
+
+	aud_ejecucion_sanciones = document.getElementById("aud_ejecucion_sanciones").value; if (aud_ejecucion_sanciones== "") { aud_ejecucion_sanciones = 0; } else { aud_ejecucion_sanciones = parseInt(document.getElementById("aud_ejecucion_sanciones").value); }
+	aud_ejecucion_sancionesNu = document.getElementById("valor171").value; if (aud_ejecucion_sancionesNu == "") { aud_ejecucion_sancionesNu = 0; } else { aud_ejecucion_sancionesNu = parseInt(document.getElementById("valor171").value); }
+
+	ap_revocan_absolutoria = document.getElementById("ap_revocan_absolutoria").value; if (ap_revocan_absolutoria== "") { ap_revocan_absolutoria = 0; } else { ap_revocan_absolutoria = parseInt(document.getElementById("ap_revocan_absolutoria").value); }
+	ap_revocan_absolutoriaNu = document.getElementById("valor172").value; if (ap_revocan_absolutoriaNu == "") { ap_revocan_absolutoriaNu = 0; } else { ap_revocan_absolutoriaNu = parseInt(document.getElementById("valor172").value); }
+
+	TIE_intervencion_comunicaciones = document.getElementById("TIE_intervencion_comunicaciones").value; if (TIE_intervencion_comunicaciones== "") { TIE_intervencion_comunicaciones = 0; } else { TIE_intervencion_comunicaciones = parseInt(document.getElementById("TIE_intervencion_comunicaciones").value); }
+	TIE_intervencion_comunicacionesNu = document.getElementById("valor173").value; if (TIE_intervencion_comunicacionesNu == "") { TIE_intervencion_comunicacionesNu = 0; } else { TIE_intervencion_comunicacionesNu = parseInt(document.getElementById("valor173").value); }
+
+	TIE_datos_conservados = document.getElementById("TIE_datos_conservados").value; if (TIE_datos_conservados== "") { TIE_datos_conservados = 0; } else { TIE_datos_conservados = parseInt(document.getElementById("TIE_datos_conservados").value); }
+	TIE_datos_conservadosNu = document.getElementById("valor175").value; if (TIE_datos_conservadosNu == "") { TIE_datos_conservadosNu = 0; } else { TIE_datos_conservadosNu = parseInt(document.getElementById("valor175").value); }
+
+	TIE_datos_bancarios = document.getElementById("TIE_datos_bancarios").value; if (TIE_datos_bancarios== "") { TIE_datos_bancarios = 0; } else { TIE_datos_bancarios = parseInt(document.getElementById("TIE_datos_bancarios").value); }
+	TIE_datos_bancariosNu = document.getElementById("valor176").value; if (TIE_datos_bancariosNu == "") { TIE_datos_bancariosNu = 0; } else { TIE_datos_bancariosNu = parseInt(document.getElementById("valor176").value); }
+
+	TIEneg_intervencion_comunicaciones = document.getElementById("TIEneg_intervencion_comunicaciones").value; if (TIEneg_intervencion_comunicaciones== "") { TIEneg_intervencion_comunicaciones= 0; } else { TIEneg_intervencion_comunicaciones = parseInt(document.getElementById("TIEneg_intervencion_comunicaciones").value); }
+	TIEneg_intervencion_comunicacionesNu = document.getElementById("valor178").value; if (TIEneg_intervencion_comunicacionesNu == "") { TIEneg_intervencion_comunicacionesNu = 0; } else { TIEneg_intervencion_comunicacionesNu = parseInt(document.getElementById("valor178").value); }
+
+	TIEneg_datos_conservados = document.getElementById("TIEneg_datos_conservados").value; if (TIEneg_datos_conservados== "") { TIEneg_datos_conservados= 0; } else { TIEneg_datos_conservados = parseInt(document.getElementById("TIEneg_datos_conservados").value); }
+	TIEneg_datos_conservadosNu = document.getElementById("valor179").value; if (TIEneg_datos_conservadosNu == "") { TIEneg_datos_conservadosNu = 0; } else { TIEneg_datos_conservadosNu = parseInt(document.getElementById("valor179").value); }
+
+	TIEneg_datos_bancarios = document.getElementById("TIEneg_datos_bancarios").value; if (TIEneg_datos_bancarios== "") { TIEneg_datos_bancarios= 0; } else { TIEneg_datos_bancarios = parseInt(document.getElementById("TIEneg_datos_bancarios").value); }
+	TIEneg_datos_bancariosNu = document.getElementById("valor180").value; if (TIEneg_datos_bancariosNu == "") { TIEneg_datos_bancariosNu = 0; } else { TIEneg_datos_bancariosNu = parseInt(document.getElementById("valor180").value); }
 
 	var arrayCamposData = [cdete, sdete, FIsolic, FIotor, FInega, legal, ilegal, aunvinc, mix, MCsol, MCotor, MCnega, ppofic, ppjus, ppanju, exgaeco, emvien, incuval, pssafj, scviind, pcdrclug, pccdper, sindom, steeca, steapl, coloele, rpdmjd, SDpapen, SDpmuImpu, acrep, criopor, termant, acu, citac, Cconc, Cnega, ONapre, ONcomp, DRppa, DRppd, DRppmp, apenoadmi, SDIrev, SDImod, SDIconf, Reproc, MJGorap, MJGorcomp,
 		MJCorapre, MJCordcomp, totAudiencias, ACPREaie, ACPREaio, SOALscp, SOALarep, SENabsol, SENmixc, SENsreda, SENnocreda, INCOMdecre, INCOMadmi, ARJnap, ARJnar, ARJncoap, ARJnoc, ARJppmc, ARJtps, ARJrvp, ARJrnscp, ARJnapa, ARJsdpa, ARJemp, ARTEdap, ARTEsd, DSEDrfmp, DSEDmfmp, DSEDcfmp, csjdsm, OSapre, OScomp, medidasProteccion, intervencionTR, tomaMuestras, exhumacion, obDatosReservados,
-		intervencionCME, provPrecautoria, cadCustodia, InspLugDis, InspInmuebles, entrevistasTestigos, reconocimientoPer, solInfoPericiales, InfInstiSeg, examenFisPersona, audJuiOral, audFallo, absolutorio, AudIndiSan, procEspecial, audCondenatorio, mecanismosAceleracion, apeamparo, amparoDirecto, amparoIndirecto, auvinc, scpro, proabre, SENcon, SDuno, SDdos, SDtres, SDcuatro, SDcinco, SDseis, SDsiete, SDocho, SDnueve, SDdiez, totCarpTram_nucs];
+		intervencionCME, provPrecautoria, cadCustodia, InspLugDis, InspInmuebles, entrevistasTestigos, reconocimientoPer, solInfoPericiales, InfInstiSeg, examenFisPersona, audJuiOral, audFallo, absolutorio, AudIndiSan, procEspecial, audCondenatorio, mecanismosAceleracion, apeamparo, amparoDirecto, amparoIndirecto, auvinc, scpro, proabre, SENcon, SDuno, SDdos, SDtres, SDcuatro, SDcinco, SDseis, SDsiete, SDocho, SDnueve, SDdiez, totCarpTram_nucs,
+		audiencia_incial, prueba_anticipada, escrito_acusacion, investigacion_complementaria, aud_ejecucion_sanciones, ap_revocan_absolutoria, TIE_intervencion_comunicaciones, TIE_datos_conservados, TIE_datos_bancarios, TIEneg_intervencion_comunicaciones, TIEneg_datos_conservados, TIEneg_datos_bancarios];
 
 	var arrayNucsData = [cdeteNu, sdeteNu, FIsolicNu, FIotorNU, FInegaNu, legalNu, ilegalNu, aunvincNu, mixNu, MCsolNu, MCotorNu, MCnegaNu, ppoficNu, ppjusNu, ppanjuNu, exgaecoNu, emvienNu, incuvalNu, pssafjNu, scviindNu, pcdrclugNu, pccdperNu, sindomNu, steecaNu, steaplNu, coloeleNu, rpdmjdNu, SDpapenNu, SDpmuImpuNu, acrepNu, crioporNu, termantNu, acuNu, citacNu, CconcNu, CnegaNu, ONapreNu, ONcompNu, DRppaNu,
 		DRppdNu, DRppmpNu, apenoadmiNu, SDIrevNu, SDImodNu, SDIconfNu, ReprocNu, MJGorapNu, MJGorcompNu, MJCorapreNu, MJCordcompNu, totAudienciasNu, ACPREaieNu, ACPREaioNu, SOALscpNu, SOALarepNu, SENabsolNu, SENmixcNu, SENsredaNu, SENnocredaNu, INCOMdecreNu, INCOMadmiNu, ARJnapNu, ARJnarNu, ARJncoapNu, ARJnocNu, ARJppmcNu, ARJtpsNu, ARJrvpNu, ARJrnscpNu, ARJnapaNu, ARJsdpaNu, ARJempNu, ARTEdapNu,
 		ARTEsdNu, DSEDrfmpNu, DSEDmfmpNu, DSEDcfmpNu, csjdsmNu, OSapreNu, OScompNu, medidasProteccionNu, intervencionTRNu, tomaMuestrasNu, exhumacionNu, obDatosReservadosNu, intervencionCMENu, provPrecautoriaNu, cadCustodiaNu, InspLugDisNu, InspInmueblesNu, entrevistasTestigosNu, reconocimientoPerNu, solInfoPericialesNu, InfInstiSegNu, examenFisPersonaNu, audJuiOralNu, audFalloNu, absolutorioNu,
-		AudIndiSanNu, procEspecialNu, audCondenatorioNu, mecanismosAceleracionNu, apeamparoNu, amparoDirectoNu, amparoIndirectoNu, vincprocesoNU, scprocesoNu, proAbreNu, condenaNu, SDunoNu, SDdosNu, SDtresNu, SDcuatroNu, SDcincoNu, SDseisNu, SDsieteNu, SDochoNu, SDnueveNu, SDdiezNu , totCarpTram_nucsNu];
+		AudIndiSanNu, procEspecialNu, audCondenatorioNu, mecanismosAceleracionNu, apeamparoNu, amparoDirectoNu, amparoIndirectoNu, vincprocesoNU, scprocesoNu, proAbreNu, condenaNu, SDunoNu, SDdosNu, SDtresNu, SDcuatroNu, SDcincoNu, SDseisNu, SDsieteNu, SDochoNu, SDnueveNu, SDdiezNu , totCarpTram_nucsNu,
+		audiencia_incialNu, prueba_anticipadaNu, escrito_acusacionNu, investigacion_complementariaNu, aud_ejecucion_sancionesNu, ap_revocan_absolutoriaNu, TIE_intervencion_comunicacionesNu, TIE_datos_conservadosNu, TIE_datos_bancariosNu, TIEneg_intervencion_comunicacionesNu, TIEneg_datos_conservadosNu, TIEneg_datos_bancariosNu];
 
 	var arrayCheckicon = ["checCdeten", "checSdeten", "checkFIsolic", "checkFIotor", "checkFInega", "checklegal", "checkilegal", "checkaunvinc", "checkmix", "checkMCsol", "checkMCotor", "checkMCnega", "checkppofic", "checkppjus", "checkppanju", "checkexgaeco", "checkemvien", "checkincuval", "checkpssafj", "checkscviind", "checkpcdrclug", "checkpccdper", "checksindom", "checksteeca", "checksteapl", "checkcoloele",
 		"checkrpdmjd", "checkSDpapen", "checkSDpmuImpu", "checkCacrep", "checkcriopor", "checktermant", "checkacu", "checkcitac", "checkCconc", "checkCnega", "checkONapre", "checkONcomp", "checkDRppa", "checkDRppd", "checkDRppmp", "checkapenoadmi", "checkSDIrev", "checkSDImod", "checkSDIconf", "checkReproc", "checkMJGorap", "checkMJGorcomp", "checkMJCorapre", "checkMJCordcomp", "checktotAudiencias",
 		"checkACPREaie", "checkACPREaio", "checkSOALscp", "checkSOALarep", "checkSENabsol", "checkSENmixc", "checkSENsreda", "checkSENnocreda", "checkINCOMdecre", "checkINCOMadmi", "checkARJnap", "checkARJnar", "checkARJncoap", "checkARJnoc", "checkARJppmc", "checkARJtps", "checkARJrvp", "checkARJrnscp", "checkSARJnapa", "checkARJsdpa", "checkARJemp", "checkARTEdap", "checkARTEsd", "checkDSEDrfmp",
 		"checkDSEDmfmp", "checkDSEDcfmp", "checkcsjdsm", "checkOSapre", "checkOScomp", "checkMedidasProteccion", "checkIntervencionTR", "checkTomaMuestras", "checkExhumacion", "checkObDatosReservados", "checkIntervencionCME", "checkProvPrecautoria", "checkCadCustodia", "checkInspLugDis", "checkInspInmuebles", "checkEntrevistasTestigos", "checkReconocimientoPer", "checkSolInfoPericiales",
 		"checkInfInstiSeg", "checkExamenFisPersona", "checkAudJuiOral", "checkAudFallo", "checkAbsolutorio", "checkAIDS", "checkProcEspecial", "checkAudCondenatorio", "checkMecanismoAcele", "checkapeamparo", "checkAmparoDirecto", "checkAmparoIndirecto", "checkauvinc", "checkscpro", "checkproabre", "checkSENcon", "checkSDuno", "checkSDdos", "checkSDtres", "checkSDcuatro", "checkSDcinco", "checkSDseis", "checkSDsiete", "checkSDocho", "checkSDnueve", "checkSDdiez",
-		"checktotCarpTram_nucs"];
+		"checktotCarpTram_nucs", "check_audiencia_incial", "check_prueba_anticipada", "check_escrito_acusacion", "check_investigacion_complementaria", "check_aud_ejecucion_sanciones", "check_ap_revocan_absolutoria", "checkTIE_intervencion_comunicaciones", "checkTIE_datos_conservados", "checkTIE_datos_bancarios",
+	    "check_TIEneg_intervencion_comunicaciones", "checkTIEneg_datos_conservados" , "checkTIEneg_datos_bancarios"];
 
 	//alert(INCOMdecre+"-"+INCOMdecreNu);
 
@@ -660,7 +713,10 @@ function guardarLitigacion(idEnlace, mes, anio, idMp, idUnidad) {
 		&& InspInmuebles == InspInmueblesNu && entrevistasTestigos == entrevistasTestigosNu && reconocimientoPer == reconocimientoPerNu && solInfoPericiales == solInfoPericialesNu && InfInstiSeg == InfInstiSegNu
 		&& examenFisPersona == examenFisPersonaNu && audJuiOral == audJuiOralNu && audFallo == audFalloNu && absolutorio == absolutorioNu && AudIndiSan == AudIndiSanNu && procEspecial == procEspecialNu
 		&& audCondenatorio == audCondenatorioNu && mecanismosAceleracion == mecanismosAceleracionNu && apeamparo == apeamparoNu && amparoDirecto == amparoDirectoNu && InspLugDis == InspLugDisNu
-		&& SDuno == SDunoNu && SDdos == SDdosNu && SDtres == SDtresNu && SDcuatro == SDcuatroNu && SDcinco == SDcincoNu && SDseis == SDseisNu && SDsiete == SDsieteNu && SDocho == SDochoNu && SDnueve == SDnueveNu && SDdiez == SDdiezNu && totCarpTram_nucs == totCarpTram_nucsNu) {
+		&& SDuno == SDunoNu && SDdos == SDdosNu && SDtres == SDtresNu && SDcuatro == SDcuatroNu && SDcinco == SDcincoNu && SDseis == SDseisNu && SDsiete == SDsieteNu && SDocho == SDochoNu && SDnueve == SDnueveNu && SDdiez == SDdiezNu && totCarpTram_nucs == totCarpTram_nucsNu
+		&& audiencia_incial == audiencia_incialNu && prueba_anticipada == prueba_anticipadaNu && escrito_acusacion == escrito_acusacionNu && investigacion_complementaria == investigacion_complementariaNu
+	    && aud_ejecucion_sanciones == aud_ejecucion_sancionesNu && ap_revocan_absolutoria == ap_revocan_absolutoriaNu && TIE_intervencion_comunicaciones == TIE_intervencion_comunicacionesNu && TIE_datos_conservados == TIE_datos_conservadosNu
+	    && TIE_datos_bancarios == TIE_datos_bancariosNu && TIEneg_intervencion_comunicaciones == TIEneg_intervencion_comunicacionesNu && TIEneg_datos_conservados == TIEneg_datos_conservadosNu && TIEneg_datos_bancarios == TIEneg_datos_bancariosNu) {
 		//cont = document.getElementById('respuestaGuardalitig');    
 
 		ajax = objetoAjax();
@@ -705,7 +761,10 @@ function guardarLitigacion(idEnlace, mes, anio, idMp, idUnidad) {
 			+ "&OSapre=" + OSapre + "&OScomp=" + OScomp + "&medidasProteccion=" + medidasProteccion + "&MPV=" + MPV + "&intervencionTR=" + intervencionTR + "&tomaMuestras=" + tomaMuestras + "&exhumacion=" + exhumacion + "&obDatosReservados=" + obDatosReservados + "&intervencionCME=" + intervencionCME + "&provPrecautoria=" + provPrecautoria + "&cadCustodia=" + cadCustodia
 			+ "&InspLugDis=" + InspLugDis + "&InspInmuebles=" + InspInmuebles + "&entrevistasTestigos=" + entrevistasTestigos + "&reconocimientoPer=" + reconocimientoPer + "&solInfoPericiales=" + solInfoPericiales + "&InfInstiSeg=" + InfInstiSeg + "&examenFisPersona=" + examenFisPersona + "&audJuiOral=" + audJuiOral + "&audFallo=" + audFallo + "&absolutorio=" + absolutorio
 			+ "&AudIndiSan=" + AudIndiSan + "&procEspecial=" + procEspecial + "&audCondenatorio=" + audCondenatorio + "&mecanismosAceleracion=" + mecanismosAceleracion + "&apeamparo=" + apeamparo + "&amparoDirecto=" + amparoDirecto + "&amparoIndirecto=" + amparoIndirecto
-			+ "&SDuno=" + SDuno + "&SDdos=" + SDdos + "&SDtres=" + SDtres + "&SDcuatro=" + SDcuatro + "&SDcinco=" + SDcinco + "&SDseis=" + SDseis + "&SDsiete=" + SDsiete + "&SDocho=" + SDocho + "&SDnueve=" + SDnueve + "&SDdiez=" + SDdiez + "&totCarpTram_nucs=" + totCarpTram_nucsNu);
+			+ "&SDuno=" + SDuno + "&SDdos=" + SDdos + "&SDtres=" + SDtres + "&SDcuatro=" + SDcuatro + "&SDcinco=" + SDcinco + "&SDseis=" + SDseis + "&SDsiete=" + SDsiete + "&SDocho=" + SDocho + "&SDnueve=" + SDnueve + "&SDdiez=" + SDdiez + "&totCarpTram_nucs=" + totCarpTram_nucsNu
+		    +  "&audiencia_incial=" + audiencia_incial + "&prueba_anticipada=" + prueba_anticipada + "&escrito_acusacion=" + escrito_acusacion + "&investigacion_complementaria=" + investigacion_complementaria + "&aud_ejecucion_sanciones=" + aud_ejecucion_sanciones
+		    + "&ap_revocan_absolutoria=" + ap_revocan_absolutoria + "&TIE_intervencion_comunicaciones=" + TIE_intervencion_comunicaciones + "&TIE_datos_conservados=" + TIE_datos_conservados + "&TIE_datos_bancarios=" + TIE_datos_bancarios
+		    + "&TIEneg_intervencion_comunicaciones=" + TIEneg_intervencion_comunicaciones + "&TIEneg_datos_conservados=" + TIEneg_datos_conservados + "&TIEneg_datos_bancarios=" + TIEneg_datos_bancarios);
 
 	} else {
 
