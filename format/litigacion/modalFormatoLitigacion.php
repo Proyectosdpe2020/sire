@@ -540,6 +540,7 @@ $total_tramite = $dataTramite[0][0];
 							</div>
 						</div>
 					</div>
+
 					<div class="panel panel-default fd1">
 						<div class="panel-body">
 							<h5 class="text-on-pannel"><strong> Cateos </strong></h5>
@@ -743,6 +744,191 @@ $total_tramite = $dataTramite[0][0];
 							</div>
 						</div>
 					</div>
+
+                    <!--AUDIENCIA INICIAL-->
+                    <div class="panel panel-default fd1">
+                        <div class="panel-body">
+                            <h5 class="text-on-pannel"><strong> Audiencias iniciales </strong></h5>
+                            <div class="row">
+
+                                <div class="col-xs-4">
+                                    <label class="colorLetras" for="inputlg">Audiencia inicial :</label>
+                                    <div class="iconiput">
+                                        <input type="number" placeholder="cantidad" class="first" id="audiencia_incial" onblur="sumTotCarpJudTram(event);" value="<? if ($a == 1) {
+                                            echo  $datalit[0][147];
+                                        } ?>" />
+                                        <span onclick="sendDataModalLitigacion('audiencia_incial',166,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)">
+											<div id="check_audiencia_incial"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div>
+										</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--PRUEBA ANTICIPADA-->
+                    <div class="panel panel-default fd1">
+                        <div class="panel-body">
+                            <h5 class="text-on-pannel"><strong> Pruebas anticipadas </strong></h5>
+                            <div class="row">
+
+                                <div class="col-xs-4">
+                                    <label class="colorLetras" for="inputlg">Prueba anticipada :</label>
+                                    <div class="iconiput">
+                                        <input type="number" placeholder="cantidad" class="first" id="prueba_anticipada" onblur="sumTotCarpJudTram(event);" value="<? if ($a == 1) {
+                                            echo  $datalit[0][148];
+                                        } ?>" />
+                                        <span onclick="sendDataModalLitigacion('prueba_anticipada',167,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)">
+											<div id="check_prueba_anticipada"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div>
+										</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--ESCRITO DE ACUSACION-->
+                    <div class="panel panel-default fd1">
+                        <div class="panel-body">
+                            <h5 class="text-on-pannel"><strong> Escritos de acusación </strong></h5>
+                            <div class="row">
+
+                                <div class="col-xs-4">
+                                    <label class="colorLetras" for="inputlg">Escrito de acusación :</label>
+                                    <div class="iconiput">
+                                        <input type="number" placeholder="cantidad" class="first" id="escrito_acusacion" onblur="sumTotCarpJudTram(event);" value="<? if ($a == 1) {
+                                            echo  $datalit[0][149];
+                                        } ?>" />
+                                        <span onclick="sendDataModalLitigacion('escrito_acusacion',168,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)">
+											<div id="check_escrito_acusacion"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div>
+										</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Actos de investigación complementaria-->
+                    <div class="panel panel-default fd1">
+                        <div class="panel-body">
+                            <h5 class="text-on-pannel"><strong> Actos de investigación complementaria </strong></h5>
+                            <div class="row">
+
+                                <div class="col-xs-4">
+                                    <label class="colorLetras" for="inputlg">Actos de investigación complementaria :</label>
+                                    <div class="iconiput">
+                                        <input type="number" placeholder="cantidad" class="first" id="investigacion_complementaria" onblur="sumTotCarpJudTram(event);" value="<? if ($a == 1) {
+                                            echo  $datalit[0][150];
+                                        } ?>" />
+                                        <span onclick="sendDataModalLitigacion('investigacion_complementaria',170,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)">
+											<div id="check_investigacion_complementaria"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div>
+										</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--TECNICAS DE INVESTIGACION ESPECIALES-->
+                    <div class="panel panel-default fd1">
+                        <div class="panel-body">
+                            <h5 class="text-on-pannel"><strong> Tecnicas de investigación especiales </strong></h5>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-3">
+                                    <label class="colorLetras" for="inputlg">Otorgadas :</label>
+                                    <input type="number" value="<? if ($a == 1) {
+                                        echo  $datalit[0][159];
+                                    } else {
+                                        echo 0;
+                                    } ?>" placeholder="" disabled="" class="first" id="TIE_otorgadas" />
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-3">
+                                    <label class="colorLetras" for="inputlg">Intervención de comunicaciones privadas :</label>
+                                    <div class="iconiput">
+                                        <input type="number" placeholder="cantidad" class="first" id="TIE_intervencion_comunicaciones" onblur="sumTIEotorgadas(event)" value="<? if ($a == 1) {
+                                            echo  $datalit[0][153];
+                                        } ?>" />
+                                        <span onclick="sendDataModalLitigacion('TIE_intervencion_comunicaciones',173,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)">
+											<div id="checkTIE_intervencion_comunicaciones"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div>
+										</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-3">
+                                    <label class="colorLetras" for="inputlg">Datos conservados</label>
+                                    <div class="iconiput">
+                                        <input type="number" placeholder="cantidad" class="first" id="TIE_datos_conservados" onblur="sumTIEotorgadas(event)" value="<? if ($a == 1) {
+                                            echo $datalit[0][154];
+                                        } ?>" />
+                                        <span onclick="sendDataModalLitigacion('TIE_datos_conservados',175,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)">
+											<div id="checkTIE_datos_conservados"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div>
+										</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-3">
+                                    <label class="colorLetras" for="inputlg">Datos bancarios :</label>
+                                    <div class="iconiput">
+                                        <input type="number" placeholder="cantidad" class="first" id="TIE_datos_bancarios" onblur="sumTIEotorgadas(event)" value="<? if ($a == 1) {
+                                            echo $datalit[0][155];
+                                        } ?>" />
+                                        <span onclick="sendDataModalLitigacion('TIE_datos_bancarios',176,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)">
+											<div id="checkTIE_datos_bancarios"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div>
+										</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-3">
+                                    <label class="colorLetras" for="inputlg">Negadas :</label>
+                                    <input type="number" value="<? if ($a == 1) {
+                                        echo  $datalit[0][160];
+                                    } else {
+                                        echo 0;
+                                    } ?>" placeholder="" disabled="" class="first" id="TIE_negadas" />
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-3">
+                                    <label class="colorLetras" for="inputlg">Intervención de comunicaciones privadas :</label>
+                                    <div class="iconiput">
+                                        <input type="number" placeholder="cantidad" class="first" id="TIEneg_intervencion_comunicaciones" onblur="sumTIEnegadas(event)" value="<? if ($a == 1) {
+                                            echo  $datalit[0][156];
+                                        } ?>" />
+                                        <span onclick="sendDataModalLitigacion('TIEneg_intervencion_comunicaciones',178,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)">
+											<div id="check_TIEneg_intervencion_comunicaciones"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div>
+										</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-3">
+                                    <label class="colorLetras" for="inputlg">Datos conservados</label>
+                                    <div class="iconiput">
+                                        <input type="number" placeholder="cantidad" class="first" id="TIEneg_datos_conservados" onblur="sumTIEnegadas(event)" value="<? if ($a == 1) {
+                                            echo $datalit[0][157];
+                                        } ?>" />
+                                        <span onclick="sendDataModalLitigacion('TIEneg_datos_conservados',179,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)">
+											<div id="checkTIEneg_datos_conservados"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div>
+										</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-3">
+                                    <label class="colorLetras" for="inputlg">Datos bancarios :</label>
+                                    <div class="iconiput">
+                                        <input type="number" placeholder="cantidad" class="first" id="TIEneg_datos_bancarios" onblur="sumTIEnegadas(event)" value="<? if ($a == 1) {
+                                            echo $datalit[0][158];
+                                        } ?>" />
+                                        <span onclick="sendDataModalLitigacion('TIEneg_datos_bancarios',180,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)">
+											<div id="checkTIEneg_datos_bancarios"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div>
+										</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
 					<!--Actos de investigación con control judicial NUEVO-->
 					<div class="panel panel-default fd1">
 						<div class="panel-body">
@@ -1072,6 +1258,17 @@ $total_tramite = $dataTramite[0][0];
 										</span>
 									</div>
 								</div>
+                                <div class="col-xs-12 col-sm-12 col-md-4">
+                                    <label class="colorLetras" for="inputlg">Audiencia de ejecución de sanciones:</label>
+                                    <div class="iconiput">
+                                        <input type="number" placeholder="cantidad" class="first" id="aud_ejecucion_sanciones" onblur="sumResoJuicioOral(event)" value="<? if ($a == 1) {
+                                            echo  $datalit[0][151];
+                                        } ?>" />
+                                        <span onclick="sendDataModalLitigacion('aud_ejecucion_sanciones',171,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)">
+											<div id="check_aud_ejecucion_sanciones"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div>
+										</span>
+                                    </div>
+                                </div>
 							</div>
 						</div>
 					</div>
@@ -1453,6 +1650,17 @@ $total_tramite = $dataTramite[0][0];
 										</span>
 									</div>
 								</div>
+                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <label class="colorLetras" for="inputlg">Apelaciones que revocan o modifican las absolutorias :</label>
+                                    <div class="iconiput">
+                                        <input type="number" placeholder="cantidad" class="first" id="ap_revocan_absolutoria" onblur="sumApelaJuControl(event)" value="<? if ($a == 1) {
+                                            echo  $datalit[0][152];
+                                        } ?>" />
+                                        <span onclick="sendDataModalLitigacion('ap_revocan_absolutoria',172,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)">
+											<div id="check_ap_revocan_absolutoria"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div>
+										</span>
+                                    </div>
+                                </div>
 							</div>
 						</div>
 					</div>

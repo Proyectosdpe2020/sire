@@ -172,6 +172,18 @@
        if (isset($_POST["SDdiez"])){ $SDdiez = $_POST["SDdiez"]; }  
        if (isset($_POST["totCarpTram_nucs"])){ $totCarpTram_nucs = $_POST["totCarpTram_nucs"]; }
 
+       if (isset($_POST["audiencia_incial"])){ $audiencia_incial = $_POST["audiencia_incial"]; }
+       if (isset($_POST["prueba_anticipada"])){ $prueba_anticipada = $_POST["prueba_anticipada"]; }
+       if (isset($_POST["escrito_acusacion"])){ $escrito_acusacion = $_POST["escrito_acusacion"]; }
+       if (isset($_POST["investigacion_complementaria"])){ $investigacion_complementaria = $_POST["investigacion_complementaria"]; }
+       if (isset($_POST["aud_ejecucion_sanciones"])){ $aud_ejecucion_sanciones = $_POST["aud_ejecucion_sanciones"]; }
+       if (isset($_POST["ap_revocan_absolutoria"])){ $ap_revocan_absolutoria = $_POST["ap_revocan_absolutoria"]; }
+       if (isset($_POST["TIE_intervencion_comunicaciones"])){ $TIE_intervencion_comunicaciones = $_POST["TIE_intervencion_comunicaciones"]; }
+       if (isset($_POST["TIE_datos_conservados"])){ $TIE_datos_conservados = $_POST["TIE_datos_conservados"]; }
+       if (isset($_POST["TIE_datos_bancarios"])){ $TIE_datos_bancarios = $_POST["TIE_datos_bancarios"]; }
+       if (isset($_POST["TIEneg_intervencion_comunicaciones"])){ $TIEneg_intervencion_comunicaciones = $_POST["TIEneg_intervencion_comunicaciones"]; }
+       if (isset($_POST["TIEneg_datos_conservados"])){ $TIEneg_datos_conservados = $_POST["TIEneg_datos_conservados"]; }
+       if (isset($_POST["TIEneg_datos_bancarios"])){ $TIEneg_datos_bancarios = $_POST["TIEneg_datos_bancarios"]; }
 
 
   ////// HACER CONSULTA PARA SABER SI YA EXISTE ////////  
@@ -210,7 +222,11 @@
                               Med_CautelaresOtorgadas = $MCotor, LegalDetencion = $legal, IlegalDetencion = $ilegal, recibiOtmp = $recibiOtmp, cesefunciones = $cesefunciones, ordenesSolicitadasAprehension = $OSapre, ordenesSolicitadasComparecencia = $OScomp, medidasProteccion = $medidasProteccion, totalVictProt = $MPV, controlJudicialIntervencionTR = $intervencionTR, controlJudicialTomaMuestras = $tomaMuestras, controlJudicialExhumacion = $exhumacion, controlJudicialObDatosReservados = $obDatosReservados, controlJudicialIntervencionCME = $intervencionCME, controlJudicialProvPrecautoria = $provPrecautoria, sinControlJudicialCadCustodia = $cadCustodia, sinControlJudicialInspLugDis = $InspLugDis, sinControlJudicialInspInmuebles = $InspInmuebles, sinControlJudicialEntrevistasTestigos = $entrevistasTestigos, sinControlJudicialReconocimientoPer = $reconocimientoPer, sinControlJudicialSolInfoPericiales = $solInfoPericiales, sinControlJudicialInfInstiSeg = $InfInstiSeg,
                                sinControlJudicialexamenFisPersona = $examenFisPersona, audienciaJuicioOral = $audJuiOral,
                                audienciaFallo = $audFallo, absolutorio = $absolutorio, audienciaIndiviSancion = $AudIndiSan, procedimientoEspecial = $procEspecial, audienciaCondenatorio = $audCondenatorio, mecanismosAceleracion = $mecanismosAceleracion, apelacionesAmparo = $apeamparo, amparoDirecto = $amparoDirecto, amparoIndirecto = $amparoIndirecto 
-                               ,SDuno = $SDuno, SDdos = $SDdos, SDtres = $SDtres   , SDcuatro = $SDcuatro   , SDcinco = $SDcinco   , SDseis = $SDseis   , SDsiete = $SDsiete   , SDocho = $SDocho   , SDnueve = $SDnueve   , SDdiez = $SDdiez ,  totCarpTram_nucs = $totCarpTram_nucs      WHERE idLitigacion = $idLitigacion    
+                               ,SDuno = $SDuno, SDdos = $SDdos, SDtres = $SDtres   , SDcuatro = $SDcuatro   , SDcinco = $SDcinco   , SDseis = $SDseis   , SDsiete = $SDsiete   , SDocho = $SDocho   , SDnueve = $SDnueve   , SDdiez = $SDdiez ,  totCarpTram_nucs = $totCarpTram_nucs,
+                                audienciaIncial = $audiencia_incial, pruebaAnticipada = $prueba_anticipada, escritoAcusacion = $escrito_acusacion, actosInvComplementaria = $investigacion_complementaria,
+                                 audienciaEjecuSanciones = $aud_ejecucion_sanciones,  apelRevModAbsolutoria = $ap_revocan_absolutoria, TIEotorgaIntervensionComuni = $TIE_intervencion_comunicaciones,
+                                  TIEotorgaDatosConservados = $TIE_datos_conservados, TIEotorgaDatosBancarios = $TIE_datos_bancarios, TIEnegativaIntervencionComuni = $TIEneg_intervencion_comunicaciones,
+                                   TIEnegativaDatosConservados = $TIEneg_datos_conservados, TIEnegativaDatosBancarios =  $TIEneg_datos_bancarios WHERE idLitigacion = $idLitigacion    
 
                               COMMIT
                     END TRY
@@ -242,7 +258,7 @@
                       BEGIN TRANSACTION
                           SET NOCOUNT ON    
 
-                            INSERT INTO Litigacion VALUES($idUnidad, GETDATE(), $mes, $anio , $idFiscalia, $tramAnt, $cdete,  $sdete, $auvinc, $aunvinc, $mix, $ppofic, $ppjus, $ppanju, $exgaeco, $emvien, $incuval, $pssafj, $scviind, $pcdrclug, $pccdper, $sindom, $steeca, $steapl, $coloele, $rpdmjd, $SDpapen,$SDpmuImpu, $acrep, $scpro, $criopor, $termant, $proabre, $acu, $citac, $Cconc, $Cnega, $ONapre, $ONcomp, $DRppa, $DRppd, $DRppmp, $apenoadmi, $SDIrev, $SDImod, $SDIconf, $Reproc, $MJGorap, $MJGorcomp, $MJCorapre, $MJCordcomp, $totAudiencias, $ACPREaie, $ACPREaio, $SOALscp, $SOALarep, $SENcon, $SENabsol, $SENmixc, $SENsreda, $SENnocreda, $INCOMdecre, $INCOMadmi, $ARJnap, $ARJnar, $ARJncoap, $ARJnoc, $ARJppmc, $ARJtps,  $ARJrvp, $ARJrnscp, $ARJnapa, $ARJsdpa, $ARJemp, $ARTEdap, $ARTEsd, $DSEDrfmp, $DSEDmfmp, $DSEDcfmp, $csjdsm, $FIsolic, $FIotor, $FInega,  $legal, $ilegal, $MCsol, $MCnega, $MCotor, $idMp,0, $recibiOtmp, $cesefunciones, $OSapre, $OScomp, $medidasProteccion, $MPV, $intervencionTR, $tomaMuestras, $exhumacion, $obDatosReservados, $intervencionCME, $provPrecautoria, $cadCustodia, $InspLugDis, $InspInmuebles, $entrevistasTestigos, $reconocimientoPer,  $solInfoPericiales, $InfInstiSeg, $examenFisPersona, $audJuiOral, $audFallo, $absolutorio, $AudIndiSan, $procEspecial, $audCondenatorio, $mecanismosAceleracion, $apeamparo, $amparoDirecto, $amparoIndirecto,0,$SDuno,$SDdos,$SDtres,$SDcuatro,$SDcinco,$SDseis,$SDsiete,$SDocho,$SDnueve,$SDdiez, $totCarpTram_nucs) 
+                            INSERT INTO Litigacion VALUES($idUnidad, GETDATE(), $mes, $anio , $idFiscalia, $tramAnt, $cdete,  $sdete, $auvinc, $aunvinc, $mix, $ppofic, $ppjus, $ppanju, $exgaeco, $emvien, $incuval, $pssafj, $scviind, $pcdrclug, $pccdper, $sindom, $steeca, $steapl, $coloele, $rpdmjd, $SDpapen,$SDpmuImpu, $acrep, $scpro, $criopor, $termant, $proabre, $acu, $citac, $Cconc, $Cnega, $ONapre, $ONcomp, $DRppa, $DRppd, $DRppmp, $apenoadmi, $SDIrev, $SDImod, $SDIconf, $Reproc, $MJGorap, $MJGorcomp, $MJCorapre, $MJCordcomp, $totAudiencias, $ACPREaie, $ACPREaio, $SOALscp, $SOALarep, $SENcon, $SENabsol, $SENmixc, $SENsreda, $SENnocreda, $INCOMdecre, $INCOMadmi, $ARJnap, $ARJnar, $ARJncoap, $ARJnoc, $ARJppmc, $ARJtps,  $ARJrvp, $ARJrnscp, $ARJnapa, $ARJsdpa, $ARJemp, $ARTEdap, $ARTEsd, $DSEDrfmp, $DSEDmfmp, $DSEDcfmp, $csjdsm, $FIsolic, $FIotor, $FInega,  $legal, $ilegal, $MCsol, $MCnega, $MCotor, $idMp,0, $recibiOtmp, $cesefunciones, $OSapre, $OScomp, $medidasProteccion, $MPV, $intervencionTR, $tomaMuestras, $exhumacion, $obDatosReservados, $intervencionCME, $provPrecautoria, $cadCustodia, $InspLugDis, $InspInmuebles, $entrevistasTestigos, $reconocimientoPer,  $solInfoPericiales, $InfInstiSeg, $examenFisPersona, $audJuiOral, $audFallo, $absolutorio, $AudIndiSan, $procEspecial, $audCondenatorio, $mecanismosAceleracion, $apeamparo, $amparoDirecto, $amparoIndirecto,0,$SDuno,$SDdos,$SDtres,$SDcuatro,$SDcinco,$SDseis,$SDsiete,$SDocho,$SDnueve,$SDdiez, $totCarpTram_nucs, $audiencia_incial, $prueba_anticipada, $escrito_acusacion, $investigacion_complementaria,  $aud_ejecucion_sanciones, $ap_revocan_absolutoria, $TIE_intervencion_comunicaciones, $TIE_datos_conservados, $TIE_datos_bancarios, $TIEneg_intervencion_comunicaciones, $TIEneg_datos_conservados, $TIEneg_datos_bancarios) 
 
 
                           COMMIT
@@ -253,7 +269,6 @@
                     END CATCH
                     END
                   ";
-
 
 
                     $result = sqlsrv_query($conn,$queryTransaction, array(), array( "Scrollable" => 'static' ));  
