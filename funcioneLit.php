@@ -85,7 +85,21 @@ function getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad, $idMp)
   sum([SDnueve]) as 'SDnueve',
   sum([SDdiez]) as 'SDdiez',
   sum([totCarpTram_nucs]) as 'totCarpTram_nucs',
-  sum([SobreseimientosMuerteImputado]) as 'SobreseimientosMuerteImputado'
+  sum([SobreseimientosMuerteImputado]) as 'SobreseimientosMuerteImputado',
+  sum([audienciaIncial]) as 'audienciaIncial',
+  sum([pruebaAnticipada]) as 'pruebaAnticipada',
+  sum([escritoAcusacion]) as 'escritoAcusacion',
+  sum([actosInvComplementaria]) as 'actosInvComplementaria',
+  sum([audienciaEjecuSanciones]) as 'audienciaEjecuSanciones',
+  sum([apelRevModAbsolutoria]) as 'apelRevModAbsolutoria',
+  sum([TIEotorgaIntervensionComuni]) as 'TIEotorgaIntervensionComuni',
+  sum([TIEotorgaDatosConservados]) as 'TIEotorgaDatosConservados',
+  sum([TIEotorgaDatosBancarios]) as 'TIEotorgaDatosBancarios',
+  sum([TIEnegativaIntervencionComuni]) as 'TIEnegativaIntervencionComuni',
+  sum([TIEnegativaDatosConservados]) as 'TIEnegativaDatosConservados',
+  sum([TIEnegativaDatosBancarios]) as 'TIEnegativaDatosBancarios',
+  sum([TIEotorgadas]) as 'TIEotorgadas',
+  sum([TIEnegadas]) as 'TIEnegadas'
    FROM Litigacion WHERE idMes = $mes AND idAnio = $anio AND idUnidad = $idUnidad";
 	} else {
 
@@ -238,6 +252,20 @@ function getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad, $idMp)
       ,[SDnueve]
       ,[SDdiez]
       ,[totCarpTram_nucs]
+,[audienciaIncial]
+,[pruebaAnticipada]
+,[escritoAcusacion]
+,[actosInvComplementaria]
+,[audienciaEjecuSanciones]
+,[apelRevModAbsolutoria]
+,[TIEotorgaIntervensionComuni]
+,[TIEotorgaDatosConservados]
+,[TIEotorgaDatosBancarios]
+,[TIEnegativaIntervencionComuni]
+,[TIEnegativaDatosConservados]
+,[TIEnegativaDatosBancarios]
+,[TIEotorgadas]
+,[TIEnegadas]
 FROM [ESTADISTICAV2].[dbo].[Litigacion] WHERE idMes = $mes AND idAnio = $anio AND idUnidad = $idUnidad AND idMp = $idMp";
 	}
 
@@ -423,6 +451,21 @@ FROM [ESTADISTICAV2].[dbo].[Litigacion] WHERE idMes = $mes AND idAnio = $anio AN
 		$arreglo[$indice][149] = $row['SDdiez'];
 		$arreglo[$indice][150] = $row['totCarpTram_nucs'];
 		$arreglo[$indice][151] = $row['SobreseimientosMuerteImputado'];
+
+        $arreglo[$indice][152] = $row['audienciaIncial'];
+        $arreglo[$indice][153] = $row['pruebaAnticipada'];
+        $arreglo[$indice][154] = $row['escritoAcusacion'];
+        $arreglo[$indice][155] = $row['actosInvComplementaria'];
+        $arreglo[$indice][156] = $row['audienciaEjecuSanciones'];
+        $arreglo[$indice][157] = $row['apelRevModAbsolutoria'];
+        $arreglo[$indice][158] = $row['TIEotorgaIntervensionComuni'];
+        $arreglo[$indice][159] = $row['TIEotorgaDatosConservados'];
+        $arreglo[$indice][160] = $row['TIEotorgaDatosBancarios'];
+        $arreglo[$indice][161] = $row['TIEnegativaIntervencionComuni'];
+        $arreglo[$indice][162] = $row['TIEnegativaDatosConservados'];
+        $arreglo[$indice][163] = $row['TIEnegativaDatosBancarios'];
+        $arreglo[$indice][164] = $row['TIEotorgadas'];
+        $arreglo[$indice][165] = $row['TIEnegadas'];
 
 		$indice++;
 	}
@@ -612,7 +655,7 @@ function getLastDeterminacionCarpetalit($conn, $idCarp)
 function getDistincCarpetasAgenteDetemrn20Lit($conn, $idMp, $mes, $anio,  $deten,  $estatus, $idUnidad)
 {
 
-	if ($estatus == 64 || $estatus == 155 || $estatus == 156 || $estatus == 157 || $estatus == 158 || $estatus == 159 || $estatus == 160 || $estatus == 161 || $estatus == 162 || $estatus == 163 || $estatus == 164 || $estatus == 60 || $estatus == 61 || $estatus == 63 || $estatus == 114 || $estatus == 115 || $estatus == 116 || $estatus == 117 || $estatus == 119 || $estatus == 120 || $estatus == 121 || $estatus == 122 || $estatus == 123 || $estatus == 124 || $estatus == 125 || $estatus == 126 || $estatus == 127 || $estatus == 128 || $estatus == 140 || $estatus == 3 || $estatus == 4 || $estatus == 5  || $estatus == 6 || $estatus == 7 || $estatus == 151 || $estatus == 10 || $estatus == 12 || $estatus == 98 || $estatus == 97  || $estatus == 96 || $estatus == 17 || $estatus == 18 || $estatus == 95 || $estatus == 20 || $estatus == 21 || $estatus == 22 || $estatus == 23 || $estatus == 24 || $estatus == 25 || $estatus == 26 || $estatus == 27 || $estatus == 28 || $estatus == 29 || $estatus == 30 || $estatus == 31 || $estatus == 33 || $estatus == 34 || $estatus == 35 || $estatus == 36 || $estatus == 38 || $estatus == 112 || $estatus == 113 || $estatus == 3 || $estatus == 50 || $estatus == 53 || $estatus == 57 || $estatus == 58 || $estatus == 129 || $estatus == 139 || $estatus == 65) {
+	if ($estatus == 64 || $estatus == 155 || $estatus == 156 || $estatus == 157 || $estatus == 158 || $estatus == 159 || $estatus == 160 || $estatus == 161 || $estatus == 162 || $estatus == 163 || $estatus == 164 || $estatus == 60 || $estatus == 61 || $estatus == 63 || $estatus == 114 || $estatus == 115 || $estatus == 116 || $estatus == 117 || $estatus == 119 || $estatus == 120 || $estatus == 121 || $estatus == 122 || $estatus == 123 || $estatus == 124 || $estatus == 125 || $estatus == 126 || $estatus == 127 || $estatus == 128 || $estatus == 140 || $estatus == 3 || $estatus == 4 || $estatus == 5  || $estatus == 6 || $estatus == 7 || $estatus == 151 || $estatus == 10 || $estatus == 12 || $estatus == 98 || $estatus == 97  || $estatus == 96 || $estatus == 17 || $estatus == 18 || $estatus == 95 || $estatus == 20 || $estatus == 21 || $estatus == 22 || $estatus == 23 || $estatus == 24 || $estatus == 25 || $estatus == 26 || $estatus == 27 || $estatus == 28 || $estatus == 29 || $estatus == 30 || $estatus == 31 || $estatus == 33 || $estatus == 34 || $estatus == 35 || $estatus == 36 || $estatus == 38 || $estatus == 112 || $estatus == 113 || $estatus == 3 || $estatus == 50 || $estatus == 53 || $estatus == 57 || $estatus == 58 || $estatus == 129 || $estatus == 139 || $estatus == 65 || $estatus == 166 || $estatus == 167 || $estatus == 168 || $estatus == 170 || $estatus == 170 || $estatus == 171 || $estatus == 172 || $estatus == 173 || $estatus == 175 || $estatus == 176 || $estatus == 178 || $estatus == 179 || $estatus == 180 || $estatus == 84) {
 
 
 		$query = "  SELECT nuc FROM estatusNucs 
@@ -983,6 +1026,20 @@ function getDataMP_documentExcel($conn, $mes, $anio, $idUnidad){
 																	  ,mp.nombre as nombreMP
 																	  ,mp.paterno as paternoMP
 																	  ,mp.materno as maternoMP
+                                                                ,l.[audienciaIncial]
+                                                                ,l.[pruebaAnticipada]
+                                                                ,l.[escritoAcusacion]
+                                                                ,l.[actosInvComplementaria]
+                                                                ,l.[audienciaEjecuSanciones]
+                                                                ,l.[apelRevModAbsolutoria]
+                                                                ,l.[TIEotorgaIntervensionComuni]
+                                                                ,l.[TIEotorgaDatosConservados]
+                                                                ,l.[TIEotorgaDatosBancarios]
+                                                                ,l.[TIEnegativaIntervencionComuni]
+                                                                ,l.[TIEnegativaDatosConservados]
+                                                                ,l.[TIEnegativaDatosBancarios]
+                                                                ,l.[TIEotorgadas]
+                                                                ,l.[TIEnegadas]
 		FROM [ESTADISTICAV2].[dbo].[Litigacion] l
 		INNER JOIN dbo.mp mp ON mp.idMp = l.idMp
 		WHERE l.idUnidad = $idUnidad AND l.idMes = $mes and l.idAnio = $anio";
@@ -1171,6 +1228,21 @@ function getDataMP_documentExcel($conn, $mes, $anio, $idUnidad){
 		$arreglo[$indice][152] = $row['nombreMP'];
 		$arreglo[$indice][153] = $row['paternoMP'];
 		$arreglo[$indice][154] = $row['maternoMP'];
+
+        $arreglo[$indice][155] = $row['audienciaIncial'];
+        $arreglo[$indice][156] = $row['pruebaAnticipada'];
+        $arreglo[$indice][157] = $row['escritoAcusacion'];
+        $arreglo[$indice][158] = $row['actosInvComplementaria'];
+        $arreglo[$indice][159] = $row['audienciaEjecuSanciones'];
+        $arreglo[$indice][160] = $row['apelRevModAbsolutoria'];
+        $arreglo[$indice][161] = $row['TIEotorgaIntervensionComuni'];
+        $arreglo[$indice][162] = $row['TIEotorgaDatosConservados'];
+        $arreglo[$indice][163] = $row['TIEotorgaDatosBancarios'];
+        $arreglo[$indice][164] = $row['TIEnegativaIntervencionComuni'];
+        $arreglo[$indice][165] = $row['TIEnegativaDatosConservados'];
+        $arreglo[$indice][166] = $row['TIEnegativaDatosBancarios'];
+        $arreglo[$indice][167] = $row['TIEotorgadas'];
+        $arreglo[$indice][168] = $row['TIEnegadas'];
 
 
 		$indice++;

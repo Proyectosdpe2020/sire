@@ -8,6 +8,7 @@ $fecha_actual = date("d/m/Y");
 $fecha = strftime("%Y-%m-%d %H:%M:%S", time());
 $anioActual = date("Y");
 $hoy = date("Y-m-d"); //Fecha calendario
+$get_idCoorporacion = 0;
 
 if (isset($_POST["idEnlace"])) {
 	$idEnlace = $_POST["idEnlace"];
@@ -60,6 +61,7 @@ if (isset($_POST["idMedida"])) {
 		$get_idEnlace = $medidaData[0][8];
 		$get_idFiscaliaProcedencia = $medidaData[0][9];
 		$get_estatus = $medidaData[0][11];
+		$get_idCoorporacion = $medidaData[0][13];
 		$a = 1;
 
 		///// MEDIDAS APLICADAS PARA EL RESTIGO /////
@@ -118,7 +120,7 @@ if (isset($_POST["idMedida"])) {
 					<input type="hidden" name="idFiscAdscrito" id="idFiscAdscrito" value="<? echo	$idFiscAdscrito; ?>"> 
 					<div id="contDataAgente">
 					<? if ( $idMedida != 0) { ?>
-						<div class="col-xs-12 col-sm-12  col-md-3">
+						<div class="col-xs-12 col-sm-12  col-md-2">
 							<label for="idAdscripcion">Área de adscripción : </label>
 							<select class="form-control" id="idAdscripcion" disabled>
 								<?$data = getDataAdscripcion($connMedidas, $get_idMP);
@@ -127,7 +129,7 @@ if (isset($_POST["idMedida"])) {
 								</select>
 						</div>
 						<? } else { ?>
-						<div class="col-xs-12 col-sm-12  col-md-3">
+						<div class="col-xs-12 col-sm-12  col-md-2">
 							<label for="idAdscripcion">Área de adscripción : </label>
 							 <select class="form-control" id="idAdscripcion" disabled>
 									<option class="fontBold" value="0" > </option>
@@ -146,6 +148,26 @@ if (isset($_POST["idMedida"])) {
 								<option value="<? if ($a == 1) { ?> 1 <? } ?>"><? if ($a == 1) { ?> Agente <? } ?></option>
 							</select>
 						</div>
+						<div class="col-xs-10 col-sm-10  col-md-3">
+							<label for="idCoorporacion">Coorporación Policial que dará protección: </label>
+							<select class="form-control" id="idCoorporacion" >
+								<option value=null>Seleccione la coorporación</option>
+								<?php 
+								$getCoorporacion = getCoorporacion($connMedidas);
+								foreach($getCoorporacion as $coorporacion){ ?>									
+									<option 
+										value="<?= $coorporacion['idCatCoorporacion'] ?>"
+										<?php
+										if($a == 1 && $coorporacion['idCatCoorporacion'] == $get_idCoorporacion){ ?>
+											selected
+										<? } ?>
+									>
+										<?= $coorporacion['nombre'] ?>
+									</option>
+								<?}
+								?>
+							</select>
+						</div>
 					</div>
 				</div><br>
 			<? } ?>
@@ -153,9 +175,7 @@ if (isset($_POST["idMedida"])) {
 			<div class="row">
 				<div class="col-xs-12 col-sm-12  col-md-2">
 					<label for="nuc">NUC: <span class="aste">(*)</span></label>
-					<input class="form-control mandda gehit" value="<? if ($a == 1) {
-																																																						echo $get_nuc;
-																																																					} ?>" onchange="validateMedidaOK(this.id)" id="nuc" type="text" <? if ($rolUser == 1 || $rolUser == 3) { ?> disabled <? } ?>>
+					<input class="form-control mandda gehit" value="<? if ($a == 1) {echo $get_nuc;} ?>" onchange="validateMedidaOK(this.id)" id="nuc" type="text" <? if ($rolUser == 1 || $rolUser == 3) { ?> disabled <? } ?>>
 				</div>
 				<div class="col-xs-12 col-sm-12  col-md-3">
 					<label for="idDelito">Delito: <span class="aste">(*)</span></label>
@@ -188,17 +208,33 @@ if (isset($_POST["idMedida"])) {
 				</div>
 				<div class="col-xs-12 col-sm-12  col-md-2">
 					<label for="fechaAcuerdo">Fecha del acuerdo: <span class="aste">(*)</span></label>
-					<input id="fechaAcuerdo" type="datetime-local" value="<? if ($a == 1) {
-																																																												echo $fechaev = str_ireplace(' ', 'T', $get_fechaAcuerdo);
-																																																											} ?>" onchange="validateMedidaOK(this.id) , checkDateAcuerdo('<? echo $fecha ?>') " name="fechaAcuerdo" class="fechas form-control gehit" min="<? echo $anioActual; ?>-<? echo $m; ?>-01T00:00:00" max="<? echo $hoy; ?>T23:59:59" <? if ($rolUser == 1 || $rolUser == 3) { ?> disabled <? } ?> />
+					<input 
+						id="fechaAcuerdo" 
+						type="datetime-local" 
+						value="<? if ($a == 1) {
+							echo $fechaev = str_ireplace(' ', 'T', $get_fechaAcuerdo);
+						} ?>" 
+						onchange="
+							validateMedidaOK(this.id), 
+							checkDateAcuerdo('<? echo $fecha ?>') " 						
+						name="fechaAcuerdo" 
+						class="fechas form-control gehit" 
+						min="<? echo $anioActual; ?>-<? echo $m; ?>-01T00:00:00" 
+						max="<? echo $hoy; ?>T23:59:59" 
+						<? if ($rolUser == 1 || $rolUser == 3) { ?> disabled <? } ?> />
 				</div>
 				<div class="col-xs-12 col-sm-12  col-md-2">
 					<label for="fechaRegistro">Fecha de registro:</label>
-					<input class="form-control" id="fechaRegistro" value="<? if ($a == 1) {
-																																																												echo $get_fechaRegistro;
-																																																											} else {
-																																																												echo $fecha;
-																																																											} ?>" type="text" readonly><br>
+					<input 
+						class="form-control"
+						id="fechaRegistro" 
+						value="<? if ($a == 1) {
+								echo $get_fechaRegistro;
+							} else {
+								echo $fecha;
+							} ?>" 
+						type="text" 
+						readonly><br>
 				</div>
 			</div>
 		</div>
@@ -314,12 +350,29 @@ if (isset($_POST["idMedida"])) {
 				<h5 class="text-on-pannel"><strong>Medidas de protección VICTIMA</strong></h5>
 				<div class="row">
 					<div class="col-xs-12 col-sm-6  col-md-6">
-						<img <? if ($a == 1 && in_array(1, $aplicadas)) { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 01 Fondo.png" <? } else { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 01 Gris.png" onmouseover="hoverIMG(this, 'uno');" onmouseout="unhoverIMG(this, 'uno')" <? if ($a == 1 && (sizeof($getMedidasAplicadas) > 0) && $rolUser != 1) { ?> onclick="aplicarMedida(<? echo $idEnlace; ?>, <? echo $idMedida; ?>, 1, <? echo $get_nuc; ?>)" <? } else {
-							if ($rolUser != 1 && $rolUser != 4) { ?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 1, <? echo $idMedida; ?>)" <? }
-							elseif($rolUser == 4) { ?> onclick="agregarMedida(this, 1 , 'uno')" <? }
-					}
-				} ?> class="cursorp" width="100%">
+						<img 
+							<? if ($a == 1 && in_array(1, $aplicadas)) { 
+								?> 
+									src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 01 Fondo.png" 
+								<? 
+								} 
+								else { 
+								?> 
+									src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 01 Gris.png" 
+									onmouseover="hoverIMG(this, 'uno');" 
+									onmouseout="unhoverIMG(this, 'uno')" 
+									<? if ($a == 1 && (sizeof($getMedidasAplicadas) > 0) && $rolUser != 1) { 
+										?> onclick="aplicarMedida(<? echo $idEnlace; ?>, <? echo $idMedida; ?>, 1, <? echo $get_nuc; ?>)" <? 
+									} else {
+											if ($rolUser != 1 && $rolUser != 4) { 
+												?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 1, <? echo $idMedida; ?>)" <? }
+											elseif($rolUser == 4) { 
+												?> onclick="agregarMedida(this, 1 , 'uno')" <? 
+											}
+									}
+								} ?> class="cursorp" width="100%">
 					</div>
+					
 					<div class="col-xs-12 col-sm-6  col-md-6">
 						<img <? if ($a == 1 && in_array(2, $aplicadas)) { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 02 Fondo.png" <? } else { ?> src="img/iconosMedidasDeProteccion/iconosMedidas/Medidas 02 Gris.png" onmouseover="hoverIMG(this, 'dos');" onmouseout="unhoverIMG(this, 'dos')" <? if ($a == 1 && (sizeof($getMedidasAplicadas) > 0) && $rolUser != 1) { ?> onclick="aplicarMedida(<? echo $idEnlace; ?>, <? echo $idMedida; ?>, 2, <? echo $get_nuc; ?>)" <? } else {
 							if ($rolUser != 1 && $rolUser != 4) { ?> onclick="modalDatosMedida(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 2, <? echo $idMedida; ?>)" <? }
@@ -395,11 +448,23 @@ if (isset($_POST["idMedida"])) {
 				<?if($rolUser == 4){ 
 					if($a == 1){ 
 						 $getFechaConclusion = getDataGenerales($connMedidas, $idMedida, 0, 0);
-						 $fechaConclusion = $getFechaConclusion[0][3]->format('Y-m-d H:i'); } ?>
+						 if ($getFechaConclusion[0][3] != null) {
+							$fechaConclusion = $getFechaConclusion[0][3]->format('Y-m-d H:i'); 
+						  }
+						 } ?>
 				<div class="row">
 					<div class="col-xs-12 col-sm-12  col-md-3">
 						<label for="fechaConclusion">Fecha de conclusión: <span class="aste">(*)</span></label>
-						<input id="fechaConclu" type="datetime-local" value="<?if($a == 1){ echo $fechaConclusion; } ?>" name="fechaConclu" onchange="validateMedidaOK(this.id)" class="fechas form-control gehit" />
+						<input 
+							id="fechaConclu" 
+							type="datetime-local" 
+							value="<?if($a == 1){ echo $fechaConclusion; } ?>" 
+							name="fechaConclu" 
+							onchange="
+								validateMedidaOK(this.id)
+								validarFechaConclusion(this.id)" 
+							onclick="createOptionsDate()"
+							class="fechas form-control gehit" />
 					</div>
 				</div><br>
 			<? } ?>
@@ -409,7 +474,7 @@ if (isset($_POST["idMedida"])) {
 	<? $getDataTestigos = getDataTestigos($connMedidas, $idMedida); 
 				if (sizeof($getDataTestigos) > 0){ $banT = 1;}else{$banT = 0;}
 	?>																			
-	<hr>																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																				
+	<hr>
 	<div class="form-check">
 	<input class="form-check-input"<? if($banT == 1){echo "checked"; } ?> <? if($banT == 1){ echo "disabled"; } ?> onchange="toggleCheckboxTestigo(this)" type="checkbox" value="" id="flexCheckDefault">
   
@@ -570,7 +635,8 @@ if (isset($_POST["idMedida"])) {
 
 
 	<div class="modal-footer">
-		<button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeModalMDP(<? echo $anioActual; ?>, <? echo $idEnlace; ?>, 0, <? echo $rolUser; ?> )">Cerrar</button>
+		<button type="button" class="btn btn-default"  onclick="closeModalMDP(<? echo $anioActual; ?>, <? echo $idEnlace; ?>, 0, <? echo $rolUser; ?>, <?= $get_idCoorporacion ?> )">Cerrar</button>
+		<!-- data-dismiss="modal" Se eliminó temporal Botón cerrar -->
 		<? if ( ($rolUser == 2 && $idMedida == 0) || ($rolUser == 4 && $idMedida == 0 ) ) { ?>
 			<button type="button" class="btn btn-primary" onclick="modalDatosMedidaCapturista(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 10, <? echo $idMedida; ?>,0, <? echo $rolUser; ?>)">Guardar información</button>
 		<? } elseif ( ($rolUser == 2  && $idMedida != 0) || ($rolUser == 4  && $idMedida != 0) ) { ?>

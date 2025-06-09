@@ -919,7 +919,9 @@ function getDatosLitigacionMpUnidad($conn, $idMp, $mes, $anio, $idFiscalia, $idU
 	, [sinControlJudicialEntrevistasTestigos], [sinControlJudicialReconocimientoPer], [sinControlJudicialSolInfoPericiales], [sinControlJudicialInfInstiSeg]
 	, [sinControlJudicialexamenFisPersona], [resolucionesJuicioOral], [audienciaJuicioOral], [audienciaFallo], [absolutorio], [audienciaIndiviSancion]
 	, [procedimientoEspecial], [audienciaCondenatorio], [mecanismosAceleracion], [apelacionesAmparo], [amparos], [amparoDirecto], [amparoIndirecto]
-	, [SDuno],[SDdos],[SDtres],[SDcuatro],[SDcinco],[SDseis],[SDsiete],[SDocho],[SDnueve],[SDdiez],[totCarpTram_nucs]
+	, [SDuno],[SDdos],[SDtres],[SDcuatro],[SDcinco],[SDseis],[SDsiete],[SDocho],[SDnueve],[SDdiez],[totCarpTram_nucs],[audienciaIncial],[pruebaAnticipada]
+    , [escritoAcusacion] , [actosInvComplementaria] , [audienciaEjecuSanciones], [apelRevModAbsolutoria], [TIEotorgaIntervensionComuni], [TIEotorgaDatosConservados]
+    , [TIEotorgaDatosBancarios] , [TIEnegativaIntervencionComuni] , [TIEnegativaDatosConservados], [TIEnegativaDatosBancarios], [TIEotorgadas] , [TIEnegadas]
 	FROM Litigacion WHERE idMes = $mes AND idAnio = $anio AND idFiscalia = $idFiscalia AND idMp = $idMp AND idUnidad = $idUnidad";
 
 
@@ -1102,6 +1104,25 @@ function getDatosLitigacionMpUnidad($conn, $idMp, $mes, $anio, $idFiscalia, $idU
 		$arreglo[$indice][144] = $row['SDnueve'];
 		$arreglo[$indice][145] = $row['SDdiez'];
 		$arreglo[$indice][146] = $row['totCarpTram_nucs'];
+
+        $arreglo[$indice][147] = $row['audienciaIncial'];
+        $arreglo[$indice][148] = $row['pruebaAnticipada'];
+        $arreglo[$indice][149] = $row['escritoAcusacion'];
+        $arreglo[$indice][150] = $row['actosInvComplementaria'];
+        $arreglo[$indice][151] = $row['audienciaEjecuSanciones'];
+        $arreglo[$indice][152] = $row['apelRevModAbsolutoria'];
+        $arreglo[$indice][153] = $row['TIEotorgaIntervensionComuni'];
+        $arreglo[$indice][154] = $row['TIEotorgaDatosConservados'];
+        $arreglo[$indice][155] = $row['TIEotorgaDatosBancarios'];
+        $arreglo[$indice][156] = $row['TIEnegativaIntervencionComuni'];
+        $arreglo[$indice][157] = $row['TIEnegativaDatosConservados'];
+        $arreglo[$indice][158] = $row['TIEnegativaDatosBancarios'];
+        $arreglo[$indice][159] = $row['TIEotorgadas'];
+        $arreglo[$indice][160] = $row['TIEnegadas'];
+
+
+
+
 		$indice++;
 	}
 	if (isset($arreglo)) {

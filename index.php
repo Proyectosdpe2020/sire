@@ -138,7 +138,7 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 	<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 	<link rel="stylesheet" type="text/css" href="css/principal.css">
 	<link rel="stylesheet" type="text/css" href="css/puesDispo.css">
-	<link rel="stylesheet" type="text/css" href="css/trimestral.css">
+	<link rel="stylesheet" type="text/css" href="css/trimestral_20250404.css">
 	<link rel="stylesheet" type="text/css" href="css/carpetasJudicializadas.css">
 
 
@@ -877,8 +877,8 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 	<script language="JavaScript" type="text/javascript" src="js/scriptCarpetas.js"></script>
 	<script language="JavaScript" type="text/javascript" src="js/cmasc.js"></script>
 	<!--<script language="JavaScript" type="text/javascript" src="js/litigacion.js"></script>-->
-	<script language="JavaScript" type="text/javascript" src="js/litigacion_230404.js"></script>
-	<script language="JavaScript" type="text/javascript" src="js/trimestral.js"></script>
+	<script language="JavaScript" type="text/javascript" src="js/litigacion_250602.js"></script>
+	<script language="JavaScript" type="text/javascript" src="js/trimestral_20250407.js"></script>
 	<script language="JavaScript" type="text/javascript" src="js/desapar.js"></script>
 	<script language="JavaScript" type="text/javascript" src="js/procesosPenales.js"></script>
 	<script language="JavaScript" type="text/javascript" src="js/puesDispos230217.js"></script>
@@ -893,7 +893,11 @@ if ($idEnlace == 14 || $idEnlace == 15 || $idEnlace == 23 || $idEnlace == 22 || 
 	<!--<script language="JavaScript" type="text/javascript" src="js/litigacionSENAP.js"></script>-->
 	<script language="JavaScript" type="text/javascript" src="js/litigacionSENAP_230404.js"></script>
 	<script type="text/javascript" src="js/carpetasJudicializadas.js"></script>
-	<? if ($format == 16) { ?><script type="text/javascript" src="js/medidasDeProteccion.js"></script><? } ?>
+	<? if ($format == 16) { ?>
+		<script type="text/javascript" src="js/medidasDeProteccion.js"></script>		
+		<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+	<? } ?>
+
 	<? if ($format == 18 || $format == 19) { ?><script type="text/javascript" src="js/mandamientosJudiciales_20062022Late.js"></script><? } ?>
 	<script language="JavaScript" type="text/javascript" src="js/estadoDeFuerza.js"></script>
 	<script language="JavaScript" type="text/javascript" src="js/busquedas.js"></script>

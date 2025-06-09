@@ -20,7 +20,7 @@ if (isset($_POST['rolUser'])){ $rolUser = $_POST['rolUser']; }
 
 //SE RECIBE OBJETO ARRAY CON LOS DATOS PRINCIPALES
 if (isset($_POST["dataPrincipalArray"]) && $idMedida == 0){ 
- $data = json_decode($_POST['dataPrincipalArray'], true); 
+$data = json_decode($_POST['dataPrincipalArray'], true);
  $fechaAcuerdo = $data[3]; 
  $fechaAcuerdo = str_ireplace("'",'',$fechaAcuerdo);
 
@@ -80,7 +80,7 @@ if($idMedida == 0 && $rolUser != 4){
      SET NOCOUNT ON
        declare @insertado int
      
-       INSERT INTO medidas.medidasProteccion VALUES($data[1],0,0,0,$data[2], $fechaAcuerdo,GETDATE(), DATEPART(dw, $fechaAcuerdo), DATEPART(day, $fechaAcuerdo), DATEPART(month, $fechaAcuerdo), DATEPART(year, $fechaAcuerdo), $idEnlace, $data[10], 1, '')
+       INSERT INTO medidas.medidasProteccion VALUES($data[1],0,0,0,$data[2], $fechaAcuerdo,GETDATE(), DATEPART(dw, $fechaAcuerdo), DATEPART(day, $fechaAcuerdo), DATEPART(month, $fechaAcuerdo), DATEPART(year, $fechaAcuerdo), $idEnlace, $data[10], 1, '',null)
 
        select @insertado = @@IDENTITY
 
@@ -126,7 +126,7 @@ if($idMedida == 0 && $rolUser != 4){
                           SET NOCOUNT ON
                             declare @insertado int
                           
-                            INSERT INTO medidas.medidasProteccion VALUES($data[1],$data[11],$data[14],$data[15],$data[2], $fechaAcuerdo,GETDATE(), DATEPART(dw, $fechaAcuerdo), DATEPART(day, $fechaAcuerdo), DATEPART(month, $fechaAcuerdo), DATEPART(year, $fechaAcuerdo), $idEnlace, $data[10], 1, $fechaConclusion)
+                            INSERT INTO medidas.medidasProteccion VALUES($data[1],$data[11],$data[14],$data[15],$data[2], $fechaAcuerdo,GETDATE(), DATEPART(dw, $fechaAcuerdo), DATEPART(day, $fechaAcuerdo), DATEPART(month, $fechaAcuerdo), DATEPART(year, $fechaAcuerdo), $idEnlace, $data[10], 1, $fechaConclusion, $data[18])
 
                             select @insertado = @@IDENTITY
 

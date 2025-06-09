@@ -1,49 +1,37 @@
 <?php
-header('Content-Type: text/html; charset=utf-8');
+header('Content-Type: application/json; charset=utf-8');
 include("../../../Conexiones/Conexion.php");
 include("../../../Conexiones/conexionMedidas.php");
 include("../../../funcionesMedidasProteccion.php");
 
-//VARIABLES DEL FORMULARIO OBTENIDO
-if (isset($_POST['ratificacion'])){ $ratificacion = $_POST['ratificacion']; }
-if (isset($_POST['observacionRatifica'])){ $observacionRatifica = $_POST['observacionRatifica']; }
-if (isset($_POST['modifica'])){ $modifica = $_POST['modifica']; }
-if (isset($_POST['observacionModifica'])){ $observacionModifica = $_POST['observacionModifica']; }
+// VARIABLES DEL FORMULARIO OBTENIDO
+$resolucion = isset($_POST['resolucion']) ? $_POST['resolucion'] : null;
+$observacionResolucion = isset($_POST['observacionResolucion']) ? $_POST['observacionResolucion'] : null;
+$idResolucion = isset($_POST['idResolucion']) ? $_POST['idResolucion'] : null;
+$idMedida = isset($_POST['idMedida']) ? $_POST['idMedida'] : null;
+$resolucionValue = isset($_POST['resolucionValue']) ? $_POST['resolucionValue'] : null;
 
-if (isset($_POST['idResolucion'])){ $idResolucion = $_POST['idResolucion']; }
-if (isset($_POST['idMedida'])){ $idMedida = $_POST['idMedida']; }
+$observacionRes = 'observacion' . ucfirst($resolucionValue);
 
+// Iniciar la transacción
+sqlsrv_begin_transaction($connMedidas);
 
-  $queryTransaction = "
-    BEGIN
-     BEGIN TRY
-      BEGIN TRANSACTION
-       SET NOCOUNT ON
+$queryTransaction = "
+    UPDATE medidas.resoluciones 
+    SET $resolucionValue = ?, $observacionRes = ? 
+    WHERE idResolucion = ?";
 
-        UPDATE medidas.resoluciones SET ratificacion = $ratificacion, modificada = $modifica, observacionRatifica = '$observacionRatifica', observacionModifica = '$observacionModifica' 
-        WHERE idResolucion = $idResolucion
+// Preparar la consulta
+$params = array($resolucion, $observacionResolucion, $idResolucion);
+$result = sqlsrv_query($connMedidas, $queryTransaction, $params);
 
-       COMMIT
-      END TRY
-     BEGIN CATCH
-    ROLLBACK TRANSACTION
-   RAISERROR('No se realizo la transaccion',16,1)
-  END CATCH
-  END";
-  
-
- $result = sqlsrv_query($connMedidas,$queryTransaction, array(), array( "Scrollable" => 'static' ));
- while ($row = sqlsrv_fetch_array( $result, SQLSRV_FETCH_ASSOC )){  
-  $id=$row['id'];
- }
- $arreglo[0] = "NO";
- $arreglo[1] = "SI";
- $arreglo[2] = $idMedida;
- $d = array('first' => $arreglo[1] , 'idMedidaUltimo' => $arreglo[2]);
- if ($result) {
-  echo json_encode($d);
- }else{
-  echo json_encode(array('first'=>$arreglo[0]));
- }
-
+if ($result) {
+    sqlsrv_commit($connMedidas);
+    echo json_encode(['first' => 'SI', 'idMedidaUltimo' => $idMedida]);
+} else {
+    sqlsrv_rollback($connMedidas);
+    // Obtener el error para diagnóstico
+    $errors = sqlsrv_errors();
+    echo json_encode(['first' => 'NO', 'error' => $errors]);
+}
 ?>

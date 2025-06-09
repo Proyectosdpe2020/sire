@@ -103,7 +103,7 @@
 							}	
 						if($fisid[0][0] == 6){
 							if($idUnidad != 1052) {
-								$idUn = "IN(152,164,1005,1006,62,63,64,65,66,67,68,69,70,1050)";
+								$idUn = "IN(152,164,1005,1006,62,63,64,65,66,67,68,69,70,1050,1054)";
 							}else{
 								$idUn = "IN(".$idUnidad.")";
 							}
@@ -167,6 +167,7 @@
 						</li>
 					</ul>
 				</div><br><hr><br>
+                <div class="scroll-container">
 				<table class="tableTrimes">
 					<thead>
 						<tr>
@@ -179,6 +180,7 @@
 							<th scope="col">2021</th>
 							<th scope="col">2022</th>
 							<th scope="col">2023</th>
+                            <th scope="col">2024</th>
 						 <th scope="col">Años Anteriores</th>
 							<th scope="col"><? echo $m1; ?></th>
 							<th scope="col"><? echo $m2; ?></th>
@@ -231,924 +233,1019 @@
 						
 						?>
 						<tr>
-							<th scope="row">7.1</th>
-							<td style="text-align: left;">Determinados en archivo temporal</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 5, $per1, 2017); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-								<input type="number" value="<? echo $data[0][0]; ?>" id="1val2017" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-								<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 5, $per1, 2018); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-								<input type="number" value="<? echo $data[0][0]; ?>" id="1val2018" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 5, $per1, 2019); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-								<input type="number" value="<? echo $data[0][0]; ?>" id="1val2019" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 5, $per1, 2020); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-								<input type="number" value="<? echo $data[0][0]; ?>" id="1val2020" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-								<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 5, $per1, 2021); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-								<input type="number" value="<? echo $data[0][0]; ?>" id="1val2021" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 5, $per1, 2022); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-								<input type="number" value="<? echo $data[0][0]; ?>" id="1val2022" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
+                            <th scope="row">7.1</th>
+                            <td style="text-align: left;">Determinados en archivo temporal</td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 5, $per1, 2017);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="1val2017" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 5, $per1, 2018);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="1val2018" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 5, $per1, 2019);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="1val2019" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 5, $per1, 2020);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="1val2020" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 5, $per1, 2021);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="1val2021" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 5, $per1, 2022);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="1val2022" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
 
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 5, $per1, 2023); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-								<input type="number" value="<? echo $data[0][0]; ?>" id="1val2023" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-							
-							<td class="blockInp">- - -</td>
-							<? $datahis = getDAtaSIREQuestionEstatusResto($conn , $anio, $idUn, 5, $per1, $per); ?>
-						<!--	<td class="blockInp"><? echo $datahis[0][0]; ?></td>-->
-							<?
-									$tota = 0; $tota1 = 0;
-									for ($o=0; $o < sizeof($arr) ; $o++) { 
-												$data = getDAtaSIREQuestionEstatus($conn , $arr[$o] , $anio, $idUn, 5, $per1);
-												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][0], 1); }
-												$tota = $tota + $data[0][0];
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-												?>
-													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<? 
-													
-													if($idUnidad == 1001){ if(is_null($data1[0][$o])) {echo "";} else{echo $data1[0][$o];} }else {if($o == 2 && $dataEnviados[0][0] == 0){ 
-														echo " "; 
-												  }else {
-												  	echo $data[0][0];
-												  } }?>" id="p18m<? echo $o+1; ?>" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
-												<?										
-									}
-							?>	
-							<td class="blockInp"><input type="number" value="<? echo $tota; ?>" id="p18tot" readonly></td>
-						</tr>
-						<tr>
-							<th scope="row">7.2</th>
-							<td style="text-align: left;">Determinados como abstención de investigar</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 2, $per1, 2017); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-								<input type="number" value="<? echo $data[0][0]; ?>" id="2val2017" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-								<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 2, $per1, 2018); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-								<input type="number" value="<? echo $data[0][0]; ?>" id="2val2018" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-								<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 2, $per1, 2019); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-								<input type="number" value="<? echo $data[0][0]; ?>" id="2val2019" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-								<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 2, $per1, 2020); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
-								<input type="number" value="<? echo $data[0][0]; ?>" id="2val2020" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-								<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 2, $per1, 2021); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
-								<input type="number" value="<? echo $data[0][0]; ?>" id="2val2021" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 2, $per1, 2022); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
-								<input type="number" value="<? echo $data[0][0]; ?>" id="2val2022" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 5, $per1, 2023);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="1val2023" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
 
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 2, $per1, 2023); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
-								<input type="number" value="<? echo $data[0][0]; ?>" id="2val2023" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
+                            <?
+                                                $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 5, $per1, 2024);
+                                                if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="1val2024" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
 
 							<td class="blockInp">- - -</td>
-							<? $datahis = getDAtaSIREQuestionEstatusResto($conn , $anio, $idUn, 2, $per1, $per); ?>
-							<!--<td class="blockInp"><? echo $datahis[0][0]; ?></td>-->
-							<?
-									$tota = 0; $tota1 = 0;
-									for ($o=0; $o < sizeof($arr) ; $o++) { 
+                            <? $datahis = getDAtaSIREQuestionEstatusResto($conn , $anio, $idUn, 5, $per1, $per); ?>
+                            <!--	<td class="blockInp"><? echo $datahis[0][0]; ?></td>-->
+                            <?
+                            $tota = 0; $tota1 = 0;
+                            for ($o=0; $o < sizeof($arr) ; $o++) {
+                                $data = getDAtaSIREQuestionEstatus($conn , $arr[$o] , $anio, $idUn, 5, $per1);
+                                if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][0], 1); }
+                                $tota = $tota + $data[0][0];
+                                if(is_null($data[0][0])){ $data[0][0] = 0; }
+                                ?>
+                                <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>"><input type="number" value="<?
 
-												$data = getDAtaSIREQuestionEstatus($conn , $arr[$o] , $anio, $idUn, 2, $per1);
-												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][0], 1); }
-												$tota = $tota + $data[0][0];
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-												?>
-													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-													
-													<input type="number" value="<?if($idUnidad == 1001){ if(is_null($data2[0][$o])) {echo "";} else{echo $data2[0][$o];} }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p19m<? echo $o+1; ?>" 
-													
-													<? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
-												<?										
-									}
-							?>	
-							<td class="blockInp"><input type="number" value="<? echo $tota; ?>" id="p19tot" readonly></td>
-						</tr>
-						<tr>
-							<th scope="row">7.3</th>
-							<td style="text-align: left;">Determinados como no ejercicio de la acción penal</td>
-								<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 20, $per1, 2017); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
-								<input type="number" value="<? echo $data[0][0]; ?>" id="3val2017" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 20, $per1, 2018); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-								<input type="number" value="<? echo $data[0][0]; ?>" id="3val2018" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-								<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 20, $per1, 2019); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-								<input type="number" value="<? echo $data[0][0]; ?>" id="3val2019" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 20, $per1, 2020); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-								<input type="number" value="<? echo $data[0][0]; ?>" id="3val2020" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 20, $per1, 2021); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-								<input type="number" value="<? echo $data[0][0]; ?>" id="3val2021" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 20, $per1, 2022); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-								<input type="number" value="<? echo $data[0][0]; ?>" id="3val2022" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
+                                    if($idUnidad == 1001){ if(is_null($data1[0][$o])) {echo "";} else{echo $data1[0][$o];} }else {if($o == 2 && $dataEnviados[0][0] == 0){
+                                        echo " ";
+                                    }else {
+                                        echo $data[0][0];
+                                    } }?>" id="p18m<? echo $o+1; ?>" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
+                                <?
+                            }
+                            ?>
+                            <td class="blockInp"><input type="number" value="<? echo $tota; ?>" id="p18tot" readonly></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">7.2</th>
+                            <td style="text-align: left;">Determinados como abstención de investigar</td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 2, $per1, 2017);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="2val2017" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 2, $per1, 2018);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="2val2018" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 2, $per1, 2019);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="2val2019" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 2, $per1, 2020);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="2val2020" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 2, $per1, 2021);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="2val2021" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 2, $per1, 2022);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="2val2022" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
 
-								<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 20, $per1, 2023); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-								<input type="number" value="<? echo $data[0][0]; ?>" id="3val2023" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 2, $per1, 2023);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="2val2023" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 2, $per1, 2024);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="2val2024" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
 
-							<td class="blockInp">- - -</td>
-							<? $datahis = getDAtaSIREQuestionEstatusResto($conn , $anio, $idUn, 20, $per1, $per); ?>
-							<!--<td class="blockInp"><? echo $datahis[0][0]; ?></td>-->
-							<?
-									$tota = 0; $tota1 = 0;
-									for ($o=0; $o < sizeof($arr) ; $o++) { 
+                            <td class="blockInp">- - -</td>
+                            <? $datahis = getDAtaSIREQuestionEstatusResto($conn , $anio, $idUn, 2, $per1, $per); ?>
+                            <!--<td class="blockInp"><? echo $datahis[0][0]; ?></td>-->
+                            <?
+                            $tota = 0; $tota1 = 0;
+                            for ($o=0; $o < sizeof($arr) ; $o++) {
 
-												$data = getDAtaSIREQuestionEstatus($conn , $arr[$o] , $anio, $idUn, 20, $per1);
+                                $data = getDAtaSIREQuestionEstatus($conn , $arr[$o] , $anio, $idUn, 2, $per1);
+                                if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][0], 1); }
+                                $tota = $tota + $data[0][0];
+                                if(is_null($data[0][0])){ $data[0][0] = 0; }
+                                ?>
+                                <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
 
-												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][0], 1); }
-												$tota = $tota + $data[0][0];
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-												?>
-													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-													<input type="number" value="<?if($idUnidad == 1001){ if(is_null($data3[0][$o])) {echo "";} else{echo $data3[0][$o];} }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p20m<? echo $o+1; ?>" 
-													
-													<? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
-												<?										
-									}
-							?>	
-							<td class="blockInp"><input type="number" value="<? echo $tota; ?>" id="p20tot" readonly></td>
-						</tr>
-						<tr>
-							<th scope="row">7.4</th>
-							<td style="text-align: left;">Determinados por criterio de oportunidad</td>
-								<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 25, $per1, 2017); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
-								<input type="number" value="<? echo $data[0][0]; ?>" id="4val2017" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 25, $per1, 2018); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
-								<input type="number" value="<? echo $data[0][0]; ?>" id="4val2018" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 25, $per1, 2019); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
-								<input type="number" value="<? echo $data[0][0]; ?>" id="4val2019" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 25, $per1, 2020); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
-								<input type="number" value="<? echo $data[0][0]; ?>" id="4val2020" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 25, $per1, 2021); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
-								<input type="number" value="<? echo $data[0][0]; ?>" id="4val2021" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 25, $per1, 2022); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
-								<input type="number" value="<? echo $data[0][0]; ?>" id="4val2022" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
+                                    <input type="number" value="<?if($idUnidad == 1001){ if(is_null($data2[0][$o])) {echo "";} else{echo $data2[0][$o];} }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p19m<? echo $o+1; ?>"
 
-								<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 25, $per1, 2023); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
-								<input type="number" value="<? echo $data[0][0]; ?>" id="4val2023" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
+                                        <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
+                                <?
+                            }
+                            ?>
+                            <td class="blockInp"><input type="number" value="<? echo $tota; ?>" id="p19tot" readonly></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">7.3</th>
+                            <td style="text-align: left;">Determinados como no ejercicio de la acción penal</td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 20, $per1, 2017);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="3val2017" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 20, $per1, 2018);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="3val2018" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 20, $per1, 2019);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="3val2019" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 20, $per1, 2020);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="3val2020" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 20, $per1, 2021);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="3val2021" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 20, $per1, 2022);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="3val2022" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
 
-							<td class="blockInp">- - -</td>
-							<? $datahis = getDAtaSIREQuestionEstatusResto($conn , $anio, $idUn, 25, $per1, $per); ?>
-							<!--<td class="blockInp"><? echo $datahis[0][0]; ?></td>-->
-							<?
-									$tota = 0; $tota1 = 0;
-									for ($o=0; $o < sizeof($arr) ; $o++) { 
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 20, $per1, 2023);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="3val2023" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 20, $per1, 2024);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="3val2024" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
 
-												$data = getDAtaSIREQuestionEstatus($conn , $arr[$o] , $anio, $idUn, 25, $per1);
-												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][0], 1); }
-												$tota = $tota + $data[0][0];
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-												?>
-													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-													<input type="number" value="<?if($idUnidad == 1001){ if(is_null($data4[0][$o])) {echo "";} else{echo $data4[0][$o];} }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p21m<? echo $o+1; ?>" 
-													
-													<? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
-												<?										
-									}
-							?>	
-							<td class="blockInp"><input type="number" value="<? echo $tota; ?>" id="p21tot" readonly></td>
-						</tr>
-						<tr>
-							<th scope="row">7.5</th>
-							<td style="text-align: left;">Por incompetencia</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 21, $per1, 2017); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
-								<input type="number" value="<? echo $data[0][0]; ?>" id="5val2017" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 21, $per1, 2018); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
-								<input type="number" value="<? echo $data[0][0]; ?>" id="5val2018" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 21, $per1, 2019); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
-								<input type="number" value="<? echo $data[0][0]; ?>" id="5val2019" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 21, $per1, 2020); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
-								<input type="number" value="<? echo $data[0][0]; ?>" id="5val2020" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 21, $per1, 2021); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
-								<input type="number" value="<? echo $data[0][0]; ?>" id="5val2021" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 21, $per1, 2022); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
-								<input type="number" value="<? echo $data[0][0]; ?>" id="5val2022" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
+                            <td class="blockInp">- - -</td>
+                            <? $datahis = getDAtaSIREQuestionEstatusResto($conn , $anio, $idUn, 20, $per1, $per); ?>
+                            <!--<td class="blockInp"><? echo $datahis[0][0]; ?></td>-->
+                            <?
+                            $tota = 0; $tota1 = 0;
+                            for ($o=0; $o < sizeof($arr) ; $o++) {
 
-								<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 21, $per1, 2023); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
-								<input type="number" value="<? echo $data[0][0]; ?>" id="5val2023" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
+                                $data = getDAtaSIREQuestionEstatus($conn , $arr[$o] , $anio, $idUn, 20, $per1);
 
-							<td class="blockInp">- - -</td>
-							<? $datahis = getDAtaSIREQuestionEstatusResto($conn , $anio, $idUn, 21, $per1, $per); ?>
-							<!--<td class="blockInp"><? echo $datahis[0][0]; ?></td>-->
-							<?
-									$tota = 0; $tota1 = 0;
-									for ($o=0; $o < sizeof($arr) ; $o++) { 
+                                if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][0], 1); }
+                                $tota = $tota + $data[0][0];
+                                if(is_null($data[0][0])){ $data[0][0] = 0; }
+                                ?>
+                                <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                    <input type="number" value="<?if($idUnidad == 1001){ if(is_null($data3[0][$o])) {echo "";} else{echo $data3[0][$o];} }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p20m<? echo $o+1; ?>"
 
-												$data = getDAtaSIREQuestionEstatus($conn , $arr[$o] , $anio, $idUn, 21, $per1);
-												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][0], 1); }
-												$tota = $tota + $data[0][0];
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-												?>
-													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-													<input type="number" value="<?if($idUnidad == 1001){ if(is_null($data5[0][$o])) {echo "";} else{echo $data5[0][$o];} }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p22m<? echo $o+1; ?>" 
-													
-													<? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
-												<?										
-									}
-							?>	
-							<td class="blockInp"><input type="number" value="<? echo $tota; ?>" id="p22tot" readonly></td>
-						</tr>
-						<tr>
-							<th scope="row">7.6</th>
-							<td style="text-align: left;">Por acumulación</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 3, $per1, 2017); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-								<input type="number" value="<? echo $data[0][0]; ?>" id="6val2017" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 3, $per1, 2018); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-								<input type="number" value="<? echo $data[0][0]; ?>" id="6val2018" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 3, $per1, 2019); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-								<input type="number" value="<? echo $data[0][0]; ?>" id="6val2019" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 3, $per1, 2020); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-								<input type="number" value="<? echo $data[0][0]; ?>" id="6val2020" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 3, $per1, 2021); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-								<input type="number" value="<? echo $data[0][0]; ?>" id="6val2021" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
-							<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 3, $per1, 2022); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-								<input type="number" value="<? echo $data[0][0]; ?>" id="6val2022" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
+                                        <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
+                                <?
+                            }
+                            ?>
+                            <td class="blockInp"><input type="number" value="<? echo $tota; ?>" id="p20tot" readonly></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">7.4</th>
+                            <td style="text-align: left;">Determinados por criterio de oportunidad</td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 25, $per1, 2017);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="4val2017" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 25, $per1, 2018);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="4val2018" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 25, $per1, 2019);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="4val2019" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 25, $per1, 2020);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="4val2020" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 25, $per1, 2021);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="4val2021" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 25, $per1, 2022);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="4val2022" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
 
-								<?
-												$data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 3, $per1, 2023); 
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-							 ?>
-							<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-								<input type="number" value="<? echo $data[0][0]; ?>" id="6val2023" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
-							</td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 25, $per1, 2023);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="4val2023" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 25, $per1, 2024);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="4val2024" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
 
-							<td class="blockInp">- - -</td>
-							<? $datahis = getDAtaSIREQuestionEstatusResto($conn , $anio, $idUn, 3, $per1, $per); ?>
-							<!--<td class="blockInp"><? echo $datahis[0][0]; ?></td>-->
-							<?
-									$tota = 0; $tota1 = 0;
-									for ($o=0; $o < sizeof($arr) ; $o++) { 
+                            <td class="blockInp">- - -</td>
+                            <? $datahis = getDAtaSIREQuestionEstatusResto($conn , $anio, $idUn, 25, $per1, $per); ?>
+                            <!--<td class="blockInp"><? echo $datahis[0][0]; ?></td>-->
+                            <?
+                            $tota = 0; $tota1 = 0;
+                            for ($o=0; $o < sizeof($arr) ; $o++) {
 
-												$data = getDAtaSIREQuestionEstatus($conn , $arr[$o] , $anio, $idUn, 3, $per1);
-												if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][0], 1); }
-												$tota = $tota + $data[0][0];
-												if(is_null($data[0][0])){ $data[0][0] = 0; }
-												?>
-													<td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
-													<input type="number" value="<?if($idUnidad == 1001){ if(is_null($data6[0][$o])) {echo "";} else{echo $data6[0][$o];} }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p23m<? echo $o+1; ?>" 
-													
-													<? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
-												<?										
-									}
-							?>	
-							<td class="blockInp"><input type="number" value="<? echo $tota; ?>" id="p23tot" readonly></td>
-							<input style="display: none !important;" type="number" value="0" id="p24m1">
-							<input style="display: none !important;" type="number" value="0" id="p24m2">
-							<input style="display: none !important;" type="number" value="0" id="p24m3">
-						</tr>
-						<tr>
-							<th scope="row">7.7</th>
-							<td style="text-align: left;">Por sobreseimiento ordenado por el Juez de Control antes de la vinculación a proceso</td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[0]; ?><input type="hidden" value="<? echo $d10[0]; ?>" id="7val2017"></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[1]; ?><input type="hidden" value="<? echo $d10[1]; ?>" id="7val2018"></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[2]; ?><input type="hidden" value="<? echo $d10[2]; ?>" id="7val2019"></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[3]; ?><input type="hidden" value="<? echo $d10[3]; ?>" id="7val2020"></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[4]; ?><input type="hidden" value="<? echo $d10[4]; ?>" id="7val2021"></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2022, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[5]; ?><input type="hidden" value="<? echo $d10[5]; ?>" id="7val2022"></td>	
+                                $data = getDAtaSIREQuestionEstatus($conn , $arr[$o] , $anio, $idUn, 25, $per1);
+                                if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][0], 1); }
+                                $tota = $tota + $data[0][0];
+                                if(is_null($data[0][0])){ $data[0][0] = 0; }
+                                ?>
+                                <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                    <input type="number" value="<?if($idUnidad == 1001){ if(is_null($data4[0][$o])) {echo "";} else{echo $data4[0][$o];} }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p21m<? echo $o+1; ?>"
 
-							<td class="cPo" onclick="loaNucTrimeShow(0,2023, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[6]; ?><input type="hidden" value="<? echo $d10[6]; ?>" id="7val2023"></td>	
+                                        <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
+                                <?
+                            }
+                            ?>
+                            <td class="blockInp"><input type="number" value="<? echo $tota; ?>" id="p21tot" readonly></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">7.5</th>
+                            <td style="text-align: left;">Por incompetencia</td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 21, $per1, 2017);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="5val2017" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 21, $per1, 2018);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="5val2018" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 21, $per1, 2019);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="5val2019" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 21, $per1, 2020);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="5val2020" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 21, $per1, 2021);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="5val2021" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 21, $per1, 2022);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="5val2022" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
 
-							<td class="cPo" onclick="loaNucTrimes(0,0, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)">Capturar</td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 21, $per1, 2023);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="5val2023" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 21, $per1, 2024);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>" >
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="5val2024" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
 
-							<td class="cPo" onclick="loaNucTrimes(<? echo $mes1; ?>,<? echo $anio; ?>, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d101[0][0]; ?></td>
-							<td class="cPo" onclick="loaNucTrimes(<? echo $mes2; ?>,<? echo $anio; ?>, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d102[0][0]; ?></td>
-							<td class="cPo" onclick="loaNucTrimes(<? echo $mes3; ?>,<? echo $anio; ?>, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d103[0][0]; ?></td>
-							<td class="blockInp"><input type="number" value="<? echo $totd10; ?>" id="p10tot" readonly><input style="display: none !important;" type="number" value="0" id="p24tot"></td>
-						</tr>
-						<tr>
-							<th scope="row">7.8</th>
-							<input style="display: none !important;" type="number" value="0" id="p25m1">
-							<input style="display: none !important;" type="number" value="0" id="p25m2">
-							<input style="display: none !important;" type="number" value="0" id="p25m3">
-							<td style="text-align: left;">Por otra causa que extinga la acción penal</td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[0]; ?><input type="hidden" value="<? echo $d11[0]; ?>" id="8val2017"></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[1]; ?><input type="hidden" value="<? echo $d11[1]; ?>" id="8val2018"></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[2]; ?><input type="hidden" value="<? echo $d11[2]; ?>" id="8val2019"></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[3]; ?><input type="hidden" value="<? echo $d11[3]; ?>" id="8val2020"></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[4]; ?><input type="hidden" value="<? echo $d11[4]; ?>" id="8val2021"></td>
-							<td class="cPo" onclick="loaNucTrimeShow(0,2022, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[5]; ?><input type="hidden" value="<? echo $d11[5]; ?>" id="8val2022"></td>
+                            <td class="blockInp">- - -</td>
+                            <? $datahis = getDAtaSIREQuestionEstatusResto($conn , $anio, $idUn, 21, $per1, $per); ?>
+                            <!--<td class="blockInp"><? echo $datahis[0][0]; ?></td>-->
+                            <?
+                            $tota = 0; $tota1 = 0;
+                            for ($o=0; $o < sizeof($arr) ; $o++) {
 
-							<td class="cPo" onclick="loaNucTrimeShow(0,2023, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[6]; ?><input type="hidden" value="<? echo $d11[6]; ?>" id="8val2023"></td>
+                                $data = getDAtaSIREQuestionEstatus($conn , $arr[$o] , $anio, $idUn, 21, $per1);
+                                if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][0], 1); }
+                                $tota = $tota + $data[0][0];
+                                if(is_null($data[0][0])){ $data[0][0] = 0; }
+                                ?>
+                                <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                    <input type="number" value="<?if($idUnidad == 1001){ if(is_null($data5[0][$o])) {echo "";} else{echo $data5[0][$o];} }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p22m<? echo $o+1; ?>"
+
+                                        <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
+                                <?
+                            }
+                            ?>
+                            <td class="blockInp"><input type="number" value="<? echo $tota; ?>" id="p22tot" readonly></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">7.6</th>
+                            <td style="text-align: left;">Por acumulación</td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 3, $per1, 2017);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="6val2017" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 3, $per1, 2018);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="6val2018" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 3, $per1, 2019);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="6val2019" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 3, $per1, 2020);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="6val2020" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 3, $per1, 2021);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="6val2021" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 3, $per1, 2022);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="6val2022" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 3, $per1, 2023);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="6val2023" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+                            <?
+                            $data = getDAtaSIREQuestionEstatusHitorico($conn , $anio, $idUn, 3, $per1, 2024);
+                            if(is_null($data[0][0])){ $data[0][0] = 0; }
+                            ?>
+                            <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                <input type="number" value="<? echo $data[0][0]; ?>" id="6val2024" <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?> >
+                            </td>
+
+                            <td class="blockInp">- - -</td>
+                            <? $datahis = getDAtaSIREQuestionEstatusResto($conn , $anio, $idUn, 3, $per1, $per); ?>
+                            <!--<td class="blockInp"><? echo $datahis[0][0]; ?></td>-->
+                            <?
+                            $tota = 0; $tota1 = 0;
+                            for ($o=0; $o < sizeof($arr) ; $o++) {
+
+                                $data = getDAtaSIREQuestionEstatus($conn , $arr[$o] , $anio, $idUn, 3, $per1);
+                                if($o == 2){	$dataEnviados = getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $dataEnlaces[0][0], 1); }
+                                $tota = $tota + $data[0][0];
+                                if(is_null($data[0][0])){ $data[0][0] = 0; }
+                                ?>
+                                <td class="<? if($idUnidad == 1001){ echo ""; }else{ echo "blockInp"; } ?>">
+                                    <input type="number" value="<?if($idUnidad == 1001){ if(is_null($data6[0][$o])) {echo "";} else{echo $data6[0][$o];} }else {if($o == 2 && $dataEnviados[0][0] == 0){ echo " "; }else {echo $data[0][0];}} ?>" id="p23m<? echo $o+1; ?>"
+
+                                        <? if($idUnidad == 1001){ echo ""; }else{ echo "readonly"; } ?>></td>
+                                <?
+                            }
+                            ?>
+                            <td class="blockInp"><input type="number" value="<? echo $tota; ?>" id="p23tot" readonly></td>
+                            <input style="display: none !important;" type="number" value="0" id="p24m1">
+                            <input style="display: none !important;" type="number" value="0" id="p24m2">
+                            <input style="display: none !important;" type="number" value="0" id="p24m3">
+                        </tr>
+                        <tr>
+                            <th scope="row">7.7</th>
+                            <td style="text-align: left;">Por sobreseimiento ordenado por el Juez de Control antes de la vinculación a proceso</td>
+                            <td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[0]; ?><input type="hidden" value="<? echo $d10[0]; ?>" id="7val2017"></td>
+                            <td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[1]; ?><input type="hidden" value="<? echo $d10[1]; ?>" id="7val2018"></td>
+                            <td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[2]; ?><input type="hidden" value="<? echo $d10[2]; ?>" id="7val2019"></td>
+                            <td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[3]; ?><input type="hidden" value="<? echo $d10[3]; ?>" id="7val2020"></td>
+                            <td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[4]; ?><input type="hidden" value="<? echo $d10[4]; ?>" id="7val2021"></td>
+                            <td class="cPo" onclick="loaNucTrimeShow(0,2022, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[5]; ?><input type="hidden" value="<? echo $d10[5]; ?>" id="7val2022"></td>
+
+                            <td class="cPo" onclick="loaNucTrimeShow(0,2023, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[6]; ?><input type="hidden" value="<? echo $d10[6]; ?>" id="7val2023"></td>
+                            <td class="cPo" onclick="loaNucTrimeShow(0,2024, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d10[7]; ?><input type="hidden" value="<? echo $d10[7]; ?>" id="7val2024"></td>
+
+                            <td class="cPo" onclick="loaNucTrimes(0,0, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)">Capturar</td>
+
+                            <td class="cPo" onclick="loaNucTrimes(<? echo $mes1; ?>,<? echo $anio; ?>, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d101[0][0]; ?></td>
+                            <td class="cPo" onclick="loaNucTrimes(<? echo $mes2; ?>,<? echo $anio; ?>, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d102[0][0]; ?></td>
+                            <td class="cPo" onclick="loaNucTrimes(<? echo $mes3; ?>,<? echo $anio; ?>, <? echo $per; ?>, 24, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d103[0][0]; ?></td>
+                            <td class="blockInp"><input type="number" value="<? echo $totd10; ?>" id="p10tot" readonly><input style="display: none !important;" type="number" value="0" id="p24tot"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">7.8</th>
+                            <input style="display: none !important;" type="number" value="0" id="p25m1">
+                            <input style="display: none !important;" type="number" value="0" id="p25m2">
+                            <input style="display: none !important;" type="number" value="0" id="p25m3">
+                            <td style="text-align: left;">Por otra causa que extinga la acción penal</td>
+                            <td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[0]; ?><input type="hidden" value="<? echo $d11[0]; ?>" id="8val2017"></td>
+                            <td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[1]; ?><input type="hidden" value="<? echo $d11[1]; ?>" id="8val2018"></td>
+                            <td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[2]; ?><input type="hidden" value="<? echo $d11[2]; ?>" id="8val2019"></td>
+                            <td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[3]; ?><input type="hidden" value="<? echo $d11[3]; ?>" id="8val2020"></td>
+                            <td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[4]; ?><input type="hidden" value="<? echo $d11[4]; ?>" id="8val2021"></td>
+                            <td class="cPo" onclick="loaNucTrimeShow(0,2022, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[5]; ?><input type="hidden" value="<? echo $d11[5]; ?>" id="8val2022"></td>
+
+                            <td class="cPo" onclick="loaNucTrimeShow(0,2023, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[6]; ?><input type="hidden" value="<? echo $d11[6]; ?>" id="8val2023"></td>
+                            <td class="cPo" onclick="loaNucTrimeShow(0,2024, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d11[7]; ?><input type="hidden" value="<? echo $d11[7]; ?>" id="8val2024"></td>
 
 
-							<td class="cPo" onclick="loaNucTrimes(0,0, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)">Capturar</td>
+                            <td class="cPo" onclick="loaNucTrimes(0,0, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)">Capturar</td>
 
-							<td class="cPo" onclick="loaNucTrimes(<? echo $mes1; ?>,<? echo $anio; ?>, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d111[0][0]; ?></td>
-							<td class="cPo" onclick="loaNucTrimes(<? echo $mes2; ?>,<? echo $anio; ?>, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d112[0][0]; ?></td>
-							<td class="cPo" onclick="loaNucTrimes(<? echo $mes3; ?>,<? echo $anio; ?>, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d113[0][0]; ?></td>
-							<td class="blockInp"><input type="number" value="<? echo $totd11; ?>" id="p11tot" readonly><input style="display: none !important;" type="number" value="0" id="p25tot"></td>
-						</tr>
-						<tr>
-							<th scope="row">7.9</th>
-							<td style="text-align: left;">Otra decisión/terminación que establezca el código penal de la entidad federativa</td>
-							<td class="blockInp"><input type="number" value="0" id="9val2017" readonly></td>
-							<td class="blockInp"><input type="number" value="0" id="9val2018" readonly></td>
-							<td class="blockInp"><input type="number" value="0" id="9val2019" readonly></td>
-							<td class="blockInp"><input type="number" value="0" id="9val2020" readonly></td>
-							<td class="blockInp"><input type="number" value="0" id="9val2021" readonly></td>
-							<td class="blockInp"><input type="number" value="0" id="9val2022" readonly></td>
-							<td class="blockInp"><input type="number" value="0" id="9val2023" readonly></td>
-							<td class="blockInp">- - -</td>
-							<td class="blockInp"><input type="number" value="0" id="p26m1" <? if($envt == 1 && $idUnidad != 1001){ echo "readonly"; } ?>></td>
-							<td class="blockInp"><input type="number" value="0" id="p26m2" <? if($envt == 1 && $idUnidad != 1001){ echo "readonly"; } ?>></td>
-							<td class="blockInp"><input type="number" value="0" id="p26m3" <? if($envt == 1 && $idUnidad != 1001){ echo "readonly"; } ?>></td>
-							<td class="blockInp"><input type="number" value="0" id="p26tot" readonly></td>
-				
-						</tr>
-						<tr>
-							<th scope="row">7.10</th>
-							<!--
-							<input style="display: none !important;" type="number" value="0" id="p27m1">
-							<input style="display: none !important;" type="number" value="0" id="p27m2">
-							<input style="display: none !important;" type="number" value="0" id="p27m3">-->
-							<?php 				if($hasNucs7[0][0] == 0){							?>																																																														
-                <td style="text-align: left;">En trámite en la etapa de investigación (antes del auto de vinculación a proceso).</td>
-                <td><input type="number" value="<? echo $dataQuestAn27[0][0]; ?>" id="10val2017"></td>
-                <td><input type="number" value="<? echo $dataQuestAn27[0][1]; ?>" id="10val2018"></td>
-                <td><input type="number" value="<? echo $dataQuestAn27[0][2]; ?>" id="10val2019"></td>
-                <td><input type="number" value="<? echo $dataQuestAn27[0][3]; ?>" id="10val2020"></td>
-                <td><input type="number" value="<? echo $dataQuestAn27[0][4]; ?>" id="10val2021"></td>
-																<td><input type="number" value="<? echo $dataQuestAn27[0][5]; ?>" id="10val2022"></td>
-																<td><input type="number" value="<? echo $dataQuestAn27[0][6]; ?>" id="10val2023"></td>
-                <!--<td class="">--</td>-->
-                <td class="">Capturar</td>
-                <td><input type="number" value="<? echo $data10[0][0]; ?>" id="p27m1" <? if ($envt == 1 && $idUnidad = !1001) {
-                                                                                                                                                                                                                                                                                                            echo "readonly";
-                                                                                                                                                                                                                                                                                                        } ?>></td>
-                <td><input type="number" value="<? echo $data10[0][1]; ?>" id="p27m2" <? if ($envt == 1 && $idUnidad = !1001) {
-                                                                                                                                                                                                                                                                                                            echo "readonly";
-                                                                                                                                                                                                                                                                                                        } ?>></td>
-                <td><input type="number" value="<? echo $data10[0][2]; ?>" id="p27m3" <? if ($envt == 1 && $idUnidad = !1001) {
-                                                                                                                                                                                                                                                                                                            echo "readonly";
-                                                                                                                                                                                                                                                                                                        } ?>></td>
-                <td class="blockInp"><input type="number" value="<? echo $data10[0][3]; ?>" id="p27tot" readonly></td>
-    
-                <?php } 
-    
-                                if($hasNucs7[0][0] == 1){							?>		
-                   <input style="display: none !important;" type="number" value="0" id="p27m1">
-						            	<input style="display: none !important;" type="number" value="0" id="p27m2">
-							          <input style="display: none !important;" type="number" value="0" id="p27m3">																																																										
-                <td style="text-align: left;">En trámite en la etapa de investigación (antes del auto de vinculación a proceso).</td>
-																<input type="hidden" value="<? echo $d12[0]; ?>" id="10val2017">
-                <input type="hidden" value="<? echo $d12[1]; ?>" id="10val2018">
-                <input type="hidden" value="<? echo $d12[2]; ?>" id="10val2019">
-                <input type="hidden" value="<? echo $d12[3]; ?>" id="10val2020">
-                <input type="hidden" value="<? echo $d12[4]; ?>" id="10val2021">
-																<input type="hidden" value="<? echo $d12[5]; ?>" id="10val2022">
-															 <input type="hidden" value="<? echo $d12[6]; ?>" id="10val2023">
-                <td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 27, <? echo $idEnlace; ?>, <? echo $idUnidad; ?>, <? echo $anio; ?>)"><? echo $d12[0]; ?></td>
+                            <td class="cPo" onclick="loaNucTrimes(<? echo $mes1; ?>,<? echo $anio; ?>, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d111[0][0]; ?></td>
+                            <td class="cPo" onclick="loaNucTrimes(<? echo $mes2; ?>,<? echo $anio; ?>, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d112[0][0]; ?></td>
+                            <td class="cPo" onclick="loaNucTrimes(<? echo $mes3; ?>,<? echo $anio; ?>, <? echo $per; ?>, 25, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d113[0][0]; ?></td>
+                            <td class="blockInp"><input type="number" value="<? echo $totd11; ?>" id="p11tot" readonly><input style="display: none !important;" type="number" value="0" id="p25tot"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">7.9</th>
+                            <td style="text-align: left;">Otra decisión/terminación que establezca el código penal de la entidad federativa</td>
+                            <td class="blockInp"><input type="number" value="0" id="9val2017" readonly></td>
+                            <td class="blockInp"><input type="number" value="0" id="9val2018" readonly></td>
+                            <td class="blockInp"><input type="number" value="0" id="9val2019" readonly></td>
+                            <td class="blockInp"><input type="number" value="0" id="9val2020" readonly></td>
+                            <td class="blockInp"><input type="number" value="0" id="9val2021" readonly></td>
+                            <td class="blockInp"><input type="number" value="0" id="9val2022" readonly></td>
+                            <td class="blockInp"><input type="number" value="0" id="9val2023" readonly></td>
+                            <td class="blockInp"><input type="number" value="0" id="9val2024" readonly></td>
+                            <td class="blockInp">- - -</td>
+                            <td class="blockInp"><input type="number" value="0" id="p26m1" <? if($envt == 1 && $idUnidad != 1001){ echo "readonly"; } ?>></td>
+                            <td class="blockInp"><input type="number" value="0" id="p26m2" <? if($envt == 1 && $idUnidad != 1001){ echo "readonly"; } ?>></td>
+                            <td class="blockInp"><input type="number" value="0" id="p26m3" <? if($envt == 1 && $idUnidad != 1001){ echo "readonly"; } ?>></td>
+                            <td class="blockInp"><input type="number" value="0" id="p26tot" readonly></td>
+
+                        </tr>
+                        <tr>
+                            <th scope="row">7.10</th>
+                            <!--
+                            <input style="display: none !important;" type="number" value="0" id="p27m1">
+                            <input style="display: none !important;" type="number" value="0" id="p27m2">
+                            <input style="display: none !important;" type="number" value="0" id="p27m3">-->
+                            <?php 				if($hasNucs7[0][0] == 0){							?>
+                                <td style="text-align: left;">En trámite en la etapa de investigación (antes del auto de vinculación a proceso).</td>
+                                <td><input type="number" value="<? echo $dataQuestAn27[0][0]; ?>" id="10val2017"></td>
+                                <td><input type="number" value="<? echo $dataQuestAn27[0][1]; ?>" id="10val2018"></td>
+                                <td><input type="number" value="<? echo $dataQuestAn27[0][2]; ?>" id="10val2019"></td>
+                                <td><input type="number" value="<? echo $dataQuestAn27[0][3]; ?>" id="10val2020"></td>
+                                <td><input type="number" value="<? echo $dataQuestAn27[0][4]; ?>" id="10val2021"></td>
+                                <td><input type="number" value="<? echo $dataQuestAn27[0][5]; ?>" id="10val2022"></td>
+                                <td><input type="number" value="<? echo $dataQuestAn27[0][6]; ?>" id="10val2023"></td>
+                                <td><input type="number" value="<? echo $dataQuestAn27[0][7]; ?>" id="10val2024"></td>
+                                <!--<td class="">--</td>-->
+                                <td class="">Capturar</td>
+                                <td><input type="number" value="<? echo $data10[0][0]; ?>" id="p27m1" <? if ($envt == 1 && $idUnidad = !1001) {
+                                        echo "readonly";
+                                    } ?>></td>
+                                <td><input type="number" value="<? echo $data10[0][1]; ?>" id="p27m2" <? if ($envt == 1 && $idUnidad = !1001) {
+                                        echo "readonly";
+                                    } ?>></td>
+                                <td><input type="number" value="<? echo $data10[0][2]; ?>" id="p27m3" <? if ($envt == 1 && $idUnidad = !1001) {
+                                        echo "readonly";
+                                    } ?>></td>
+                                <td class="blockInp"><input type="number" value="<? echo $data10[0][3]; ?>" id="p27tot" readonly></td>
+
+                            <?php }
+
+                            if($hasNucs7[0][0] == 1){							?>
+                                <input style="display: none !important;" type="number" value="0" id="p27m1">
+                                <input style="display: none !important;" type="number" value="0" id="p27m2">
+                                <input style="display: none !important;" type="number" value="0" id="p27m3">
+                                <td style="text-align: left;">En trámite en la etapa de investigación (antes del auto de vinculación a proceso).</td>
+                                <input type="hidden" value="<? echo $d12[0]; ?>" id="10val2017">
+                                <input type="hidden" value="<? echo $d12[1]; ?>" id="10val2018">
+                                <input type="hidden" value="<? echo $d12[2]; ?>" id="10val2019">
+                                <input type="hidden" value="<? echo $d12[3]; ?>" id="10val2020">
+                                <input type="hidden" value="<? echo $d12[4]; ?>" id="10val2021">
+                                <input type="hidden" value="<? echo $d12[5]; ?>" id="10val2022">
+                                <input type="hidden" value="<? echo $d12[6]; ?>" id="10val2023">
+                                <input type="hidden" value="<? echo $d12[7]; ?>" id="10val2024">
+                                <td class="cPo" onclick="loaNucTrimeShow(0,2017, <? echo $per; ?>, 27, <? echo $idEnlace; ?>, <? echo $idUnidad; ?>, <? echo $anio; ?>)"><? echo $d12[0]; ?></td>
                                 <td class="cPo" onclick="loaNucTrimeShow(0,2018, <? echo $per; ?>, 27, <? echo $idEnlace; ?>, <? echo $idUnidad; ?>, <? echo $anio; ?>)"><? echo $d12[1]; ?></td>
                                 <td class="cPo" onclick="loaNucTrimeShow(0,2019, <? echo $per; ?>, 27, <? echo $idEnlace; ?>, <? echo $idUnidad; ?>, <? echo $anio; ?>)"><? echo $d12[2]; ?></td>
                                 <td class="cPo" onclick="loaNucTrimeShow(0,2020, <? echo $per; ?>, 27, <? echo $idEnlace; ?>, <? echo $idUnidad; ?>, <? echo $anio; ?>)"><? echo $d12[3]; ?></td>
                                 <td class="cPo" onclick="loaNucTrimeShow(0,2021, <? echo $per; ?>, 27, <? echo $idEnlace; ?>, <? echo $idUnidad; ?>, <? echo $anio; ?>)"><? echo $d12[4]; ?></td>
-																																<td class="cPo" onclick="loaNucTrimeShow(0,2022, <? echo $per; ?>, 27, <? echo $idEnlace; ?>, <? echo $idUnidad; ?>, <? echo $anio; ?>)"><? echo $d12[5]; ?></td>
-																																<td class="cPo" onclick="loaNucTrimeShow(0,2023, <? echo $per; ?>, 27, <? echo $idEnlace; ?>, <? echo $idUnidad; ?>, <? echo $anio; ?>)"><? echo $d12[6]; ?></td>
-    
+                                <td class="cPo" onclick="loaNucTrimeShow(0,2022, <? echo $per; ?>, 27, <? echo $idEnlace; ?>, <? echo $idUnidad; ?>, <? echo $anio; ?>)"><? echo $d12[5]; ?></td>
+                                <td class="cPo" onclick="loaNucTrimeShow(0,2023, <? echo $per; ?>, 27, <? echo $idEnlace; ?>, <? echo $idUnidad; ?>, <? echo $anio; ?>)"><? echo $d12[6]; ?></td>
+                                <td class="cPo" onclick="loaNucTrimeShow(0,2024, <? echo $per; ?>, 27, <? echo $idEnlace; ?>, <? echo $idUnidad; ?>, <? echo $anio; ?>)"><? echo $d12[7]; ?></td>
+
                                 <td class="cPo" onclick="loaNucTrimes(0,0, <? echo $per; ?>, 27, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)">Capturar</td>
-    
+
                                 <td class="cPo" onclick="loaNucTrimes(<? echo $mes1; ?>,<? echo $anio; ?>, <? echo $per; ?>, 27, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d121[0][0]; ?></td>
                                 <td class="cPo" onclick="loaNucTrimes(<? echo $mes2; ?>,<? echo $anio; ?>, <? echo $per; ?>, 27, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d122[0][0]; ?></td>
                                 <td class="cPo" onclick="loaNucTrimes(<? echo $mes3; ?>,<? echo $anio; ?>, <? echo $per; ?>, 27, <? echo $idEnlace; ?>, <? echo $idUnidad ?>, <? echo $anio; ?>)"><? echo $d123[0][0]; ?></td>
                                 <td class="blockInp"><input type="number" value="<? echo $totd12; ?>" id="p10tot" readonly><input style="display: none !important;" type="number" value="0" id="p27tot"></td>
-    
-                <?php } ?>
-						</tr>
-						<tr>
-							<th scope="row">7.11</th>
-							<td style="text-align: left;">Vinculados a proceso</td>
-							<?
-							  $has_litigation = false;
-									$has_captured = false;
-									$validaEnlace = $idEnlace;
-									$data_sended = false;
-									$quest_class = "";
-									$quest_value = "";
-									$quest_readonly = "";
 
-								if( $dataEnlaces[0][1] != 0){  //check if it has litigation
-										$validaEnlace = $dataEnlaces[0][1];
-										$has_litigation = true; 
-										if($idUn == 'IN(34)'){ $idUn = 'IN(167)'; }
-										$idUn = 'IN('.$dataEnlaces[0][2].')'; //Para obtener unidad correcta de litigacion NUEVO***
-									}	
-									else{ 
-										$validaEnlace = $dataEnlaces[0][0];
-										$has_litigation = false; 
-									}  
+                            <?php } ?>
+                        </tr>
+                        <tr>
+                            <th scope="row">7.11</th>
+                            <td style="text-align: left;">Vinculados a proceso</td>
+                            <?
+                            $has_litigation = false;
+                            $has_captured = false;
+                            $validaEnlace = $idEnlace;
+                            $data_sended = false;
+                            $quest_class = "";
+                            $quest_value = "";
+                            $quest_readonly = "";
 
-									if($has_litigation && $idUnidad != 1001){ //write exclusions
-										$quest_class =  "blockInp"; 
-										$quest_readonly = "readonly"; 
-									} 
-									else if($idUnidad == 1001){
-										$quest_readonly = "";
-									}
-							?>
-       <!---PREGUNTA 7.11 HISTORICO-->
-							<?if($has_litigation){
-								$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 151, $per1, 2017);
-								$quest_value = $data[0][0];
-							}else{ $quest_value = $dataQuestAn28[0][0]; } ?>
-							<td class="<?php echo $quest_class; ?>" >
-								<input type="number" value="<?echo $quest_value; ?>" id="11val2017" <? echo $quest_readonly; ?> >
-							</td>
-							<? if($has_litigation){
-								$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 151, $per1, 2018);
-								$quest_value = $data[0][0];
-							}else{ $quest_value = $dataQuestAn28[0][1]; } ?>
-							<td class="<?php echo $quest_class; ?>" >
-								<input type="number" value="<? echo $quest_value; ?>" id="11val2018" <? echo $quest_readonly; ?> >
-							</td>
-							<?if($has_litigation){
-								$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 151, $per1, 2019);
-								$quest_value = $data[0][0];
-							}else{ $quest_value = $dataQuestAn28[0][2]; } ?>
-							<td class="<?php echo $quest_class; ?>" >
-								<input type="number" value="<? echo $quest_value; ?>" id="11val2019" <? echo $quest_readonly; ?> >
-							</td>
-							<?if($has_litigation){ 
-								$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 151, $per1, 2020);
-								$quest_value = $data[0][0];
-							}else{ $quest_value = $dataQuestAn28[0][3]; } ?>
-							<td class="<?php echo $quest_class; ?>" >
-								<input type="number" value="<? echo $quest_value; ?>" id="11val2020" <? echo $quest_readonly; ?> >
-							</td>
-							<?if($has_litigation){
-								$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 151, $per1, 2021);
-								$quest_value = $data[0][0];
-							}else{ $quest_value = $dataQuestAn28[0][4]; } ?>
-							<td class="<?php echo $quest_class; ?>" >
-								<input type="number" value="<? echo $quest_value; ?>" id="11val2021" <? echo $quest_readonly; ?> >
-							</td>
-							<?if($has_litigation){
-								$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 151, $per1, 2022);
-								$quest_value = $data[0][0];
-							}else{ $quest_value = $dataQuestAn28[0][5]; } ?>
-							<td class="<?php echo $quest_class; ?>" >
-								<input type="number" value="<? echo $quest_value; ?>" id="11val2022" <? echo $quest_readonly; ?> >
-							</td>
-								<?if($has_litigation){
-								$data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 151, $per1, 2023);
-								$quest_value = $data[0][0];
-							}else{ $quest_value = $dataQuestAn28[0][6]; } ?>
-							<td class="<?php echo $quest_class; ?>" >
-								<input type="number" value="<? echo $quest_value; ?>" id="11val2023" <? echo $quest_readonly; ?> >
-							</td>
-							<td class="blockInp">- - -</td>
-							<!--- TERMINA PREGUNTA 7.11 HISTORICO-->
-							<? $datahis = getDAtaSIREQuestionEstatusResto($conn , $anio, $idUn, 19, $per1, $per); ?>
-							<!--<td class="blockInp"><? echo $datahis[0][0]; ?></td>-->
-							<?
-									$tota = 0; $tota1 = 0;
+                            if( $dataEnlaces[0][1] != 0){  //check if it has litigation
+                                $validaEnlace = $dataEnlaces[0][1];
+                                $has_litigation = true;
+                                if($idUn == 'IN(34)'){ $idUn = 'IN(167)'; }
+                                $idUn = 'IN('.$dataEnlaces[0][2].')'; //Para obtener unidad correcta de litigacion NUEVO***
+                            }
+                            else{
+                                $validaEnlace = $dataEnlaces[0][0];
+                                $has_litigation = false;
+                            }
 
-									$has_litigation = false;
-									$has_captured = false;
-									$validaEnlace = $idEnlace;
-									$data_sended = false;
+                            if($has_litigation && $idUnidad != 1001){ //write exclusions
+                                $quest_class =  "blockInp";
+                                $quest_readonly = "readonly";
+                            }
+                            else if($idUnidad == 1001){
+                                $quest_readonly = "";
+                            }
+                            ?>
+                            <!---PREGUNTA 7.11 HISTORICO-->
+                            <?if($has_litigation){
+                                $data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 151, $per1, 2017);
+                                $quest_value = $data[0][0];
+                            }else{ $quest_value = $dataQuestAn28[0][0]; } ?>
+                            <td class="<?php echo $quest_class; ?>" >
+                                <input type="number" value="<?echo $quest_value; ?>" id="11val2017" <? echo $quest_readonly; ?> >
+                            </td>
+                            <? if($has_litigation){
+                                $data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 151, $per1, 2018);
+                                $quest_value = $data[0][0];
+                            }else{ $quest_value = $dataQuestAn28[0][1]; } ?>
+                            <td class="<?php echo $quest_class; ?>" >
+                                <input type="number" value="<? echo $quest_value; ?>" id="11val2018" <? echo $quest_readonly; ?> >
+                            </td>
+                            <?if($has_litigation){
+                                $data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 151, $per1, 2019);
+                                $quest_value = $data[0][0];
+                            }else{ $quest_value = $dataQuestAn28[0][2]; } ?>
+                            <td class="<?php echo $quest_class; ?>" >
+                                <input type="number" value="<? echo $quest_value; ?>" id="11val2019" <? echo $quest_readonly; ?> >
+                            </td>
+                            <?if($has_litigation){
+                                $data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 151, $per1, 2020);
+                                $quest_value = $data[0][0];
+                            }else{ $quest_value = $dataQuestAn28[0][3]; } ?>
+                            <td class="<?php echo $quest_class; ?>" >
+                                <input type="number" value="<? echo $quest_value; ?>" id="11val2020" <? echo $quest_readonly; ?> >
+                            </td>
+                            <?if($has_litigation){
+                                $data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 151, $per1, 2021);
+                                $quest_value = $data[0][0];
+                            }else{ $quest_value = $dataQuestAn28[0][4]; } ?>
+                            <td class="<?php echo $quest_class; ?>" >
+                                <input type="number" value="<? echo $quest_value; ?>" id="11val2021" <? echo $quest_readonly; ?> >
+                            </td>
+                            <?if($has_litigation){
+                                $data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 151, $per1, 2022);
+                                $quest_value = $data[0][0];
+                            }else{ $quest_value = $dataQuestAn28[0][5]; } ?>
+                            <td class="<?php echo $quest_class; ?>" >
+                                <input type="number" value="<? echo $quest_value; ?>" id="11val2022" <? echo $quest_readonly; ?> >
+                            </td>
+                            <?if($has_litigation){
+                                $data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 151, $per1, 2023);
+                                $quest_value = $data[0][0];
+                            }else{ $quest_value = $dataQuestAn28[0][6]; } ?>
+                            <td class="<?php echo $quest_class; ?>" >
+                                <input type="number" value="<? echo $quest_value; ?>" id="11val2023" <? echo $quest_readonly; ?> >
+                            </td>
+                            <?if($has_litigation){
+                                $data = getDAtaSIREQuestionEstatusLitiHistorico($conn , $anio, $idUn, 151, $per1, 2024);
+                                $quest_value = $data[0][0];
+                            }else{ $quest_value = $dataQuestAn28[0][7]; } ?>
+                            <td class="<?php echo $quest_class; ?>" >
+                                <input type="number" value="<? echo $quest_value; ?>" id="11val2024" <? echo $quest_readonly; ?> >
+                            </td>
+                            <td class="blockInp">- - -</td>
+                            <!--- TERMINA PREGUNTA 7.11 HISTORICO-->
+                            <? $datahis = getDAtaSIREQuestionEstatusResto($conn , $anio, $idUn, 19, $per1, $per); ?>
+                            <!--<td class="blockInp"><? echo $datahis[0][0]; ?></td>-->
+                            <?
+                            $tota = 0; $tota1 = 0;
 
-									if(!is_null($data11)){ //check if the question has something
-										$data = $data11;
-										$has_captured = true;
-									}
+                            $has_litigation = false;
+                            $has_captured = false;
+                            $validaEnlace = $idEnlace;
+                            $data_sended = false;
 
-									if( $dataEnlaces[0][1] != 0){  //check if it has litigation
-										$validaEnlace = $dataEnlaces[0][1];
-										$has_litigation = true; 
-										if($idUn == 'IN(34)'){ $idUn = 'IN(167)'; }
-										$idUn = 'IN('.$dataEnlaces[0][2].')'; //Para obtener unidad correcta de litigacion NUEVO***
-									}	
-									else{ 
-										$validaEnlace = $dataEnlaces[0][0];
-										$has_litigation = false; 
-									} 
+                            if(!is_null($data11)){ //check if the question has something
+                                $data = $data11;
+                                $has_captured = true;
+                            }
 
-									if(getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $validaEnlace, 4) != 0){ //check if last month has sended
-										$data_sended = true;
-									}
+                            if( $dataEnlaces[0][1] != 0){  //check if it has litigation
+                                $validaEnlace = $dataEnlaces[0][1];
+                                $has_litigation = true;
+                                if($idUn == 'IN(34)'){ $idUn = 'IN(167)'; }
+                                $idUn = 'IN('.$dataEnlaces[0][2].')'; //Para obtener unidad correcta de litigacion NUEVO***
+                            }
+                            else{
+                                $validaEnlace = $dataEnlaces[0][0];
+                                $has_litigation = false;
+                            }
 
-									$quest_class = "";
-									$quest_value = "";
-									$quest_readonly = "";
-									$tota = 0;
+                            if(getDataEnlaceMesValidaEnviado($conn, $arr[2], $anio, $validaEnlace, 4) != 0){ //check if last month has sended
+                                $data_sended = true;
+                            }
 
-									if($has_litigation && $idUnidad != 1001){ //write exclusions
-										$quest_class =  "blockInp"; 
-										$quest_readonly = "readonly"; 
-									} 
-									else if($idUnidad == 1001){
-										$quest_readonly = "";
-									}
+                            $quest_class = "";
+                            $quest_value = "";
+                            $quest_readonly = "";
+                            $tota = 0;
 
-									for ($o=0; $o < sizeof($arr) ; $o++) { 
-          
-										if($has_captured){ //set value if has captured or not
+                            if($has_litigation && $idUnidad != 1001){ //write exclusions
+                                $quest_class =  "blockInp";
+                                $quest_readonly = "readonly";
+                            }
+                            else if($idUnidad == 1001){
+                                $quest_readonly = "";
+                            }
 
-											$quest_value =  $data[0][$o]; 
-											$tota += $data[0][$o];
+                            for ($o=0; $o < sizeof($arr) ; $o++) {
 
-										}
+                                if($has_captured){ //set value if has captured or not
 
-										else{
+                                    $quest_value =  $data[0][$o];
+                                    $tota += $data[0][$o];
 
-											if($has_litigation){ 
-					
-												$data = getDAtaSIREQuestionEstatusLiti($conn , $arr[$o] , $anio, $idUn, 151, $per1);
-       
-												if($data_sended){ //all trimester sended
-													$quest_value = $data[0][0];
-													$tota += $data[0][0];
-												}
-												else if($o != 2){ //last month not sended
-													$quest_value = $data[0][0];
-													$tota += $data[0][0];
-												}
-												else{ //put blak if its the last month and has no data sended
-													$quest_value = "";
-												}
+                                }
 
-											}
-										}
+                                else{
 
-										?>
-											<td class="<?php echo $quest_class; ?>">
-												<input type="number" value="<?php echo $quest_value; ?>" id="p28m<? echo $o+1; ?>" <? echo $quest_readonly; ?> >
-											</td>
-										<?										
-									}
-							?>	
-							<td class="blockInp"><input type="number" value="<? echo $tota;  ?>" id="p28tot" readonly></td>
-						</tr>
-						<tr>
-							<td colspan="14" style="background-color: #7C8B9E; font-size: 20px;"><strong>DERIVADOS A MECANISMOS ALTERNATIVOS (ANTES DEL AUTO DE VINCULACIÓN A PROCESO)</strong></td>
-						</tr>
-						<tr>
-							<?php
-						
-							if($envt != 1 && $idEnlace == 67){
+                                    if($has_litigation){
 
-								include("cmasc.php");
+                                        $data = getDAtaSIREQuestionEstatusLiti($conn , $arr[$o] , $anio, $idUn, 151, $per1);
 
-								$tot_7_12 = $array_7[12][1]+$array_7[12][2]+$array_7[12][3];
+                                        if($data_sended){ //all trimester sended
+                                            $quest_value = $data[0][0];
+                                            $tota += $data[0][0];
+                                        }
+                                        else if($o != 2){ //last month not sended
+                                            $quest_value = $data[0][0];
+                                            $tota += $data[0][0];
+                                        }
+                                        else{ //put blak if its the last month and has no data sended
+                                            $quest_value = "";
+                                        }
 
-							?>
-							<th scope="row">7.12</th>
-							<td style="text-align: left;">En trámite en el CMASC sin acuerdo reparatorio</td>
-							<td><input type="number" value="<? echo $array_7[12][2017]; ?>" id="12val2017" readonly></td>
-							<td><input type="number" value="<? echo $array_7[12][2018]; ?>" id="12val2018" readonly></td>
-							<td><input type="number" value="<? echo $array_7[12][2019]; ?>" id="12val2019" readonly></td>
-							<td><input type="number" value="<? echo $array_7[12][2020]; ?>" id="12val2020" readonly></td>
-							<td><input type="number" value="<? echo $array_7[12][2021]; ?>" id="12val2021" readonly></td>
-							<td><input type="number" value="<? echo $array_7[12][2022]; ?>" id="12val2022" readonly></td>
-							<td><input type="number" value="<? echo $array_7[12][2023]; ?>" id="12val2023" readonly></td>
-							<td class="blockInp">- - -</td>
-							<td><input type="number" value="<? echo $array_7[12][1]; ?>" id="p29m1" readonly></td>
-							<td><input type="number" value="<? echo $array_7[12][2]; ?>" id="p29m2" readonly></td>
-							<td><input type="number" value="<? echo $array_7[12][3]; ?>" id="p29m3" readonly></td>
-							<td class="blockInp"><input type="number" value="<? echo $tot_7_12; ?>" id="p29tot" readonly></td>
+                                    }
+                                }
 
-							<?php
-							}
-							else{
-							?>
-							<th scope="row">7.12</th>
-							<td style="text-align: left;">En trámite en el CMASC sin acuerdo reparatorio</td>
-							<td><input type="number" value="<? echo $dataQuestAn29[0][0]; ?>" id="12val2017"></td>
-							<td><input type="number" value="<? echo $dataQuestAn29[0][1]; ?>" id="12val2018"></td>
-							<td><input type="number" value="<? echo $dataQuestAn29[0][2]; ?>" id="12val2019"></td>
-							<td><input type="number" value="<? echo $dataQuestAn29[0][3]; ?>" id="12val2020"></td>
-							<td><input type="number" value="<? echo $dataQuestAn29[0][4]; ?>" id="12val2021"></td>
-							<td><input type="number" value="<? echo $dataQuestAn29[0][5]; ?>" id="12val2022"></td>
-							<td><input type="number" value="<? echo $dataQuestAn29[0][6]; ?>" id="12val2023"></td>
-							<td class="blockInp">- - -</td>
-							<td><input type="number" value="<? echo $data12[0][0]; ?>" id="p29m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data12[0][1]; ?>" id="p29m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data12[0][2]; ?>" id="p29m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td class="blockInp"><input type="number" value="<? echo $data12[0][3]; ?>" id="p29tot" readonly></td>
-							<?php
-							}
-							?>
-						</tr>
-						<tr>
-							<th scope="row">7.13</th>
-							<td style="text-align: left;">En trámite en el CMASC con acuerdo reparatorio firmado (en proceso de cumplimiento)</td>
-							<td><input type="number" value="<? echo $dataQuestAn30[0][0]; ?>" id="13val2017"></td>
-							<td><input type="number" value="<? echo $dataQuestAn30[0][1]; ?>" id="13val2018"></td>
-							<td><input type="number" value="<? echo $dataQuestAn30[0][2]; ?>" id="13val2019"></td>
-							<td><input type="number" value="<? echo $dataQuestAn30[0][3]; ?>" id="13val2020"></td>
-							<td><input type="number" value="<? echo $dataQuestAn30[0][4]; ?>" id="13val2021"></td>
-							<td><input type="number" value="<? echo $dataQuestAn30[0][5]; ?>" id="13val2022"></td>
-							<td><input type="number" value="<? echo $dataQuestAn30[0][6]; ?>" id="13val2023"></td>
-							<td class="blockInp">- - -</td>
-							<td><input type="number" value="<? echo $data13[0][0]; ?>" id="p30m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data13[0][1]; ?>" id="p30m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data13[0][2]; ?>" id="p30m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td class="blockInp"><input type="number" value="<? echo $data13[0][3]; ?>" id="p30tot" readonly></td>
-						</tr>
-						<tr>
-							<th scope="row">7.14</th>
-							<td style="text-align: left;">Resueltos (cumplidos) en CMASC por mediación</td>
-							<td><input type="number" value="<? echo $dataQuestAn31[0][0]; ?>" id="14val2017"></td>
-							<td><input type="number" value="<? echo $dataQuestAn31[0][1]; ?>" id="14val2018"></td>
-							<td><input type="number" value="<? echo $dataQuestAn31[0][2]; ?>" id="14val2019"></td>
-							<td><input type="number" value="<? echo $dataQuestAn31[0][3]; ?>" id="14val2020"></td>
-							<td><input type="number" value="<? echo $dataQuestAn31[0][4]; ?>" id="14val2021"></td>
-							<td><input type="number" value="<? echo $dataQuestAn31[0][5]; ?>" id="14val2022"></td>
-							<td><input type="number" value="<? echo $dataQuestAn31[0][6]; ?>" id="14val2023"></td>
-							<td class="blockInp">- - -</td>
-							<td><input type="number" value="<? echo $data14[0][0]; ?>" id="p31m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data14[0][1]; ?>" id="p31m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data14[0][2]; ?>" id="p31m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td class="blockInp"><input type="number" value="<? echo $data14[0][3]; ?>" id="p8tot" readonly></td>
-						</tr>
-						<tr>
-							<th scope="row">7.15</th>
-							<td style="text-align: left;">Resueltos (cumplidos) en CMASC por conciliación</td>
-							<td><input type="number" value="<? echo $dataQuestAn32[0][0]; ?>" id="15val2017"></td>
-							<td><input type="number" value="<? echo $dataQuestAn32[0][1]; ?>" id="15val2018"></td>
-							<td><input type="number" value="<? echo $dataQuestAn32[0][2]; ?>" id="15val2019"></td>
-							<td><input type="number" value="<? echo $dataQuestAn32[0][3]; ?>" id="15val2020"></td>
-							<td><input type="number" value="<? echo $dataQuestAn32[0][4]; ?>" id="15val2021"></td>
-							<td><input type="number" value="<? echo $dataQuestAn32[0][5]; ?>" id="15val2022"></td>
-							<td><input type="number" value="<? echo $dataQuestAn32[0][6]; ?>" id="15val2023"></td>
-							<td class="blockInp">- - -</td>
-							<td><input type="number" value="<? echo $data15[0][0]; ?>" id="p32m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data15[0][1]; ?>" id="p32m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data15[0][2]; ?>" id="p32m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td class="blockInp"><input type="number" value="<? echo $data15[0][3]; ?>" id="p32tot" readonly></td>
-						</tr>
-						<tr>
-							<th scope="row">7.16</th>
-							<td style="text-align: left;">Resueltos (cumplidos) en CMASC por acuerdo reparatorio por junta restaurativa</td>
-							<td><input type="number" value="<? echo $dataQuestAn33[0][0]; ?>" id="16val2017"></td>
-							<td><input type="number" value="<? echo $dataQuestAn33[0][1]; ?>" id="16val2018"></td>
-							<td><input type="number" value="<? echo $dataQuestAn33[0][2]; ?>" id="16val2019"></td>
-							<td><input type="number" value="<? echo $dataQuestAn33[0][3]; ?>" id="16val2020"></td>
-							<td><input type="number" value="<? echo $dataQuestAn33[0][4]; ?>" id="16val2021"></td>
-							<td><input type="number" value="<? echo $dataQuestAn33[0][5]; ?>" id="16val2022"></td>
-							<td><input type="number" value="<? echo $dataQuestAn33[0][6]; ?>" id="16val2023"></td>
-							<td class="blockInp">- - -</td>
-							<td><input type="number" value="<? echo $data16[0][0]; ?>" id="p33m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data16[0][1]; ?>" id="p33m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td><input type="number" value="<? echo $data16[0][2]; ?>" id="p33m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
-							<td class="blockInp"><input type="number" value="<? echo $data16[0][3]; ?>" id="p33tot" readonly></td>
-						</tr>
-						<tr>
-						 <th style=" border: inset 0pt" scope="row"></th>
-							<td style=" border: inset 0pt"></td>
-							<td style=" border: inset 0pt"></td>
-							<td style=" border: inset 0pt"></td>
-							<td style=" border: inset 0pt"></td>
-							<td style=" border: inset 0pt"></td>
-							<td style=" border: inset 0pt"></td>
-							<td style=" border: inset 0pt"></td>
-							<td style=" border: inset 0pt"></td>
-							<td style=" border: inset 0pt"></td>
-							<td style=" border: inset 0pt"></td>
-							<td style=" border: inset 0pt"></td>
-							<!--<td style=" border: inset 0pt"></td>-->
-							<td style=" border: inset 0pt"><strong>TOTAL:</strong></td>
-							<td class="blockInp"><strong><?php if($sumTotal != null){ if($envt != 1 && $idEnlace == 67){echo $sumTotal+$tot_7_12;}else{echo $sumTotal;} }else{echo "0";} ?></strong></td>
-						</tr>
-					</tbody>
-				</table><br><br>
-				<div class="textoNotaSire" >
-					<ul>
-						<li style="list-style-type: circle !important" >
-								Los reactivos del 7.1 al 7.6, y 7.11 fueron precargados automáticamente correspondiente con la información que fue proporcionada por su unidad en el Sistema Integral de Registro Estadístico (SIRE)<br><br>
-						</li>
-					</ul>
-				</div><br><br>
-				<div class="textoNota" >
-					<ul>
-						<li style="list-style-type: circle !important" >
-							<div class="imagenWarning">
-							 <img src="images/warning.png"  class="imgWarning" alt="">
-							 	Nota.- La suma de los datos proporcionados en todos los reactivos de esta pregunta (del 7.1 al 7.16) deberán ser igual a la suma de los datos proporcionados en todos los reactivos de la pregunta 2, del 2.1 al 2.2 (carpetas de investigación iniciadas por denuncias, querellas u otros requisitos equivalentes recibidos en 2020 y 2019, respectivamente).
-							</div>
-						</li>
-					</ul>
-				</div><br><br>
-				<div class="textoNota" >
-					<ul>
-						<li style="list-style-type: circle !important" >
-							<div class="imagenWarning">
-							 En el caso de que el Ministerio Público decida la acumulación de procedimientos, solamente se deberá considerar aquellas carpetas que se concluyeron con motivo de su incorporación a otra.
-							</div>
-						</li>
-					</ul>
-				</div><br><br>
-				<div class="textoNota" >
-					<ul>
-						<li style="list-style-type: circle !important" >
-							<div class="imagenWarning">
-								En caso de que un procedimiento que todavía no haya sido vinculado a proceso se hubiere derivado al CMASC perteneciente al Poder Judicial por cargas de trabajo u otros motivos, se deberá registrar en este apartado.
-							</div>
-						</li>
-					</ul>
-				</div><br><br>
-				<div class="textoNota" >
-					<ul>
-						<li style="list-style-type: circle !important" >
-							<div class="imagenWarning">
-							No deberán registrarse los procedimientos derivados al CMASC dependiente de la Fiscalía cuando éstos hayan sido vinculados a proceso.
-							</div>
-						</li>
-					</ul>
-				</div>
-				<div class="botonGuardar">
-						<? if($envt == 0){ ?> 
-					<button type="button" class="btn btn-success" onclick="saveQuest7(7, <? echo $per; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" id="guardarPregunta">GUARDAR</button> <? } ?>
-				</div>
-			
+                                ?>
+                                <td class="<?php echo $quest_class; ?>">
+                                    <input type="number" value="<?php echo $quest_value; ?>" id="p28m<? echo $o+1; ?>" <? echo $quest_readonly; ?> >
+                                </td>
+                                <?
+                            }
+                            ?>
+                            <td class="blockInp"><input type="number" value="<? echo $tota;  ?>" id="p28tot" readonly></td>
+                        </tr>
+                        <tr>
+                            <td colspan="14" style="background-color: #7C8B9E; font-size: 20px;"><strong>DERIVADOS A MECANISMOS ALTERNATIVOS (ANTES DEL AUTO DE VINCULACIÓN A PROCESO)</strong></td>
+                        </tr>
+                        <tr>
+                            <?php
+
+                            if($envt != 1 && $idEnlace == 67){
+
+                                include("cmasc.php");
+
+                                $tot_7_12 = $array_7[12][1]+$array_7[12][2]+$array_7[12][3];
+
+                                ?>
+                                <th scope="row">7.12</th>
+                                <td style="text-align: left;">En trámite en el CMASC sin acuerdo reparatorio</td>
+                                <td><input type="number" value="<? echo $array_7[12][2017]; ?>" id="12val2017" readonly></td>
+                                <td><input type="number" value="<? echo $array_7[12][2018]; ?>" id="12val2018" readonly></td>
+                                <td><input type="number" value="<? echo $array_7[12][2019]; ?>" id="12val2019" readonly></td>
+                                <td><input type="number" value="<? echo $array_7[12][2020]; ?>" id="12val2020" readonly></td>
+                                <td><input type="number" value="<? echo $array_7[12][2021]; ?>" id="12val2021" readonly></td>
+                                <td><input type="number" value="<? echo $array_7[12][2022]; ?>" id="12val2022" readonly></td>
+                                <td><input type="number" value="<? echo $array_7[12][2023]; ?>" id="12val2023" readonly></td>
+                                <td><input type="number" value="<? echo $array_7[12][2024]; ?>" id="12val2024" readonly></td>
+                                <td class="blockInp">- - -</td>
+                                <td><input type="number" value="<? echo $array_7[12][1]; ?>" id="p29m1" readonly></td>
+                                <td><input type="number" value="<? echo $array_7[12][2]; ?>" id="p29m2" readonly></td>
+                                <td><input type="number" value="<? echo $array_7[12][3]; ?>" id="p29m3" readonly></td>
+                                <td class="blockInp"><input type="number" value="<? echo $tot_7_12; ?>" id="p29tot" readonly></td>
+
+                                <?php
+                            }
+                            else{
+                                ?>
+                                <th scope="row">7.12</th>
+                                <td style="text-align: left;">En trámite en el CMASC sin acuerdo reparatorio</td>
+                                <td><input type="number" value="<? echo $dataQuestAn29[0][0]; ?>" id="12val2017"></td>
+                                <td><input type="number" value="<? echo $dataQuestAn29[0][1]; ?>" id="12val2018"></td>
+                                <td><input type="number" value="<? echo $dataQuestAn29[0][2]; ?>" id="12val2019"></td>
+                                <td><input type="number" value="<? echo $dataQuestAn29[0][3]; ?>" id="12val2020"></td>
+                                <td><input type="number" value="<? echo $dataQuestAn29[0][4]; ?>" id="12val2021"></td>
+                                <td><input type="number" value="<? echo $dataQuestAn29[0][5]; ?>" id="12val2022"></td>
+                                <td><input type="number" value="<? echo $dataQuestAn29[0][6]; ?>" id="12val2023"></td>
+                                <td><input type="number" value="<? echo $dataQuestAn29[0][7]; ?>" id="12val2024"></td>
+                                <td class="blockInp">- - -</td>
+                                <td><input type="number" value="<? echo $data12[0][0]; ?>" id="p29m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
+                                <td><input type="number" value="<? echo $data12[0][1]; ?>" id="p29m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
+                                <td><input type="number" value="<? echo $data12[0][2]; ?>" id="p29m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
+                                <td class="blockInp"><input type="number" value="<? echo $data12[0][3]; ?>" id="p29tot" readonly></td>
+                                <?php
+                            }
+                            ?>
+                        </tr>
+                        <tr>
+                            <th scope="row">7.13</th>
+                            <td style="text-align: left;">En trámite en el CMASC con acuerdo reparatorio firmado (en proceso de cumplimiento)</td>
+                            <td><input type="number" value="<? echo $dataQuestAn30[0][0]; ?>" id="13val2017"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn30[0][1]; ?>" id="13val2018"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn30[0][2]; ?>" id="13val2019"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn30[0][3]; ?>" id="13val2020"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn30[0][4]; ?>" id="13val2021"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn30[0][5]; ?>" id="13val2022"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn30[0][6]; ?>" id="13val2023"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn30[0][7]; ?>" id="13val2024"></td>
+                            <td class="blockInp">- - -</td>
+                            <td><input type="number" value="<? echo $data13[0][0]; ?>" id="p30m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
+                            <td><input type="number" value="<? echo $data13[0][1]; ?>" id="p30m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
+                            <td><input type="number" value="<? echo $data13[0][2]; ?>" id="p30m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
+                            <td class="blockInp"><input type="number" value="<? echo $data13[0][3]; ?>" id="p30tot" readonly></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">7.14</th>
+                            <td style="text-align: left;">Resueltos (cumplidos) en CMASC por mediación</td>
+                            <td><input type="number" value="<? echo $dataQuestAn31[0][0]; ?>" id="14val2017"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn31[0][1]; ?>" id="14val2018"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn31[0][2]; ?>" id="14val2019"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn31[0][3]; ?>" id="14val2020"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn31[0][4]; ?>" id="14val2021"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn31[0][5]; ?>" id="14val2022"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn31[0][6]; ?>" id="14val2023"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn31[0][7]; ?>" id="14val2024"></td>
+                            <td class="blockInp">- - -</td>
+                            <td><input type="number" value="<? echo $data14[0][0]; ?>" id="p31m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
+                            <td><input type="number" value="<? echo $data14[0][1]; ?>" id="p31m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
+                            <td><input type="number" value="<? echo $data14[0][2]; ?>" id="p31m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
+                            <td class="blockInp"><input type="number" value="<? echo $data14[0][3]; ?>" id="p8tot" readonly></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">7.15</th>
+                            <td style="text-align: left;">Resueltos (cumplidos) en CMASC por conciliación</td>
+                            <td><input type="number" value="<? echo $dataQuestAn32[0][0]; ?>" id="15val2017"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn32[0][1]; ?>" id="15val2018"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn32[0][2]; ?>" id="15val2019"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn32[0][3]; ?>" id="15val2020"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn32[0][4]; ?>" id="15val2021"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn32[0][5]; ?>" id="15val2022"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn32[0][6]; ?>" id="15val2023"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn32[0][7]; ?>" id="15val2024"></td>
+                            <td class="blockInp">- - -</td>
+                            <td><input type="number" value="<? echo $data15[0][0]; ?>" id="p32m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
+                            <td><input type="number" value="<? echo $data15[0][1]; ?>" id="p32m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
+                            <td><input type="number" value="<? echo $data15[0][2]; ?>" id="p32m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
+                            <td class="blockInp"><input type="number" value="<? echo $data15[0][3]; ?>" id="p32tot" readonly></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">7.16</th>
+                            <td style="text-align: left;">Resueltos (cumplidos) en CMASC por acuerdo reparatorio por junta restaurativa</td>
+                            <td><input type="number" value="<? echo $dataQuestAn33[0][0]; ?>" id="16val2017"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn33[0][1]; ?>" id="16val2018"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn33[0][2]; ?>" id="16val2019"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn33[0][3]; ?>" id="16val2020"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn33[0][4]; ?>" id="16val2021"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn33[0][5]; ?>" id="16val2022"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn33[0][6]; ?>" id="16val2023"></td>
+                            <td><input type="number" value="<? echo $dataQuestAn33[0][7]; ?>" id="16val2024"></td>
+                            <td class="blockInp">- - -</td>
+                            <td><input type="number" value="<? echo $data16[0][0]; ?>" id="p33m1" <? if($envt == 1){ echo "readonly"; } ?>></td>
+                            <td><input type="number" value="<? echo $data16[0][1]; ?>" id="p33m2" <? if($envt == 1){ echo "readonly"; } ?>></td>
+                            <td><input type="number" value="<? echo $data16[0][2]; ?>" id="p33m3" <? if($envt == 1){ echo "readonly"; } ?>></td>
+                            <td class="blockInp"><input type="number" value="<? echo $data16[0][3]; ?>" id="p33tot" readonly></td>
+                        </tr>
+                        <tr>
+                            <th style=" border: inset 0pt" scope="row"></th>
+                            <td style=" border: inset 0pt"></td>
+                            <td style=" border: inset 0pt"></td>
+                            <td style=" border: inset 0pt"></td>
+                            <td style=" border: inset 0pt"></td>
+                            <td style=" border: inset 0pt"></td>
+                            <td style=" border: inset 0pt"></td>
+                            <td style=" border: inset 0pt"></td>
+                            <td style=" border: inset 0pt"></td>
+                            <td style=" border: inset 0pt"></td>
+                            <td style=" border: inset 0pt"></td>
+                            <td style=" border: inset 0pt"></td>
+                            <td style=" border: inset 0pt"></td>
+                            <!--<td style=" border: inset 0pt"></td>-->
+                            <td style=" border: inset 0pt"><strong>TOTAL:</strong></td>
+                            <td class="blockInp"><strong><?php if($sumTotal != null){ if($envt != 1 && $idEnlace == 67){echo $sumTotal+$tot_7_12;}else{echo $sumTotal;} }else{echo "0";} ?></strong></td>
+                        </tr>
+                    </tbody>
+                </table><br><br>
+                </div><br><br>
+                <div class="textoNotaSire" >
+                    <ul>
+                        <li style="list-style-type: circle !important" >
+                            Los reactivos del 7.1 al 7.6, y 7.11 fueron precargados automáticamente correspondiente con la información que fue proporcionada por su unidad en el Sistema Integral de Registro Estadístico (SIRE)<br><br>
+                        </li>
+                    </ul>
+                </div><br><br>
+                <div class="textoNota" >
+                    <ul>
+                        <li style="list-style-type: circle !important" >
+                            <div class="imagenWarning">
+                                <img src="images/warning.png"  class="imgWarning" alt="">
+                                Nota.- La suma de los datos proporcionados en todos los reactivos de esta pregunta (del 7.1 al 7.16) deberán ser igual a la suma de los datos proporcionados en todos los reactivos de la pregunta 2, del 2.1 al 2.2 (carpetas de investigación iniciadas por denuncias, querellas u otros requisitos equivalentes recibidos en 2020 y 2019, respectivamente).
+                            </div>
+                        </li>
+                    </ul>
+                </div><br><br>
+                <div class="textoNota" >
+                    <ul>
+                        <li style="list-style-type: circle !important" >
+                            <div class="imagenWarning">
+                                En el caso de que el Ministerio Público decida la acumulación de procedimientos, solamente se deberá considerar aquellas carpetas que se concluyeron con motivo de su incorporación a otra.
+                            </div>
+                        </li>
+                    </ul>
+                </div><br><br>
+                <div class="textoNota" >
+                    <ul>
+                        <li style="list-style-type: circle !important" >
+                            <div class="imagenWarning">
+                                En caso de que un procedimiento que todavía no haya sido vinculado a proceso se hubiere derivado al CMASC perteneciente al Poder Judicial por cargas de trabajo u otros motivos, se deberá registrar en este apartado.
+                            </div>
+                        </li>
+                    </ul>
+                </div><br><br>
+                <div class="textoNota" >
+                    <ul>
+                        <li style="list-style-type: circle !important" >
+                            <div class="imagenWarning">
+                                No deberán registrarse los procedimientos derivados al CMASC dependiente de la Fiscalía cuando éstos hayan sido vinculados a proceso.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="botonGuardar">
+                    <? if($envt == 0){ ?>
+                        <button type="button" class="btn btn-success" onclick="saveQuest7(7, <? echo $per; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>, <? echo $idEnlace; ?>)" id="guardarPregunta">GUARDAR</button> <? } ?>
+                </div>
+                <script>
+                    const scrollContainer = document.querySelector('.scroll-container');
+
+                    let isDown = false;
+                    let startX;
+                    let scrollLeft;
+
+                    scrollContainer.addEventListener('mousedown', (e) => {
+                        isDown = true;
+                        scrollContainer.style.cursor = "grabbing";
+                        startX = e.pageX - scrollContainer.offsetLeft;
+                        scrollLeft = scrollContainer.scrollLeft;
+                    });
+
+                    scrollContainer.addEventListener('mouseleave', () => {
+                        isDown = false;
+                        scrollContainer.style.cursor = "grab";
+                    });
+
+                    scrollContainer.addEventListener('mouseup', () => {
+                        isDown = false;
+                        scrollContainer.style.cursor = "grab";
+                    });
+
+                    scrollContainer.addEventListener('mousemove', (e) => {
+                        if (!isDown) return;
+                        e.preventDefault();
+                        const x = e.pageX - scrollContainer.offsetLeft;
+                        const walk = (x - startX) * 2; // Controla la velocidad del desplazamiento
+                        scrollContainer.scrollLeft = scrollLeft - walk;
+                    });
+                </script>

@@ -8,7 +8,7 @@ $cargo  = 'Agente del Ministerio Publico';
 $idFiscalia = $data[0][2];
 $nombreFiscalia  = $data[0][3];
 ?>
-<div class="col-xs-12 col-sm-12  col-md-3">
+<div class="col-xs-12 col-sm-12  col-md-2">
 	<label for="idAdscripcion">Área de adscripción :</label>
 	<select class="form-control" id="idAdscripcion" disabled>
 	<?for ($h=0; $h < sizeof($data); $h++) { 
@@ -27,6 +27,18 @@ $nombreFiscalia  = $data[0][3];
 	<label for="idFuncion">Función :</label>
 	<select class="form-control" id="idFuncion" disabled>
 		<option value="1">Agente</option>
+	</select>
+</div>
+<div class="col-xs-10 col-sm-10  col-md-3">
+	<label for="idCoorporacion">Coorporación Policial que dará protección: </label>
+	<select class="form-control" id="idCoorporacion">
+		<option value=null>Seleccione la coorporación</option>
+		<?php 
+		$getCoorporacion = getCoorporacion($connMedidas);
+		foreach($getCoorporacion as $coorporacion){ ?>									
+			<option value="<?= $coorporacion['idCatCoorporacion'] ?>"><?= $coorporacion['nombre'] ?></option>
+		<?}
+		?>
 	</select>
 </div>
 

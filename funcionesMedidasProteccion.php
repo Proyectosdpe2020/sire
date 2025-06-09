@@ -18,6 +18,28 @@ function getCausaPenalNuc($conn, $nuc){
 	if(isset($arreglo)){return $arreglo;}
 }
 
+function getCoorporacion($connMedidas) {
+    $query = "
+        SELECT idCatCoorporacion, nombre
+        FROM medidas.catCoorporacion";
+    $stmt = sqlsrv_prepare($connMedidas, $query);
+    if ($stmt) {
+        $result = sqlsrv_execute($stmt);
+        if ($result) {
+            $array = [];
+            while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+                $array[] = $row; // Agregar cada fila al array
+            }
+            return $array;
+        } else {
+            $errors = sqlsrv_errors();
+            return $errors;
+        }
+    } else {
+        $errors = sqlsrv_errors();
+        return $errors;
+    }
+}
 
 function getDataMP($connMedidas, $rolUser, $idEnlace){
 	if($rolUser != 4){
@@ -188,6 +210,7 @@ function get_data_medida($connMedidas, $idMedida){
 													      ,[idEnlace]
 													      ,[idFiscaliaProcedencia]
 													      ,[estatus]
+														  ,[idCatCoorporacion]
 													  FROM [SIRE].[medidas].[medidasProteccion] WHERE idMedida = $idMedida ";
 	$indice = 0;
 	$stmt = sqlsrv_query($connMedidas, $query);
@@ -205,6 +228,7 @@ function get_data_medida($connMedidas, $idMedida){
 		$arreglo[$indice][9]=$row['idFiscaliaProcedencia'];
 		$arreglo[$indice][11]=$row['estatus'];
 		$arreglo[$indice][12]=$row['fechaAcuerdo']->format('Y-m-d');
+		$arreglo[$indice][13]=$row['idCatCoorporacion'];
 
 		$indice++;
 	}
@@ -271,23 +295,230 @@ FROM [SIRE].[medidas].[testigo] WHERE idMedida = $idMedida ";
 	if(isset($arreglo)){return $arreglo;}
 }
 
+//Funcio para crear una nueva resolucion
+function createResolucion($connMedidas, $idMedida){
+	$query = "	INSERT INTO medidas.resoluciones (idMedida)
+				VALUES (?)";
+	$params = array($idMedida);
+	$stmt = sqlsrv_query($connMedidas, $query, $params);
+	if($stmt === false){
+		die(print_r(sqlsrv_errors(), true));
+	}
+}
+
+//Function para obtener idResoluciones
+function getIdResoluciones($connMedidas, $idMedida){
+	$query = "	SELECT [idResolucion]
+				FROM medidas.resoluciones
+				WHERE idMedida = ?";
+	$params = array($idMedida);
+	$stmt = sqlsrv_query($connMedidas, $query, $params);
+
+	if($stmt === false){
+		die(print_r(sqlsrv_errors(), true));
+	}
+	$row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+	if($row === null) return null;
+	$array = array();
+	$array[0] = $row['idResolucion'];
+
+	return $array;
+}
+
+// Función para obtener los datos de las medidas que han sido ratificadas
+function getRatificada($connMedidas, $idResolucion) {
+    $query = "
+        SELECT idRatificada, ratificada, observacion
+        FROM medidas.ratificada
+        WHERE idResolucion = ?";
+    
+    return executeResolucion($connMedidas, $idResolucion, $query);
+}
+
+// Función para obtener los datos de las medidas que han sido ampliadas
+function getAmpliada($connMedidas, $idResolucion) {
+    $query = "
+        SELECT idAmpliada, ampliacion, observacion, temporalidadActual, fechaPrevia, fechaConclusion, temporalidadPrevia
+        FROM medidas.ampliada
+        WHERE idResolucion = ?";
+    
+    return executeResolucion($connMedidas, $idResolucion, $query);
+}
+
+// Función para obtener los datos de las medidas que han sido modificadas
+function getModificada($connMedidas, $idResolucion) {
+    $query = "
+        SELECT idModificada, modificada, observacion, fechaPrevia, fechaConclusion, fraccionesPrevias, fraccionesActuales
+        FROM medidas.modificada
+        WHERE idResolucion = ?";
+    
+    return executeResolucion($connMedidas, $idResolucion, $query);
+}
+
+// Función para obtener los datos de las medidas que han sido revocadas
+function getRevocada($connMedidas, $idResolucion) {
+    $query = "
+        SELECT idRevocada, revocada, observacion, fechaRevocada
+        FROM medidas.revocada
+        WHERE idResolucion = ?";
+    
+    return executeResolucion($connMedidas, $idResolucion, $query);
+}
+
+// Función para ejecutar código con idResolucion en la base de datos
+function executeResolucion($connMedidas, $idResolucion, $query) {
+    $params = [ [&$idResolucion, SQLSRV_PARAM_IN] ];
+
+    $stmt = sqlsrv_prepare($connMedidas, $query, $params);
+
+    if ($stmt && sqlsrv_execute($stmt)) {
+        $array = [];
+        while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+            $array[] = $row;
+        }
+        return $array;
+    } else {
+        $errors = sqlsrv_errors();
+        return $errors;
+    }
+}
+
+//Función para obtener cada una de las resoluciones existentes
+function getDataResolucion($connMedidas, $idResolucion){
+	$query ="
+		SELECT 
+			res.idResolucion, 
+        	res.idMedida, 
+       		COALESCE(a.ampliacion, 0) AS ampliada, 
+       		COALESCE(r.revocada, 0) AS revocada, 
+			COALESCE(ra.ratificada, 0) AS ratificada, 
+       		COALESCE(m.modificada, 0) AS modificada
+		FROM SIRE.medidas.resoluciones res
+		LEFT JOIN (
+			SELECT idResolucion, MAX(CASE WHEN ampliacion IS NOT NULL THEN ampliacion ELSE 0 END) as ampliacion
+			FROM SIRE.medidas.ampliada
+			GROUP BY idResolucion
+		) a ON a.idResolucion = res.idResolucion
+		LEFT JOIN (
+			SELECT idResolucion, MAX(CASE WHEN revocada IS NOT NULL THEN revocada ELSE 0 END) as revocada
+			FROM SIRE.medidas.revocada
+			GROUP BY idResolucion
+		) r ON r.idResolucion = res.idResolucion
+		LEFT JOIN (
+			SELECT idResolucion, MAX(CASE WHEN modificada IS NOT NULL THEN modificada ELSE 0 END) as modificada
+			FROM SIRE.medidas.modificada
+			GROUP BY idResolucion
+		) m ON m.idResolucion = res.idResolucion
+		LEFT JOIN (
+			SELECT idResolucion, MAX(CASE WHEN ratificada IS NOT NULL THEN ratificada ELSE 0 END) as ratificada
+			FROM SIRE.medidas.ratificada
+			GROUP BY idResolucion
+		) ra ON ra.idResolucion = res.idResolucion
+		WHERE res.idResolucion = ?; ";
+
+	$params = [ [&$idResolucion, SQLSRV_PARAM_IN] ];
+
+	$stmt = sqlsrv_prepare($connMedidas, $query, $params);
+	if($stmt && sqlsrv_execute($stmt)){
+		$array = [];
+		while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+			$array [] = $row;
+		}
+		return $array;
+	}
+	else{
+		$errors = sqlsrv_errors();
+		return $errors;
+	}
+}
+
+//Funcion para obtener idMedida, idResolucion, resolucion y su observacion
+function getDataResolucionesUnit($connMedidas, $idMedida, $idResolucion, $tipoResolucion) {
+    $observacion = "observacion" . ucfirst($tipoResolucion);
+
+    $query = "SELECT [$tipoResolucion], [$observacion]
+              FROM medidas.resoluciones 
+              WHERE idMedida = ?";
+    
+    // Preparar y ejecutar la consulta
+    $params = array($idMedida);
+    $stmt = sqlsrv_query($connMedidas, $query, $params);
+
+    // Verificar si la consulta fue exitosa
+    if ($stmt === false) {
+        die(print_r(sqlsrv_errors(), true)); // Mostrar errores de SQL Server
+    }
+
+    // Obtener la fila
+    $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+    
+    // Verificar si se obtuvieron resultados
+    if ($row === null) {
+        return null; // O manejar el caso en que no se encuentren resultados
+    }
+
+    $arreglo = array();
+    $arreglo[0] = $idResolucion;
+    $arreglo[1] = $idMedida;
+    $arreglo[2] = $tipoResolucion;
+    $arreglo[3] = $row[$tipoResolucion];
+    $arreglo[4] = $row[$observacion];
+
+    return $arreglo;
+}
+
+//Funcion para obtener los documentos subidos en los seguimientos
+function getFileSeguimientos($connMedidas, $idMedida) {
+    $query = "SELECT [idSeguimiento], [nombre_archivo], [ruta_archivo]
+              FROM medidas.seguimientos
+              WHERE idMedida = ?";
+    $params = array($idMedida);
+    $stmt = sqlsrv_query($connMedidas, $query, $params);
+
+    if ($stmt === false) {
+        die(print_r(sqlsrv_errors(), true));
+    }
+    $arreglo = []; 
+    while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+        $arreglo[] = [
+            0 => $row['idSeguimiento'],
+            1 => $row['nombre_archivo'],
+            2 => $row['ruta_archivo']
+        ];
+    }
+
+    return count($arreglo) > 0 ? $arreglo : null; // Devuelve null si no hay registros
+}
+
 
 function getDataResoluciones($connMedidas, $idMedida, $tipoConsulta, $idResolucion){
 	if($tipoConsulta == 0){
 		$query = " SELECT idResolucion
 													      ,idMedida
 													      ,CASE 
-													           WHEN ratificacion = 1 THEN 'Si'
+													           WHEN ratificacion = 1 THEN 'Sí'
 													           WHEN ratificacion = 0 THEN 'No'
 													          ELSE 'Desconocido'
 													       END as ratificacion
 													      ,CASE 
-													           WHEN modificada = 1 THEN 'Si'
+													           WHEN modificada = 1 THEN 'Sí'
 													           WHEN modificada = 0 THEN 'No'
 													          ELSE 'Desconocido'
 													       END as modificada
-													      ,observacionRatifica
-													      ,observacionModifica
+														   ,CASE
+														   		WHEN ampliada = 1 THEN 'Sí'
+																WHEN ampliada = 0 THEN 'No'
+																ELSE 'Desconocido'
+															END as ampliada
+															,CASE
+																WHEN revocada = 1 THEN 'Sí'
+																WHEN revocada = 0 THEN 'No'
+																ELSE 'Desconocido'
+															END as revocada
+													      ,observacionRatificacion
+													      ,observacionModificada
+														  ,observacionAmpliada
+														  ,observacionRevocada
 													  FROM medidas.resoluciones where idMedida = $idMedida ";
 	}else{
 			$query = " SELECT idResolucion
@@ -302,8 +533,8 @@ function getDataResoluciones($connMedidas, $idMedida, $tipoConsulta, $idResoluci
 													           WHEN modificada = 0 THEN 'No'
 													          ELSE 'Desconocido'
 													       END as modificada
-													      ,observacionRatifica
-													      ,observacionModifica
+													      ,observacionRatificacion
+													      ,observacionModificada
 													  FROM medidas.resoluciones where idResolucion = $idResolucion ";
 	}
 	$indice = 0;
@@ -312,10 +543,18 @@ function getDataResoluciones($connMedidas, $idMedida, $tipoConsulta, $idResoluci
 	{
 		$arreglo[$indice][0]=$row['idResolucion'];
 		$arreglo[$indice][1]=$row['idMedida'];
-		$arreglo[$indice][2]=$row['ratificacion'];
-		$arreglo[$indice][3]=$row['modificada'];
-		$arreglo[$indice][4]=$row['observacionRatifica'];
-		$arreglo[$indice][5]=$row['observacionModifica'];
+		$arreglo[$indice][2]='ratificacion';
+		$arreglo[$indice][3]=$row['ratificacion'];
+		$arreglo[$indice][4]=$row['observacionRatificacion'];
+		$arreglo[$indice][5]='modificada';
+		$arreglo[$indice][6]=$row['modificada'];		
+		$arreglo[$indice][7]=$row['observacionModificada'];
+		$arreglo[$indice][8]='ampliada';
+		$arreglo[$indice][9]=$row['ampliada'];		
+		$arreglo[$indice][10]=$row['observacionAmpliada'];
+		$arreglo[$indice][11]='revocada';
+		$arreglo[$indice][12]=$row['revocada'];
+		$arreglo[$indice][13]=$row['observacionRevocada'];
 		$indice++;
 	}
 	if(isset($arreglo)){return $arreglo;}
@@ -582,7 +821,7 @@ function get_data_medidas_dia($connMedidas, $numeroDia, $diames, $anio, $fiscali
 															  INNER JOIN PRUEBA.dbo.CatModalidadesEstadisticas d ON d.CatModalidadesEstadisticasID = m.idDelito
 															  INNER JOIN medidas.catFiscalias f ON f.catFiscaliasID = m.idFiscaliaProcedencia 
 															  INNER JOIN ESTADISTICAV2.dbo.enlace e ON e.idEnlace = m.idEnlace
-															  WHERE m.idUnidad = 1 AND m.idFiscalia = 1 AND m.diaSemana = $numeroDia AND m.anio = $anio AND m.diaMes = $diames AND m.mes = $mes
+															  WHERE m.diaSemana = $numeroDia AND m.anio = $anio AND m.diaMes = $diames AND m.mes = $mes
 															  order by m.idMedida desc ";
 		}else{
 			       $query = " SELECT m.idMedida
@@ -610,7 +849,7 @@ function get_data_medidas_dia($connMedidas, $numeroDia, $diames, $anio, $fiscali
 															  INNER JOIN PRUEBA.dbo.CatModalidadesEstadisticas d ON d.CatModalidadesEstadisticasID = m.idDelito
 															  INNER JOIN medidas.catFiscalias f ON f.catFiscaliasID = m.idFiscaliaProcedencia 
 															  INNER JOIN ESTADISTICAV2.dbo.enlace e ON e.idEnlace = m.idEnlace
-															  WHERE m.idUnidad = 1 AND m.idFiscalia = 1 AND m.anio = $anio  AND m.mes = $mes order by m.idMedida desc ";
+															  WHERE m.anio = $anio  AND m.mes = $mes order by m.idMedida desc ";
 		}
 	}elseif($rolUser == 2){
 		if($diames != 0){
@@ -817,6 +1056,7 @@ function getDataAnio(){
 	$arreglo[1][0]=2022;
 	$arreglo[2][0]=2023;
 	$arreglo[3][0]=2024;
+	$arreglo[4][0]=2025;
 	return $arreglo;
 }
 
@@ -1107,7 +1347,7 @@ function checkFechaConclusion($fechaConclusion){
 	if($fechaConclusion == '1900-01-01 00:00'){
 		return 'NOTRABAJADA';
 	}else{
-		if(	$fechaActual > $fechaConclusion){
+		if(	$fechaActual > $fechaConclusion){			
 			return 'CONCLUIDA';
 		}else{
 			return 'ACTIVA';
@@ -1160,4 +1400,29 @@ function checkEdad($edad){
 	}elseif($edad < 0){
 		return "Meses";
 	}
+}
+
+function convertirARomanos($numero) {
+    $mapa = array(
+        'M' => 1000,
+        'CM' => 900,
+        'D' => 500,
+        'CD' => 400,
+        'C' => 100,
+        'XC' => 90,
+        'L' => 50,
+        'XL' => 40,
+        'X' => 10,
+        'IX' => 9,
+        'V' => 5,
+        'IV' => 4,
+        'I' => 1
+    );
+    $resultado = '';
+    foreach ($mapa as $romano => $valor) {
+        $matches = intval($numero / $valor);
+        $resultado .= str_repeat($romano, $matches);
+        $numero = $numero % $valor;
+    }
+    return $resultado;
 }
