@@ -189,12 +189,13 @@ function modalDatosMedidaCapturista(tipoModal, idEnlace, b, fraccion, idMedida, 
 	/////////////////////////// SI EL TIPO MODAL ES UNA NUEVA MEDIDA ENTONCES ES  0 ///////////////////////////////
 	if (idMedida == 0) {
 		if(rolUser == 4){
-   var dataValidate = validateDataMedidaGeneralRegionales(); //Validamos que la información principal halla sido llenada previamente
+   			var dataValidate = validateDataMedidaGeneralRegionales(); //Validamos que la información principal halla sido llenada previamente
 		}else{
 			var dataValidate = validateDataMedidaCapturista(); //Validamos que la información principal halla sido llenada previamente
 		}
 		if (dataValidate[0] == 'true') {
 			$('#cargandoInfo').modal('show');
+
 			if(rolUser == 4){ 	
 				var contentArrayMedidasAplicadasData = JSON.parse(dataValidate[2]); /*Obtenemos la informacion del arreglo de medidas aplicadas*/
 				var dataMedidasAplicadasArray = {};
@@ -202,7 +203,9 @@ function modalDatosMedidaCapturista(tipoModal, idEnlace, b, fraccion, idMedida, 
 					dataMedidasAplicadasArray = JSON.stringify(dataMedidasAplicadasArray);
 						console.log("dos: "+dataMedidasAplicadasArray);
 				 //dataMedidasAplicadasArray = getValuesMedidasAplicadas(dataValidate[2]); eliminar
-			}else { var dataMedidasAplicadasArray = 0; } 
+			}
+			else { var dataMedidasAplicadasArray = 0; }
+			
 			var contentArrayData = JSON.parse(dataValidate[1]); //Obtenemos la informacion del arreglo
 			console.log(contentArrayData[1]); //NUC
 			console.log("Total de medidas aplicadas: "+dataMedidasAplicadasArray)
@@ -211,7 +214,7 @@ function modalDatosMedidaCapturista(tipoModal, idEnlace, b, fraccion, idMedida, 
 			var dataPrincipalArray = {};
 			for (i in contentArrayData) { dataPrincipalArray[i] = contentArrayData[i]; }
 			dataPrincipalArray = JSON.stringify(dataPrincipalArray);
-		 console.log("Información del array principal: " + dataPrincipalArray);
+		 	console.log("Información del array principal: " + dataPrincipalArray);
 			//Invocamos a la funcion que valida si existe el NUC en sigi realizando un callback a la funcion succes de ajax para retornar el valor
 			validaNucSIGI(nuc, function (resp, arrayData) {
 				existeNuc = resp;
@@ -2888,6 +2891,7 @@ function validateDataMedidaGeneralRegionales() {
 	var idDelito = document.getElementById("idDelito").value;
 	var fechaAcuerdo = document.getElementById("fechaAcuerdo").value;
 	var fechaRegistro = document.getElementById("fechaRegistro").value;
+	// var nOficio = document.getElementById("nOficio").value;
 
  	var nombreVicti = document.getElementById("nombreVicti").value; 
 	var paternoVicti = document.getElementById("paternoVicti").value; 
@@ -2920,7 +2924,7 @@ function validateDataMedidaGeneralRegionales() {
 		temporalidad = 0;
 	}
 
-	if (agentesMP_id != "" && idCargo != "" && idFuncion != "" && idAdscripcion != "" && nuc != "" && idDelito != "" && fechaAcuerdo != "" && fechaRegistro != "" && nombreVicti != "" && paternoVicti != "" && maternoVicti != "" && generoVicti != "" && edadVictima != "" && idFiscaliaProc != "" && totalInputs != 0 && fechaConclu != "" && temporalidad != 0 ) {
+	if (agentesMP_id != "" && idCargo != "" && idFuncion != "" && idAdscripcion != "" && nuc != "" && idDelito != "" && fechaAcuerdo != "" && fechaRegistro != "" && nombreVicti != "" && paternoVicti != "" && maternoVicti != "" && generoVicti != "" && edadVictima != "" && idFiscaliaProc != "" && totalInputs != 0 && fechaConclu != "" && temporalidad != 0) {
 
 		var dataGenerales = Array();
 		dataGenerales[1] = nuc.trim();
@@ -2942,9 +2946,10 @@ function validateDataMedidaGeneralRegionales() {
 		dataGenerales[16] = fechaConclu;
 		dataGenerales[17] = temporalidad;
 		dataGenerales[18] = idCoorporacion;
+		dataGenerales[19] = "null";
 
 
-//Obtenemos el nombre de los id de los input agregados dinamicamente
+		//Obtenemos el nombre de los id de los input agregados dinamicamente
 		const getIdNameInput = [...document.querySelectorAll('.inputMedidaHidden')].map(el => el.id);
 		var dataMedidasAplicadasArray = {};
 		for (j in getIdNameInput){
