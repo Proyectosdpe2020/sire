@@ -10,7 +10,8 @@ function showModalMDP(tipoModal, idEnlace, idMedida, typeArch, typeCheck) {
 			$('.dataAutocomplet').select2({
 				width: '100%',
 				placeholder: "Seleccione",
-				allowClear: false
+				allowClear: false,
+				dropdownParent: $('#medidaDeProteccion')
 			});
 		}
 	}
@@ -29,11 +30,6 @@ function showModalReporte(idEnlace, rolUser, tipo){
 	ajax.onreadystatechange = function () {
 		if (ajax.readyState == 4 && ajax.status == 200) {
 			cont.innerHTML = ajax.responseText;
-			$('.dataAutocomplet').select2({
-				width: '100%',
-				placeholder: "Seleccione",
-				allowClear: false
-			});
 			$('#generarReporte').modal('show');
 		}
 	}
@@ -112,7 +108,11 @@ function modalDatosMedida(tipoModal, idEnlace, b, fraccion, idMedida, sectionAct
 								ajax.onreadystatechange = function () {
 									if (ajax.readyState == 4 && ajax.status == 200) {
 										cont.innerHTML = ajax.responseText;
-										$('.dataAutocomplet').select2({ width: '100%', placeholder: "Seleccione", allowClear: false });
+										$('.dataAutocomplet').select2({ 
+											width: '100%', 
+											placeholder: "Seleccione", 
+											allowClear: false 
+										});
 										$('#medidaDeProteccion').modal('hide');
 										$('#infoGeneralMedida').modal('show');
 									}
@@ -707,7 +707,8 @@ function reloadModalMDP(tipoModal, idEnlace, idMedida, typeArch, typeCheck) {
 			$('.dataAutocomplet').select2({
 				width: '100%',
 				placeholder: "Seleccione",
-				allowClear: false
+				allowClear: false,
+				dropdownParent: $('#medidaDeProteccion')
 			});
 		}
 	}
@@ -1950,11 +1951,6 @@ function uploadSeguimiento(idMedida, idEnlace, nuc) {
 			ajax.onreadystatechange = function () {
 				if (ajax.readyState === 4 && ajax.status === 200) {
 					cont.innerHTML = ajax.responseText;
-					$('.dataAutocomplet').select2({
-						width: '100%',
-						placeholder: "Seleccione",
-						allowClear: false
-					});
 				}
 			}
 			//console.log([...fileForm]); // Muestra el contenido de fileForm
@@ -2028,11 +2024,6 @@ function editaConstanciaLlamadas(idEnlace, idConstanciaLlamada, idMedida, tipoAc
 	ajax.onreadystatechange = function () {
 		if (ajax.readyState == 4 && ajax.status == 200) {
 			cont.innerHTML = ajax.responseText;
-			$('.dataAutocomplet').select2({
-				width: '100%',
-				placeholder: "Seleccione",
-				allowClear: false
-			});
 		}
 	}
 	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -2188,7 +2179,8 @@ function reloadModalMDP2(tipoModal, idEnlace, idMedida, typeArch, typeCheck) {
 			$('.dataAutocomplet').select2({
 				width: '100%',
 				placeholder: "Seleccione",
-				allowClear: false
+				allowClear: false,
+				dropdownParent: $('#medidaDeProteccion')
 			});
 		}
 	}
