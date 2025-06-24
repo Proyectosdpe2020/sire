@@ -353,7 +353,7 @@ function guardarLitigacion(idEnlace, mes, anio, idMp, idUnidad) {
 	recibiOtmp = document.getElementById("recibiOtmp").value; if (recibiOtmp == "") { recibiOtmp = 0; } else { recibiOtmp = parseInt(document.getElementById("recibiOtmp").value); }
 	cesefunciones = document.getElementById("cesefunciones").value; if (cesefunciones == "") { cesefunciones = 0; } else { cesefunciones = parseInt(document.getElementById("cesefunciones").value); }
 
-	tramAnt = document.getElementById("tramAnt").value; if (tramAnt == "") { tramAnt = 0; } else { tramAnt = parseInt(document.getElementById("tramAnt").value); }
+	/*tramAnt = document.getElementById("tramAnt").value; if (tramAnt == "") { tramAnt = 0; } else { tramAnt = parseInt(document.getElementById("tramAnt").value); }*/
 	cdete = document.getElementById("cdete").value; if (cdete == "") { cdete = 0; } else { cdete = parseInt(document.getElementById("cdete").value); }
 	cdeteNu = document.getElementById("valor1").value; if (cdeteNu == "") { cdeteNu = 0; } else { cdeteNu = parseInt(document.getElementById("valor1").value); }
 	sdete = document.getElementById("sdete").value; if (sdete == "") { sdete = 0; } else { sdete = parseInt(document.getElementById("sdete").value); }
@@ -749,7 +749,7 @@ function guardarLitigacion(idEnlace, mes, anio, idMp, idUnidad) {
 		}
 
 		ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-		ajax.send("&idUnidad=" + idUnidad + "&idEnlace=" + idEnlace + "&idMp=" + idMp + "&mes=" + mes + "&anio=" + anio + "&tramAnt=" + tramAnt + "&cdete=" + cdete + "&sdete=" + sdete + "&FIsolic=" + FIsolic + "&FIotor=" + FIotor + "&FInega=" + FInega + "&auvinc="
+		ajax.send("&idUnidad=" + idUnidad + "&idEnlace=" + idEnlace + "&idMp=" + idMp + "&mes=" + mes + "&anio=" + anio +  "&cdete=" + cdete + "&sdete=" + sdete + "&FIsolic=" + FIsolic + "&FIotor=" + FIotor + "&FInega=" + FInega + "&auvinc="
 			+ auvinc + "&aunvinc=" + aunvinc + "&mix=" + mix + "&MCsol=" + MCsol + "&MCotor=" + MCotor + "&MCnega=" + MCnega + "&ppofic=" + ppofic + "&ppjus="
 			+ ppjus + "&ppanju=" + ppanju + "&exgaeco=" + exgaeco + "&emvien=" + emvien + "&incuval=" + incuval + "&pssafj=" + pssafj + "&scviind="
 			+ scviind + "&pcdrclug=" + pcdrclug + "&pccdper=" + pccdper + "&sindom=" + sindom + "&steeca=" + steeca + "&steapl=" + steapl + "&coloele=" + coloele + "&rpdmjd=" + rpdmjd + "&SDpapen=" + SDpapen + "&acrep=" + acrep

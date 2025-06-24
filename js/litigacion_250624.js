@@ -1252,15 +1252,15 @@ function nucInserts(idinput, idMp, mes, anio, estatResolucion, deten, idUnidad) 
 
                             if (objDatos.first == "SI") {
 
-                              if(estatResolucion != 181){
-                                  ////// VALIDAR SI EL NUC SE ENCUENTRA YA JUDICIALIZADO O NO ///////
-                                  checkNucJudiciImputado(estatResolucion, idMp, mes, anio, deten, idUnidad);
+                                if(estatResolucion != 181){
+                                    ////// VALIDAR SI EL NUC SE ENCUENTRA YA JUDICIALIZADO O NO ///////
+                                    checkNucJudiciImputado(estatResolucion, idMp, mes, anio, deten, idUnidad);
 
-                                  /////// SE EJECUTARA CUANDO YA SE QUIERA INSERTAR EL NUC EN BD DESPUES DE VALIDAR LOS IMPUTADOS
-                                  // getDatosNucDetermEstlit(nuc, idMp, estatResolucion, mes, anio, deten, idUnidad);
-                              }else{
-                                  sendDataModalImputadosNUC_tramite(nuc , idMp, mes, anio, estatResolucion, idUnidad);
-                              }
+                                    /////// SE EJECUTARA CUANDO YA SE QUIERA INSERTAR EL NUC EN BD DESPUES DE VALIDAR LOS IMPUTADOS
+                                    // getDatosNucDetermEstlit(nuc, idMp, estatResolucion, mes, anio, deten, idUnidad);
+                                }else{
+                                    sendDataModalImputadosNUC_tramite(nuc , idMp, mes, anio, estatResolucion, idUnidad);
+                                }
 
                             }
                         }
@@ -2618,7 +2618,7 @@ function updateTableNucsLiti2(idMp, anio, mes, estatResolucion, nuc, deten, idUn
 
 //funcion para actualizar tabla del estatus tramite 181
 function updateTableNucsLiti_tramite(idMp, anio, mes, estatResolucion, nuc, deten, idUnidad) {
-console.log("idMp: " + idMp + " anio: " + anio + " mes: " + mes + " estatResolucion: " + estatResolucion + " nuc: " + nuc + " deten: " + deten + " idUnidad: " + idUnidad  );
+    console.log("idMp: " + idMp + " anio: " + anio + " mes: " + mes + " estatResolucion: " + estatResolucion + " nuc: " + nuc + " deten: " + deten + " idUnidad: " + idUnidad  );
     acc = "showtableTramite";
     cont = document.getElementById("contTableNucslitg_tramite");
     ajax = objetoAjax();
@@ -2665,25 +2665,25 @@ function sendDataModalTramite(inputCant, estatus, idMp, mes, anio, idUnidad) {
 
     var cant = document.getElementById(inputCant).value;
     cont = document.getElementById('contmodal_tramite');
-        $('#nuc').focus();
-        ajax = objetoAjax();
-        ajax.open("POST", "format/litigacion/views/modal_tramite.php");
-        ajax.onreadystatechange = function () {
-            if (ajax.readyState == 4 && ajax.status == 200) {
-                cont.innerHTML = ajax.responseText;
+    $('#nuc').focus();
+    ajax = objetoAjax();
+    ajax.open("POST", "format/litigacion/views/modal_tramite.php");
+    ajax.onreadystatechange = function () {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+            cont.innerHTML = ajax.responseText;
 
 
-                $('#modal_tramite').modal('show');
-                $('#modalFormatoLitig').modal('hide');
+            $('#modal_tramite').modal('show');
+            $('#modalFormatoLitig').modal('hide');
 
-                // Cuando el modal ya es visible, entonces inicializa DataTables
-                $('#modal_tramite').on('shown.bs.modal', function () {
-                    dataTable_iniciar_tramite();
-                });
-            }
+            // Cuando el modal ya es visible, entonces inicializa DataTables
+            $('#modal_tramite').on('shown.bs.modal', function () {
+                dataTable_iniciar_tramite();
+            });
         }
-        ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        ajax.send("&cant=" + cant + "&idMp=" + idMp + "&mes=" + mes + "&anio=" + anio + "&idUnidad=" + idUnidad + "&estatus=" + estatus);
+    }
+    ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    ajax.send("&cant=" + cant + "&idMp=" + idMp + "&mes=" + mes + "&anio=" + anio + "&idUnidad=" + idUnidad + "&estatus=" + estatus);
 
 }
 

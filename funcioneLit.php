@@ -99,7 +99,8 @@ function getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad, $idMp)
   sum([TIEnegativaDatosConservados]) as 'TIEnegativaDatosConservados',
   sum([TIEnegativaDatosBancarios]) as 'TIEnegativaDatosBancarios',
   sum([TIEotorgadas]) as 'TIEotorgadas',
-  sum([TIEnegadas]) as 'TIEnegadas'
+  sum([TIEnegadas]) as 'TIEnegadas',
+  sum([tramite_total]) as 'tramite_total',
    FROM Litigacion WHERE idMes = $mes AND idAnio = $anio AND idUnidad = $idUnidad";
 	} else {
 
@@ -266,6 +267,7 @@ function getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad, $idMp)
 ,[TIEnegativaDatosBancarios]
 ,[TIEotorgadas]
 ,[TIEnegadas]
+,[tramite_total]
 FROM [ESTADISTICAV2].[dbo].[Litigacion] WHERE idMes = $mes AND idAnio = $anio AND idUnidad = $idUnidad AND idMp = $idMp";
 	}
 
@@ -466,6 +468,8 @@ FROM [ESTADISTICAV2].[dbo].[Litigacion] WHERE idMes = $mes AND idAnio = $anio AN
         $arreglo[$indice][163] = $row['TIEnegativaDatosBancarios'];
         $arreglo[$indice][164] = $row['TIEotorgadas'];
         $arreglo[$indice][165] = $row['TIEnegadas'];
+        $arreglo[$indice][166] = $row['tramite_total'];
+
 
 		$indice++;
 	}
@@ -553,7 +557,7 @@ function getDistincCarpetasAgenteLitigacion($conn, $idMp, $estatus, $mes, $anio,
 																SELECT no_averiguacion , idEstatusAveriguacion FROM estatusAveriguaciones 
 					WHERE idMp = $idMp AND mes = $mes AND anio = $anio AND  idEstatus = $estatus AND idUnidad = $idUnidad  ";
 		} 
-		else if ($estatus == 165 ) {
+		else if ($estatus == 181 ) {
 			$query = " SELECT nuc, idEstatusNucs FROM estatusNucs WHERE idMp = $idMp AND idEstatus = $estatus  ";
 		}else {
 			$query = " SELECT DISTINCT nuc, idEstatusNucs FROM estatusNucs WHERE idMp = $idMp AND idEstatus = $estatus AND mes = $mes AND anio = $anio AND idUnidad = $idUnidad Group BY nuc , idEstatusNucs";
@@ -1040,6 +1044,7 @@ function getDataMP_documentExcel($conn, $mes, $anio, $idUnidad){
                                                                 ,l.[TIEnegativaDatosBancarios]
                                                                 ,l.[TIEotorgadas]
                                                                 ,l.[TIEnegadas]
+                                                                ,l.[tramite_total]
 		FROM [ESTADISTICAV2].[dbo].[Litigacion] l
 		INNER JOIN dbo.mp mp ON mp.idMp = l.idMp
 		WHERE l.idUnidad = $idUnidad AND l.idMes = $mes and l.idAnio = $anio";
@@ -1243,7 +1248,7 @@ function getDataMP_documentExcel($conn, $mes, $anio, $idUnidad){
         $arreglo[$indice][166] = $row['TIEnegativaDatosBancarios'];
         $arreglo[$indice][167] = $row['TIEotorgadas'];
         $arreglo[$indice][168] = $row['TIEnegadas'];
-
+        $arreglo[$indice][169] = $row['tramite_total'];
 
 		$indice++;
 	}
@@ -1269,3 +1274,158 @@ function formatTitleSheet($nombreMP, $paternoMP, $maternoMP){
 	}
 }
 
+
+function getDataTramite($conn, $nuc){
+    // PASO 1: Definición de la función
+    // - $conn: Es la conexión a la base de datos
+    // - $nuc: Es el número único de caso que vamos a consultar
+
+    // PASO 2: Primera consulta para verificar el estatus
+    $queryEstatus = "SELECT TOP 1 idEstatusNucs 
+                     FROM estatusNucs 
+                     WHERE nuc = ? AND idEstatus = 181 
+                     ORDER BY idEstatusNucs DESC";
+    // Esta consulta hace lo siguiente:
+    // - SELECT TOP 1: Selecciona solo el primer registro
+    // - FROM estatusNucs: De la tabla estatusNucs
+    // - WHERE nuc = ? AND idEstatus = 181: Filtra por el NUC proporcionado y el estatus 181
+    // - ORDER BY idEstatusNucs DESC: Ordena de forma descendente para obtener el más reciente
+
+    // PASO 3: Preparación de parámetros para la primera consulta
+    $paramsEstatus = array($nuc);
+    // Crea un arreglo con el valor del NUC que se usará como parámetro
+
+    // PASO 4: Ejecutar la primera consulta
+    $stmtEstatus = sqlsrv_query($conn, $queryEstatus, $paramsEstatus);
+
+    // PASO 5: Verificar si hubo error en la consulta
+    if($stmtEstatus === false) {
+        return false;
+    }
+
+    // PASO 6: Procesar el resultado de la primera consulta
+    if($rowEstatus = sqlsrv_fetch_array($stmtEstatus, SQLSRV_FETCH_ASSOC)) {
+        // Si encontró un registro, obtiene el idEstatusNucs
+        $idEstatusNucs = $rowEstatus['idEstatusNucs'];
+
+        // PASO 7: Segunda consulta a la tabla de trámites
+        $queryTramite = "SELECT * FROM tramiteLitigacion WHERE idEstatusNucs = ?";
+        // Esta consulta selecciona todos los campos de tramiteLitigacion
+        // donde idEstatusNucs coincida con el obtenido anteriormente
+
+        // PASO 8: Preparación de parámetros para la segunda consulta
+        $paramsTramite = array($idEstatusNucs);
+
+        // PASO 9: Ejecutar la segunda consulta
+        $stmtTramite = sqlsrv_query($conn, $queryTramite, $paramsTramite);
+
+        // PASO 10: Verificar si hubo error en la segunda consulta
+        if($stmtTramite === false) {
+            return false;
+        }
+
+        // PASO 11: Procesar el resultado de la segunda consulta
+        if($rowTramite = sqlsrv_fetch_array($stmtTramite, SQLSRV_FETCH_ASSOC)) {
+            // Si encuentra datos, los retorna
+            return $rowTramite;
+        }
+    }
+
+    // PASO 12: Si no se encontró nada, retorna false
+    return false;
+}
+
+function getDataTramiteImputados($conn, $idCarpetaTramite){
+
+    $queryTramiteImputados = "SELECT * FROM tramiteImputadoLitigacion WHERE idCarpetaTramite = ?";
+    $paramsTramiteImputados = array($idCarpetaTramite);
+    $stmtTramiteImputados = sqlsrv_query($conn, $queryTramiteImputados, $paramsTramiteImputados);
+
+    if($stmtTramiteImputados === false) {
+        return false;
+    }
+
+    $imputados = array();
+    // Recorremos todas las filas y las guardamos en el array
+    while($rowTramiteImputados = sqlsrv_fetch_array($stmtTramiteImputados, SQLSRV_FETCH_ASSOC)) {
+        $imputados[] = $rowTramiteImputados;
+    }
+
+    return $imputados;
+
+}
+
+function getTramiteAgenteLitigacion($conn, $idMp, $estatus, $mes, $anio, $idUnidad){
+
+    $query = " SELECT * FROM estatusNucs WHERE idMp = $idMp AND idEstatus = $estatus  ";
+
+    //echo $query."<br>";
+
+    $indice = 0;
+
+    $stmt = sqlsrv_query($conn, $query);
+
+    while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+        $arreglo[$indice][0] = $row['nuc'];
+        $arreglo[$indice][1] = $row['idEstatusNucs'];
+        $arreglo[$indice][2] = $row['idMp'];
+        $arreglo[$indice][3] = $row['idUnidad'];
+        $arreglo[$indice][4] = $row['anio'];
+        $arreglo[$indice][5] = $row['mes'];
+        $arreglo[$indice][6] = $row['idCarpeta'];
+
+        $indice++;
+    }
+    if (isset($arreglo)) {
+        return $arreglo;
+    }
+}
+
+
+function getDatosTramiteLitigacion($conn, $idEstatusNucs) {
+    $query = "SELECT [idCarpetaTramite]
+                    ,[idEstatusNucs]
+                    ,[causaPenal]
+                    ,[cuadernoAntecedentes]
+                    ,[cuadernoConRequerimiento]
+                    ,[archivoEnSedeJudicial]
+              FROM [ESTADISTICAV2].[dbo].[tramiteLitigacion] 
+              WHERE [idEstatusNucs] = ?";
+
+    $params = array($idEstatusNucs);
+    $stmt = sqlsrv_query($conn, $query, $params);
+
+    if ($stmt === false) {
+        return false;
+    }
+
+    $datos = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+    sqlsrv_free_stmt($stmt);
+
+    return $datos;
+}
+
+// Creamos la función para obtener los imputados del tramite
+function getImputadosTramite($conn, $idCarpetaTramite) {
+    $query = "SELECT [idImputadoTramite]
+                    ,[nombre]
+                    ,[apellidoPaterno]
+                    ,[apellidoMaterno]
+             FROM [ESTADISTICAV2].[dbo].[tramiteImputadoLitigacion] 
+             WHERE [idCarpetaTramite] = ?";
+
+    $params = array($idCarpetaTramite);
+    $stmt = sqlsrv_query($conn, $query, $params);
+
+    if ($stmt === false) {
+        return array();
+    }
+
+    $imputados = array();
+    while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+        $imputados[] = $row;
+    }
+
+    sqlsrv_free_stmt($stmt);
+    return $imputados;
+}

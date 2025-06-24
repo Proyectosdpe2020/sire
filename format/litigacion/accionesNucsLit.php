@@ -735,7 +735,7 @@ switch ($acc) {
 
 		$vari = "valor";
 
-		$arregloEsatusLit = array(1, 2, 3, 4, 5, 6, 7, 10, 12, 98, 97, 96, 17, 18, 95, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 89, 99, 90, 91, 93, 32, 33, 34, 35, 36, 38, 40, 41, 43, 44, 45, 46, 48, 49, 50, 53, 57, 58, 60, 61, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 112, 113, 129, 114, 115, 116, 117, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 140, 139, 141, 144, 145, 142, 146, 147, 148, 149, 151, 152, 153, 154, 139, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165 , 166 , 167 , 168 , 170 , 171 , 172 , 173 , 175 , 176 , 178 , 179 , 180);
+		$arregloEsatusLit = array(1, 2, 3, 4, 5, 6, 7, 10, 12, 98, 97, 96, 17, 18, 95, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 89, 99, 90, 91, 93, 32, 33, 34, 35, 36, 38, 40, 41, 43, 44, 45, 46, 48, 49, 50, 53, 57, 58, 60, 61, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 112, 113, 129, 114, 115, 116, 117, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 140, 139, 141, 144, 145, 142, 146, 147, 148, 149, 151, 152, 153, 154, 139, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 181 , 166 , 167 , 168 , 170 , 171 , 172 , 173 , 175 , 176 , 178 , 179 , 180);
 
 
 		for ($p = 0; $p < sizeof($arregloEsatusLit); $p++) {
@@ -1337,7 +1337,120 @@ switch ($acc) {
 			}
 
 		break;
+
+    case 'showtableTramite':
+
+        if (isset($_POST["idMp"])) {
+            $idMp = $_POST["idMp"];
+        }
+        if (isset($_POST["estatus"])) {
+            $estatResolucion = $_POST["estatus"];
+        }
+        if (isset($_POST["mes"])) {
+            $mes = $_POST["mes"];
+        }
+        if (isset($_POST["anio"])) {
+            $anio = $_POST["anio"];
+        }
+        if (isset($_POST["nuc"])) {
+            $nuc = $_POST["nuc"];
+        }
+        if (isset($_POST["deten"])) {
+            $deten = $_POST["deten"];
+        }
+        if (isset($_POST["idUnidad"])) {
+            $idUnidad = $_POST["idUnidad"];
+        }
+
+        //// Obtener las carpetas del Mp
+        $sumador = 0;
+        $carpeAgente = getTramiteAgenteLitigacion($conn, $idMp, $estatResolucion, $mes, $anio, $idUnidad);
+
+
+        ob_start();
+        for ($i = 0; $i < sizeof($carpeAgente); $i++) {
+        $nuc = $carpeAgente[$i][0];
+        $idEstatusNucsThisNUC = $carpeAgente[$i][1];
+        $idMp = $carpeAgente[$i][2];
+        $idUnidad = $carpeAgente[$i][3];
+        $anio = $carpeAgente[$i][4];
+        $mes = $carpeAgente[$i][5];
+        $idCarpeta = $carpeAgente[$i][6];
+
+        $nucs = getNucExpSicap($conSic, $idCarpeta);
+        $exp = $nucs[0][1];
+
+        // Obtener los datos de tramiteLitigacion
+        $datosTramite = getDatosTramiteLitigacion($conn, $idEstatusNucsThisNUC);
+
+        // Obtener los imputados si hay datos del trámite
+        $imputados = array();
+        if ($datosTramite && isset($datosTramite['idCarpetaTramite'])) {
+        $imputados = getImputadosTramite($conn, $datosTramite['idCarpetaTramite']);
+        }
+        ?>
+        <tr>
+            <td class="tdRowMainData negr"><?php echo ($sumador + 1); ?></td>
+            <td class="tdRowMainData negr"><?php echo $nuc; ?></td>
+            <td class="tdRowMainData negr"><?php echo $exp; ?></td>
+            <td class="tdRowMainData negr">
+                <?= ($datosTramite && $datosTramite['causaPenal']) ? $datosTramite['causaPenal'] : 'N/A' ?>
+            </td>
+            <td class="tdRowMainData negr">
+                <?= ($datosTramite && $datosTramite['cuadernoAntecedentes']) ? $datosTramite['cuadernoAntecedentes'] : 'N/A' ?>
+            </td>
+            <td class="tdRowMainData negr">
+                <?= ($datosTramite && $datosTramite['cuadernoConRequerimiento']) ? 'SI' : 'NO' ?>
+            </td>
+            <td class="tdRowMainData negr">
+                <?= ($datosTramite && $datosTramite['archivoEnSedeJudicial']) ? 'SI' : 'NO' ?>
+            </td>
+            <td class="tdRowMainData negr">
+                <?php
+                if (!empty($imputados)) {
+                    echo "<div class='imputados-list'>";
+                    foreach ($imputados as $imputado) {
+                        $nombreCompleto = trim($imputado['nombre'] . ' ' .
+                            $imputado['apellidoPaterno'] . ' ' .
+                            $imputado['apellidoMaterno']);
+                        echo "<div class='imputado-item'>" . htmlspecialchars($nombreCompleto) . "</div>";
+                    }
+                    echo "</div>";
+                } else {
+                    echo "Sin imputados registrados";
+                }
+                ?>
+            </td>
+            <td class="tdRowMainData">
+                <button style="width: 100%; height:34%; font-size: 1em; box-sizing: border-box;"
+                        type="button"
+                        onclick="sendDataModalImputadosNUC_tramite('<?php echo $nuc; ?>', <?php echo $idMp; ?>, <?php echo $mes; ?>, <?php echo $anio; ?>, 181, <?php echo $idUnidad; ?>)"
+                        class="btn-success btn-sm redondear">
+                    <span style="color: white !important;" class="glyphicon glyphicon-pencil"></span> Editar
+                </button>
+            </td>
+            <td class="tdRowMainData">
+                <button style="width: 100%; height:34%; font-size: 1em; box-sizing: border-box;"
+                        type="button"
+                        onclick="deleteTramiteCarpeta(<?php echo $idEstatusNucsThisNUC; ?>, <?php echo $idMp; ?>, <?php echo $anio; ?>, <?php echo $mes; ?>, <?php echo $estatResolucion ?>, '<?php echo $nuc; ?>', <?php echo $idUnidad; ?>)"
+                        class="btn-danger btn-sm redondear">
+                    <span style="color: white !important;" class="glyphicon glyphicon-trash"></span> Eliminar
+                </button>
+            </td>
+        </tr>
+        <?php
+        $sumador++;
+}
+        $html = ob_get_clean();
+// Devolver respuesta JSON con el HTML
+        echo json_encode(['html' => $html]);
+
+
+
+        break;
+
 	}
+
 
 
 

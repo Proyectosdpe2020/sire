@@ -595,6 +595,31 @@ $idUsuario = $_SESSION['useridIE'];
 
 		</div>
 
+        <div class="modal fade bs-example-modal-sm" id="modal_tramite" role="dialog" data-backdrop="static" data-keyboard="false" style="overflow: auto">
+
+            <div id="modalVistaCss" class="modal-dialog modal-sm" style="width: 80%; margin-top: 1%; ">
+
+                <div class="modal-content">
+
+                    <div id="contmodal_tramite"></div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="modal fade bs-example-modal-sm" id="modalFormatImputados_tramite" role="dialog" data-backdrop="static" data-keyboard="false">
+
+            <div id="modalVistaCss_imputado" class="modal-dialog modal-sm" style="width: 60%;  margin-top: 2%; ">
+
+                <div class="modal-content" >
+
+                    <div id="contmodalImputadosLitig_tramite"></div>
+
+                </div>
+            </div>
+
+        </div>
 
 
 		</html>

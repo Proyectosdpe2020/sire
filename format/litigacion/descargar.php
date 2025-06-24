@@ -96,7 +96,7 @@
  $data = getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad, 0);
 
 
-	$objPHPExcel->getActiveSheet()->SetCellValue("D12", $data[0][0]); //Existencia anterior
+	$objPHPExcel->getActiveSheet()->SetCellValue("D12", $data[0][166]); //TRAMITE
 	$objPHPExcel->getActiveSheet()->SetCellValue("H12", $data[0][105]);  //Recibidas por otro ministerio publico
 
 	$objPHPExcel->getActiveSheet()->SetCellValue("D13", $data[0][1]); //Carpetas Judicializadas
@@ -310,7 +310,7 @@ for($pageIndex=1; $pageIndex <= $totalMP; $pageIndex++){
  $sheet->SetCellValue("D10", $dataMp[$k][152].' '.$dataMp[$k][153].' '.$dataMp[$k][154]);
 
 
- $sheet->SetCellValue("D12", $dataMp[$k][0]); //Existencia anterior
+ $sheet->SetCellValue("D12", $dataMp[$k][169]); //TRAMITE
 	$sheet->SetCellValue("H12", $dataMp[$k][105]);  //Recibidas por otro ministerio publico
 
 	$sheet->SetCellValue("D13", $dataMp[$k][1]); //Carpetas Judicializadas
