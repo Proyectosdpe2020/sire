@@ -173,11 +173,15 @@ if (isset($_POST["idMedida"])) {
 			<? } ?>
 			<!---TERMINA SECCION COORDINADOR-->
 			<div class="row">
-				<div class="col-xs-12 col-sm-12  col-md-2">
+				<div class="col-xs-12 col-sm-12  col-md-4">
 					<label for="nuc">NUC: <span class="aste">(*)</span></label>
-					<input class="form-control mandda gehit" value="<? if ($a == 1) {echo $get_nuc;} ?>" onchange="validateMedidaOK(this.id)" id="nuc" type="text" <? if ($rolUser == 1 || $rolUser == 3) { ?> disabled <? } ?>>
+					<input class="form-control" value="<? if ($a == 1) {echo $get_nuc;} ?>" onchange="validateMedidaOK(this.id)" id="nuc" type="text" <? if ($rolUser == 1 || $rolUser == 3) { ?> disabled <? } ?>>
 				</div>
-				<div class="col-xs-12 col-sm-12  col-md-3">
+				<div class="col-xs-12 col-sm-12  col-md-4">
+					<label for="nOficio">Número de oficio: <span class="aste">(*)</span></label>
+					<input class="form-control" id="nOficio" type="text" disabled>
+				</div>
+				<div class="col-xs-12 col-sm-12  col-md-4">
 					<label for="idDelito">Delito: <span class="aste">(*)</span></label>
 					<div id="idDelito_div">
 						<select class="dataAutocomplet form-control browser-default custom-select" id="idDelito" onchange="validateMedidaOK('idDelito_div')" <? if ($rolUser == 1 || $rolUser == 3) { ?> disabled <? } ?>>
@@ -191,7 +195,9 @@ if (isset($_POST["idMedida"])) {
 						</select>
 					</div>
 				</div>
-				<div class="col-xs-12 col-sm-12  col-md-3">
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12  col-md-4">
 					<label for="idFiscaliaProc">Fiscalía ó Unidad de procedencia :</label>
 					<div id="idFiscaliaProc_div">
 						<select class="dataAutocomplet form-control browser-default custom-select" id="idFiscaliaProc" onchange="validateMedidaOK('idFiscaliaProc_div')" <? if ($rolUser == 1 || $rolUser == 3) { ?> disabled <? } ?>>
@@ -206,7 +212,7 @@ if (isset($_POST["idMedida"])) {
 						</select>
 					</div>
 				</div>
-				<div class="col-xs-12 col-sm-12  col-md-2">
+				<div class="col-xs-12 col-sm-12  col-md-4">
 					<label for="fechaAcuerdo">Fecha del acuerdo: <span class="aste">(*)</span></label>
 					<input 
 						id="fechaAcuerdo" 
@@ -223,7 +229,7 @@ if (isset($_POST["idMedida"])) {
 						max="<? echo $hoy; ?>T23:59:59" 
 						<? if ($rolUser == 1 || $rolUser == 3) { ?> disabled <? } ?> />
 				</div>
-				<div class="col-xs-12 col-sm-12  col-md-2">
+				<div class="col-xs-12 col-sm-12  col-md-4">
 					<label for="fechaRegistro">Fecha de registro:</label>
 					<input 
 						class="form-control"
@@ -247,15 +253,15 @@ if (isset($_POST["idMedida"])) {
 			<div class="row">
 				<div class="col-xs-12 col-sm-12  col-md-3">
 					<label for="nombreVicti">Nombre: <span class="aste">(*)</span></label>
-					<input class="form-control mandda gehit" value="" onchange="validateMedidaOK(this.id)" id="nombreVicti" type="text">
+					<input class="form-control" value="" onchange="validateMedidaOK(this.id)" id="nombreVicti" type="text">
 				</div>
 				<div class="col-xs-12 col-sm-12  col-md-3">
 					<label for="paternoVicti">Paterno: <span class="aste">(*)</span></label>
-					<input class="form-control mandda gehit" value="" onchange="validateMedidaOK(this.id)" id="paternoVicti" type="text">
+					<input class="form-control" value="" onchange="validateMedidaOK(this.id)" id="paternoVicti" type="text">
 				</div>
 				<div class="col-xs-12 col-sm-12  col-md-3">
 					<label for="maternoVicti">Materno: <span class="aste">(*)</span></label>
-					<input class="form-control mandda gehit" value="" onchange="validateMedidaOK(this.id)" id="maternoVicti" type="text">
+					<input class="form-control" value="" onchange="validateMedidaOK(this.id)" id="maternoVicti" type="text">
 				</div>
 				<div class="col-xs-12 col-sm-12  col-md-2">
 					<label for="generoVicti">Género: <span class="aste">(*)</span></label>
@@ -479,7 +485,7 @@ if (isset($_POST["idMedida"])) {
 	<input class="form-check-input"<? if($banT == 1){echo "checked"; } ?> <? if($banT == 1){ echo "disabled"; } ?> onchange="toggleCheckboxTestigo(this)" type="checkbox" value="" id="flexCheckDefault">
   
   
-  <label class="form-check-label" for="flexCheckChecked">La medida de Proteccion cuenta con Testigos!</label>
+  <label class="form-check-label" for="flexCheckChecked">¡La medida de Proteccion cuenta con Testigos!</label>
 </div><br>
 	<!--DATOS DE LA VICTIMA-->
 	<div id="panelDeTestigos" <? if($banT == 1){?> style="display:block; " <? }else{ ?>  style="display:none;"   <? } ?>class="panel panel-default fd1">
@@ -489,21 +495,26 @@ if (isset($_POST["idMedida"])) {
 			<div class="row">
 				<div class="col-xs-12 col-sm-12  col-md-2">
 					<label for="nombreVicti">Causa:</label>
-					<input class="form-control mandda gehit" <?php if ($bandCausa == 1) {
-																																															echo "disabled";
-																																														} ?> value="<?php echo $causaP; ?>" id="causaTest" type="text">
+					<input 
+						class="form-control" 
+						<?php if ($bandCausa == 1) {
+							echo "disabled";
+						} ?> 
+						value="<?php echo $causaP; ?>" 
+						id="causaTest" 
+						type="text">
 				</div>
 				<div class="col-xs-12 col-sm-12  col-md-4">
 					<label for="nombreVicti">Nombre (s): <span class="aste">(*)</span></label>
-					<input class="form-control mandda gehit" value="" id="nombreTest" type="text">
+					<input class="form-control" value="" id="nombreTest" type="text">
 				</div>
 				<div class="col-xs-12 col-sm-12  col-md-2">
 					<label for="paternoVicti">Paterno: <span class="aste">(*)</span></label>
-					<input class="form-control mandda gehit" value="" id="paternoTest" type="text">
+					<input class="form-control" value="" id="paternoTest" type="text">
 				</div>
 				<div class="col-xs-12 col-sm-12  col-md-2">
 					<label for="maternoVicti">Materno: <span class="aste">(*)</span></label>
-					<input class="form-control mandda gehit" value="" id="maternoTest" type="text">
+					<input class="form-control" value="" id="maternoTest" type="text">
 				</div>
 				<div class="col-xs-12 col-sm-12  col-md-2">
 					<label for="maternoVicti">Estado Actual <span class="aste">(*)</span></label>
