@@ -100,7 +100,7 @@ function getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad, $idMp)
   sum([TIEnegativaDatosBancarios]) as 'TIEnegativaDatosBancarios',
   sum([TIEotorgadas]) as 'TIEotorgadas',
   sum([TIEnegadas]) as 'TIEnegadas',
-  sum([tramite_total]) as 'tramite_total',
+  sum([tramite_total]) as 'tramite_total'
    FROM Litigacion WHERE idMes = $mes AND idAnio = $anio AND idUnidad = $idUnidad";
 	} else {
 
