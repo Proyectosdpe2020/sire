@@ -196,6 +196,6 @@ $idUsuario = $_SESSION['useridIE'];
 
 <div class="row"><br>
     <div class="col-xs-12 col-sm-12 col-md-12">
-        <center><button style="width: 97%;" type="button" class="btn btn-primary redondear" onclick="salirModal_tramite(<?php echo $idMp; ?>)">Salir</button></center>
+        <center><button style="width: 97%;" type="button" class="btn btn-primary redondear" onclick="salirModal_tramite(<?php echo $idMp; ?> , <?php echo $idUnidad ?>)">Salir</button></center>
     </div> <br>
 </div><br>

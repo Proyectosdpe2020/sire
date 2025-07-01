@@ -7,9 +7,10 @@ include("../../../funciones.php");
 include("../../../funcioneLit.php");
 
 $idMp = $_POST['idMp'];
+$idUnidad = $_POST['idUnidad'];
 
-$query = "SELECT COUNT(nuc) as total FROM estatusNucs WHERE idMp = ? AND idEstatus = 181";
-$params = array($idMp);
+$query = "SELECT COUNT(nuc) as total FROM estatusNucs WHERE idMp = ? AND idUnidad = ? AND idEstatus = 181 ";
+$params = array($idMp , $idUnidad);
 
 $stmt = sqlsrv_query($conn, $query, $params);
 
