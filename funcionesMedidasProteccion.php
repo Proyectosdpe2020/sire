@@ -211,6 +211,7 @@ function get_data_medida($connMedidas, $idMedida){
 													      ,[idFiscaliaProcedencia]
 													      ,[estatus]
 														  ,[idCatCoorporacion]
+														  ,[nOficio]
 													  FROM [SIRE].[medidas].[medidasProteccion] WHERE idMedida = $idMedida ";
 	$indice = 0;
 	$stmt = sqlsrv_query($connMedidas, $query);
@@ -229,6 +230,7 @@ function get_data_medida($connMedidas, $idMedida){
 		$arreglo[$indice][11]=$row['estatus'];
 		$arreglo[$indice][12]=$row['fechaAcuerdo']->format('Y-m-d');
 		$arreglo[$indice][13]=$row['idCatCoorporacion'];
+		$arreglo[$indice][14]=$row['nOficio'];
 
 		$indice++;
 	}
