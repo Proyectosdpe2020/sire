@@ -1357,7 +1357,7 @@ function getDataTramiteImputados($conn, $idCarpetaTramite){
 
 function getTramiteAgenteLitigacion($conn, $idMp, $estatus, $mes, $anio, $idUnidad){
 
-    $query = " SELECT * FROM estatusNucs WHERE idMp = $idMp AND idEstatus = $estatus  ";
+    $query = " SELECT * FROM estatusNucs WHERE idMp = $idMp AND idEstatus = $estatus AND idUnidad = $idUnidad ";
 
     //echo $query."<br>";
 

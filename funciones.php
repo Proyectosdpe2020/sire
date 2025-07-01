@@ -3344,7 +3344,7 @@ function getIdUnidEnlaceMPunidad($conn, $idEnlace)
 function getCarpetasAgenteLitigacion_totalTramite($conSic, $idMp, $estatus, $mes, $anio, $idUnidad)
 {
 
-	$query = " SELECT count(nuc) as total FROM estatusNucs WHERE idMp = $idMp AND idEstatus = 181  ";
+	$query = " SELECT count(nuc) as total FROM estatusNucs WHERE idMp = $idMp AND idEstatus = 181 AND idUnidad = $idUnidad ";
 
 	$indice = 0;
 

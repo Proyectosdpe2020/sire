@@ -3043,12 +3043,13 @@ function dataTable_iniciar_tramite(){
     } );
 }
 
-function salirModal_tramite(idMp) {
+function salirModal_tramite(idMp , idUnidad) {
     $.ajax({
         url: 'format/litigacion/views/obtener_total_tramite.php',
         type: 'POST',
         data: {
-            idMp: idMp
+            idMp: idMp,
+            idUnidad: idUnidad
         },
         dataType: 'json',
         success: function(response) {
