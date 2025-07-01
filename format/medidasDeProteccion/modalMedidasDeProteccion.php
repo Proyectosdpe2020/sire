@@ -62,6 +62,7 @@ if (isset($_POST["idMedida"])) {
 		$get_idFiscaliaProcedencia = $medidaData[0][9];
 		$get_estatus = $medidaData[0][11];
 		$get_idCoorporacion = $medidaData[0][13];
+		$get_nOficio = $medidaData[0][14];
 		$a = 1;
 
 		///// MEDIDAS APLICADAS PARA EL RESTIGO /////
@@ -179,7 +180,7 @@ if (isset($_POST["idMedida"])) {
 				</div>
 				<div class="col-xs-12 col-sm-12  col-md-4">
 					<label for="nOficio">Número de oficio: <span class="aste">(*)</span></label>
-					<input class="form-control" id="nOficio" type="text" disabled>
+					<input class="form-control" id="nOficio" type="text" onchange="validateNOF(this.id)" value="<?php if ($a == 1) echo $get_nOficio; ?>">
 				</div>
 				<div class="col-xs-12 col-sm-12  col-md-4">
 					<label for="idDelito">Delito: <span class="aste">(*)</span></label>
@@ -645,12 +646,19 @@ if (isset($_POST["idMedida"])) {
 
 
 
-	<div class="modal-footer">
+	<div class="modal-footer row">
+		<?php 
+			if ($rolUser == 1) { ?>
+				<div class="text-start col-sm-1">
+					<button class="btn btn-danger" onclick="deleteMedida(<?= $idMedida ?>, <?= $idEnlace ?>, <?= $rolUser ?>)">Borrar Medida de Protección</button>
+				</div>
+			<?php } 
+		?>	
 		<button type="button" class="btn btn-default"  onclick="closeModalMDP(<? echo $anioActual; ?>, <? echo $idEnlace; ?>, 0, <? echo $rolUser; ?>, <?= $get_idCoorporacion ?> )">Cerrar</button>
 		<!-- data-dismiss="modal" Se eliminó temporal Botón cerrar -->
 		<? if ( ($rolUser == 2 && $idMedida == 0) || ($rolUser == 4 && $idMedida == 0 ) ) { ?>
 			<button type="button" class="btn btn-primary" onclick="modalDatosMedidaCapturista(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 10, <? echo $idMedida; ?>,0, <? echo $rolUser; ?>)">Guardar información</button>
-		<? } elseif ( ($rolUser == 2  && $idMedida != 0) || ($rolUser == 4  && $idMedida != 0) ) { ?>
+		<? } elseif ( ($rolUser == 2  && $idMedida != 0) || ($rolUser == 4  && $idMedida != 0) ) { ?>			
 			<button type="button" class="btn btn-primary" onclick="actualizarDatosCarpeta(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 10, <? echo $idMedida; ?>, <? echo $rolUser; ?>)">Actualizar información</button>
 		<? } elseif ($rolUser == 1) { ?>
 			<button type="button" class="btn btn-primary" onclick="asignar_medida_mp(<? echo $tipoModal; ?>, <? echo $idEnlace; ?>,<? echo $b; ?>, 10, <? echo $idMedida; ?>)">Asignar a Ministerio Publico</button>

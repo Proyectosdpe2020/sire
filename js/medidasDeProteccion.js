@@ -314,7 +314,7 @@ function modalDatosMedidaCapturista(tipoModal, idEnlace, b, fraccion, idMedida, 
 
 function actualizarDatosCarpeta(tipoModal, idEnlace, b, fraccion, idMedida, rolUser) {
 		if(rolUser == 4){
-   var dataValidate = validateDataMedidaGeneralRegionalesUpdate(); //Validamos que la información principal halla sido llenada previamente
+   			var dataValidate = validateDataMedidaGeneralRegionalesUpdate(); //Validamos que la información principal halla sido llenada previamente
 		}else{
 			var dataValidate = validateDataMedidaCapturistaUpdate(); //Validamos que la información principal halla sido llenada previamente
 		}
@@ -720,6 +720,29 @@ function reloadModalMDP(tipoModal, idEnlace, idMedida, typeArch, typeCheck) {
 function validateMedidaOK(element) {
 	cont = document.getElementById(element);
 	cont.style.border = "";
+}
+
+// Validamos que no haya un número de oficio previo en la base de datos
+function validateNOF (element) {
+	validateMedidaOK(element);
+	var nOficio = document.getElementById(element).value;
+	
+	if ( nOficio != null ) {
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: "format/medidasDeProteccion/inserts/validateNOF.php",
+			data: "nOficio=" + nOficio,
+			success: function (resp) {
+				if (resp.validate) {
+					swal("", "El número de oficio ya existe, favor de verificar.", "warning");
+					cont = document.getElementById(element);
+					cont.style.border = "1px solid red";
+					cont.value = "";
+				}
+			}
+		});
+	}
 }
 
 function validaNucSIGI(nuc, my_callback) {
@@ -1984,32 +2007,40 @@ function deleteFile(moduloID, item_ID, idEnlace, idMedida, path){
 	},
 	function(isConfirm){
 		if(isConfirm){
-			$.ajax({
-				type: "POST",
-				dataType: 'html',
-				url: "format/medidasDeProteccion/inserts/deleteFile.php",
-				data: "&moduloID=" + moduloID + "&item_ID=" + item_ID + "&idMedida=" + idMedida + "&path=" +  path,
-				success: function (resp) {
-					var json = resp;
-					var obj = eval("(" + json + ")");
-					if (obj.first == "NO") {
-						swal("", "No se elimino verifique los datos.", "warning");
-					} else {
-						if (obj.first == "SI") {
-							var obj = eval("(" + json + ")");
-							if (obj.deleteS == "SI"){
-								swal("", "Registro eliminado exitosamente.", "success");
-							}
-							else{
-								console.log(obj.mensaje);
-								swal("", "No se encontró el archivo verifique los datos.", "warning");
-							}							
-							modalDatosMedida(1, idEnlace, 0, 0, idMedida, obj.modulo);
-						}
-					}
-				}		
-			});			
+			if (moduloID == 1) {
+				var modulo = "seguimientoMedidas";
+			}
+			deleteSeguimiento(moduloID, item_ID, idEnlace, idMedida, path);
+			modalDatosMedida(1, idEnlace, 0, 0, idMedida, modulo);
 		}
+	});
+}
+
+//Función para eliminar el archivo del seguimiento
+function deleteSeguimiento(moduloID, item_ID, idEnlace, idMedida, path) {
+	$.ajax({
+	type: "POST",
+	dataType: 'html',
+	url: "format/medidasDeProteccion/inserts/deleteFile.php",
+	data: "&moduloID=" + moduloID + "&item_ID=" + item_ID + "&idMedida=" + idMedida + "&path=" +  path,
+	success: function (resp) {
+		var json = resp;
+		var obj = eval("(" + json + ")");
+		if (obj.first == "NO") {
+			swal("", "No se elimino verifique los datos.", "warning");
+		} else {
+			if (obj.first == "SI") {
+				var obj = eval("(" + json + ")");
+				if (obj.deleteS == "SI"){
+					swal("", "Registro eliminado exitosamente.", "success");
+				}
+				else{
+					console.log(obj.mensaje);
+					swal("", "No se encontró el archivo verifique los datos.", "warning");
+				}
+			}
+		}
+	}		
 	});
 }
 
@@ -2761,6 +2792,62 @@ function deleteItem(moduloID, item_ID, idEnlace, idMedida, banderaTotal) {
 		});
 }
 
+function deleteMedida(idMedida, idEnlace, rolUser) {
+	if (idMedida != "") {
+		swal({
+			title: 'Eliminar Medida de Protección',
+			text: '¿Está seguro de eliminar la medida de protección seleccionada?',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: 'rgba(21,47,74,.9)',
+			confirmButtonText: 'Sí, eliminar',
+			cancelButtonText: 'No, cancelar',
+		}, function (isConfirm) {
+			if (isConfirm) {
+				$.ajax({
+					type: "POST",
+					dataType: 'json',
+					url: "format/medidasDeProteccion/inserts/getSeguimientos.php",
+					data: { idMedida: idMedida },
+					success: function (resp) {
+						if (resp.length > 0) {
+							for (const element of resp) {
+								deleteSeguimiento(1, element.idSeguimiento, idEnlace, idMedida, element.ruta_archivo);
+								console.log("Eliminado:", element.nombre_archivo);
+							}
+						}
+
+						$.ajax({
+							type: 'POST',
+							dataType: 'json',
+							url: 'format/medidasDeProteccion/inserts/deleteMedida.php',
+							data: { idMedida: idMedida },
+							success: function (ans) {
+								if (ans.success) {
+									setTimeout(function () {
+										swal("¡Éxito!", "Medida de protección eliminada exitosamente.", "success");
+										closeModalMDP('', idEnlace, 0, rolUser, '');
+									}, 200); 
+								} else {
+									setTimeout(function () {
+										swal("Error", "No se pudo eliminar la medida de protección. Verifique los datos.", "warning");
+									}, 200);
+								}
+							}
+						});
+					},
+					error: function (err) {
+						console.error("Error en la petición:", err);
+					}
+				});
+			}
+		});
+	}
+	else {
+		swal("Error", "No se ha seleccionado una medida de protección para eliminar.", "error");
+	}
+}
+
 function deleteItemV(moduloID, item_ID, idEnlace, idMedida, banderaTotal) {
 	swal({
 		title: "Eliminar información",
@@ -2801,8 +2888,6 @@ function deleteItemV(moduloID, item_ID, idEnlace, idMedida, banderaTotal) {
 						}
 					});
 				}
-
-
 			}
 
 		});
@@ -2883,7 +2968,7 @@ function validateDataMedidaGeneralRegionales() {
 	var idDelito = document.getElementById("idDelito").value;
 	var fechaAcuerdo = document.getElementById("fechaAcuerdo").value;
 	var fechaRegistro = document.getElementById("fechaRegistro").value;
-	// var nOficio = document.getElementById("nOficio").value;
+	var nOficio = document.getElementById("nOficio").value;
 
  	var nombreVicti = document.getElementById("nombreVicti").value; 
 	var paternoVicti = document.getElementById("paternoVicti").value; 
@@ -2897,9 +2982,9 @@ function validateDataMedidaGeneralRegionales() {
 	var totalInputs = inputMedidaHidden.length;
 
 	//Arreglo de campos para validar con color rojo, si se agrega un nuevo campo, agregar en el arreglo para incluir en la validacion de color
-	var arrayCamposValida = ["agentesMP_id_div", "idCargo", "idFuncion", "idAdscripcion", "nuc", "idDelito_div", "fechaAcuerdo", "fechaRegistro", "nombreVicti", "paternoVicti", "maternoVicti", "generoVicti", "edadVictima", "idFiscaliaProc_div" , "fechaConclu", "idCoorporacion"];
+	var arrayCamposValida = ["agentesMP_id_div", "idCargo", "idFuncion", "idAdscripcion", "nuc", "idDelito_div", "fechaAcuerdo", "fechaRegistro", "nombreVicti", "paternoVicti", "maternoVicti", "generoVicti", "edadVictima", "idFiscaliaProc_div" , "fechaConclu", "idCoorporacion", "nOficio"];
 	//Arreglo de variables de informacion, donde se verifica si hay informacion en dicha variable
-	var arrayCamposData = [agentesMP_id, idCargo, idFuncion, idAdscripcion, nuc, idDelito, fechaAcuerdo, fechaRegistro, nombreVicti, paternoVicti, maternoVicti, generoVicti, edadVictima, idFiscaliaProc, fechaConclu, idCoorporacion];
+	var arrayCamposData = [agentesMP_id, idCargo, idFuncion, idAdscripcion, nuc, idDelito, fechaAcuerdo, fechaRegistro, nombreVicti, paternoVicti, maternoVicti, generoVicti, edadVictima, idFiscaliaProc, fechaConclu, idCoorporacion, nOficio];
 	//Bucle del tamaño de los campos, se verifica si la variable tiene información, si esta no tiene coloreamos el input de color rojo
 	for (x = 0; x < arrayCamposValida.length; x++) {
 		if ($.trim(arrayCamposData[x]) == "") {
@@ -2916,7 +3001,7 @@ function validateDataMedidaGeneralRegionales() {
 		temporalidad = 0;
 	}
 
-	if (agentesMP_id != "" && idCargo != "" && idFuncion != "" && idAdscripcion != "" && nuc != "" && idDelito != "" && fechaAcuerdo != "" && fechaRegistro != "" && nombreVicti != "" && paternoVicti != "" && maternoVicti != "" && generoVicti != "" && edadVictima != "" && idFiscaliaProc != "" && totalInputs != 0 && fechaConclu != "" && temporalidad != 0) {
+	if (agentesMP_id != "" && idCargo != "" && idFuncion != "" && idAdscripcion != "" && nuc != "" && idDelito != "" && fechaAcuerdo != "" && fechaRegistro != "" && nombreVicti != "" && paternoVicti != "" && maternoVicti != "" && generoVicti != "" && edadVictima != "" && idFiscaliaProc != "" && totalInputs != 0 && fechaConclu != "" && temporalidad != 0 && nOficio != "") {
 
 		var dataGenerales = Array();
 		dataGenerales[1] = nuc.trim();
@@ -2938,7 +3023,7 @@ function validateDataMedidaGeneralRegionales() {
 		dataGenerales[16] = fechaConclu;
 		dataGenerales[17] = temporalidad;
 		dataGenerales[18] = idCoorporacion;
-		dataGenerales[19] = "null";
+		dataGenerales[19] = nOficio.trim();
 
 
 		//Obtenemos el nombre de los id de los input agregados dinamicamente
@@ -3030,6 +3115,7 @@ function validateDataMedidaGeneralRegionalesUpdate() {
 	var idFiscAdscrito = document.getElementById("idFiscAdscrito").value;//No ocupa validacion
 	var fechaConclu = document.getElementById("fechaConclu").value;
 	var idCoorporacion = document.getElementById("idCoorporacion").value;
+	var nOficio = document.getElementById("nOficio").value;
 
 	var nuc = document.getElementById("nuc").value;
 	var idDelito = document.getElementById("idDelito").value;
@@ -3038,9 +3124,9 @@ function validateDataMedidaGeneralRegionalesUpdate() {
 	var idFiscaliaProc = document.getElementById("idFiscaliaProc").value;
 
 	//Arreglo de campos para validar con color rojo, si se agrega un nuevo campo, agregar en el arreglo para incluir en la validacion de color
-	var arrayCamposValida = ["nuc", "idDelito_div", "fechaAcuerdo", "fechaRegistro", "idFiscaliaProc_div", "agentesMP_id", "idCargo", "idFuncion", "idAdscripcion" , "fechaConclu", "idCoorporacion"];
+	var arrayCamposValida = ["nuc", "idDelito_div", "fechaAcuerdo", "fechaRegistro", "idFiscaliaProc_div", "agentesMP_id", "idCargo", "idFuncion", "idAdscripcion" , "fechaConclu", "idCoorporacion", "nOficio"];
 	//Arreglo de variables de informacion, donde se verifica si hay informacion en dicha variable
-	var arrayCamposData = [nuc, idDelito, fechaAcuerdo, fechaRegistro, idFiscaliaProc, agentesMP_id, idCargo, idFuncion, idAdscripcion, fechaConclu, idCoorporacion];
+	var arrayCamposData = [nuc, idDelito, fechaAcuerdo, fechaRegistro, idFiscaliaProc, agentesMP_id, idCargo, idFuncion, idAdscripcion, fechaConclu, idCoorporacion, nOficio];
 	//Bucle del tamaño de los campos, se verifica si la variable tiene información, si esta no tiene coloreamos el input de color rojo
 	for (x = 0; x < arrayCamposValida.length; x++) {
 		if ($.trim(arrayCamposData[x]) == "") {
@@ -3053,7 +3139,7 @@ function validateDataMedidaGeneralRegionalesUpdate() {
 	let temporalidad = calculo_temporalidad(fechaConclu, fechaAcuerdo);
 	console.log("La temporalidad de la medida es de: " + temporalidad + " días");
 
-	if (agentesMP_id != "" && idCargo != "" && idFuncion != "" && idAdscripcion != "" && nuc != "" && idDelito != "" && fechaAcuerdo != "" && fechaRegistro != "" && idFiscaliaProc != "" && fechaConclu != "" ) {
+	if (agentesMP_id != "" && idCargo != "" && idFuncion != "" && idAdscripcion != "" && nuc != "" && idDelito != "" && fechaAcuerdo != "" && fechaRegistro != "" && idFiscaliaProc != "" && fechaConclu != "" && nOficio != "") {
 
 		var dataGenerales = Array();
 		dataGenerales[1] = nuc.trim();
@@ -3070,6 +3156,7 @@ function validateDataMedidaGeneralRegionalesUpdate() {
 		dataGenerales[11] = fechaConclu;
 		dataGenerales[12] = temporalidad;
 		dataGenerales[13] = idCoorporacion;
+		dataGenerales[14] = nOficio.trim();
 
 
 
