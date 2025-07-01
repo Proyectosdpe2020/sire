@@ -47,12 +47,19 @@ $data = getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad, $idMp);
 
 						<table border="0" id="table1110" width="100%" style="margin-top: -10px;">
 							<div id="respDesc"></div>
+                            <tr>
+                                <td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Trámite</label></td>
+                                <td style="width: 3%; font-weight: bold" class="tdFiscalia">
+                                    <center><br><? echo $data[0][166] ?></center>
+                                </td>
+                            </tr>
+                            <!--
 							<tr>
 								<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia">Existencia anterior (+)</label></td>
 								<td style="width: 3%; font-weight: bold;" class="tdFiscalia">
 									<center><? echo $data[0][0] ?></center>
 								</td>
-							</tr>
+							</tr>-->
 							<tr>
 								<td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia">Recibidas por Otro Ministerio Público</label></td>
 								<td style="width: 3%; font-weight: bold;" class="tdFiscalia">
@@ -582,6 +589,12 @@ $data = getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad, $idMp);
 									<center><? echo $data[0][134] ?></center>
 								</td>
 							</tr>
+                            <tr>
+                                <td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Audiencia de ejecución de sanciones </label></td>
+                                <td style="width: 3%; font-weight: bold" class="tdFiscalia">
+                                    <center><? echo $data[0][156] ?></center>
+                                </td>
+                            </tr>
 
 							<tr>
 								<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Sentencias</label></td>
@@ -784,6 +797,12 @@ $data = getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad, $idMp);
 									<center><? echo $data[0][82] ?></center>
 								</td>
 							</tr>
+                            <tr>
+                                <td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Revocan o modifican absolutorias</label></td>
+                                <td style="width: 3%; font-weight: bold" class="tdFiscalia">
+                                    <center><? echo $data[0][157] ?></center>
+                                </td>
+                            </tr>
 
 							<tr>
 								<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Apelaciones no admitidas</label></td>
@@ -816,6 +835,49 @@ $data = getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad, $idMp);
 									<center><? echo $data[0][139] ?></center>
 								</td>
 							</tr>
+
+                            <tr>
+                                <td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Técnicas de investigación especiales</label></td>
+                                <td style="width: 3%; font-weight: bold" class="tdFiscalia">
+                                    <center><br><? echo $data[0][164] + $data[0][165] ?></center>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Otorgadas</label></td>
+                                <td style="width: 3%; font-weight: bold" class="tdFiscalia">
+                                    <center><? echo $data[0][164] ?></center>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 25%;" class="tdFiscalia"><label class="labelFiscalia2">Negadas</label></td>
+                                <td style="width: 3%; font-weight: bold" class="tdFiscalia">
+                                    <center><? echo $data[0][165] ?></center>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Audiencia inicial</label></td>
+                                <td style="width: 3%; font-weight: bold" class="tdFiscalia">
+                                    <center><br><? echo $data[0][152] ?></center>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Pruebas anticipadas</label></td>
+                                <td style="width: 3%; font-weight: bold" class="tdFiscalia">
+                                    <center><br><? echo $data[0][153] ?></center>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Escritos de acusación</label></td>
+                                <td style="width: 3%; font-weight: bold" class="tdFiscalia">
+                                    <center><br><? echo $data[0][154] ?></center>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Actos de investigación complementaria</label></td>
+                                <td style="width: 3%; font-weight: bold" class="tdFiscalia">
+                                    <center><br><? echo $data[0][155] ?></center>
+                                </td>
+                            </tr>
 
 
 
@@ -1066,13 +1128,13 @@ $data = getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad, $idMp);
 									<center><? echo $data[0][48] ?></center>
 								</td>
 							</tr>
-
+<!--
 								<tr>
 									<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Total de Carpetas Judicializadas en trámite</label></td>
 									<td style="width: 3%; font-weight: bold" class="tdFiscalia">
 										<center><br><? echo $data[0][150] ?></center>
 									</td>
-							 </tr>
+							 </tr>-->
       <!--
 							<tr>
 								<td style="width: 25%;" class="tdFiscalia"><br><label class="labelFiscalia">Total de Carpetas Judicializadas en trámite</label></td>

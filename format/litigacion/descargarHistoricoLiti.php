@@ -105,7 +105,7 @@
      $data = getDatosLitigacionMpUnidad2($conn, $mes, $anio, $idUnidad, $idMp);
 
 
-	$objPHPExcel->getActiveSheet()->SetCellValue("D12", $data[0][0]); //Existencia anterior
+	$objPHPExcel->getActiveSheet()->SetCellValue("D12", $data[0][166]); //Tramite
 	$objPHPExcel->getActiveSheet()->SetCellValue("H12", $data[0][105]);  //Recibidas por otro ministerio publico
 
 	$objPHPExcel->getActiveSheet()->SetCellValue("D13", $data[0][1]); //Carpetas Judicializadas
@@ -287,6 +287,16 @@
 	$objPHPExcel->getActiveSheet()->SetCellValue("D109", $data[0][148]); //Canalizados por cese de funciones
 	$objPHPExcel->getActiveSheet()->SetCellValue("D110", $data[0][149]); //Canalizados por cese de funciones
 
+    $objPHPExcel->getActiveSheet()->SetCellValue("H22", $data[0][156]);
+    $objPHPExcel->getActiveSheet()->SetCellValue("H57", $data[0][157]);
+	$objPHPExcel->getActiveSheet()->SetCellValue("H72", $data[0][164] + $data[0][165]);
+    $objPHPExcel->getActiveSheet()->SetCellValue("H73", $data[0][164]);
+    $objPHPExcel->getActiveSheet()->SetCellValue("H74", $data[0][165]);
+    $objPHPExcel->getActiveSheet()->SetCellValue("H75", $data[0][152]);
+	$objPHPExcel->getActiveSheet()->SetCellValue("H76", $data[0][153]);
+	$objPHPExcel->getActiveSheet()->SetCellValue("H77", $data[0][154]);
+    $objPHPExcel->getActiveSheet()->SetCellValue("H78", $data[0][155]);
+
 	$nombre_reporte = $nombrereporte.".xlsx";
 
 	//Obtenemos el numero total de MP en la unidad
@@ -306,7 +316,7 @@ for($pageIndex=1; $pageIndex <= $totalMP; $pageIndex++){
  $sheet->SetCellValue("D10", $dataMp[$k][152].' '.$dataMp[$k][153].' '.$dataMp[$k][154]);
 
 
- $sheet->SetCellValue("D12", $dataMp[$k][0]); //Existencia anterior
+ $sheet->SetCellValue("D12", $dataMp[$k][169]); //tRAMITE
 	$sheet->SetCellValue("H12", $dataMp[$k][105]);  //Recibidas por otro ministerio publico
 
 	$sheet->SetCellValue("D13", $dataMp[$k][1]); //Carpetas Judicializadas
@@ -490,6 +500,16 @@ for($pageIndex=1; $pageIndex <= $totalMP; $pageIndex++){
 	$sheet->SetCellValue("D108", $dataMp[$k][147]); //Canalizados por cese de funciones
 	$sheet->SetCellValue("D109", $dataMp[$k][148]); //Canalizados por cese de funciones
 	$sheet->SetCellValue("D110", $dataMp[$k][149]); //Canalizados por cese de funciones
+
+	$sheet->SetCellValue("H22", $dataMp[$k][159]);
+	$sheet->SetCellValue("H57", $dataMp[$k][160]);
+	$sheet->SetCellValue("H72", $dataMp[$k][167] + $dataMp[$k][168]);
+	$sheet->SetCellValue("H73", $dataMp[$k][167]);
+	$sheet->SetCellValue("H74", $dataMp[$k][168]);
+	$sheet->SetCellValue("H75", $dataMp[$k][155]);
+	$sheet->SetCellValue("H76", $dataMp[$k][156]);
+	$sheet->SetCellValue("H77", $dataMp[$k][157]);
+	$sheet->SetCellValue("H78", $dataMp[$k][158]);
 
  
 

@@ -921,7 +921,7 @@ function getDatosLitigacionMpUnidad($conn, $idMp, $mes, $anio, $idFiscalia, $idU
 	, [procedimientoEspecial], [audienciaCondenatorio], [mecanismosAceleracion], [apelacionesAmparo], [amparos], [amparoDirecto], [amparoIndirecto]
 	, [SDuno],[SDdos],[SDtres],[SDcuatro],[SDcinco],[SDseis],[SDsiete],[SDocho],[SDnueve],[SDdiez],[totCarpTram_nucs],[audienciaIncial],[pruebaAnticipada]
     , [escritoAcusacion] , [actosInvComplementaria] , [audienciaEjecuSanciones], [apelRevModAbsolutoria], [TIEotorgaIntervensionComuni], [TIEotorgaDatosConservados]
-    , [TIEotorgaDatosBancarios] , [TIEnegativaIntervencionComuni] , [TIEnegativaDatosConservados], [TIEnegativaDatosBancarios], [TIEotorgadas] , [TIEnegadas]
+    , [TIEotorgaDatosBancarios] , [TIEnegativaIntervencionComuni] , [TIEnegativaDatosConservados], [TIEnegativaDatosBancarios], [TIEotorgadas] , [TIEnegadas] , [tramite_total]
 	FROM Litigacion WHERE idMes = $mes AND idAnio = $anio AND idFiscalia = $idFiscalia AND idMp = $idMp AND idUnidad = $idUnidad";
 
 
@@ -1119,7 +1119,7 @@ function getDatosLitigacionMpUnidad($conn, $idMp, $mes, $anio, $idFiscalia, $idU
         $arreglo[$indice][158] = $row['TIEnegativaDatosBancarios'];
         $arreglo[$indice][159] = $row['TIEotorgadas'];
         $arreglo[$indice][160] = $row['TIEnegadas'];
-
+        $arreglo[$indice][161] = $row['tramite_total'];
 
 
 
@@ -3344,7 +3344,7 @@ function getIdUnidEnlaceMPunidad($conn, $idEnlace)
 function getCarpetasAgenteLitigacion_totalTramite($conSic, $idMp, $estatus, $mes, $anio, $idUnidad)
 {
 
-	$query = " SELECT count(nuc) as total FROM estatusNucs WHERE idMp = $idMp AND idEstatus = 165  ";
+	$query = " SELECT count(nuc) as total FROM estatusNucs WHERE idMp = $idMp AND idEstatus = 181 AND idUnidad = $idUnidad ";
 
 	$indice = 0;
 

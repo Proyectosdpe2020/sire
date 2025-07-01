@@ -61,7 +61,7 @@ if ($datalit) {
 	$a = 0;
 }
 
-$dataTramite = getCarpetasAgenteLitigacion_totalTramite($conn, $idMp, 165, $mes, $anio, $idUnidad);
+$dataTramite = getCarpetasAgenteLitigacion_totalTramite($conn, $idMp, 181, $mes, $anio, $idUnidad);
 $total_tramite = $dataTramite[0][0];
 
 
@@ -110,14 +110,23 @@ $total_tramite = $dataTramite[0][0];
 				<div class="row">
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<div class="panel panel-default fd1" style="">
-							<div class="panel-body">
-								<h5 class="text-on-pannel"><strong> Existencia Anterior </strong></h5>
-								<input class="form-control input-md redondear fdesv" id="tramAnt" type="number" value="<? if ($bandHabTramite == 1) {
-																																																																																																echo $tramiteAnte;
-																																																																																															} else {
-																																																																																																echo $tramiteAnte;
-																																																																																															} ?>" readonly onblur="sumTotCarpJudTram(event)">
-							</div>
+                            <div class="panel-body">
+                                <h5 class="text-on-pannel"><strong> TRÁMITE </strong></h5>
+                                <div class="iconiput">
+                                    <input type="number" placeholder="cantidad" class="first" id="tramite_litigacion" value="<?echo $total_tramite; ?>" readonly/>
+                                    <span onclick="sendDataModalTramite('tramite_litigacion',181,<? echo $idMp ?>, <? echo $mes; ?>, <? echo $anio; ?>, <? echo $idUnidad; ?>)">
+											<div id="checkTramite_litigacion"><i class="fa fa-file-text fa-lg fa-fw" aria-hidden="true"></i></div>
+										</span>
+                                </div>
+                                <!--
+                                <h5 class="text-on-pannel"><strong> Existencia Anterior </strong></h5>
+                                <input class="form-control input-md redondear fdesv" id="tramAnt" type="number"
+                                       value="<? if ($bandHabTramite == 1) {
+                                           echo $tramiteAnte;
+                                       } else {
+                                           echo $tramiteAnte;
+                                       } ?>" readonly onblur="sumTotCarpJudTram(event)">-->
+                            </div>
 						</div>
 						<div class="panel panel-default fd1">
 							<div class="panel-body">
@@ -2195,7 +2204,7 @@ $total_tramite = $dataTramite[0][0];
 																																					} ?>" placeholder="" class="first" disabled="true" id="totCarjudTram" />
 								</div>
 							</div>
-
+<!--
 							<div class="row">
 								<div class="col-xs-12">
 									<label class="colorLetras" for="inputlg"> Total de carpetas judicializadas en tramite :</label>
@@ -2208,7 +2217,7 @@ $total_tramite = $dataTramite[0][0];
 								</div>
 							</div>
 
-
+-->
 						</div>
 					</div>
 				</div>
