@@ -37,7 +37,7 @@ if($rolUser == 1){
             mp.nombre + ' ' + mp.paterno + ' ' + mp.materno AS nombreMP,
             m.nuc,
             CASE
-                WHEN m.nOficio IS NULL THEN 0
+                WHEN m.nOficio IS NULL THEN 'Desconocido'
                 ELSE m.nOficio
             END AS nOficio,
             d.Nombre AS delito,
@@ -123,7 +123,7 @@ elseif($rolUser == 4){
             mp.nombre + ' ' + mp.paterno + ' ' + mp.materno AS nombreMP,
             m.nuc,
             CASE
-                WHEN m.nOficio IS NULL THEN 0
+                WHEN m.nOficio IS NULL THEN 'Desconocido'
                 ELSE m.nOficio
             END AS nOficio,
             d.Nombre AS delito,
@@ -222,12 +222,13 @@ $keysFechas = ['fechaRegistro', 'inicio', 'fin', 'ampliacion', 'temporalidadActu
 foreach ($arreglo as $registro) {
     $col = 'A';
     foreach ($keys as $key) {
-        if ($key == 'nOficio' && $registro[$key] == 0) {
-            $sheet->setCellValue($col.(string)($contC), 'Desconocido');
-        }
-        else {
-            $sheet->setCellValue($col.(string)($contC), $registro[$key]);
-        }        
+        // if ($key == 'nOficio' && $registro[$key] == 0) {
+        //     $sheet->setCellValue($col.(string)($contC), 'Desconocido');
+        // }
+        // else {
+        //     $sheet->setCellValue($col.(string)($contC), $registro[$key]);
+        // }
+        $sheet->setCellValue($col.(string)($contC), $registro[$key]);
         $col++;
     }
     $victimas = json_decode($registro['victimas'], true);
